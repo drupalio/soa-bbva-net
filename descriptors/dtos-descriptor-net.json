@@ -1,0 +1,81 @@
+{
+  "bbva": {
+    "uuaa": "czic"
+  },
+  "dtos": {
+    "enumProductType": {
+      "enumValue": "String"
+    },
+    "enumFinancialStatusType": {
+      "enumValue": "String"
+    },
+    "enumContactSourceType": {
+      "enumValue": "String"
+    },
+    "enumPhoneNumberType": {
+      "enumValue": "String"
+    },
+    "operation": {
+      "operationCode": {
+        "type": "String",
+        "isKeyField": true,
+        "description": "Identificador del movimiento.",
+        "required": true 
+      },
+      "description": "String"
+    },
+    "phoneNumber": {
+      "number": "String",
+      "countryCode": "String",
+      "regionalCode": "String",
+      "type": "dto.enumPhoneNumberType",
+      "primary": "Boolean",
+      "active": "Boolean",
+      "contactSource": "dto.enumContactSourceType"
+    },
+    "email": {
+      "address": "String",
+      "primary": "Boolean",
+      "active": "Boolean",
+      "source": "dto.enumContactSourceType"
+    },
+    "contactInformation": {
+      "phoneNumbers": "List<dto.phoneNumber>",
+      "emails": "List<dto.email>"
+    },
+    "movement": {
+      "movementId": {
+        "type": "String",
+        "isKeyField": true,
+        "description": "Identificador del movimiento.",
+        "required": true 
+      },
+      "concept": "String",
+      "transactionDate": "arq.DATE",
+      "sourceReference": "String",
+      "destinationReference": "String",
+      "operation": "dto.operation",
+      "value": "arq.MONEY",
+      "balance": "arq.MONEY"
+    },
+    "product": {
+      "productId": {
+        "type": "String",
+        "isKeyField": true,
+        "description": "Identificador del producto",
+        "required": true
+      },
+      "type": "dto.enumProductType",
+      "name": "String",
+      "alias": "String",
+      "financialState": "dto.enumFinancialStatusType",
+      "visible": "Boolean",
+      "operable": "Boolean",
+      "assets": "arq.MONEY",
+      "liabilities": "arq.MONEY",
+      "ownersEquity": "arq.MONEY",
+      "contactInfo": "dto.contactInformation",
+      "movements": "List<dto.movement>"
+    }
+  }
+}

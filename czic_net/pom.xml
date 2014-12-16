@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+        <groupId>com.bbva.czic</groupId>
+        <artifactId>pom-padre_czic</artifactId>
+        <version>1.4.0</version>
+    </parent>
+    <groupId>com.bbva.czic</groupId>
+	<artifactId>czic_net</artifactId>
+	<packaging>jar</packaging>
+	<version>1.0.0</version>
+	<name>czic_net</name>
+	<dependencies>
+		<dependency>
+	          <groupId>com.bbva.jee.arq.spring.core</groupId>
+	          <artifactId>arq-spring-restutils</artifactId>
+	          <version>${arq-spring-restutils.version}</version>
+	    </dependency> 
+	    <!--Dependencias Validator -->
+	    <dependency>
+				<groupId>org.hibernate</groupId>
+				<artifactId>hibernate-validator</artifactId>
+				<version>${hibernate-validator.version}</version>
+		</dependency>
+		<dependency>
+				<groupId>javax.validation</groupId>
+				<artifactId>validation-api</artifactId>
+				<version>${validation-api.version}</version>
+		</dependency>
+	    <!--Dependencias Swagger -->
+		<dependency>
+			<groupId>com.wordnik</groupId>
+			<artifactId>swagger-core_2.10</artifactId>
+			<version>${swagger.core.version}</version>
+			<exclusions>
+	            <exclusion>
+	                 <groupId>javax.ws.rs</groupId>
+	                 <artifactId>jsr311-api</artifactId>
+	            </exclusion>
+	         </exclusions>		
+		</dependency>
+		<dependency>
+			<groupId>com.wordnik</groupId>
+			<artifactId>swagger-jaxrs_2.10</artifactId>
+			<version>${swagger.jaxrs.version}</version>
+		</dependency>  
+	</dependencies>
+	<build>
+		<finalName>${project.artifactId}-${project.version}-dto</finalName>
+	</build>
+</project>
+    
