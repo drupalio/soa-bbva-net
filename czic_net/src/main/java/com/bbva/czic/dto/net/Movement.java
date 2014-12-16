@@ -17,37 +17,31 @@ import com.bbva.jee.arq.spring.core.servicing.utils.MoneyAdapter;
 import com.bbva.jee.arq.spring.core.servicing.utils.Money;
 import com.wordnik.swagger.annotations.ApiModelProperty;
 
-@XmlRootElement(name = "movement", namespace = "urn:com:bbva:czic:dto:net")
-@XmlType(name = "movement", namespace = "urn:com:bbva:czic:dto:net")
+@XmlRootElement(name = "Movement", namespace = "urn:com:bbva:czic:dto:net")
+@XmlType(name = "Movement", namespace = "urn:com:bbva:czic:dto:net")
 @XmlAccessorType(XmlAccessType.FIELD)
 public class Movement
     implements Serializable
 {
 
     public final static long serialVersionUID = 1L;
-    @ApiModelProperty(value = "Identificador del movimiento.", required = true)
-    private String movementId;
-
-    @ApiModelProperty("")
+    @ApiModelProperty(value = "Identificador de la operacion", required = true)
+    private String id;
+    @ApiModelProperty(value = "concepto de la operacion", required = true)
     private String concept;
-
     @XmlJavaTypeAdapter(CalendarAdapter.class)
     @XmlSchemaType(name = "dateTime")
-    @ApiModelProperty("")
+    @ApiModelProperty(value = " fecha de la transaccion", required = true)
     private Date transactionDate;
-
-    @ApiModelProperty("")
+    @ApiModelProperty("Cuenta origen del movimiento")
     private String sourceReference;
-
-    @ApiModelProperty("")
+    @ApiModelProperty("Cuenta destino del movimiento")
     private String destinationReference;
-
-    @ApiModelProperty("")
-    private Operation operation;
-
+    @ApiModelProperty(value = "Informacion de la operacion (codigo y descripcion)", required = true)
+    private OperationTest operation;
     @XmlJavaTypeAdapter(MoneyAdapter.class)
     @XmlElement(type = Money.class)
-    @ApiModelProperty("")
+    @ApiModelProperty("valor de la operacion")
     private Money value;
     @XmlJavaTypeAdapter(MoneyAdapter.class)
     @XmlElement(type = Money.class)
@@ -58,12 +52,12 @@ public class Movement
         //default constructor
     }
 
-    public String getMovementId() {
-        return movementId;
+    public String getId() {
+        return id;
     }
 
-    public void setMovementId(String movementId) {
-        this.movementId = movementId;
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getConcept() {
@@ -98,11 +92,11 @@ public class Movement
         this.destinationReference = destinationReference;
     }
 
-    public Operation getOperation() {
+    public OperationTest getOperation() {
         return operation;
     }
 
-    public void setOperation(Operation operation) {
+    public void setOperation(OperationTest operation) {
         this.operation = operation;
     }
 

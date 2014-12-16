@@ -5,77 +5,53 @@ import java.io.Serializable;
 import java.util.List;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
-import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 
-import com.bbva.jee.arq.spring.core.servicing.utils.MoneyAdapter;
-import com.bbva.jee.arq.spring.core.servicing.utils.Money;
 import com.wordnik.swagger.annotations.ApiModelProperty;
 
-@XmlRootElement(name = "product", namespace = "urn:com:bbva:czic:dto:net")
-@XmlType(name = "product", namespace = "urn:com:bbva:czic:dto:net")
+@XmlRootElement(name = "Product", namespace = "urn:com:bbva:czic:dto:net")
+@XmlType(name = "Product", namespace = "urn:com:bbva:czic:dto:net")
 @XmlAccessorType(XmlAccessType.FIELD)
 public class Product
     implements Serializable
 {
 
     public final static long serialVersionUID = 1L;
-
-    @ApiModelProperty(value = "Identificador del producto", required = true)
-    private String productId;
-
-    @ApiModelProperty("")
+    @ApiModelProperty(value = "Identificador del usuario ejecutivo de ventas", required = true)
+    private String id;
+    @ApiModelProperty(value = "", required = true)
     private EnumProductType type;
-
-    @ApiModelProperty("")
+    @ApiModelProperty(value = "Nombre del producto", required = true)
     private String name;
-
-    @ApiModelProperty("")
+    @ApiModelProperty("Alias del producto")
     private String alias;
-
-    @ApiModelProperty("")
+    @ApiModelProperty(value = "Identificador que referencia si un producto es un activo o un pasivo", required = true)
     private EnumFinancialStatusType financialState;
-
-    @ApiModelProperty("")
+    @ApiModelProperty(value = "Visibilidad del producto", required = true)
     private Boolean visible;
-
-    @ApiModelProperty("")
+    @ApiModelProperty(value = "Operatibilidad del producto", required = true)
     private Boolean operable;
-
-    @XmlJavaTypeAdapter(MoneyAdapter.class)
-    @XmlElement(type = Money.class)
+    @ApiModelProperty(value = "Entidad con toda la informaci\u00f3n del balance de la cuenta", required = true)
+    private Balance balance;
+    @ApiModelProperty(value = "description", required = true)
+    private ContactInfo contactInfo;
     @ApiModelProperty("")
-    private Money assets;
-
-    @XmlJavaTypeAdapter(MoneyAdapter.class)
-    @XmlElement(type = Money.class)
+    private Conditions conditions;
     @ApiModelProperty("")
-    private Money liabilities;
-
-    @XmlJavaTypeAdapter(MoneyAdapter.class)
-    @XmlElement(type = Money.class)
-    @ApiModelProperty("")
-    private Money ownersEquity;
-
-    @ApiModelProperty("")
-    private ContactInformation contactInfo;
-
-    @ApiModelProperty("")
-    private List<Movement> movements;
+    private List<Movement> movement;
 
     public Product() {
         //default constructor
     }
 
-    public String getProductId() {
-        return productId;
+    public String getId() {
+        return id;
     }
 
-    public void setProductId(String productId) {
-        this.productId = productId;
+    public void setId(String id) {
+        this.id = id;
     }
 
     public EnumProductType getType() {
@@ -126,44 +102,36 @@ public class Product
         this.operable = operable;
     }
 
-    public Money getAssets() {
-        return assets;
+    public Balance getBalance() {
+        return balance;
     }
 
-    public void setAssets(Money assets) {
-        this.assets = assets;
+    public void setBalance(Balance balance) {
+        this.balance = balance;
     }
 
-    public Money getLiabilities() {
-        return liabilities;
-    }
-
-    public void setLiabilities(Money liabilities) {
-        this.liabilities = liabilities;
-    }
-
-    public Money getOwnersEquity() {
-        return ownersEquity;
-    }
-
-    public void setOwnersEquity(Money ownersEquity) {
-        this.ownersEquity = ownersEquity;
-    }
-
-    public ContactInformation getContactInfo() {
+    public ContactInfo getContactInfo() {
         return contactInfo;
     }
 
-    public void setContactInfo(ContactInformation contactInfo) {
+    public void setContactInfo(ContactInfo contactInfo) {
         this.contactInfo = contactInfo;
     }
 
-    public List<Movement> getMovements() {
-        return movements;
+    public Conditions getConditions() {
+        return conditions;
     }
 
-    public void setMovements(List<Movement> movements) {
-        this.movements = movements;
+    public void setConditions(Conditions conditions) {
+        this.conditions = conditions;
+    }
+
+    public List<Movement> getMovement() {
+        return movement;
+    }
+
+    public void setMovement(List<Movement> movement) {
+        this.movement = movement;
     }
 
 }

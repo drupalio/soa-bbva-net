@@ -4,15 +4,15 @@
     <parent>
         <groupId>com.bbva.arq.servicing.spring</groupId>
         <artifactId>pom-padre-frontend</artifactId>
-        <version>1.5.1</version>
+        <version>1.4.0</version>
     </parent>
     <groupId>com.bbva.czic</groupId>
     <artifactId>pom-padre_czic</artifactId>
+    <version>1.4.0</version>
     <packaging>pom</packaging>
     <name>pom-padre_czic</name>
     <url>http://maven.apache.org</url>
     <modules>
-        <module>czic_GlobalPosition</module>
         <module>czic_net</module>
         <module>czic</module>
     </modules>
