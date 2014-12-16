@@ -1,19 +1,14 @@
 
 package com.bbva.czic.dto.net;
 
-import java.io.Serializable;
-import java.util.List;
+import com.wordnik.swagger.annotations.ApiModelProperty;
+
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
-import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
-
-
-import com.bbva.jee.arq.spring.core.servicing.utils.MoneyAdapter;
-import com.bbva.jee.arq.spring.core.servicing.utils.Money;
-import com.wordnik.swagger.annotations.ApiModelProperty;
+import java.io.Serializable;
+import java.util.List;
 
 @XmlRootElement(name = "product", namespace = "urn:com:bbva:czic:dto:net")
 @XmlType(name = "product", namespace = "urn:com:bbva:czic:dto:net")
@@ -45,20 +40,8 @@ public class Product
     @ApiModelProperty("")
     private Boolean operable;
 
-    @XmlJavaTypeAdapter(MoneyAdapter.class)
-    @XmlElement(type = Money.class)
     @ApiModelProperty("")
-    private Money assets;
-
-    @XmlJavaTypeAdapter(MoneyAdapter.class)
-    @XmlElement(type = Money.class)
-    @ApiModelProperty("")
-    private Money liabilities;
-
-    @XmlJavaTypeAdapter(MoneyAdapter.class)
-    @XmlElement(type = Money.class)
-    @ApiModelProperty("")
-    private Money ownersEquity;
+    private Balance balance;
 
     @ApiModelProperty("")
     private ContactInformation contactInfo;
@@ -126,30 +109,6 @@ public class Product
         this.operable = operable;
     }
 
-    public Money getAssets() {
-        return assets;
-    }
-
-    public void setAssets(Money assets) {
-        this.assets = assets;
-    }
-
-    public Money getLiabilities() {
-        return liabilities;
-    }
-
-    public void setLiabilities(Money liabilities) {
-        this.liabilities = liabilities;
-    }
-
-    public Money getOwnersEquity() {
-        return ownersEquity;
-    }
-
-    public void setOwnersEquity(Money ownersEquity) {
-        this.ownersEquity = ownersEquity;
-    }
-
     public ContactInformation getContactInfo() {
         return contactInfo;
     }
@@ -166,4 +125,11 @@ public class Product
         this.movements = movements;
     }
 
+    public Balance getBalance() {
+        return balance;
+    }
+
+    public void setBalance(Balance balance) {
+        this.balance = balance;
+    }
 }

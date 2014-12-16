@@ -1,12 +1,11 @@
 
 package com.bbva.czic.dto.net;
 
-import java.io.Serializable;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
-import com.wordnik.swagger.annotations.ApiModelProperty;
+import java.io.Serializable;
 
 
 
@@ -16,5 +15,5 @@ import com.wordnik.swagger.annotations.ApiModelProperty;
 public enum EnumProductType
     implements Serializable
 {
-    AC, CA, LO, SI
+    PC, CA, TDC, LO, SI, CC, RQ, LI, AQ
 }

@@ -1,15 +1,14 @@
 
 package com.bbva.czic.dto.net;
 
-import java.io.Serializable;
-import java.util.List;
+import com.wordnik.swagger.annotations.ApiModelProperty;
+
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
-
-
-import com.wordnik.swagger.annotations.ApiModelProperty;
+import java.io.Serializable;
+import java.util.List;
 
 @XmlRootElement(name = "contactInformation", namespace = "urn:com:bbva:czic:dto:net")
 @XmlType(name = "contactInformation", namespace = "urn:com:bbva:czic:dto:net")

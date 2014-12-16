@@ -86,6 +86,13 @@
       "value" : "arq.MONEY",
       "balance" : "arq.MONEY"
     },
+    "balance": {
+      "#metadata" : {
+        "dtoPackage" : "com.bbva.czic.dto.net.Balance"
+      },
+      "balance": "arq.MONEY",
+      "availableBalance": "arq.MONEY"
+    },
     "product" : {
       "#metadata" : {
         "dtoPackage" : "com.bbva.czic.dto.net.Product"
@@ -102,9 +109,7 @@
       "financialState" : "dto.enumFinancialStatusType",
       "visible" : "Boolean",
       "operable" : "Boolean",
-      "assets" : "arq.MONEY",
-      "liabilities" : "arq.MONEY",
-      "ownersEquity" : "arq.MONEY",
+      "balance": "dto.balance",
       "contactInfo" : "dto.contactInformation",
       "movements" : "List<dto.movement>"
     }
@@ -112,14 +117,14 @@
   "sn" : {
     "targetDto" : "product",
     "logicalId" : "GlobalPosition",
-    "registryId" : "SN201400333",
+    "registryId" : "SNCO1400002",
     "version" : "V01",
     "description" : "SN GlobalPosition",
     "smcs" : {
       "put" : [ {
         "targetDto" : "product",
         "logicalId" : "update",
-        "registryId" : "SMC201400334",
+        "registryId" : "null",
         "description" : "Update the product.",
         "notes" : "Update the product partially",
         "gceErrors" : [ "aliasGCE1", "aliasGCE2" ]
@@ -128,7 +133,7 @@
         "all" : [ {
           "targetDto" : "product",
           "logicalId" : "getExtractGlobalBalance",
-          "registryId" : "SMC201400335",
+          "registryId" : "SMCCO1400003",
           "description" : "Gets all the users products",
           "notes" : "List of products that COULD be filtered by product type.",
           "gceErrors" : [ "aliasGCE1", "aliasGCE2" ]
