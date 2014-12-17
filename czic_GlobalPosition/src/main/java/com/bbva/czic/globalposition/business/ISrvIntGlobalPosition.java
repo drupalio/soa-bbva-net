@@ -18,7 +18,7 @@ import com.bbva.czic.globalposition.business.dto.DTOIntEnumPhoneNumberType;
 
 
 public interface ISrvIntGlobalPosition {
- 	public List<DTOIntProduct> getExtractGlobalBalance(String customerId);
+ 	public List<DTOIntProduct> getExtractGlobalBalance(String customerId, String filter);
 
 	public void updateProductVisibility(String idProduct, DTOIntProduct infoProduct);
 

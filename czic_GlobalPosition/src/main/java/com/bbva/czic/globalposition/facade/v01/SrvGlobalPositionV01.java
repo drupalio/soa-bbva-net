@@ -9,6 +9,7 @@ import com.bbva.jee.arq.spring.core.log.I18nLogFactory;
 import com.bbva.jee.arq.spring.core.servicing.annotations.SMC;
 import com.bbva.jee.arq.spring.core.servicing.annotations.SN;
 import com.bbva.jee.arq.spring.core.servicing.annotations.VN;
+import com.bbva.jee.arq.spring.core.servicing.gce.BusinessServiceException;
 import com.bbva.jee.arq.spring.core.servicing.utils.BusinessServicesToolKit;
 import com.wordnik.swagger.annotations.*;
 import org.apache.cxf.jaxrs.model.wadl.ElementClass;
@@ -71,12 +72,13 @@ public class SrvGlobalPositionV01 implements ISrvGlobalPositionV01, com.bbva.jee
 	@SMC(registryID="SMCCO1400003",logicalID="getExtractGlobalBalance")
 	public List<Product> getExtractGlobalBalance(
 			@PathParam("customerId") String customerId,
-			@ApiParam(value = "filter param") @DefaultValue("(productType=={productType})") @QueryParam("$filter") String filter,
+			@ApiParam(value = "filter param") @DefaultValue("null") @QueryParam("$filter") String filter,
 			@ApiParam(value = "fields param") @DefaultValue("null") @QueryParam("$fields") String fields,
 			@ApiParam(value = "expands param") @DefaultValue("null") @QueryParam("$expands") String expands,
 			@ApiParam(value = "order by param") @DefaultValue("null") @QueryParam("$sort") String sort) {
 
-		return Mapper.productListMap(srvIntGlobalPosition.getExtractGlobalBalance(customerId));
+
+		return Mapper.productListMap(srvIntGlobalPosition.getExtractGlobalBalance(customerId, filter));
 	}
 
 	@ApiOperation(value="Update the product.", notes="Update the product partially", response=Response.class)
@@ -100,7 +102,7 @@ public class SrvGlobalPositionV01 implements ISrvGlobalPositionV01, com.bbva.jee
 		} else if (infoProduct.getOperable() != null){
 			this.updateProductOperability(idProduct, infoProduct);
 		} else {
-			//TODO manejar la excepción cuando ninguno de los payloads se encuentra seteado
+			throw new BusinessServiceException("wrongParameters");
 		}
 
 		return Response.ok().build();
