@@ -31,7 +31,7 @@ public class Movement
     private String concept;
 
     @XmlJavaTypeAdapter(CalendarAdapter.class)
-    @XmlSchemaType(name = "dateTime")
+    //@XmlSchemaType(name = "dateTime")
     @ApiModelProperty("")
     private Calendar transactionDate;
 
