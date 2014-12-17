@@ -4,7 +4,7 @@
 	<parent>
         <groupId>com.bbva.czic</groupId>
         <artifactId>pom-padre_czic</artifactId>
-        <version>1.4.0</version>
+        <version>1.5.1</version>
     </parent>
     <groupId>com.bbva.czic</groupId>
 	<artifactId>czic</artifactId>
@@ -449,7 +449,7 @@
                     </dependency>
                 </dependencies>
             </plugin>
-        <plugin>
+        <!--<plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-site-plugin</artifactId>
                 <version>${maven-site-plugin.version}</version>
@@ -465,7 +465,7 @@
                         </goals>
                     </execution>
                 </executions>
-            </plugin>
+            </plugin>-->
         </plugins>
 			<!-- Versiones de plugins de Maven para Frontend Spring -->
 		<pluginManagement>

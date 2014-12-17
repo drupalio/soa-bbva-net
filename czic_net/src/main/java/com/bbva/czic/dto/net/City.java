@@ -23,7 +23,7 @@ public class City
     @ApiModelProperty(value = " nombre", required = true)
     private String name;
     @ApiModelProperty("estado o dependencia")
-    private StateTest state;
+    private State state;
 
     public City() {
         //default constructor
@@ -45,11 +45,11 @@ public class City
         this.name = name;
     }
 
-    public StateTest getState() {
+    public State getState() {
         return state;
     }
 
-    public void setState(StateTest state) {
+    public void setState(State state) {
         this.state = state;
     }
 

@@ -21,7 +21,7 @@ public class CreditCard
     @ApiModelProperty(value = "Identificador de la tarjeta de credito", required = true)
     private String number;
     @ApiModelProperty("Entidad que posee toda un resumen de pagos de la tarjeta de cr\u00e9dito")
-    private PaymentTest payment;
+    private Payment payment;
     @ApiModelProperty("Entidad que posee toda la informaci\u00f3n acerca de las cuotas de la tarjeta de cr\u00e9dito")
     private Balance quota;
 
@@ -37,11 +37,11 @@ public class CreditCard
         this.number = number;
     }
 
-    public PaymentTest getPayment() {
+    public Payment getPayment() {
         return payment;
     }
 
-    public void setPayment(PaymentTest payment) {
+    public void setPayment(Payment payment) {
         this.payment = payment;
     }
 

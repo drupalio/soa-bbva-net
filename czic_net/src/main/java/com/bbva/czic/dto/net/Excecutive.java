@@ -26,11 +26,11 @@ public class Excecutive
     @ApiModelProperty("Telefono del ejecutivo de cuenta")
     private String phone;
     @ApiModelProperty("Oficina a la cual esta asignado un ejecutivo de cuenta")
-    private OfficeTest office;
+    private Office office;
     @ApiModelProperty("Correo electronico de un ejecutivo de cuenta")
     private String email;
     @ApiModelProperty("Clientes que tiene asignado un ejecutivo de cuenta")
-    private List<UserTest> customer;
+    private List<User> customer;
 
     public Excecutive() {
         //default constructor
@@ -60,11 +60,11 @@ public class Excecutive
         this.phone = phone;
     }
 
-    public OfficeTest getOffice() {
+    public Office getOffice() {
         return office;
     }
 
-    public void setOffice(OfficeTest office) {
+    public void setOffice(Office office) {
         this.office = office;
     }
 
@@ -76,11 +76,11 @@ public class Excecutive
         this.email = email;
     }
 
-    public List<UserTest> getCustomer() {
+    public List<User> getCustomer() {
         return customer;
     }
 
-    public void setCustomer(List<UserTest> customer) {
+    public void setCustomer(List<User> customer) {
         this.customer = customer;
     }
 

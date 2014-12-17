@@ -21,7 +21,7 @@ public class Loan
     @ApiModelProperty("Entidad con toda la informaci\u00f3n del balance del pr\u00e9stamo")
     private Balance balance;
     @ApiModelProperty("Entidad que posee toda un resumen de pagos del pr\u00e9stamo")
-    private PaymentTest payment;
+    private Payment payment;
     @ApiModelProperty(value = "Estado del prestamo", required = true)
     private EnumLoanStatus status;
 
@@ -37,11 +37,11 @@ public class Loan
         this.balance = balance;
     }
 
-    public PaymentTest getPayment() {
+    public Payment getPayment() {
         return payment;
     }
 
-    public void setPayment(PaymentTest payment) {
+    public void setPayment(Payment payment) {
         this.payment = payment;
     }
 

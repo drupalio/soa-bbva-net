@@ -3,6 +3,8 @@
 
   <xs:import namespace="urn:com:bbva:jee:arq:spring:core:servicing:utils" schemaLocation="schema1.xsd"/>
 
+  <xs:element name="balance" type="tns:balance"/>
+
   <xs:element name="contactInformation" type="tns:contactInformation"/>
 
   <xs:element name="email" type="tns:email"/>
@@ -27,9 +29,7 @@
     <xs:sequence>
       <xs:element name="movements" type="tns:movement" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
       <xs:element name="contactInfo" type="tns:contactInformation" minOccurs="0"/>
-      <xs:element name="ownersEquity" type="ns1:money" minOccurs="0"/>
-      <xs:element name="liabilities" type="ns1:money" minOccurs="0"/>
-      <xs:element name="assets" type="ns1:money" minOccurs="0"/>
+      <xs:element name="balance" type="tns:balance" minOccurs="0"/>
       <xs:element name="operable" type="xs:boolean" minOccurs="0"/>
       <xs:element name="visible" type="xs:boolean" minOccurs="0"/>
       <xs:element name="financialState" type="tns:enumFinancialStatusType" minOccurs="0"/>
@@ -88,6 +88,13 @@
     </xs:sequence>
   </xs:complexType>
 
+  <xs:complexType name="balance">
+    <xs:sequence>
+      <xs:element name="availableBalance" type="ns1:money" minOccurs="0"/>
+      <xs:element name="total" type="ns1:money" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
   <xs:simpleType name="enumContactSourceType">
     <xs:restriction base="xs:string">
       <xs:enumeration value="MOBILE"/>
@@ -113,10 +120,15 @@
 
   <xs:simpleType name="enumProductType">
     <xs:restriction base="xs:string">
-      <xs:enumeration value="AC"/>
+      <xs:enumeration value="PC"/>
       <xs:enumeration value="CA"/>
+      <xs:enumeration value="TDC"/>
       <xs:enumeration value="LO"/>
       <xs:enumeration value="SI"/>
+      <xs:enumeration value="CC"/>
+      <xs:enumeration value="RQ"/>
+      <xs:enumeration value="LI"/>
+      <xs:enumeration value="AQ"/>
     </xs:restriction>
   </xs:simpleType>
 </xs:schema>

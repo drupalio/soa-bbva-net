@@ -33,7 +33,7 @@ public class Conditions
     @ApiModelProperty(value = "Tipo de comision que aplica para el producto", required = true)
     private String commission;
     @ApiModelProperty(value = "Datos de la oficina donde se realizo la apertura del producto", required = true)
-    private OfficeTest office;
+    private Office office;
     @ApiModelProperty("")
     private String mobilizationConditions;
 
@@ -73,11 +73,11 @@ public class Conditions
         this.commission = commission;
     }
 
-    public OfficeTest getOffice() {
+    public Office getOffice() {
         return office;
     }
 
-    public void setOffice(OfficeTest office) {
+    public void setOffice(Office office) {
         this.office = office;
     }
 

@@ -2,7 +2,7 @@
 package com.bbva.czic.dto.net;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.util.Calendar;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
@@ -17,8 +17,8 @@ import com.bbva.jee.arq.spring.core.servicing.utils.MoneyAdapter;
 import com.bbva.jee.arq.spring.core.servicing.utils.Money;
 import com.wordnik.swagger.annotations.ApiModelProperty;
 
-@XmlRootElement(name = "Movement", namespace = "urn:com:bbva:czic:dto:net")
-@XmlType(name = "Movement", namespace = "urn:com:bbva:czic:dto:net")
+@XmlRootElement(name = "movement", namespace = "urn:com:bbva:czic:dto:net")
+@XmlType(name = "movement", namespace = "urn:com:bbva:czic:dto:net")
 @XmlAccessorType(XmlAccessType.FIELD)
 public class Movement
     implements Serializable
@@ -29,19 +29,24 @@ public class Movement
     private String id;
     @ApiModelProperty(value = "concepto de la operacion", required = true)
     private String concept;
+
     @XmlJavaTypeAdapter(CalendarAdapter.class)
     @XmlSchemaType(name = "dateTime")
-    @ApiModelProperty(value = " fecha de la transaccion", required = true)
-    private Date transactionDate;
-    @ApiModelProperty("Cuenta origen del movimiento")
+    @ApiModelProperty("")
+    private Calendar transactionDate;
+
+    @ApiModelProperty("")
     private String sourceReference;
-    @ApiModelProperty("Cuenta destino del movimiento")
+
+    @ApiModelProperty("")
     private String destinationReference;
-    @ApiModelProperty(value = "Informacion de la operacion (codigo y descripcion)", required = true)
-    private OperationTest operation;
+
+    @ApiModelProperty("")
+    private Operation operation;
+
     @XmlJavaTypeAdapter(MoneyAdapter.class)
     @XmlElement(type = Money.class)
-    @ApiModelProperty("valor de la operacion")
+    @ApiModelProperty("")
     private Money value;
     @XmlJavaTypeAdapter(MoneyAdapter.class)
     @XmlElement(type = Money.class)
@@ -68,11 +73,11 @@ public class Movement
         this.concept = concept;
     }
 
-    public Date getTransactionDate() {
+    public Calendar getTransactionDate() {
         return transactionDate;
     }
 
-    public void setTransactionDate(Date transactionDate) {
+    public void setTransactionDate(Calendar transactionDate) {
         this.transactionDate = transactionDate;
     }
 
@@ -92,11 +97,11 @@ public class Movement
         this.destinationReference = destinationReference;
     }
 
-    public OperationTest getOperation() {
+    public Operation getOperation() {
         return operation;
     }
 
-    public void setOperation(OperationTest operation) {
+    public void setOperation(Operation operation) {
         this.operation = operation;
     }
 

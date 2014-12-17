@@ -28,7 +28,7 @@ public class Account
     @ApiModelProperty("Saldo en canje de una cuenta")
     private Money tradeBalance;
     @ApiModelProperty("Chequeras asociadas a la cuenta")
-    private List<CheckbookTest> checkbooks;
+    private List<Checkbook> checkbooks;
 
     public Account() {
         //default constructor
@@ -42,11 +42,11 @@ public class Account
         this.tradeBalance = tradeBalance;
     }
 
-    public List<CheckbookTest> getCheckbooks() {
+    public List<Checkbook> getCheckbooks() {
         return checkbooks;
     }
 
-    public void setCheckbooks(List<CheckbookTest> checkbooks) {
+    public void setCheckbooks(List<Checkbook> checkbooks) {
         this.checkbooks = checkbooks;
     }
 

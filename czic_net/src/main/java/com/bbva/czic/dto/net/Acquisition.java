@@ -20,7 +20,7 @@ public class Acquisition
 
     public final static long serialVersionUID = 1L;
     @ApiModelProperty(value = "Comercios relacionados a una adquirencia", required = true)
-    private List<CommerceTest> commerces;
+    private List<Commerce> commerces;
     @ApiModelProperty("Correos configurados para una adquirencia")
     private List<String> mail;
 
@@ -28,11 +28,11 @@ public class Acquisition
         //default constructor
     }
 
-    public List<CommerceTest> getCommerces() {
+    public List<Commerce> getCommerces() {
         return commerces;
     }
 
-    public void setCommerces(List<CommerceTest> commerces) {
+    public void setCommerces(List<Commerce> commerces) {
         this.commerces = commerces;
     }
 
