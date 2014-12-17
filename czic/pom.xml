@@ -452,7 +452,11 @@
                     </dependency>
                 </dependencies>
             </plugin>
+<<<<<<< HEAD
         <!--<plugin>
+=======
+        <!--plugin>
+>>>>>>> new_master
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-site-plugin</artifactId>
                 <version>${maven-site-plugin.version}</version>
@@ -468,7 +472,11 @@
                         </goals>
                     </execution>
                 </executions>
+<<<<<<< HEAD
             </plugin>-->
+=======
+            </plugin-->
+>>>>>>> new_master
         </plugins>
 			<!-- Versiones de plugins de Maven para Frontend Spring -->
 		<pluginManagement>

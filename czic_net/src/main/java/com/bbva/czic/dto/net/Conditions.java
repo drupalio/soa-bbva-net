@@ -28,7 +28,11 @@ public class Conditions
     @ApiModelProperty("Descripcion del tipo de producto")
     private String description;
     @XmlJavaTypeAdapter(CalendarAdapter.class)
+<<<<<<< HEAD
     @XmlSchemaType(name = "dateTime")
+=======
+    //@XmlSchemaType(name = "dateTime")
+>>>>>>> new_master
     @ApiModelProperty(value = " Fecha en la que se realizo la apertura del producto", required = true)
     private Calendar openingDate;
     @ApiModelProperty(value = "Tipo de comision que aplica para el producto", required = true)
