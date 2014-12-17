@@ -9,6 +9,7 @@ import com.wordnik.swagger.annotations.ApiModelProperty;
 import javax.xml.bind.annotation.*;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import java.io.Serializable;
+import java.util.Calendar;
 import java.util.Date;
 
 @XmlRootElement(name = "movement", namespace = "urn:com:bbva:czic:dto:net")
@@ -28,7 +29,7 @@ public class Movement
     @XmlJavaTypeAdapter(CalendarAdapter.class)
     @XmlSchemaType(name = "dateTime")
     @ApiModelProperty("")
-    private Date transactionDate;
+    private Calendar transactionDate;
 
     @ApiModelProperty("")
     private String sourceReference;
@@ -68,11 +69,11 @@ public class Movement
         this.concept = concept;
     }
 
-    public Date getTransactionDate() {
+    public Calendar getTransactionDate() {
         return transactionDate;
     }
 
-    public void setTransactionDate(Date transactionDate) {
+    public void setTransactionDate(Calendar transactionDate) {
         this.transactionDate = transactionDate;
     }
 
