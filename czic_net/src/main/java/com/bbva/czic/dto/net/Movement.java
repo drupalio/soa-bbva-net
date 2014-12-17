@@ -2,7 +2,7 @@
 package com.bbva.czic.dto.net;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.util.Calendar;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
@@ -25,16 +25,15 @@ public class Movement
 {
 
     public final static long serialVersionUID = 1L;
-    @ApiModelProperty(value = "Identificador del movimiento.", required = true)
-    private String movementId;
-
-    @ApiModelProperty("")
+    @ApiModelProperty(value = "Identificador de la operacion", required = true)
+    private String id;
+    @ApiModelProperty(value = "concepto de la operacion", required = true)
     private String concept;
 
     @XmlJavaTypeAdapter(CalendarAdapter.class)
     @XmlSchemaType(name = "dateTime")
     @ApiModelProperty("")
-    private Date transactionDate;
+    private Calendar transactionDate;
 
     @ApiModelProperty("")
     private String sourceReference;
@@ -58,12 +57,12 @@ public class Movement
         //default constructor
     }
 
-    public String getMovementId() {
-        return movementId;
+    public String getId() {
+        return id;
     }
 
-    public void setMovementId(String movementId) {
-        this.movementId = movementId;
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getConcept() {
@@ -74,11 +73,11 @@ public class Movement
         this.concept = concept;
     }
 
-    public Date getTransactionDate() {
+    public Calendar getTransactionDate() {
         return transactionDate;
     }
 
-    public void setTransactionDate(Date transactionDate) {
+    public void setTransactionDate(Calendar transactionDate) {
         this.transactionDate = transactionDate;
     }
 

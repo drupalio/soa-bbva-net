@@ -1,47 +1,48 @@
 
 package com.bbva.czic.dto.net;
 
-import com.wordnik.swagger.annotations.ApiModelProperty;
-
+import java.io.Serializable;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
-import java.io.Serializable;
 
-@XmlRootElement(name = "phoneNumber", namespace = "urn:com:bbva:czic:dto:net")
-@XmlType(name = "phoneNumber", namespace = "urn:com:bbva:czic:dto:net")
+
+import com.wordnik.swagger.annotations.ApiModelProperty;
+
+@XmlRootElement(name = "PhoneNumbers", namespace = "urn:com:bbva:czic:dto:net")
+@XmlType(name = "PhoneNumbers", namespace = "urn:com:bbva:czic:dto:net")
 @XmlAccessorType(XmlAccessType.FIELD)
-public class PhoneNumber
+public class PhoneNumbers
     implements Serializable
 {
 
     public final static long serialVersionUID = 1L;
-    @ApiModelProperty("")
-    private String number;
-    @ApiModelProperty("")
-    private String countryCode;
-    @ApiModelProperty("")
-    private String regionalCode;
-    @ApiModelProperty("")
-    private EnumPhoneNumberType type;
-    @ApiModelProperty("")
-    private Boolean primary;
-    @ApiModelProperty("")
-    private Boolean active;
-    @ApiModelProperty("")
+    @ApiModelProperty("Fuente de los contactos")
     private EnumContactSourceType contactSource;
+    @ApiModelProperty("Codigo del pais")
+    private String countryCode;
+    @ApiModelProperty(" Codigo de la region")
+    private String regionalCode;
+    @ApiModelProperty("Numero de telefono")
+    private String number;
+    @ApiModelProperty("Fuente de tipo de numero")
+    private EnumPhoneNumberType type;
+    @ApiModelProperty("Numero por defecto")
+    private Boolean primary;
+    @ApiModelProperty("Numero activo")
+    private Boolean active;
 
-    public PhoneNumber() {
+    public PhoneNumbers() {
         //default constructor
     }
 
-    public String getNumber() {
-        return number;
+    public EnumContactSourceType getContactSource() {
+        return contactSource;
     }
 
-    public void setNumber(String number) {
-        this.number = number;
+    public void setContactSource(EnumContactSourceType contactSource) {
+        this.contactSource = contactSource;
     }
 
     public String getCountryCode() {
@@ -58,6 +59,14 @@ public class PhoneNumber
 
     public void setRegionalCode(String regionalCode) {
         this.regionalCode = regionalCode;
+    }
+
+    public String getNumber() {
+        return number;
+    }
+
+    public void setNumber(String number) {
+        this.number = number;
     }
 
     public EnumPhoneNumberType getType() {
@@ -82,14 +91,6 @@ public class PhoneNumber
 
     public void setActive(Boolean active) {
         this.active = active;
-    }
-
-    public EnumContactSourceType getContactSource() {
-        return contactSource;
-    }
-
-    public void setContactSource(EnumContactSourceType contactSource) {
-        this.contactSource = contactSource;
     }
 
 }

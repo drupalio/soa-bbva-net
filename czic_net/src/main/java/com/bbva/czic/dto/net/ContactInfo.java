@@ -1,29 +1,30 @@
 
 package com.bbva.czic.dto.net;
 
-import com.wordnik.swagger.annotations.ApiModelProperty;
-
+import java.io.Serializable;
+import java.util.List;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
-import java.io.Serializable;
-import java.util.List;
 
-@XmlRootElement(name = "contactInformation", namespace = "urn:com:bbva:czic:dto:net")
-@XmlType(name = "contactInformation", namespace = "urn:com:bbva:czic:dto:net")
+
+import com.wordnik.swagger.annotations.ApiModelProperty;
+
+@XmlRootElement(name = "ContactInfo", namespace = "urn:com:bbva:czic:dto:net")
+@XmlType(name = "ContactInfo", namespace = "urn:com:bbva:czic:dto:net")
 @XmlAccessorType(XmlAccessType.FIELD)
-public class ContactInformation
+public class ContactInfo
     implements Serializable
 {
 
     public final static long serialVersionUID = 1L;
-    @ApiModelProperty("")
+    @ApiModelProperty(" Listado de numeros de telefono del usuario")
     private List<PhoneNumber> phoneNumbers;
-    @ApiModelProperty("")
+    @ApiModelProperty("Listado de mails del usuario")
     private List<Email> emails;
 
-    public ContactInformation() {
+    public ContactInfo() {
         //default constructor
     }
 
