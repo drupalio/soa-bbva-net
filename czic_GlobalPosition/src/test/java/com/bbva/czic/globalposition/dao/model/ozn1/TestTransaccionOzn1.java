@@ -1,7 +1,5 @@
 package com.bbva.czic.globalposition.dao.model.ozn1;
 
-import com.bbva.jee.arq.spring.core.host.protocolo.ps9.ErrorMappingHelper;
-import com.bbva.jee.arq.spring.core.servicing.gce.BusinessServiceException;
 import org.apache.commons.logging.Log;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -39,28 +37,19 @@ public class TestTransaccionOzn1 {
 		
 	@Autowired
 	private TransaccionOzn1 transaccion;
-
-	@Autowired
-	private ErrorMappingHelper errorMappingHelper;
-
+	
 	@Test
 	public void test() throws ExcepcionTransaccion {
 		
 		PeticionTransaccionOzn1 peticion = new PeticionTransaccionOzn1();		
-
-		FormatoOZECN1E0 formatoEntrada = new FormatoOZECN1E0();
-		formatoEntrada.setNumclie("12340981234");
-		peticion.getCuerpo().getPartes().add(formatoEntrada);
+		
+		/*
+		 * TODO: poblar la peticion con valores adecuados
+		 */
 		
 		try {
 			LOG.info("Invocando transaccion, peticion: " + peticion);
 			RespuestaTransaccionOzn1 respuesta = transaccion.invocar(peticion);
-
-			BusinessServiceException exception = errorMappingHelper.toBusinessServiceException(respuesta);
-			if ( exception != null ) throw exception;
-
-
-
 			LOG.info("Recibida respuesta: " + respuesta);
 		} catch ( ExcepcionRespuestaHost e ) {
 			LOG.error("Error recibido desde host, codigoError: " + e.getCodigoError() + ", descripcion: " + e.getMessage());

@@ -4,7 +4,7 @@
 	<parent>
         <groupId>com.bbva.czic</groupId>
         <artifactId>pom-padre_czic</artifactId>
-        <version>1.5.1</version>
+        <version>1.4.0</version>
     </parent>
     <groupId>com.bbva.czic</groupId>
 	<artifactId>czic_net</artifactId>
@@ -23,14 +23,12 @@
 				<artifactId>hibernate-validator</artifactId>
 				<version>${hibernate-validator.version}</version>
 		</dependency>
-		<!--Dependencias Swagger -->
-
 		<dependency>
-			<groupId>javax.validation</groupId>
-			<artifactId>validation-api</artifactId>
-			<version>${validation-api.version}</version>
+				<groupId>javax.validation</groupId>
+				<artifactId>validation-api</artifactId>
+				<version>${validation-api.version}</version>
 		</dependency>
-		<!--Dependencias Swagger -->
+	    <!--Dependencias Swagger -->
 		<dependency>
 			<groupId>com.wordnik</groupId>
 			<artifactId>swagger-core_2.10</artifactId>

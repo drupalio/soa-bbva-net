@@ -8,7 +8,6 @@
     </parent>
     <groupId>com.bbva.czic</groupId>
     <artifactId>pom-padre_czic</artifactId>
-    <version>1.5.1</version>
     <packaging>pom</packaging>
     <name>pom-padre_czic</name>
     <url>http://maven.apache.org</url>

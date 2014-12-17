@@ -157,6 +157,7 @@
 	<classpathentry kind="var" path="M2_REPO/org/apache/cxf/cxf-rt-transports-http/2.6.10/cxf-rt-transports-http-2.6.10.jar" sourcepath="M2_REPO/org/apache/cxf/cxf-rt-transports-http/2.6.10/cxf-rt-transports-http-2.6.10-sources.jar"/>
 	<classpathentry kind="var" path="M2_REPO/org/apache/cxf/cxf-rt-ws-addr/2.6.10/cxf-rt-ws-addr-2.6.10.jar" sourcepath="M2_REPO/org/apache/cxf/cxf-rt-ws-addr/2.6.10/cxf-rt-ws-addr-2.6.10-sources.jar"/>
 	<classpathentry kind="var" path="M2_REPO/org/apache/cxf/cxf-rt-ws-policy/2.6.10/cxf-rt-ws-policy-2.6.10.jar" sourcepath="M2_REPO/org/apache/cxf/cxf-rt-ws-policy/2.6.10/cxf-rt-ws-policy-2.6.10-sources.jar"/>
+	<classpathentry kind="var" path="M2_REPO/com/bbva/czic/czic_net/1.0.0/czic_net-1.0.0.jar"/>
 	<classpathentry kind="var" path="M2_REPO/com/ibm/disthub2/dhbcore/7.0.1.7/dhbcore-7.0.1.7.jar">
 		<attributes>
 			<attribute name="javadoc_location" value="jar:file:/S:/M2_REPO/com/ibm/disthub2/dhbcore/7.0.1.7/dhbcore-7.0.1.7-javadoc.jar!/"/>
@@ -404,8 +405,8 @@
 	<classpathentry kind="con" path="org.eclipse.m2e.MAVEN2_CLASSPATH_CONTAINER">
 		<attributes>
 			<attribute name="maven.pomderived" value="true"/>
+			<attribute name="org.eclipse.jst.component.nondependency" value=""/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="S:/M2_REPO/com/bbva/czic/czic_canonicalDto/1.0.0"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>
