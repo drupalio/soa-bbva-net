@@ -52,10 +52,8 @@ import com.bbva.czic.globalposition.business.ISrvIntGlobalPosition;
 @SN(registryID="SNCO1400002",logicalID="GlobalPosition")
 @VN(vnn="V01")
 @Api(value="/GlobalPosition/V01",description="SN GlobalPosition")
-@Produces({ MediaType.APPLICATION_JSON})
+@Produces({ MediaType.APPLICATION_JSON })
 @Service
-
-	
 public class SrvGlobalPositionV01 implements ISrvGlobalPositionV01, com.bbva.jee.arq.spring.core.servicing.utils.ContextAware {
 
 	private static I18nLog log = I18nLogFactory.getLogI18n(SrvGlobalPositionV01.class,"META-INF/spring/i18n/log/mensajesLog");
@@ -108,6 +106,7 @@ public class SrvGlobalPositionV01 implements ISrvGlobalPositionV01, com.bbva.jee
 	@PUT
 	@Path("/{idProduct}")
 	@Consumes({ MediaType.APPLICATION_JSON })
+	@SMC(registryID="SMCCO1400020",logicalID="updateProductVisibility")
 	public Response update(@ApiParam(value="Claim identifier")@PathParam("idProduct") String idProduct, @ApiParam(value="Claim information")Product infoProduct) {
 
 		return null;

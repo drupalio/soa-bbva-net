@@ -405,6 +405,9 @@
                     <webAppConfig>
                         <contextPath>/${project.name}</contextPath>
                     </webAppConfig>
+
+                    <stopKey/>
+                    <stopPort>9090</stopPort>
                 </configuration>
             </plugin>
         <plugin>
