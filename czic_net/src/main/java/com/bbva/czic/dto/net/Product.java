@@ -1,64 +1,57 @@
 
 package com.bbva.czic.dto.net;
 
-import com.wordnik.swagger.annotations.ApiModelProperty;
-
+import java.io.Serializable;
+import java.util.List;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
-import java.io.Serializable;
-import java.util.List;
 
-@XmlRootElement(name = "product", namespace = "urn:com:bbva:czic:dto:net")
-@XmlType(name = "product", namespace = "urn:com:bbva:czic:dto:net")
+
+import com.wordnik.swagger.annotations.ApiModelProperty;
+
+@XmlRootElement(name = "Product", namespace = "urn:com:bbva:czic:dto:net")
+@XmlType(name = "Product", namespace = "urn:com:bbva:czic:dto:net")
 @XmlAccessorType(XmlAccessType.FIELD)
 public class Product
     implements Serializable
 {
 
     public final static long serialVersionUID = 1L;
-
-    @ApiModelProperty(value = "Identificador del producto", required = true)
-    private String productId;
-
-    @ApiModelProperty("")
+    @ApiModelProperty(value = "Identificador del usuario ejecutivo de ventas", required = true)
+    private String id;
+    @ApiModelProperty(value = "", required = true)
     private EnumProductType type;
-
-    @ApiModelProperty("")
+    @ApiModelProperty(value = "Nombre del producto", required = true)
     private String name;
-
-    @ApiModelProperty("")
+    @ApiModelProperty("Alias del producto")
     private String alias;
-
-    @ApiModelProperty("")
+    @ApiModelProperty(value = "Identificador que referencia si un producto es un activo o un pasivo", required = true)
     private EnumFinancialStatusType financialState;
-
-    @ApiModelProperty("")
+    @ApiModelProperty(value = "Visibilidad del producto", required = true)
     private Boolean visible;
-
-    @ApiModelProperty("")
+    @ApiModelProperty(value = "Operatibilidad del producto", required = true)
     private Boolean operable;
-
-    @ApiModelProperty("")
+    @ApiModelProperty(value = "Entidad con toda la informaci\u00f3n del balance de la cuenta", required = true)
     private Balance balance;
-
+    @ApiModelProperty(value = "description", required = true)
+    private ContactInfo contactInfo;
     @ApiModelProperty("")
-    private ContactInformation contactInfo;
-
+    private Conditions conditions;
     @ApiModelProperty("")
-    private List<Movement> movements;
+    private List<Movement> movement;
 
     public Product() {
         //default constructor
     }
 
-    public String getProductId() {
-        return productId;
+    public String getId() {
+        return id;
     }
 
-    public void setProductId(String productId) {
-        this.productId = productId;
+    public void setId(String id) {
+        this.id = id;
     }
 
     public EnumProductType getType() {
@@ -109,22 +102,6 @@ public class Product
         this.operable = operable;
     }
 
-    public ContactInformation getContactInfo() {
-        return contactInfo;
-    }
-
-    public void setContactInfo(ContactInformation contactInfo) {
-        this.contactInfo = contactInfo;
-    }
-
-    public List<Movement> getMovements() {
-        return movements;
-    }
-
-    public void setMovements(List<Movement> movements) {
-        this.movements = movements;
-    }
-
     public Balance getBalance() {
         return balance;
     }
@@ -132,4 +109,29 @@ public class Product
     public void setBalance(Balance balance) {
         this.balance = balance;
     }
+
+    public ContactInfo getContactInfo() {
+        return contactInfo;
+    }
+
+    public void setContactInfo(ContactInfo contactInfo) {
+        this.contactInfo = contactInfo;
+    }
+
+    public Conditions getConditions() {
+        return conditions;
+    }
+
+    public void setConditions(Conditions conditions) {
+        this.conditions = conditions;
+    }
+
+    public List<Movement> getMovement() {
+        return movement;
+    }
+
+    public void setMovement(List<Movement> movement) {
+        this.movement = movement;
+    }
+
 }

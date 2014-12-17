@@ -23,12 +23,14 @@
 				<artifactId>hibernate-validator</artifactId>
 				<version>${hibernate-validator.version}</version>
 		</dependency>
+		<!--Dependencias Swagger -->
+
 		<dependency>
-				<groupId>javax.validation</groupId>
-				<artifactId>validation-api</artifactId>
-				<version>${validation-api.version}</version>
+			<groupId>javax.validation</groupId>
+			<artifactId>validation-api</artifactId>
+			<version>${validation-api.version}</version>
 		</dependency>
-	    <!--Dependencias Swagger -->
+		<!--Dependencias Swagger -->
 		<dependency>
 			<groupId>com.wordnik</groupId>
 			<artifactId>swagger-core_2.10</artifactId>
