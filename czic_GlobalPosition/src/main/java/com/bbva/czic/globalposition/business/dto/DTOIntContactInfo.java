@@ -5,13 +5,13 @@ import java.util.List;
 
 
 
-public class DTOIntContactInformation {
+public class DTOIntContactInfo {
 
     public final static long serialVersionUID = 1L;
     private List<DTOIntPhoneNumber> phoneNumbers;
     private List<DTOIntEmail> emails;
 
-    public DTOIntContactInformation() {
+    public DTOIntContactInfo() {
         //default constructor
     }
 

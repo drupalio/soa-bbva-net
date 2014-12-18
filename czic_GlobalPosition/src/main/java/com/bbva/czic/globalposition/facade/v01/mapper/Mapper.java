@@ -18,7 +18,7 @@ import com.bbva.czic.globalposition.business.dto.DTOIntProduct;
 import com.bbva.czic.globalposition.business.dto.DTOIntOperation;
 import com.bbva.czic.globalposition.business.dto.DTOIntEnumContactSourceType;
 import com.bbva.czic.globalposition.business.dto.DTOIntPhoneNumber;
-import com.bbva.czic.globalposition.business.dto.DTOIntContactInformation;
+import com.bbva.czic.globalposition.business.dto.DTOIntContactInfo;
 import com.bbva.czic.globalposition.business.dto.DTOIntEmail;
 import com.bbva.czic.globalposition.business.dto.DTOIntMovement;
 import com.bbva.czic.globalposition.business.dto.DTOIntEnumPhoneNumberType;
@@ -61,6 +61,7 @@ public class Mapper {
 	public static DTOIntProduct dtoIntProductMap(Product product) {
 		DTOIntProduct dtoIntProduct = new DTOIntProduct();
 		BeanUtils.copyProperties(product, dtoIntProduct);
+		dtoIntProduct.setProductType(product.getType().name());
 		return dtoIntProduct;
 	}
 
@@ -103,17 +104,17 @@ public class Mapper {
 	}
 
 
-	public static ContactInformation contactInformationMap(DTOIntContactInformation dtoIntContactInformation) {
+	public static ContactInformation contactInformationMap(DTOIntContactInfo dtoIntContactInfo) {
 		ContactInformation contactInformation = new ContactInformation();
-		BeanUtils.copyProperties(dtoIntContactInformation, contactInformation);
+		BeanUtils.copyProperties(dtoIntContactInfo, contactInformation);
 		return contactInformation;
 	}
 
 
-	public static DTOIntContactInformation dtoIntContactInformationMap(ContactInformation contactInformation) {
-		DTOIntContactInformation dtoIntContactInformation = new DTOIntContactInformation();
-		BeanUtils.copyProperties(contactInformation, dtoIntContactInformation);
-		return dtoIntContactInformation;
+	public static DTOIntContactInfo dtoIntContactInformationMap(ContactInformation contactInformation) {
+		DTOIntContactInfo dtoIntContactInfo = new DTOIntContactInfo();
+		BeanUtils.copyProperties(contactInformation, dtoIntContactInfo);
+		return dtoIntContactInfo;
 	}
 
 
