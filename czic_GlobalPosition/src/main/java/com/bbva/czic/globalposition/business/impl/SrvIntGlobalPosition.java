@@ -38,6 +38,8 @@ public class SrvIntGlobalPosition implements ISrvIntGlobalPosition {
 	public List<DTOIntProduct> getExtractGlobalBalance(String customerId, String filter) {
 		log.info(" getExtractGlobalBalance product ");
 
+		List<DTOIntProduct> initialResult = globalPositionDAO.getExtractGlobalBalance(customerId);
+
 		if (filter != null && !filter.contentEquals("null")) {
 			log.info("A query string (filter) has been sended: " + filter);
 			SearchCondition<DTOIntProduct> sc;
@@ -60,9 +62,11 @@ public class SrvIntGlobalPosition implements ISrvIntGlobalPosition {
 				throw new BusinessServiceException(FILTERERROR, filter, e.getMessage());
 			}
 
+			List<DTOIntProduct> found = sc.findAll(initialResult);
+			return found;
 		}
 
-		return null;
+		return initialResult;
 	}
 
 	@Override
