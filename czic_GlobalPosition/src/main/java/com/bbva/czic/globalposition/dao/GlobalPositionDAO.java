@@ -8,5 +8,8 @@ public interface GlobalPositionDAO {
 
     List<DTOIntProduct> getExtractGlobalBalance(String customerId);
 
+    void updateVisibility(String idProduct, Boolean visible);
+
+    void updateOperability(String idProduct, Boolean operable);
 }
 

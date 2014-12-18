@@ -2,7 +2,9 @@ package com.bbva.czic.globalposition.business.impl;
 
 import java.util.List;
 
+import com.bbva.czic.dto.net.Product;
 import com.bbva.czic.globalposition.dao.GlobalPositionDAO;
+import com.bbva.czic.globalposition.facade.v01.mapper.Mapper;
 import com.bbva.jee.arq.spring.core.servicing.gce.BusinessServiceException;
 import org.apache.cxf.jaxrs.ext.search.PrimitiveStatement;
 import org.apache.cxf.jaxrs.ext.search.SearchCondition;
@@ -35,7 +37,7 @@ public class SrvIntGlobalPosition implements ISrvIntGlobalPosition {
 	GlobalPositionDAO globalPositionDAO;
 
 	@Override
-	public List<DTOIntProduct> getExtractGlobalBalance(String customerId, String filter) {
+	public List<Product> getExtractGlobalBalance(String customerId, String filter) {
 		log.info(" getExtractGlobalBalance product ");
 
 		List<DTOIntProduct> initialResult = globalPositionDAO.getExtractGlobalBalance(customerId);
@@ -62,20 +64,20 @@ public class SrvIntGlobalPosition implements ISrvIntGlobalPosition {
 				throw new BusinessServiceException(FILTERERROR, filter, e.getMessage());
 			}
 
-			List<DTOIntProduct> found = sc.findAll(initialResult);
+			List<Product> found = Mapper.productListMap(sc.findAll(initialResult));
 			return found;
 		}
 
-		return initialResult;
+		return Mapper.productListMap(initialResult);
 	}
 
 	@Override
-	public void updateProductVisibility(String idProduct, DTOIntProduct infoProduct) {
-
+	public void updateProductVisibility(String idProduct, Product infoProduct) {
+		globalPositionDAO.updateVisibility(idProduct, infoProduct.getVisible());
 	}
 
 	@Override
-	public void updateProductOperability(String idProduct, DTOIntProduct infoProduct){
-
+	public void updateProductOperability(String idProduct, Product infoProduct){
+		globalPositionDAO.updateOperability(idProduct, infoProduct.getOperable());
 	}
 }

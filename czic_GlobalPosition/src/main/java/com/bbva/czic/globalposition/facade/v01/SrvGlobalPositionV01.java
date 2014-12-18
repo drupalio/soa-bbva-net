@@ -2,7 +2,6 @@ package com.bbva.czic.globalposition.facade.v01;
 
 import com.bbva.czic.dto.net.Product;
 import com.bbva.czic.globalposition.business.ISrvIntGlobalPosition;
-import com.bbva.czic.globalposition.business.dto.DTOIntProduct;
 import com.bbva.czic.globalposition.facade.v01.mapper.Mapper;
 import com.bbva.jee.arq.spring.core.log.I18nLog;
 import com.bbva.jee.arq.spring.core.log.I18nLogFactory;
@@ -78,7 +77,7 @@ public class SrvGlobalPositionV01 implements ISrvGlobalPositionV01, com.bbva.jee
 			@ApiParam(value = "order by param") @DefaultValue("null") @QueryParam("$sort") String sort) {
 
 
-		return Mapper.productListMap(srvIntGlobalPosition.getExtractGlobalBalance(customerId, filter));
+		return srvIntGlobalPosition.getExtractGlobalBalance(customerId, filter);
 	}
 
 	@ApiOperation(value="Update the product.", notes="Update the product partially", response=Response.class)
@@ -111,12 +110,12 @@ public class SrvGlobalPositionV01 implements ISrvGlobalPositionV01, com.bbva.jee
 	@SMC(registryID="SMCCO1400004",logicalID="update")
 	private void updateProductVisibility(String idProduct, Product infoProduct) {
 
-		srvIntGlobalPosition.updateProductVisibility(idProduct, Mapper.dtoIntProductMap(infoProduct));
+		srvIntGlobalPosition.updateProductVisibility(idProduct, infoProduct);
 	}
 
 	@SMC(registryID="SMCCO1400005",logicalID="update")
 	private void updateProductOperability(String idProduct, Product infoProduct) {
 
-		srvIntGlobalPosition.updateProductOperability(idProduct, Mapper.dtoIntProductMap(infoProduct));
+		srvIntGlobalPosition.updateProductOperability(idProduct, infoProduct);
 	}
 }
