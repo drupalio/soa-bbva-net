@@ -22,38 +22,35 @@ import com.bbva.jee.arq.spring.core.servicing.test.MockInvocationContextTestExec
  * @author Arquitectura Spring BBVA
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(
-	loader = BusinessServiceTestContextLoader.class, 
-	locations = {
-        "classpath*:/META-INF/spring/applicationContext-*.xml", 
-        "classpath:/META-INF/spring/business-service.xml",
-        "classpath:/META-INF/spring/business-service-test.xml"
-    }
-)
-@TestExecutionListeners(listeners = { MockInvocationContextTestExecutionListener.class, DependencyInjectionTestExecutionListener.class })
+@ContextConfiguration(loader = BusinessServiceTestContextLoader.class, locations = {
+		"classpath*:/META-INF/spring/applicationContext-*.xml", "classpath:/META-INF/spring/business-service.xml",
+		"classpath:/META-INF/spring/business-service-test.xml" })
+@TestExecutionListeners(listeners = { MockInvocationContextTestExecutionListener.class,
+		DependencyInjectionTestExecutionListener.class })
 public class TestTransaccionOzn1 {
-	
+
 	private static final Log LOG = I18nLogFactory.getLog(TestTransaccionOzn1.class);
-		
+
 	@Autowired
 	private TransaccionOzn1 transaccion;
-	
+
 	@Test
 	public void test() throws ExcepcionTransaccion {
-		
-		PeticionTransaccionOzn1 peticion = new PeticionTransaccionOzn1();		
-		
+
+		PeticionTransaccionOzn1 peticion = new PeticionTransaccionOzn1();
+
 		/*
 		 * TODO: poblar la peticion con valores adecuados
 		 */
-		
+
 		try {
 			LOG.info("Invocando transaccion, peticion: " + peticion);
 			RespuestaTransaccionOzn1 respuesta = transaccion.invocar(peticion);
 			LOG.info("Recibida respuesta: " + respuesta);
-		} catch ( ExcepcionRespuestaHost e ) {
-			LOG.error("Error recibido desde host, codigoError: " + e.getCodigoError() + ", descripcion: " + e.getMessage());
-		} catch ( ExcepcionTransporte e ) {
+		} catch (ExcepcionRespuestaHost e) {
+			LOG.error("Error recibido desde host, codigoError: " + e.getCodigoError() + ", descripcion: "
+					+ e.getMessage());
+		} catch (ExcepcionTransporte e) {
 			LOG.error("Error de transporte", e);
 		}
 	}

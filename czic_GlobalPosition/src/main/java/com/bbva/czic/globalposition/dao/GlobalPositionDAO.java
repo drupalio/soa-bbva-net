@@ -1,15 +1,16 @@
 package com.bbva.czic.globalposition.dao;
 
 import com.bbva.czic.globalposition.business.dto.DTOIntProduct;
+import com.bbva.jee.arq.spring.core.host.transporte.ExcepcionTransporte;
 
 import java.util.List;
 
 public interface GlobalPositionDAO {
+    
+    List<DTOIntProduct> getExtractGlobalBalance(String customerId) throws ExcepcionTransporte;
 
-    List<DTOIntProduct> getExtractGlobalBalance(String customerId);
+    void updateProductVisibility(String idProduct, Boolean visible);
 
-    void updateVisibility(String idProduct, Boolean visible);
-
-    void updateOperability(String idProduct, Boolean operable);
+    void updateProductOperability(String idProduct, Boolean operable);
 }
 

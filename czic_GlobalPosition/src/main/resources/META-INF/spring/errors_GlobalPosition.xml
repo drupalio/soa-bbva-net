@@ -27,8 +27,6 @@
       - servicing:http-status: codigo http asociado a este error
      -->
 
-	<error-definition severity="ERROR" alias="alias" code="0" servicing:http-status="400">
-
 		<!--
            Descripcion del error.
            Se requiere indicar al menos un mensaje en el idioma por defecto.
