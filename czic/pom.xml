@@ -306,6 +306,13 @@
             <artifactId>czic_GlobalPosition</artifactId>
             <version>1.0.0</version>
         </dependency>
+    
+     <dependency>
+            <groupId>com.bbva.czic.accounts</groupId>
+           <artifactId>czic_accounts</artifactId>    
+           <version>1.0.0</version>    
+    </dependency>
+
     </dependencies>
 	<build>
 		<plugins>

@@ -3,6 +3,8 @@ package com.bbva.czic.globalposition.dao;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.annotation.Resource;
+
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.bbva.czic.globalposition.business.dto.DTOIntEnumFinancialStatusType;
@@ -12,6 +14,7 @@ import com.bbva.czic.globalposition.dao.model.ozn1.FormatoOZECN1S1;
 import com.bbva.czic.globalposition.dao.model.ozn1.PeticionTransaccionOzn1;
 import com.bbva.czic.globalposition.dao.model.ozn1.RespuestaTransaccionOzn1;
 import com.bbva.czic.globalposition.dao.model.ozn1.TransaccionOzn1;
+import com.bbva.czic.mapper.GoblalPositionMapper;
 import com.bbva.jee.arq.spring.core.host.protocolo.ps9.ErrorMappingHelper;
 import com.bbva.jee.arq.spring.core.host.protocolo.ps9.aplicacion.CopySalida;
 import com.bbva.jee.arq.spring.core.host.transporte.ExcepcionTransporte;
@@ -25,6 +28,9 @@ public class GlobalPositionDAOImpl implements GlobalPositionDAO {
 	@Autowired
 	private ErrorMappingHelper errorMappingHelper;
 
+	@Resource(name = "globalPositionMapper")
+	private GoblalPositionMapper goblalPositionMapper;
+
 	@Override
 	public List<DTOIntProduct> getExtractGlobalBalance(String customerId) throws ExcepcionTransporte {
 
@@ -35,6 +41,10 @@ public class GlobalPositionDAOImpl implements GlobalPositionDAO {
 		// 2. Si es un tipo de producto diferente a tarjetas se mapea a el tipo de salida 0 (comunes)
 		formatoEntrada.setNumclie(customerId);
 		peticion.getCuerpo().getPartes().add(formatoEntrada);
+		
+		//DTOIntProduct dtoip = 
+
+		 //goblalPositionMapper.map(sourceObject, destinationClass)
 
 		try {
 			RespuestaTransaccionOzn1 respuesta = transaccion.invocar(peticion);
@@ -64,6 +74,10 @@ public class GlobalPositionDAOImpl implements GlobalPositionDAO {
 	public void updateProductVisibility(String idProduct, DTOIntProduct infoProduct) {
 		// TODO Auto-generated method stub
 
+	}
+
+	public void setGoblalPositionMapper(GoblalPositionMapper goblalPositionMapper) {
+		this.goblalPositionMapper = goblalPositionMapper;
 	}
 
 	@Override
