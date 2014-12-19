@@ -16,6 +16,8 @@ import com.bbva.jee.arq.spring.core.log.I18nLogFactory;
 import com.bbva.jee.arq.spring.core.servicing.test.BusinessServiceTestContextLoader;
 import com.bbva.jee.arq.spring.core.servicing.test.MockInvocationContextTestExecutionListener;
 
+import static org.junit.Assert.*;
+
 /**
  * Test de la transacci&oacute;n <code>OZN1</code>
  * 

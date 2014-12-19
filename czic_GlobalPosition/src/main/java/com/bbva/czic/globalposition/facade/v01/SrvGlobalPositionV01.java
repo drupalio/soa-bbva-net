@@ -10,6 +10,7 @@ import com.bbva.jee.arq.spring.core.servicing.annotations.SN;
 import com.bbva.jee.arq.spring.core.servicing.annotations.VN;
 import com.bbva.jee.arq.spring.core.servicing.gce.BusinessServiceException;
 import com.bbva.jee.arq.spring.core.servicing.utils.BusinessServicesToolKit;
+import com.google.gson.Gson;
 import com.wordnik.swagger.annotations.*;
 import org.apache.cxf.jaxrs.model.wadl.ElementClass;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,10 +21,13 @@ import javax.ws.rs.core.HttpHeaders;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.List;
+import java.util.Random;
 
 
-	
 @Path("/V01")
 @SN(registryID="SNCO1400002",logicalID="GlobalPosition")
 @VN(vnn="V01")
@@ -76,7 +80,34 @@ public class SrvGlobalPositionV01 implements ISrvGlobalPositionV01, com.bbva.jee
 			@ApiParam(value = "expands param") @DefaultValue("null") @QueryParam("$expands") String expands,
 			@ApiParam(value = "order by param") @DefaultValue("null") @QueryParam("$sort") String sort) {
 
+		//TODO retirar prueba
+		Gson gson = new Gson();
 
+		try {
+
+			BufferedReader br = new BufferedReader(
+					new FileReader("c:\\file.json"));
+
+			//convert the json string back to object
+			List<Product> obj = gson.fromJson(br, List.class);
+
+			Random random = new Random();
+			random.setSeed(2);
+
+			if ((random.nextInt()%2) == 0) {
+				if ((random.nextInt()%2) == 0) {
+					throw new BusinessServiceException("wrongParameters");
+				} else {
+					throw new BusinessServiceException("noData");
+				}
+			} else {
+				return obj;
+			}
+
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		//TODO fin prueba
 		return srvIntGlobalPosition.getExtractGlobalBalance(customerId, filter);
 	}
 

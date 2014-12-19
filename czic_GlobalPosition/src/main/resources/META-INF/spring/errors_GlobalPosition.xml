@@ -44,15 +44,15 @@
    - En caso contrario, se elige el mensaje en el idioma por defecto.
    -->
 
-    <error-definition severity="FATAL" alias="globalPositionNotFound" code="1" servicing:http-status="409">
+    <error-definition severity="ERROR" alias="wrongParameters" code="1" servicing:http-status="409">
         <message>GlobalPosition not found.</message>
         <message lang="en">GlobalPosition not found.</message>
-        <message lang="es">Posicion global no encontrada.</message>
+        <message lang="es">Parámetros inválidos</message>
     </error-definition>
-    <error-definition severity="FATAL" alias="productNotFound" code="2" servicing:http-status="409">
+    <error-definition severity="ERROR" alias="noData" code="2" servicing:http-status="409">
         <message>Product not found.</message>
         <message lang="en">Product not found.</message>
-        <message lang="es">Producto no encontrado.</message>
+        <message lang="es">No existen datos para la búsqueda realizada.</message>
     </error-definition>
 
 </error-definitions>

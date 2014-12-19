@@ -19,7 +19,7 @@ import static org.junit.Assert.*;
 public class MapperTest {
 
     @Test
-    public void mapProductTypeToDtoIntProductTypeTest() {
+    public void testMapProductTypeToDtoIntProductType() {
         Product product = new Product();
         Balance balance = new Balance();
         DTOIntProduct intProduct = new DTOIntProduct();

@@ -37,10 +37,10 @@ public class SrvIntGlobalPosition implements ISrvIntGlobalPosition {
 	GlobalPositionDAO globalPositionDAO;
 
 	@Override
-	public List<Product> getExtractGlobalBalance(String customerId, String filter) {
+	public List<Product> getExtractGlobalBalance(final String customerId, final String filter) {
 		log.info(" getExtractGlobalBalance product ");
 
-		List<DTOIntProduct> initialResult = globalPositionDAO.getExtractGlobalBalance(customerId);
+		final List<DTOIntProduct> initialResult = globalPositionDAO.getExtractGlobalBalance(customerId);
 
 		if (filter != null && !filter.contentEquals("null")) {
 			log.info("A query string (filter) has been sended: " + filter);
@@ -49,14 +49,9 @@ public class SrvIntGlobalPosition implements ISrvIntGlobalPosition {
 			try {
 				sc = new FiqlParser<DTOIntProduct>(DTOIntProduct.class).parse(filter);
 
-				List<PrimitiveStatement> splitDataFilter = bussinesToolKit.getDataFromFilter(sc);
-				for (PrimitiveStatement st: splitDataFilter) {
-					log.info("The property is: " + st.getProperty());
-					log.info("The condition is: " + st.getCondition().toString());
-					log.info("The value is: " + st.getValue().toString());
-				}
+				final List<PrimitiveStatement> splitDataFilter = bussinesToolKit.getDataFromFilter(sc);
 
-				String pattern = bussinesToolKit.matchesPatternFromFilter(SERVICENAME, filter);
+				final String pattern = bussinesToolKit.matchesPatternFromFilter(SERVICENAME, filter);
 				if (pattern != null) {
 					log.info("The pattern is: " + pattern);
 				}
@@ -64,7 +59,7 @@ public class SrvIntGlobalPosition implements ISrvIntGlobalPosition {
 				throw new BusinessServiceException(FILTERERROR, filter, e.getMessage());
 			}
 
-			List<Product> found = Mapper.productListMap(sc.findAll(initialResult));
+			final List<Product> found = Mapper.productListMap(sc.findAll(initialResult));
 			return found;
 		}
 
@@ -72,12 +67,12 @@ public class SrvIntGlobalPosition implements ISrvIntGlobalPosition {
 	}
 
 	@Override
-	public void updateProductVisibility(String idProduct, Product infoProduct) {
+	public void updateProductVisibility(final String idProduct, final Product infoProduct) {
 		globalPositionDAO.updateProductVisibility(idProduct, infoProduct.getVisible());
 	}
 
 	@Override
-	public void updateProductOperability(String idProduct, Product infoProduct){
+	public void updateProductOperability(final String idProduct, final Product infoProduct){
 		globalPositionDAO.updateProductVisibility(idProduct, infoProduct.getOperable());
 	}
 }

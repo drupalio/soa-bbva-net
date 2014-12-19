@@ -28,7 +28,7 @@ public class GlobalPositionDAOImpl implements GlobalPositionDAO {
 	private ErrorMappingHelper errorMappingHelper;
 
 	@Override
-	public List<DTOIntProduct> getExtractGlobalBalance(String customerId) throws ExcepcionTransporte {
+	public List<DTOIntProduct> getExtractGlobalBalance(final String customerId) throws ExcepcionTransporte {
 
 		PeticionTransaccionOzn1 peticion = new PeticionTransaccionOzn1();
 		FormatoOZECN1E0 formatoEntrada = new FormatoOZECN1E0();
@@ -63,7 +63,7 @@ public class GlobalPositionDAOImpl implements GlobalPositionDAO {
 	}
 
 	@Override
-	public void updateProductVisibility(String idProduct, Boolean visible) {
+	public void updateProductVisibility(final String idProduct, final Boolean visible) {
 		// TODO Auto-generated method stub
 
 	}
