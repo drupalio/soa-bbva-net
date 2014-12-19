@@ -6,18 +6,24 @@
         <artifactId>pom-padre_czic</artifactId>
         <version>1.4.0</version>
     </parent>
-    <groupId>com.bbva.czic</groupId>
-	<artifactId>czic</artifactId>
-	<packaging>war</packaging>
+    <groupId>com.bbva.czic.cardcharge</groupId>
+	<artifactId>czic_CardCharge</artifactId>
+	<packaging>jar</packaging>
 	<version>1.0.0</version>
-	<name>czic</name>
-	
+	<name>czic_CardCharge</name>
+		
 	<repositories/>
     <pluginRepositories/>
 	<dependencies>
 	
     <!-- INICIO Arquitectura Servicios -->
-    
+
+     <dependency>
+       <groupId>com.bbva.czic</groupId>
+       <artifactId>czic_net</artifactId>
+       <version>1.0.0</version>
+    </dependency>
+  
     <dependency>
        <groupId>com.bbva.jee.arq.spring.core</groupId>
        <artifactId>arq-spring-servicing-core</artifactId>
@@ -42,11 +48,13 @@
 		<groupId>com.bbva.jee.arq.spring.core</groupId>
 		<artifactId>arq-spring-connector-host</artifactId>
 		<version>${arq.spring.connector.host.version}</version>
+		<scope>test</scope>
 	</dependency>
 	<dependency>
 		<groupId>com.bbva.jee.arq.spring.core</groupId>
 		<artifactId>arq-spring-connector-host-ps9</artifactId>
 		<version>${arq.spring.connector.host.ps9.version}</version>
+		<scope>test</scope>
 	</dependency>
 	<dependency>
 		<groupId>com.bbva.jee.arq.spring.core</groupId>
@@ -57,6 +65,7 @@
 		<groupId>com.bbva.jee.arq.spring.core</groupId>
 		<artifactId>arq-spring-connector-host-imsconnect</artifactId>
 		<version>${arq.spring.connector.host.imsconnect.version}</version>
+		<scope>test</scope>
 	</dependency>
 
 	<!--Dependencias Swagger -->
@@ -82,26 +91,8 @@
        <artifactId>guava</artifactId>
        <version>${guava.version}</version>
     </dependency>   
- 
-    <!-- FIN Arquitectura Servicios-->
   
-	     <dependency>
-			<groupId>org.hibernate</groupId>
-			<artifactId>hibernate-entitymanager</artifactId>
-			<version>${hibernate-entitymanager.version}</version>
-			<scope>test</scope>
-			<classifier/>
-			<exclusions>
-				<exclusion>
-					<groupId>cglib</groupId>
-					<artifactId>cglib</artifactId>
-				</exclusion>
-				<exclusion>
-					<groupId>dom4j</groupId>
-					<artifactId>dom4j</artifactId>
-				</exclusion>
-			</exclusions> 
-		</dependency>
+  <!-- FIN Arquitectura Servicios-->
   
 		<dependency>
 			<groupId>junit</groupId>
@@ -195,7 +186,34 @@
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-tx</artifactId>
 			<version>${spring.version}</version>
-		</dependency>
+		</dependency>		
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-beans</artifactId>
+			<version>${spring.version}</version>
+		</dependency>		
+	<!--
+	<dependency>
+            <groupId>bsh</groupId>
+            <artifactId>bsh</artifactId>
+            <version>${bsh.version}</version>
+            
+        </dependency>
+	-->	
+    <dependency>
+            <groupId>mx4j</groupId>
+            <artifactId>mx4j-tools</artifactId>
+            <version>${mx4j-tools.version}</version>
+            
+        </dependency>
+    <!--
+	<dependency>
+            <groupId>org.dbunit</groupId>
+            <artifactId>dbunit</artifactId>
+            <version>2.4.8</version>
+            
+        </dependency>
+	-->	
     <dependency>
             <groupId>org.codehaus.jackson</groupId>
             <artifactId>jackson-core-asl</artifactId>
@@ -279,40 +297,54 @@
     <dependency>
             <groupId>org.apache.cxf</groupId>
             <artifactId>cxf-rt-frontend-jaxws</artifactId>
-            <version>${cxf.version}</version>
-            
+            <version>${cxf.version}</version>           
         </dependency>
     <dependency>
             <groupId>org.apache.cxf</groupId>
             <artifactId>cxf-rt-frontend-jaxrs</artifactId>
             <version>${cxf.version}</version>
-            
-        </dependency>
+	</dependency>
     <dependency>
             <groupId>org.apache.cxf</groupId>
             <artifactId>cxf-rt-transports-http</artifactId>
-            <version>${cxf.version}</version>
-            
-        </dependency>
-
-	<dependency>
-		<groupId>org.apache.cxf</groupId>
-		<artifactId>cxf-rt-rs-extension-search</artifactId>
-		<version>${cxf.version}</version>
-	</dependency>
-  
-    <!--dependency>
-            <groupId>com.bbva.czic.globalposition</groupId>
-            <artifactId>czic_GlobalPosition</artifactId>
-            <version>1.0.0</version>
-        </dependency-->
-    
-     <dependency>
-            <groupId>com.bbva.czic.cardcharge</groupId>
-           <artifactId>czic_CardCharge</artifactId>    
-           <version>1.0.0</version>    
+            <version>${cxf.version}</version>    
     </dependency>
-
+    <dependency>
+          <groupId>org.apache.cxf</groupId>
+          <artifactId>cxf-rt-rs-extension-search</artifactId>
+          <version>${cxf.version}</version>
+    </dependency>
+        
+	<!-- Hibernate para tests  -->
+	<dependency>
+		<groupId>org.hibernate</groupId>
+		<artifactId>hibernate-entitymanager</artifactId>
+		<version>${hibernate-entitymanager.version}</version>
+		<classifier />
+		<exclusions>
+			<exclusion>
+				<groupId>cglib</groupId>
+				<artifactId>cglib</artifactId>
+			</exclusion>
+			<exclusion>
+				<groupId>dom4j</groupId>
+				<artifactId>dom4j</artifactId>
+			</exclusion>
+		</exclusions>
+		<scope>test</scope>
+	</dependency>		
+    
+   	<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-validator</artifactId>
+			<version>${hibernate-validator.version}</version>
+	</dependency>
+	<dependency>
+			<groupId>javax.validation</groupId>
+			<artifactId>validation-api</artifactId>
+			<version>${validation-api.version}</version>
+	</dependency>
+    
     </dependencies>
 	<build>
 		<plugins>
@@ -355,12 +387,22 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-assembly-plugin</artifactId>
-                
-                <configuration>
-                    <descriptorRefs>
-                        <descriptorRef>jar-with-dependencies</descriptorRef>
-                    </descriptorRefs>
+               <configuration>
+                    <descriptors>
+                        <descriptor>generacionFacade.xml</descriptor>
+                        <descriptor>generacionSN.xml</descriptor>
+                    </descriptors>
+                    <outputDirectory>target</outputDirectory>
                 </configuration>
+                <executions>
+                   <execution>
+                       <id>make-assembly</id>
+                       <phase>package</phase>
+                       <goals>
+                           <goal>single</goal>
+                       </goals>
+                   </execution>
+               </executions>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -421,8 +463,7 @@
             </plugin>
         <plugin>
                 <groupId>org.codehaus.mojo</groupId>
-                <artifactId>aspectj-maven-plugin</artifactId>
-                
+                <artifactId>aspectj-maven-plugin</artifactId>                
                 <configuration>
                     <outxml>true</outxml>
                     <aspectLibraries>
@@ -430,9 +471,13 @@
                             <groupId>org.springframework</groupId>
                             <artifactId>spring-aspects</artifactId>
                         </aspectLibrary>
+                        <aspectLibrary>
+							<groupId>com.bbva.jee.arq.spring.core</groupId>
+							<artifactId>arq-spring-servicing-core</artifactId>
+						</aspectLibrary> 
 						<aspectLibrary>
-                            <groupId>com.bbva.jee.arq.spring.core</groupId>
-                            <artifactId>arq-spring-servicing-core</artifactId>
+							<groupId>com.bbva.jee.arq.spring.core</groupId>
+                            <artifactId>arq-spring-restutils</artifactId>
                         </aspectLibrary>
                     </aspectLibraries>
                     <source>1.6</source>
@@ -461,23 +506,6 @@
                     </dependency>
                 </dependencies>
             </plugin>
-        <!--plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-site-plugin</artifactId>
-                <version>${maven-site-plugin.version}</version>
-                <configuration>
-                    <reportPlugins/>
-                </configuration>
-                <executions>
-                    <execution>
-                        <id>crearJar</id>
-                        <phase>compile</phase>
-                        <goals>
-                            <goal>jar</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin-->
         </plugins>
 			<!-- Versiones de plugins de Maven para Frontend Spring -->
 		<pluginManagement>
@@ -521,16 +549,6 @@
 						<excludes>
 							<exclude>**/*_Roo_*</exclude>
 						</excludes>
-					</configuration>
-				</plugin>
-				<plugin>
-					<groupId>org.apache.maven.plugins</groupId>
-					<artifactId>maven-assembly-plugin</artifactId>
-					<version>${maven-assembly-plugin.version}</version>
-					<configuration>
-						<descriptorRefs>
-							<descriptorRef>jar-with-dependencies</descriptorRef>
-						</descriptorRefs>
 					</configuration>
 				</plugin>
 				<plugin>
@@ -601,14 +619,14 @@
 								<groupId>org.springframework</groupId>
 								<artifactId>spring-aspects</artifactId>
 							</aspectLibrary>
-							<aspectLibrary>
+						    <aspectLibrary>
 								<groupId>com.bbva.jee.arq.spring.core</groupId>
-								<artifactId>arq-spring-core</artifactId>
-							</aspectLibrary>
-							<aspectLibrary>
+								<artifactId>arq-spring-servicing-core</artifactId>
+							</aspectLibrary> 
+						    <aspectLibrary>
 								<groupId>com.bbva.jee.arq.spring.core</groupId>
 								<artifactId>arq-spring-restutils</artifactId>
-							</aspectLibrary> 
+							</aspectLibrary> 							
 						</aspectLibraries>
 						<source>1.6</source>
 						<target>1.6</target>
@@ -636,6 +654,6 @@
 				</plugin>
 			</plugins>
 		</pluginManagement>
-	<finalName>czic_qsrv_01</finalName>
     </build>
 </project>
+    
