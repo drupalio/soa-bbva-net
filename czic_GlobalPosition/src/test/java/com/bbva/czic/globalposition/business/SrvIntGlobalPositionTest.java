@@ -27,8 +27,6 @@ import static org.mockito.Mockito.when;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(loader = BusinessServiceTestContextLoader.class, locations = {
-		"classpath*:/META-INF/spring/applicationContext-*.xml",
-		"classpath:/META-INF/spring/business-service.xml",
 		"classpath:/META-INF/spring/business-service-test.xml" })
 @TestExecutionListeners(listeners = {
 		MockInvocationContextTestExecutionListener.class,
