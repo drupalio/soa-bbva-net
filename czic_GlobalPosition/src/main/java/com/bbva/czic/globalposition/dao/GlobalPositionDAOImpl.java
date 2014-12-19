@@ -19,7 +19,9 @@ import com.bbva.jee.arq.spring.core.host.protocolo.ps9.ErrorMappingHelper;
 import com.bbva.jee.arq.spring.core.host.protocolo.ps9.aplicacion.CopySalida;
 import com.bbva.jee.arq.spring.core.host.transporte.ExcepcionTransporte;
 import com.bbva.jee.arq.spring.core.servicing.gce.BusinessServiceException;
+import org.springframework.stereotype.Component;
 
+@Component
 public class GlobalPositionDAOImpl implements GlobalPositionDAO {
 
 	@Autowired
@@ -32,7 +34,7 @@ public class GlobalPositionDAOImpl implements GlobalPositionDAO {
 	private GoblalPositionMapper goblalPositionMapper;
 
 	@Override
-	public List<DTOIntProduct> getExtractGlobalBalance(String customerId) throws ExcepcionTransporte {
+	public List<DTOIntProduct> getExtractGlobalBalance(final String customerId) throws ExcepcionTransporte {
 
 		PeticionTransaccionOzn1 peticion = new PeticionTransaccionOzn1();
 		FormatoOZECN1E0 formatoEntrada = new FormatoOZECN1E0();
@@ -71,7 +73,7 @@ public class GlobalPositionDAOImpl implements GlobalPositionDAO {
 	}
 
 	@Override
-	public void updateProductVisibility(String idProduct, DTOIntProduct infoProduct) {
+	public void updateProductVisibility(final String idProduct, final Boolean visible) {
 		// TODO Auto-generated method stub
 
 	}
@@ -81,12 +83,12 @@ public class GlobalPositionDAOImpl implements GlobalPositionDAO {
 	}
 
 	@Override
-	public void updateProductOperability(String idUser, DTOIntProduct infoProduct) {
+	public void updateProductOperability(String idProduct, Boolean operable) {
 
 		PeticionTransaccionOzn1 peticion = new PeticionTransaccionOzn1();
 		FormatoOZECN1E0 formatoEntrada = new FormatoOZECN1E0();
 
-		formatoEntrada.setNumclie(idUser);
+		formatoEntrada.setNumclie(idProduct);
 
 		peticion.getCuerpo().getPartes().add(formatoEntrada);
 		try {

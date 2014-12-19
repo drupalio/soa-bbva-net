@@ -6,16 +6,3 @@ sarc createSN --descriptorFile sn-descriptor-globalPosition.json
 sarc createSN --descriptorFile sn-descriptor-globalPosition.json
 exit
 // ServicesArchitecture log closed at 2014-12-15 11:07:21
-// ServicesArchitecture log opened at 2014-12-18 14:16:04
-sarc createSN --descriptorFile sn-descriptor-customer.json
-// ServicesArchitecture log opened at 2014-12-18 14:18:24
-sarc createSN --descriptorFile sn-descriptor-customer.json
-// ServicesArchitecture log opened at 2014-12-18 14:20:04
-sarc createSN --descriptorFile sn-descriptor-customer.json
-// ServicesArchitecture log opened at 2014-12-18 14:27:11
-sarc createSN --descriptorFile sn-descriptor-customer.json
-// ServicesArchitecture log opened at 2014-12-18 18:56:00
-sarc createSN --descriptorFile sn-descriptor-account.json
-sarc createSN --descriptorFile sn-descriptor-account.json
-exit
-// ServicesArchitecture log closed at 2014-12-18 19:04:05

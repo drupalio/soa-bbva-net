@@ -15,5 +15,5 @@ import javax.xml.bind.annotation.XmlType;
 public enum EnumProductType
     implements Serializable
 {
-    PC, CA, TDC, LO, SI, CC, RQ, LI, AQ
+    PC, TDC, LO, SI, ED, RQ, LI, AQ
 }

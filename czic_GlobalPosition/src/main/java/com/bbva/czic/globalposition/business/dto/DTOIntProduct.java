@@ -4,42 +4,43 @@ package com.bbva.czic.globalposition.business.dto;
 import java.util.List;
 
 
-import com.bbva.jee.arq.spring.core.servicing.utils.Money;
+import com.bbva.czic.dto.net.Balance;
 
 public class DTOIntProduct {
 
     public final static long serialVersionUID = 1L;
-    private String productId;
-    private DTOIntEnumProductType type;
+    private String id;
+    private String productType;
     private String name;
     private String alias;
     private DTOIntEnumFinancialStatusType financialState;
     private Boolean visible;
     private Boolean operable;
-    private Money assets;
-    private Money liabilities;
-    private Money ownersEquity;
-    private DTOIntContactInformation contactInfo;
-    private List<DTOIntMovement> movements;
+    private Balance balance;
+    private DTOIntContactInfo contactInfo;
 
     public DTOIntProduct() {
         //default constructor
     }
 
-    public String getProductId() {
-        return productId;
+    public static long getSerialVersionUID() {
+        return serialVersionUID;
     }
 
-    public void setProductId(String productId) {
-        this.productId = productId;
+    public String getId() {
+        return id;
     }
 
-    public DTOIntEnumProductType getType() {
-        return type;
+    public void setId(String id) {
+        this.id = id;
     }
 
-    public void setType(DTOIntEnumProductType type) {
-        this.type = type;
+    public String getProductType() {
+        return productType;
+    }
+
+    public void setProductType(String productType) {
+        this.productType = productType;
     }
 
     public String getName() {
@@ -82,44 +83,19 @@ public class DTOIntProduct {
         this.operable = operable;
     }
 
-    public Money getAssets() {
-        return assets;
+    public Balance getBalance() {
+        return balance;
     }
 
-    public void setAssets(Money assets) {
-        this.assets = assets;
+    public void setBalance(Balance balance) {
+        this.balance = balance;
     }
 
-    public Money getLiabilities() {
-        return liabilities;
-    }
-
-    public void setLiabilities(Money liabilities) {
-        this.liabilities = liabilities;
-    }
-
-    public Money getOwnersEquity() {
-        return ownersEquity;
-    }
-
-    public void setOwnersEquity(Money ownersEquity) {
-        this.ownersEquity = ownersEquity;
-    }
-
-    public DTOIntContactInformation getContactInfo() {
+    public DTOIntContactInfo getContactInfo() {
         return contactInfo;
     }
 
-    public void setContactInfo(DTOIntContactInformation contactInfo) {
+    public void setContactInfo(DTOIntContactInfo contactInfo) {
         this.contactInfo = contactInfo;
     }
-
-    public List<DTOIntMovement> getMovements() {
-        return movements;
-    }
-
-    public void setMovements(List<DTOIntMovement> movements) {
-        this.movements = movements;
-    }
-
 }
