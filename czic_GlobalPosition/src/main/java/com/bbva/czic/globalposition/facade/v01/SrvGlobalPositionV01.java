@@ -80,34 +80,6 @@ public class SrvGlobalPositionV01 implements ISrvGlobalPositionV01, com.bbva.jee
 			@ApiParam(value = "expands param") @DefaultValue("null") @QueryParam("$expands") String expands,
 			@ApiParam(value = "order by param") @DefaultValue("null") @QueryParam("$sort") String sort) {
 
-		//TODO retirar prueba
-		Gson gson = new Gson();
-
-		try {
-
-			BufferedReader br = new BufferedReader(
-					new FileReader("c:\\file.json"));
-
-			//convert the json string back to object
-			List<Product> obj = gson.fromJson(br, List.class);
-
-			Random random = new Random();
-			random.setSeed(2);
-
-			if ((random.nextInt()%2) == 0) {
-				if ((random.nextInt()%2) == 0) {
-					throw new BusinessServiceException("wrongParameters");
-				} else {
-					throw new BusinessServiceException("noData");
-				}
-			} else {
-				return obj;
-			}
-
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		//TODO fin prueba
 		return srvIntGlobalPosition.getExtractGlobalBalance(customerId, filter);
 	}
 
