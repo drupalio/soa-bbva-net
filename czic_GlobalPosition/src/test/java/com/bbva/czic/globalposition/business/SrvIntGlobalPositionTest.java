@@ -1,5 +1,6 @@
 package com.bbva.czic.globalposition.business;
 
+import com.bbva.czic.dto.net.Product;
 import com.bbva.czic.globalposition.business.dto.DTOIntProduct;
 import com.bbva.czic.globalposition.business.impl.SrvIntGlobalPosition;
 import com.bbva.czic.globalposition.dao.GlobalPositionDAO;
@@ -12,6 +13,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.mockito.runners.MockitoJUnitRunner;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.TestExecutionListeners;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
@@ -26,10 +28,15 @@ import static org.mockito.Mockito.when;
 
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(loader = BusinessServiceTestContextLoader.class, locations = {
-		"classpath:/META-INF/spring/business-service-test.xml" })
+@ContextConfiguration(
+		loader = BusinessServiceTestContextLoader.class,
+		locations = {
+				"classpath*:/META-INF/spring/applicationContext-*.xml",
+				"classpath:/META-INF/spring/business-service.xml",
+				"classpath:/META-INF/spring/business-service-test.xml"
+		})
 @TestExecutionListeners(listeners = {
-		MockInvocationContextTestExecutionListener.class,
+		//MockInvocationContextTestExecutionListener.class,
 		DependencyInjectionTestExecutionListener.class
 })
 public class SrvIntGlobalPositionTest {
@@ -38,6 +45,7 @@ public class SrvIntGlobalPositionTest {
 	GlobalPositionDAO globalPositionDAO;
 
 	@InjectMocks
+	@Autowired
 	SrvIntGlobalPosition srv;
 
 	@Before
@@ -57,22 +65,22 @@ public class SrvIntGlobalPositionTest {
 		srv.getExtractGlobalBalance("111", null);
 
 		//validation
-		assertEquals(products.size(), 5);
+		assertEquals(5, products.size());
 	}
 
 	@Test
 	public void testFilterByProductType(){
 		//setUp - data
-		List<DTOIntProduct> products = getProductsList();
+		final List<DTOIntProduct> products = getProductsList();
 
 		//setUp - expectation
 		when(globalPositionDAO.getExtractGlobalBalance(anyString())).thenReturn(products);
 
 		//SUT's excecution
-		srv.getExtractGlobalBalance("111", "({productType==DE)");
+		final List<Product> productsResult = srv.getExtractGlobalBalance("111", "(productType==ED)");
 
 		//validation
-		assertEquals(products.size(), 1);
+		assertEquals(1, productsResult.size());
 	}
 		
 	@Test

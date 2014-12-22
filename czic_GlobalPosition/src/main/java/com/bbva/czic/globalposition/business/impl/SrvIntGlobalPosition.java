@@ -48,18 +48,27 @@ public class SrvIntGlobalPosition implements ISrvIntGlobalPosition {
 
 			try {
 				sc = new FiqlParser<DTOIntProduct>(DTOIntProduct.class).parse(filter);
-
+				/*
 				final List<PrimitiveStatement> splitDataFilter = bussinesToolKit.getDataFromFilter(sc);
+				for (PrimitiveStatement st: splitDataFilter) {
+					log.info("The property is: " + st.getProperty());
+					log.info("The condition is: " + st.getCondition().toString());
+					log.info("The value is: " + st.getValue().toString());
+				}
 
 				final String pattern = bussinesToolKit.matchesPatternFromFilter(SERVICENAME, filter);
 				if (pattern != null) {
 					log.info("The pattern is: " + pattern);
 				}
+				*/
 			} catch (SearchParseException e) {
+				log.error("SearchParseException - The query string (filter) has failed: " + e);
 				throw new BusinessServiceException(FILTERERROR, filter, e.getMessage());
 			}
 
-			final List<Product> found = Mapper.productListMap(sc.findAll(initialResult));
+			final List<DTOIntProduct> intFound = sc.findAll(initialResult);
+
+			final List<Product> found = Mapper.productListMap(intFound);
 			return found;
 		}
 

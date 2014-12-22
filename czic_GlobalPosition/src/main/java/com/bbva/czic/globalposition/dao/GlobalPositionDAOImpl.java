@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
+import com.bbva.czic.mapper.GlobalPositionMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.bbva.czic.globalposition.business.dto.DTOIntEnumFinancialStatusType;
@@ -14,7 +15,6 @@ import com.bbva.czic.globalposition.dao.model.ozn1.FormatoOZECN1S1;
 import com.bbva.czic.globalposition.dao.model.ozn1.PeticionTransaccionOzn1;
 import com.bbva.czic.globalposition.dao.model.ozn1.RespuestaTransaccionOzn1;
 import com.bbva.czic.globalposition.dao.model.ozn1.TransaccionOzn1;
-import com.bbva.czic.mapper.GoblalPositionMapper;
 import com.bbva.jee.arq.spring.core.host.protocolo.ps9.ErrorMappingHelper;
 import com.bbva.jee.arq.spring.core.host.protocolo.ps9.aplicacion.CopySalida;
 import com.bbva.jee.arq.spring.core.host.transporte.ExcepcionTransporte;
@@ -29,9 +29,6 @@ public class GlobalPositionDAOImpl implements GlobalPositionDAO {
 
 	@Autowired
 	private ErrorMappingHelper errorMappingHelper;
-
-	@Resource(name = "globalPositionMapper")
-	private GoblalPositionMapper goblalPositionMapper;
 
 	@Override
 	public List<DTOIntProduct> getExtractGlobalBalance(final String customerId) throws ExcepcionTransporte {
@@ -76,10 +73,6 @@ public class GlobalPositionDAOImpl implements GlobalPositionDAO {
 	public void updateProductVisibility(final String idProduct, final Boolean visible) {
 		// TODO Auto-generated method stub
 
-	}
-
-	public void setGoblalPositionMapper(GoblalPositionMapper goblalPositionMapper) {
-		this.goblalPositionMapper = goblalPositionMapper;
 	}
 
 	@Override

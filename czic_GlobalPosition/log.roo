@@ -7,3 +7,6 @@ exit
 // ServicesArchitecture log closed at 2014-12-15 15:42:39
 // ServicesArchitecture log opened at 2014-12-22 09:36:09
 sarc importTransaction --protocol PS9_MX --copy OZECN1E0_FDF.txt,OZECN1S0_FDF.txt,OZECN1S1_FDF.txt,OZN1_CCT.txt,OZN1_FDX.txt
+sarc importTransaction --protocol PS9_MX --copy OZN1_CCT.txt,OZECN1E0_FDF.txt,OZECN1S0_FDF.txt,OZECN1S1_FDF.txt,OZN1_FDX.txt
+exit
+// ServicesArchitecture log closed at 2014-12-22 18:00:32
