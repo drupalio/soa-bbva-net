@@ -7,10 +7,10 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
-@XmlRootElement(name = "EnumDocumentType", namespace = "urn:com:bbva:czic:dto:net")
-@XmlType(name = "EnumDocumentType", namespace = "urn:com:bbva:czic:dto:net")
+@XmlRootElement(name = "EnumAccountState", namespace = "urn:com:bbva:czic:dto:net")
+@XmlType(name = "EnumAccountState", namespace = "urn:com:bbva:czic:dto:net")
 @XmlAccessorType(XmlAccessType.FIELD)
-public enum EnumDocumentType implements Serializable {
-	VALIDAR
+public enum EnumAccountState implements Serializable {
+	ACTIVE, INACTIVE
 
 }

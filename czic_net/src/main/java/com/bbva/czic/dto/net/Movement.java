@@ -2,7 +2,7 @@
 package com.bbva.czic.dto.net;
 
 import java.io.Serializable;
-import java.util.Calendar;
+import java.util.Date;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
@@ -10,15 +10,15 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlSchemaType;
 import javax.xml.bind.annotation.XmlType;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+
+
 import com.bbva.jee.arq.spring.core.servicing.utils.CalendarAdapter;
-
-
 import com.bbva.jee.arq.spring.core.servicing.utils.MoneyAdapter;
 import com.bbva.jee.arq.spring.core.servicing.utils.Money;
 import com.wordnik.swagger.annotations.ApiModelProperty;
 
-@XmlRootElement(name = "movement", namespace = "urn:com:bbva:czic:dto:net")
-@XmlType(name = "movement", namespace = "urn:com:bbva:czic:dto:net")
+@XmlRootElement(name = "Movement", namespace = "urn:com:bbva:czic:dto:net")
+@XmlType(name = "Movement", namespace = "urn:com:bbva:czic:dto:net")
 @XmlAccessorType(XmlAccessType.FIELD)
 public class Movement
     implements Serializable
@@ -29,24 +29,27 @@ public class Movement
     private String id;
     @ApiModelProperty(value = "concepto de la operacion", required = true)
     private String concept;
-
     @XmlJavaTypeAdapter(CalendarAdapter.class)
-    //@XmlSchemaType(name = "dateTime")
-    @ApiModelProperty("")
-    private Calendar transactionDate;
-
-    @ApiModelProperty("")
+    @XmlSchemaType(name = "dateTime")
+    @ApiModelProperty(value = " fecha de la transaccion", required = true)
+    private Date transactionDate;
+    @XmlJavaTypeAdapter(CalendarAdapter.class)
+    @XmlSchemaType(name = "dateTime")
+    @ApiModelProperty(value = " fecha y hora de la operacion", required = true)
+    private Date operationDate;
+    @ApiModelProperty("Cuenta origen del movimiento")
     private String sourceReference;
-
-    @ApiModelProperty("")
+    @ApiModelProperty("Cuenta destino del movimiento")
     private String destinationReference;
-
-    @ApiModelProperty("")
+    @ApiModelProperty(value = "Informacion de la operacion (codigo y descripcion)", required = true)
     private Operation operation;
-
+    @ApiModelProperty(value = "Informacion de la operacion (codigo y descripcion)", required = true)
+    private Office office;
+    @ApiModelProperty(value = "Campo alfanum\u00e9rico que permite identificar la red utilizada para la operaci\u00f3n", required = true)
+    private EnumAccountState status;
     @XmlJavaTypeAdapter(MoneyAdapter.class)
     @XmlElement(type = Money.class)
-    @ApiModelProperty("")
+    @ApiModelProperty("valor de la operacion")
     private Money value;
     @XmlJavaTypeAdapter(MoneyAdapter.class)
     @XmlElement(type = Money.class)
@@ -73,12 +76,20 @@ public class Movement
         this.concept = concept;
     }
 
-    public Calendar getTransactionDate() {
+    public Date getTransactionDate() {
         return transactionDate;
     }
 
-    public void setTransactionDate(Calendar transactionDate) {
+    public void setTransactionDate(Date transactionDate) {
         this.transactionDate = transactionDate;
+    }
+
+    public Date getOperationDate() {
+        return operationDate;
+    }
+
+    public void setOperationDate(Date operationDate) {
+        this.operationDate = operationDate;
     }
 
     public String getSourceReference() {
@@ -103,6 +114,22 @@ public class Movement
 
     public void setOperation(Operation operation) {
         this.operation = operation;
+    }
+
+    public Office getOffice() {
+        return office;
+    }
+
+    public void setOffice(Office office) {
+        this.office = office;
+    }
+
+    public EnumAccountState getStatus() {
+        return status;
+    }
+
+    public void setStatus(EnumAccountState status) {
+        this.status = status;
     }
 
     public Money getValue() {

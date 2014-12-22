@@ -30,7 +30,7 @@ public class Excecutive
     @ApiModelProperty("Correo electronico de un ejecutivo de cuenta")
     private String email;
     @ApiModelProperty("Clientes que tiene asignado un ejecutivo de cuenta")
-    private List<User> customer;
+    private List<ThirdParty> customer;
 
     public Excecutive() {
         //default constructor
@@ -76,11 +76,11 @@ public class Excecutive
         this.email = email;
     }
 
-    public List<User> getCustomer() {
+    public List<ThirdParty> getCustomer() {
         return customer;
     }
 
-    public void setCustomer(List<User> customer) {
+    public void setCustomer(List<ThirdParty> customer) {
         this.customer = customer;
     }
 
