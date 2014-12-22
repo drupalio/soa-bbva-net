@@ -9,7 +9,11 @@ import com.bbva.czic.globalposition.dao.model.ozn1.FormatoOZECN1E0;
 
 @Mapper(value = "globalPositionMapper")
 public class GoblalPositionMapper extends AbstractConfigurableMapper {
+	@Override
+	protected void configure(MapperFactory factory) {
 
+	}
+	/*
 	@Override
 	protected void configure(MapperFactory factory) {
 
@@ -23,7 +27,7 @@ public class GoblalPositionMapper extends AbstractConfigurableMapper {
 	public static void main(String... args) {
 		DTOIntProduct dto = new DTOIntProduct();
 		FormatoOZECN1E0 format = new FormatoOZECN1E0();
-		dto.setProductId("1234");
+		dto.setId("1234");
 		format.setNumclie("12345678765");
 
 		FormatoOZECN1E0 result = new GoblalPositionMapper().map(dto, FormatoOZECN1E0.class);
@@ -32,5 +36,5 @@ public class GoblalPositionMapper extends AbstractConfigurableMapper {
 
 		System.out.println(result2.getProductId());
 
-	}
+	}*/
 }
