@@ -1,13 +1,14 @@
 
 package com.bbva.czic.dto.net;
 
-import com.wordnik.swagger.annotations.ApiModelProperty;
-
+import java.io.Serializable;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
-import java.io.Serializable;
+
+
+import com.wordnik.swagger.annotations.ApiModelProperty;
 
 @XmlRootElement(name = "Operation", namespace = "urn:com:bbva:czic:dto:net")
 @XmlType(name = "Operation", namespace = "urn:com:bbva:czic:dto:net")

@@ -30,7 +30,7 @@ public class User
     @ApiModelProperty("Identificador de la informacion del contacto")
     private com.bbva.czic.dto.net.ContactInfo ContactInfo;
     @ApiModelProperty("Entidad con toda la informaci\u00f3n del ejecutivo de ventas")
-    private Excecutive userSalesExecutive;
+    private String userSalesExecutive;
     @XmlJavaTypeAdapter(CalendarAdapter.class)
     @XmlSchemaType(name = "dateTime")
     @ApiModelProperty("Fecha de la \u00faltima vez que accedi\u00f3 el usuario al portal")
@@ -68,11 +68,11 @@ public class User
         this.ContactInfo = ContactInfo;
     }
 
-    public Excecutive getUserSalesExecutive() {
+    public String getUserSalesExecutive() {
         return userSalesExecutive;
     }
 
-    public void setUserSalesExecutive(Excecutive userSalesExecutive) {
+    public void setUserSalesExecutive(String userSalesExecutive) {
         this.userSalesExecutive = userSalesExecutive;
     }
 

@@ -20,7 +20,7 @@ public class ContactInfo
 
     public final static long serialVersionUID = 1L;
     @ApiModelProperty(" Listado de numeros de telefono del usuario")
-    private List<PhoneNumber> phoneNumbers;
+    private List<PhoneNumbers> phoneNumbers;
     @ApiModelProperty("Listado de mails del usuario")
     private List<Email> emails;
 
@@ -28,11 +28,11 @@ public class ContactInfo
         //default constructor
     }
 
-    public List<PhoneNumber> getPhoneNumbers() {
+    public List<PhoneNumbers> getPhoneNumbers() {
         return phoneNumbers;
     }
 
-    public void setPhoneNumbers(List<PhoneNumber> phoneNumbers) {
+    public void setPhoneNumbers(List<PhoneNumbers> phoneNumbers) {
         this.phoneNumbers = phoneNumbers;
     }
 

@@ -8,30 +8,28 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
-
-
 import com.bbva.jee.arq.spring.core.servicing.utils.MoneyAdapter;
+
+
 import com.bbva.jee.arq.spring.core.servicing.utils.Money;
 import com.wordnik.swagger.annotations.ApiModelProperty;
 
-@XmlRootElement(name = "Balance", namespace = "urn:com:bbva:czic:dto:net")
-@XmlType(name = "Balance", namespace = "urn:com:bbva:czic:dto:net")
+@XmlRootElement(name = "MonthlyBalances", namespace = "urn:com:bbva:czic:dto:net")
+@XmlType(name = "MonthlyBalances", namespace = "urn:com:bbva:czic:dto:net")
 @XmlAccessorType(XmlAccessType.FIELD)
-public class Balance
+public class MonthlyBalances
     implements Serializable
 {
 
     public final static long serialVersionUID = 1L;
     @XmlJavaTypeAdapter(MoneyAdapter.class)
     @XmlElement(type = Money.class)
-    @ApiModelProperty("Saldo total del producto")
+    @ApiModelProperty("saldo consolidado del mes")
     private Money balance;
-    @XmlJavaTypeAdapter(MoneyAdapter.class)
-    @XmlElement(type = Money.class)
-    @ApiModelProperty("Saldo disponible del producto")
-    private Money availableBalance;
+    @ApiModelProperty("mes de evaluacion para el saldo")
+    private String month;
 
-    public Balance() {
+    public MonthlyBalances() {
         //default constructor
     }
 
@@ -43,12 +41,12 @@ public class Balance
         this.balance = balance;
     }
 
-    public Money getAvailableBalance() {
-        return availableBalance;
+    public String getMonth() {
+        return month;
     }
 
-    public void setAvailableBalance(Money availableBalance) {
-        this.availableBalance = availableBalance;
+    public void setMonth(String month) {
+        this.month = month;
     }
 
 }

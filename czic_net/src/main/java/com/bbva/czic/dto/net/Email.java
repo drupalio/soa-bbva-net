@@ -1,67 +1,66 @@
+
 package com.bbva.czic.dto.net;
 
 import java.io.Serializable;
-
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
+
 
 import com.wordnik.swagger.annotations.ApiModelProperty;
 
 @XmlRootElement(name = "Email", namespace = "urn:com:bbva:czic:dto:net")
 @XmlType(name = "Email", namespace = "urn:com:bbva:czic:dto:net")
 @XmlAccessorType(XmlAccessType.FIELD)
-public class Email implements Serializable {
+public class Email
+    implements Serializable
+{
 
-	public final static long serialVersionUID = 1L;
+    public final static long serialVersionUID = 1L;
+    @ApiModelProperty("Fuente de los contactos")
+    private EnumContactSourceType source;
+    @ApiModelProperty("Direccion de correo electronico")
+    private String addres;
+    @ApiModelProperty(" Correo por defecto")
+    private Boolean primary;
+    @ApiModelProperty("Correo activo")
+    private Boolean active;
 
-	@ApiModelProperty("Fuente de los contactos")
-	private EnumContactSourceType source;
+    public Email() {
+        //default constructor
+    }
 
-	@ApiModelProperty("Direccion de correo electronico")
-	private String addres;
+    public EnumContactSourceType getSource() {
+        return source;
+    }
 
-	@ApiModelProperty(" Correo por defecto")
-	private Boolean primary;
+    public void setSource(EnumContactSourceType source) {
+        this.source = source;
+    }
 
-	@ApiModelProperty("Correo activo")
-	private Boolean active;
+    public String getAddres() {
+        return addres;
+    }
 
-	public Email() {
-		// default constructor
-	}
+    public void setAddres(String addres) {
+        this.addres = addres;
+    }
 
-	public EnumContactSourceType getSource() {
-		return source;
-	}
+    public Boolean getPrimary() {
+        return primary;
+    }
 
-	public void setSource(EnumContactSourceType source) {
-		this.source = source;
-	}
+    public void setPrimary(Boolean primary) {
+        this.primary = primary;
+    }
 
-	public String getAddres() {
-		return addres;
-	}
+    public Boolean getActive() {
+        return active;
+    }
 
-	public void setAddres(String addres) {
-		this.addres = addres;
-	}
-
-	public Boolean getPrimary() {
-		return primary;
-	}
-
-	public void setPrimary(Boolean primary) {
-		this.primary = primary;
-	}
-
-	public Boolean getActive() {
-		return active;
-	}
-
-	public void setActive(Boolean active) {
-		this.active = active;
-	}
+    public void setActive(Boolean active) {
+        this.active = active;
+    }
 
 }
