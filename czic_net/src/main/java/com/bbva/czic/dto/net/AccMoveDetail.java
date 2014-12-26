@@ -2,6 +2,7 @@
 package com.bbva.czic.dto.net;
 
 import java.io.Serializable;
+import java.util.Calendar;
 import java.util.Date;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -25,11 +26,11 @@ public class AccMoveDetail
     @XmlJavaTypeAdapter(CalendarAdapter.class)
     @XmlSchemaType(name = "dateTime")
     @ApiModelProperty("fecha del valor del moviiento de la cuenta")
-    private Date valueDate;
+    private Calendar valueDate;
     @XmlJavaTypeAdapter(CalendarAdapter.class)
     @XmlSchemaType(name = "dateTime")
     @ApiModelProperty("hora de ejecucion del movimiento de la cuenta")
-    private Date operationTime;
+    private Calendar operationTime;
     @ApiModelProperty("Informacion de la oficina o corresponsal de origen de la operacion sobre cuenta")
     private Office office;
     @ApiModelProperty("Estado de la operacion")
@@ -39,19 +40,19 @@ public class AccMoveDetail
         //default constructor
     }
 
-    public Date getValueDate() {
+    public Calendar getValueDate() {
         return valueDate;
     }
 
-    public void setValueDate(Date valueDate) {
+    public void setValueDate(Calendar valueDate) {
         this.valueDate = valueDate;
     }
 
-    public Date getOperationTime() {
+    public Calendar getOperationTime() {
         return operationTime;
     }
 
-    public void setOperationTime(Date operationTime) {
+    public void setOperationTime(Calendar operationTime) {
         this.operationTime = operationTime;
     }
 

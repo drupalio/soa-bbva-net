@@ -2,6 +2,7 @@
 package com.bbva.czic.dto.net;
 
 import java.io.Serializable;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import javax.xml.bind.annotation.XmlAccessType;
@@ -34,7 +35,7 @@ public class User
     @XmlJavaTypeAdapter(CalendarAdapter.class)
     @XmlSchemaType(name = "dateTime")
     @ApiModelProperty("Fecha de la \u00faltima vez que accedi\u00f3 el usuario al portal")
-    private Date lastAccessDate;
+    private Calendar lastAccessDate;
     @ApiModelProperty("Arreglo de los mensajes de alerta generados para el usuario")
     private List<Message> message;
     @ApiModelProperty("Arreglo de los productos correspondientes al usuario")
@@ -76,11 +77,11 @@ public class User
         this.userSalesExecutive = userSalesExecutive;
     }
 
-    public Date getLastAccessDate() {
+    public Calendar getLastAccessDate() {
         return lastAccessDate;
     }
 
-    public void setLastAccessDate(Date lastAccessDate) {
+    public void setLastAccessDate(Calendar lastAccessDate) {
         this.lastAccessDate = lastAccessDate;
     }
 

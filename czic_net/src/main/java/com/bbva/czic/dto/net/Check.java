@@ -2,6 +2,7 @@
 package com.bbva.czic.dto.net;
 
 import java.io.Serializable;
+import java.util.Calendar;
 import java.util.Date;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -30,7 +31,7 @@ public class Check
     @XmlJavaTypeAdapter(CalendarAdapter.class)
     @XmlSchemaType(name = "dateTime")
     @ApiModelProperty(value = "description", required = true)
-    private Date issueDate;
+    private Calendar issueDate;
     @XmlJavaTypeAdapter(MoneyAdapter.class)
     @XmlElement(type = Money.class)
     @ApiModelProperty(value = "Valor del cheque", required = true)
@@ -40,7 +41,7 @@ public class Check
     @XmlJavaTypeAdapter(CalendarAdapter.class)
     @XmlSchemaType(name = "dateTime")
     @ApiModelProperty(value = "Fecha de modificacion", required = true)
-    private Date modifiedDate;
+    private Calendar modifiedDate;
 
     public Check() {
         //default constructor
@@ -54,11 +55,11 @@ public class Check
         this.id = id;
     }
 
-    public Date getIssueDate() {
+    public Calendar getIssueDate() {
         return issueDate;
     }
 
-    public void setIssueDate(Date issueDate) {
+    public void setIssueDate(Calendar issueDate) {
         this.issueDate = issueDate;
     }
 
@@ -78,12 +79,11 @@ public class Check
         this.status = status;
     }
 
-    public Date getModifiedDate() {
+    public Calendar getModifiedDate() {
         return modifiedDate;
     }
 
-    public void setModifiedDate(Date modifiedDate) {
+    public void setModifiedDate(Calendar modifiedDate) {
         this.modifiedDate = modifiedDate;
     }
-
 }

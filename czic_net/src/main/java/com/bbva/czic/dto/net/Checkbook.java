@@ -2,6 +2,7 @@
 package com.bbva.czic.dto.net;
 
 import java.io.Serializable;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import javax.xml.bind.annotation.XmlAccessType;
@@ -34,11 +35,11 @@ public class Checkbook
     @XmlJavaTypeAdapter(CalendarAdapter.class)
     @XmlSchemaType(name = "dateTime")
     @ApiModelProperty("Fecha de solicitud de la chequera ")
-    private Date requestDate;
+    private Calendar requestDate;
     @XmlJavaTypeAdapter(CalendarAdapter.class)
     @XmlSchemaType(name = "dateTime")
     @ApiModelProperty("Fecha de entrega de la nueva chequera")
-    private Date deliveryDate;
+    private Calendar deliveryDate;
     @ApiModelProperty(value = "Estado actual de la chequera solicitada", required = true)
     private String actualState;
     @ApiModelProperty(value = "Cheques asociados a una chequera", required = true)
@@ -80,19 +81,19 @@ public class Checkbook
         this.totalCheck = totalCheck;
     }
 
-    public Date getRequestDate() {
+    public Calendar getRequestDate() {
         return requestDate;
     }
 
-    public void setRequestDate(Date requestDate) {
+    public void setRequestDate(Calendar requestDate) {
         this.requestDate = requestDate;
     }
 
-    public Date getDeliveryDate() {
+    public Calendar getDeliveryDate() {
         return deliveryDate;
     }
 
-    public void setDeliveryDate(Date deliveryDate) {
+    public void setDeliveryDate(Calendar deliveryDate) {
         this.deliveryDate = deliveryDate;
     }
 
