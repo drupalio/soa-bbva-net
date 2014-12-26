@@ -1,4 +1,4 @@
-package com.bbva.czic.globalposition.facade.v01;
+package com.bbva.czic.globalposition.facade.v01.mapper;
 
 import com.bbva.czic.dto.net.Balance;
 import com.bbva.czic.dto.net.EnumProductType;
