@@ -16,6 +16,10 @@ public class DTOIntPhoneNumber {
     private DTOIntEnumContactSourceType contactSource;
 
     public DTOIntPhoneNumber() {
+    }
+
+    public DTOIntPhoneNumber(String number) {
+        this.number = number;
         //default constructor
     }
 

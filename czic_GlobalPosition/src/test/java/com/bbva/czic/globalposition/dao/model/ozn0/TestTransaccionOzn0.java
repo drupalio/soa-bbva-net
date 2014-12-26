@@ -1,10 +1,5 @@
-package com.bbva.czic.globalposition.dao.model.ozn1;
+package com.bbva.czic.globalposition.dao.model.ozn0;
 
-import com.bbva.jee.arq.spring.core.host.ExcepcionTransaccion;
-import com.bbva.jee.arq.spring.core.host.protocolo.ExcepcionRespuestaHost;
-import com.bbva.jee.arq.spring.core.host.transporte.ExcepcionTransporte;
-import com.bbva.jee.arq.spring.core.log.I18nLogFactory;
-import com.bbva.jee.arq.spring.core.servicing.test.BusinessServiceTestContextLoader;
 import org.apache.commons.logging.Log;
 import org.junit.Ignore;
 import org.junit.Test;
@@ -15,8 +10,15 @@ import org.springframework.test.context.TestExecutionListeners;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.support.DependencyInjectionTestExecutionListener;
 
+import com.bbva.jee.arq.spring.core.host.ExcepcionTransaccion;
+import com.bbva.jee.arq.spring.core.host.protocolo.ExcepcionRespuestaHost;
+import com.bbva.jee.arq.spring.core.host.transporte.ExcepcionTransporte;
+import com.bbva.jee.arq.spring.core.log.I18nLogFactory;
+import com.bbva.jee.arq.spring.core.servicing.test.BusinessServiceTestContextLoader;
+import com.bbva.jee.arq.spring.core.servicing.test.MockInvocationContextTestExecutionListener;
+
 /**
- * Test de la transacci&oacute;n <code>OZN1</code>
+ * Test de la transacci&oacute;n <code>OZN0</code>
  * 
  * @author Arquitectura Spring BBVA
  */
@@ -33,18 +35,18 @@ import org.springframework.test.context.support.DependencyInjectionTestExecution
 		//MockInvocationContextTestExecutionListener.class,
 		DependencyInjectionTestExecutionListener.class
 })
-public class TestTransaccionOzn1 {
+public class TestTransaccionOzn0 {
 	
-	private static final Log LOG = I18nLogFactory.getLog(TestTransaccionOzn1.class);
+	private static final Log LOG = I18nLogFactory.getLog(TestTransaccionOzn0.class);
 		
 	@Autowired
-	private TransaccionOzn1 transaccion;
+	private TransaccionOzn0 transaccion;
 
 	@Ignore
 	@Test
 	public void test() throws ExcepcionTransaccion {
 		
-		PeticionTransaccionOzn1 peticion = new PeticionTransaccionOzn1();		
+		PeticionTransaccionOzn0 peticion = new PeticionTransaccionOzn0();		
 		
 		/*
 		 * TODO: poblar la peticion con valores adecuados
@@ -52,7 +54,7 @@ public class TestTransaccionOzn1 {
 		
 		try {
 			LOG.info("Invocando transaccion, peticion: " + peticion);
-			RespuestaTransaccionOzn1 respuesta = transaccion.invocar(peticion);
+			RespuestaTransaccionOzn0 respuesta = transaccion.invocar(peticion);
 			LOG.info("Recibida respuesta: " + respuesta);
 		} catch ( ExcepcionRespuestaHost e ) {
 			LOG.error("Error recibido desde host, codigoError: " + e.getCodigoError() + ", descripcion: " + e.getMessage());
@@ -60,5 +62,4 @@ public class TestTransaccionOzn1 {
 			LOG.error("Error de transporte", e);
 		}
 	}
-
 }

@@ -6,3 +6,10 @@ sarc createSN --descriptorFile sn-descriptor-globalPosition.json
 sarc createSN --descriptorFile sn-descriptor-globalPosition.json
 exit
 // ServicesArchitecture log closed at 2014-12-15 11:07:21
+// ServicesArchitecture log opened at 2014-12-23 17:51:59
+sarc generatePackage
+// ServicesArchitecture log opened at 2014-12-23 18:02:39
+sarc generatePackage
+sarc generatePackage
+exit
+// ServicesArchitecture log closed at 2014-12-23 18:09:03
