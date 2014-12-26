@@ -1,0 +1,73 @@
+{
+  "bbva" : {
+    "uuaa" : "czic",
+    "remoteType" : "RESTFUL"
+  },
+  "dtos" : {
+    "excecutive" : {
+      "#metadata" : {
+        "dtoPackage" : "com.bbva.czic.dto.net.Excecutive"
+      },"excecutiveId" : {
+        "type" : "String",
+        "isKeyField" : true,
+        "description" : "Identificador del ejecutivo",
+        "required" : true
+      }
+    },
+    "thirdParty" : {
+      "#metadata" : {
+        "dtoPackage" : "com.bbva.czic.dto.net.ThirdParty"
+      }  ,"thirdPartyId" : {
+        "type" : "String",
+        "isKeyField" : true,
+        "description" : "Identificador del thirdParty",
+        "required" : true
+      }
+    },
+    "office" : {
+      "#metadata" : {
+        "dtoPackage" : "com.bbva.czic.dto.net.Office"
+      }  ,"officeId" : {
+        "type" : "String",
+        "isKeyField" : true,
+        "description" : "Identificador del office",
+        "required" : true
+      }
+    },
+    "user" : {
+      "#metadata" : {
+        "dtoPackage" : "com.bbva.czic.dto.net.User"
+      }  ,"userId" : {
+        "type" : "String",
+        "isKeyField" : true,
+        "description" : "Identificador del usuario",
+        "required" : true
+      }
+    },
+    "enumThirdPartyType" : {
+      "#metadata" : {
+        "dtoPackage" : "com.bbva.czic.dto.net.EnumThirdPartyType"
+      },
+      "enumValue" : "String"
+    }
+  },
+  "sn" : {
+    "targetDto" : "excecutive",
+    "logicalId" : "Excecutives",
+    "registryId" : "SN201400005",
+    "version" : "V01",
+    "description" : "Excecutive REST service.",
+    "smcs" : {
+      "get" : {
+        "all" : [ {
+          "targetDto" : "excecutive",
+          "logicalId" : "executives",
+          "registryId" : "SMC201400009",
+          "description" : "Servicio multicanal getExcecutive",
+          "notes" : "Servicio multicanal getExcecutive",
+          "gceErrors" : [ "aliasGCE1", "aliasGCE2" ]
+        } ]
+      }
+    }
+  }
+}
