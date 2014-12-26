@@ -12,5 +12,4 @@ import javax.xml.bind.annotation.XmlType;
 @XmlAccessorType(XmlAccessType.FIELD)
 public enum EnumCardChargeCategory implements Serializable {
 	TRAVEL, CLOTHS, FOOD
-
 }

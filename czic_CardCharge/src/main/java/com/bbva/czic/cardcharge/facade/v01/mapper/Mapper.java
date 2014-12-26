@@ -3,9 +3,9 @@ package com.bbva.czic.cardcharge.facade.v01.mapper;
 import org.springframework.beans.BeanUtils;
 
 import com.bbva.czic.dto.net.CardCharge;
-import com.bbva.czic.dto.net.Excecutive;
+import com.bbva.czic.dto.net.Executive;
 import com.bbva.czic.cardcharge.business.dto.DTOIntCardCharge;
-import com.bbva.czic.cardcharge.business.dto.DTOIntExcecutive;
+import com.bbva.czic.cardcharge.business.dto.DTOIntExecutive;
 
 
 public class Mapper {
@@ -25,17 +25,17 @@ public class Mapper {
  } 
 
 		
- public static Excecutive excecutiveMap(DTOIntExcecutive dtoIntExcecutive) { 
- 		Excecutive excecutive = new Excecutive(); 
- 		BeanUtils.copyProperties(dtoIntExcecutive, excecutive); 
+ public static Executive excecutiveMap(DTOIntExecutive dtoIntExecutive) { 
+ 		Executive excecutive = new Executive(); 
+ 		BeanUtils.copyProperties(dtoIntExecutive, excecutive); 
  		return excecutive; 
  } 
 
 		
- public static DTOIntExcecutive dtoIntExcecutiveMap(Excecutive excecutive) { 
- 		DTOIntExcecutive dtoIntExcecutive = new DTOIntExcecutive(); 
- 		BeanUtils.copyProperties(excecutive, dtoIntExcecutive); 
- 		return dtoIntExcecutive; 
+ public static DTOIntExecutive dtoIntExecutiveMap(Executive excecutive) { 
+ 		DTOIntExecutive dtoIntExecutive = new DTOIntExecutive(); 
+ 		BeanUtils.copyProperties(excecutive, dtoIntExecutive); 
+ 		return dtoIntExecutive; 
  } 
 
 	
