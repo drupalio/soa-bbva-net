@@ -12,4 +12,5 @@ import javax.xml.bind.annotation.XmlType;
 @XmlAccessorType(XmlAccessType.FIELD)
 public enum EnumLoanStatus implements Serializable {
 	NORMAL
+
 }

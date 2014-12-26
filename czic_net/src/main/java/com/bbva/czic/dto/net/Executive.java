@@ -11,10 +11,10 @@ import javax.xml.bind.annotation.XmlType;
 
 import com.wordnik.swagger.annotations.ApiModelProperty;
 
-@XmlRootElement(name = "Excecutive", namespace = "urn:com:bbva:czic:dto:net")
-@XmlType(name = "Excecutive", namespace = "urn:com:bbva:czic:dto:net")
+@XmlRootElement(name = "Executive", namespace = "urn:com:bbva:czic:dto:net")
+@XmlType(name = "Executive", namespace = "urn:com:bbva:czic:dto:net")
 @XmlAccessorType(XmlAccessType.FIELD)
-public class Excecutive
+public class Executive
     implements Serializable
 {
 
@@ -32,7 +32,7 @@ public class Excecutive
     @ApiModelProperty("Clientes que tiene asignado un ejecutivo de cuenta")
     private List<ThirdParty> customer;
 
-    public Excecutive() {
+    public Executive() {
         //default constructor
     }
 
