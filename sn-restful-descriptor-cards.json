@@ -1,0 +1,49 @@
+{
+  "bbva" : {
+    "uuaa" : "czic",
+    "remoteType" : "RESTFUL"
+  },
+  "dtos" : {
+    "excecutive" : {
+      "#metadata" : {
+        "dtoPackage" : "com.bbva.czic.dto.net.Excecutive"
+      },
+      "excecutiveId" : {
+        "type" : "String",
+        "isKeyField" : true,
+        "description" : "Identificador del ejecutivo",
+        "required" : true
+      }
+    },
+    "cardCharge" : {
+      "#metadata" : {
+        "dtoPackage" : "com.bbva.czic.dto.net.CardCharge"
+      },
+      "cardChargeId" : {
+        "type" : "String",
+        "isKeyField" : true,
+        "description" : "Identificador del CardCharge",
+        "required" : true
+      }
+    }
+  },
+  "sn" : {
+    "targetDto" : "cardCharge",
+    "logicalId" : "CardCharge",
+    "registryId" : "SN201400004",
+    "version" : "V01",
+    "description" : "CardCharge REST service.",
+    "smcs" : {
+      "get" : {
+        "all" : [ {
+          "targetDto" : "cardCharge",
+          "logicalId" : "getCreditCardCharges",
+          "registryId" : "SMC201400008",
+          "description" : "Servicio multicanal de cards",
+          "notes" : "Servicio multicanal de cards",
+          "gceErrors" : [ "aliasGCE1", "aliasGCE2" ]
+        }]
+      }
+    }
+  }
+}

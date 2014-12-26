@@ -1,0 +1,836 @@
+{
+    "bbva": {
+        "uuaa": "czic"
+    },
+    "dtos": {
+        "EnumNetType": {
+            "R": "String",
+            "A": "String"
+        },"EnumCardChargeCategory": {
+            "TRAVEL": "String",
+            "CLOTHS": "String",
+            "FOOD": "String"
+        },"EnumThirdPartyType": {
+            "CUSTOMER": "String",
+            "LEAD": "String",
+            "AGGREGATE": "String"
+        },
+        "EnumLoanStatus": {
+            "NORMAL": "String"
+        },
+        "EnumRotaryMoveStatus": {
+            "ACCEPTED": "String",
+            "REJECTED": "String",
+            "PENDING": "String"
+        },
+        "EnumCheckStatus": {
+            "HABILITADO": "String",
+            "SOLICITADO": "String"
+        },
+        "EnumMessageType": {
+            "ADVERTISEMENT": "String",
+            "INFORMATION": "String",
+            "NOTIFICATION": "String"
+        },
+        "EnumPhoneNumberType": {
+            "MOBILE" : "String",            
+            "LANDLINE" : "String",            
+            "FAX" : "String"            
+        },
+        "EnumContactSourceType": {
+            "MOBILE" : "String",
+            "WEB" : "String",            
+            "THIRD_PARTY" : "String"            
+        },
+        "EnumAccountType": {
+            "AC" : "String",            
+            "CA" :"String",
+            "LO":"String"            
+        },
+        "EnumFinancialStatusType": {
+            "A" : "String",            
+            "P" : "String"
+        },
+        "EnumAcqSituation": {
+            "NORMAL": "String"
+        },
+        "EnumMonth": {
+            "JANUARY": "String",
+            "FEBRUARY": "String",
+            "MARCH": "String",
+            "APRIL": "String",
+            "MAY": "String",
+            "JUNE": "String",
+            "JULY": "String",
+            "AUGUST": "String",
+            "SEPTEMBER": "String",
+            "OCTOBER": "String",
+            "NOVEMBER": "String",
+            "DECEMBER": "String"
+        },
+        "EnumDocumentType": {
+            "VALIDAR": "String"
+        },
+        "EnumAccountMoveStatus": {
+            "ACCEPTED": "String",
+            "REJECTED": "String",
+            "PENDING": "String"
+        },
+        "EnumProductType" : {
+            "AC" : "String",
+            "CA" : "String",
+            "LO" : "String",
+            "SI" : "String"
+        },
+        "EnumConsignmentType" : {
+            "ELECTRONIC" : "String",
+            "OTHER" : "String"
+        },
+		"EnumAccountState" : {
+            "ACTIVE" : "String",
+            "INACTIVE" : "String"
+        },
+		
+		"MonthlyBalances": {
+            "balance": {
+                "type": "arq.MONEY",
+                "description": "saldo consolidado del mes"
+            },
+            "month": {
+                "type": "String",
+                "description": "mes de evaluacion para el saldo"
+            }
+        },
+		
+        "Check": {
+            "id": {
+                "type": "String",
+                "isKeyField": true,
+                "description": "Identificador del cheque",
+                "required": true
+            },
+            "issueDate": {
+                "type": "arq.DATE",
+                "description": "description",
+                "required": true
+            },
+            "value": {
+                "type": "arq.MONEY",
+                "description": "Valor del cheque",
+                "required": true
+            },
+            "status": {
+                "type": "dto.EnumCheckStatus",
+                "description": "Estado actual del cheque",
+                "required": true
+            },
+            "modifiedDate": {
+                "type": "arq.DATE",
+                "description": "Fecha de modificacion",
+                "required": true
+            }
+        },
+         "Checkbook": {
+            "id": {
+                "type": "String",
+                "isKeyField": true,
+                "description": "Numero identificativo del cheque",
+                "required": true
+            },
+            "firstCheck": {
+                "type": "Integer",
+                "description": "Numero del primer cheque del intervalo de consulta",
+                "required" : true
+            },
+            "lastCheckl": {
+                "type": "Integer",
+                "description": " ultimo cheque de intervalo de consulta"
+            },
+            "totalCheck": {
+                "type": "String",
+                "description": " numero de cheques totales de la chequera "
+            },
+            "requestDate": {
+                "type": "arq.DATE",
+                "description": "Fecha de solicitud de la chequera "
+            },
+            "deliveryDate": {
+                "type": "arq.DATE",
+                "description": "Fecha de entrega de la nueva chequera"
+            },
+            "actualState": {
+                "type": "String",
+                "description": "Estado actual de la chequera solicitada",
+                "required" : true
+            },
+            "checks": {
+                "type": "List<dto.Check>",
+                "description": "Cheques asociados a una chequera",
+                "required" : true
+            }
+        },
+         "Account": {
+            "tradeBalance": {
+                "type": "arq.MONEY",
+                "description": "Saldo en canje de una cuenta"
+            },
+            "checkbooks": {
+                "type": "List<dto.Checkbook>",
+                "description": "Chequeras asociadas a la cuenta"
+            }
+        },
+        "Payment": {
+            "dueDate": {
+                "type": "arq.DATE",
+                "description": "Fecha de vencimiento del pago"
+            },
+            "paymentDate": {
+                "type": "arq.DATE",
+                "description": "Fecha de pago"
+            },
+            "shortDate": {
+                "type": "arq.DATE",
+                "description": "Fecha corta del pago"
+            },
+            "fees": {
+                "type": "arq.MONEY",
+                "description": "Honorarios del pago"
+            },
+            "minimumPayment": {
+                "type": "arq.MONEY",
+                "description": "Pago minimo"
+            },
+            "numbersOfQuota": {
+                "type": "Integer",
+                "description": "Numero de cuotas"
+            }
+        },
+        "Currency": {
+            "id": {
+                "type": "String",
+                "isKeyField": true,
+                "description": "Código ISO alfabético de la divisa",
+                "required": true
+            },
+            "code": {
+                "type": "String",
+                "description": "Código ISO numérico de la divisa"
+            },
+            "name": {
+                "type": "String",
+                "description": "Nombre de la divisa"
+            }
+        },
+        "Country": {
+            "id": {
+                "type": "String",
+                "isKeyField": true,
+                "description": " Identificador del pais",
+                "required": true
+            },
+            "name": {
+                "type": "String",
+                "description": "Nombre del pais"
+            }
+        },
+        "State": {
+            "id": {
+                "type": "String",
+                "isKeyField": true,
+                "description": " Identificador del estado",
+                "required": true
+            },
+            "name": {
+                "type": "String",
+                "description": "Nombre",
+                "required" : true
+            },
+            "country": {
+                "type": "dto.Country",
+                "description": "Pais"
+            }
+        },
+        "City": {
+            "id": {
+                "type": "String",
+                "isKeyField": true,
+                "description": " Identificador de la ciudad",
+                "required": true
+            },
+            "name": {
+                "type": "String",
+                "description": " nombre",
+                "required" : true
+            },
+            "state": {
+                "type": "dto.State",
+                "description": "estado o dependencia"
+            }
+        },
+        "Commerce": {
+            "net": {
+                "type": "dto.EnumNetType",
+                "description": "Red a la que pertenece el comercio",
+                "required" : true
+            },
+            "code": {
+                "type": "String",
+                "description": "Código único de comercio de 10 posiciones",
+                "required" : true                
+            },
+            "name": {
+                "type": "String",
+                "description": "Nombre del establecimiento o comercio",
+                "required" : true
+            },
+            "city": {
+                "type": "dto.City",
+                "description": " Ciudad donde esta el establecimiento o comercio",
+                "required" : true
+            }
+        },
+        "Acquisition": {
+            "commerces": {
+                "type": "List<dto.Commerce>",
+                "description": "Comercios relacionados a una adquirencia",
+                "required" : true
+            },
+            "mail": {
+                "type": "List<String>",
+                "description": "Correos configurados para una adquirencia"
+            }
+        },
+         "Balance": {
+            "total": {
+                "type": "arq.MONEY",
+                "description": "Saldo total del producto"
+            },
+            "availableBalance": {
+                "type": "arq.MONEY",
+                "description": "Saldo disponible del producto"
+            }
+        },
+        "Loan": {
+            "balance": {
+                "type": "dto.Balance",
+                "description": "Entidad con toda la información del balance del préstamo"
+            },
+            "payment": {
+                "type": "dto.Payment",
+                "description": "Entidad que posee toda un resumen de pagos del préstamo"
+            },
+            "status": {
+                "type": "dto.EnumLoanStatus",
+                "description": "Estado del prestamo",
+                "required" : true
+            }
+        },
+        "CreditCard": {
+            "number": {
+                "type": "String",
+                "description": "Identificador de la tarjeta de credito",
+                "required" : true
+            },
+            "payment": {
+                "type": "dto.Payment",
+                "description": "Entidad que posee toda un resumen de pagos de la tarjeta de crédito"
+            },
+            "quota": {
+                "type": "dto.Balance",
+                "description": "Entidad que posee toda la información acerca de las cuotas de la tarjeta de crédito"
+            }
+        },
+        "RotaryQuotaMove": {
+            "remainingQuotas": {
+                "type": "Integer",
+                "description": "Cuotas restantes del movimiento de la cuenta",
+                "required" : true
+            },
+            "totalQuotal": {
+                "type": "Integer",
+                "description": "Total cuotas pendientes de la cuenta",
+                "required" : true
+            },
+            "status": {
+                "type": "dto.EnumRotaryMoveStatus",
+                "description": "Estado de los movimientos de la cuenta",
+                "required" : true
+            }
+        },
+          "Location": {
+            "city": {
+                "type": "dto.City",
+                "description": "Ciudad dónde se originó"
+            },
+            "category": {
+                "type": "String",
+                "description": "Categoría sobre la cual se evaluan los costos de operaciones en dicha ubicacion"
+            }
+        },
+        "Office": {
+            "code": {
+                "type": "String",
+                "description": "Codigo del corresponsal financiero",
+                "required" : true
+            },
+            "name": {
+                "type": "String",
+                "description": "Nombre del corresponsal financiero",
+                "required" : true
+            },
+            "location": {
+                "type": "dto.Location",
+                "description": "Informacion de la ubicacion de un origen"
+            },
+            "postalAddress": {
+                "type": "String",
+                "description": "Direccion postal de la oficina donde se realizo la apertura del producto",
+                "required" : true
+            }
+        },
+        "Message": {
+            "id": {
+                "type": "String",
+                "isKeyField": true,
+                "description": "Identificador del mensaje"
+            },
+            "title": {
+                "type": "String",
+                "description": "Titulo del mensaje",
+                "required": true
+            },
+            "template": {
+                "type": "String",
+                "description": "Descripcion del mensaje"
+            },
+            "reference": {
+                "type": "dto.EnumMessageType",
+                "description": "Fecha de emidion del mensaje"
+            },
+            "time": {
+                "type": "arq.CALENDAR",
+                "description": "Tipo de mensaje",
+                "required": true
+            },
+            "value": {
+                "type": "arq.MONEY",
+                "description": "Valor de mensaje"
+            },
+            "info": {
+                "type": "String",
+                "description": "Tiempo de mensaje"
+            }
+        },
+        "PhoneNumbers": {
+            "contactSource": {
+                "type": "dto.EnumContactSourceType",
+                "description": "Fuente de los contactos"
+            },
+            "countryCode": {
+                "type": "String",
+                "description": "Codigo del pais"
+            },
+            "regionalCode": {
+                "type": "String",
+                "description": " Codigo de la region"
+            },
+            "number": {
+                "type": "String",
+                "description": "Numero de telefono"
+            },
+            "type": {
+                "type": "dto.EnumPhoneNumberType",
+                "description": "Fuente de tipo de numero"
+            },
+            "primary": {
+                "type": "Boolean",
+                "description": "Numero por defecto"
+            },
+            "active": {
+                "type": "Boolean",
+                "description": "Numero activo"
+            }
+        },
+        "Email": {
+            "source": {
+                "type": "dto.EnumContactSourceType",
+                "description": "Fuente de los contactos"
+            },
+            "addres": {
+                "type": "String",
+                "description": "Direccion de correo electronico"
+            },
+            "primary": {
+                "type": "Boolean",
+                "description": " Correo por defecto"
+            },
+            "active": {
+                "type": "Boolean",
+                "description": "Correo activo"
+            }
+        },
+        "ContactInfo": {
+            "phoneNumbers": {
+                "type": "List<dto.PhoneNumbers>",
+                "description": " Listado de numeros de telefono del usuario"
+            },
+            "emails": {
+                "type": "List<dto.Email>",
+                "description": "Listado de mails del usuario"
+            }
+        },    
+          "Conditions": {
+            "category": {
+                "type": "String",
+                "description": "Tipo de plan asociado al producto",
+                "required" : true
+            },
+            "description": {
+                "type": "String",
+                "description": "Descripcion del tipo de producto"
+            },
+            "openingDate": {
+                "type": "arq.DATE",
+                "description": " Fecha en la que se realizo la apertura del producto",
+                "required" : true
+            },
+            "commission": {
+                "type": "String",
+                "description": "Tipo de comision que aplica para el producto",
+                "required" : true
+            },
+            "office": {
+                "type": "dto.Office",
+                "description": "Datos de la oficina donde se realizo la apertura del producto",
+                "required" : true
+            },
+            "mobilizationConditions": {
+                "type": "String",
+                "description": ""
+            }
+        },
+          "Operation": {
+            "code": {
+                "type": "String",
+                "description": "Código del tipo de operación",
+                "required" : true
+            },
+            "description": {
+                "type": "String",
+                "description": "Descripcion de la operacion",
+                "required" : true
+            }
+        },
+         "Movement": {
+            "id": {
+                "type": "String",
+                "description": "Identificador de la operacion",
+                "required" : true
+            },
+            "concept": {
+                "type": "String",
+                "description": "concepto de la operacion",
+                "required" : true
+            },
+            "transactionDate": {
+                "type": "arq.DATE",
+                "description": " fecha de la transaccion",
+                "required" : true
+            },
+			"operationDate": {
+                "type": "arq.DATE",
+                "description": " fecha y hora de la operacion",
+                "required" : true
+            },
+            "sourceReference": {
+                "type": "String",
+                "description": "Cuenta origen del movimiento"
+            },
+            "destinationReference": {
+                "type": "String",
+                "description": "Cuenta destino del movimiento"
+            },
+            "operation": {
+                "type": "dto.Operation",
+                "description": "Informacion de la operacion (codigo y descripcion)",
+                "required" : true
+            },
+			 "office": {
+                "type": "dto.Office",
+                "description": "Informacion de la operacion (codigo y descripcion)",
+                "required" : true
+            },
+			"status": {
+                "type": "dto.EnumAccountState",
+                "description": "Campo alfanumérico que permite identificar la red utilizada para la operación",
+                "required" : true
+            },
+			
+            "value": {
+                "type": "arq.MONEY",
+                "description": "valor de la operacion"
+            },
+            "balance": {
+                "type": "arq.MONEY"
+            }
+        },
+          "Product": {
+            "id": {
+                "type": "String",
+                "isKeyField": true,
+                "description": "Identificador del usuario ejecutivo de ventas",
+                "required": true
+            },
+            "type": {
+                "type": "dto.EnumProductType",
+                "required": true
+            },
+            "name": {
+                "type": "String",
+                "description": "Nombre del producto",
+                "required": true
+            },
+            "alias": {
+                "type": "String",
+                "description": "Alias del producto"
+            },
+            "financialState": {
+                "type": "dto.EnumFinancialStatusType",
+                "description": "Identificador que referencia si un producto es un activo o un pasivo",
+                "required": true
+            },
+            "visible": {
+                "type": "Boolean",
+                "description": "Visibilidad del producto",
+                "required": true
+            },
+            "operable": {
+                "type": "Boolean",
+                "description": "Operatibilidad del producto",
+                "required": true
+            },
+            "balance": {
+                "type": "dto.Balance",
+                "description": "Entidad con toda la información del balance de la cuenta",
+                "required": true
+            },
+            "contactInfo": {
+                "type": "dto.ContactInfo",
+                "description": "description",
+                "required": true
+            },
+            "conditions": {
+                "type": "dto.Conditions"
+            },
+            "movement": {
+                "type": "List<dto.Movement>"
+            }
+        },
+        "Consignment": {
+            "number": {
+                "type": "String",
+                "description": "Numero de la consignacion",
+                "required" : true
+            },
+            "type": {
+                "type": "dto.EnumConsignmentType",
+                "description": "Campo alfabético que identifica la forma como se realiza la consignacion",
+                "required" : true
+            },
+            "date": {
+                "type": "arq.DATE",
+                "description": "Fecha de la consignacion",
+                "required" : true
+            }
+        },
+        "AcqMoveDetail": {
+            "net": {
+                "type": "dto.EnumNetType",
+                "description": "Campo alfanumérico que permite identificar la red utilizada para la operación",
+                "required" : true
+            },
+            "code": {
+                "type": "String",
+                "description": "Campo numérico que informa el código que describe la operación",
+                "required" : true
+            },
+            "city": {
+                "type": "dto.City",
+                "description": "Campo que informa la ciudad en donde se realiza la operación",
+                "required" : true
+            },
+            "situation": {
+                "type": "dto.EnumAcqSituation",
+                "description": "Campo alfabético el cual identifica el estado de la operación",
+                "required" : true
+            },
+            "docsCount": {
+                "type": "Integer",
+                "description": "Campo numérico que informa la cantidad de documentos utilizados en la operación"
+            },
+            "iva": {
+                "type": "arq.MONEY",
+                "description": "Campo numérico que indica el monto del Impuesto de Valor Agregado con respecto a la operación"
+            },
+            "iconsumo": {
+                "type": "arq.MONEY",
+                "description": "Campo numérico que indica el monto del Impuesto al consumo con respecto a la operación"
+            },
+            "tips": {
+                "type": "arq.MONEY",
+                "description": "Campo numérico que indica el monto del valor de la propina con respecto a la operación"
+            },
+            "comision": {
+                "type": "arq.MONEY",
+                "description": "Campo numérico que informa el valor de la comisión aplicada a la operación"
+            },
+            "reteiva": {
+                "type": "arq.MONEY",
+                "description": "Campo numérico que informa el descuento aplicado por concepto de reteiva"
+            },
+            "retefuente": {
+                "type": "arq.MONEY",
+                "description": "Campo numérico que informa el descuento aplicado por concepto de retefuente"
+            },
+            "charge": {
+                "type": "arq.MONEY",
+                "description": "Campo numérico que informa la aplicación de un cargo en específico"
+            },
+            "consignment": {
+                "type": "dto.Consignment",
+                "description": "Informacion relacionada a la consignacion",
+                "required" : true
+            }
+        },
+        "AccMoveDetail": {
+            "valueDate": {
+                "type": "arq.DATE",
+                "description": "fecha del valor del moviiento de la cuenta"
+            },
+            "operationTime": {
+                "type": "arq.DATE",
+                "description": "hora de ejecucion del movimiento de la cuenta"
+            },
+            "office": {
+                "type": "dto.Office",
+                "description": "Informacion de la oficina o corresponsal de origen de la operacion sobre cuenta"
+            },
+            "status": {
+                "type": "dto.EnumAccountMoveStatus",
+                "description": "Estado de la operacion"
+            }
+        },     
+        "ElectronicDespositValue": {
+            "overallInvestment": {
+                "type": "arq.MONEY",
+                "description": "saldo total que se dispone para el usuario",
+                "required" : true
+            },
+            "month": {
+                "type": "String",
+                "description": "Mes sobre el cual se hace el analisis o evaluo",
+                "required" : true
+            }
+        },
+         "AccMovementsResume": {
+            "income": {
+                "type": "arq.MONEY",
+                "description": "Ingresos a la cuenta"
+            },
+            "outcome": {
+                "type": "arq.MONEY",
+                "description": "Egresos de la cuenta"
+            },
+            "balance": {
+                "type": "arq.MONEY",
+                "description": "Saldo de la cuenta"
+            },
+            "month": {
+                "type": "dto.EnumMonth",
+                "description": "Mes en el cual se calculan los valores del resumen",
+                "required" : true
+            }
+        },
+         "User": {
+            "customerId": {
+                "type": "String",
+                "isKeyField": true,
+                "description": "Identificador del usuario",
+                "required": true
+            },
+            "name": {
+                "type": "String",
+                "description": "Nombre del usuario"
+            },
+            "ContactInfo": {
+                "type": "dto.ContactInfo",
+                "description": "Identificador de la informacion del contacto"
+            },
+            "userSalesExecutive": {
+                "type": "String",
+                "description": "Entidad con toda la información del ejecutivo de ventas"
+            },
+            "lastAccessDate": {
+                "type": "arq.DATE",
+                "description": "Fecha de la última vez que accedió el usuario al portal"
+            },
+            "message": {
+                "type": "List<dto.Message>",
+                "description": "Arreglo de los mensajes de alerta generados para el usuario"
+            },
+            "products": {
+                "type": "List<dto.Product>",
+                "description": "Arreglo de los productos correspondientes al usuario"
+            }
+        },"ThirdParty":{
+		  "customerId": {
+                "type": "dto.User",
+                "description": "Identificador del tercero"
+            },
+            "type": {
+                "type": "dto.EnumThirdPartyType",
+                "description": "Tipo de tercero: (CUSTOMER, LEAD, AGGREGATE)",
+                "required": true
+            }	
+		},
+             "Excecutive": {
+            "id": {
+                "type": "String",
+                "isKeyField": true,
+                "description": "  Identificador del ejecutivo de cuenta",
+                "required": true
+            },
+            "name": {
+                "type": "String",
+                "description": "Nombre del ejecutivo de cuenta"
+            },
+            "phone": {
+                "type": "String",
+                "description": "Telefono del ejecutivo de cuenta"
+            },
+            "office": {
+                "type": "dto.Office",
+                "description": "Oficina a la cual esta asignado un ejecutivo de cuenta"
+            },
+            "email": {
+                "type": "String",
+                "description": "Correo electronico de un ejecutivo de cuenta"
+            },
+            "customer": {
+                "type": "List<dto.ThirdParty>",
+                "description": "Clientes que tiene asignado un ejecutivo de cuenta"
+            }
+        },"CardCharge": {
+            
+            "category": {
+                "type": "dto.EnumCardChargeCategory",
+                "description": "Aspecto comercial",
+                "required": true
+            },
+            "amount": {
+                "type": "arq.MONEY",
+                "description": "Valor del consumo total diferido a cada una de las categorias"
+            }
+        }
+    }
+}

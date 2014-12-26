@@ -14,8 +14,10 @@
     <!--url>http://maven.apache.org</url-->
     <modules>
         <module>czic_GlobalPosition</module>
-        <!--module>czic_accounts</module>
-        <module>czic_Excecutives</module-->
+        <module>czic_Executives</module>
+        <module>czic_customers</module>
+        <module>czic_checkbooks</module>
+        <module>czic_loan</module>
         <module>czic_CardCharge</module>
         <module>czic_net</module>
         <module>czic</module>
