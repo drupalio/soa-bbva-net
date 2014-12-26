@@ -2,7 +2,6 @@ package com.bbva.czic.globalposition.facade.v01;
 
 import com.bbva.czic.dto.net.Product;
 import com.bbva.czic.globalposition.business.ISrvIntGlobalPosition;
-import com.bbva.czic.globalposition.facade.v01.mapper.Mapper;
 import com.bbva.jee.arq.spring.core.log.I18nLog;
 import com.bbva.jee.arq.spring.core.log.I18nLogFactory;
 import com.bbva.jee.arq.spring.core.servicing.annotations.SMC;
@@ -10,7 +9,6 @@ import com.bbva.jee.arq.spring.core.servicing.annotations.SN;
 import com.bbva.jee.arq.spring.core.servicing.annotations.VN;
 import com.bbva.jee.arq.spring.core.servicing.gce.BusinessServiceException;
 import com.bbva.jee.arq.spring.core.servicing.utils.BusinessServicesToolKit;
-import com.google.gson.Gson;
 import com.wordnik.swagger.annotations.*;
 import org.apache.cxf.jaxrs.model.wadl.ElementClass;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,11 +19,7 @@ import javax.ws.rs.core.HttpHeaders;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
 import java.util.List;
-import java.util.Random;
 
 
 @Path("/V01")
