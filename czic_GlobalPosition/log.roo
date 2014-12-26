@@ -10,3 +10,8 @@ sarc importTransaction --protocol PS9_MX --copy OZECN1E0_FDF.txt,OZECN1S0_FDF.tx
 sarc importTransaction --protocol PS9_MX --copy OZN1_CCT.txt,OZECN1E0_FDF.txt,OZECN1S0_FDF.txt,OZECN1S1_FDF.txt,OZN1_FDX.txt
 exit
 // ServicesArchitecture log closed at 2014-12-22 18:00:32
+// ServicesArchitecture log opened at 2014-12-23 09:53:53
+sarc importTransaction --protocol PS9_MX --copy DOF.CN.YLQ.QGDTCCT.KNOZN0.txt,DOF.CN.YLQ.QGDTFDF.OZ1COZN0.txt
+// [failed] exit
+exit
+// ServicesArchitecture log closed at 2014-12-23 15:17:58
