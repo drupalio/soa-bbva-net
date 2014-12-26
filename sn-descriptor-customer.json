@@ -1,0 +1,108 @@
+{
+    "bbva": {
+        "uuaa": "czic",
+        "remoteType": "RESTFUL"
+    },
+    "dtos": {
+        "EnumCardChargeCategory": {
+            "#metadata": {
+                "dtoPackage": "com.bbva.czic.dto.net.enumCardChargeCategory"
+            },
+            "enumValue": "String"
+        },
+        "EnumMonth": {
+            "#metadata": {
+                "dtoPackage": "com.bbva.czic.dto.net.enumMonth"
+            },
+            "enumValue": "String"
+        },
+        "CardCharge": {
+            "#metadata": {
+                "dtoPackage": "com.bbva.czic.dto.net.cardCharge"
+            },
+            "category": {
+                "type": "dto.EnumCardChargeCategory",
+                "description": "Aspecto comercial",
+                "required": true
+            },
+            "amount": {
+                "type": "arq.MONEY",
+                "description": "Valor del consumo total diferido a cada una de las categorias"
+            }
+        },
+        "user": {
+            "#metadata": {
+                "dtoPackage": "com.bbva.czic.dto.net.user"
+            },
+            "customerId": {
+                "type": "String",
+                "isKeyField": true,
+                "description": "Identificador del usuario",
+                "required": true
+            }
+        },
+        "CreditCard": {
+            "#metadata": {
+                "dtoPackage": "com.bbva.czic.dto.net.creditCard"
+            },
+            "number": {
+                "type": "String",
+                "description": "Identificador de la tarjeta de credito",
+                "required": true
+            }
+        },
+        "Product": {
+            "#metadata": {
+                "dtoPackage": "com.bbva.czic.dto.net.product"
+            },
+            "id": {
+                "type": "dto.Product",
+                "isKeyField": true,
+                "description": "Identificador del usuario ejecutivo de ventas",
+                "required": true
+            }
+        },
+        "AccMovementsResume": {
+            "#metadata": {
+                "dtoPackage": "com.bbva.czic.dto.net.accMovementsResume"
+            },
+            "income": {
+                "type": "arq.MONEY",
+                "description": "Ingresos a la cuenta"
+            },
+            "outcome": {
+                "type": "arq.MONEY",
+                "description": "Egresos de la cuenta"
+            },
+            "balance": {
+                "type": "arq.MONEY",
+                "description": "Saldo de la cuenta"
+            },
+            "month": {
+                "type": "dto.EnumMonth",
+                "description": "Mes en el cual se calculan los valores del resumen",
+                "required" : true
+            }
+        },
+
+         "CardCharge": {
+            
+            "category": {
+                "type": "dto.EnumCardChargeCategory",
+                "description": "Aspecto comercial",
+                "required": true
+            },
+            "amount": {
+                "type": "arq.MONEY",
+                "description": "Valor del consumo total diferido a cada una de las categorias"
+            }
+        }     
+    },
+	   "sn": {
+            "targetDto": "customer",
+            "logicalId": "customers",
+            "registryId": "SN201400333",
+            "version": "V01",
+            "description": "SN Customer"
+        }
+}

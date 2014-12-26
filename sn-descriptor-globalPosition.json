@@ -1,0 +1,139 @@
+{
+  "bbva" : {
+    "uuaa" : "czic",
+    "remoteType" : "RESTFUL"
+  },
+  "dtos" : {
+    "enumProductType" : {
+      "#metadata" : {
+        "dtoPackage" : "com.bbva.czic.dto.net.EnumProductType"
+      },
+      "enumValue" : "String"
+    },
+    "enumFinancialStatusType" : {
+      "#metadata" : {
+        "dtoPackage" : "com.bbva.czic.dto.net.EnumFinancialStatusType"
+      },
+      "enumValue" : "String"
+    },
+    "enumContactSourceType" : {
+      "#metadata" : {
+        "dtoPackage" : "com.bbva.czic.dto.net.EnumContactSourceType"
+      },
+      "enumValue" : "String"
+    },
+    "enumPhoneNumberType" : {
+      "#metadata" : {
+        "dtoPackage" : "com.bbva.czic.dto.net.EnumPhoneNumberType"
+      },
+      "enumValue" : "String"
+    },
+    "operation" : {
+      "#metadata" : {
+        "dtoPackage" : "com.bbva.czic.dto.net.Operation"
+      },
+      "operationCode" : {
+        "type" : "String",
+        "isKeyField" : true,
+        "description" : "Identificador del movimiento.",
+        "required" : true
+      },
+      "description" : "String"
+    },
+    "phoneNumber" : {
+      "#metadata" : {
+        "dtoPackage" : "com.bbva.czic.dto.net.PhoneNumber"
+      },
+      "number" : "String",
+      "countryCode" : "String",
+      "regionalCode" : "String",
+      "type" : "dto.enumPhoneNumberType",
+      "primary" : "Boolean",
+      "active" : "Boolean",
+      "contactSource" : "dto.enumContactSourceType"
+    },
+    "email" : {
+      "#metadata" : {
+        "dtoPackage" : "com.bbva.czic.dto.net.Email"
+      },      
+      "address" : "String",
+      "primary" : "Boolean",
+      "active" : "Boolean",
+      "source" : "dto.enumContactSourceType"
+    },
+    "contactInformation" : {
+      "#metadata" : {
+        "dtoPackage" : "com.bbva.czic.dto.net.ContactInformation"
+      },
+      "phoneNumbers" : "List<dto.phoneNumber>",
+      "emails" : "List<dto.email>"
+    },
+    "movement" : {
+      "#metadata" : {
+        "dtoPackage" : "com.bbva.czic.dto.net.Movement"
+      },
+      "movementId" : {
+        "type" : "String",
+        "isKeyField" : true,
+        "description" : "Identificador del movimiento.",
+        "required" : true
+      },
+      "concept" : "String",
+      "transactionDate" : "arq.DATE",
+      "sourceReference" : "String",
+      "destinationReference" : "String",
+      "operation" : "dto.operation",
+      "value" : "arq.MONEY",
+      "balance" : "arq.MONEY"
+    },
+    "product" : {
+      "#metadata" : {
+        "dtoPackage" : "com.bbva.czic.dto.net.Product"
+      },
+      "productId" : {
+        "type" : "String",
+        "isKeyField" : true,
+        "description" : "Identificador del producto",
+        "required" : true
+      },
+      "type" : "dto.enumProductType",
+      "name" : "String",
+      "alias" : "String",
+      "financialState" : "dto.enumFinancialStatusType",
+      "visible" : "Boolean",
+      "operable" : "Boolean",
+      "assets" : "arq.MONEY",
+      "liabilities" : "arq.MONEY",
+      "ownersEquity" : "arq.MONEY",
+      "contactInfo" : "dto.contactInformation",
+      "movements" : "List<dto.movement>"
+    }
+  },
+  "sn" : {
+    "targetDto" : "product",
+    "logicalId" : "GlobalPosition",
+    "registryId" : "SN201400333",
+    "version" : "V01",
+    "description" : "SN GlobalPosition",
+    "smcs" : {
+      "put" : [ {
+        "targetDto" : "product",
+        "logicalId" : "update",
+        "registryId" : "SMC201400334",
+        "description" : "Update the product.",
+        "notes" : "Update the product partially",
+        "gceErrors" : [ "aliasGCE1", "aliasGCE2" ]
+      } ],
+      "get" : {
+        "all" : [ {
+          "targetDto" : "product",
+          "logicalId" : "getExtractGlobalBalance",
+          "registryId" : "SMC201400335",
+          "description" : "Gets all the users products",
+          "notes" : "List of products that COULD be filtered by product type.",
+          "gceErrors" : [ "aliasGCE1", "aliasGCE2" ]
+        } ]
+      }
+    }
+  }
+}
