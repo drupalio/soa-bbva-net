@@ -12,6 +12,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
 
+import org.apache.cxf.jaxrs.model.wadl.ElementClass;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -64,9 +65,10 @@ public class SrvLoanV01 implements ISrvLoanV01, com.bbva.jee.arq.spring.core.ser
 	@ApiOperation(value = "Obtiene la informaci�n general del producto de fianciamiento", notes = "Obtiene la informaci�n general del producto de fianciamiento", response = Loan.class)
 	@ApiResponses(value = { @ApiResponse(code = -1, message = "aliasGCE1"),
 			@ApiResponse(code = -1, message = "aliasGCE2"),
-			@ApiResponse(code = 200, message = "Found Sucessfully", response = Response.class),
+			@ApiResponse(code = 200, message = "Found Sucessfully", response = Loan.class),
 			@ApiResponse(code = 500, message = "Technical Error") })
 	@GET
+	@ElementClass(response = Loan.class)
 	@Path("/{idLoan}/rotaryQuotas/{idRotaryQuota}")
 	@SMC(registryID = "SMC201400010", logicalID = "getRotaryQuota")
 	public Loan getRotaryQuota(@ApiParam(value = "Claim identifier param") @PathParam("idLoan") String idLoan) {
@@ -77,9 +79,10 @@ public class SrvLoanV01 implements ISrvLoanV01, com.bbva.jee.arq.spring.core.ser
 	@ApiOperation(value = "Obtiene un resumen de movimientos realizados sobre el producto de financiamiento. �ste servicio es paginado", notes = "Obtiene un resumen de movimientos realizados sobre el producto de financiamiento. �ste servicio es paginado", response = List.class)
 	@ApiResponses(value = { @ApiResponse(code = -1, message = "aliasGCE1"),
 			@ApiResponse(code = -1, message = "aliasGCE2"),
-			@ApiResponse(code = 200, message = "Found Sucessfully", response = Response.class),
+			@ApiResponse(code = 200, message = "Found Sucessfully", response = Loan[].class),
 			@ApiResponse(code = 500, message = "Technical Error") })
 	@GET
+	@ElementClass(response = Loan[].class)
 	@Path("/{idLoan}/rotaryQuotaMovements")
 	@SMC(registryID = "SMC201400011", logicalID = "listRotaryQuotaMovements")
 	public List<Loan> listRotaryQuotaMovements(
@@ -95,9 +98,10 @@ public class SrvLoanV01 implements ISrvLoanV01, com.bbva.jee.arq.spring.core.ser
 	@ApiOperation(value = "Obtiene los detalles del movimiento seleccionado para el producto de financiamiento", notes = "Obtiene los detalles del movimiento seleccionado para el producto de financiamiento", response = RotaryQuotaMove.class)
 	@ApiResponses(value = { @ApiResponse(code = -1, message = "aliasGCE1"),
 			@ApiResponse(code = -1, message = "aliasGCE2"),
-			@ApiResponse(code = 200, message = "Found Sucessfully", response = Response.class),
+			@ApiResponse(code = 200, message = "Found Sucessfully", response = Loan.class),
 			@ApiResponse(code = 500, message = "Technical Error") })
 	@GET
+	@ElementClass(response = Loan.class)
 	@Path("/{idLoan}/rotaryQuotaMovements/{idRotaryQuotaMovement}")
 	@SMC(registryID = "SMC201400012", logicalID = "getRotaryQuotaMovement")
 	public Loan getRotaryQuotaMovement(

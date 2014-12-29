@@ -7,12 +7,12 @@
 	<includeBaseDirectory>false</includeBaseDirectory>
 	<fileSets>
 	    <fileSet>
-            <directory>target/classes/com/bbva/czic/cardcharge/business</directory>            
-            <outputDirectory>com/bbva/czic/cardcharge/business</outputDirectory>
+            <directory>target/classes/com/bbva/czic/cards/business</directory>            
+            <outputDirectory>com/bbva/czic/cards/business</outputDirectory>
         </fileSet>
 	    <fileSet>
-            <directory>target/classes/com/bbva/czic/cardcharge/dao</directory>            
-            <outputDirectory>com/bbva/czic/cardcharge/dao</outputDirectory>
+            <directory>target/classes/com/bbva/czic/cards/dao</directory>            
+            <outputDirectory>com/bbva/czic/cards/dao</outputDirectory>
         </fileSet>		
 	    <fileSet>
             <directory>target/classes/META-INF</directory>            

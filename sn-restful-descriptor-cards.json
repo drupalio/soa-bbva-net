@@ -4,11 +4,11 @@
     "remoteType" : "RESTFUL"
   },
   "dtos" : {
-    "excecutive" : {
+    "executive" : {
       "#metadata" : {
         "dtoPackage" : "com.bbva.czic.dto.net.Excecutive"
       },
-      "excecutiveId" : {
+      "executiveId" : {
         "type" : "String",
         "isKeyField" : true,
         "description" : "Identificador del ejecutivo",
@@ -29,7 +29,7 @@
   },
   "sn" : {
     "targetDto" : "cardCharge",
-    "logicalId" : "CardCharge",
+    "logicalId" : "cards",
     "registryId" : "SN201400004",
     "version" : "V01",
     "description" : "CardCharge REST service.",

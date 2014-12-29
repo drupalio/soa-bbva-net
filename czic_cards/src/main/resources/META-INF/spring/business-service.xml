@@ -37,14 +37,14 @@
 	<context:annotation-config />
 	
 	<!-- Declaracion de modulo de servicios -->
-	<servicing:module-metadata  service-logical-id="CardCharge" />
+	<servicing:module-metadata  service-logical-id="cards" />
     
 	<!-- beans de cxf -->
     <import resource="classpath:META-INF/cxf/cxf.xml"/>
     <import resource="classpath:META-INF/cxf/cxf-extension-soap.xml"/>
     <import resource="classpath:META-INF/cxf/cxf-servlet.xml"/>
 		
-	<context:component-scan base-package="com.bbva.czic.cardcharge">
+	<context:component-scan base-package="com.bbva.czic.cards">
 		<context:exclude-filter expression=".*_Roo_.*" type="regex"/>
 		<context:exclude-filter expression="org.springframework.stereotype.Controller" type="annotation"/>
 	</context:component-scan>
@@ -71,7 +71,7 @@
 			<entry key="json" value="application/json"/>
 		</jaxrs:extensionMappings>
     	<jaxrs:serviceBeans>
-    		<ref bean="srvCardChargeV01"/>
+    		<ref bean="srvCardsV01"/>
     		<ref bean="swaggerResourceJSON"/>
     	</jaxrs:serviceBeans>
     </jaxrs:server>

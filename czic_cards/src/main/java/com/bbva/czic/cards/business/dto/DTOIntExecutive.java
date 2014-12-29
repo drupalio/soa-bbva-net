@@ -1,3 +1,4 @@
+
 package com.bbva.czic.cards.business.dto;
 
 public class DTOIntExecutive {
@@ -14,7 +15,7 @@ public class DTOIntExecutive {
     }
 
     public void setExecutiveId(String executiveId) {
-        this.executiveId = this.executiveId;
+        this.executiveId = executiveId;
     }
 
 }

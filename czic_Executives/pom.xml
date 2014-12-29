@@ -7,10 +7,10 @@
         <version>1.4.0</version>
     </parent>
     <groupId>com.bbva.czic.executives</groupId>
-	<artifactId>czic_Executives</artifactId>
+	<artifactId>czic_executives</artifactId>
 	<packaging>jar</packaging>
 	<version>1.0.0</version>
-	<name>czic_Executives</name>
+	<name>czic_executives</name>
 		
 	<repositories/>
     <pluginRepositories/>

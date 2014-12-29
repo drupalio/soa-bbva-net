@@ -7,8 +7,8 @@
 	<includeBaseDirectory>false</includeBaseDirectory>
 	<fileSets>
 		<fileSet>
-            <directory>target/classes/com/bbva/czic/cardcharge/facade</directory>
-            <outputDirectory>com/bbva/czic/cardcharge/facade</outputDirectory>
+            <directory>target/classes/com/bbva/czic/cards/facade</directory>
+            <outputDirectory>com/bbva/czic/cards/facade</outputDirectory>
         </fileSet>
 	</fileSets> 
 </assembly>

@@ -19,6 +19,7 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.core.HttpHeaders;
 import javax.ws.rs.core.UriInfo;
 
+import org.apache.cxf.jaxrs.model.wadl.ElementClass;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -86,9 +87,10 @@ public class SrvCustomersV01 implements ISrvCustomersV01, com.bbva.jee.arq.sprin
 	@ApiResponses(value = {
 		@ApiResponse(code = -1, message = "aliasGCE1"),
 		@ApiResponse(code = -1, message = "aliasGCE2"),
-		@ApiResponse(code = 200, message = "Found Sucessfully", response=Response.class),
+		@ApiResponse(code = 200, message = "Found Sucessfully", response=List.class),
 		@ApiResponse(code = 500, message = "Technical Error")})
 	@GET
+	@ElementClass(response = List.class)
 	@Path("/{idUser}/creditCards")
 	@SMC(registryID="SMC201400024",logicalID="getlistCreditCardsCharges")
 	public List<CreditCard> getlistCreditCardsCharges(@ApiParam(value="Claim identifier param") @PathParam("idUser") String idUser) {
@@ -101,9 +103,10 @@ public class SrvCustomersV01 implements ISrvCustomersV01, com.bbva.jee.arq.sprin
 	@ApiResponses(value = {
 		@ApiResponse(code = -1, message = "aliasGCE1"),
 		@ApiResponse(code = -1, message = "aliasGCE2"),
-		@ApiResponse(code = 200, message = "Found Sucessfully", response=Response.class),
+		@ApiResponse(code = 200, message = "Found Sucessfully", response=List.class),
 		@ApiResponse(code = 500, message = "Technical Error")})
 	@GET
+	@ElementClass(response = List.class)
 	@Path("/{idUser}/accMovementsResumes")
 	@SMC(registryID="SMC201400025",logicalID="getlistAccountsMovementsResume")
 	public List<AccMovementsResume> getlistAccountsMovementsResume(@ApiParam(value="Claim identifier param") @PathParam("idUser") String idUser) {

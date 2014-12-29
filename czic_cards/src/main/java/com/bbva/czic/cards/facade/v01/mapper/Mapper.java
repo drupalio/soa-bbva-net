@@ -25,17 +25,17 @@ public class Mapper {
  } 
 
 		
- public static Executive excecutiveMap(DTOIntExecutive dtoIntExecutive) { 
- 		Executive excecutive = new Executive(); 
- 		BeanUtils.copyProperties(dtoIntExecutive, excecutive); 
+ public static Executive excecutiveMap(DTOIntExecutive dtoIntExecutive) {
+ 		Executive excecutive = new Executive();
+ 		BeanUtils.copyProperties(dtoIntExecutive, excecutive);
  		return excecutive; 
  } 
 
 		
- public static DTOIntExecutive dtoIntExecutiveMap(Executive excecutive) { 
- 		DTOIntExecutive dtoIntExecutive = new DTOIntExecutive(); 
- 		BeanUtils.copyProperties(excecutive, dtoIntExecutive); 
- 		return dtoIntExecutive; 
+ public static DTOIntExecutive dtoIntExcecutiveMap(Executive excecutive) {
+ 		DTOIntExecutive dtoIntExecutive = new DTOIntExecutive();
+ 		BeanUtils.copyProperties(excecutive, dtoIntExecutive);
+ 		return dtoIntExecutive;
  } 
 
 	

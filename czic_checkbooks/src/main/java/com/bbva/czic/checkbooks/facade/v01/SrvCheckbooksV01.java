@@ -13,6 +13,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
 
+import org.apache.cxf.jaxrs.model.wadl.ElementClass;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -65,9 +66,10 @@ public class SrvCheckbooksV01 implements ISrvCheckbooksV01, com.bbva.jee.arq.spr
 	@ApiOperation(value = "Operation to get the details of the checks associated with a checkbook for the account associated with a client. This service is paginated", notes = "--", response = List.class)
 	@ApiResponses(value = { @ApiResponse(code = -1, message = "aliasGCE1"),
 			@ApiResponse(code = -1, message = "aliasGCE2"),
-			@ApiResponse(code = 200, message = "Found Sucessfully", response = Response.class),
+			@ApiResponse(code = 200, message = "Found Sucessfully", response = List.class),
 			@ApiResponse(code = 500, message = "Technical Error") })
 	@GET
+	@ElementClass(response = List.class)
 	@Path("/{idCheckbook}/checks")
 	@SMC(registryID = "SMC551400014", logicalID = "getChecks")
 	public List<Check> getChecks(
@@ -80,9 +82,10 @@ public class SrvCheckbooksV01 implements ISrvCheckbooksV01, com.bbva.jee.arq.spr
 	@ApiOperation(value = "Operation obtaining checkbooks related to a client's product.", notes = "----", response = Response.class)
 	@ApiResponses(value = { @ApiResponse(code = -1, message = "aliasGCE1"),
 			@ApiResponse(code = -1, message = "aliasGCE2"),
-			@ApiResponse(code = 200, message = "Found Sucessfully", response = Response.class),
+			@ApiResponse(code = 200, message = "Found Sucessfully", response = List.class),
 			@ApiResponse(code = 500, message = "Technical Error") })
 	@GET
+	@ElementClass(response = List.class)
 	@SMC(registryID = "SMC551400013", logicalID = "getCheckbooks")
 	public Response getCheckbooks(
 			@ApiParam(value = "filter param") @DefaultValue("null") @QueryParam("$filter") String filter,
