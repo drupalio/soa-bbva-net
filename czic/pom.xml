@@ -35,6 +35,18 @@
               <version>1.0.0</version>
        </dependency>
 
+        <dependency>
+            <groupId>com.bbva.czic.customers</groupId>
+            <artifactId>czic_customers</artifactId>
+            <version>1.0.0</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.bbva.czic.checkbooks</groupId>
+            <artifactId>czic_checkbooks</artifactId>
+            <version>1.0.0</version>
+        </dependency>
+
         <!-- INICIO Arquitectura Servicios -->
 
         <dependency>
