@@ -7,12 +7,20 @@ import java.lang.String;
 
 privileged aspect FormatoOZNCENK0_Roo_JavaBean {
     
-    public String FormatoOZNCENK0.getNomoper() {
-        return this.nomoper;
+    public String FormatoOZNCENK0.getNommovi() {
+        return this.nommovi;
     }
     
-    public void FormatoOZNCENK0.setNomoper(String nomoper) {
-        this.nomoper = nomoper;
+    public void FormatoOZNCENK0.setNommovi(String nommovi) {
+        this.nommovi = nommovi;
+    }
+    
+    public String FormatoOZNCENK0.getNomtarj() {
+        return this.nomtarj;
+    }
+    
+    public void FormatoOZNCENK0.setNomtarj(String nomtarj) {
+        this.nomtarj = nomtarj;
     }
     
 }
