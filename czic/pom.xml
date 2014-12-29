@@ -29,11 +29,11 @@
             <version>1.0.0</version>
         </dependency>
 
-        <!--dependency>
-               <groupId>com.bbva.czic.excecutives</groupId>
-              <artifactId>czic_Excecutives</artifactId>
+        <dependency>
+               <groupId>com.bbva.czic.executives</groupId>
+              <artifactId>czic_executives</artifactId>
               <version>1.0.0</version>
-       </dependency-->
+       </dependency>
 
         <!-- INICIO Arquitectura Servicios -->
 

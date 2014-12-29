@@ -4,10 +4,10 @@
     "remoteType" : "RESTFUL"
   },
   "dtos" : {
-    "excecutive" : {
+    "executive" : {
       "#metadata" : {
         "dtoPackage" : "com.bbva.czic.dto.net.Excecutive"
-      },"excecutiveId" : {
+      },"executiveId" : {
         "type" : "String",
         "isKeyField" : true,
         "description" : "Identificador del ejecutivo",
@@ -53,7 +53,7 @@
   },
   "sn" : {
     "targetDto" : "excecutive",
-    "logicalId" : "Excecutives",
+    "logicalId" : "excecutives",
     "registryId" : "SN201400005",
     "version" : "V01",
     "description" : "Excecutive REST service.",

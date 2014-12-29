@@ -11,7 +11,7 @@ import com.bbva.czic.dto.net.User;
 
 
 public interface ISrvExecutivesV01 {
- 	public Executive[] executives(String filter, String fields, String expands, String orderby);
+ 	public List<Executive> getExecutive(String filter, String fields, String expands, String sort);
 
 	
 }
