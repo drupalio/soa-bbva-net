@@ -13,9 +13,8 @@ import com.bbva.czic.dto.net.EnumMonth;
 
 
 public interface ISrvCustomersV01 {
- 	public List<CreditCard> getlistCreditCardsCharges(String idUser);
+ 	public List<CardCharge> listCreditCardsCharges(String idUser);
 
-		public List<AccMovementsResume> getlistAccountsMovementsResume(String idUser);
+	public List<AccMovementsResume> listAccountsMovementsResume(String idUser);
 
-	
 }
