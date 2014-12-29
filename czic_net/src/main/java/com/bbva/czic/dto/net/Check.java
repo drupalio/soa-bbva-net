@@ -28,17 +28,17 @@ public class Check
     public final static long serialVersionUID = 1L;
     @ApiModelProperty(value = "Identificador del cheque", required = true)
     private String id;
-    @XmlJavaTypeAdapter(CalendarAdapter.class)
+//    @XmlJavaTypeAdapter(CalendarAdapter.class)
     @XmlSchemaType(name = "dateTime")
     @ApiModelProperty(value = "description", required = true)
     private Calendar issueDate;
-    @XmlJavaTypeAdapter(MoneyAdapter.class)
+//    @XmlJavaTypeAdapter(MoneyAdapter.class)
     @XmlElement(type = Money.class)
     @ApiModelProperty(value = "Valor del cheque", required = true)
     private Money value;
     @ApiModelProperty(value = "Estado actual del cheque", required = true)
     private EnumCheckStatus status;
-    @XmlJavaTypeAdapter(CalendarAdapter.class)
+//    @XmlJavaTypeAdapter(CalendarAdapter.class)
     @XmlSchemaType(name = "dateTime")
     @ApiModelProperty(value = "Fecha de modificacion", required = true)
     private Calendar modifiedDate;

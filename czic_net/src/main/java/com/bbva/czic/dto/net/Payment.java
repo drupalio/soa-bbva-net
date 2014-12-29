@@ -26,15 +26,15 @@ public class Payment
 {
 
     public final static long serialVersionUID = 1L;
-    @XmlJavaTypeAdapter(CalendarAdapter.class)
+//    @XmlJavaTypeAdapter(CalendarAdapter.class)
     @XmlSchemaType(name = "dateTime")
     @ApiModelProperty("Fecha de vencimiento del pago")
     private Calendar dueDate;
-    @XmlJavaTypeAdapter(CalendarAdapter.class)
+//    @XmlJavaTypeAdapter(CalendarAdapter.class)
     @XmlSchemaType(name = "dateTime")
     @ApiModelProperty("Fecha de pago")
     private Calendar paymentDate;
-    @XmlJavaTypeAdapter(CalendarAdapter.class)
+//    @XmlJavaTypeAdapter(CalendarAdapter.class)
     @XmlSchemaType(name = "dateTime")
     @ApiModelProperty("Fecha corta del pago")
     private Date shortDate;

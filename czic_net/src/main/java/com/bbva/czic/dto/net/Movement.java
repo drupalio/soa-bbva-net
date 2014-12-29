@@ -30,11 +30,11 @@ public class Movement
     private String id;
     @ApiModelProperty(value = "concepto de la operacion", required = true)
     private String concept;
-    @XmlJavaTypeAdapter(CalendarAdapter.class)
+//    @XmlJavaTypeAdapter(CalendarAdapter.class)
     @XmlSchemaType(name = "dateTime")
     @ApiModelProperty(value = " fecha de la transaccion", required = true)
     private Calendar transactionDate;
-    @XmlJavaTypeAdapter(CalendarAdapter.class)
+//    @XmlJavaTypeAdapter(CalendarAdapter.class)
     @XmlSchemaType(name = "dateTime")
     @ApiModelProperty(value = " fecha y hora de la operacion", required = true)
     private Calendar operationDate;

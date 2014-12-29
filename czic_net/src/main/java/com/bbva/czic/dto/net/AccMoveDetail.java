@@ -23,11 +23,11 @@ public class AccMoveDetail
 {
 
     public final static long serialVersionUID = 1L;
-    @XmlJavaTypeAdapter(CalendarAdapter.class)
+//    @XmlJavaTypeAdapter(CalendarAdapter.class)
     @XmlSchemaType(name = "dateTime")
     @ApiModelProperty("fecha del valor del moviiento de la cuenta")
     private Calendar valueDate;
-    @XmlJavaTypeAdapter(CalendarAdapter.class)
+//    @XmlJavaTypeAdapter(CalendarAdapter.class)
     @XmlSchemaType(name = "dateTime")
     @ApiModelProperty("hora de ejecucion del movimiento de la cuenta")
     private Calendar operationTime;

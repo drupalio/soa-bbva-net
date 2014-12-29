@@ -32,11 +32,11 @@ public class Checkbook
     private Integer lastCheckl;
     @ApiModelProperty(" numero de cheques totales de la chequera ")
     private String totalCheck;
-    @XmlJavaTypeAdapter(CalendarAdapter.class)
+//    @XmlJavaTypeAdapter(CalendarAdapter.class)
     @XmlSchemaType(name = "dateTime")
     @ApiModelProperty("Fecha de solicitud de la chequera ")
     private Calendar requestDate;
-    @XmlJavaTypeAdapter(CalendarAdapter.class)
+//    @XmlJavaTypeAdapter(CalendarAdapter.class)
     @XmlSchemaType(name = "dateTime")
     @ApiModelProperty("Fecha de entrega de la nueva chequera")
     private Calendar deliveryDate;
