@@ -2,5 +2,5 @@
 package com.bbva.czic.globalposition.business.dto;
 
 public enum DTOIntEnumProductType {
-    AC, CA, LO, SI
+    PC, TDC, LO, SI, ED, RQ, LI, AQ
 }

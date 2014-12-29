@@ -10,10 +10,10 @@ import javax.xml.bind.annotation.XmlType;
 
 import com.wordnik.swagger.annotations.ApiModelProperty;
 
-@XmlRootElement(name = "PhoneNumbers", namespace = "urn:com:bbva:czic:dto:net")
-@XmlType(name = "PhoneNumbers", namespace = "urn:com:bbva:czic:dto:net")
+@XmlRootElement(name = "PhoneNumber", namespace = "urn:com:bbva:czic:dto:net")
+@XmlType(name = "PhoneNumber", namespace = "urn:com:bbva:czic:dto:net")
 @XmlAccessorType(XmlAccessType.FIELD)
-public class PhoneNumbers
+public class PhoneNumber
     implements Serializable
 {
 
@@ -33,7 +33,7 @@ public class PhoneNumbers
     @ApiModelProperty("Numero activo")
     private Boolean active;
 
-    public PhoneNumbers() {
+    public PhoneNumber() {
         //default constructor
     }
 

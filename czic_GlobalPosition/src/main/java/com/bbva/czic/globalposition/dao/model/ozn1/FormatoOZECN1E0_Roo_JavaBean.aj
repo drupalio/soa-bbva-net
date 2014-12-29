@@ -15,4 +15,12 @@ privileged aspect FormatoOZECN1E0_Roo_JavaBean {
         this.numclie = numclie;
     }
     
+    public String FormatoOZECN1E0.getTipprod() {
+        return this.tipprod;
+    }
+    
+    public void FormatoOZECN1E0.setTipprod(String tipprod) {
+        this.tipprod = tipprod;
+    }
+    
 }

@@ -91,34 +91,24 @@ public class Mapper {
  } 
 
 		
- public static EnumCardChargeCategory enumCardChargeCategoryMap(DTOIntEnumCardChargeCategory dtoIntEnumCardChargeCategory) { 
- 		EnumCardChargeCategory enumCardChargeCategory = new EnumCardChargeCategory(); 
- 		BeanUtils.copyProperties(dtoIntEnumCardChargeCategory, enumCardChargeCategory); 
- 		return enumCardChargeCategory; 
+ public static EnumCardChargeCategory enumCardChargeCategoryMap(DTOIntEnumCardChargeCategory dtoIntEnumCardChargeCategory) {
+	 return EnumCardChargeCategory.valueOf(dtoIntEnumCardChargeCategory.name());
  } 
 
 		
- public static DTOIntEnumCardChargeCategory dtoIntEnumCardChargeCategoryMap(EnumCardChargeCategory enumCardChargeCategory) { 
- 		DTOIntEnumCardChargeCategory dtoIntEnumCardChargeCategory = new DTOIntEnumCardChargeCategory(); 
- 		BeanUtils.copyProperties(enumCardChargeCategory, dtoIntEnumCardChargeCategory); 
- 		return dtoIntEnumCardChargeCategory; 
+ public static DTOIntEnumCardChargeCategory dtoIntEnumCardChargeCategoryMap(EnumCardChargeCategory enumCardChargeCategory) {
+	 return DTOIntEnumCardChargeCategory.valueOf(enumCardChargeCategory.name());
  } 
 
 		
- public static EnumMonth enumMonthMap(DTOIntEnumMonth dtoIntEnumMonth) { 
- 		EnumMonth enumMonth = new EnumMonth(); 
- 		BeanUtils.copyProperties(dtoIntEnumMonth, enumMonth); 
- 		return enumMonth; 
+ public static EnumMonth enumMonthMap(DTOIntEnumMonth dtoIntEnumMonth) {
+	 return EnumMonth.valueOf(dtoIntEnumMonth.name());
  } 
 
 		
- public static DTOIntEnumMonth dtoIntEnumMonthMap(EnumMonth enumMonth) { 
- 		DTOIntEnumMonth dtoIntEnumMonth = new DTOIntEnumMonth(); 
- 		BeanUtils.copyProperties(enumMonth, dtoIntEnumMonth); 
- 		return dtoIntEnumMonth; 
- } 
+ public static DTOIntEnumMonth dtoIntEnumMonthMap(EnumMonth enumMonth) {
+	 return DTOIntEnumMonth.valueOf(enumMonth.name());
+ }
 
-	
-	
 }
 

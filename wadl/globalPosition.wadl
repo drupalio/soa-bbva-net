@@ -28,7 +28,7 @@
                     <xs:element minOccurs="0" name="financialState" type="tns:enumFinancialStatusType"/>
                     <xs:element minOccurs="0" name="visible" type="xs:boolean"/>
                     <xs:element minOccurs="0" name="operable" type="xs:boolean"/>
-                    <xs:element minOccurs="0" name="balance" type="tns:Balance"/>
+                    <xs:element minOccurs="0" name="total" type="tns:Balance"/>
                     <xs:element minOccurs="0" name="contactInfo" type="tns:ContactInfo"/>
                     <xs:element minOccurs="0" name="conditions" type="tns:Conditions"/>
                     <xs:element maxOccurs="unbounded" minOccurs="0" name="movement" nillable="true" type="tns:movement"/>
@@ -118,7 +118,7 @@
                     <xs:element minOccurs="0" name="destinationReference" type="xs:string"/>
                     <xs:element minOccurs="0" name="operation" type="tns:Operation"/>
                     <xs:element minOccurs="0" name="value" type="ns1:money"/>
-                    <xs:element minOccurs="0" name="balance" type="ns1:money"/>
+                    <xs:element minOccurs="0" name="total" type="ns1:money"/>
                 </xs:sequence>
             </xs:complexType>
             <xs:complexType name="Operation">
