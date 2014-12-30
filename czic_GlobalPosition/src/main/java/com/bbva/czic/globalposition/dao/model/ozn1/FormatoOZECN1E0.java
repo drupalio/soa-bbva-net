@@ -26,10 +26,4 @@ public class FormatoOZECN1E0 {
 	@Campo(indice = 1, nombre = "NUMCLIE", tipo = TipoCampo.ALFANUMERICO, longitudMinima = 8, longitudMaxima = 8)
 	private String numclie;
 	
-	/**
-	 * <p>Campo <code>TIPPROD</code>, &iacute;ndice: <code>2</code>, tipo: <code>ALFANUMERICO</code>
-	 */
-	@Campo(indice = 2, nombre = "TIPPROD", tipo = TipoCampo.ALFANUMERICO, longitudMinima = 2, longitudMaxima = 2)
-	private String tipprod;
-	
 }

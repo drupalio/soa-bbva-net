@@ -8,7 +8,7 @@ import com.bbva.czic.dto.net.Product;
 import com.bbva.czic.dto.net.Operation;
 import com.bbva.czic.dto.net.EnumContactSourceType;
 import com.bbva.czic.dto.net.PhoneNumber;
-import com.bbva.czic.dto.net.ContactInfo;
+import com.bbva.czic.dto.net.ContactInformation;
 import com.bbva.czic.dto.net.Email;
 import com.bbva.czic.dto.net.Movement;
 import com.bbva.czic.dto.net.EnumPhoneNumberType;
@@ -104,14 +104,14 @@ public class Mapper {
 	}
 
 
-	public static ContactInfo contactInformationMap(DTOIntContactInfo dtoIntContactInfo) {
-		ContactInfo contactInformation = new ContactInfo();
+	public static ContactInformation contactInformationMap(DTOIntContactInfo dtoIntContactInfo) {
+		ContactInformation contactInformation = new ContactInformation();
 		BeanUtils.copyProperties(dtoIntContactInfo, contactInformation);
 		return contactInformation;
 	}
 
 
-	public static DTOIntContactInfo dtoIntContactInformationMap(ContactInfo contactInformation) {
+	public static DTOIntContactInfo dtoIntContactInformationMap(ContactInformation contactInformation) {
 		DTOIntContactInfo dtoIntContactInfo = new DTOIntContactInfo();
 		BeanUtils.copyProperties(contactInformation, dtoIntContactInfo);
 		return dtoIntContactInfo;

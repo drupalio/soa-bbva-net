@@ -301,13 +301,13 @@
 		<version>${cxf.version}</version>
 	</dependency>
   
-    <dependency>
+    <!--dependency>
             <groupId>com.bbva.czic.globalposition</groupId>
             <artifactId>czic_GlobalPosition</artifactId>
             <version>1.0.0</version>
-        </dependency>
+        </dependency-->
     
-     <!--dependency>
+     <dependency>
             <groupId>com.bbva.czic.cardcharge</groupId>
            <artifactId>czic_CardCharge</artifactId>    
            <version>1.0.0</version>    
@@ -317,7 +317,7 @@
             <groupId>com.bbva.czic.excecutives</groupId>
            <artifactId>czic_Excecutives</artifactId>    
            <version>1.0.0</version>    
-    </dependency-->
+    </dependency>
 
     </dependencies>
 	<build>

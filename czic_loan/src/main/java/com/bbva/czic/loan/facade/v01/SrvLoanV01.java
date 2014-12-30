@@ -3,6 +3,7 @@ package com.bbva.czic.loan.facade.v01;
 import java.util.Date;
 import java.util.List;
 
+import javax.ws.rs.DefaultValue;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
@@ -68,7 +69,7 @@ public class SrvLoanV01 implements ISrvLoanV01, com.bbva.jee.arq.spring.core.ser
 			@ApiResponse(code = 200, message = "Found Sucessfully", response = Response.class),
 			@ApiResponse(code = 500, message = "Technical Error") })
 	@GET
-	@Path("/{idLoan}/rotaryQuotas/{idRotaryQuota}")
+	@Path("/rotaryQuotas/{idLoan}")
 	@SMC(registryID = "SMC201400010", logicalID = "getRotaryQuota")
 	public Loan getRotaryQuota(@ApiParam(value = "Claim identifier param") @PathParam("idLoan") String idLoan) {
 		return srvIntLoan.getRotaryQuota(idLoan);
@@ -81,12 +82,12 @@ public class SrvLoanV01 implements ISrvLoanV01, com.bbva.jee.arq.spring.core.ser
 			@ApiResponse(code = 200, message = "Found Sucessfully", response = Response.class),
 			@ApiResponse(code = 500, message = "Technical Error") })
 	@GET
-	@Path("/{idLoan}/rotaryQuotaMovements")
+	@Path("/rotaryQuotaMovements/{idLoan}/movement")
 	@SMC(registryID = "SMC201400011", logicalID = "listRotaryQuotaMovements")
 	public List<Movement> listRotaryQuotaMovements(
-			@ApiParam(value = "Claim identifier param") @PathParam("starDate") Date starDate,
-			@ApiParam(value = "Claim identifier param") @PathParam("endDate") Date endDate,
-			@ApiParam(value = "Claim identifier param") @PathParam("paginationKey") String paginationKey,
+			@ApiParam(value = "Claim identifier param") @DefaultValue("null") @PathParam("$starDate") Date starDate,
+			@ApiParam(value = "Claim identifier param") @DefaultValue("null") @PathParam("$endDate") Date endDate,
+			@ApiParam(value = "Claim identifier param") @DefaultValue("null") @PathParam("$paginationKey") String paginationKey,
 			@ApiParam(value = "Claim identifier param") @PathParam("pageSize") Integer pageSize,
 			@ApiParam(value = "Claim identifier param") @PathParam("idLoan") String idLoan) {
 		return srvIntLoan.listRotaryQuotaMovements(starDate, endDate, paginationKey, pageSize, idLoan);
@@ -99,7 +100,7 @@ public class SrvLoanV01 implements ISrvLoanV01, com.bbva.jee.arq.spring.core.ser
 			@ApiResponse(code = 200, message = "Found Sucessfully", response = Response.class),
 			@ApiResponse(code = 500, message = "Technical Error") })
 	@GET
-	@Path("/{idLoan}/rotaryQuotaMovements/{idMovement}")
+	@Path("/rotaryQuotaMovements/{idLoan}/movement/{idMovement}")
 	@SMC(registryID = "SMC201400012", logicalID = "getRotaryQuotaMovement")
 	public Movement getRotaryQuotaMovement(
 			@ApiParam(value = "Claimer identifier param") @PathParam("idMovement") String idMovement,

@@ -5,15 +5,14 @@ package com.bbva.czic.loan.dao.model.oznk;
 
 import java.lang.String;
 import java.math.BigDecimal;
-import java.util.Date;
 
 privileged aspect FormatoOZNCSNK0_Roo_JavaBean {
     
-    public Date FormatoOZNCSNK0.getFechao() {
+    public String FormatoOZNCSNK0.getFechao() {
         return this.fechao;
     }
     
-    public void FormatoOZNCSNK0.setFechao(Date fechao) {
+    public void FormatoOZNCSNK0.setFechao(String fechao) {
         this.fechao = fechao;
     }
     

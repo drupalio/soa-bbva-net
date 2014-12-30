@@ -23,12 +23,6 @@
 			<version>1.0.0</version>
 		</dependency>
 
-		<dependency>
-			<groupId>ma.glasnost.orika</groupId>
-			<artifactId>orika-core</artifactId>
-			<version>1.4.5</version>
-		</dependency>
-
 		<!-- INICIO Arquitectura Servicios -->
 
 		<dependency>
@@ -76,6 +70,13 @@
 		</dependency>
 
 		<!--Dependencias Swagger -->
+
+
+		<dependency>
+			<groupId>com.google.code.gson</groupId>
+			<artifactId>gson</artifactId>
+			<version>1.7.1</version>
+		</dependency>
 
 		<dependency>
 			<groupId>org.mockito</groupId>
@@ -384,7 +385,7 @@
 					<excludes>
 						<exclude>**/*_Roo_*</exclude>
 					</excludes>
-					<skipTests>false</skipTests>
+					<skipTests>true</skipTests>
 				</configuration>
 			</plugin>
 			<plugin>

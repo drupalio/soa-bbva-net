@@ -1,7 +1,6 @@
 
 package com.bbva.czic.globalposition.business.dto;
 
-import java.util.ArrayList;
 import java.util.List;
 
 
@@ -13,8 +12,7 @@ public class DTOIntContactInfo {
     private List<DTOIntEmail> emails;
 
     public DTOIntContactInfo() {
-        phoneNumbers = new ArrayList<DTOIntPhoneNumber>();
-        emails = new ArrayList<DTOIntEmail>();
+        //default constructor
     }
 
     public List<DTOIntPhoneNumber> getPhoneNumbers() {

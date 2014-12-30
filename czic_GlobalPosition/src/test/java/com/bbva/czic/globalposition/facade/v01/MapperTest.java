@@ -1,16 +1,17 @@
-package com.bbva.czic.globalposition.facade.v01.mapper;
+package com.bbva.czic.globalposition.facade.v01;
 
 import com.bbva.czic.dto.net.Balance;
 import com.bbva.czic.dto.net.EnumProductType;
 import com.bbva.czic.dto.net.Product;
 import com.bbva.czic.globalposition.business.dto.DTOIntProduct;
-import com.bbva.jee.arq.spring.core.servicing.utils.Money;
+import com.bbva.czic.globalposition.facade.v01.mapper.Mapper;
 import org.junit.Test;
+import com.bbva.jee.arq.spring.core.servicing.utils.Money;
 
 import java.math.BigDecimal;
 import java.util.Currency;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
 
 /**
  * Created by Administrador on 17/12/2014.

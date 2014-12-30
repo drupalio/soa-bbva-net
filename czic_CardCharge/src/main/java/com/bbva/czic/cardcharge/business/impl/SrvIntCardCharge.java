@@ -11,6 +11,7 @@ import com.bbva.jee.arq.spring.core.log.I18nLogFactory;
 import com.bbva.jee.arq.spring.core.servicing.utils.BusinessServicesToolKit;
 
 import com.bbva.czic.cardcharge.business.dto.DTOIntCardCharge;
+import com.bbva.czic.cardcharge.business.dto.DTOIntExcecutive;
 import com.bbva.czic.cardcharge.business.ISrvIntCardCharge;
 
 

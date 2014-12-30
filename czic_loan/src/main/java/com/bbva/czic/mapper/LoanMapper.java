@@ -18,11 +18,12 @@ public class LoanMapper extends AbstractConfigurableMapper {
 				.field("fechaop", "operationDate").field("resto", "concept").field("valorop", "value")
 				.field("balance", "balance").field("tipope", "operation.description").byDefault().register();
 
+		/* Mapeo FormatoOZNCSNK0 */
 		factory.classMap(DTOIntMovement.class, FormatoOZNCSNI0.class).field("fechao", "operationDate")
 				.field("resto", "concept").field("importe", "value").field("balance", "balance")
-
 				.field("descop", "destinationReference").field("estado", "status").byDefault().register();
 
+		/* Mapeo FormatoOZNCSNJ0 */
 		factory.classMap(DTOIntMovement.class, FormatoOZNCSNI0.class)
 				.field("nomprod", "id")
 				// pendiente

@@ -1,7 +1,6 @@
 package com.bbva.czic.loan.dao;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -39,41 +38,38 @@ public class LoanDAOImpl implements LoanDAO {
 	private LoanMapper loanMapper;
 
 	@Override
-	public List<DTOIntMovement> listRotaryQuotaMovements(Date starDate, Date endDate, String paginationKey,
+	public List<DTOIntMovement> listRotaryQuotaMovements(String starDate, String endDate, String paginationKey,
 			Integer pageSize, String idLoan) throws BusinessServiceException {
 
 		DTOIntMovement movement = new DTOIntMovement();
 		List<DTOIntMovement> movementList = new ArrayList<DTOIntMovement>();
 
 		try {
-			FormatoOZNCENI0 formatoOZNCENI0 = new FormatoOZNCENI0();
 
+			FormatoOZNCENI0 formatoOZNCENI0 = new FormatoOZNCENI0();
 			formatoOZNCENI0.setFechini(starDate);
 			formatoOZNCENI0.setFechafi(endDate);
 			formatoOZNCENI0.setIndpag(paginationKey);
 			formatoOZNCENI0.setNotarje(idLoan);
 			PeticionTransaccionOzni peticion = new PeticionTransaccionOzni();
-
 			peticion.getCuerpo().getPartes().add(formatoOZNCENI0);
 			RespuestaTransaccionOzni respuesta = new TransaccionOzni().invocar(peticion);
-
 			BusinessServiceException exception = errorMappingHelper.toBusinessServiceException(respuesta);
 			if (exception != null) throw new BusinessServiceException("loanServerListRotary");
-
 			CopySalida outputCopy = respuesta.getCuerpo().getParte(CopySalida.class);
 			if (outputCopy != null) {
-
 				FormatoOZNCSNI0 formatoSalida = outputCopy.getCopy(FormatoOZNCSNI0.class);
+				// TODO : validar salidas
 				if (formatoSalida != null) {
-
 					movement = new LoanMapper().map(formatoSalida, DTOIntMovement.class);
-
 					movementList.add(movement);
 				}
 			}
+
 		} catch (Exception e) {
 		}
 		return movementList;
+
 	}
 
 	@Override
@@ -82,27 +78,23 @@ public class LoanDAOImpl implements LoanDAO {
 		DTOIntLoan dTOIntLoan = new DTOIntLoan();
 
 		try {
+
 			FormatoOZNCENJ0 formatoOZNCENJ0 = new FormatoOZNCENJ0();
 			formatoOZNCENJ0.setNumprod(idLoan);
-
 			PeticionTransaccionOznj peticion = new PeticionTransaccionOznj();
-
 			peticion.getCuerpo().getPartes().add(formatoOZNCENJ0);
 			RespuestaTransaccionOznj respuesta = new TransaccionOznj().invocar(peticion);
-
 			BusinessServiceException exception = errorMappingHelper.toBusinessServiceException(respuesta);
 			if (exception != null) throw new BusinessServiceException("loanServergetRotaryQuota");
-
 			CopySalida outputCopy = respuesta.getCuerpo().getParte(CopySalida.class);
 			if (outputCopy != null) {
 
 				FormatoOZNCSNJ0 formatoSalida = outputCopy.getCopy(FormatoOZNCSNJ0.class);
 				if (formatoSalida != null) {
-
 					dTOIntLoan = loanMapper.map(formatoSalida, DTOIntLoan.class);
-
 				}
 			}
+
 		} catch (Exception e) {
 		}
 		return dTOIntLoan;
@@ -114,32 +106,25 @@ public class LoanDAOImpl implements LoanDAO {
 
 		DTOIntMovement dtoIntMovement = new DTOIntMovement();
 		FormatoOZNCENK0 formatoOZNCENK0 = new FormatoOZNCENK0();
-
 		try {
-
 			formatoOZNCENK0.setNommovi(idMovement);
 			formatoOZNCENK0.setNomtarj(idLoan);
-
 			PeticionTransaccionOznk peticion = new PeticionTransaccionOznk();
-
 			peticion.getCuerpo().getPartes().add(peticion);
-
 			RespuestaTransaccionOznk respuesta = new TransaccionOznk().invocar(peticion);
-
 			BusinessServiceException exception = errorMappingHelper.toBusinessServiceException(respuesta);
 			if (exception != null) throw new BusinessServiceException("loanPeticionRotaryMuvement");
-
 			CopySalida outputCopy = respuesta.getCuerpo().getParte(CopySalida.class);
 			if (outputCopy != null) {
-
 				FormatoOZNCSNK0 formatoSalida = outputCopy.getCopy(FormatoOZNCSNK0.class);
 				if (formatoSalida != null) {
-
 					dtoIntMovement = loanMapper.map(formatoSalida, DTOIntMovement.class);
 				}
 			}
+			return dtoIntMovement;
 		} catch (Exception e) {
+			throw new BusinessServiceException(e.getMessage());
 		}
-		return dtoIntMovement;
+
 	}
 }

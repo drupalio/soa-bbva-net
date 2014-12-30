@@ -1,5 +1,6 @@
 package com.bbva.czic.loan.business.impl;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -38,6 +39,8 @@ public class SrvIntLoan implements ISrvIntLoan {
 	public Loan getRotaryQuota(String idRotaryQuota) throws BusinessServiceException {
 		Loan loan = new Loan();
 
+		if (idRotaryQuota == null) throw new BusinessServiceException("loanPeticiongetRotaryQuota");
+
 		DTOIntLoan dtoIntLoan = loanDao.getRotaryQuota(idRotaryQuota);
 
 		loan.setPayment(dtoIntLoan.getPayment());
@@ -52,10 +55,17 @@ public class SrvIntLoan implements ISrvIntLoan {
 			String idLoan) throws BusinessServiceException {
 
 		Movement movement = null;
+		SimpleDateFormat sdf = new SimpleDateFormat("YYYY-MM-dd");
+
+		String fecaInicio = sdf.format(starDate);
+		String fechaFinal = sdf.format(endDate);
+
 		List<Movement> movementList = new ArrayList<Movement>();
-		List<DTOIntMovement> intLoan = loanDao.listRotaryQuotaMovements(starDate, endDate, paginationKey, pageSize,
-				idLoan);
+
+		List<DTOIntMovement> intLoan = loanDao.listRotaryQuotaMovements(fecaInicio, fechaFinal, paginationKey,
+				pageSize, idLoan);
 		for (DTOIntMovement item : intLoan) {
+			movement = new Movement();
 
 			movement = (Movement)loanMapper.getMapper(item, Movement.class);
 
@@ -67,10 +77,16 @@ public class SrvIntLoan implements ISrvIntLoan {
 	@Override
 	public Movement getRotaryQuotaMovement(String idMovement, String idLoan) throws BusinessServiceException {
 
-		Movement movement = null;
-		DTOIntMovement dtoIntMovement = loanDao.getRotaryQuotaMovement(idMovement, idLoan);
-		movement = loanMapper.map(dtoIntMovement, Movement.class);
+		try {
+			Movement movement = null;
+			if (idMovement == null || idLoan == null) throw new BusinessServiceException("loanPeticionRotaryMuvement");
 
-		return movement;
+			DTOIntMovement dtoIntMovement = loanDao.getRotaryQuotaMovement(idMovement, idLoan);
+			movement = (Movement)loanMapper.getMapper(dtoIntMovement, Movement.class);
+
+			return movement;
+		} catch (Exception e) {
+			throw new BusinessServiceException(e.getMessage());
+		}
 	}
 }

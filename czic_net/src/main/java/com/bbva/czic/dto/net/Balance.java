@@ -25,7 +25,7 @@ public class Balance
     @XmlJavaTypeAdapter(MoneyAdapter.class)
     @XmlElement(type = Money.class)
     @ApiModelProperty("Saldo total del producto")
-    private Money total;
+    private Money balance;
     @XmlJavaTypeAdapter(MoneyAdapter.class)
     @XmlElement(type = Money.class)
     @ApiModelProperty("Saldo disponible del producto")
@@ -35,12 +35,12 @@ public class Balance
         //default constructor
     }
 
-    public Money getTotal() {
-        return total;
+    public Money getBalance() {
+        return balance;
     }
 
-    public void setTotal(Money total) {
-        this.total = total;
+    public void setBalance(Money balance) {
+        this.balance = balance;
     }
 
     public Money getAvailableBalance() {

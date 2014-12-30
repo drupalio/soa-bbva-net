@@ -1,23 +1,15 @@
 package com.bbva.czic.globalposition.business;
 
-import com.bbva.czic.dto.net.Product;
-import com.bbva.czic.globalposition.business.dto.DTOIntEnumProductType;
 import com.bbva.czic.globalposition.business.dto.DTOIntProduct;
 import com.bbva.czic.globalposition.business.impl.SrvIntGlobalPosition;
 import com.bbva.czic.globalposition.dao.GlobalPositionDAO;
-import com.bbva.jee.arq.spring.core.servicing.gce.BusinessServiceException;
-import com.bbva.jee.arq.spring.core.servicing.test.BusinessServiceTestContextLoader;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.TestExecutionListeners;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.springframework.test.context.support.DependencyInjectionTestExecutionListener;
+import org.mockito.runners.MockitoJUnitRunner;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,25 +19,13 @@ import static org.mockito.Mockito.anyString;
 import static org.mockito.Mockito.when;
 
 
-@RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(
-		loader = BusinessServiceTestContextLoader.class,
-		locations = {
-				"classpath*:/META-INF/spring/applicationContext-*.xml",
-				"classpath:/META-INF/spring/business-service.xml",
-				"classpath:/META-INF/spring/business-service-test.xml"
-		})
-@TestExecutionListeners(listeners = {
-		//MockInvocationContextTestExecutionListener.class,
-		DependencyInjectionTestExecutionListener.class
-})
+@RunWith(MockitoJUnitRunner.class)
 public class SrvIntGlobalPositionTest {
 
 	@Mock
 	GlobalPositionDAO globalPositionDAO;
 
 	@InjectMocks
-	@Autowired
 	SrvIntGlobalPosition srv;
 
 	@Before
@@ -62,42 +42,30 @@ public class SrvIntGlobalPositionTest {
 		when(globalPositionDAO.getExtractGlobalBalance(anyString())).thenReturn(products);
 
 		//SUT's excecution
-		final List<Product> productsResult = srv.getExtractGlobalBalance("111", null);
+		srv.getExtractGlobalBalance("111", null);
 
 		//validation
-		assertEquals(5, productsResult.size());
+		assertEquals(products.size(), 5);
 	}
 
 	@Test
 	public void testFilterByProductType(){
 		//setUp - data
-		final List<DTOIntProduct> products = getProductsList();
+		List<DTOIntProduct> products = getProductsList();
 
 		//setUp - expectation
 		when(globalPositionDAO.getExtractGlobalBalance(anyString())).thenReturn(products);
 
 		//SUT's excecution
-		final List<Product> productsResult = srv.getExtractGlobalBalance("111", "(productType==ED)");
+		srv.getExtractGlobalBalance("111", "({productType==DE)");
 
 		//validation
-		assertEquals(1, productsResult.size());
+		assertEquals(products.size(), 1);
 	}
-
-	@Test(expected = BusinessServiceException.class)
-	public void testFilterErrorShouldThrowABusinessException() {
-		//setUp - data
-		final List<DTOIntProduct> products = getProductsList();
-
-		//setUp - expectation
-		when(globalPositionDAO.getExtractGlobalBalance(anyString())).thenReturn(products);
-
-		//SUT's excecution
-		final List<Product> productsResult = srv.getExtractGlobalBalance("111", "(uberTroter==ED)");
-	}
-
+		
 	@Test
 	public void testModifyProduct() {
-
+		//TODO: call srv.modifyProduct
 	}
 
 	private List<DTOIntProduct> getProductsList() {
@@ -108,8 +76,7 @@ public class SrvIntGlobalPositionTest {
 		intProduct.setId("1");
 		intProduct.setAlias("Cuentas Corrientes");
 		intProduct.setName("Cuentas que tal");
-		//intProduct.setProductType("PC");
-		intProduct.setProductType(DTOIntEnumProductType.PC.name());
+		intProduct.setProductType("PC");
 
 		intProducts.add(intProduct);
 
@@ -117,38 +84,48 @@ public class SrvIntGlobalPositionTest {
 		intProduct.setId("2");
 		intProduct.setAlias("Cuentas Corrientes");
 		intProduct.setName("Cuentas que tal");
-		//intProduct.setProductType("TDC");
-		intProduct.setProductType(DTOIntEnumProductType.TDC.name());
+		intProduct.setProductType("TDC");
 
-				intProducts.add(intProduct);
+		intProducts.add(intProduct);
 
 		intProduct = new DTOIntProduct();
 		intProduct.setId("3");
 		intProduct.setAlias("Cuentas Corrientes");
 		intProduct.setName("Cuentas que tal");
-		//intProduct.setProductType("ED");
-		intProduct.setProductType(DTOIntEnumProductType.ED.name());
+		intProduct.setProductType("ED");
 
-				intProducts.add(intProduct);
+		intProducts.add(intProduct);
 
 		intProduct = new DTOIntProduct();
 		intProduct.setId("4");
 		intProduct.setAlias("Cuentas Corrientes");
 		intProduct.setName("Cuentas que tal");
-		//intProduct.setProductType("AQ");
-		intProduct.setProductType(DTOIntEnumProductType.AQ.name());
+		intProduct.setProductType("AQ");
 
-				intProducts.add(intProduct);
+		intProducts.add(intProduct);
 
 		intProduct = new DTOIntProduct();
 		intProduct.setId("5");
 		intProduct.setAlias("Cuentas Corrientes");
 		intProduct.setName("Cuentas que tal");
-		//intProduct.setProductType("RQ");
-		intProduct.setProductType(DTOIntEnumProductType.RQ.name());
+		intProduct.setProductType("RQ");
 
-				intProducts.add(intProduct);
+		intProducts.add(intProduct);
 
+		/*
+		Gson gson = new Gson();
+		List<DTOIntProduct> products = new ArrayList<DTOIntProduct>();
+		try {
+			BufferedReader br = new BufferedReader(
+                    new FileReader(this.getClass().getResource("products.json").getFile()));
+
+			//convert the json string back to object
+			products = Arrays.asList(gson.fromJson(br, DTOIntProduct[].class));
+
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
+		*/
 		return intProducts;
 
 	}
