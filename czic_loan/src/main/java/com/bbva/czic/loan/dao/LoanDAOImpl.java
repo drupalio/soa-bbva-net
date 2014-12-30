@@ -3,8 +3,6 @@ package com.bbva.czic.loan.dao;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.annotation.Resource;
-
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.bbva.czic.loan.business.dto.DTOIntLoan;
@@ -34,12 +32,12 @@ public class LoanDAOImpl implements LoanDAO {
 	@Autowired
 	private ErrorMappingHelper errorMappingHelper;
 
-	@Resource(name = "loanMapper")
-	private LoanMapper loanMapper;
+	// @Resource(name = "loanMapper")
+	// private LoanMapper loanMapper;
 
 	@Override
-	public List<DTOIntMovement> listRotaryQuotaMovements(String starDate, String endDate, String paginationKey,
-			Integer pageSize, String idLoan) throws BusinessServiceException {
+	public List<DTOIntMovement> listRotaryQuotaMovements(String idLoan, String starDate, String endDate,
+			String paginationKey, String pageSize) throws BusinessServiceException {
 
 		DTOIntMovement movement = new DTOIntMovement();
 		List<DTOIntMovement> movementList = new ArrayList<DTOIntMovement>();
@@ -91,7 +89,7 @@ public class LoanDAOImpl implements LoanDAO {
 
 				FormatoOZNCSNJ0 formatoSalida = outputCopy.getCopy(FormatoOZNCSNJ0.class);
 				if (formatoSalida != null) {
-					dTOIntLoan = loanMapper.map(formatoSalida, DTOIntLoan.class);
+					// dTOIntLoan = loanMapper.map(formatoSalida, DTOIntLoan.class);
 				}
 			}
 
@@ -118,7 +116,7 @@ public class LoanDAOImpl implements LoanDAO {
 			if (outputCopy != null) {
 				FormatoOZNCSNK0 formatoSalida = outputCopy.getCopy(FormatoOZNCSNK0.class);
 				if (formatoSalida != null) {
-					dtoIntMovement = loanMapper.map(formatoSalida, DTOIntMovement.class);
+					// dtoIntMovement = loanMapper.map(formatoSalida, DTOIntMovement.class);
 				}
 			}
 			return dtoIntMovement;

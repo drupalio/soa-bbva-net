@@ -9,7 +9,7 @@
 	<!--I getRotaryQuota -->
 	<error-definition severity="FATAL" alias="loanPeticiongetRotaryQuota" code="1" servicing:http-status="400">
 		<message>Error en la peticion, valide los parametros de entrada.</message>		
-		<message lang="en">Error en la peticion, valide los parametros de entrada.</message>
+		<message lang="es">Error en la peticion, valide los parametros de entrada.</message>
 	</error-definition>
 	<error-definition severity="FATAL" alias="loanServergetRotaryQuota" code="1" servicing:http-status="409">
 		<message>Internal server error.</message>		
@@ -20,22 +20,22 @@
 	<!--I listRotaryQuotaMovements -->
 	<error-definition severity="FATAL" alias="loanPeticionListRotary" code="1" servicing:http-status="400">
 		<message>Error en la peticion, valide los parametros de entrada.</message>		
-		<message lang="en">Error en la peticion, valide los parametros de entrada.</message>
+		<message lang="es">Error en la peticion, valide los parametros de entrada.</message>
 	</error-definition>
 	<error-definition severity="FATAL" alias="loanServerListRotary" code="1" servicing:http-status="409">
 		<message>Internal server error.</message>		
-		<message lang="en">Internal server error.</message>
+		<message lang="es">Internal server error.</message>
 	</error-definition>
 	<!--F listRotaryQuotaMovements -->
 	
 	<!--I listRotaryQuotaMovements -->
 	<error-definition severity="FATAL" alias="loanPeticionRotaryMuvement" code="1" servicing:http-status="400">
 		<message>Error en la peticion, valide los parametros de entrada.</message>		
-		<message lang="en">Error en la peticion, valide los parametros de entrada.</message>
+		<message lang="es">Error en la peticion, valide los parametros de entrada.</message>
 	</error-definition>
 	<error-definition severity="FATAL" alias="loanServerRotaryMuvement" code="1" servicing:http-status="409">
 		<message>Internal server error.</message>		
-		<message lang="en">Internal server error.</message>
+		<message lang="es">Internal server error.</message>
 	</error-definition>
 	<!--F listRotaryQuotaMovements -->
 	

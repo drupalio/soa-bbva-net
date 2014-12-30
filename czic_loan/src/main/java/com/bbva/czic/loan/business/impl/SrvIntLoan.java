@@ -1,8 +1,6 @@
 package com.bbva.czic.loan.business.impl;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -37,41 +35,51 @@ public class SrvIntLoan implements ISrvIntLoan {
 
 	@Override
 	public Loan getRotaryQuota(String idRotaryQuota) throws BusinessServiceException {
-		Loan loan = new Loan();
+		try {
+			Loan loan = new Loan();
 
-		if (idRotaryQuota == null) throw new BusinessServiceException("loanPeticiongetRotaryQuota");
+			if (idRotaryQuota == null) throw new BusinessServiceException("loanPeticiongetRotaryQuota");
 
-		DTOIntLoan dtoIntLoan = loanDao.getRotaryQuota(idRotaryQuota);
+			DTOIntLoan dtoIntLoan = loanDao.getRotaryQuota(idRotaryQuota);
 
-		loan.setPayment(dtoIntLoan.getPayment());
-		loan.setStatus(dtoIntLoan.getStatus());
-		loan.setBalance(dtoIntLoan.getBalance());
+			loan.setPayment(dtoIntLoan.getPayment());
+			loan.setStatus(dtoIntLoan.getStatus());
+			loan.setBalance(dtoIntLoan.getBalance());
 
-		return loan;
+			return loan;
+		} catch (Exception e) {
+			throw new BusinessServiceException(e.getMessage());
+		}
 	}
 
 	@Override
-	public List<Movement> listRotaryQuotaMovements(Date starDate, Date endDate, String paginationKey, Integer pageSize,
-			String idLoan) throws BusinessServiceException {
+	public List<Movement> listRotaryQuotaMovements(String idLoan, String filter, String fields, String expands,
+			String sort) throws BusinessServiceException {
 
-		Movement movement = null;
-		SimpleDateFormat sdf = new SimpleDateFormat("YYYY-MM-dd");
+		try {
+			Movement movement = null;
+			List<Movement> movementList = new ArrayList<Movement>();
 
-		String fecaInicio = sdf.format(starDate);
-		String fechaFinal = sdf.format(endDate);
+			log.info("A query string (filter) has been sended: " + filter + ", " + fields + ", " + expands + ", "
+					+ sort);
 
-		List<Movement> movementList = new ArrayList<Movement>();
+			if (idLoan == null || filter == null || fields == null || expands == null || sort == null)
+				throw new BusinessServiceException("loanPeticionListRotary");
 
-		List<DTOIntMovement> intLoan = loanDao.listRotaryQuotaMovements(fecaInicio, fechaFinal, paginationKey,
-				pageSize, idLoan);
-		for (DTOIntMovement item : intLoan) {
-			movement = new Movement();
+			List<DTOIntMovement> intLoan = loanDao.listRotaryQuotaMovements(idLoan, filter, fields, expands, sort);
 
-			movement = (Movement)loanMapper.getMapper(item, Movement.class);
+			for (DTOIntMovement item : intLoan) {
+				movement = new Movement();
 
-			movementList.add(movement);
+				movement = (Movement)loanMapper.getMapper(item, Movement.class);
+
+				movementList.add(movement);
+			}
+			return movementList;
+		} catch (Exception e) {
+			throw new BusinessServiceException(e.getMessage());
 		}
-		return movementList;
+
 	}
 
 	@Override
