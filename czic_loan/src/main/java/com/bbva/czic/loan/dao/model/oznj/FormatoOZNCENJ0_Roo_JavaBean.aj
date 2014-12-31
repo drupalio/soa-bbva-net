@@ -7,12 +7,12 @@ import java.lang.String;
 
 privileged aspect FormatoOZNCENJ0_Roo_JavaBean {
     
-    public String FormatoOZNCENJ0.getNoopera() {
-        return this.noopera;
+    public String FormatoOZNCENJ0.getNumprod() {
+        return this.numprod;
     }
     
-    public void FormatoOZNCENJ0.setNoopera(String noopera) {
-        this.noopera = noopera;
+    public void FormatoOZNCENJ0.setNumprod(String numprod) {
+        this.numprod = numprod;
     }
     
 }
