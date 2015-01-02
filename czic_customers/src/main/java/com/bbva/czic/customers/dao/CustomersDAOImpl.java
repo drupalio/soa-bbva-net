@@ -1,8 +1,103 @@
 package com.bbva.czic.customers.dao;
 
-public class CustomersDAOImpl  implements CustomersDAO {
+import java.util.ArrayList;
+import java.util.List;
 
-	//TODO: method implementations
-	
+import javax.annotation.Resource;
+
+import org.springframework.beans.factory.annotation.Autowired;
+
+import com.bbva.czic.customers.business.dto.DTOIntAccMovementsResume;
+import com.bbva.czic.customers.business.dto.DTOIntCardCharge;
+import com.bbva.czic.customers.dao.model.ozno.FormatoOZECNOE0;
+import com.bbva.czic.customers.dao.model.ozno.FormatoOZECNOS0;
+import com.bbva.czic.customers.dao.model.ozno.PeticionTransaccionOzno;
+import com.bbva.czic.customers.dao.model.ozno.RespuestaTransaccionOzno;
+import com.bbva.czic.customers.dao.model.ozno.TransaccionOzno;
+import com.bbva.czic.customers.dao.model.oznq.FormatoOZECNQE0;
+import com.bbva.czic.customers.dao.model.oznq.FormatoOZECNQS0;
+import com.bbva.czic.customers.dao.model.oznq.PeticionTransaccionOznq;
+import com.bbva.czic.customers.dao.model.oznq.RespuestaTransaccionOznq;
+import com.bbva.czic.customers.dao.model.oznq.TransaccionOznq;
+import com.bbva.czic.mapper.CustomerMapper;
+import com.bbva.jee.arq.spring.core.host.protocolo.ps9.ErrorMappingHelper;
+import com.bbva.jee.arq.spring.core.host.protocolo.ps9.aplicacion.CopySalida;
+import com.bbva.jee.arq.spring.core.servicing.gce.BusinessServiceException;
+
+public class CustomersDAOImpl implements CustomersDAO {
+
+	@Resource(name = "CustomerMapper")
+	private CustomerMapper customerMapper;
+
+	@Autowired
+	private ErrorMappingHelper errorMappingHelper;
+
+	@Override
+	public List<DTOIntAccMovementsResume> getlistAccountsMovementsResume(
+			String idUser, String fechain, String fechafi)
+			throws BusinessServiceException {
+
+		DTOIntAccMovementsResume dtoIntAccountAccMovementsResume = new DTOIntAccMovementsResume();
+		List<DTOIntAccMovementsResume> accountMovementDtoList = new ArrayList<DTOIntAccMovementsResume>();
+
+		try {
+			FormatoOZECNQE0 FormatoOZECNQE = new FormatoOZECNQE0();
+			FormatoOZECNQE.setFechafi(fechain);
+			FormatoOZECNQE.setFechafi(fechafi);
+
+			PeticionTransaccionOznq peticion = new PeticionTransaccionOznq();
+
+			peticion.getCuerpo().getPartes().add(FormatoOZECNQE);
+			RespuestaTransaccionOznq respuesta = new TransaccionOznq()
+					.invocar(peticion);
+
+			BusinessServiceException exception = errorMappingHelper.toBusinessServiceException(respuesta);
+			if (exception != null) throw new BusinessServiceException("noDataCustomerListAccountsMovementsResume");
+			CopySalida outputCopy = respuesta.getCuerpo().getParte(CopySalida.class);
+			if (outputCopy != null) {
+
+				FormatoOZECNQS0 formatoSalida = outputCopy.getCopy(FormatoOZECNQS0.class);
+				if (formatoSalida != null) {
+					 dtoIntAccountAccMovementsResume = customerMapper.map(formatoSalida, DTOIntAccMovementsResume.class);
+				}
+			}
+		} catch (Exception e) {
+		}
+		return accountMovementDtoList;
+	}
+
+	@Override
+	public List<DTOIntCardCharge> getlistCreCardCharges(String idUser,
+			String fechain, String fechafi) throws BusinessServiceException {
+
+		DTOIntCardCharge dtoIntCardCharge = new DTOIntCardCharge();
+		List<DTOIntCardCharge> cardChargetDtoList = new ArrayList<DTOIntCardCharge>();
+
+		try {
+			FormatoOZECNOE0 FormatoOZECNOE0 = new FormatoOZECNOE0();
+			FormatoOZECNOE0.setFechafi(fechain);
+			FormatoOZECNOE0.setFechafi(fechafi);
+			FormatoOZECNOE0.setNumprod(idUser);
+
+			PeticionTransaccionOzno peticion = new PeticionTransaccionOzno();
+
+			peticion.getCuerpo().getPartes().add(FormatoOZECNOE0);
+			RespuestaTransaccionOzno respuesta = new TransaccionOzno()
+					.invocar(peticion);
+			
+			BusinessServiceException exception = errorMappingHelper.toBusinessServiceException(respuesta);
+			if (exception != null) throw new BusinessServiceException("noDataListCreditCardsCharges");
+			CopySalida outputCopy = respuesta.getCuerpo().getParte(CopySalida.class);
+			if (outputCopy != null) {
+
+				FormatoOZECNOS0 formatoSalida = outputCopy.getCopy(FormatoOZECNOS0.class);
+				if (formatoSalida != null) {
+					dtoIntCardCharge = customerMapper.map(formatoSalida, DTOIntCardCharge.class);
+				}
+			}
+		} catch (Exception e) {
+		}
+		return cardChargetDtoList;
+	}
+
 }
-

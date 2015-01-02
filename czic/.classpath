@@ -1,18 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
-	<classpathentry kind="src" output="target/test-classes" path="src/test/java">
-		<attributes>
-			<attribute name="optional" value="true"/>
-			<attribute name="maven.pomderived" value="true"/>
-		</attributes>
-	</classpathentry>
-	<classpathentry excluding="**/*.java" including="**/*.java" kind="src" output="target/test-classes" path="src/test/resources"/>
-	<classpathentry kind="src" output="target/classes" path="src/main/java">
-		<attributes>
-			<attribute name="optional" value="true"/>
-			<attribute name="maven.pomderived" value="true"/>
-		</attributes>
-	</classpathentry>
 	<classpathentry excluding="**/*.java" including="**/*.java" kind="src" path="src/main/resources"/>
 	<classpathentry kind="var" path="M2_REPO/javax/resource/connector-api/1.5/connector-api-1.5.jar" sourcepath="M2_REPO/javax/resource/connector-api/1.5/connector-api-1.5-sources.jar"/>
 	<classpathentry kind="var" path="M2_REPO/javax/jms/jms/1.1/jms-1.1.jar">
@@ -46,41 +33,41 @@
 			<attribute name="javadoc_location" value="jar:file:/S:/M2_REPO/aopalliance/aopalliance/1.0/aopalliance-1.0-javadoc.jar!/"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="var" path="M2_REPO/com/bbva/jee/arq/spring/core/arq-spring-connector-host/1.4.0/arq-spring-connector-host-1.4.0.jar" sourcepath="M2_REPO/com/bbva/jee/arq/spring/core/arq-spring-connector-host/1.4.0/arq-spring-connector-host-1.4.0-sources.jar">
+	<classpathentry kind="var" path="M2_REPO/com/bbva/jee/arq/spring/core/arq-spring-connector-host/1.5.1/arq-spring-connector-host-1.5.1.jar" sourcepath="M2_REPO/com/bbva/jee/arq/spring/core/arq-spring-connector-host/1.5.1/arq-spring-connector-host-1.5.1-sources.jar">
 		<attributes>
-			<attribute name="javadoc_location" value="jar:file:/S:/M2_REPO/com/bbva/jee/arq/spring/core/arq-spring-connector-host/1.4.0/arq-spring-connector-host-1.4.0-javadoc.jar!/"/>
+			<attribute name="javadoc_location" value="jar:file:/S:/M2_REPO/com/bbva/jee/arq/spring/core/arq-spring-connector-host/1.5.1/arq-spring-connector-host-1.5.1-javadoc.jar!/"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="var" path="M2_REPO/com/bbva/jee/arq/spring/core/arq-spring-connector-host-api/1.4.0/arq-spring-connector-host-api-1.4.0.jar" sourcepath="M2_REPO/com/bbva/jee/arq/spring/core/arq-spring-connector-host-api/1.4.0/arq-spring-connector-host-api-1.4.0-sources.jar">
+	<classpathentry kind="var" path="M2_REPO/com/bbva/jee/arq/spring/core/arq-spring-connector-host-api/1.5.0/arq-spring-connector-host-api-1.5.0.jar" sourcepath="M2_REPO/com/bbva/jee/arq/spring/core/arq-spring-connector-host-api/1.5.0/arq-spring-connector-host-api-1.5.0-sources.jar">
 		<attributes>
-			<attribute name="javadoc_location" value="jar:file:/S:/M2_REPO/com/bbva/jee/arq/spring/core/arq-spring-connector-host-api/1.4.0/arq-spring-connector-host-api-1.4.0-javadoc.jar!/"/>
+			<attribute name="javadoc_location" value="jar:file:/S:/M2_REPO/com/bbva/jee/arq/spring/core/arq-spring-connector-host-api/1.5.0/arq-spring-connector-host-api-1.5.0-javadoc.jar!/"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="var" path="M2_REPO/com/bbva/jee/arq/spring/core/arq-spring-connector-host-imsconnect/1.4.0/arq-spring-connector-host-imsconnect-1.4.0.jar" sourcepath="M2_REPO/com/bbva/jee/arq/spring/core/arq-spring-connector-host-imsconnect/1.4.0/arq-spring-connector-host-imsconnect-1.4.0-sources.jar">
+	<classpathentry kind="var" path="M2_REPO/com/bbva/jee/arq/spring/core/arq-spring-connector-host-imsconnect/1.5.1/arq-spring-connector-host-imsconnect-1.5.1.jar" sourcepath="M2_REPO/com/bbva/jee/arq/spring/core/arq-spring-connector-host-imsconnect/1.5.1/arq-spring-connector-host-imsconnect-1.5.1-sources.jar">
 		<attributes>
-			<attribute name="javadoc_location" value="jar:file:/S:/M2_REPO/com/bbva/jee/arq/spring/core/arq-spring-connector-host-imsconnect/1.4.0/arq-spring-connector-host-imsconnect-1.4.0-javadoc.jar!/"/>
+			<attribute name="javadoc_location" value="jar:file:/S:/M2_REPO/com/bbva/jee/arq/spring/core/arq-spring-connector-host-imsconnect/1.5.1/arq-spring-connector-host-imsconnect-1.5.1-javadoc.jar!/"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="var" path="M2_REPO/com/bbva/jee/arq/spring/core/arq-spring-connector-host-ps9/1.4.0/arq-spring-connector-host-ps9-1.4.0.jar" sourcepath="M2_REPO/com/bbva/jee/arq/spring/core/arq-spring-connector-host-ps9/1.4.0/arq-spring-connector-host-ps9-1.4.0-sources.jar">
+	<classpathentry kind="var" path="M2_REPO/com/bbva/jee/arq/spring/core/arq-spring-connector-host-ps9/1.5.1/arq-spring-connector-host-ps9-1.5.1.jar" sourcepath="M2_REPO/com/bbva/jee/arq/spring/core/arq-spring-connector-host-ps9/1.5.1/arq-spring-connector-host-ps9-1.5.1-sources.jar">
 		<attributes>
-			<attribute name="javadoc_location" value="jar:file:/S:/M2_REPO/com/bbva/jee/arq/spring/core/arq-spring-connector-host-ps9/1.4.0/arq-spring-connector-host-ps9-1.4.0-javadoc.jar!/"/>
+			<attribute name="javadoc_location" value="jar:file:/S:/M2_REPO/com/bbva/jee/arq/spring/core/arq-spring-connector-host-ps9/1.5.1/arq-spring-connector-host-ps9-1.5.1-javadoc.jar!/"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="var" path="M2_REPO/com/bbva/jee/arq/spring/core/arq-spring-core-api/1.4.0/arq-spring-core-api-1.4.0.jar" sourcepath="M2_REPO/com/bbva/jee/arq/spring/core/arq-spring-core-api/1.4.0/arq-spring-core-api-1.4.0-sources.jar">
+	<classpathentry kind="var" path="M2_REPO/com/bbva/jee/arq/spring/core/arq-spring-core-api/1.5.0/arq-spring-core-api-1.5.0.jar" sourcepath="M2_REPO/com/bbva/jee/arq/spring/core/arq-spring-core-api/1.5.0/arq-spring-core-api-1.5.0-sources.jar">
 		<attributes>
-			<attribute name="javadoc_location" value="jar:file:/S:/M2_REPO/com/bbva/jee/arq/spring/core/arq-spring-core-api/1.4.0/arq-spring-core-api-1.4.0-javadoc.jar!/"/>
+			<attribute name="javadoc_location" value="jar:file:/S:/M2_REPO/com/bbva/jee/arq/spring/core/arq-spring-core-api/1.5.0/arq-spring-core-api-1.5.0-javadoc.jar!/"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="var" path="M2_REPO/com/bbva/jee/arq/spring/core/arq-spring-core-spi/1.4.0/arq-spring-core-spi-1.4.0.jar"/>
-	<classpathentry kind="var" path="M2_REPO/com/bbva/jee/arq/spring/core/arq-spring-monitoring/1.4.0/arq-spring-monitoring-1.4.0.jar"/>
-	<classpathentry kind="var" path="M2_REPO/com/bbva/jee/arq/spring/core/arq-spring-restutils/1.4.0/arq-spring-restutils-1.4.0.jar" sourcepath="M2_REPO/com/bbva/jee/arq/spring/core/arq-spring-restutils/1.4.0/arq-spring-restutils-1.4.0-sources.jar">
+	<classpathentry kind="var" path="M2_REPO/com/bbva/jee/arq/spring/core/arq-spring-core-spi/1.5.0/arq-spring-core-spi-1.5.0.jar"/>
+	<classpathentry kind="var" path="M2_REPO/com/bbva/jee/arq/spring/core/arq-spring-monitoring/1.5.0/arq-spring-monitoring-1.5.0.jar"/>
+	<classpathentry kind="var" path="M2_REPO/com/bbva/jee/arq/spring/core/arq-spring-restutils/1.5.0/arq-spring-restutils-1.5.0.jar" sourcepath="M2_REPO/com/bbva/jee/arq/spring/core/arq-spring-restutils/1.5.0/arq-spring-restutils-1.5.0-sources.jar">
 		<attributes>
-			<attribute name="javadoc_location" value="jar:file:/S:/M2_REPO/com/bbva/jee/arq/spring/core/arq-spring-restutils/1.4.0/arq-spring-restutils-1.4.0-javadoc.jar!/"/>
+			<attribute name="javadoc_location" value="jar:file:/S:/M2_REPO/com/bbva/jee/arq/spring/core/arq-spring-restutils/1.5.0/arq-spring-restutils-1.5.0-javadoc.jar!/"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="var" path="M2_REPO/com/bbva/jee/arq/spring/core/arq-spring-servicing-core/1.4.0/arq-spring-servicing-core-1.4.0.jar" sourcepath="M2_REPO/com/bbva/jee/arq/spring/core/arq-spring-servicing-core/1.4.0/arq-spring-servicing-core-1.4.0-sources.jar">
+	<classpathentry kind="var" path="M2_REPO/com/bbva/jee/arq/spring/core/arq-spring-servicing-core/1.5.1/arq-spring-servicing-core-1.5.1.jar" sourcepath="M2_REPO/com/bbva/jee/arq/spring/core/arq-spring-servicing-core/1.5.1/arq-spring-servicing-core-1.5.1-sources.jar">
 		<attributes>
-			<attribute name="javadoc_location" value="jar:file:/S:/M2_REPO/com/bbva/jee/arq/spring/core/arq-spring-servicing-core/1.4.0/arq-spring-servicing-core-1.4.0-javadoc.jar!/"/>
+			<attribute name="javadoc_location" value="jar:file:/S:/M2_REPO/com/bbva/jee/arq/spring/core/arq-spring-servicing-core/1.5.1/arq-spring-servicing-core-1.5.1-javadoc.jar!/"/>
 			<attribute name="org.eclipse.ajdt.aspectpath" value="true"/>
 		</attributes>
 	</classpathentry>
@@ -138,6 +125,7 @@
 			<attribute name="javadoc_location" value="jar:file:/S:/M2_REPO/com/ibm/mq/commonservices/7.0.1.7/commonservices-7.0.1.7-javadoc.jar!/"/>
 		</attributes>
 	</classpathentry>
+	<classpathentry kind="var" path="M2_REPO/com/googlecode/concurrentlinkedhashmap/concurrentlinkedhashmap-lru/1.2_jdk5/concurrentlinkedhashmap-lru-1.2_jdk5.jar" sourcepath="M2_REPO/com/googlecode/concurrentlinkedhashmap/concurrentlinkedhashmap-lru/1.2_jdk5/concurrentlinkedhashmap-lru-1.2_jdk5-sources.jar"/>
 	<classpathentry kind="var" path="M2_REPO/com/ibm/connector/1.3.0/connector-1.3.0.jar">
 		<attributes>
 			<attribute name="javadoc_location" value="jar:file:/S:/M2_REPO/com/ibm/connector/1.3.0/connector-1.3.0-javadoc.jar!/"/>
@@ -191,6 +179,7 @@
 	</classpathentry>
 	<classpathentry kind="var" path="M2_REPO/com/bbva/jee/arq/spring/integraciones/grantingtickets/1.0.0/grantingtickets-1.0.0.jar"/>
 	<classpathentry kind="var" path="M2_REPO/com/google/guava/guava/13.0.1/guava-13.0.1.jar" sourcepath="M2_REPO/com/google/guava/guava/13.0.1/guava-13.0.1-sources.jar"/>
+	<classpathentry kind="var" path="M2_REPO/org/hamcrest/hamcrest-core/1.1/hamcrest-core-1.1.jar" sourcepath="M2_REPO/org/hamcrest/hamcrest-core/1.1/hamcrest-core-1.1-sources.jar"/>
 	<classpathentry kind="var" path="M2_REPO/com/hazelcast/hazelcast-all/2.5/hazelcast-all-2.5.jar" sourcepath="M2_REPO/com/hazelcast/hazelcast-all/2.5/hazelcast-all-2.5-sources.jar"/>
 	<classpathentry kind="var" path="M2_REPO/com/ibm/mq/headers/7.0.1.7/headers-7.0.1.7.jar">
 		<attributes>
@@ -275,11 +264,13 @@
 			<attribute name="javadoc_location" value="jar:file:/S:/M2_REPO/org/codehaus/jackson/jackson-xc/1.8.0/jackson-xc-1.8.0-javadoc.jar!/"/>
 		</attributes>
 	</classpathentry>
+	<classpathentry kind="var" path="M2_REPO/com/carrotsearch/java-sizeof/0.0.4/java-sizeof-0.0.4.jar" sourcepath="M2_REPO/com/carrotsearch/java-sizeof/0.0.4/java-sizeof-0.0.4-sources.jar"/>
 	<classpathentry kind="var" path="M2_REPO/javassist/javassist/3.12.0.GA/javassist-3.12.0.GA.jar" sourcepath="M2_REPO/javassist/javassist/3.12.0.GA/javassist-3.12.0.GA-sources.jar">
 		<attributes>
 			<attribute name="javadoc_location" value="jar:file:/S:/M2_REPO/javassist/javassist/3.12.0.GA/javassist-3.12.0.GA-javadoc.jar!/"/>
 		</attributes>
 	</classpathentry>
+	<classpathentry kind="var" path="M2_REPO/org/javassist/javassist/3.16.1-GA/javassist-3.16.1-GA.jar" sourcepath="M2_REPO/org/javassist/javassist/3.16.1-GA/javassist-3.16.1-GA-sources.jar"/>
 	<classpathentry kind="var" path="M2_REPO/com/sun/xml/bind/jaxb-impl/2.1.13/jaxb-impl-2.1.13.jar" sourcepath="M2_REPO/com/sun/xml/bind/jaxb-impl/2.1.13/jaxb-impl-2.1.13-sources.jar">
 		<attributes>
 			<attribute name="javadoc_location" value="jar:file:/S:/M2_REPO/com/sun/xml/bind/jaxb-impl/2.1.13/jaxb-impl-2.1.13-javadoc.jar!/"/>
@@ -312,6 +303,7 @@
 			<attribute name="javadoc_location" value="jar:file:/S:/M2_REPO/log4j/log4j/1.2.16/log4j-1.2.16-javadoc.jar!/"/>
 		</attributes>
 	</classpathentry>
+	<classpathentry kind="var" path="M2_REPO/org/mockito/mockito-core/1.9.0/mockito-core-1.9.0.jar" sourcepath="M2_REPO/org/mockito/mockito-core/1.9.0/mockito-core-1.9.0-sources.jar"/>
 	<classpathentry kind="var" path="M2_REPO/com/ibm/mq/7.0.1.7/mq-7.0.1.7.jar">
 		<attributes>
 			<attribute name="javadoc_location" value="jar:file:/S:/M2_REPO/com/ibm/mq/7.0.1.7/mq-7.0.1.7-javadoc.jar!/"/>
@@ -328,12 +320,14 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="var" path="M2_REPO/org/apache/neethi/neethi/3.0.2/neethi-3.0.2.jar" sourcepath="M2_REPO/org/apache/neethi/neethi/3.0.2/neethi-3.0.2-sources.jar"/>
+	<classpathentry kind="var" path="M2_REPO/org/objenesis/objenesis/1.0/objenesis-1.0.jar" sourcepath="M2_REPO/org/objenesis/objenesis/1.0/objenesis-1.0-sources.jar"/>
 	<classpathentry kind="var" path="M2_REPO/com/oracle/ojdbc14/10.2.0.2/ojdbc14-10.2.0.2.jar"/>
 	<classpathentry kind="var" path="M2_REPO/org/springframework/roo/org.springframework.roo.annotations/1.1.5.RELEASE/org.springframework.roo.annotations-1.1.5.RELEASE.jar">
 		<attributes>
 			<attribute name="javadoc_location" value="jar:file:/S:/M2_REPO/org/springframework/roo/org.springframework.roo.annotations/1.1.5.RELEASE/org.springframework.roo.annotations-1.1.5.RELEASE-javadoc.jar!/"/>
 		</attributes>
 	</classpathentry>
+	<classpathentry kind="var" path="M2_REPO/ma/glasnost/orika/orika-core/1.4.5/orika-core-1.4.5.jar" sourcepath="M2_REPO/ma/glasnost/orika/orika-core/1.4.5/orika-core-1.4.5-sources.jar"/>
 	<classpathentry kind="var" path="M2_REPO/com/thoughtworks/paranamer/paranamer/2.3/paranamer-2.3.jar" sourcepath="M2_REPO/com/thoughtworks/paranamer/paranamer/2.3/paranamer-2.3-sources.jar"/>
 	<classpathentry kind="var" path="M2_REPO/postgresql/postgresql/9.2-1004.jdbc3/postgresql-9.2-1004.jdbc3.jar"/>
 	<classpathentry kind="var" path="M2_REPO/org/reflections/reflections/0.9.8/reflections-0.9.8.jar" sourcepath="M2_REPO/org/reflections/reflections/0.9.8/reflections-0.9.8-sources.jar"/>
@@ -397,6 +391,18 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="con" path="org.eclipse.ajdt.core.ASPECTJRT_CONTAINER"/>
+	<classpathentry kind="src" output="target/classes" path="src/main/java">
+		<attributes>
+			<attribute name="optional" value="true"/>
+			<attribute name="maven.pomderived" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="src" output="target/test-classes" path="src/test/java">
+		<attributes>
+			<attribute name="optional" value="true"/>
+			<attribute name="maven.pomderived" value="true"/>
+		</attributes>
+	</classpathentry>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.6">
 		<attributes>
 			<attribute name="maven.pomderived" value="true"/>
