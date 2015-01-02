@@ -3,27 +3,25 @@
 
 package com.bbva.czic.loan.dao.model.oznj;
 
-import java.lang.Integer;
-import java.lang.Long;
 import java.lang.String;
 import java.math.BigDecimal;
 import java.util.Date;
 
 privileged aspect FormatoOZNCSNJ0_Roo_JavaBean {
     
-    public Integer FormatoOZNCSNJ0.getTipprod() {
+    public String FormatoOZNCSNJ0.getTipprod() {
         return this.tipprod;
     }
     
-    public void FormatoOZNCSNJ0.setTipprod(Integer tipprod) {
+    public void FormatoOZNCSNJ0.setTipprod(String tipprod) {
         this.tipprod = tipprod;
     }
     
-    public Long FormatoOZNCSNJ0.getNomprod() {
+    public String FormatoOZNCSNJ0.getNomprod() {
         return this.nomprod;
     }
     
-    public void FormatoOZNCSNJ0.setNomprod(Long nomprod) {
+    public void FormatoOZNCSNJ0.setNomprod(String nomprod) {
         this.nomprod = nomprod;
     }
     
@@ -59,11 +57,11 @@ privileged aspect FormatoOZNCSNJ0_Roo_JavaBean {
         this.saldope = saldope;
     }
     
-    public Date FormatoOZNCSNJ0.getFechave() {
+    public String FormatoOZNCSNJ0.getFechave() {
         return this.fechave;
     }
     
-    public void FormatoOZNCSNJ0.setFechave(Date fechave) {
+    public void FormatoOZNCSNJ0.setFechave(String fechave) {
         this.fechave = fechave;
     }
     

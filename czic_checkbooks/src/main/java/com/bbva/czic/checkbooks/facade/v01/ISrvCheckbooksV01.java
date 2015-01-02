@@ -10,7 +10,6 @@ import java.util.List;
 public interface ISrvCheckbooksV01 {
 
     List<Check> getChecks(String idCheck);
-
    
 
 	List<Checkbook> getCheckbooks(String idCheckbook);

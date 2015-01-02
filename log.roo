@@ -13,3 +13,7 @@ sarc generatePackage
 sarc generatePackage
 exit
 // ServicesArchitecture log closed at 2014-12-23 18:09:03
+// ServicesArchitecture log opened at 2014-12-29 11:11:46
+sarc createSN --descriptorFile sn-restful-descriptor-cards.json
+exit
+// ServicesArchitecture log closed at 2014-12-29 11:13:59

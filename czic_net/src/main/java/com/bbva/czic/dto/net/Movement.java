@@ -2,6 +2,7 @@
 package com.bbva.czic.dto.net;
 
 import java.io.Serializable;
+import java.util.Calendar;
 import java.util.Date;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -32,11 +33,11 @@ public class Movement
     @XmlJavaTypeAdapter(CalendarAdapter.class)
     @XmlSchemaType(name = "dateTime")
     @ApiModelProperty(value = " fecha de la transaccion", required = true)
-    private Date transactionDate;
+    private Calendar transactionDate;
     @XmlJavaTypeAdapter(CalendarAdapter.class)
     @XmlSchemaType(name = "dateTime")
     @ApiModelProperty(value = " fecha y hora de la operacion", required = true)
-    private Date operationDate;
+    private Calendar operationDate;
     @ApiModelProperty("Cuenta origen del movimiento")
     private String sourceReference;
     @ApiModelProperty("Cuenta destino del movimiento")
@@ -76,19 +77,19 @@ public class Movement
         this.concept = concept;
     }
 
-    public Date getTransactionDate() {
+    public Calendar getTransactionDate() {
         return transactionDate;
     }
 
-    public void setTransactionDate(Date transactionDate) {
+    public void setTransactionDate(Calendar transactionDate) {
         this.transactionDate = transactionDate;
     }
 
-    public Date getOperationDate() {
+    public Calendar getOperationDate() {
         return operationDate;
     }
 
-    public void setOperationDate(Date operationDate) {
+    public void setOperationDate(Calendar operationDate) {
         this.operationDate = operationDate;
     }
 

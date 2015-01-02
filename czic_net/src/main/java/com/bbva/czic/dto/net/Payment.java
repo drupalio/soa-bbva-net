@@ -2,6 +2,7 @@
 package com.bbva.czic.dto.net;
 
 import java.io.Serializable;
+import java.util.Calendar;
 import java.util.Date;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -25,15 +26,15 @@ public class Payment
 {
 
     public final static long serialVersionUID = 1L;
-    @XmlJavaTypeAdapter(CalendarAdapter.class)
+//    @XmlJavaTypeAdapter(CalendarAdapter.class)
     @XmlSchemaType(name = "dateTime")
     @ApiModelProperty("Fecha de vencimiento del pago")
-    private Date dueDate;
-    @XmlJavaTypeAdapter(CalendarAdapter.class)
+    private Calendar dueDate;
+//    @XmlJavaTypeAdapter(CalendarAdapter.class)
     @XmlSchemaType(name = "dateTime")
     @ApiModelProperty("Fecha de pago")
-    private Date paymentDate;
-    @XmlJavaTypeAdapter(CalendarAdapter.class)
+    private Calendar paymentDate;
+//    @XmlJavaTypeAdapter(CalendarAdapter.class)
     @XmlSchemaType(name = "dateTime")
     @ApiModelProperty("Fecha corta del pago")
     private Date shortDate;
@@ -52,19 +53,19 @@ public class Payment
         //default constructor
     }
 
-    public Date getDueDate() {
+    public Calendar getDueDate() {
         return dueDate;
     }
 
-    public void setDueDate(Date dueDate) {
+    public void setDueDate(Calendar dueDate) {
         this.dueDate = dueDate;
     }
 
-    public Date getPaymentDate() {
+    public Calendar getPaymentDate() {
         return paymentDate;
     }
 
-    public void setPaymentDate(Date paymentDate) {
+    public void setPaymentDate(Calendar paymentDate) {
         this.paymentDate = paymentDate;
     }
 

@@ -408,5 +408,6 @@
 			<attribute name="org.eclipse.jst.component.nondependency" value=""/>
 		</attributes>
 	</classpathentry>
+	<classpathentry kind="var" path="M2_REPO/com/bbva/czic/czic_net/1.0.0/czic_net-1.0.0.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>

@@ -53,11 +53,11 @@ public class SrvGlobalPositionV01 implements ISrvGlobalPositionV01, com.bbva.jee
 	ISrvIntGlobalPosition srvIntGlobalPosition;
 
 	
-	@ApiOperation(value="Gets all the users products", notes="List of products that COULD be filtered by product type.",response=Response.class)
+	@ApiOperation(value="Gets all the users products", notes="List of products that COULD be filtered by product type.", response=List.class)
 	@ApiResponses(value = {
 		@ApiResponse(code = -1, message = "wrongParameters"),
 		@ApiResponse(code = -1, message = "noData"),
-		@ApiResponse(code = 200, message = "Found Sucessfully", response=Product[].class),
+		@ApiResponse(code = 200, message = "Found Sucessfully", response=List.class),
 		@ApiResponse(code = 500, message = "Technical Error"),
 		@ApiResponse(code = 400, message = "wrongParameters"),
 		@ApiResponse(code = 409, message = "noData")
@@ -65,17 +65,16 @@ public class SrvGlobalPositionV01 implements ISrvGlobalPositionV01, com.bbva.jee
 	@GET
 	@Path("/customers/{customerId}/products")
 	@Produces({MediaType.APPLICATION_JSON})
-	@ElementClass(response = Product.class)
+	@ElementClass(response = List.class)
 	@SMC(registryID="SMCCO1400003",logicalID="getExtractGlobalBalance")
-	public Product[] getExtractGlobalBalance(
-			@PathParam("customerId") String customerId,
+	public List<Product> getExtractGlobalBalance(
+			@ApiParam(value="Customer identifier")@PathParam("customerId") String customerId,
 			@ApiParam(value = "filter param") @DefaultValue("null") @QueryParam("$filter") String filter,
 			@ApiParam(value = "fields param") @DefaultValue("null") @QueryParam("$fields") String fields,
 			@ApiParam(value = "expands param") @DefaultValue("null") @QueryParam("$expands") String expands,
 			@ApiParam(value = "order by param") @DefaultValue("null") @QueryParam("$sort") String sort) {
 
-		List<Product> products = srvIntGlobalPosition.getExtractGlobalBalance(customerId, filter);
-		return products.toArray(new Product[products.size()]);
+		return srvIntGlobalPosition.getExtractGlobalBalance(customerId, filter);
 	}
 
 	@ApiOperation(value="Update the product.", notes="Update the product partially", response=Response.class)
@@ -89,8 +88,8 @@ public class SrvGlobalPositionV01 implements ISrvGlobalPositionV01, com.bbva.jee
 	@Path("/{idProduct}")
 	@Consumes({ MediaType.APPLICATION_JSON })
 	public Response update(
-			@ApiParam(value="Claim identifier")@PathParam("idProduct") String idProduct,
-			@ApiParam(value="Claim information")Product infoProduct) {
+			@ApiParam(value="Product identifier")@PathParam("idProduct") String idProduct,
+			@ApiParam(value="Produc information")Product infoProduct) {
 
 		infoProduct.setId(idProduct);
 

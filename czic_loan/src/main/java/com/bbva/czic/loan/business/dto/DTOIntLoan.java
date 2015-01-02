@@ -3,12 +3,15 @@ package com.bbva.czic.loan.business.dto;
 import com.bbva.czic.dto.net.Balance;
 import com.bbva.czic.dto.net.EnumLoanStatus;
 import com.bbva.czic.dto.net.Payment;
+import com.bbva.czic.dto.net.Product;
 
-public class DTOIntLoan {
+public class DTOIntLoan extends Product {
 
 	public final static long serialVersionUID = 1L;
 
 	private Balance balance;
+
+	private Balance debt;
 
 	private Payment payment;
 
@@ -18,10 +21,12 @@ public class DTOIntLoan {
 		// default constructor
 	}
 
+	@Override
 	public Balance getBalance() {
 		return balance;
 	}
 
+	@Override
 	public void setBalance(Balance balance) {
 		this.balance = balance;
 	}
@@ -40,6 +45,14 @@ public class DTOIntLoan {
 
 	public void setStatus(EnumLoanStatus status) {
 		this.status = status;
+	}
+
+	private Balance getDebt() {
+		return debt;
+	}
+
+	private void setDebt(Balance debt) {
+		this.debt = debt;
 	}
 
 }

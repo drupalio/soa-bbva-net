@@ -2,6 +2,7 @@
 package com.bbva.czic.dto.net;
 
 import java.io.Serializable;
+import java.util.Calendar;
 import java.util.Date;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -26,10 +27,10 @@ public class Consignment
     private String number;
     @ApiModelProperty(value = "Campo alfab\u00e9tico que identifica la forma como se realiza la consignacion", required = true)
     private EnumConsignmentType type;
-    @XmlJavaTypeAdapter(CalendarAdapter.class)
+//    @XmlJavaTypeAdapter(CalendarAdapter.class)
     @XmlSchemaType(name = "dateTime")
     @ApiModelProperty(value = "Fecha de la consignacion", required = true)
-    private Date date;
+    private Calendar date;
 
     public Consignment() {
         //default constructor
@@ -51,12 +52,11 @@ public class Consignment
         this.type = type;
     }
 
-    public Date getDate() {
+    public Calendar getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(Calendar date) {
         this.date = date;
     }
-
 }

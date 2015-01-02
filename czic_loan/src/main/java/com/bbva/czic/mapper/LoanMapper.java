@@ -5,22 +5,46 @@ import ma.glasnost.orika.impl.DefaultMapperFactory;
 
 import com.bbva.czic.core.stereotype.AbstractConfigurableMapper;
 import com.bbva.czic.core.stereotype.Mapper;
-import com.bbva.czic.loan.business.dto.DTOIntLoan;
-import com.bbva.czic.loan.dao.model.ozni.FormatoOZNCENI0;
+import com.bbva.czic.loan.business.dto.DTOIntMovement;
+import com.bbva.czic.loan.dao.model.ozni.FormatoOZNCSNI0;
 
-@Mapper(value = "loanMapper")
 public class LoanMapper extends AbstractConfigurableMapper {
+
+	private static LoanMapper instance = null;
+
+	public static LoanMapper getInstance() {
+		if (instance == null) {
+			instance = new LoanMapper();
+		}
+		return instance;
+	}
 
 	@Override
 	protected void configure(MapperFactory factory) {
 
-		factory.classMap(DTOIntLoan.class, FormatoOZNCENI0.class).field("NOTARJE", "id").
+		factory.classMap(DTOIntMovement.class, FormatoOZNCSNI0.class).field("numeope", "id")
+				.field("fechaop", "operationDate").field("resto", "concept").field("valorop", "value")
+				.field("balance", "balance").field("tipope", "operation.description").byDefault().register();
 
-		byDefault().register();
+		/* Mapeo FormatoOZNCSNK0 */
+		factory.classMap(DTOIntMovement.class, FormatoOZNCSNI0.class).field("fechao", "operationDate")
+				.field("resto", "concept").field("importe", "value").field("balance", "balance")
+				.field("descop", "destinationReference").field("estado", "status").byDefault().register();
 
+		/* Mapeo FormatoOZNCSNJ0 */
+		factory.classMap(DTOIntMovement.class, FormatoOZNCSNI0.class)
+				.field("nomprod", "id")
+				// pendiente
+				.field("tipprod", "productType").field("nomprod", "name").field("saldoto", "balance.balance")
+
+				.field("saldodi", "balance.availableBalance").field("montoso", "debt.balance")
+				.field("saldope", "debt.availableBalance").field("fechave", "payment.paymentDate")
+				.field("fechapa", "payment.dueDate").field("fechaco", "payment.shortDate")
+				.field("honorar", "payment.fees").field("numcout", "payment.numbersOfQuota")
+				.field("estado", "payment.status").byDefault().register();
 	}
 
-	public Object getMapper(Class<?> dtoEnt, Class<?> dtoSal) {
+	public Object getMapper(Object dtoEnt, Class<?> dtoSal) {
 
 		MapperFactory mapperFactory = new DefaultMapperFactory.Builder().build();
 
@@ -28,12 +52,4 @@ public class LoanMapper extends AbstractConfigurableMapper {
 		return dtoSal;
 	}
 
-	public static void main(String... args) {
-
-		/*
-		 * DTOIntProduct dto = new DTOIntProduct(); FormatoOZECN1E0 format = new FormatoOZECN1E0(); dto.setId("1234");
-		 * format.setNumclie("12345678765"); FormatoOZECN1E0 result = new LoanMapper().map(dto, FormatoOZECN1E0.class);
-		 * DTOIntProduct result2 = new LoanMapper().map(format, DTOIntProduct.class); System.out.println(result2.getId());
-		 */
-	}
 }

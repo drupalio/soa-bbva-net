@@ -33,7 +33,7 @@ public class Message
     private String template;
     @ApiModelProperty("Fecha de emidion del mensaje")
     private EnumMessageType reference;
-    @XmlJavaTypeAdapter(CalendarAdapter.class)
+//    @XmlJavaTypeAdapter(CalendarAdapter.class)
     @XmlSchemaType(name = "dateTime")
     @ApiModelProperty(value = "Tipo de mensaje", required = true)
     private Calendar time;

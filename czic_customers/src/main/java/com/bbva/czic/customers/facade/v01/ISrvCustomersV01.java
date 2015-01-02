@@ -4,12 +4,12 @@ import java.util.List;
 
 import com.bbva.czic.dto.net.AccMovementsResume;
 import com.bbva.czic.dto.net.CardCharge;
+import com.bbva.jee.arq.spring.core.servicing.gce.BusinessServiceException;
 
 
 public interface ISrvCustomersV01 {
- 	public List<CardCharge> getlistCreditCardsCharges(String idUser,String fechaini , String fechafi);
+	public List<CardCharge> listCreditCardsCharges( String customerId, String filter);
 
-		public List<AccMovementsResume> getlistAccountsMovementsResume(String idUser, String fechaini , String fechafi);
+ 	public List<AccMovementsResume> listAccountsMovementsResume( String customerId, String filter);
 
-	
 }

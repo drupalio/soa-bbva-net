@@ -5,7 +5,6 @@ package com.bbva.czic.loan.dao.model.ozni;
 
 import java.lang.String;
 import java.math.BigDecimal;
-import java.util.Date;
 
 privileged aspect FormatoOZNCSNI0_Roo_JavaBean {
     
@@ -17,11 +16,11 @@ privileged aspect FormatoOZNCSNI0_Roo_JavaBean {
         this.numeope = numeope;
     }
     
-    public Date FormatoOZNCSNI0.getFechaop() {
+    public String FormatoOZNCSNI0.getFechaop() {
         return this.fechaop;
     }
     
-    public void FormatoOZNCSNI0.setFechaop(Date fechaop) {
+    public void FormatoOZNCSNI0.setFechaop(String fechaop) {
         this.fechaop = fechaop;
     }
     

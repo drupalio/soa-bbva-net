@@ -2,6 +2,7 @@
 package com.bbva.czic.dto.net;
 
 import java.io.Serializable;
+import java.util.Calendar;
 import java.util.Date;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -26,10 +27,10 @@ public class Conditions
     private String category;
     @ApiModelProperty("Descripcion del tipo de producto")
     private String description;
-    @XmlJavaTypeAdapter(CalendarAdapter.class)
+//    @XmlJavaTypeAdapter(CalendarAdapter.class)
     @XmlSchemaType(name = "dateTime")
     @ApiModelProperty(value = " Fecha en la que se realizo la apertura del producto", required = true)
-    private Date openingDate;
+    private Calendar openingDate;
     @ApiModelProperty(value = "Tipo de comision que aplica para el producto", required = true)
     private String commission;
     @ApiModelProperty(value = "Datos de la oficina donde se realizo la apertura del producto", required = true)
@@ -57,11 +58,11 @@ public class Conditions
         this.description = description;
     }
 
-    public Date getOpeningDate() {
+    public Calendar getOpeningDate() {
         return openingDate;
     }
 
-    public void setOpeningDate(Date openingDate) {
+    public void setOpeningDate(Calendar openingDate) {
         this.openingDate = openingDate;
     }
 

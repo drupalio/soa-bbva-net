@@ -5,10 +5,15 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
+import org.apache.cxf.jaxrs.ext.search.PrimitiveStatement;
+import org.apache.cxf.jaxrs.ext.search.SearchCondition;
+import org.apache.cxf.jaxrs.ext.search.SearchParseException;
+import org.apache.cxf.jaxrs.ext.search.fiql.FiqlParser;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.bbva.czic.customers.business.dto.DTOIntAccMovementsResume;
 import com.bbva.czic.customers.business.dto.DTOIntCardCharge;
+import com.bbva.czic.customers.business.impl.SrvIntCustomers;
 import com.bbva.czic.customers.dao.model.ozno.FormatoOZECNOE0;
 import com.bbva.czic.customers.dao.model.ozno.FormatoOZECNOS0;
 import com.bbva.czic.customers.dao.model.ozno.PeticionTransaccionOzno;
@@ -22,19 +27,28 @@ import com.bbva.czic.customers.dao.model.oznq.TransaccionOznq;
 import com.bbva.czic.mapper.CustomerMapper;
 import com.bbva.jee.arq.spring.core.host.protocolo.ps9.ErrorMappingHelper;
 import com.bbva.jee.arq.spring.core.host.protocolo.ps9.aplicacion.CopySalida;
+import com.bbva.jee.arq.spring.core.log.I18nLog;
+import com.bbva.jee.arq.spring.core.log.I18nLogFactory;
 import com.bbva.jee.arq.spring.core.servicing.gce.BusinessServiceException;
+import com.bbva.jee.arq.spring.core.servicing.utils.BusinessServicesToolKit;
 
 public class CustomersDAOImpl implements CustomersDAO {
 
+	private static final String FILTERERROR = null;
 	@Resource(name = "CustomerMapper")
 	private CustomerMapper customerMapper;
+	@Autowired
+	BusinessServicesToolKit bussinesToolKit;
 
 	@Autowired
 	private ErrorMappingHelper errorMappingHelper;
+	
+	private static I18nLog log = I18nLogFactory.getLogI18n(
+			SrvIntCustomers.class, "META-INF/spring/i18n/log/mensajesLog");
 
 	@Override
 	public List<DTOIntAccMovementsResume> getlistAccountsMovementsResume(
-			String idUser, String fechain, String fechafi)
+			String idUser, String filter)
 			throws BusinessServiceException {
 
 		DTOIntAccMovementsResume dtoIntAccountAccMovementsResume = new DTOIntAccMovementsResume();
@@ -42,10 +56,37 @@ public class CustomersDAOImpl implements CustomersDAO {
 
 		try {
 			FormatoOZECNQE0 FormatoOZECNQE = new FormatoOZECNQE0();
-			FormatoOZECNQE.setFechafi(fechain);
-			FormatoOZECNQE.setFechafi(fechafi);
-
+			
 			PeticionTransaccionOznq peticion = new PeticionTransaccionOznq();
+			
+			if (filter != null && !filter.contentEquals("null")) 
+				log.info("A query string (filter) has been sended: " + filter);
+				SearchCondition<DTOIntAccMovementsResume> sc;
+				String property = null;
+				String condition = null;
+				String value = null;
+
+			
+				try {
+					sc = new FiqlParser<DTOIntAccMovementsResume>(DTOIntAccMovementsResume.class).parse(filter);
+
+					final List<PrimitiveStatement> splitDataFilter = bussinesToolKit.getDataFromFilter(sc);
+					for (PrimitiveStatement st: splitDataFilter) {
+						property = st.getProperty();
+						condition = st.getCondition().toString();
+						value = st.getValue().toString();
+					}
+
+					/*
+					final String pattern = bussinesToolKit.matchesPatternFromFilter(SERVICENAME, filter);
+					if (pattern != null) {
+						log.info("The pattern is: " + pattern);
+					}
+					*/
+				} catch (SearchParseException e) {
+					log.error("SearchParseException - The query string (filter) has failed: " + e);
+					throw new BusinessServiceException(FILTERERROR, filter, e.getMessage());
+				}
 
 			peticion.getCuerpo().getPartes().add(FormatoOZECNQE);
 			RespuestaTransaccionOznq respuesta = new TransaccionOznq()
@@ -63,20 +104,19 @@ public class CustomersDAOImpl implements CustomersDAO {
 			}
 		} catch (Exception e) {
 		}
+		
 		return accountMovementDtoList;
-	}
+	
+		}
 
 	@Override
-	public List<DTOIntCardCharge> getlistCreCardCharges(String idUser,
-			String fechain, String fechafi) throws BusinessServiceException {
+	public List<DTOIntCardCharge> getlistCreCardCharges(String idUser,String filter) throws BusinessServiceException {
 
 		DTOIntCardCharge dtoIntCardCharge = new DTOIntCardCharge();
 		List<DTOIntCardCharge> cardChargetDtoList = new ArrayList<DTOIntCardCharge>();
 
 		try {
 			FormatoOZECNOE0 FormatoOZECNOE0 = new FormatoOZECNOE0();
-			FormatoOZECNOE0.setFechafi(fechain);
-			FormatoOZECNOE0.setFechafi(fechafi);
 			FormatoOZECNOE0.setNumprod(idUser);
 
 			PeticionTransaccionOzno peticion = new PeticionTransaccionOzno();
