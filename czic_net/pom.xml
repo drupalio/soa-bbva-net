@@ -8,7 +8,7 @@
     </parent>
     <groupId>com.bbva.czic</groupId>
 	<artifactId>czic_net</artifactId>
-	<packaging>pom</packaging>
+	<packaging>jar</packaging>
 	<version>1.0.0</version>
 	<name>czic_net</name>
 	<dependencies>
