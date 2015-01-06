@@ -1,4 +1,4 @@
-package com.bbva.czic.mapper;
+package com.bbva.czic.globalposition.mapper;
 
 import com.bbva.czic.core.stereotype.AbstractConfigurableMapper;
 import com.bbva.czic.core.stereotype.Mapper;
