@@ -53,7 +53,7 @@ public class Mapper {
 	public static Product productMap(DTOIntProduct dtoIntProduct) {
 		Product product = new Product();
 		BeanUtils.copyProperties(dtoIntProduct, product);
-		product.setType(EnumProductType.valueOf(dtoIntProduct.getProductType()));
+		product.setType(dtoIntProduct.getProductType());
 		return product;
 	}
 
@@ -61,7 +61,7 @@ public class Mapper {
 	public static DTOIntProduct dtoIntProductMap(Product product) {
 		DTOIntProduct dtoIntProduct = new DTOIntProduct();
 		BeanUtils.copyProperties(product, dtoIntProduct);
-		dtoIntProduct.setProductType(product.getType().name());
+		dtoIntProduct.setProductType(product.getType());
 		return dtoIntProduct;
 	}
 

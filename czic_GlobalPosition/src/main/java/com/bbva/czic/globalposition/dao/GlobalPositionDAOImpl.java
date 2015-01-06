@@ -1,6 +1,6 @@
 package com.bbva.czic.globalposition.dao;
 
-import com.bbva.czic.globalposition.business.dto.DTOIntEnumProductType;
+import com.bbva.czic.dto.net.EnumProductType;
 import com.bbva.czic.globalposition.business.dto.DTOIntPhoneNumber;
 import com.bbva.czic.globalposition.business.dto.DTOIntProduct;
 import com.bbva.czic.globalposition.dao.model.ozn0.FormatoOZNCEOM0;
@@ -65,32 +65,32 @@ public class GlobalPositionDAOImpl implements GlobalPositionDAO {
 		if (businessServiceException != null) {
 			throw businessServiceException;
 		}
-		CopySalida outputCopy = respuesta.getCuerpo().getParte(CopySalida.class);
-		if (outputCopy != null) {
+		List<CopySalida> copiesSalida = respuesta.getCuerpo().getPartes(CopySalida.class);
+		for (CopySalida copySalida : copiesSalida) {
 			// 1. Si es PG completa, se coloca el tipo de salida 1 (No comunes)
 			// 2. Si es un tipo de producto diferente a tarjetas se mapea a el tipo de salida 0 (comunes)
 			DTOIntProduct intProduct = new DTOIntProduct();
 			if (intProductType == null) {
-				FormatoOZECN1S1 formatoSalida = outputCopy.getCopy(FormatoOZECN1S1.class);
+				FormatoOZECN1S1 formatoSalida = copySalida.getCopy(FormatoOZECN1S1.class);
 				intProduct.setId(formatoSalida.getNumprod());
 				String productType = formatoSalida.getTipprod();
 
 				if(productType.equals(PERSONAL_ACCOUNT)) {
-					intProduct.setProductType(DTOIntEnumProductType.PC.name());
+					intProduct.setProductType(EnumProductType.PC);
 				} else if(productType.equals(ELECTRONIC_DEPOSIT)) {
-					intProduct.setProductType(DTOIntEnumProductType.ED.name());
+					intProduct.setProductType(EnumProductType.ED);
 				} else if(productType.equals(TC)) {
-					intProduct.setProductType(DTOIntEnumProductType.TDC.name());
+					intProduct.setProductType(EnumProductType.TC);
 				} else if(productType.equals(LOAN)) {
-					intProduct.setProductType(DTOIntEnumProductType.LO.name());
+					intProduct.setProductType(EnumProductType.LO);
 				} else if(productType.equals(SI)) {
-					intProduct.setProductType(DTOIntEnumProductType.SI.name());
+					intProduct.setProductType(EnumProductType.SI);
 				} else if(productType.equals(ROTARY_QUOTA)) {
-					intProduct.setProductType(DTOIntEnumProductType.RQ.name());
+					intProduct.setProductType(EnumProductType.RQ);
 				} else if(productType.equals(LEISING)) {
-					intProduct.setProductType(DTOIntEnumProductType.LI.name());
+					intProduct.setProductType(EnumProductType.LI);
 				} else if(productType.equals(AQUISITION)) {
-					intProduct.setProductType(DTOIntEnumProductType.AQ.name());
+					intProduct.setProductType(EnumProductType.AQ);
 				}
 
 				intProduct.setName(formatoSalida.getNomprod());
@@ -114,27 +114,27 @@ public class GlobalPositionDAOImpl implements GlobalPositionDAO {
 						getPhoneNumbers().
 						add(new DTOIntPhoneNumber(formatoSalida.getNumcelu()));
 
-			} else if(!intProductType.equals(DTOIntEnumProductType.TDC)){
-				FormatoOZECN1S0 formatoSalida = outputCopy.getCopy(FormatoOZECN1S0.class);
+			} else if(!intProductType.equals(EnumProductType.TC)){
+				FormatoOZECN1S0 formatoSalida = copySalida.getCopy(FormatoOZECN1S0.class);
 				intProduct.setId(formatoSalida.getNumprod());
 				String productType = formatoSalida.getTipprod();
 
 				if(productType.equals(PERSONAL_ACCOUNT)) {
-					intProduct.setProductType(DTOIntEnumProductType.PC.name());
+					intProduct.setProductType(EnumProductType.PC);
 				} else if(productType.equals(ELECTRONIC_DEPOSIT)) {
-					intProduct.setProductType(DTOIntEnumProductType.ED.name());
+					intProduct.setProductType(EnumProductType.ED);
 				} else if(productType.equals(TC)) {
-					intProduct.setProductType(DTOIntEnumProductType.TDC.name());
+					intProduct.setProductType(EnumProductType.TC);
 				} else if(productType.equals(LOAN)) {
-					intProduct.setProductType(DTOIntEnumProductType.LO.name());
+					intProduct.setProductType(EnumProductType.LO);
 				} else if(productType.equals(SI)) {
-					intProduct.setProductType(DTOIntEnumProductType.SI.name());
+					intProduct.setProductType(EnumProductType.SI);
 				} else if(productType.equals(ROTARY_QUOTA)) {
-					intProduct.setProductType(DTOIntEnumProductType.RQ.name());
+					intProduct.setProductType(EnumProductType.RQ);
 				} else if(productType.equals(LEISING)) {
-					intProduct.setProductType(DTOIntEnumProductType.LI.name());
+					intProduct.setProductType(EnumProductType.LI);
 				} else if(productType.equals(AQUISITION)) {
-					intProduct.setProductType(DTOIntEnumProductType.AQ.name());
+					intProduct.setProductType(EnumProductType.AQ);
 				}
 
 				intProduct.setName(formatoSalida.getNomprod());

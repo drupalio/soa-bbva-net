@@ -1,5 +1,6 @@
 package com.bbva.czic.globalposition.business;
 
+import com.bbva.czic.dto.net.EnumProductType;
 import com.bbva.czic.dto.net.Product;
 import com.bbva.czic.globalposition.business.dto.DTOIntEnumProductType;
 import com.bbva.czic.globalposition.business.dto.DTOIntProduct;
@@ -109,7 +110,7 @@ public class SrvIntGlobalPositionTest {
 		intProduct.setAlias("Cuentas Corrientes");
 		intProduct.setName("Cuentas que tal");
 		//intProduct.setProductType("PC");
-		intProduct.setProductType(DTOIntEnumProductType.PC.name());
+		intProduct.setProductType(EnumProductType.PC);
 
 		intProducts.add(intProduct);
 
@@ -117,8 +118,8 @@ public class SrvIntGlobalPositionTest {
 		intProduct.setId("2");
 		intProduct.setAlias("Cuentas Corrientes");
 		intProduct.setName("Cuentas que tal");
-		//intProduct.setProductType("TDC");
-		intProduct.setProductType(DTOIntEnumProductType.TDC.name());
+		//intProduct.setProductType("TC");
+		intProduct.setProductType(EnumProductType.TC);
 
 				intProducts.add(intProduct);
 
@@ -127,7 +128,7 @@ public class SrvIntGlobalPositionTest {
 		intProduct.setAlias("Cuentas Corrientes");
 		intProduct.setName("Cuentas que tal");
 		//intProduct.setProductType("ED");
-		intProduct.setProductType(DTOIntEnumProductType.ED.name());
+		intProduct.setProductType(EnumProductType.ED);
 
 				intProducts.add(intProduct);
 
@@ -136,7 +137,7 @@ public class SrvIntGlobalPositionTest {
 		intProduct.setAlias("Cuentas Corrientes");
 		intProduct.setName("Cuentas que tal");
 		//intProduct.setProductType("AQ");
-		intProduct.setProductType(DTOIntEnumProductType.AQ.name());
+		intProduct.setProductType(EnumProductType.AQ);
 
 				intProducts.add(intProduct);
 
@@ -145,7 +146,7 @@ public class SrvIntGlobalPositionTest {
 		intProduct.setAlias("Cuentas Corrientes");
 		intProduct.setName("Cuentas que tal");
 		//intProduct.setProductType("RQ");
-		intProduct.setProductType(DTOIntEnumProductType.RQ.name());
+		intProduct.setProductType(EnumProductType.RQ);
 
 				intProducts.add(intProduct);
 

@@ -13,6 +13,7 @@
     <version>1.4.0</version>
     <!--url>http://maven.apache.org</url-->
     <modules>
+        <module>czic_commons</module>
         <module>czic_GlobalPosition</module>
         <module>czic_executives</module>
         <module>czic_customers</module>

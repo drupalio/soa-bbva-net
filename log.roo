@@ -17,3 +17,8 @@ exit
 sarc createSN --descriptorFile sn-restful-descriptor-cards.json
 exit
 // ServicesArchitecture log closed at 2014-12-29 11:13:59
+// ServicesArchitecture log opened at 2015-01-05 12:37:33
+sarc createRoutine --projectName commons
+sarc createRoutine --projectName commons
+exit
+// ServicesArchitecture log closed at 2015-01-05 12:44:40

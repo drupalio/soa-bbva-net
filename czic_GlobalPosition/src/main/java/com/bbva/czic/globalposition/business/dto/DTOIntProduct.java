@@ -5,19 +5,23 @@ import java.util.List;
 
 
 import com.bbva.czic.dto.net.Balance;
+import com.bbva.czic.dto.net.Contract;
+import com.bbva.czic.dto.net.EnumFinancialStatusType;
+import com.bbva.czic.dto.net.EnumProductType;
 
 public class DTOIntProduct {
 
     public final static long serialVersionUID = 1L;
     private String id;
-    private String productType;
+    private EnumProductType productType;
     private String name;
     private String alias;
-    private DTOIntEnumFinancialStatusType financialState;
+    private EnumFinancialStatusType financialState;
     private Boolean visible;
     private Boolean operable;
-    private Balance balance;
+    private DTOIntBalance balance;
     private DTOIntContactInfo contactInfo;
+    private DTOIntContract contract;
 
     public DTOIntProduct() {
         //default constructor
@@ -35,11 +39,11 @@ public class DTOIntProduct {
         this.id = id;
     }
 
-    public String getProductType() {
+    public EnumProductType getProductType() {
         return productType;
     }
 
-    public void setProductType(String productType) {
+    public void setProductType(EnumProductType productType) {
         this.productType = productType;
     }
 
@@ -59,11 +63,11 @@ public class DTOIntProduct {
         this.alias = alias;
     }
 
-    public DTOIntEnumFinancialStatusType getFinancialState() {
+    public EnumFinancialStatusType getFinancialState() {
         return financialState;
     }
 
-    public void setFinancialState(DTOIntEnumFinancialStatusType financialState) {
+    public void setFinancialState(EnumFinancialStatusType financialState) {
         this.financialState = financialState;
     }
 
@@ -83,11 +87,11 @@ public class DTOIntProduct {
         this.operable = operable;
     }
 
-    public Balance getBalance() {
+    public DTOIntBalance getBalance() {
         return balance;
     }
 
-    public void setBalance(Balance balance) {
+    public void setBalance(DTOIntBalance balance) {
         this.balance = balance;
     }
 
@@ -98,4 +102,13 @@ public class DTOIntProduct {
     public void setContactInfo(DTOIntContactInfo contactInfo) {
         this.contactInfo = contactInfo;
     }
+
+    public DTOIntContract getContract() {
+        return contract;
+    }
+
+    public void setContract(DTOIntContract contract) {
+        this.contract = contract;
+    }
+
 }
