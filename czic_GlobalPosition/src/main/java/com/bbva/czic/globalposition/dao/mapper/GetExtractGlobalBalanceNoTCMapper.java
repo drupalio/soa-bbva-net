@@ -1,25 +1,23 @@
 package com.bbva.czic.globalposition.dao.mapper;
 
 import com.bbva.czic.dto.net.EnumFinancialStatusType;
-import com.bbva.czic.dto.net.EnumPhoneNumberType;
 import com.bbva.czic.dto.net.EnumProductType;
 import com.bbva.czic.globalposition.business.dto.*;
 import com.bbva.czic.globalposition.dao.model.ozn1.FormatoOZECN1E0;
-import com.bbva.czic.globalposition.dao.model.ozn1.FormatoOZECN1S1;
+import com.bbva.czic.globalposition.dao.model.ozn1.FormatoOZECN1S0;
 import com.bbva.czic.globalposition.dao.utils.converters.FormatBalanceToDTOBalanceConverter;
 import com.bbva.czic.routine.commons.rm.utils.tx.IFormatNotApply;
 import com.bbva.czic.routine.commons.rm.utils.tx.IPaginatedTransactionMapper;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by Administrador on 05/01/2015.
  */
-@Component("tx-get-extract-global-balance-mapper-tc")
-public class GetExtractGlobalBalanceMapper
-        implements IPaginatedTransactionMapper <DTOIntFilterProduct, FormatoOZECN1E0, DTOIntProducts, IFormatNotApply, DTOIntProduct, FormatoOZECN1S1, IFormatNotApply> {
+@Component("tx-get-extract-global-balance-mapper")
+public class GetExtractGlobalBalanceNoTCMapper
+        implements IPaginatedTransactionMapper <DTOIntFilterProduct, FormatoOZECN1E0, DTOIntProducts, IFormatNotApply, DTOIntProduct, FormatoOZECN1S0, IFormatNotApply> {
 
     /**
      * {@inheritDoc}
@@ -63,7 +61,7 @@ public class GetExtractGlobalBalanceMapper
      * {@inheritDoc}
      */
     @Override
-    public DTOIntProduct mapToInnerEntity(final FormatoOZECN1S1 outFormat, final DTOIntFilterProduct dtoIn) {
+    public DTOIntProduct mapToInnerEntity(final FormatoOZECN1S0 outFormat, final DTOIntFilterProduct dtoIn) {
         final DTOIntProduct product = new DTOIntProduct();
         final FormatBalanceToDTOBalanceConverter balanceConverter = new FormatBalanceToDTOBalanceConverter();
         final DTOIntContract contract = new DTOIntContract();
@@ -71,34 +69,15 @@ public class GetExtractGlobalBalanceMapper
         product.setProductType(EnumProductType.valueOf(outFormat.getTipprod()));
         product.setId(outFormat.getNumprod());
 
-        product.setBalance(balanceConverter.convert(outFormat.getSaltota(), outFormat.getSaldisp(), null));
+        product.setBalance(balanceConverter.convert(outFormat.getSaltota(), outFormat.getSaldisp(), outFormat.getSalcanj()));
 
         product.setVisible(outFormat.getIndvisi().equalsIgnoreCase("v") || outFormat.getIndvisi().equalsIgnoreCase("t"));
         product.setOperable(outFormat.getIndoper().equalsIgnoreCase("v") || outFormat.getIndoper().equalsIgnoreCase("t"));
         product.setAlias(outFormat.getAlias());
         product.setName(outFormat.getNomprod());
         product.setFinancialState(EnumFinancialStatusType.valueOf(outFormat.getFinstat()));
-        if (outFormat.getNumtarj() != null) {
-            product.setId(outFormat.getNumtarj());
-        }
-        contract.setNumber(outFormat.getNumcont());
-        product.setContract(contract);
-
-        product.setContactInfo(getDtoIntContactInfo(outFormat.getNumcelu()));
 
         return product;
-    }
-
-    private DTOIntContactInfo getDtoIntContactInfo(final String mobilePhoneNumber) {
-        final DTOIntContactInfo contactInfo = new DTOIntContactInfo();
-        final DTOIntPhoneNumber phoneNumber = new DTOIntPhoneNumber();
-        final List<DTOIntPhoneNumber> phoneNumbers = new ArrayList<DTOIntPhoneNumber>();
-
-        phoneNumber.setNumber(mobilePhoneNumber);
-        phoneNumber.setType(EnumPhoneNumberType.MOBILE);
-        phoneNumbers.add(phoneNumber);
-        contactInfo.setPhoneNumbers(phoneNumbers);
-        return contactInfo;
     }
 
 }

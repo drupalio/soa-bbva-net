@@ -2,6 +2,8 @@ package com.bbva.czic.globalposition.facade.v01;
 
 import com.bbva.czic.dto.net.Product;
 import com.bbva.czic.globalposition.business.ISrvIntGlobalPosition;
+import com.bbva.czic.globalposition.business.dto.DTOIntProduct;
+import com.bbva.czic.globalposition.facade.v01.mapper.Mapper;
 import com.bbva.jee.arq.spring.core.log.I18nLog;
 import com.bbva.jee.arq.spring.core.log.I18nLogFactory;
 import com.bbva.jee.arq.spring.core.servicing.annotations.SMC;
@@ -74,7 +76,8 @@ public class SrvGlobalPositionV01 implements ISrvGlobalPositionV01, com.bbva.jee
 			@ApiParam(value = "expands param") @DefaultValue("null") @QueryParam("$expands") String expands,
 			@ApiParam(value = "order by param") @DefaultValue("null") @QueryParam("$sort") String sort) {
 
-		return srvIntGlobalPosition.getExtractGlobalBalance(customerId, filter);
+		List<DTOIntProduct> products = srvIntGlobalPosition.getExtractGlobalBalance(customerId, filter);
+		return Mapper.productListMap(products);
 	}
 
 	@ApiOperation(value="Update the product.", notes="Update the product partially", response=Response.class)

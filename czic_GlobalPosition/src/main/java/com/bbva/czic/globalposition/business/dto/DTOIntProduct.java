@@ -1,11 +1,6 @@
 
 package com.bbva.czic.globalposition.business.dto;
 
-import java.util.List;
-
-
-import com.bbva.czic.dto.net.Balance;
-import com.bbva.czic.dto.net.Contract;
 import com.bbva.czic.dto.net.EnumFinancialStatusType;
 import com.bbva.czic.dto.net.EnumProductType;
 

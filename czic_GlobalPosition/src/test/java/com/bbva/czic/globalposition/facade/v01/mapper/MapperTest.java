@@ -32,7 +32,7 @@ public class MapperTest {
         intProduct = Mapper.dtoIntProductMap(product);
 
         assertEquals(product.getId(), intProduct.getId());
-        assertEquals(product.getType().name(), intProduct.getProductType());
+        assertEquals(product.getType(), intProduct.getProductType());
 
     }
 }

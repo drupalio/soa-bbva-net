@@ -2,7 +2,7 @@
 package com.bbva.czic.globalposition.business.dto;
 
 
-
+import com.bbva.czic.dto.net.EnumContactSourceType;
 
 public class DTOIntEmail {
 
@@ -10,7 +10,7 @@ public class DTOIntEmail {
     private String address;
     private Boolean primary;
     private Boolean active;
-    private DTOIntEnumContactSourceType source;
+    private EnumContactSourceType source;
 
     public DTOIntEmail() {
         //default constructor
@@ -40,12 +40,11 @@ public class DTOIntEmail {
         this.active = active;
     }
 
-    public DTOIntEnumContactSourceType getSource() {
+    public EnumContactSourceType getSource() {
         return source;
     }
 
-    public void setSource(DTOIntEnumContactSourceType source) {
+    public void setSource(EnumContactSourceType source) {
         this.source = source;
     }
-
 }
