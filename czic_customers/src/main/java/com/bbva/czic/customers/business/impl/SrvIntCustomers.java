@@ -1,10 +1,14 @@
 package com.bbva.czic.customers.business.impl;
 
+
+import java.sql.Date;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.Resource;
 
+import org.apache.cxf.jaxrs.ext.search.ConditionType;
 import org.apache.cxf.jaxrs.ext.search.PrimitiveStatement;
 import org.apache.cxf.jaxrs.ext.search.SearchCondition;
 import org.apache.cxf.jaxrs.ext.search.SearchParseException;
@@ -12,13 +16,10 @@ import org.apache.cxf.jaxrs.ext.search.fiql.FiqlParser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import scala.metaprogramming.Mirror.Public;
-
 import com.bbva.czic.customers.business.ISrvIntCustomers;
 import com.bbva.czic.customers.business.dto.DTOIntAccMovementsResume;
 import com.bbva.czic.customers.business.dto.DTOIntCardCharge;
 import com.bbva.czic.customers.dao.CustomersDAO;
-import com.bbva.czic.customers.facade.v01.mapper.Mapper;
 import com.bbva.czic.dto.net.AccMovementsResume;
 import com.bbva.czic.dto.net.CardCharge;
 import com.bbva.czic.mapper.CustomerMapper;
@@ -42,6 +43,9 @@ public class SrvIntCustomers implements ISrvIntCustomers {
 	@Autowired
 	BusinessServicesToolKit bussinesToolKit;
 	
+	String fechain = null;
+	String fechafi = null;
+	
 	
 /***************************AccountMovement***************************************/
 	@Override
@@ -59,39 +63,49 @@ public class SrvIntCustomers implements ISrvIntCustomers {
 		
 			
 			if (filter != null && !filter.contentEquals("null")) 
-				log.info("A query string (filter) has been sended: " + filter);
+				log.info("A query string (filter) has been sended: " + filter );
 				SearchCondition<DTOIntAccMovementsResume> sc;
+				
 				String property = null;
 				String condition = null;
 				String value = null;
 
+				SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
 			
 				try {
 					sc = new FiqlParser<DTOIntAccMovementsResume>(DTOIntAccMovementsResume.class).parse(filter);
 
 					final List<PrimitiveStatement> splitDataFilter = bussinesToolKit.getDataFromFilter(sc);
+					 
+			
 					for (PrimitiveStatement st: splitDataFilter) {
 						property = st.getProperty();
 						condition = st.getCondition().toString();
-						value = st.getValue().toString();
+						value = st.getProperty().toString();
+						
+						if(condition.equals(ConditionType.GREATER_THAN)){
+							 fechain = (String) st.getValue();
+							
+						}else if (condition.equals(ConditionType.LESS_OR_EQUALS)){
+							fechafi =st.getProperty().toString();
+						}
+						
 					}
+					
+						
+					
 
-					/*
-					final String pattern = bussinesToolKit.matchesPatternFromFilter(SERVICENAME, filter);
-					if (pattern != null) {
-						log.info("The pattern is: " + pattern);
-					}
-					*/
+					
 				} catch (SearchParseException e) {
 					log.error("SearchParseException - The query string (filter) has failed: " + e);
 					throw new BusinessServiceException(FILTERERROR, filter, e.getMessage());
 					
 				}
 				
-				List<DTOIntCardCharge> dtoIntCardCharges = customersDao
-						.getlistCreCardCharges(idUser, filter);
+				List<DTOIntAccMovementsResume> dtoIntAccMovementsResumes = customersDao
+						.getlistAccountsMovementsResume(idUser, fechain, fechafi);
 
-				for (DTOIntCardCharge item : dtoIntCardCharges) {
+				for (DTOIntAccMovementsResume item : dtoIntAccMovementsResumes) {
 
 					accountMovementsResume = new AccMovementsResume();
 
@@ -138,7 +152,15 @@ public class SrvIntCustomers implements ISrvIntCustomers {
 					for (PrimitiveStatement st: splitDataFilter) {
 						property = st.getProperty();
 						condition = st.getCondition().toString();
-						value = st.getValue().toString();
+						value = st.getProperty().toString();
+						
+						if(condition.equals(ConditionType.GREATER_THAN)){
+							 fechain = (String) st.getValue();
+							
+						}else if (condition.equals(ConditionType.LESS_OR_EQUALS)){
+							fechafi =st.getProperty().toString(); 
+						}
+						
 					}
 
 					/*
@@ -153,7 +175,7 @@ public class SrvIntCustomers implements ISrvIntCustomers {
 				}
 			
 			List<DTOIntCardCharge> dtoIntCardCharges = customersDao
-					.getlistCreCardCharges(numproduct, filter);
+					.getlistCreCardCharges(numproduct, fechafi, fechafi);
 
 			for (DTOIntCardCharge item : dtoIntCardCharges) {
 

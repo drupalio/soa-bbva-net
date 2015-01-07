@@ -15,5 +15,7 @@
 		http://bbva.com/arq-spring-servicing http://bbva.com/arq-spring-servicing/servicing.xsd ">
 
 	<servicing:test-metadata application-name="czic" local-configuration-filesystem-root="S:/lc" />
-
+	
 </beans>
+
+

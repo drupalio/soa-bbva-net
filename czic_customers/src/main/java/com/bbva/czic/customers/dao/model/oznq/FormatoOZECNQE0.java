@@ -40,10 +40,6 @@ public class FormatoOZECNQE0 {
 	@Campo(indice = 3, nombre = "FECHAFI", tipo = TipoCampo.FECHA, longitudMinima = 10, longitudMaxima = 10, formato = "yyyy-MM-dd")
 	private Date fechafi;
 
-	public void setFechafi(String fechain2) {
-		// TODO Auto-generated method stub
-		
-	}
 
 	
 }

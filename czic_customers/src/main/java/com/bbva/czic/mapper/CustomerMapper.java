@@ -25,7 +25,7 @@ public class CustomerMapper extends AbstractConfigurableMapper {
 		.field("customerId", "idusuar")
 		.byDefault().register();
 		factory.classMap(User.class, DTOIntUser.class)
-		.field("", "customerId")
+		.field("customerId", "customerId")
 		.byDefault().register();
 
 		// factory.classMap(aType, bType)
@@ -37,10 +37,10 @@ public class CustomerMapper extends AbstractConfigurableMapper {
 		.field("month", "mes")
 		.byDefault().register();
 	    factory.classMap(AccMovementsResume.class, DTOIntAccMovementsResume.class)
-		.field("", "income")
-		.field("", "outcome")
-		.field("", "balance")
-		.field("", "month")
+		.field("income", "income")
+		.field("outcome", "outcome")
+		.field("balance", "balance")
+		.field("month", "month")
 		.byDefault().register();
 	    
 	 // ***************************datos de entrada listCardCharges***************
@@ -48,7 +48,7 @@ public class CustomerMapper extends AbstractConfigurableMapper {
 	 		.field("customerId", "numprod")
 	 		.byDefault().register();
 	 		factory.classMap(User.class, DTOIntUser.class)
-	 		.field("", "customerId")
+	 		.field("customerId", "customerId")
 	 		.byDefault().register();
 
 	 		// factory.classMap(aType, bType)
@@ -58,8 +58,8 @@ public class CustomerMapper extends AbstractConfigurableMapper {
 	 		.field("amount", "valcate")
 	 		.byDefault().register();
 	 	    factory.classMap(CardCharge.class, DTOIntCardCharge.class)
-	 		.field("", "category")
-	 		.field("", "amount")
+	 		.field("category", "category")
+	 		.field("amount", "amount")
 	 		.byDefault().register();
 	 	    
 	    

@@ -48,23 +48,23 @@ public class CustomersDAOImpl implements CustomersDAO {
 
 	@Override
 	public List<DTOIntAccMovementsResume> getlistAccountsMovementsResume(
-			String idUser, String filter)
+			String idUser, String fechain ,String fechafin)
 			throws BusinessServiceException {
 
 		DTOIntAccMovementsResume dtoIntAccountAccMovementsResume = new DTOIntAccMovementsResume();
 		List<DTOIntAccMovementsResume> accountMovementDtoList = new ArrayList<DTOIntAccMovementsResume>();
 
 		try {
-			FormatoOZECNQE0 FormatoOZECNQE = new FormatoOZECNQE0();
+			FormatoOZECNQE0 formatoOZECNQE = new FormatoOZECNQE0();
 			
 			PeticionTransaccionOznq peticion = new PeticionTransaccionOznq();
 			
-			if (filter != null && !filter.contentEquals("null")) 
+			/*	if (filter != null && !filter.contentEquals("null")) 
 				log.info("A query string (filter) has been sended: " + filter);
 				SearchCondition<DTOIntAccMovementsResume> sc;
-				String property = null;
-				String condition = null;
-				String value = null;
+				String fecha1 = null;
+				String fecha2 = null;
+				//String value = null;
 
 			
 				try {
@@ -72,36 +72,40 @@ public class CustomersDAOImpl implements CustomersDAO {
 
 					final List<PrimitiveStatement> splitDataFilter = bussinesToolKit.getDataFromFilter(sc);
 					for (PrimitiveStatement st: splitDataFilter) {
-						property = st.getProperty();
-						condition = st.getCondition().toString();
-						value = st.getValue().toString();
+						fecha1 = st.getProperty();
+						fecha2 = st.getCondition().toString();
+						//value = st.getValue().toString();
 					}
 
-					/*
-					final String pattern = bussinesToolKit.matchesPatternFromFilter(SERVICENAME, filter);
-					if (pattern != null) {
-						log.info("The pattern is: " + pattern);
-					}
-					*/
+					
+				//	final String pattern = bussinesToolKit.matchesPatternFromFilter(SERVICENAME, filter);
+			    //	if (pattern != null) {
+				//		log.info("The pattern is: " + pattern);
+				//	}
+					
 				} catch (SearchParseException e) {
 					log.error("SearchParseException - The query string (filter) has failed: " + e);
-					throw new BusinessServiceException(FILTERERROR, filter, e.getMessage());
-				}
-
-			peticion.getCuerpo().getPartes().add(FormatoOZECNQE);
+					throw new BusinessServiceException(FILTERERROR, filter, e.getMessage()); 
+				} */
+			
+			
+			
+			peticion.getCuerpo().getPartes().add(formatoOZECNQE);
 			RespuestaTransaccionOznq respuesta = new TransaccionOznq()
 					.invocar(peticion);
 
 			BusinessServiceException exception = errorMappingHelper.toBusinessServiceException(respuesta);
 			if (exception != null) throw new BusinessServiceException("noDataCustomerListAccountsMovementsResume");
-			CopySalida outputCopy = respuesta.getCuerpo().getParte(CopySalida.class);
-			if (outputCopy != null) {
-
+			List<CopySalida> outputCopies = respuesta.getCuerpo().getPartes(CopySalida.class);
+			
+			for (CopySalida outputCopy : outputCopies) {
 				FormatoOZECNQS0 formatoSalida = outputCopy.getCopy(FormatoOZECNQS0.class);
-				if (formatoSalida != null) {
-					 dtoIntAccountAccMovementsResume = customerMapper.map(formatoSalida, DTOIntAccMovementsResume.class);
-				}
+				dtoIntAccountAccMovementsResume = customerMapper.map(formatoSalida, DTOIntAccMovementsResume.class);
+				accountMovementDtoList.add(dtoIntAccountAccMovementsResume);
+				
 			}
+			
+			
 		} catch (Exception e) {
 		}
 		
@@ -110,7 +114,7 @@ public class CustomersDAOImpl implements CustomersDAO {
 		}
 
 	@Override
-	public List<DTOIntCardCharge> getlistCreCardCharges(String idUser,String filter) throws BusinessServiceException {
+	public List<DTOIntCardCharge> getlistCreCardCharges(String idUser,String fechain , String fechafi) throws BusinessServiceException {
 
 		DTOIntCardCharge dtoIntCardCharge = new DTOIntCardCharge();
 		List<DTOIntCardCharge> cardChargetDtoList = new ArrayList<DTOIntCardCharge>();
@@ -120,6 +124,36 @@ public class CustomersDAOImpl implements CustomersDAO {
 			FormatoOZECNOE0.setNumprod(idUser);
 
 			PeticionTransaccionOzno peticion = new PeticionTransaccionOzno();
+		/*	if (filter != null && !filter.contentEquals("null")) 
+				log.info("A query string (filter) has been sended: " + filter);
+				SearchCondition<DTOIntCardCharge> sc;
+				String property = null;
+				String condition = null;
+				String value = null;
+				
+				try {
+					sc = new FiqlParser<DTOIntCardCharge>(DTOIntCardCharge.class).parse(filter);
+
+					final List<PrimitiveStatement> splitDataFilter = bussinesToolKit.getDataFromFilter(sc);
+					for (PrimitiveStatement st: splitDataFilter) {
+						property = st.getProperty();
+						condition = st.getCondition().toString();
+						value = st.getValue().toString();
+					}
+
+				
+					//final String pattern = bussinesToolKit.matchesPatternFromFilter(SERVICENAME, filter);
+					//if (pattern != null) {
+				    //		log.info("The pattern is: " + pattern);
+				//	}
+				
+				} catch (SearchParseException e) {
+					log.error("SearchParseException - The query string (filter) has failed: " + e);
+					throw new BusinessServiceException(FILTERERROR, filter, e.getMessage());
+			
+			
+				}*/
+			
 
 			peticion.getCuerpo().getPartes().add(FormatoOZECNOE0);
 			RespuestaTransaccionOzno respuesta = new TransaccionOzno()
@@ -127,14 +161,19 @@ public class CustomersDAOImpl implements CustomersDAO {
 			
 			BusinessServiceException exception = errorMappingHelper.toBusinessServiceException(respuesta);
 			if (exception != null) throw new BusinessServiceException("noDataListCreditCardsCharges");
-			CopySalida outputCopy = respuesta.getCuerpo().getParte(CopySalida.class);
-			if (outputCopy != null) {
-
-				FormatoOZECNOS0 formatoSalida = outputCopy.getCopy(FormatoOZECNOS0.class);
-				if (formatoSalida != null) {
-					dtoIntCardCharge = customerMapper.map(formatoSalida, DTOIntCardCharge.class);
-				}
+			List<CopySalida> outputCopies = respuesta.getCuerpo().getPartes(CopySalida.class);
+			//if (outputCopy != null) {
+			
+			for(CopySalida outputCopy :outputCopies){
+			FormatoOZECNOS0 formatoSalida = outputCopy.getCopy(FormatoOZECNOS0.class);
+			dtoIntCardCharge = customerMapper.map(formatoSalida, DTOIntCardCharge.class);
+			cardChargetDtoList.add(dtoIntCardCharge);
+				
+				
 			}
+
+			//FormatoOZECNOS0 formatoSalida = outputCopy.getCopy(FormatoOZECNOS0.class);		
+			
 		} catch (Exception e) {
 		}
 		return cardChargetDtoList;
