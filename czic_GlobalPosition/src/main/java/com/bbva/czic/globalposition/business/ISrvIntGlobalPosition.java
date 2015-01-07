@@ -8,8 +8,8 @@ import com.bbva.czic.globalposition.business.dto.DTOIntProduct;
 public interface ISrvIntGlobalPosition {
  	public List<DTOIntProduct> getExtractGlobalBalance(String customerId, String filter);
 
-	public void updateProductVisibility(String idProduct, Product infoProduct);
+	public void updateProductVisibility(DTOIntProduct productInt);
 
-	public void updateProductOperability(String idProduct, Product infoProduct);
+	public void updateProductOperability(DTOIntProduct productInt);
 
 }

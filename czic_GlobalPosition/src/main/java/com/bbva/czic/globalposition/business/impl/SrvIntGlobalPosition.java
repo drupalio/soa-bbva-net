@@ -1,7 +1,6 @@
 package com.bbva.czic.globalposition.business.impl;
 
 import com.bbva.czic.dto.net.EnumProductType;
-import com.bbva.czic.dto.net.Product;
 import com.bbva.czic.globalposition.business.ISrvIntGlobalPosition;
 import com.bbva.czic.globalposition.business.dto.DTOIntFilterProduct;
 import com.bbva.czic.globalposition.business.dto.DTOIntProduct;
@@ -39,23 +38,19 @@ public class SrvIntGlobalPosition implements ISrvIntGlobalPosition {
 		final List<DTOIntProduct> initialResult;
 		final DTOIntFilterProduct filterProduct = getFilterProduct(customerId, filter);
 
-		if (filterProduct.getProductType().equals(EnumProductType.TC) || filterProduct.getProductType().equals(null)) {
-			initialResult = globalPositionDAO.getExtractGlobalBalance(filterProduct).getProducts();
-		} else {
-			initialResult = globalPositionDAO.getExtractGlobalBalanceNoTC(filterProduct).getProducts();
-		}
+		initialResult = globalPositionDAO.getExtractGlobalBalance(filterProduct).getProducts();
 
 		return initialResult;
 	}
 
 	@Override
-	public void updateProductVisibility(final String idProduct, final Product infoProduct) {
-		globalPositionDAO.updateProductVisibility(idProduct, infoProduct.getVisible());
+	public void updateProductVisibility(DTOIntProduct productInt) {
+		globalPositionDAO.updateProductVisibility(productInt);
 	}
 
 	@Override
-	public void updateProductOperability(final String idProduct, final Product infoProduct){
-		globalPositionDAO.updateProductVisibility(idProduct, infoProduct.getOperable());
+	public void updateProductOperability(DTOIntProduct productInt){
+		globalPositionDAO.updateProductVisibility(productInt);
 	}
 
 	private DTOIntFilterProduct getFilterProduct(String customerId, String filter) {

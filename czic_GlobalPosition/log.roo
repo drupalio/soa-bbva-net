@@ -15,3 +15,7 @@ sarc importTransaction --protocol PS9_MX --copy DOF.CN.YLQ.QGDTCCT.KNOZN0.txt,DO
 // [failed] exit
 exit
 // ServicesArchitecture log closed at 2014-12-23 15:17:58
+// ServicesArchitecture log opened at 2015-01-07 00:14:37
+sarc importTransaction --protocol PS9_MX --copy DOF.CN.YLQ.QGDTCCT.KNOZNH.txt,DOF.CN.YLQ.QGDTFDF.OZNCEOMH.txt
+exit
+// ServicesArchitecture log closed at 2015-01-07 00:49:53

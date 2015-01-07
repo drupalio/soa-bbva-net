@@ -66,7 +66,7 @@ public class GetExtractGlobalBalanceNoTCMapper
         final FormatBalanceToDTOBalanceConverter balanceConverter = new FormatBalanceToDTOBalanceConverter();
         final DTOIntContract contract = new DTOIntContract();
 
-        product.setProductType(EnumProductType.valueOf(outFormat.getTipprod()));
+        product.setType(EnumProductType.valueOf(outFormat.getTipprod()));
         product.setId(outFormat.getNumprod());
 
         product.setBalance(balanceConverter.convert(outFormat.getSaltota(), outFormat.getSaldisp(), outFormat.getSalcanj()));

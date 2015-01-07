@@ -11,10 +11,8 @@ public interface GlobalPositionDAO {
     
     DTOIntProducts getExtractGlobalBalance(DTOIntFilterProduct filterProduct);
 
-    DTOIntProducts getExtractGlobalBalanceNoTC(DTOIntFilterProduct filterProduct);
+    void updateProductVisibility(DTOIntProduct product);
 
-    void updateProductVisibility(String idProduct, Boolean visible);
-
-    void updateProductOperability(String idProduct, Boolean operable);
+    void updateProductOperability(DTOIntProduct product);
 }
 

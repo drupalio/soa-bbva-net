@@ -110,12 +110,22 @@ public class SrvGlobalPositionV01 implements ISrvGlobalPositionV01, com.bbva.jee
 	@SMC(registryID="SMCCO1400004",logicalID="update")
 	private void updateProductVisibility(String idProduct, Product infoProduct) {
 
-		srvIntGlobalPosition.updateProductVisibility(idProduct, infoProduct);
+		final DTOIntProduct productInt = new DTOIntProduct();
+
+		productInt.setId(idProduct);
+		productInt.setVisible(infoProduct.getVisible());
+
+		srvIntGlobalPosition.updateProductVisibility(productInt);
 	}
 
 	@SMC(registryID="SMCCO1400005",logicalID="update")
 	private void updateProductOperability(String idProduct, Product infoProduct) {
 
-		srvIntGlobalPosition.updateProductOperability(idProduct, infoProduct);
+		final DTOIntProduct productInt = new DTOIntProduct();
+
+		productInt.setId(idProduct);
+		productInt.setOperable(infoProduct.getOperable());
+
+		srvIntGlobalPosition.updateProductOperability(productInt);
 	}
 }

@@ -8,7 +8,7 @@ public class DTOIntProduct {
 
     public final static long serialVersionUID = 1L;
     private String id;
-    private EnumProductType productType;
+    private EnumProductType type;
     private String name;
     private String alias;
     private EnumFinancialStatusType financialState;
@@ -34,12 +34,12 @@ public class DTOIntProduct {
         this.id = id;
     }
 
-    public EnumProductType getProductType() {
-        return productType;
+    public EnumProductType getType() {
+        return type;
     }
 
-    public void setProductType(EnumProductType productType) {
-        this.productType = productType;
+    public void setType(EnumProductType type) {
+        this.type = type;
     }
 
     public String getName() {
@@ -66,7 +66,7 @@ public class DTOIntProduct {
         this.financialState = financialState;
     }
 
-    public Boolean getVisible() {
+    public Boolean isVisible() {
         return visible;
     }
 
@@ -74,7 +74,7 @@ public class DTOIntProduct {
         this.visible = visible;
     }
 
-    public Boolean getOperable() {
+    public Boolean isOperable() {
         return operable;
     }
 

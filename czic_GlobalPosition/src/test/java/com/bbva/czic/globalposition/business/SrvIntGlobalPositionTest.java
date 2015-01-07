@@ -1,11 +1,9 @@
 package com.bbva.czic.globalposition.business;
 
 import com.bbva.czic.dto.net.EnumProductType;
-import com.bbva.czic.dto.net.Product;
 import com.bbva.czic.globalposition.business.dto.DTOIntProduct;
 import com.bbva.czic.globalposition.business.impl.SrvIntGlobalPosition;
 import com.bbva.czic.globalposition.dao.GlobalPositionDAO;
-import com.bbva.jee.arq.spring.core.servicing.gce.BusinessServiceException;
 import com.bbva.jee.arq.spring.core.servicing.test.BusinessServiceTestContextLoader;
 import org.junit.Before;
 import org.junit.Test;
@@ -23,8 +21,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
-import static org.mockito.Mockito.anyString;
-import static org.mockito.Mockito.when;
 
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -66,8 +62,8 @@ public class SrvIntGlobalPositionTest {
 		intProduct.setId("1");
 		intProduct.setAlias("Cuentas Corrientes");
 		intProduct.setName("Cuentas que tal");
-		//intProduct.setProductType("PC");
-		intProduct.setProductType(EnumProductType.PC);
+		//intProduct.setType("PC");
+		intProduct.setType(EnumProductType.PC);
 
 		intProducts.add(intProduct);
 
@@ -75,8 +71,8 @@ public class SrvIntGlobalPositionTest {
 		intProduct.setId("2");
 		intProduct.setAlias("Cuentas Corrientes");
 		intProduct.setName("Cuentas que tal");
-		//intProduct.setProductType("TC");
-		intProduct.setProductType(EnumProductType.TC);
+		//intProduct.setType("TC");
+		intProduct.setType(EnumProductType.TC);
 
 				intProducts.add(intProduct);
 
@@ -84,8 +80,8 @@ public class SrvIntGlobalPositionTest {
 		intProduct.setId("3");
 		intProduct.setAlias("Cuentas Corrientes");
 		intProduct.setName("Cuentas que tal");
-		//intProduct.setProductType("ED");
-		intProduct.setProductType(EnumProductType.ED);
+		//intProduct.setType("ED");
+		intProduct.setType(EnumProductType.ED);
 
 				intProducts.add(intProduct);
 
@@ -93,8 +89,8 @@ public class SrvIntGlobalPositionTest {
 		intProduct.setId("4");
 		intProduct.setAlias("Cuentas Corrientes");
 		intProduct.setName("Cuentas que tal");
-		//intProduct.setProductType("AQ");
-		intProduct.setProductType(EnumProductType.AQ);
+		//intProduct.setType("AQ");
+		intProduct.setType(EnumProductType.AQ);
 
 				intProducts.add(intProduct);
 
@@ -102,8 +98,8 @@ public class SrvIntGlobalPositionTest {
 		intProduct.setId("5");
 		intProduct.setAlias("Cuentas Corrientes");
 		intProduct.setName("Cuentas que tal");
-		//intProduct.setProductType("RQ");
-		intProduct.setProductType(EnumProductType.RQ);
+		//intProduct.setType("RQ");
+		intProduct.setType(EnumProductType.RQ);
 
 				intProducts.add(intProduct);
 
