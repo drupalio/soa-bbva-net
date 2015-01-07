@@ -24,7 +24,8 @@ public class CheckbooksMapper extends AbstractConfigurableMapper {
 		
 		//************************checkbooks salida  OZECNSS0******************************************
 		factory.classMap(DTOIntCheckbook.class, FormatoOZECNSS0.class)
-		.field("fistCheck", "primchq").field("lastCheckl", "ultichq")
+		.field("fistCheck", "primchq")
+		.field("lastCheckl", "ultichq")
 		.field("totalCheck", "totachq")
 		.field("requestDate", "fesemis")
 		.field("deliveryDate", "fecentr")
@@ -32,12 +33,40 @@ public class CheckbooksMapper extends AbstractConfigurableMapper {
 		.byDefault().register();
 		
 		factory.classMap(Checkbook.class, DTOIntCheckbook.class)
-		.field("firstCheck", "fistCheck").field("lastCheckL", "lastCheckl")
+		.field("firstCheck", "fistCheck")
+		.field("lastCheckL", "lastCheckl")
 		.field("totalCheck", "totalCheck")
 		.field("requestDate", "requestDate")
 		.field("deliveryDate", "deliveryDate")
 		.field("actualState", "actualState")
+		.field("checks", "checks")
 		.byDefault().register();
+		
+		
+		//***********************checks entrada OZECNYE0 **********************************/
+		
+		factory.classMap(DTOIntCheckbook.class, FormatoOZECNSE0.class)
+		.field("id", "numcheq")
+		.byDefault().register();
+		factory.classMap(Checkbook.class, DTOIntCheckbook.class)
+		.field("id", "id")
+		.byDefault().register();
+		
+		
+		//************************checks salida  OZECNSS0******************************************
+				factory.classMap(DTOIntCheckbook.class, FormatoOZECNSS0.class)
+				.field("issueDate", "fechemi")
+				.field("value", "valchq")
+				.field("status", "estchq")
+				.field("modifiedDate", "fechmod")
+				.byDefault().register();
+				
+				factory.classMap(Checkbook.class, DTOIntCheckbook.class)
+				.field("issueDate", "issueDate")
+				.field("value", "value")
+				.field("status", "status")
+				.field("modifiedDate", "modifiedDatez")
+				.byDefault().register();;
 	
 	/*	DTOIntEnumCheckbookStatus 
        //***********************checks****************************************
