@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
 import com.bbva.czic.cards.business.dto.DTOIntCardCharge;
 import com.bbva.czic.cards.dao.model.ozno.FormatoOZECNOE0;
@@ -18,6 +19,7 @@ import com.bbva.jee.arq.spring.core.host.protocolo.ps9.aplicacion.CopySalida;
 import com.bbva.jee.arq.spring.core.host.transporte.ExcepcionTransporte;
 import com.bbva.jee.arq.spring.core.servicing.gce.BusinessServiceException;
 
+@Repository
 public class CardsDAOImpl implements CardsDAO {
 
 	@Autowired

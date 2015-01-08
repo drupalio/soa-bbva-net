@@ -1,7 +1,7 @@
 package com.bbva.czic.loan.dao;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 
 import com.bbva.czic.loan.business.dto.DTOIntLoan;
 import com.bbva.czic.loan.business.dto.DTOIntMovement;
@@ -19,7 +19,7 @@ import com.bbva.jee.arq.spring.core.host.protocolo.ps9.ErrorMappingHelper;
 import com.bbva.jee.arq.spring.core.host.protocolo.ps9.aplicacion.CopySalida;
 import com.bbva.jee.arq.spring.core.servicing.gce.BusinessServiceException;
 
-@Component
+@Repository
 public class LoanDAOImpl implements LoanDAO {
 
 	@Autowired
