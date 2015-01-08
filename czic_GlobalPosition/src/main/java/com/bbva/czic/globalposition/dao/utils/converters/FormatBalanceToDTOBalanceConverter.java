@@ -8,21 +8,33 @@ import java.math.BigDecimal;
 import java.util.Currency;
 
 /**
- * Created by Administrador on 05/01/2015.
+ * Created by Entelgy
  */
 public class FormatBalanceToDTOBalanceConverter {
 
-    public DTOIntBalance convert(String totalBalance, String availableBalance) {
-        final Money totalMoney = new Money(
-                Currency.getInstance("COP"),
-                new BigDecimal(totalBalance));
-        final Money availableMoney = new Money(
-                Currency.getInstance("COP"),
-                new BigDecimal(availableBalance));
-
+    public DTOIntBalance convert(String totalBalance, String availableBalance, String tradeBalance) {
         final DTOIntBalance balance = new DTOIntBalance();
-        balance.setAvailableBalance(availableMoney);
-        balance.setTotal(totalMoney);
+
+        if (!totalBalance.equals(null)) {
+            final Money totalMoney = new Money(
+                    Currency.getInstance("COP"),
+                    new BigDecimal(totalBalance));
+            balance.setTotal(totalMoney);
+        }
+
+        if (!availableBalance.equals(null)) {
+            final Money availableMoney = new Money(
+                    Currency.getInstance("COP"),
+                    new BigDecimal(availableBalance));
+            balance.setAvailableBalance(availableMoney);
+        }
+
+        if (!tradeBalance.equals(null)) {
+            final Money tradeMoney = new Money(
+                    Currency.getInstance("COP"),
+                    new BigDecimal(tradeBalance));
+            balance.setTotal(tradeMoney);
+        }
 
         return balance;
     }

@@ -13,6 +13,8 @@ public class DTOIntBalance {
 
     private Money availableBalance;
 
+    private Money tradeBalance;
+
     public DTOIntBalance() {
         //default constructor
     }
@@ -33,4 +35,11 @@ public class DTOIntBalance {
         this.availableBalance = availableBalance;
     }
 
+    public Money getTradeBalance() {
+        return tradeBalance;
+    }
+
+    public void setTradeBalance(Money tradeBalance) {
+        this.tradeBalance = tradeBalance;
+    }
 }

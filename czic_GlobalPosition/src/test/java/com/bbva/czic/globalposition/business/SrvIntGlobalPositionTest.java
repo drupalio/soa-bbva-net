@@ -1,12 +1,9 @@
 package com.bbva.czic.globalposition.business;
 
 import com.bbva.czic.dto.net.EnumProductType;
-import com.bbva.czic.dto.net.Product;
-import com.bbva.czic.globalposition.business.dto.DTOIntEnumProductType;
 import com.bbva.czic.globalposition.business.dto.DTOIntProduct;
 import com.bbva.czic.globalposition.business.impl.SrvIntGlobalPosition;
 import com.bbva.czic.globalposition.dao.GlobalPositionDAO;
-import com.bbva.jee.arq.spring.core.servicing.gce.BusinessServiceException;
 import com.bbva.jee.arq.spring.core.servicing.test.BusinessServiceTestContextLoader;
 import org.junit.Before;
 import org.junit.Test;
@@ -24,8 +21,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
-import static org.mockito.Mockito.anyString;
-import static org.mockito.Mockito.when;
 
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -52,48 +47,6 @@ public class SrvIntGlobalPositionTest {
 	@Before
 	public void init() {
 		MockitoAnnotations.initMocks(this);
-	}
-
-	@Test
-	public void testGetAllProductsIfNoFilter() {
-		//setUp - data
-		List<DTOIntProduct> products = getProductsList();
-
-		//setUp - expectation
-		when(globalPositionDAO.getExtractGlobalBalance(anyString())).thenReturn(products);
-
-		//SUT's excecution
-		final List<Product> productsResult = srv.getExtractGlobalBalance("111", null);
-
-		//validation
-		assertEquals(5, productsResult.size());
-	}
-
-	@Test
-	public void testFilterByProductType(){
-		//setUp - data
-		final List<DTOIntProduct> products = getProductsList();
-
-		//setUp - expectation
-		when(globalPositionDAO.getExtractGlobalBalance(anyString())).thenReturn(products);
-
-		//SUT's excecution
-		final List<Product> productsResult = srv.getExtractGlobalBalance("111", "(productType==ED)");
-
-		//validation
-		assertEquals(1, productsResult.size());
-	}
-
-	@Test(expected = BusinessServiceException.class)
-	public void testFilterErrorShouldThrowABusinessException() {
-		//setUp - data
-		final List<DTOIntProduct> products = getProductsList();
-
-		//setUp - expectation
-		when(globalPositionDAO.getExtractGlobalBalance(anyString())).thenReturn(products);
-
-		//SUT's excecution
-		final List<Product> productsResult = srv.getExtractGlobalBalance("111", "(uberTroter==ED)");
 	}
 
 	@Test

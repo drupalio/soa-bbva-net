@@ -1,4 +1,4 @@
-package com.bbva.czic.globalposition.dao.model.ozn0;
+package com.bbva.czic.globalposition.dao.model.oznh;
 
 
 import org.springframework.roo.addon.javabean.RooJavaBean;
@@ -10,15 +10,15 @@ import com.bbva.jee.arq.spring.core.host.Formato;
 import com.bbva.jee.arq.spring.core.host.TipoCampo;
 
 /**
- * Formato de datos <code>OZNCEOM0</code> de la transacci&oacute;n <code>OZN0</code>
+ * Formato de datos <code>OZNCEOMH</code> de la transacci&oacute;n <code>OZNH</code>
  * 
  * @author Arquitectura Spring BBVA
  */
-@Formato(nombre = "OZNCEOM0")
+@Formato(nombre = "OZNCEOMH")
 @RooJavaBean
 @RooToString
 @RooSerializable
-public class FormatoOZNCEOM0 {
+public class FormatoOZNCEOMH {
 
 	/**
 	 * <p>Campo <code>NUMCTA</code>, &iacute;ndice: <code>1</code>, tipo: <code>ALFANUMERICO</code>
@@ -27,9 +27,9 @@ public class FormatoOZNCEOM0 {
 	private String numcta;
 	
 	/**
-	 * <p>Campo <code>INDCTA</code>, &iacute;ndice: <code>2</code>, tipo: <code>ALFANUMERICO</code>
+	 * <p>Campo <code>CODBLQ</code>, &iacute;ndice: <code>2</code>, tipo: <code>ALFANUMERICO</code>
 	 */
-	@Campo(indice = 2, nombre = "INDCTA", tipo = TipoCampo.ALFANUMERICO, longitudMinima = 4, longitudMaxima = 7)
-	private String indcta;
+	@Campo(indice = 2, nombre = "CODBLQ", tipo = TipoCampo.ALFANUMERICO, longitudMinima = 4, longitudMaxima = 4)
+	private String codblq;
 	
 }
