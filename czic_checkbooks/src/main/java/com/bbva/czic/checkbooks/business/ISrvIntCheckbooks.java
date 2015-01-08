@@ -10,13 +10,9 @@ public interface ISrvIntCheckbooks {
 
 	public List<Checkbook> getCheckbooks(String id);
 
-	// public List<Check> getChecks(String id, String filter, Integer indpagi,
-		//	Integer tampagi) throws BusinessServiceException;
+	
 
-	//public List<Check> getChecks(String id, Calendar fechfin,
-		//	Calendar fechfin2, Integer indpagi, Integer tampagi);
-
-	List<Check> getChecks(String id, String filter, Integer indpagi,
+	public List<Check> getChecks(String id, String filter, Integer indpagi,
 			Integer tampagi);
 
 
