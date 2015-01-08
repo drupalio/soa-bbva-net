@@ -1,6 +1,7 @@
 package com.bbva.czic.globalposition.dao.model.oznh;
 
 import org.apache.commons.logging.Log;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,14 +31,18 @@ import com.bbva.jee.arq.spring.core.servicing.test.MockInvocationContextTestExec
         "classpath:/META-INF/spring/business-service-test.xml"
     }
 )
-@TestExecutionListeners(listeners = { MockInvocationContextTestExecutionListener.class, DependencyInjectionTestExecutionListener.class })
+@TestExecutionListeners(listeners = {
+		//MockInvocationContextTestExecutionListener.class,
+		DependencyInjectionTestExecutionListener.class
+})
 public class TestTransaccionOznh {
 	
 	private static final Log LOG = I18nLogFactory.getLog(TestTransaccionOznh.class);
 		
 	@Autowired
 	private TransaccionOznh transaccion;
-	
+
+	@Ignore
 	@Test
 	public void test() throws ExcepcionTransaccion {
 		
@@ -46,7 +51,7 @@ public class TestTransaccionOznh {
 		/*
 		 * TODO: poblar la peticion con valores adecuados
 		 */
-		
+
 		try {
 			LOG.info("Invocando transaccion, peticion: " + peticion);
 			RespuestaTransaccionOznh respuesta = transaccion.invocar(peticion);

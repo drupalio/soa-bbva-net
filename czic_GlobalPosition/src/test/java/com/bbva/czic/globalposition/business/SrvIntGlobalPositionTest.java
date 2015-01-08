@@ -62,8 +62,8 @@ public class SrvIntGlobalPositionTest {
 		intProduct.setId("1");
 		intProduct.setAlias("Cuentas Corrientes");
 		intProduct.setName("Cuentas que tal");
-		//intProduct.setType("PC");
-		intProduct.setType(EnumProductType.PC);
+		//intProduct.setProductType("PC");
+		intProduct.setProductType(EnumProductType.PC);
 
 		intProducts.add(intProduct);
 
@@ -71,8 +71,8 @@ public class SrvIntGlobalPositionTest {
 		intProduct.setId("2");
 		intProduct.setAlias("Cuentas Corrientes");
 		intProduct.setName("Cuentas que tal");
-		//intProduct.setType("TC");
-		intProduct.setType(EnumProductType.TC);
+		//intProduct.setProductType("TC");
+		intProduct.setProductType(EnumProductType.TC);
 
 				intProducts.add(intProduct);
 
@@ -80,8 +80,8 @@ public class SrvIntGlobalPositionTest {
 		intProduct.setId("3");
 		intProduct.setAlias("Cuentas Corrientes");
 		intProduct.setName("Cuentas que tal");
-		//intProduct.setType("ED");
-		intProduct.setType(EnumProductType.ED);
+		//intProduct.setProductType("ED");
+		intProduct.setProductType(EnumProductType.ED);
 
 				intProducts.add(intProduct);
 
@@ -89,8 +89,8 @@ public class SrvIntGlobalPositionTest {
 		intProduct.setId("4");
 		intProduct.setAlias("Cuentas Corrientes");
 		intProduct.setName("Cuentas que tal");
-		//intProduct.setType("AQ");
-		intProduct.setType(EnumProductType.AQ);
+		//intProduct.setProductType("AQ");
+		intProduct.setProductType(EnumProductType.AQ);
 
 				intProducts.add(intProduct);
 
@@ -98,8 +98,8 @@ public class SrvIntGlobalPositionTest {
 		intProduct.setId("5");
 		intProduct.setAlias("Cuentas Corrientes");
 		intProduct.setName("Cuentas que tal");
-		//intProduct.setType("RQ");
-		intProduct.setType(EnumProductType.RQ);
+		//intProduct.setProductType("RQ");
+		intProduct.setProductType(EnumProductType.RQ);
 
 				intProducts.add(intProduct);
 

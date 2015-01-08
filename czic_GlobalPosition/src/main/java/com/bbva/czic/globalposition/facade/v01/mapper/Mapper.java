@@ -13,7 +13,7 @@ public class Mapper {
 	public static Product productMap(DTOIntProduct dtoIntProduct) {
 		Product product = new Product();
 		BeanUtils.copyProperties(dtoIntProduct, product);
-		product.setType(dtoIntProduct.getType());
+		product.setType(dtoIntProduct.getProductType());
 		return product;
 	}
 
@@ -21,7 +21,7 @@ public class Mapper {
 	public static DTOIntProduct dtoIntProductMap(Product product) {
 		DTOIntProduct dtoIntProduct = new DTOIntProduct();
 		BeanUtils.copyProperties(product, dtoIntProduct);
-		dtoIntProduct.setType(product.getType());
+		dtoIntProduct.setProductType(product.getType());
 		return dtoIntProduct;
 	}
 
