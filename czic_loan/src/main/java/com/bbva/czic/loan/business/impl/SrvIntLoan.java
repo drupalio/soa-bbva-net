@@ -29,8 +29,9 @@ public class SrvIntLoan implements ISrvIntLoan {
 			throws BusinessServiceException {
 		try {
 
-			if (idRotaryQuota == null)
+			if (idRotaryQuota == null){
 				throw new BusinessServiceException("loanPeticiongetRotaryQuota");
+			}
 
 			DTOIntLoan dtoIntLoan = loanDao.getRotaryQuota(idRotaryQuota);
 
