@@ -86,26 +86,4 @@ public class SrvLoanV01 implements ISrvLoanV01,
 		return loan;
 	}
 
-	@Override
-	@ApiOperation(value = "Obtiene los detalles del movimiento seleccionado para el producto de financiamiento", notes = "Obtiene los detalles del movimiento seleccionado para el producto de financiamiento", response = RotaryQuotaMove.class)
-	@ApiResponses(value = {
-			@ApiResponse(code = -1, message = "aliasGCE1"),
-			@ApiResponse(code = -1, message = "aliasGCE2"),
-			@ApiResponse(code = 200, message = "Found Sucessfully", response = Response.class),
-			@ApiResponse(code = 500, message = "Technical Error") })
-	@GET
-	@Path("/rotaryQuota/{idLoan}/movement/{idMovement}")
-	@SMC(registryID = "SMC201400012", logicalID = "getRotaryQuotaMovement")
-	public Movement getRotaryQuotaMovement(
-			@ApiParam(value = "Claimer identifier param") @PathParam("idMovement") String idMovement,
-			@ApiParam(value = "Claimer identifier param") @PathParam("idLoan") String idLoan) {
-
-		Movement movement = null;
-		DTOIntMovement dtoIntMovement = srvIntLoan.getRotaryQuotaMovement(
-				idMovement, idLoan);
-		movement = (Movement) LoanMapper.getInstance().getMapper(
-				dtoIntMovement, Movement.class);
-
-		return movement;
-	}
 }

@@ -40,19 +40,4 @@ public class SrvIntLoan implements ISrvIntLoan {
 			throw new BusinessServiceException(e.getMessage());
 		}
 	}
-
-	@Override
-	public DTOIntMovement getRotaryQuotaMovement(String idMovement,
-			String idLoan) throws BusinessServiceException {
-
-		try {
-			if (idMovement == null || idLoan == null)
-				throw new BusinessServiceException("loanPeticionRotaryMuvement");
-
-			return loanDao.getRotaryQuotaMovement(idMovement, idLoan);
-
-		} catch (Exception e) {
-			throw new BusinessServiceException(e.getMessage());
-		}
-	}
 }

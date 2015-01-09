@@ -6,7 +6,4 @@ import com.bbva.czic.dto.net.Movement;
 public interface ISrvLoanV01 {
 
 	public Loan getRotaryQuota(String idLoan);
-
-	public Movement getRotaryQuotaMovement(String idMovement, String idLoan);
-
 }

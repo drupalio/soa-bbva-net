@@ -85,11 +85,6 @@ public class SrvIntLoanTest {
 		final  DTOIntLoan loanResult = srv.getRotaryQuota(null);
 	}
 
-	@Test
-	public void testGetRotaryQuotaMovement() {
-		// TODO: call srv.getRotaryQuotaMovement
-	}
-
 	/**
 	 * Metodo que crea un DTOIntLoan dummy para los test
 	 * @author Sebastian Gamba - Entelgy Col.

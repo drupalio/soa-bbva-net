@@ -17,7 +17,7 @@ public class Loan extends Product implements Serializable {
 	public final static long serialVersionUID = 1L;
 
 	@ApiModelProperty("Entidad con toda la informaci\u00f3n del balance del pr\u00e9stamo")
-	private Balance balance;
+	private Balance debt;
 
 	@ApiModelProperty("Entidad que posee toda un resumen de pagos del pr\u00e9stamo")
 	private Payment payment;
@@ -29,14 +29,12 @@ public class Loan extends Product implements Serializable {
 		// default constructor
 	}
 
-	@Override
-	public Balance getBalance() {
-		return balance;
+	public Balance getDebt() {
+		return debt;
 	}
 
-	@Override
-	public void setBalance(Balance balance) {
-		this.balance = balance;
+	public void setDebt(Balance debt) {
+		this.debt = debt;
 	}
 
 	public Payment getPayment() {
