@@ -24,6 +24,12 @@
 		</dependency>
 
 		<dependency>
+			<groupId>com.bbva.czic</groupId>
+			<artifactId>czic_commons</artifactId>
+			<version>1.0.0</version>
+		</dependency>
+
+		<dependency>
 			<groupId>ma.glasnost.orika</groupId>
 			<artifactId>orika-core</artifactId>
 			<version>1.4.5</version>

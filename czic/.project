@@ -2,7 +2,12 @@
   <name>czic</name>
   <comment>pom-padre-frontend Versión de Arquitectura Spring Servicing 1.0.0</comment>
   <projects>
+    <project>czic_cards</project>
+    <project>czic_checkbooks</project>
+    <project>czic_customers</project>
+    <project>czic_executives</project>
     <project>czic_GlobalPosition</project>
+    <project>czic_loan</project>
     <project>czic_net</project>
   </projects>
   <buildSpec>

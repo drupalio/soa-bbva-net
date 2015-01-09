@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+        <groupId>com.bbva.czic</groupId>
+        <artifactId>pom-padre_czic</artifactId>
+        <version>1.4.0</version>
+    </parent>
+
+    <groupId>com.bbva.czic</groupId>
+	<artifactId>czic_commons</artifactId>
+	<packaging>jar</packaging>
+	<version>1.0.0</version>
+	<name>czic_commons</name>
+
+	<dependencies>
+	    <dependency>
+	       <groupId>com.bbva.jee.arq.spring.core</groupId>
+	       <artifactId>arq-spring-servicing-core</artifactId>
+	       <version>${arq-spring-servicing-core.version}</version>
+	    </dependency>
+	    <dependency>
+	    	<groupId>com.bbva.jee.arq.spring.core</groupId>
+	        <artifactId>arq-spring-restutils</artifactId>
+	        <version>${arq-spring-restutils.version}</version>
+	    </dependency>
+	    <dependency>
+	        <groupId>com.bbva.jee.arq.spring.core</groupId>
+	        <artifactId>arq-spring-core-spi</artifactId>
+	        <version>${arq-spring-core-spi.version}</version>
+	   	</dependency>      
+	   	<dependency>
+	        <groupId>com.bbva.jee.arq.spring.core</groupId>
+	        <artifactId>arq-spring-core-api</artifactId>
+	        <version>${arq-spring-core-api.version}</version>
+	   	</dependency>  
+	   	<dependency>
+			<groupId>com.bbva.jee.arq.spring.core</groupId>
+			<artifactId>arq-spring-connector-host</artifactId>
+			<version>${arq.spring.connector.host.version}</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>com.bbva.jee.arq.spring.core</groupId>
+			<artifactId>arq-spring-connector-host-ps9</artifactId>
+			<version>${arq.spring.connector.host.ps9.version}</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>com.bbva.jee.arq.spring.core</groupId>
+			<artifactId>arq-spring-connector-host-api</artifactId>
+			<version>${arq.spring.connector.host.api.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.bbva.jee.arq.spring.core</groupId>
+			<artifactId>arq-spring-connector-host-imsconnect</artifactId>
+			<version>${arq.spring.connector.host.imsconnect.version}</version>
+			<scope>test</scope>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-entitymanager</artifactId>
+			<version>${hibernate-entitymanager.version}</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.8.2</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>servlet-api</artifactId>
+			<version>2.5</version>
+			<scope>provided</scope>
+		</dependency>
+
+	</dependencies>	
+	<build>
+		<finalName>${project.artifactId}-${project.version}-rm</finalName>
+	</build>
+</project>
+    

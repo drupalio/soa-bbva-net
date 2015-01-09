@@ -50,6 +50,9 @@ public class Product implements Serializable {
 	@ApiModelProperty("")
 	private List<Movement> movement;
 
+	@ApiModelProperty("")
+	private Contract contract;
+
 	public Product() {
 		// default constructor
 	}
@@ -146,4 +149,11 @@ public class Product implements Serializable {
 		this.movement = movement;
 	}
 
+	public Contract getContract() {
+		return contract;
+	}
+
+	public void setContract(Contract contract) {
+		this.contract = contract;
+	}
 }

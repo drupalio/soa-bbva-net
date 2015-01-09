@@ -1,7 +1,9 @@
 <projectDescription>
   <name>czic_customers</name>
   <comment>pom-padre-frontend Versión de Arquitectura Spring Servicing 1.0.0</comment>
-  <projects/>
+  <projects>
+    <project>czic_net</project>
+  </projects>
   <buildSpec>
     <buildCommand>
       <name>org.eclipse.ajdt.core.ajbuilder</name>
