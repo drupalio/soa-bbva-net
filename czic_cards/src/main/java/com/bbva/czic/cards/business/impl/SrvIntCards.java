@@ -107,7 +107,7 @@ public class SrvIntCards implements ISrvIntCards {
 					endDateFilter = formato.parse(endDate);
 				} catch (ParseException ex) {
 					throw new BusinessServiceException(
-							"getCreditCardCharges - ParseException - error conviertiendo las fechas a tipo Date.");
+							"getCreditCardCharges - ParseException - error conviertiendo las fechas a Date.");
 				}
 
 				initialResultList = cardsDAO.getCreditCardCharges(id,

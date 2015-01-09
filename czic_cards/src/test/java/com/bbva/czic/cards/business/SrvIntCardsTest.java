@@ -1,15 +1,18 @@
 package com.bbva.czic.cards.business;
 
+import static org.junit.Assert.assertNotNull;
 import static org.mockito.Mockito.when;
 
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.TestExecutionListeners;
@@ -20,10 +23,6 @@ import com.bbva.czic.cards.business.dto.DTOIntCardCharge;
 import com.bbva.czic.cards.dao.CardsDAO;
 import com.bbva.jee.arq.spring.core.servicing.gce.BusinessServiceException;
 import com.bbva.jee.arq.spring.core.servicing.test.BusinessServiceTestContextLoader;
-
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.mockito.Mockito.anyString;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(loader = BusinessServiceTestContextLoader.class, locations = {
@@ -41,6 +40,11 @@ public class SrvIntCardsTest {
 	@InjectMocks
 	@Autowired
 	ISrvIntCards srv;
+
+	@Before
+	public void init() {
+		MockitoAnnotations.initMocks(this);
+	}
 
 	@Test(expected = BusinessServiceException.class)
 	public void testFilterFormatoFechasIncorrectos() {
