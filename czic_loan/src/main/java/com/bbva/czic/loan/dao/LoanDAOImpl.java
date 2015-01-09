@@ -5,7 +5,7 @@ import java.util.Calendar;
 import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 
 import com.bbva.czic.dto.net.Balance;
 import com.bbva.czic.dto.net.EnumProductType;
@@ -27,7 +27,7 @@ import com.bbva.jee.arq.spring.core.host.protocolo.ps9.aplicacion.CopySalida;
 import com.bbva.jee.arq.spring.core.servicing.gce.BusinessServiceException;
 import com.bbva.jee.arq.spring.core.servicing.utils.Money;
 
-@Component
+@Repository
 public class LoanDAOImpl implements LoanDAO {
 
 	@Autowired
