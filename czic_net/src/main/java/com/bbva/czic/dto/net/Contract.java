@@ -7,8 +7,8 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
-@XmlRootElement(name = "Product", namespace = "urn:com:bbva:czic:dto:net")
-@XmlType(name = "Product", namespace = "urn:com:bbva:czic:dto:net")
+@XmlRootElement(name = "Contract", namespace = "urn:com:bbva:czic:dto:net")
+@XmlType(name = "Contract", namespace = "urn:com:bbva:czic:dto:net")
 @XmlAccessorType(XmlAccessType.FIELD)
 public class Contract {
 
