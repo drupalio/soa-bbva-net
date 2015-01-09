@@ -49,7 +49,7 @@ public class CardsDAOImpl implements CardsDAO {
 		RespuestaTransaccionOzno respuesta = transaccionGetCardCharges
 				.invocar(peticion);
 
-		// Verificamos si tiene execpcion la respuesta
+		// Verificamos si tiene excepcion la respuesta
 		BusinessServiceException businessServiceException = errorMappingHelper
 				.toBusinessServiceException(respuesta);
 

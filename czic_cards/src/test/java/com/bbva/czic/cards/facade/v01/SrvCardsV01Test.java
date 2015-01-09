@@ -23,8 +23,7 @@ public class SrvCardsV01Test {
 	ISrvIntCards srvIntMock;
 
 	@InjectMocks
-	@Autowired
-	ISrvCardsV01 srv;
+	SrvCardsV01 srv;
 
 	@Before
 	public void init() {
