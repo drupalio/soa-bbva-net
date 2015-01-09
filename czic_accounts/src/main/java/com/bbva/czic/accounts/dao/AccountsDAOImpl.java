@@ -6,6 +6,14 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
+import com.bbva.czic.accounts.dao.model.oznu.FormatoOZECNUE0;
+import com.bbva.czic.accounts.dao.model.oznu.PeticionTransaccionOznu;
+import com.bbva.czic.accounts.dao.model.oznu.RespuestaTransaccionOznu;
+import com.bbva.czic.accounts.dao.model.oznu.TransaccionOznu;
+import com.bbva.czic.accounts.dao.model.oznv.FormatoOZECNVE0;
+import com.bbva.czic.accounts.dao.model.oznv.PeticionTransaccionOznv;
+import com.bbva.czic.accounts.dao.model.oznv.RespuestaTransaccionOznv;
+import com.bbva.czic.accounts.dao.model.oznv.TransaccionOznv;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.bbva.czic.accounts.business.dto.DTOIntAccount;
