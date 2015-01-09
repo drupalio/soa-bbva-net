@@ -1,6 +1,8 @@
 package com.bbva.czic.accounts.business.dto;
 
-public class DTOIntMonthlyBalances<Money> {
+import com.bbva.jee.arq.spring.core.servicing.utils.Money;
+
+public class DTOIntMonthlyBalances {
 
 	public final static long serialVersionUID = 1L;
 	private Money balance;

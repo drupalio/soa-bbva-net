@@ -2,7 +2,9 @@ package com.bbva.czic.accounts.business.dto;
 
 import java.util.Date;
 
-public class DTOIntMovement<Money> {
+import com.bbva.jee.arq.spring.core.servicing.utils.Money;
+
+public class DTOIntMovement {
 
 	public final static long serialVersionUID = 1L;
 	private String id;

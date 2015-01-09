@@ -2,7 +2,9 @@ package com.bbva.czic.accounts.business.dto;
 
 import java.util.Date;
 
-public class DTOIntAccount<Money> {
+import com.bbva.jee.arq.spring.core.servicing.utils.Money;
+
+public class DTOIntAccount {
 
 	public final static long serialVersionUID = 1L;
 	private Money tradeBalance;
@@ -40,7 +42,7 @@ public class DTOIntAccount<Money> {
 	public void setEndMonth(Date endMonth) {
 		this.endMonth = endMonth;
 	}
-	
+
 	public String getSearchMonth() {
 		return searchMonth;
 	}
@@ -48,6 +50,5 @@ public class DTOIntAccount<Money> {
 	public void setSearchMonth(String searchMonth) {
 		this.searchMonth = searchMonth;
 	}
-	
 
 }

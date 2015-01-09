@@ -9,33 +9,22 @@ import javax.annotation.Resource;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.bbva.czic.accounts.business.dto.DTOIntAccount;
-import com.bbva.czic.accounts.business.dto.DTOIntMovement;
-import com.bbva.czic.accounts.dao.model.oznu.FormatoOZECNUE0;
-import com.bbva.czic.accounts.dao.model.oznu.PeticionTransaccionOznu;
-import com.bbva.czic.accounts.dao.model.oznu.RespuestaTransaccionOznu;
-import com.bbva.czic.accounts.dao.model.oznu.TransaccionOznu;
-import com.bbva.czic.accounts.dao.model.oznv.FormatoOZECNVE0;
-import com.bbva.czic.accounts.dao.model.oznv.FormatoOZECNVS0;
-import com.bbva.czic.accounts.dao.model.oznv.PeticionTransaccionOznv;
-import com.bbva.czic.accounts.dao.model.oznv.RespuestaTransaccionOznv;
-import com.bbva.czic.accounts.dao.model.oznv.TransaccionOznv;
-import com.bbva.czic.mapper.*;
+import com.bbva.czic.accounts.dao.model.ozna.FormatoOZNCENA0;
+import com.bbva.czic.accounts.dao.model.ozna.FormatoOZNCSNA0;
+import com.bbva.czic.accounts.dao.model.ozna.PeticionTransaccionOzna;
+import com.bbva.czic.accounts.dao.model.ozna.RespuestaTransaccionOzna;
+import com.bbva.czic.accounts.dao.model.ozna.TransaccionOzna;
 import com.bbva.jee.arq.spring.core.host.protocolo.ps9.ErrorMappingHelper;
 import com.bbva.jee.arq.spring.core.host.protocolo.ps9.aplicacion.CopySalida;
 import com.bbva.jee.arq.spring.core.servicing.gce.BusinessServiceException;
 
-public abstract class AccountsDAOImpl<AccountMapper> implements AccountsDAO {
+public class AccountsDAOImpl implements AccountsDAO {
 
 	@Autowired
 	private ErrorMappingHelper errorMappingHelper;
 
-	@Resource(name = "accountsMapper")
-	private AccountMapper accountsMapper;
-
-	// Inicio evolucion de un saldo de cuenta - Movs getAccountMonthlyBalance //
 	@Override
-	public DTOIntAccount getAccountMonthlyBalance(String id, Date startMonth,
-			Date endMonth) throws BusinessServiceException {
+	public DTOIntAccount getAccountMonthlyBalance(String id, Date startMonth, Date endMonth) throws BusinessServiceException {
 
 		DTOIntAccount dtoIntAccount = new DTOIntAccount();
 		List<DTOIntAccount> accountList = new ArrayList<DTOIntAccount>();
@@ -48,36 +37,29 @@ public abstract class AccountsDAOImpl<AccountMapper> implements AccountsDAO {
 
 			peticion.getCuerpo().getPartes().add(peticion);
 
-			RespuestaTransaccionOznv respuesta = new TransaccionOznv()
-					.invocar(peticion);
+			RespuestaTransaccionOznv respuesta = new TransaccionOznv().invocar(peticion);
 
-			BusinessServiceException exception = errorMappingHelper
-					.toBusinessServiceException(respuesta);
+			BusinessServiceException exception = errorMappingHelper.toBusinessServiceException(respuesta);
 			if (exception != null)
 				throw new BusinessServiceException("wrongParameters");
 
-			CopySalida outputCopy = respuesta.getCuerpo().getParte(
-					CopySalida.class);
+			CopySalida outputCopy = respuesta.getCuerpo().getParte(CopySalida.class);
 			if (outputCopy != null) {
 
-				FormatoOZECNVE0 formatoSalida = outputCopy
-						.getCopy(FormatoOZECNVE0.class);
+				FormatoOZECNVE0 formatoSalida = outputCopy.getCopy(FormatoOZECNVE0.class);
 				if (formatoSalida != null) {
 
-					//dtoIntAccount = accountsMapper().map(formatoSalida,DTOIntAccount.class);
+					// dtoIntAccount =
+					// accountsMapper().map(formatoSalida,DTOIntAccount.class);
 				}
 			}
 		} catch (Exception e) {
 		}
 		return dtoIntAccount;
 	}
-	// Fin evolucion de un saldo de cuenta - Movs getAccountMonthlyBalance //
 
-	// Inicio listado de resumenes de balance de la cuenta por mes - Movs
-	// getAccMovementResume //
 	@Override
-	public DTOIntAccount getAccMovementResume(String id, Date startMonth,
-			Date endMonth) throws BusinessServiceException {
+	public DTOIntAccount getAccMovementResume(String id, Date startMonth, Date endMonth) throws BusinessServiceException {
 
 		DTOIntAccount dtoIntAccount = new DTOIntAccount();
 		List<DTOIntAccount> accountList = new ArrayList<DTOIntAccount>();
@@ -90,30 +72,50 @@ public abstract class AccountsDAOImpl<AccountMapper> implements AccountsDAO {
 
 			peticion.getCuerpo().getPartes().add(peticion);
 
-			RespuestaTransaccionOznu respuesta = new TransaccionOznu()
-					.invocar(peticion);
+			RespuestaTransaccionOznu respuesta = new TransaccionOznu().invocar(peticion);
 
-			BusinessServiceException exception = errorMappingHelper
-					.toBusinessServiceException(respuesta);
+			BusinessServiceException exception = errorMappingHelper.toBusinessServiceException(respuesta);
 			if (exception != null)
 				throw new BusinessServiceException("wrongParameters");
 
-			CopySalida outputCopy = respuesta.getCuerpo().getParte(
-					CopySalida.class);
+			CopySalida outputCopy = respuesta.getCuerpo().getParte(CopySalida.class);
 			if (outputCopy != null) {
 
-				FormatoOZECNUE0 formatoSalida = outputCopy
-						.getCopy(FormatoOZECNUE0.class);
+				FormatoOZECNUE0 formatoSalida = outputCopy.getCopy(FormatoOZECNUE0.class);
 				if (formatoSalida != null) {
 
-					// dtoIntAccount = accountsMapper.map(formatoSalida,DTOIntAccount.class);
+					// dtoIntAccount =
+					// accountsMapper.map(formatoSalida,DTOIntAccount.class);
 				}
 			}
 		} catch (Exception e) {
 		}
 		return dtoIntAccount;
 	}
-	// Fin listado de resumenes de balance de la cuenta por mes - Movs
-	// getAccMovementResume //
 
+	@Override
+	public DTOIntAccount getAccount(String accountId) throws BusinessServiceException {
+
+		DTOIntAccount account = new DTOIntAccount();
+
+		try {
+
+			FormatoOZNCENA0 formatoEntrada = new FormatoOZNCENA0();
+			PeticionTransaccionOzna peticion = new PeticionTransaccionOzna();
+			peticion.getCuerpo().getParte(FormatoOZNCSNA0.class);
+			RespuestaTransaccionOzna respuesta = new TransaccionOzna().invocar(peticion);
+			BusinessServiceException exception = errorMappingHelper.toBusinessServiceException(respuesta);
+			if (exception != null)
+				throw new BusinessServiceException("getAccount");
+			CopySalida outputCopy = respuesta.getCuerpo().getParte(CopySalida.class);
+			if (outputCopy != null) {
+				FormatoOZNCSNA0 formatoSalida = outputCopy.getCopy(FormatoOZNCSNA0.class);
+				// Mapeamos
+
+			}
+
+		} catch (Exception e) {
+		}
+		return account;
+	}
 }
