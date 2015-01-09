@@ -7,7 +7,7 @@ import java.util.List;
 
 
 public interface ISrvGlobalPositionV01 {
- 	public List<Product> getExtractGlobalBalance(String customerId, String filter, String fields, String expands, String orderby);
+ 	public List<Product> getExtractGlobalBalance(String customerId, String filter);
 
 	public Response update(String idProduct, Product infoProduct);
 }

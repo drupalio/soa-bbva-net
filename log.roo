@@ -22,3 +22,29 @@ sarc createRoutine --projectName commons
 sarc createRoutine --projectName commons
 exit
 // ServicesArchitecture log closed at 2015-01-05 12:44:40
+// ServicesArchitecture log opened at 2015-01-07 01:13:02
+exit
+// ServicesArchitecture log closed at 2015-01-07 01:13:08
+// ServicesArchitecture log opened at 2015-01-07 01:13:16
+exit
+// ServicesArchitecture log closed at 2015-01-07 01:13:52
+// ServicesArchitecture log opened at 2015-01-07 01:14:12
+exit
+// ServicesArchitecture log closed at 2015-01-07 01:14:37
+// ServicesArchitecture log opened at 2015-01-07 01:16:15
+// ServicesArchitecture log opened at 2015-01-07 01:18:06
+help
+help generatePackage
+exit
+// ServicesArchitecture log closed at 2015-01-07 01:23:01
+// ServicesArchitecture log opened at 2015-01-07 01:26:42
+exit
+// ServicesArchitecture log closed at 2015-01-07 01:27:33
+// ServicesArchitecture log opened at 2015-01-07 01:31:00
+sarc generatePackage
+// ServicesArchitecture log opened at 2015-01-07 12:00:49
+sarc generatePackage
+exit
+// ServicesArchitecture log closed at 2015-01-07 14:50:53
+// ServicesArchitecture log opened at 2015-01-08 18:12:29
+sarc generatePackage

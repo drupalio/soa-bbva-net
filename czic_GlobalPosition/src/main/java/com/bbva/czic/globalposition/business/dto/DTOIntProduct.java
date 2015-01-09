@@ -1,11 +1,6 @@
 
 package com.bbva.czic.globalposition.business.dto;
 
-import java.util.List;
-
-
-import com.bbva.czic.dto.net.Balance;
-import com.bbva.czic.dto.net.Contract;
 import com.bbva.czic.dto.net.EnumFinancialStatusType;
 import com.bbva.czic.dto.net.EnumProductType;
 
@@ -71,7 +66,7 @@ public class DTOIntProduct {
         this.financialState = financialState;
     }
 
-    public Boolean getVisible() {
+    public Boolean isVisible() {
         return visible;
     }
 
@@ -79,7 +74,7 @@ public class DTOIntProduct {
         this.visible = visible;
     }
 
-    public Boolean getOperable() {
+    public Boolean isOperable() {
         return operable;
     }
 

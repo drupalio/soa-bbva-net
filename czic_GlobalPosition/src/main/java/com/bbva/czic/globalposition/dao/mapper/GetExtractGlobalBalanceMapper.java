@@ -71,7 +71,7 @@ public class GetExtractGlobalBalanceMapper
         product.setProductType(EnumProductType.valueOf(outFormat.getTipprod()));
         product.setId(outFormat.getNumprod());
 
-        product.setBalance(balanceConverter.convert(outFormat.getSaltota(), outFormat.getSaldisp()));
+        product.setBalance(balanceConverter.convert(outFormat.getSaltota(), outFormat.getSaldisp(), null));
 
         product.setVisible(outFormat.getIndvisi().equalsIgnoreCase("v") || outFormat.getIndvisi().equalsIgnoreCase("t"));
         product.setOperable(outFormat.getIndoper().equalsIgnoreCase("v") || outFormat.getIndoper().equalsIgnoreCase("t"));
@@ -84,17 +84,17 @@ public class GetExtractGlobalBalanceMapper
         contract.setNumber(outFormat.getNumcont());
         product.setContract(contract);
 
-        product.setContactInfo(getDtoIntContactInfo(outFormat));
+        product.setContactInfo(getDtoIntContactInfo(outFormat.getNumcelu()));
 
         return product;
     }
 
-    private DTOIntContactInfo getDtoIntContactInfo(final FormatoOZECN1S1 outFormat) {
+    private DTOIntContactInfo getDtoIntContactInfo(final String mobilePhoneNumber) {
         final DTOIntContactInfo contactInfo = new DTOIntContactInfo();
         final DTOIntPhoneNumber phoneNumber = new DTOIntPhoneNumber();
         final List<DTOIntPhoneNumber> phoneNumbers = new ArrayList<DTOIntPhoneNumber>();
 
-        phoneNumber.setNumber(outFormat.getNumcelu());
+        phoneNumber.setNumber(mobilePhoneNumber);
         phoneNumber.setType(EnumPhoneNumberType.MOBILE);
         phoneNumbers.add(phoneNumber);
         contactInfo.setPhoneNumbers(phoneNumbers);
