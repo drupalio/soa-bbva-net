@@ -18,8 +18,7 @@ import com.wordnik.swagger.annotations.ApiModelProperty;
 @XmlType(name = "Balance", namespace = "urn:com:bbva:czic:dto:net")
 @XmlAccessorType(XmlAccessType.FIELD)
 public class Balance
-    implements Serializable
-{
+    implements Serializable {
 
     public final static long serialVersionUID = 1L;
     @XmlJavaTypeAdapter(MoneyAdapter.class)
@@ -30,6 +29,11 @@ public class Balance
     @XmlElement(type = Money.class)
     @ApiModelProperty("Saldo disponible del producto")
     private Money availableBalance;
+    @XmlJavaTypeAdapter(MoneyAdapter.class)
+    @XmlElement(type = Money.class)
+    @ApiModelProperty("Saldo en canje del producto")
+    private Money tradeBalance;
+
 
     public Balance() {
         //default constructor
@@ -51,4 +55,11 @@ public class Balance
         this.availableBalance = availableBalance;
     }
 
+    public Money getTradeBalance() {
+        return tradeBalance;
+    }
+
+    public void setTradeBalance(Money tradeBalance) {
+        this.tradeBalance = tradeBalance;
+    }
 }

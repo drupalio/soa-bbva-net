@@ -2,7 +2,8 @@
 package com.bbva.czic.globalposition.business.dto;
 
 
-
+import com.bbva.czic.dto.net.EnumContactSourceType;
+import com.bbva.czic.dto.net.EnumPhoneNumberType;
 
 public class DTOIntPhoneNumber {
 
@@ -10,10 +11,10 @@ public class DTOIntPhoneNumber {
     private String number;
     private String countryCode;
     private String regionalCode;
-    private DTOIntEnumPhoneNumberType type;
+    private EnumPhoneNumberType type;
     private Boolean primary;
     private Boolean active;
-    private DTOIntEnumContactSourceType contactSource;
+    private EnumContactSourceType contactSource;
 
     public DTOIntPhoneNumber() {
     }
@@ -47,11 +48,11 @@ public class DTOIntPhoneNumber {
         this.regionalCode = regionalCode;
     }
 
-    public DTOIntEnumPhoneNumberType getType() {
+    public EnumPhoneNumberType getType() {
         return type;
     }
 
-    public void setType(DTOIntEnumPhoneNumberType type) {
+    public void setType(EnumPhoneNumberType type) {
         this.type = type;
     }
 
@@ -71,12 +72,11 @@ public class DTOIntPhoneNumber {
         this.active = active;
     }
 
-    public DTOIntEnumContactSourceType getContactSource() {
+    public EnumContactSourceType getContactSource() {
         return contactSource;
     }
 
-    public void setContactSource(DTOIntEnumContactSourceType contactSource) {
+    public void setContactSource(EnumContactSourceType contactSource) {
         this.contactSource = contactSource;
     }
-
 }

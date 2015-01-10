@@ -32,7 +32,32 @@ public class MapperTest {
         intProduct = Mapper.dtoIntProductMap(product);
 
         assertEquals(product.getId(), intProduct.getId());
-        assertEquals(product.getType().name(), intProduct.getProductType());
+        assertEquals(product.getType(), intProduct.getProductType());
 
     }
+/*
+    @Test
+    public void testDeepMappingIfDeepObjectIsSet() {
+        final DTOIntProduct product = new DTOIntProduct();
+        final FormatBalanceToDTOBalanceConverter balanceConverter = new FormatBalanceToDTOBalanceConverter();
+        final DTOIntContract contract = new DTOIntContract();
+
+        product.setProductType(EnumProductType.valueOf(outFormat.getTipprod()));
+        product.setId(outFormat.getNumprod());
+
+        product.setBalance(balanceConverter.convert(outFormat.getSaltota(), outFormat.getSaldisp(), null));
+
+        product.setVisible(outFormat.getIndvisi().equalsIgnoreCase("v") || outFormat.getIndvisi().equalsIgnoreCase("t"));
+        product.setOperable(outFormat.getIndoper().equalsIgnoreCase("v") || outFormat.getIndoper().equalsIgnoreCase("t"));
+        product.setAlias(outFormat.getAlias());
+        product.setName(outFormat.getNomprod());
+        product.setFinancialState(EnumFinancialStatusType.valueOf(outFormat.getFinstat()));
+        if (outFormat.getNumtarj() != null) {
+            product.setId(outFormat.getNumtarj());
+        }
+        contract.setNumber(outFormat.getNumcont());
+        product.setContract(contract);
+
+        product.setContactInfo(getDtoIntContactInfo(outFormat.getNumcelu()));
+    }*/
 }
