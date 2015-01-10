@@ -29,7 +29,7 @@ public class GetExtractGlobalBalanceMapper
         final FormatoOZECN1E0 formatoEntrada = new FormatoOZECN1E0();
 
         formatoEntrada.setNumclie(dtoIn.getIdCustomer());
-        formatoEntrada.setTipprod(dtoIn.getProductType().name());
+        formatoEntrada.setTipprod(dtoIn.getProductType());
 
         return formatoEntrada;
     }

@@ -1,27 +1,19 @@
 package com.bbva.czic.globalposition.facade.v01.impl;
 
-import com.bbva.czic.dto.net.EnumProductType;
 import com.bbva.czic.dto.net.Product;
 import com.bbva.czic.globalposition.business.ISrvIntGlobalPosition;
 import com.bbva.czic.globalposition.business.dto.DTOIntFilterProduct;
 import com.bbva.czic.globalposition.business.dto.DTOIntProduct;
 import com.bbva.czic.globalposition.facade.v01.ISrvGlobalPositionV01;
 import com.bbva.czic.globalposition.facade.v01.mapper.IGlobalPositionMapper;
-import com.bbva.czic.globalposition.facade.v01.mapper.Mapper;
 import com.bbva.czic.globalposition.facade.v01.utils.converters.IFilterConverter;
-import com.bbva.czic.routine.commons.rm.utils.errors.EnumError;
 import com.bbva.jee.arq.spring.core.log.I18nLog;
 import com.bbva.jee.arq.spring.core.log.I18nLogFactory;
 import com.bbva.jee.arq.spring.core.servicing.annotations.SMC;
 import com.bbva.jee.arq.spring.core.servicing.annotations.SN;
 import com.bbva.jee.arq.spring.core.servicing.annotations.VN;
 import com.bbva.jee.arq.spring.core.servicing.gce.BusinessServiceException;
-import com.bbva.jee.arq.spring.core.servicing.utils.BusinessServicesToolKit;
 import com.wordnik.swagger.annotations.*;
-import org.apache.cxf.jaxrs.ext.search.PrimitiveStatement;
-import org.apache.cxf.jaxrs.ext.search.SearchCondition;
-import org.apache.cxf.jaxrs.ext.search.SearchParseException;
-import org.apache.cxf.jaxrs.ext.search.fiql.FiqlParser;
 import org.apache.cxf.jaxrs.model.wadl.ElementClass;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -40,7 +32,7 @@ import java.util.List;
 @VN(vnn="V01")
 @Api(value="/GlobalPosition/V01",description="SN GlobalPosition")
 @Produces({ MediaType.APPLICATION_JSON})
-@Service//(value = "srv-global-position-v01")
+@Service
 public class SrvGlobalPositionV01 implements ISrvGlobalPositionV01, com.bbva.jee.arq.spring.core.servicing.utils.ContextAware {
 
 	private static I18nLog log = I18nLogFactory.getLogI18n(SrvGlobalPositionV01.class,"META-INF/spring/i18n/log/mensajesLog");

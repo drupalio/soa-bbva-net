@@ -1,15 +1,18 @@
 package com.bbva.czic.globalposition.business;
 
-import com.bbva.czic.dto.net.EnumProductType;
+import com.bbva.czic.globalposition.business.dto.DTOIntFilterProduct;
 import com.bbva.czic.globalposition.business.dto.DTOIntProduct;
+import com.bbva.czic.globalposition.business.dto.DTOIntProducts;
 import com.bbva.czic.globalposition.business.impl.SrvIntGlobalPosition;
 import com.bbva.czic.globalposition.dao.GlobalPositionDAO;
 import com.bbva.jee.arq.spring.core.servicing.test.BusinessServiceTestContextLoader;
 import org.junit.Before;
 import org.junit.Test;
+import static org.junit.Assert.*;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import static org.mockito.Mockito.*;
 import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
@@ -19,8 +22,6 @@ import org.springframework.test.context.support.DependencyInjectionTestExecution
 
 import java.util.ArrayList;
 import java.util.List;
-
-import static org.junit.Assert.assertEquals;
 
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -50,60 +51,18 @@ public class SrvIntGlobalPositionTest {
 	}
 
 	@Test
-	public void testModifyProduct() {
+	public void testNotNullIfProductExist() {
+		// Setup data
+		final DTOIntProducts intProducts = new DTOIntProducts();
+		final DTOIntFilterProduct filterProduct = new DTOIntFilterProduct();
 
-	}
+		// Setup expectation
+		when(globalPositionDAO.getExtractGlobalBalance(filterProduct)).thenReturn(intProducts);
 
-	private List<DTOIntProduct> getProductsList() {
+		// SUT execution
+		final List<DTOIntProduct> products = srv.getExtractGlobalBalance(filterProduct);
 
-		List<DTOIntProduct> intProducts = new ArrayList<DTOIntProduct>();
-
-		DTOIntProduct intProduct = new DTOIntProduct();
-		intProduct.setId("1");
-		intProduct.setAlias("Cuentas Corrientes");
-		intProduct.setName("Cuentas que tal");
-		//intProduct.setProductType("PC");
-		intProduct.setProductType(EnumProductType.PC);
-
-		intProducts.add(intProduct);
-
-		intProduct = new DTOIntProduct();
-		intProduct.setId("2");
-		intProduct.setAlias("Cuentas Corrientes");
-		intProduct.setName("Cuentas que tal");
-		//intProduct.setProductType("TC");
-		intProduct.setProductType(EnumProductType.TC);
-
-				intProducts.add(intProduct);
-
-		intProduct = new DTOIntProduct();
-		intProduct.setId("3");
-		intProduct.setAlias("Cuentas Corrientes");
-		intProduct.setName("Cuentas que tal");
-		//intProduct.setProductType("ED");
-		intProduct.setProductType(EnumProductType.ED);
-
-				intProducts.add(intProduct);
-
-		intProduct = new DTOIntProduct();
-		intProduct.setId("4");
-		intProduct.setAlias("Cuentas Corrientes");
-		intProduct.setName("Cuentas que tal");
-		//intProduct.setProductType("AQ");
-		intProduct.setProductType(EnumProductType.AQ);
-
-				intProducts.add(intProduct);
-
-		intProduct = new DTOIntProduct();
-		intProduct.setId("5");
-		intProduct.setAlias("Cuentas Corrientes");
-		intProduct.setName("Cuentas que tal");
-		//intProduct.setProductType("RQ");
-		intProduct.setProductType(EnumProductType.RQ);
-
-				intProducts.add(intProduct);
-
-		return intProducts;
+		//Validation
 
 	}
 	

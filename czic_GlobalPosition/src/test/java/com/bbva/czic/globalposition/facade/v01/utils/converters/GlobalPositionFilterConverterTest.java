@@ -1,10 +1,9 @@
 package com.bbva.czic.globalposition.facade.v01.utils.converters;
 
 import com.bbva.czic.globalposition.business.dto.DTOIntFilterProduct;
-import com.bbva.czic.globalposition.facade.v01.utils.converters.GlobalPositionFilterConverter;
+import com.bbva.czic.globalposition.facade.v01.utils.converters.impl.GlobalPositionFilterConverter;
 import com.bbva.jee.arq.spring.core.servicing.gce.BusinessServiceException;
 import com.bbva.jee.arq.spring.core.servicing.test.BusinessServiceTestContextLoader;
-import org.apache.cxf.Bus;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import org.junit.runner.RunWith;
@@ -27,9 +26,31 @@ public class GlobalPositionFilterConverterTest {
     GlobalPositionFilterConverter gpFilterConverter;
 
     @Test(expected = BusinessServiceException.class)
-    public void testThrowExceptionIfCustomerIdIsNull() {
+    public void testThrowExceptionIfCustomerIdIsEmpty() {
         // Setup data
         final String customerId = "";
+        final String filter = "(productType==TC)";
+
+        // SUT execution
+        gpFilterConverter.getDTOIntFilter(customerId, filter);
+
+    }
+
+    @Test(expected = BusinessServiceException.class)
+    public void testThrowExceptionIfCustomerIdIsNull() {
+        // Setup data
+        final String customerId = null;
+        final String filter = "(productType==TC)";
+
+        // SUT execution
+        gpFilterConverter.getDTOIntFilter(customerId, filter);
+
+    }
+
+    @Test(expected = BusinessServiceException.class)
+    public void testThrowExceptionIfCustomerIdIsStringNull() {
+        // Setup data
+        final String customerId = "null";
         final String filter = "(productType==TC)";
 
         // SUT execution
@@ -47,19 +68,51 @@ public class GlobalPositionFilterConverterTest {
         final DTOIntFilterProduct filterProduct = gpFilterConverter.getDTOIntFilter(customerId, filter);
 
         // Validation
-        assertEquals("", filterProduct.getProductType());
+        assertEquals(null, filterProduct.getProductType());
     }
 
     @Test(expected = BusinessServiceException.class)
     public void testThrowExceptionIfFilterIsMalformed() {
         // Setup data
-
-
-        // Setup expectation
-
+        final String customerId = "1234";
+        final String filter = "(productType=)TR";
 
         // SUT execution
+        final DTOIntFilterProduct filterProduct = gpFilterConverter.getDTOIntFilter(customerId, filter);
+    }
 
+    @Test(expected = BusinessServiceException.class)
+    public void testThrowExceptionIfFilterAttrDoesntExistInDTOIntFilter() {
+        // Setup data
+        final String customerId = "1234";
+        final String filter = "(excalibur==TC)";
+
+        // SUT execution
+        final DTOIntFilterProduct filterProduct = gpFilterConverter.getDTOIntFilter(customerId, filter);
+    }
+
+    @Test(expected = BusinessServiceException.class)
+    public void testThrowExceptionIfProductTypeDoesntExistInEnumProductType() {
+        // Setup data
+        final String customerId = "1234";
+        final String filter = "(productType==3MO4)";
+
+        // SUT execution
+        final DTOIntFilterProduct filterProduct = gpFilterConverter.getDTOIntFilter(customerId, filter);
+    }
+
+    @Test
+    public void testDTOIntFilterProductIfCustomerIdAndFilterWellSet() {
+        // Setup data
+        final String customerId = "1234";
+        final String filter = "(productType==TC)";
+
+        // SUT execution
+        final DTOIntFilterProduct filterProduct = gpFilterConverter.getDTOIntFilter(customerId, filter);
+
+        //Validation
+        assertEquals(customerId, filterProduct.getIdCustomer());
+        assertEquals("TC", filterProduct.getProductType());
     }
 
 }

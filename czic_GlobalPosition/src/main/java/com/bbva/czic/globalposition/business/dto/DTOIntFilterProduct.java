@@ -9,7 +9,7 @@ public class DTOIntFilterProduct {
 
     private String idCustomer;
 
-    private EnumProductType productType;
+    private String productType;
 
     public String getIdCustomer() {
         return idCustomer;
@@ -19,11 +19,11 @@ public class DTOIntFilterProduct {
         this.idCustomer = idCustomer;
     }
 
-    public EnumProductType getProductType() {
+    public String getProductType() {
         return productType;
     }
 
-    public void setProductType(EnumProductType productType) {
+    public void setProductType(String productType) {
         this.productType = productType;
     }
 }
