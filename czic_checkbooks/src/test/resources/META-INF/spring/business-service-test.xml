@@ -1,23 +1,4 @@
-<!--   <?xml version="1.0" encoding="UTF-8"?>
-<error-definitions application="qsrv" architecture="SpringServicingArchitecture" family="checkbook" servicing:business-service="claim" xmlns="http://bbva.com/gce" xmlns:servicing="http://bbva.com/arq-spring-servicing/gce-extension">
-	<error-definition severity="FATAL" alias="claimNotFound" code="0" servicing:http-status="409">
-		<message>Claim not found.</message>		
-		<message lang="en">Claim not found.</message>
-	</error-definition>
-	<error-definition severity="FATAL" alias="claimerNotFound" code="1" servicing:http-status="409">
-		<message>Claimer not found.</message>		
-		<message lang="en">Claimer not found.</message>
-	</error-definition>
-	<error-definition severity="FATAL" alias="issueNotFound" code="2" servicing:http-status="409">
-		<message>Issue not found.</message>		
-		<message lang="en">Issue not found.</message>
-	</error-definition>
-	<error-definition severity="FATAL" alias="claimExist" code="3" servicing:http-status="409">
-		<message>Claim is not null.</message>		
-		<message lang="en">Claim is not null.</message>
-	</error-definition>
-</error-definitions>
-<
+<?xml version="1.0" encoding="UTF-8"?>
 <beans 	xmlns="http://www.springframework.org/schema/beans"
 		xmlns:servicing="http://bbva.com/arq-spring-servicing" 
 		xmlns:aop="http://www.springframework.org/schema/aop" 
@@ -35,4 +16,4 @@
 
 	<servicing:test-metadata application-name="czic" local-configuration-filesystem-root="S:/lc" />
 
-</beans>-->
+</beans>
