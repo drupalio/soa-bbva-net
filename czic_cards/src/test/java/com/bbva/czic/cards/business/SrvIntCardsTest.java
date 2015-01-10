@@ -80,7 +80,7 @@ public class SrvIntCardsTest {
 
 		// SUT's excecution
 		List<DTOIntCardCharge> carChargeList = srv.getCreditCardCharges("1",
-				"chargeDate=ge=10/01/2014;chargeDate=le=11/01/2014");
+				"chargeDate=ge=2014-10-01;chargeDate=le=2014-11-01");
 
 		// validation
 		assertNotNull(carChargeList);
