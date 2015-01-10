@@ -95,7 +95,7 @@ public class SrvIntCards implements ISrvIntCards {
 				/*
 				 * Transformacion de fechas
 				 */
-				SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
+				SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd");
 				Date startDateFilter = null;
 				Date endDateFilter = null;
 				try {

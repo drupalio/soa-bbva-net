@@ -1,23 +1,19 @@
 package com.bbva.czic.customers.business;
 
 import java.util.List;
-import javax.ws.rs.core.Response;
 
-
-import com.bbva.czic.customers.business.dto.DTOIntCreditCard;
-
-
-import com.bbva.czic.customers.business.dto.DTOIntAccMovementsResume;
-
-
-
-
-
+import com.bbva.czic.dto.net.AccMovementsResume;
+import com.bbva.czic.dto.net.CardCharge;
+import com.bbva.jee.arq.spring.core.servicing.gce.BusinessServiceException;
 
 public interface ISrvIntCustomers {
- 	public List<DTOIntCreditCard> getlistCreditCardsCharges(String idUser);
+ 	
 
-		public List<DTOIntAccMovementsResume> getlistAccountsMovementsResume(String idUser);
+List<AccMovementsResume> getlistAccountsMovementsResume(String idUser,
+		String filter) throws BusinessServiceException;
+
+List<CardCharge> getlistCreditCharges(String numproduct, String filter)
+		throws BusinessServiceException;
 
 	
 }

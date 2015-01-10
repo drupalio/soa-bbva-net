@@ -33,7 +33,7 @@
 		http://bbva.com/arq-spring-servicing/servicing.xsd">
 	
 	<context:spring-configured/>
-	<aop:aspectj-autoproxy/>	
+	<aop:aspectj-autoproxy/>
 	<context:annotation-config />
 	
 	<!-- Declaracion de modulo de servicios -->

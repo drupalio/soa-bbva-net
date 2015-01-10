@@ -2,6 +2,7 @@ package com.bbva.czic.cards.facade.v01;
 
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.when;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,7 +37,7 @@ public class SrvCardsV01Test {
 
 	@InjectMocks
 	@Autowired
-	ISrvCardsV01 srv;
+	SrvCardsV01Mock srv;
 
 	@Before
 	public void init() {
@@ -52,12 +53,10 @@ public class SrvCardsV01Test {
 		List<CardCharge> listaDTOCardCharge = null;
 
 		// setUp - expectation
-		/*
-		 * when(srvIntMock.getCreditCardCharges("1", "1")).thenReturn(
-		 * listaDtoIntCardCharge);
-		 */
 
-		doReturn(listaDtoIntCardCharge).when(srvIntMock).getCreditCardCharges("1", "1");
+		when(srvIntMock.getCreditCardCharges("1", "1")).thenReturn(listaDtoIntCardCharge);
+
+//		doReturn(listaDtoIntCardCharge).when(srvIntMock).getCreditCardCharges("1", "1");
 
 		// SUT's excecution
 		listaDTOCardCharge = srv.getCreditCardCharges("1", "1", null, null, null);

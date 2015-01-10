@@ -2,15 +2,15 @@
 package com.bbva.czic.dto.net;
 
 import java.io.Serializable;
+
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+
 import com.bbva.jee.arq.spring.core.servicing.utils.MoneyAdapter;
-
-
 import com.bbva.jee.arq.spring.core.servicing.utils.Money;
 import com.wordnik.swagger.annotations.ApiModelProperty;
 
@@ -48,5 +48,4 @@ public class CardCharge
     public void setAmount(Money amount) {
         this.amount = amount;
     }
-
 }
