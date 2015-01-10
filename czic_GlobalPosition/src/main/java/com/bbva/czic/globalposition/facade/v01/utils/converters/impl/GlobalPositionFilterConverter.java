@@ -1,8 +1,8 @@
-package com.bbva.czic.globalposition.facade.v01.utils.converters;
+package com.bbva.czic.globalposition.facade.v01.utils.converters.impl;
 
 import com.bbva.czic.dto.net.EnumProductType;
 import com.bbva.czic.globalposition.business.dto.DTOIntFilterProduct;
-import com.bbva.czic.globalposition.business.dto.DTOIntProduct;
+import com.bbva.czic.globalposition.facade.v01.utils.converters.IFilterConverter;
 import com.bbva.czic.routine.commons.rm.utils.errors.EnumError;
 import com.bbva.jee.arq.spring.core.log.I18nLog;
 import com.bbva.jee.arq.spring.core.log.I18nLogFactory;
@@ -33,19 +33,19 @@ public class GlobalPositionFilterConverter implements IFilterConverter {
 
         final DTOIntFilterProduct filterProduct = new DTOIntFilterProduct();
 
-        if(customerId.equals("null") || customerId.isEmpty() || customerId == null) {
+        if(customerId == null || customerId.equals("null") || customerId.isEmpty()) {
             throw new BusinessServiceException(EnumError.WRONG_PARAMETERS.getAlias());
         }
         if (filter != null && !filter.contentEquals("null")) {
             log.info("A query string (filter) has been sended: " + filter);
-            SearchCondition<DTOIntProduct> sc;
+            SearchCondition<DTOIntFilterProduct> sc;
             try {
-                sc = new FiqlParser<DTOIntProduct>(DTOIntProduct.class).parse(filter);
+                sc = new FiqlParser<DTOIntFilterProduct>(DTOIntFilterProduct.class).parse(filter);
 
                 final List<PrimitiveStatement> splitDataFilter = businessToolKit.getDataFromFilter(sc);
                 for (PrimitiveStatement st : splitDataFilter) {
-                    if (st.getProperty().equals("productType")) {
-                        filterProduct.setProductType(EnumProductType.valueOf(st.getValue().toString()));
+                    if (st.getProperty().equalsIgnoreCase("productType")) {
+                        filterProduct.setProductType(EnumProductType.valueOf(st.getValue().toString()).name());
                     }
                 }
 
