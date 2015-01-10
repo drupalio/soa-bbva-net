@@ -181,6 +181,7 @@
   </classpathentry>
   <classpathentry kind="var" path="M2_REPO/com/bbva/jee/arq/spring/integraciones/grantingtickets/1.0.0/grantingtickets-1.0.0.jar"/>
   <classpathentry kind="var" path="M2_REPO/com/google/guava/guava/13.0.1/guava-13.0.1.jar" sourcepath="M2_REPO/com/google/guava/guava/13.0.1/guava-13.0.1-sources.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/hamcrest/hamcrest-core/1.1/hamcrest-core-1.1.jar" sourcepath="M2_REPO/org/hamcrest/hamcrest-core/1.1/hamcrest-core-1.1-sources.jar"/>
   <classpathentry kind="var" path="M2_REPO/com/hazelcast/hazelcast-all/2.5/hazelcast-all-2.5.jar" sourcepath="M2_REPO/com/hazelcast/hazelcast-all/2.5/hazelcast-all-2.5-sources.jar"/>
   <classpathentry kind="var" path="M2_REPO/com/ibm/mq/headers/7.0.1.7/headers-7.0.1.7.jar">
     <attributes>
@@ -270,11 +271,7 @@
       <attribute value="jar:file:/S:/M2_REPO/javassist/javassist/3.12.0.GA/javassist-3.12.0.GA-javadoc.jar!/" name="javadoc_location"/>
     </attributes>
   </classpathentry>
-  <classpathentry kind="var" path="M2_REPO/com/sun/xml/bind/jaxb-impl/2.1.13/jaxb-impl-2.1.13.jar" sourcepath="M2_REPO/com/sun/xml/bind/jaxb-impl/2.1.13/jaxb-impl-2.1.13-sources.jar">
-    <attributes>
-      <attribute value="jar:file:/S:/M2_REPO/com/sun/xml/bind/jaxb-impl/2.1.13/jaxb-impl-2.1.13-javadoc.jar!/" name="javadoc_location"/>
-    </attributes>
-  </classpathentry>
+  <classpathentry kind="var" path="M2_REPO/com/sun/xml/bind/jaxb-impl/2.2.5.1/jaxb-impl-2.2.5.1.jar"/>
   <classpathentry kind="var" path="M2_REPO/com/ibm/mq/jmqi/7.0.1.7/jmqi-7.0.1.7.jar">
     <attributes>
       <attribute value="jar:file:/S:/M2_REPO/com/ibm/mq/jmqi/7.0.1.7/jmqi-7.0.1.7-javadoc.jar!/" name="javadoc_location"/>
@@ -302,6 +299,7 @@
       <attribute value="jar:file:/S:/M2_REPO/log4j/log4j/1.2.16/log4j-1.2.16-javadoc.jar!/" name="javadoc_location"/>
     </attributes>
   </classpathentry>
+  <classpathentry kind="var" path="M2_REPO/org/mockito/mockito-core/1.9.0/mockito-core-1.9.0.jar" sourcepath="M2_REPO/org/mockito/mockito-core/1.9.0/mockito-core-1.9.0-sources.jar"/>
   <classpathentry kind="var" path="M2_REPO/com/ibm/mq/7.0.1.7/mq-7.0.1.7.jar">
     <attributes>
       <attribute value="jar:file:/S:/M2_REPO/com/ibm/mq/7.0.1.7/mq-7.0.1.7-javadoc.jar!/" name="javadoc_location"/>
@@ -318,6 +316,7 @@
     </attributes>
   </classpathentry>
   <classpathentry kind="var" path="M2_REPO/org/apache/neethi/neethi/3.0.2/neethi-3.0.2.jar" sourcepath="M2_REPO/org/apache/neethi/neethi/3.0.2/neethi-3.0.2-sources.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/objenesis/objenesis/1.0/objenesis-1.0.jar" sourcepath="M2_REPO/org/objenesis/objenesis/1.0/objenesis-1.0-sources.jar"/>
   <classpathentry kind="var" path="M2_REPO/com/oracle/ojdbc14/10.2.0.2/ojdbc14-10.2.0.2.jar"/>
   <classpathentry kind="var" path="M2_REPO/org/springframework/roo/org.springframework.roo.annotations/1.1.5.RELEASE/org.springframework.roo.annotations-1.1.5.RELEASE.jar">
     <attributes>
