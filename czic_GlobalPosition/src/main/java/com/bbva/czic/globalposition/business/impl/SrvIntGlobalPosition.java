@@ -6,9 +6,9 @@ import com.bbva.czic.globalposition.business.dto.DTOIntProduct;
 import com.bbva.czic.globalposition.dao.GlobalPositionDAO;
 import com.bbva.jee.arq.spring.core.log.I18nLog;
 import com.bbva.jee.arq.spring.core.log.I18nLogFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.Resource;
 import java.util.List;
 
 
@@ -17,7 +17,7 @@ public class SrvIntGlobalPosition implements ISrvIntGlobalPosition {
 
 	private static I18nLog log = I18nLogFactory.getLogI18n(SrvIntGlobalPosition.class,"META-INF/spring/i18n/log/mensajesLog");
 
-	@Autowired
+	@Resource(name = "global-position-dao")
 	GlobalPositionDAO globalPositionDAO;
 
 	@Override
