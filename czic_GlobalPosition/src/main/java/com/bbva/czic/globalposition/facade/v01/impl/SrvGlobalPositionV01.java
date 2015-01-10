@@ -1,10 +1,11 @@
-package com.bbva.czic.globalposition.facade.v01;
+package com.bbva.czic.globalposition.facade.v01.impl;
 
 import com.bbva.czic.dto.net.EnumProductType;
 import com.bbva.czic.dto.net.Product;
 import com.bbva.czic.globalposition.business.ISrvIntGlobalPosition;
 import com.bbva.czic.globalposition.business.dto.DTOIntFilterProduct;
 import com.bbva.czic.globalposition.business.dto.DTOIntProduct;
+import com.bbva.czic.globalposition.facade.v01.ISrvGlobalPositionV01;
 import com.bbva.czic.globalposition.facade.v01.mapper.Mapper;
 import com.bbva.czic.routine.commons.rm.utils.errors.EnumError;
 import com.bbva.jee.arq.spring.core.log.I18nLog;
