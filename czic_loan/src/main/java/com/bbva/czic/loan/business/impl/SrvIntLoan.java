@@ -29,27 +29,13 @@ public class SrvIntLoan implements ISrvIntLoan {
 			throws BusinessServiceException {
 		try {
 
-			if (idRotaryQuota == null)
+			if (idRotaryQuota == null){
 				throw new BusinessServiceException("loanPeticiongetRotaryQuota");
+			}
 
 			DTOIntLoan dtoIntLoan = loanDao.getRotaryQuota(idRotaryQuota);
 
 			return dtoIntLoan;
-		} catch (Exception e) {
-			throw new BusinessServiceException(e.getMessage());
-		}
-	}
-
-	@Override
-	public DTOIntMovement getRotaryQuotaMovement(String idMovement,
-			String idLoan) throws BusinessServiceException {
-
-		try {
-			if (idMovement == null || idLoan == null)
-				throw new BusinessServiceException("loanPeticionRotaryMuvement");
-
-			return loanDao.getRotaryQuotaMovement(idMovement, idLoan);
-
 		} catch (Exception e) {
 			throw new BusinessServiceException(e.getMessage());
 		}

@@ -8,6 +8,4 @@ public interface ISrvIntLoan {
 
 	public DTOIntLoan getRotaryQuota(String idRotaryQuota);
 
-	public DTOIntMovement getRotaryQuotaMovement(String idMovement,
-			String idLoan) throws BusinessServiceException;
 }

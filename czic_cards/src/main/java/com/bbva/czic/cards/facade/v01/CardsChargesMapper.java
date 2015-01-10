@@ -2,8 +2,8 @@ package com.bbva.czic.cards.facade.v01;
 
 import com.bbva.czic.cards.business.dto.DTOIntCardCharge;
 import com.bbva.czic.cards.dao.model.ozno.FormatoOZECNOS0;
-import com.bbva.czic.dto.net.EnumCardChargeCategory;
 import com.bbva.jee.arq.spring.core.servicing.utils.Money;
+import com.bbva.czic.dto.net.*;
 
 public class CardsChargesMapper {
 

@@ -9,7 +9,4 @@ public interface LoanDAO {
 	public DTOIntLoan getRotaryQuota(String idLoan)
 			throws BusinessServiceException;
 
-	public DTOIntMovement getRotaryQuotaMovement(String idMovement,
-			String idLoan) throws BusinessServiceException;
-
 }

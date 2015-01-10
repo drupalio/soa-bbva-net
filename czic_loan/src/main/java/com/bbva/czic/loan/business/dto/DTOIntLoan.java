@@ -47,11 +47,11 @@ public class DTOIntLoan extends Product {
 		this.status = status;
 	}
 
-	private Balance getDebt() {
+	public Balance getDebt() {
 		return debt;
 	}
 
-	private void setDebt(Balance debt) {
+	public void setDebt(Balance debt) {
 		this.debt = debt;
 	}
 
