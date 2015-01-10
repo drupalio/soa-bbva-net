@@ -4,7 +4,6 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
-import java.util.concurrent.locks.Condition;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -13,7 +12,6 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.mock.staticmock.MockStaticEntityMethods;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.TestExecutionListeners;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
@@ -36,7 +34,6 @@ import com.bbva.czic.loan.business.dto.DTOIntLoan;
 import com.bbva.czic.loan.dao.LoanDAO;
 import com.bbva.jee.arq.spring.core.servicing.gce.BusinessServiceException;
 import com.bbva.jee.arq.spring.core.servicing.test.BusinessServiceTestContextLoader;
-import com.bbva.jee.arq.spring.core.servicing.test.MockInvocationContextTestExecutionListener;
 import com.bbva.jee.arq.spring.core.servicing.utils.Money;
 
 import static org.junit.Assert.assertEquals;
@@ -116,7 +113,7 @@ public class SrvIntLoanTest {
 		
 		Email email = new Email();
 		email.setActive(true);
-		email.setAddres("mock@test.com");
+		email.setAddress("mock@test.com");
 		email.setPrimary(true);
 		email.setSource(EnumContactSourceType.WEB);
 		

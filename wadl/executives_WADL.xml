@@ -107,7 +107,7 @@
             <xs:complexType name="Email">
                 <xs:sequence>
                     <xs:element minOccurs="0" name="source" type="tns:EnumContactSourceType"/>
-                    <xs:element minOccurs="0" name="addres" type="xs:string"/>
+                    <xs:element minOccurs="0" name="address" type="xs:string"/>
                     <xs:element minOccurs="0" name="primary" type="xs:boolean"/>
                     <xs:element minOccurs="0" name="active" type="xs:boolean"/>
                 </xs:sequence>

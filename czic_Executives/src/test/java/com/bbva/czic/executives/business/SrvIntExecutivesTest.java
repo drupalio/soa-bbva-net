@@ -15,13 +15,15 @@ import com.bbva.jee.arq.spring.core.servicing.test.MockInvocationContextTestExec
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(loader = BusinessServiceTestContextLoader.class, locations = {"classpath*:/META-INF/spring/applicationContext-*.xml", "classpath:/META-INF/spring/business-service.xml", "classpath:/META-INF/spring/business-service-test.xml"})
-@TestExecutionListeners(listeners = {MockInvocationContextTestExecutionListener.class, DependencyInjectionTestExecutionListener.class})
+@TestExecutionListeners(listeners = {
+//		MockInvocationContextTestExecutionListener.class,
+		DependencyInjectionTestExecutionListener.class
+})
 public class SrvIntExecutivesTest {
 	
 	@Autowired
 	ISrvIntExecutives srv;
 
-		
 	@Test
 	public void testGetExecutives() {
 		//TODO: call srv.getExecutives

@@ -21,7 +21,7 @@ public class Email
     @ApiModelProperty("Fuente de los contactos")
     private EnumContactSourceType source;
     @ApiModelProperty("Direccion de correo electronico")
-    private String addres;
+    private String address;
     @ApiModelProperty(" Correo por defecto")
     private Boolean primary;
     @ApiModelProperty("Correo activo")
@@ -39,12 +39,12 @@ public class Email
         this.source = source;
     }
 
-    public String getAddres() {
-        return addres;
+    public String getAddress() {
+        return address;
     }
 
-    public void setAddres(String addres) {
-        this.addres = addres;
+    public void setAddress(String address) {
+        this.address = address;
     }
 
     public Boolean getPrimary() {

@@ -1,28 +1,24 @@
-package com.bbva.czic.globalposition.facade.v01;
+package com.bbva.czic.globalposition.facade.v01.impl;
 
-import com.bbva.czic.dto.net.EnumProductType;
 import com.bbva.czic.dto.net.Product;
 import com.bbva.czic.globalposition.business.ISrvIntGlobalPosition;
 import com.bbva.czic.globalposition.business.dto.DTOIntFilterProduct;
 import com.bbva.czic.globalposition.business.dto.DTOIntProduct;
-import com.bbva.czic.globalposition.facade.v01.mapper.Mapper;
-import com.bbva.czic.routine.commons.rm.utils.errors.EnumError;
+import com.bbva.czic.globalposition.facade.v01.ISrvGlobalPositionV01;
+import com.bbva.czic.globalposition.facade.v01.mapper.IGlobalPositionMapper;
+import com.bbva.czic.globalposition.facade.v01.utils.converters.IFilterConverter;
 import com.bbva.jee.arq.spring.core.log.I18nLog;
 import com.bbva.jee.arq.spring.core.log.I18nLogFactory;
 import com.bbva.jee.arq.spring.core.servicing.annotations.SMC;
 import com.bbva.jee.arq.spring.core.servicing.annotations.SN;
 import com.bbva.jee.arq.spring.core.servicing.annotations.VN;
 import com.bbva.jee.arq.spring.core.servicing.gce.BusinessServiceException;
-import com.bbva.jee.arq.spring.core.servicing.utils.BusinessServicesToolKit;
 import com.wordnik.swagger.annotations.*;
-import org.apache.cxf.jaxrs.ext.search.PrimitiveStatement;
-import org.apache.cxf.jaxrs.ext.search.SearchCondition;
-import org.apache.cxf.jaxrs.ext.search.SearchParseException;
-import org.apache.cxf.jaxrs.ext.search.fiql.FiqlParser;
 import org.apache.cxf.jaxrs.model.wadl.ElementClass;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.Resource;
 import javax.ws.rs.*;
 import javax.ws.rs.core.HttpHeaders;
 import javax.ws.rs.core.MediaType;
@@ -42,9 +38,12 @@ public class SrvGlobalPositionV01 implements ISrvGlobalPositionV01, com.bbva.jee
 	private static I18nLog log = I18nLogFactory.getLogI18n(SrvGlobalPositionV01.class,"META-INF/spring/i18n/log/mensajesLog");
 
 	public HttpHeaders httpHeaders;
-	
-	@Autowired
-	BusinessServicesToolKit businessToolKit;
+
+	@Resource(name = "global-position-filter-converter")
+	IFilterConverter gpFilterConverter;
+
+	@Resource(name = "global-position-product-mapper")
+	IGlobalPositionMapper globalPositionMapper;
 
 	public UriInfo uriInfo;
 	
@@ -80,10 +79,10 @@ public class SrvGlobalPositionV01 implements ISrvGlobalPositionV01, com.bbva.jee
 			@ApiParam(value = "Customer identifier") @PathParam("customerId") String customerId,
 			@ApiParam(value = "filter param") @DefaultValue("null") @QueryParam("$filter") String filter) {
 
-		final DTOIntFilterProduct filterProduct = getFilterProduct(customerId, filter);
-
+		final DTOIntFilterProduct filterProduct = gpFilterConverter.getDTOIntFilter(customerId, filter);
 		List<DTOIntProduct> products = srvIntGlobalPosition.getExtractGlobalBalance(filterProduct);
-		return Mapper.productListMap(products);
+
+		return globalPositionMapper.mapAsList(products, Product.class);
 	}
 
 	@ApiOperation(value="Update the product.", notes="Update the product partially", response=Response.class)
@@ -135,6 +134,7 @@ public class SrvGlobalPositionV01 implements ISrvGlobalPositionV01, com.bbva.jee
 		srvIntGlobalPosition.updateProductOperability(productInt);
 	}
 
+<<<<<<< HEAD:czic_GlobalPosition/src/main/java/com/bbva/czic/globalposition/facade/v01/SrvGlobalPositionV01.java
 	private DTOIntFilterProduct getFilterProduct(String customerId, String filter) {
 
 		final DTOIntFilterProduct filterProduct = new DTOIntFilterProduct();
@@ -167,4 +167,6 @@ public class SrvGlobalPositionV01 implements ISrvGlobalPositionV01, com.bbva.jee
 		return filterProduct;
 
 	}
+=======
+>>>>>>> bd58ae038e728bf05f512007bf7b682934829a64:czic_GlobalPosition/src/main/java/com/bbva/czic/globalposition/facade/v01/impl/SrvGlobalPositionV01.java
 }
