@@ -29,7 +29,7 @@ public class User
     @ApiModelProperty("Nombre del usuario")
     private String name;
     @ApiModelProperty("Identificador de la informacion del contacto")
-    private com.bbva.czic.dto.net.ContactInfo ContactInfo;
+    private ContactInfo contactInfo;
     @ApiModelProperty("Entidad con toda la informaci\u00f3n del ejecutivo de ventas")
     private String userSalesExecutive;
 //    @XmlJavaTypeAdapter(CalendarAdapter.class)

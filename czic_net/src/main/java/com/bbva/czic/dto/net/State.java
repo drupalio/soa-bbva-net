@@ -2,10 +2,13 @@
 package com.bbva.czic.dto.net;
 
 import java.io.Serializable;
+import java.util.List;
+
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
+
 
 
 import com.wordnik.swagger.annotations.ApiModelProperty;
@@ -22,8 +25,8 @@ public class State
     private String id;
     @ApiModelProperty(value = "Nombre", required = true)
     private String name;
-    @ApiModelProperty("Pais")
-    private Country country;
+    @ApiModelProperty("ciudades pertenecientes al estado o departamento")
+    private List<City> cities;
 
     public State() {
         //default constructor
@@ -45,12 +48,13 @@ public class State
         this.name = name;
     }
 
-    public Country getCountry() {
-        return country;
-    }
+	public List<City> getCities() {
+		return cities;
+	}
 
-    public void setCountry(Country country) {
-        this.country = country;
-    }
+	public void setCities(List<City> cities) {
+		this.cities = cities;
+	}
 
+    
 }

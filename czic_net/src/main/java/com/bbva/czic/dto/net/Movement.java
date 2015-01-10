@@ -56,6 +56,8 @@ public class Movement
     @XmlElement(type = Money.class)
     @ApiModelProperty("")
     private Money balance;
+    @ApiModelProperty("Numero de cuotas del pago o movimiento")
+    private String numberOfQuotas;
 
     public Movement() {
         //default constructor
@@ -148,5 +150,15 @@ public class Movement
     public void setBalance(Money balance) {
         this.balance = balance;
     }
+
+	public String getNumberOfQuotas() {
+		return numberOfQuotas;
+	}
+
+	public void setNumberOfQuotas(String numberOfQuotas) {
+		this.numberOfQuotas = numberOfQuotas;
+	}
+    
+    
 
 }

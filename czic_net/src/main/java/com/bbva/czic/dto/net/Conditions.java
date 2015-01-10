@@ -3,15 +3,13 @@ package com.bbva.czic.dto.net;
 
 import java.io.Serializable;
 import java.util.Calendar;
-import java.util.Date;
+import java.util.List;
+
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlSchemaType;
 import javax.xml.bind.annotation.XmlType;
-import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
-import com.bbva.jee.arq.spring.core.servicing.utils.CalendarAdapter;
-
 
 import com.wordnik.swagger.annotations.ApiModelProperty;
 
@@ -37,6 +35,8 @@ public class Conditions
     private Office office;
     @ApiModelProperty("")
     private String mobilizationConditions;
+    @ApiModelProperty(value = "ultimas actividades realizadas", required = true)
+    private List<Activity> activities;
 
     public Conditions() {
         //default constructor
@@ -89,5 +89,15 @@ public class Conditions
     public void setMobilizationConditions(String mobilizationConditions) {
         this.mobilizationConditions = mobilizationConditions;
     }
+
+	public List<Activity> getActivities() {
+		return activities;
+	}
+
+	public void setActivities(List<Activity> activities) {
+		this.activities = activities;
+	}
+    
+    
 
 }

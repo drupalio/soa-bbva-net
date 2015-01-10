@@ -18,8 +18,6 @@ public class CreditCard
 {
 
     public final static long serialVersionUID = 1L;
-    @ApiModelProperty(value = "Identificador de la tarjeta de credito", required = true)
-    private String number;
     @ApiModelProperty("Entidad que posee toda un resumen de pagos de la tarjeta de cr\u00e9dito")
     private Payment payment;
     @ApiModelProperty("Entidad que posee toda la informaci\u00f3n acerca de las cuotas de la tarjeta de cr\u00e9dito")
@@ -27,14 +25,6 @@ public class CreditCard
 
     public CreditCard() {
         //default constructor
-    }
-
-    public String getNumber() {
-        return number;
-    }
-
-    public void setNumber(String number) {
-        this.number = number;
     }
 
     public Payment getPayment() {
