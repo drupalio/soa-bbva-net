@@ -25,7 +25,12 @@ public class GlobalPositionFilterConverter implements IFilterConverter {
 
     private static I18nLog log = I18nLogFactory.getLogI18n(GlobalPositionFilterConverter.class, "META-INF/spring/i18n/log/mensajesLog");
 
+    public void setBusinessToolKit(BusinessServicesToolKit businessToolKit) {
+        this.businessToolKit = businessToolKit;
+    }
+
     @Autowired
+
     BusinessServicesToolKit businessToolKit;
 
     @Override

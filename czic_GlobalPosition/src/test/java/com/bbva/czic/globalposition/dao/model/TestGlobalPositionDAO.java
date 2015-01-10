@@ -29,6 +29,7 @@ public class TestGlobalPositionDAO {
     @Test
     public void testMapInternalDTOtoHost(){
 
+
     }
 
 }

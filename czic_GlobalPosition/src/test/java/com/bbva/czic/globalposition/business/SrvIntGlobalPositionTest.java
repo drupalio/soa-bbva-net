@@ -5,6 +5,7 @@ import com.bbva.czic.globalposition.business.dto.DTOIntProduct;
 import com.bbva.czic.globalposition.business.dto.DTOIntProducts;
 import com.bbva.czic.globalposition.business.impl.SrvIntGlobalPosition;
 import com.bbva.czic.globalposition.dao.GlobalPositionDAO;
+import com.bbva.jee.arq.spring.core.servicing.gce.BusinessServiceException;
 import com.bbva.jee.arq.spring.core.servicing.test.BusinessServiceTestContextLoader;
 import org.junit.Before;
 import org.junit.Test;
@@ -23,7 +24,7 @@ import org.springframework.test.context.support.DependencyInjectionTestExecution
 import java.util.ArrayList;
 import java.util.List;
 
-
+/*
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(
 		loader = BusinessServiceTestContextLoader.class,
@@ -35,14 +36,14 @@ import java.util.List;
 @TestExecutionListeners(listeners = {
 		//MockInvocationContextTestExecutionListener.class,
 		DependencyInjectionTestExecutionListener.class
-})
+})*/
 public class SrvIntGlobalPositionTest {
 
 	@Mock
 	GlobalPositionDAO globalPositionDAO;
 
 	@InjectMocks
-	@Autowired
+	//@Autowired
 	SrvIntGlobalPosition srv;
 
 	@Before
@@ -54,6 +55,7 @@ public class SrvIntGlobalPositionTest {
 	public void testNotNullIfProductExist() {
 		// Setup data
 		final DTOIntProducts intProducts = new DTOIntProducts();
+		intProducts.setProducts(new ArrayList<DTOIntProduct>());
 		final DTOIntFilterProduct filterProduct = new DTOIntFilterProduct();
 
 		// Setup expectation
@@ -63,7 +65,7 @@ public class SrvIntGlobalPositionTest {
 		final List<DTOIntProduct> products = srv.getExtractGlobalBalance(filterProduct);
 
 		//Validation
-
+		assertNotNull(products);
 	}
 	
 }
