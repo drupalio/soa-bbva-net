@@ -18,7 +18,14 @@
 	
     <!-- INICIO Arquitectura Servicios -->
 
-    <dependency>
+        <dependency>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-core</artifactId>
+            <version>1.9.0</version>
+        </dependency>
+
+
+        <dependency>
        <groupId>com.bbva.czic</groupId>
        <artifactId>czic_net</artifactId>
        <version>1.0.0</version>

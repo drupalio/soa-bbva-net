@@ -13,7 +13,9 @@ import com.bbva.jee.arq.spring.core.host.protocolo.ps9.ErrorMappingHelper;
 import com.bbva.jee.arq.spring.core.host.protocolo.ps9.aplicacion.CopySalida;
 import com.bbva.jee.arq.spring.core.host.transporte.ExcepcionTransporte;
 import com.bbva.jee.arq.spring.core.servicing.gce.BusinessServiceException;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public class ExecutivesDAOImpl implements ExecutivesDAO {
 
 	@Autowired
