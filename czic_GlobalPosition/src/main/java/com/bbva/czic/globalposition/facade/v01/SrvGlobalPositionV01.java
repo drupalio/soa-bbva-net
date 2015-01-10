@@ -141,7 +141,7 @@ public class SrvGlobalPositionV01 implements ISrvGlobalPositionV01, com.bbva.jee
 		filterProduct.setProductType(null);
 
 		if (filter != null && !filter.contentEquals("null")) {
-			log.info("A query string (filter) has been sended: " + filter);
+			log.info("A query string (filter) has been sent: " + filter);
 			SearchCondition<DTOIntProduct> sc;
 			try {
 				sc = new FiqlParser<DTOIntProduct>(DTOIntProduct.class).parse(filter);

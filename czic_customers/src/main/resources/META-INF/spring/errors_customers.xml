@@ -44,36 +44,19 @@
    - En caso contrario, se elige el mensaje en el idioma por defecto.
    -->
 
-    <error-definition severity="ERROR" alias="wrongParametersListAccountsMovementsResume" code="1" servicing:http-status="400">
-        <message>Customer not found.</message>
-        <message lang="en">account not found.</message>
-        <message lang="es">Parámetros inválidos, validelos nuevamente  </message>
+    <error-definition severity="ERROR" alias="wrongParameters" code="1" servicing:http-status="400">
+        <message>Invalid input parameters</message>
+        <message lang="en">Ivalid input parameters</message>
+        <message lang="es">Parámetros inválidos, validelos nuevamente</message>
     </error-definition>
-    <error-definition severity="ERROR" alias="noDataCustomerListAccountsMovementsResume" code="1" servicing:http-status="409">
-        <message>Customer not found.</message>
-        <message lang="en">no data to search.</message>
+    <error-definition severity="ERROR" alias="noData" code="1" servicing:http-status="409">
+        <message>Data not found</message>
+        <message lang="en">Data not found</message>
         <message lang="es">No existen datos para la búsqueda realizada.</message>
     </error-definition>
-      <error-definition severity="ERROR" alias="technicalErrorListAccountsMovementsResume" code="1" servicing:http-status="500">
-        <message>Customer not found.</message>
+      <error-definition severity="ERROR" alias="technicalError" code="1" servicing:http-status="500">
+        <message>Platform error</message>
         <message lang="en">Platform error .</message>
-        <message lang="es">Ocurrrio un fallo con alguna plataforma.</message>
-    </error-definition>
-
-<!-- errores para listCardCharge  -->
-  <error-definition severity="ERROR" alias="wrongParametersListCreditCardsCharges" code="2" servicing:http-status="400">
-        <message>Card charge not found.</message>
-        <message lang="en">Card charge not found.</message>
-        <message lang="es">Parámetros inválidos</message>
-    </error-definition>
-    <error-definition severity="ERROR" alias="noDataListCreditCardsCharges" code="2" servicing:http-status="409">
-        <message>Card charge not found.</message>
-        <message lang="en">no data to search.</message>
-        <message lang="es">No existen datos para la búsqueda realizada.</message>
-    </error-definition>
-      <error-definition severity="ERROR" alias="technicalErrorListCreditCardsCharges" code="2" servicing:http-status="500">
-        <message>Card charge not found.</message>
-        <message lang="en">Platform error .</message>
-        <message lang="es">Ocurrrio un fallo con alguna plataforma.</message>
+        <message lang="es">Ocurrrio un fallo con la plataforma.</message>
     </error-definition>
 </error-definitions>

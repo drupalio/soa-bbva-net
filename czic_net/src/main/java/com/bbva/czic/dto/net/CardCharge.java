@@ -48,14 +48,4 @@ public class CardCharge
     public void setAmount(Money amount) {
         this.amount = amount;
     }
-
-	public void getCustomerId(String numproduct) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	
-
-
-
 }
