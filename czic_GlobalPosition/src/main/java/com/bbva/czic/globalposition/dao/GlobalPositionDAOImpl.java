@@ -36,7 +36,7 @@ public class GlobalPositionDAOImpl implements GlobalPositionDAO {
 	@Override
 	public DTOIntProducts getExtractGlobalBalance(final DTOIntFilterProduct filterProduct) {
 
-		final DTOIntProducts products = (DTOIntProducts) ((filterProduct.getProductType().equals(EnumProductType.TC) || filterProduct.getProductType().equals(null)) ?
+		final DTOIntProducts products = (DTOIntProducts) (filterProduct.getProductType() == null || (filterProduct.getProductType().equals(EnumProductType.TC)) ?
 				txGetExtractGlobalBalance.invoke(filterProduct) : txGetExtractGlobalBalanceNoTC.invoke(filterProduct));
 		return products;
 	}
