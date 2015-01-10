@@ -8,6 +8,7 @@ import com.bbva.czic.globalposition.business.dto.DTOIntProduct;
 import com.bbva.czic.globalposition.facade.v01.ISrvGlobalPositionV01;
 import com.bbva.czic.globalposition.facade.v01.mapper.IGlobalPositionMapper;
 import com.bbva.czic.globalposition.facade.v01.mapper.Mapper;
+import com.bbva.czic.globalposition.facade.v01.utils.converters.IFilterConverter;
 import com.bbva.czic.routine.commons.rm.utils.errors.EnumError;
 import com.bbva.jee.arq.spring.core.log.I18nLog;
 import com.bbva.jee.arq.spring.core.log.I18nLogFactory;
@@ -39,15 +40,15 @@ import java.util.List;
 @VN(vnn="V01")
 @Api(value="/GlobalPosition/V01",description="SN GlobalPosition")
 @Produces({ MediaType.APPLICATION_JSON})
-@Service
+@Service//(value = "srv-global-position-v01")
 public class SrvGlobalPositionV01 implements ISrvGlobalPositionV01, com.bbva.jee.arq.spring.core.servicing.utils.ContextAware {
 
 	private static I18nLog log = I18nLogFactory.getLogI18n(SrvGlobalPositionV01.class,"META-INF/spring/i18n/log/mensajesLog");
 
 	public HttpHeaders httpHeaders;
-	
-	@Autowired
-	BusinessServicesToolKit businessToolKit;
+
+	@Resource(name = "global-position-filter-converter")
+	IFilterConverter gpFilterConverter;
 
 	@Resource(name = "global-position-product-mapper")
 	IGlobalPositionMapper globalPositionMapper;
@@ -86,7 +87,7 @@ public class SrvGlobalPositionV01 implements ISrvGlobalPositionV01, com.bbva.jee
 			@ApiParam(value = "Customer identifier") @PathParam("customerId") String customerId,
 			@ApiParam(value = "filter param") @DefaultValue("null") @QueryParam("$filter") String filter) {
 
-		final DTOIntFilterProduct filterProduct = getFilterProduct(customerId, filter);
+		final DTOIntFilterProduct filterProduct = gpFilterConverter.getDTOIntFilter(customerId, filter);
 		List<DTOIntProduct> products = srvIntGlobalPosition.getExtractGlobalBalance(filterProduct);
 
 		return globalPositionMapper.mapAsList(products, Product.class);
@@ -141,36 +142,4 @@ public class SrvGlobalPositionV01 implements ISrvGlobalPositionV01, com.bbva.jee
 		srvIntGlobalPosition.updateProductOperability(productInt);
 	}
 
-	private DTOIntFilterProduct getFilterProduct(String customerId, String filter) {
-
-		final DTOIntFilterProduct filterProduct = new DTOIntFilterProduct();
-		filterProduct.setProductType(null);
-
-		if (filter != null && !filter.contentEquals("null")) {
-			log.info("A query string (filter) has been sended: " + filter);
-			SearchCondition<DTOIntProduct> sc;
-			try {
-				sc = new FiqlParser<DTOIntProduct>(DTOIntProduct.class).parse(filter);
-
-				final List<PrimitiveStatement> splitDataFilter = businessToolKit.getDataFromFilter(sc);
-				for (PrimitiveStatement st : splitDataFilter) {
-					if (st.getProperty().equals("productType")) {
-						filterProduct.setProductType(EnumProductType.valueOf(st.getValue().toString()));
-					}
-				}
-
-			} catch (SearchParseException e) {
-				log.error("SearchParseException - The query string (filter) has failed: " + e);
-				throw new BusinessServiceException(EnumError.WRONG_PARAMETERS.getAlias(), filter, e.getMessage());
-			} catch (IllegalArgumentException e) {
-				log.error("IllegalArgumentException - The product type is an invalid type - does not exist: " + e);
-				throw new BusinessServiceException(EnumError.WRONG_PARAMETERS.getAlias(), filter, e.getMessage());
-			}
-		}
-
-		filterProduct.setIdCustomer(customerId);
-
-		return filterProduct;
-
-	}
 }
