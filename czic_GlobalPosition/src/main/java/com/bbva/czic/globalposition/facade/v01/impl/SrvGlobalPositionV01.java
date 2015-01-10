@@ -49,7 +49,7 @@ public class SrvGlobalPositionV01 implements ISrvGlobalPositionV01, com.bbva.jee
 	@Autowired
 	BusinessServicesToolKit businessToolKit;
 
-	@Resource(name = "global-position-mapper")
+	@Resource(name = "global-position-product-mapper")
 	IGlobalPositionMapper globalPositionMapper;
 
 	public UriInfo uriInfo;
@@ -87,9 +87,9 @@ public class SrvGlobalPositionV01 implements ISrvGlobalPositionV01, com.bbva.jee
 			@ApiParam(value = "filter param") @DefaultValue("null") @QueryParam("$filter") String filter) {
 
 		final DTOIntFilterProduct filterProduct = getFilterProduct(customerId, filter);
-
 		List<DTOIntProduct> products = srvIntGlobalPosition.getExtractGlobalBalance(filterProduct);
-		return Mapper.productListMap(products);
+
+		return globalPositionMapper.mapAsList(products, Product.class);
 	}
 
 	@ApiOperation(value="Update the product.", notes="Update the product partially", response=Response.class)
