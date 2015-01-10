@@ -40,10 +40,6 @@ public class SrvIntCards implements ISrvIntCards {
 	 * credito
 	 * 
 	 * @author David Tafur
-	 * @param String
-	 *            id
-	 * @param String
-	 *            filter
 	 */
 	public List<DTOIntCardCharge> getCreditCardCharges(String id, String filter) {
 		log.info(" getCreditCardCharges ");

@@ -5,7 +5,6 @@ import org.springframework.stereotype.Service;
 
 import com.bbva.czic.loan.business.ISrvIntLoan;
 import com.bbva.czic.loan.business.dto.DTOIntLoan;
-import com.bbva.czic.loan.business.dto.DTOIntMovement;
 import com.bbva.czic.loan.dao.LoanDAO;
 import com.bbva.jee.arq.spring.core.log.I18nLog;
 import com.bbva.jee.arq.spring.core.log.I18nLogFactory;

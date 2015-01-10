@@ -1,7 +1,10 @@
 package com.bbva.czic.accounts.business;
 
+import com.bbva.czic.accounts.dao.AccountsDAO;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.TestExecutionListeners;
@@ -21,7 +24,7 @@ import com.bbva.jee.arq.spring.core.servicing.test.MockInvocationContextTestExec
 public class SrvIntAccountsTest {
 	
 	@Mock
-	AccountsnDAO accountDAO;
+	AccountsDAO accountDAO;
 
 	@InjectMocks
 	@Autowired

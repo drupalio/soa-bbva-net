@@ -17,13 +17,21 @@
 	<dependencies>
 	
     <!-- INICIO Arquitectura Servicios -->
-  
-   <dependency>
+    <!-- INICIO Arquitectura Servicios -->
+    
+    <dependency>
+			<groupId>ma.glasnost.orika</groupId>
+			<artifactId>orika-core</artifactId>
+			<version>1.4.5</version>
+        </dependency>
+
+    <dependency>
        <groupId>com.bbva.czic</groupId>
        <artifactId>czic_net</artifactId>
        <version>1.0.0</version>
     </dependency>
 
+  
     <dependency>
        <groupId>com.bbva.jee.arq.spring.core</groupId>
        <artifactId>arq-spring-servicing-core</artifactId>
@@ -69,8 +77,13 @@
 	</dependency>
 
 	<!--Dependencias Swagger -->
+		<dependency>
+			<groupId>org.mockito</groupId>
+			<artifactId>mockito-core</artifactId>
+			<version>1.9.0</version>
+		</dependency>
 	<dependency>
-		<groupId>com.wordnik</groupId>
+	<groupId>com.wordnik</groupId>
 		<artifactId>swagger-core_2.10</artifactId>
 		<version>${swagger.core.version}</version>
 		<exclusions>
