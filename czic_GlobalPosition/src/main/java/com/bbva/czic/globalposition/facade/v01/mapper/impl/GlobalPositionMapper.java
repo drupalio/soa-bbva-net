@@ -13,7 +13,7 @@ import com.bbva.czic.routine.commons.rm.utils.mappers.Mapper;
 import ma.glasnost.orika.MapperFactory;
 import ma.glasnost.orika.impl.ConfigurableMapper;
 
-@Mapper("global-position-")
+@Mapper("global-position-mapper")
 public class GlobalPositionMapper extends ConfigurableMapper  implements IGlobalPositionMapper{
 
     @Override

@@ -6,6 +6,7 @@ import com.bbva.czic.globalposition.business.ISrvIntGlobalPosition;
 import com.bbva.czic.globalposition.business.dto.DTOIntFilterProduct;
 import com.bbva.czic.globalposition.business.dto.DTOIntProduct;
 import com.bbva.czic.globalposition.facade.v01.ISrvGlobalPositionV01;
+import com.bbva.czic.globalposition.facade.v01.mapper.IGlobalPositionMapper;
 import com.bbva.czic.globalposition.facade.v01.mapper.Mapper;
 import com.bbva.czic.routine.commons.rm.utils.errors.EnumError;
 import com.bbva.jee.arq.spring.core.log.I18nLog;
@@ -24,6 +25,7 @@ import org.apache.cxf.jaxrs.model.wadl.ElementClass;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.Resource;
 import javax.ws.rs.*;
 import javax.ws.rs.core.HttpHeaders;
 import javax.ws.rs.core.MediaType;
@@ -46,6 +48,9 @@ public class SrvGlobalPositionV01 implements ISrvGlobalPositionV01, com.bbva.jee
 	
 	@Autowired
 	BusinessServicesToolKit businessToolKit;
+
+	@Resource(name = "global-position-mapper")
+	IGlobalPositionMapper globalPositionMapper;
 
 	public UriInfo uriInfo;
 	
