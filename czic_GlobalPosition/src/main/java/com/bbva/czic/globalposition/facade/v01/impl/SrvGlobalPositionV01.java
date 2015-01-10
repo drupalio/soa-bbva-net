@@ -134,4 +134,39 @@ public class SrvGlobalPositionV01 implements ISrvGlobalPositionV01, com.bbva.jee
 		srvIntGlobalPosition.updateProductOperability(productInt);
 	}
 
+<<<<<<< HEAD:czic_GlobalPosition/src/main/java/com/bbva/czic/globalposition/facade/v01/SrvGlobalPositionV01.java
+	private DTOIntFilterProduct getFilterProduct(String customerId, String filter) {
+
+		final DTOIntFilterProduct filterProduct = new DTOIntFilterProduct();
+		filterProduct.setProductType(null);
+
+		if (filter != null && !filter.contentEquals("null")) {
+			log.info("A query string (filter) has been sent: " + filter);
+			SearchCondition<DTOIntProduct> sc;
+			try {
+				sc = new FiqlParser<DTOIntProduct>(DTOIntProduct.class).parse(filter);
+
+				final List<PrimitiveStatement> splitDataFilter = businessToolKit.getDataFromFilter(sc);
+				for (PrimitiveStatement st : splitDataFilter) {
+					if (st.getProperty().equals("productType")) {
+						filterProduct.setProductType(EnumProductType.valueOf(st.getValue().toString()));
+					}
+				}
+
+			} catch (SearchParseException e) {
+				log.error("SearchParseException - The query string (filter) has failed: " + e);
+				throw new BusinessServiceException(EnumError.WRONG_PARAMETERS.getAlias(), filter, e.getMessage());
+			} catch (IllegalArgumentException e) {
+				log.error("IllegalArgumentException - The product type is an invalid type - does not exist: " + e);
+				throw new BusinessServiceException(EnumError.WRONG_PARAMETERS.getAlias(), filter, e.getMessage());
+			}
+		}
+
+		filterProduct.setIdCustomer(customerId);
+
+		return filterProduct;
+
+	}
+=======
+>>>>>>> bd58ae038e728bf05f512007bf7b682934829a64:czic_GlobalPosition/src/main/java/com/bbva/czic/globalposition/facade/v01/impl/SrvGlobalPositionV01.java
 }

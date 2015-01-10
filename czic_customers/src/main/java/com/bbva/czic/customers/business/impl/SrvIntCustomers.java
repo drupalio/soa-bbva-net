@@ -1,12 +1,9 @@
 package com.bbva.czic.customers.business.impl;
 
 
-import java.sql.Date;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
-
-import javax.annotation.Resource;
 
 import org.apache.cxf.jaxrs.ext.search.ConditionType;
 import org.apache.cxf.jaxrs.ext.search.PrimitiveStatement;
@@ -23,6 +20,7 @@ import com.bbva.czic.customers.dao.CustomersDAO;
 import com.bbva.czic.dto.net.AccMovementsResume;
 import com.bbva.czic.dto.net.CardCharge;
 import com.bbva.czic.mapper.CustomerMapper;
+import com.bbva.czic.routine.commons.rm.utils.errors.EnumError;
 import com.bbva.jee.arq.spring.core.log.I18nLog;
 import com.bbva.jee.arq.spring.core.log.I18nLogFactory;
 import com.bbva.jee.arq.spring.core.servicing.gce.BusinessServiceException;
@@ -38,13 +36,14 @@ public class SrvIntCustomers implements ISrvIntCustomers {
 
 	private CustomersDAO customersDao;
 
-	@Resource(name = "CustomerMapper")
-	private CustomerMapper customerMapper;
-	@Autowired
-	BusinessServicesToolKit bussinesToolKit;
 	
-	String fechain = null;
-	String fechafi = null;
+	private CustomerMapper customerMapper;
+	
+	@Autowired
+	private BusinessServicesToolKit bussinesToolKit;
+	
+	private String fechain = null;
+	private String fechafi = null;
 	
 	
 /***************************AccountMovement***************************************/
@@ -125,57 +124,49 @@ public class SrvIntCustomers implements ISrvIntCustomers {
 
 /***************************CardCharge***************************************/
 	@Override
-	
-	public List<CardCharge> getlistCreditCharges(String numproduct,
+	public List<CardCharge> getlistCreditCharges(String customerId,
 			final String filter) throws BusinessServiceException {
-		CardCharge cardCharge2 = null;
+		log.info("Into getlistCreditCharges...");
+		
 		try {
-
-			if (numproduct == null)
-				throw new BusinessServiceException(
-						"wrongParametersListCreditCardsCharges");
-
-			List<CardCharge> listCardCharge = new ArrayList<CardCharge>();
-			//cardCharge2.getCustomerId(numproduct);
 			
-			if (filter != null && !filter.contentEquals("null")) 
+			List<CardCharge> listCardCharge = new ArrayList<CardCharge>();
+			CardCharge cardCharge2 = null;
+			
+			try {
+				
 				log.info("A query string (filter) has been sended: " + filter);
 				SearchCondition<DTOIntCardCharge> sc;
+				
 				String property = null;
 				String condition = null;
 				String value = null;
 				
-				try {
-					sc = new FiqlParser<DTOIntCardCharge>(DTOIntCardCharge.class).parse(filter);
-
-					final List<PrimitiveStatement> splitDataFilter = bussinesToolKit.getDataFromFilter(sc);
-					for (PrimitiveStatement st: splitDataFilter) {
-						property = st.getProperty();
-						condition = st.getCondition().toString();
-						value = st.getProperty().toString();
+				
+				sc = new FiqlParser<DTOIntCardCharge>(DTOIntCardCharge.class).parse(filter);
+				final List<PrimitiveStatement> splitDataFilter = bussinesToolKit.getDataFromFilter(sc);
+				
+				for (PrimitiveStatement st: splitDataFilter) {
+					property = st.getProperty();
+					condition = st.getCondition().toString();
+					value = st.getProperty().toString();
+					
+					if(condition.equals(ConditionType.GREATER_THAN)){
+						 fechain = (String) st.getValue();
 						
-						if(condition.equals(ConditionType.GREATER_THAN)){
-							 fechain = (String) st.getValue();
-							
-						}else if (condition.equals(ConditionType.LESS_OR_EQUALS)){
-							fechafi =st.getProperty().toString(); 
-						}
-						
+					}else if (condition.equals(ConditionType.LESS_OR_EQUALS)){
+						fechafi =st.getProperty().toString(); 
 					}
-
-					/*
-					final String pattern = bussinesToolKit.matchesPatternFromFilter(SERVICENAME, filter);
-					if (pattern != null) {
-						log.info("The pattern is: " + pattern);
-					}
-					*/
-				} catch (SearchParseException e) {
-					log.error("SearchParseException - The query string (filter) has failed: " + e);
-					throw new BusinessServiceException(FILTERERROR, filter, e.getMessage());
+					
 				}
+
+			} catch (SearchParseException e) {
+				log.error("SearchParseException - The query string (filter) has failed: " + e);
+				throw new BusinessServiceException(FILTERERROR, filter, e.getMessage());
+			}
 			
 			List<DTOIntCardCharge> dtoIntCardCharges = customersDao
-					.getlistCreCardCharges(numproduct, fechafi, fechafi);
+					.getlistCreCardCharges(customerId, fechafi, fechafi);
 
 			for (DTOIntCardCharge item : dtoIntCardCharges) {
 
