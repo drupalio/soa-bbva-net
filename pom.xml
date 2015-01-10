@@ -18,7 +18,7 @@
         <module>czic_commons</module>
         <module>czic_GlobalPosition</module>
         <!--<module>czic_executives</module>-->
-        <module>czic_customers</module>
+        <!--<module>czic_customers</module>-->
         <module>czic_checkbooks</module>
         <module>czic_loan</module>
         <module>czic_cards</module>

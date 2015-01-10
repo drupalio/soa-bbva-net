@@ -10,7 +10,7 @@
 	<groupId>com.bbva.czic.globalposition</groupId>
 	<artifactId>czic_GlobalPosition</artifactId>
 	<packaging>jar</packaging>
-	<version>1.0.1_RC</version>
+	<version>1.0.0</version>
 	<name>czic_GlobalPosition</name>
 
 	<repositories />
