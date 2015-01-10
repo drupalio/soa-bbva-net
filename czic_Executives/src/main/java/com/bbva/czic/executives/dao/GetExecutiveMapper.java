@@ -1,9 +1,9 @@
-package com.bbva.czic.executives.business;
+package com.bbva.czic.executives.dao;
 
 import com.bbva.czic.dto.net.Executive;
 import com.bbva.czic.executives.business.dto.DTOIntExecutive;
 
-public class ExecutivesExtMapper {
+public class GetExecutiveMapper {
 
 	/**
 	 * Metodo encargado de hacer ek mapeo de un dto interno de executive a un
