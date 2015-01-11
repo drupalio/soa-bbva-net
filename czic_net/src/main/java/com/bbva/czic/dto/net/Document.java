@@ -2,11 +2,14 @@
 package com.bbva.czic.dto.net;
 
 import java.io.Serializable;
+
+import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
+import org.hibernate.validator.constraints.NotBlank;
 
 import com.wordnik.swagger.annotations.ApiModelProperty;
 
@@ -19,8 +22,10 @@ public class Document
 
     public final static long serialVersionUID = 1L;
     @ApiModelProperty(value = "Numero de documento", required = true)
+    @NotBlank
     private String number;
     @ApiModelProperty(value = "Tipo de documento", required = true)
+    @NotNull
     private EnumDocumentType type;
 
     public Document() {

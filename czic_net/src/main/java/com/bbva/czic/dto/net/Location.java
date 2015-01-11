@@ -2,10 +2,13 @@
 package com.bbva.czic.dto.net;
 
 import java.io.Serializable;
+
+import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
+
 
 
 import com.wordnik.swagger.annotations.ApiModelProperty;
@@ -19,10 +22,13 @@ public class Location
 
     public final static long serialVersionUID = 1L;
     @ApiModelProperty(value="Ciudad d\u00f3nde se origin\u00f3",required=true)
+    @NotNull
     private City city;
     @ApiModelProperty(value="Pais d\u00f3nde se origin\u00f3",required=true)
+    @NotNull
     private Country country;
     @ApiModelProperty(value="estado o departamento d\u00f3nde se origin\u00f3",required=true)
+    @NotNull
     private State state;
     @ApiModelProperty("direccion d\u00f3nde se origin\u00f3")
     private String postalAddress;

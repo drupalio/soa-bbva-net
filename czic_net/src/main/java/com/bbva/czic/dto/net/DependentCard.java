@@ -14,23 +14,23 @@ import com.wordnik.swagger.annotations.ApiModelProperty;
 @XmlRootElement(name = "Card", namespace = "urn:com:bbva:czic:dto:net")
 @XmlType(name = "Card", namespace = "urn:com:bbva:czic:dto:net")
 @XmlAccessorType(XmlAccessType.FIELD)
-public class Card extends Product implements Serializable {
+public class DependentCard extends Card implements Serializable {
 
 	public final static long serialVersionUID = 1L;
-	@ApiModelProperty("Numero de la tarjeta")
+	@ApiModelProperty("Portador o titular de la tarjeta amparada")
 	@NotBlank
-	private String cardNumber;
+	private String accountHolder;
 
-	public Card() {
+	public DependentCard() {
 		// default constructor
 	}
 
-	public String getCardNumber() {
-		return cardNumber;
+	public String getAccountHolder() {
+		return accountHolder;
 	}
 
-	public void setCardNumber(String cardNumber) {
-		this.cardNumber = cardNumber;
+	public void setAccountHolder(String accountHolder) {
+		this.accountHolder = accountHolder;
 	}
-
+	
 }

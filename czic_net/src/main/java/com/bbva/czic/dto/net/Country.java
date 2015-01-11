@@ -4,10 +4,13 @@ package com.bbva.czic.dto.net;
 import java.io.Serializable;
 import java.util.List;
 
+import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
+
+import org.hibernate.validator.constraints.NotBlank;
 
 import com.wordnik.swagger.annotations.ApiModelProperty;
 
@@ -20,10 +23,13 @@ public class Country
 
     public final static long serialVersionUID = 1L;
     @ApiModelProperty(value = " Identificador del pais", required = true)
+    @NotBlank
     private String id;
     @ApiModelProperty("Nombre del pais")
+    @NotBlank
     private String name;
     @ApiModelProperty("Estados pertenecientes al pais")
+    @NotNull
     private List<State> states;
 
     public Country() {
