@@ -6,10 +6,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
-import com.bbva.czic.dto.net.Balance;
-import com.bbva.czic.dto.net.EnumLoanStatus;
-import com.bbva.czic.dto.net.EnumProductType;
-import com.bbva.czic.dto.net.Payment;
+import com.bbva.czic.dto.net.*;
 import com.bbva.czic.loan.business.dto.DTOIntLoan;
 import com.bbva.czic.loan.dao.model.oznj.FormatoOZNCSNJ0;
 import com.bbva.czic.routine.commons.rm.utils.errors.EnumError;
@@ -75,6 +72,7 @@ public class LoanMapper {//extends AbstractConfigurableMapper {
 	public static DTOIntLoan dtoIntLoanMapper(FormatoOZNCSNJ0 formatoSalida) throws BusinessServiceException{
 		DTOIntLoan dTOIntLoan = new DTOIntLoan();
 		try {
+			log.info("inicio Mapper");
 			dTOIntLoan.setId(formatoSalida.getNumero());
 			dTOIntLoan.setType(EnumProductType.RQ);
 			dTOIntLoan.setName(formatoSalida.getNomprod());
@@ -95,7 +93,7 @@ public class LoanMapper {//extends AbstractConfigurableMapper {
 					null, Integer.parseInt(formatoSalida.getNumcout())));
 			
 			dTOIntLoan.setStatus(EnumLoanStatus.valueOf(formatoSalida.getEstado()));
-			
+			log.info("fin Mapper");
 		} catch (Exception e) {
 			log.error("An error happened while mapping");
 			throw new BusinessServiceException(EnumError.TECHNICAL_ERROR.getAlias(), e);
@@ -166,5 +164,28 @@ public class LoanMapper {//extends AbstractConfigurableMapper {
 		payment.setShortDate(shortDate);
 		
 		return payment;
+	}
+
+	/**
+	 *
+	 * @param dtoIntLoan
+	 * @return
+	 */
+	public static Loan getLoan(DTOIntLoan dtoIntLoan){
+		Loan loan = new Loan();
+		loan.setType(dtoIntLoan.getType());
+		loan.setName(dtoIntLoan.getName());
+		loan.setBalance(dtoIntLoan.getBalance());
+		loan.setDebt(dtoIntLoan.getDebt());
+		loan.setPayment(dtoIntLoan.getPayment());
+		loan.setStatus(dtoIntLoan.getStatus());
+		loan.setConditions(dtoIntLoan.getConditions());
+		loan.setContract(dtoIntLoan.getContract());
+		loan.setFinancialState(dtoIntLoan.getFinancialState());
+		loan.setContactInfo(dtoIntLoan.getContactInfo());
+		loan.setVisible(dtoIntLoan.getVisible());
+		loan.setOperable(dtoIntLoan.getOperable());
+		loan.setId(dtoIntLoan.getId());
+		return loan;
 	}
 }

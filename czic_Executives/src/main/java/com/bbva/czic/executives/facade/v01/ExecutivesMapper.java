@@ -22,7 +22,7 @@ public class ExecutivesMapper {
 		Office office = new Office();
 		office.setName(formato.getOfiejec());
 		dtoIntExecutive.setOffice(office);
-		dtoIntExecutive.setPhone(formato.getOfiejec());
+		dtoIntExecutive.setPhone(formato.getTelejec());
 
 		return dtoIntExecutive;
 	}

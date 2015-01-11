@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import com.bbva.jee.arq.spring.core.log.I18nLog;
+import com.bbva.jee.arq.spring.core.log.I18nLogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -27,6 +29,8 @@ public class CardsDAOImpl implements CardsDAO {
 	@Autowired
 	private ErrorMappingHelper errorMappingHelper;
 
+	private static I18nLog log = I18nLogFactory.getLogI18n(CardsDAOImpl.class,
+			"META-INF/spring/i18n/log/mensajesLog");
 	/**
 	 * 
 	 */
@@ -45,19 +49,23 @@ public class CardsDAOImpl implements CardsDAO {
 
 		peticion.getCuerpo().getPartes().add(formatoEntrada);
 
+		log.info("DAO - Llamado a la transaccion SMC : getCreditCardCharges SN Cards ");
 		// Respuesta
 		RespuestaTransaccionOzno respuesta = transaccionGetCardCharges
 				.invocar(peticion);
-
+		log.info("DAO - Se llama errorMappingHelpero para manejo de Exepciones SMC : getCreditCardCharges SN Cards ");
 		// Verificamos si tiene excepcion la respuesta
 		BusinessServiceException businessServiceException = errorMappingHelper
 				.toBusinessServiceException(respuesta);
 
 		if (businessServiceException != null) {
+			log.info("DAO - Se encontro una Exepcion al llamar a la transaccion SMC : getCreditCardCharges SN Cards ");
 			throw businessServiceException;
 		}
 		List<CopySalida> copiesSalida = respuesta.getCuerpo().getPartes(
 				CopySalida.class);
+
+		log.info("DAO - Se da inicio al mapeo de la lista que retorna en formatoHost a los DTO internos SMC : getCreditCardCharges SN Cards ");
 		for (CopySalida copySalida : copiesSalida) {
 
 			DTOIntCardCharge intCardCharge = new DTOIntCardCharge();
@@ -68,6 +76,8 @@ public class CardsDAOImpl implements CardsDAO {
 			listaCardCharge.add(intCardCharge);
 
 		}
+
+		log.info("DAO - Devuelve respuesta SMC : getCreditCardCharges SN Cards ");
 		return listaCardCharge;
 	}
 
