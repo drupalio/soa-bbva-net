@@ -39,12 +39,12 @@ public class SrvIntExecutives implements ISrvIntExecutives {
 	 *            filter
 	 */
 	public DTOIntExecutive getExecutive(String filter) {
-		log.info(" getCreditCardCharges ");
+		log.info(" Inicio de servicio interno SMC : getExecutive SN Executives ");
 
 		DTOIntExecutive initialResult = new DTOIntExecutive();
 		String thirdPartyId = "";
 		String thirdPartyType = "";
-
+		log.info(" Manejo del filter SMC : getExecutive SN Executives ");
 		if (filter != null && !filter.contentEquals("null")) {
 			log.info("A query string (filter) has been sended: " + filter);
 			SearchCondition<DTOIntExecutivesFilter> sc;
@@ -82,6 +82,9 @@ public class SrvIntExecutives implements ISrvIntExecutives {
 
 
 				if (thirdPartyType.equals(EnumThirdPartyType.CUSTOMER.toString())) {
+
+					log.info(" Pasó las validaciones, se hace el llamado al DAO SMC : getExecutive SN Executives ");
+
 					initialResult = executivesDAO.getExecutive(thirdPartyId);
 				}
 
