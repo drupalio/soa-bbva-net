@@ -23,12 +23,12 @@ public class ExecutivesMapperTest {
         formato.setTelejec("7684421");
 
         DTOIntExecutive dtoIntExecutive = null;
-//
-//        assertEquals(executive.getEmail(),dtoIntExecutive.getEmail());
-//        assertEquals(executive.getName(),dtoIntExecutive.getName());
-//        assertEquals(executive.getPhone(),dtoIntExecutive.getPhone());
-//        assertEquals(executive.getOffice().getName(),dtoIntExecutive.getOffice().getName());
-//        assertEquals(executive.getCustomer()
-//                ,dtoIntExecutive.getEmail());
+        dtoIntExecutive = ExecutivesMapper.mapToOuter(formato);
+
+
+        assertEquals(formato.getEmailej(),dtoIntExecutive.getEmail());
+        assertEquals(formato.getNomejec(),dtoIntExecutive.getName());
+        assertEquals(formato.getTelejec(),dtoIntExecutive.getPhone());
+        assertEquals(formato.getOfiejec(),dtoIntExecutive.getOffice().getName());
     }
 }

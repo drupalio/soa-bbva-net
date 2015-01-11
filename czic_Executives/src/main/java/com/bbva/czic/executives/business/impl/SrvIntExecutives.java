@@ -2,6 +2,7 @@ package com.bbva.czic.executives.business.impl;
 
 import java.util.List;
 
+import com.bbva.czic.executives.business.dto.DTOIntExecutivesFilter;
 import org.apache.cxf.jaxrs.ext.search.PrimitiveStatement;
 import org.apache.cxf.jaxrs.ext.search.SearchCondition;
 import org.apache.cxf.jaxrs.ext.search.SearchParseException;
@@ -27,25 +28,26 @@ public class SrvIntExecutives implements ISrvIntExecutives {
 
 	@Autowired
 	BusinessServicesToolKit bussinesToolKit;
+	@Autowired
 	private ExecutivesDAO executivesDAO;
 
 	/**
 	 * Metodo encargado de traer el ejecutivo
 	 * 
 	 * @author David Tafur
-	 * @param String
+	 * @param
 	 *            filter
 	 */
 	public DTOIntExecutive getExecutive(String filter) {
-		log.info(" getCreditCardCharges ");
+		log.info(" Inicio de servicio interno SMC : getExecutive SN Executives ");
 
 		DTOIntExecutive initialResult = new DTOIntExecutive();
 		String thirdPartyId = "";
 		String thirdPartyType = "";
-
+		log.info(" Manejo del filter SMC : getExecutive SN Executives ");
 		if (filter != null && !filter.contentEquals("null")) {
 			log.info("A query string (filter) has been sended: " + filter);
-			SearchCondition<DTOIntExecutive> sc;
+			SearchCondition<DTOIntExecutivesFilter> sc;
 			String property = null;
 			String condition = null;
 			String value = null;
@@ -55,7 +57,7 @@ public class SrvIntExecutives implements ISrvIntExecutives {
 				 * Manejo de la cadena del filter para sacar los valores de las
 				 * propiedades
 				 */
-				sc = new FiqlParser<DTOIntExecutive>(DTOIntExecutive.class)
+				sc = new FiqlParser<DTOIntExecutivesFilter>(DTOIntExecutivesFilter.class)
 						.parse(filter);
 
 				final List<PrimitiveStatement> splitDataFilter = bussinesToolKit
@@ -74,7 +76,15 @@ public class SrvIntExecutives implements ISrvIntExecutives {
 					}
 				}
 
-				if (thirdPartyType == EnumThirdPartyType.CUSTOMER.toString()) {
+				if(thirdPartyId==null || thirdPartyId.equals("")&& thirdPartyType==null || thirdPartyType.equals("")){
+					throw new BusinessServiceException("getExecutive - los parametros del filtro son obligatorios.");
+				}
+
+
+				if (thirdPartyType.equals(EnumThirdPartyType.CUSTOMER.toString())) {
+
+					log.info(" Pasó las validaciones, se hace el llamado al DAO SMC : getExecutive SN Executives ");
+
 					initialResult = executivesDAO.getExecutive(thirdPartyId);
 				}
 

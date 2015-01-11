@@ -42,12 +42,13 @@ public class SrvIntCards implements ISrvIntCards {
 	 * @author David Tafur
 	 */
 	public List<DTOIntCardCharge> getCreditCardCharges(String id, String filter) {
-		log.info(" getCreditCardCharges ");
+		log.info(" Inicio de servicio interno SMC : getCreditCardCharges SN Cards ");
 
 		List<DTOIntCardCharge> initialResultList = new ArrayList<DTOIntCardCharge>();
 		String startDate = "";
 		String endDate = "";
 
+		log.info(" Manejo del filter SMC : getCreditCardCharges SN Cards ");
 		if (filter != null && !filter.contentEquals("null") && id != null
 				&& !id.equals("")) {
 			log.info("A query string (filter) has been sended: " + filter);
@@ -106,6 +107,7 @@ public class SrvIntCards implements ISrvIntCards {
 							"getCreditCardCharges - ParseException - error conviertiendo las fechas a Date.");
 				}
 
+				log.info(" Pasó las validaciones, se hace el llamado al DAO SMC : getCreditCardCharges SN Cards ");
 				initialResultList = cardsDAO.getCreditCardCharges(id,
 						startDateFilter, endDateFilter);
 
