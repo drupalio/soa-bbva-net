@@ -40,10 +40,10 @@ public class SrvGlobalPositionV01 implements ISrvGlobalPositionV01, com.bbva.jee
 	public HttpHeaders httpHeaders;
 
 	@Resource(name = "global-position-filter-converter")
-	IFilterConverter gpFilterConverter;
+	private IFilterConverter gpFilterConverter;
 
-	@Resource(name = "global-position-product-mapper")
-	IGlobalPositionMapper globalPositionMapper;
+	@Resource(name = "global-position-mapper")
+	private IGlobalPositionMapper globalPositionMapper;
 
 	public UriInfo uriInfo;
 	
@@ -99,7 +99,7 @@ public class SrvGlobalPositionV01 implements ISrvGlobalPositionV01, com.bbva.jee
 	@Consumes({ MediaType.APPLICATION_JSON })
 	public Response update(
 			@ApiParam(value="Product identifier")@PathParam("idProduct") String idProduct,
-			@ApiParam(value="Produc information")Product infoProduct) {
+			@ApiParam(value="Product information")Product infoProduct) {
 
 		infoProduct.setId(idProduct);
 

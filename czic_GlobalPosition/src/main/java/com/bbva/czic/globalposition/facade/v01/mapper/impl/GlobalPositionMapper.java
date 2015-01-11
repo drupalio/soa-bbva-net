@@ -4,11 +4,12 @@ import com.bbva.czic.dto.net.*;
 import com.bbva.czic.globalposition.business.dto.*;
 import com.bbva.czic.globalposition.facade.v01.mapper.IGlobalPositionMapper;
 import com.bbva.czic.routine.commons.rm.utils.mappers.Mapper;
+import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
 
-@Mapper("global-position-product-mapper")
+@Component(value = "global-position-mapper")
 public class GlobalPositionMapper /*extends ConfigurableMapper*/  implements IGlobalPositionMapper{
 
 /*

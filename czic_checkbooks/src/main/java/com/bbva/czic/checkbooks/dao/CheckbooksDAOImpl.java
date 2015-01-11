@@ -2,19 +2,14 @@ package com.bbva.czic.checkbooks.dao;
 
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
-
-import javassist.bytecode.stackmap.BasicBlock.Catch;
 
 import javax.annotation.Resource;
 
-import org.apache.cxf.jaxrs.ext.search.SearchParseException;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.bbva.czic.checkbooks.business.dto.DTOIntCheck;
 import com.bbva.czic.checkbooks.business.dto.DTOIntCheckbook;
-import com.bbva.czic.checkbooks.business.dto.DTOIntEnumCheckbookStatus;
 import com.bbva.czic.checkbooks.dao.model.ozns.FormatoOZECNSE0;
 import com.bbva.czic.checkbooks.dao.model.ozns.FormatoOZECNSS0;
 import com.bbva.czic.checkbooks.dao.model.ozny.FormatoOZECNYE0;
@@ -25,11 +20,10 @@ import com.bbva.czic.checkbooks.dao.model.ozny.TransaccionOzny;
 import com.bbva.czic.checkbooks.dao.model.ozns.PeticionTransaccionOzns;
 import com.bbva.czic.checkbooks.dao.model.ozns.RespuestaTransaccionOzns;
 import com.bbva.czic.checkbooks.dao.model.ozns.TransaccionOzns;
-import com.bbva.czic.mapper.CheckbooksMapper;
+import com.bbva.czic.checkbooks.facade.v01.mappers.impl.CheckbooksMapper;
 import com.bbva.jee.arq.spring.core.host.protocolo.ps9.ErrorMappingHelper;
 import com.bbva.jee.arq.spring.core.host.protocolo.ps9.aplicacion.CopySalida;
 import com.bbva.jee.arq.spring.core.servicing.gce.BusinessServiceException;
-import com.bbva.czic.checkbooks.business.dto.DTOIntEnumCheckStatus;
 import com.bbva.czic.dto.net.EnumCheckStatus;
 
 	public class CheckbooksDAOImpl  implements CheckbooksDAO {
