@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
+import com.bbva.czic.dto.net.*;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -17,19 +18,6 @@ import org.springframework.test.context.TestExecutionListeners;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.support.DependencyInjectionTestExecutionListener;
 
-import com.bbva.czic.dto.net.Balance;
-import com.bbva.czic.dto.net.Conditions;
-import com.bbva.czic.dto.net.ContactInfo;
-import com.bbva.czic.dto.net.Email;
-import com.bbva.czic.dto.net.EnumContactSourceType;
-import com.bbva.czic.dto.net.EnumFinancialStatusType;
-import com.bbva.czic.dto.net.EnumLoanStatus;
-import com.bbva.czic.dto.net.EnumPhoneNumberType;
-import com.bbva.czic.dto.net.EnumProductType;
-import com.bbva.czic.dto.net.Location;
-import com.bbva.czic.dto.net.Office;
-import com.bbva.czic.dto.net.Payment;
-import com.bbva.czic.dto.net.PhoneNumber;
 import com.bbva.czic.loan.business.dto.DTOIntLoan;
 import com.bbva.czic.loan.dao.LoanDAO;
 import com.bbva.jee.arq.spring.core.servicing.gce.BusinessServiceException;
@@ -71,7 +59,7 @@ public class SrvIntLoanTest {
 		when(loanDao.getRotaryQuota(anyString())).thenReturn(loan);
 		
 		//SUT's excecution
-		final  DTOIntLoan loanResult = srv.getRotaryQuota("123");
+		final Loan loanResult = srv.getRotaryQuota("123");
 		
 		//validation
 		assertNotNull(loanResult);
@@ -79,7 +67,7 @@ public class SrvIntLoanTest {
 	
 	@Test(expected = BusinessServiceException.class)
 	public void testGetRotaryQuotaWhenIdNull() {
-		final  DTOIntLoan loanResult = srv.getRotaryQuota(null);
+		final  Loan loanResult = srv.getRotaryQuota(null);
 	}
 
 	/**

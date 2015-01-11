@@ -30,10 +30,11 @@ public class LoanDAOImpl implements LoanDAO {
 	private static final String COP = "COP";
 
 	@Override
-	public DTOIntLoan getRotaryQuota(String idLoan)
-			throws BusinessServiceException {
+	public DTOIntLoan getRotaryQuota(String idLoan)	throws BusinessServiceException {
 
 		DTOIntLoan dTOIntLoan = new DTOIntLoan();
+
+		log.info("LoanDAOImpl.getRotaryQuota = " + idLoan);
 
 		try {
 
@@ -41,20 +42,19 @@ public class LoanDAOImpl implements LoanDAO {
 			formatoOZNCENJ0.setNumprod(idLoan);
 			PeticionTransaccionOznj peticion = new PeticionTransaccionOznj(); 
 			peticion.getCuerpo().getPartes().add(formatoOZNCENJ0);
-			RespuestaTransaccionOznj respuesta = new TransaccionOznj()
-					.invocar(peticion);
-			BusinessServiceException exception = errorMappingHelper
-					.toBusinessServiceException(respuesta);
+			RespuestaTransaccionOznj respuesta = new TransaccionOznj().invocar(peticion);
+
+			log.info("LoanDAOImpl.getRotaryQuota.respuesta = " + respuesta.getCodigoRetorno());
+
+			BusinessServiceException exception = errorMappingHelper.toBusinessServiceException(respuesta);
 			
 			if (exception != null)
 				throw new BusinessServiceException("loanServergetRotaryQuota");
 			
-			CopySalida outputCopy = respuesta.getCuerpo().getParte(
-					CopySalida.class);
+			CopySalida outputCopy = respuesta.getCuerpo().getParte(CopySalida.class);
 			if (outputCopy != null) {
 
-				FormatoOZNCSNJ0 formatoSalida = outputCopy
-						.getCopy(FormatoOZNCSNJ0.class);
+				FormatoOZNCSNJ0 formatoSalida = outputCopy.getCopy(FormatoOZNCSNJ0.class);
 				if (formatoSalida != null) {
 					dTOIntLoan = LoanMapper.dtoIntLoanMapper(formatoSalida);
 				}
