@@ -2,11 +2,14 @@
 package com.bbva.czic.dto.net;
 
 import java.io.Serializable;
+
+import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
+import org.hibernate.validator.constraints.NotBlank;
 
 import com.wordnik.swagger.annotations.ApiModelProperty;
 
@@ -19,12 +22,17 @@ public class Email
 
     public final static long serialVersionUID = 1L;
     @ApiModelProperty("Fuente de los contactos")
+    @NotNull
     private EnumContactSourceType source;
     @ApiModelProperty("Direccion de correo electronico")
+    @NotBlank
+	@org.hibernate.validator.constraints.Email
     private String address;
     @ApiModelProperty(" Correo por defecto")
+    @NotNull
     private Boolean primary;
     @ApiModelProperty("Correo activo")
+	@NotNull
     private Boolean active;
 
     public Email() {

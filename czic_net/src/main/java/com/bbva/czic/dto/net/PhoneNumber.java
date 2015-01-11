@@ -2,11 +2,15 @@
 package com.bbva.czic.dto.net;
 
 import java.io.Serializable;
+
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Past;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
+import org.hibernate.validator.constraints.NotBlank;
 
 import com.wordnik.swagger.annotations.ApiModelProperty;
 
@@ -19,18 +23,25 @@ public class PhoneNumber
 
     public final static long serialVersionUID = 1L;
     @ApiModelProperty("Fuente de los contactos")
+    @NotNull
     private EnumContactSourceType contactSource;
     @ApiModelProperty("Codigo del pais")
+    @NotBlank
     private String countryCode;
     @ApiModelProperty(" Codigo de la region")
+    @NotBlank
     private String regionalCode;
     @ApiModelProperty("Numero de telefono")
+    @NotBlank
     private String number;
     @ApiModelProperty("Fuente de tipo de numero")
+    @NotNull
     private EnumPhoneNumberType type;
     @ApiModelProperty("Numero por defecto")
+    @NotNull
     private Boolean primary;
     @ApiModelProperty("Numero activo")
+    @NotNull
     private Boolean active;
 
     public PhoneNumber() {

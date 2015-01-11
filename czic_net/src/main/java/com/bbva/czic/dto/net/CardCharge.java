@@ -1,7 +1,8 @@
-
 package com.bbva.czic.dto.net;
 
 import java.io.Serializable;
+
+import javax.validation.constraints.NotNull;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -17,35 +18,37 @@ import com.wordnik.swagger.annotations.ApiModelProperty;
 @XmlRootElement(name = "CardCharge", namespace = "urn:com:bbva:czic:dto:net")
 @XmlType(name = "CardCharge", namespace = "urn:com:bbva:czic:dto:net")
 @XmlAccessorType(XmlAccessType.FIELD)
-public class CardCharge
-    implements Serializable
-{
 
-    public final static long serialVersionUID = 1L;
-    @ApiModelProperty(value = "Aspecto comercial", required = true)
-    private EnumCardChargeCategory category;
-    @XmlJavaTypeAdapter(MoneyAdapter.class)
-    @XmlElement(type = Money.class)
-    @ApiModelProperty("Valor del consumo total diferido a cada una de las categorias")
-    private Money amount;
+public class CardCharge implements Serializable {
 
-    public CardCharge() {
-        //default constructor
-    }
+	public final static long serialVersionUID = 1L;
+	@ApiModelProperty(value = "Aspecto comercial", required = true)
+	@NotNull
+	private EnumCardChargeCategory category;
+	@XmlJavaTypeAdapter(MoneyAdapter.class)
+	@XmlElement(type = Money.class)
+	@ApiModelProperty("Valor del consumo total diferido a cada una de las categorias")
+	@NotNull
+	private Money amount;
 
-    public EnumCardChargeCategory getCategory() {
-        return category;
-    }
+	public CardCharge() {
+		// default constructor
+	}
 
-    public void setCategory(EnumCardChargeCategory category) {
-        this.category = category;
-    }
+	public EnumCardChargeCategory getCategory() {
+		return category;
+	}
 
-    public Money getAmount() {
-        return amount;
-    }
+	public void setCategory(EnumCardChargeCategory category) {
+		this.category = category;
+	}
 
-    public void setAmount(Money amount) {
-        this.amount = amount;
-    }
+	public Money getAmount() {
+		return amount;
+	}
+
+	public void setAmount(Money amount) {
+		this.amount = amount;
+	}
+
 }

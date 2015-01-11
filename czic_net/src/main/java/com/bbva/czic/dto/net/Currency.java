@@ -2,11 +2,15 @@
 package com.bbva.czic.dto.net;
 
 import java.io.Serializable;
+
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
+
+
+import org.hibernate.validator.constraints.NotBlank;
 
 import com.wordnik.swagger.annotations.ApiModelProperty;
 
@@ -19,10 +23,13 @@ public class Currency
 
     public final static long serialVersionUID = 1L;
     @ApiModelProperty(value = "C\u00f3digo ISO alfab\u00e9tico de la divisa", required = true)
+    @NotBlank
     private String id;
     @ApiModelProperty("C\u00f3digo ISO num\u00e9rico de la divisa")
+    @NotBlank
     private String code;
     @ApiModelProperty("Nombre de la divisa")
+    @NotBlank
     private String name;
 
     public Currency() {

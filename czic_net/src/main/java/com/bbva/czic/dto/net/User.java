@@ -3,16 +3,17 @@ package com.bbva.czic.dto.net;
 
 import java.io.Serializable;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
+
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Past;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlSchemaType;
 import javax.xml.bind.annotation.XmlType;
-import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
-import com.bbva.jee.arq.spring.core.servicing.utils.CalendarAdapter;
 
+import org.hibernate.validator.constraints.NotBlank;
 
 import com.wordnik.swagger.annotations.ApiModelProperty;
 
@@ -25,20 +26,27 @@ public class User
 
     public final static long serialVersionUID = 1L;
     @ApiModelProperty(value = "Identificador del usuario", required = true)
+    @NotBlank
     private String customerId;
     @ApiModelProperty("Nombre del usuario")
+    @NotBlank
     private String name;
     @ApiModelProperty("Identificador de la informacion del contacto")
-    private com.bbva.czic.dto.net.ContactInfo ContactInfo;
+    @NotNull
+    private ContactInfo contactInfo;
     @ApiModelProperty("Entidad con toda la informaci\u00f3n del ejecutivo de ventas")
-    private String userSalesExecutive;
-//    @XmlJavaTypeAdapter(CalendarAdapter.class)
+    @NotNull
+    private Executive salesExecutive;
     @XmlSchemaType(name = "dateTime")
     @ApiModelProperty("Fecha de la \u00faltima vez que accedi\u00f3 el usuario al portal")
+    @NotNull
+    @Past
     private Calendar lastAccessDate;
     @ApiModelProperty("Arreglo de los mensajes de alerta generados para el usuario")
+    @NotNull
     private List<Message> message;
     @ApiModelProperty("Arreglo de los productos correspondientes al usuario")
+    @NotNull
     private List<Product> products;
 
     public User() {
@@ -61,23 +69,23 @@ public class User
         this.name = name;
     }
 
-    public com.bbva.czic.dto.net.ContactInfo getContactInfo() {
-        return ContactInfo;
-    }
+    public ContactInfo getContactInfo() {
+		return contactInfo;
+	}
 
-    public void setContactInfo(com.bbva.czic.dto.net.ContactInfo ContactInfo) {
-        this.ContactInfo = ContactInfo;
-    }
+	public void setContactInfo(ContactInfo contactInfo) {
+		this.contactInfo = contactInfo;
+	}
 
-    public String getUserSalesExecutive() {
-        return userSalesExecutive;
-    }
+	public Executive getSalesExecutive() {
+		return salesExecutive;
+	}
 
-    public void setUserSalesExecutive(String userSalesExecutive) {
-        this.userSalesExecutive = userSalesExecutive;
-    }
+	public void setSalesExecutive(Executive salesExecutive) {
+		this.salesExecutive = salesExecutive;
+	}
 
-    public Calendar getLastAccessDate() {
+	public Calendar getLastAccessDate() {
         return lastAccessDate;
     }
 
