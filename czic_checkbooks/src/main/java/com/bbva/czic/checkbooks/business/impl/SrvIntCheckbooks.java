@@ -3,7 +3,7 @@ package com.bbva.czic.checkbooks.business.impl;
 import com.bbva.czic.checkbooks.business.ISrvIntCheckbooks;
 import com.bbva.czic.checkbooks.business.dto.DTOIntCheck;
 import com.bbva.czic.checkbooks.business.dto.DTOIntCheckbook;
-import com.bbva.czic.checkbooks.dao.CheckbooksDAO;
+import com.bbva.czic.checkbooks.dao.ICheckbooksDAO;
 import com.bbva.jee.arq.spring.core.log.I18nLog;
 import com.bbva.jee.arq.spring.core.log.I18nLogFactory;
 import com.bbva.jee.arq.spring.core.servicing.utils.BusinessServicesToolKit;
@@ -19,7 +19,8 @@ public class SrvIntCheckbooks implements ISrvIntCheckbooks {
 	@Autowired
 	BusinessServicesToolKit bussinesToolKit;
 
-	private CheckbooksDAO checkbookDao;
+
+	private ICheckbooksDAO checkbookDao;
 
 	@Override
 	public DTOIntCheck getChecks(DTOIntCheck intCheck) {
