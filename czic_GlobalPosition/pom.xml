@@ -29,11 +29,11 @@
 			<version>1.0.0</version>
 		</dependency>
 
-		<dependency>
+		<!--<dependency>
 			<groupId>ma.glasnost.orika</groupId>
 			<artifactId>orika-core</artifactId>
 			<version>1.4.5</version>
-		</dependency>
+		</dependency>-->
 
 		<!-- INICIO Arquitectura Servicios -->
 
@@ -87,6 +87,7 @@
 			<groupId>org.mockito</groupId>
 			<artifactId>mockito-core</artifactId>
 			<version>1.9.0</version>
+			<scope>test</scope>
 		</dependency>
 
 		<dependency>

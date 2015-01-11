@@ -79,10 +79,12 @@ public class SrvGlobalPositionV01 implements ISrvGlobalPositionV01, com.bbva.jee
 			@ApiParam(value = "Customer identifier") @PathParam("customerId") String customerId,
 			@ApiParam(value = "filter param") @DefaultValue("null") @QueryParam("$filter") String filter) {
 
+		log.info("SrvGlobalPositionV01.getExtractGlobalBalance");
+
 		final DTOIntFilterProduct filterProduct = gpFilterConverter.getDTOIntFilter(customerId, filter);
 		List<DTOIntProduct> products = srvIntGlobalPosition.getExtractGlobalBalance(filterProduct);
 
-		return globalPositionMapper.mapAsList(products, Product.class);
+		return globalPositionMapper.map(products);
 	}
 
 	@ApiOperation(value="Update the product.", notes="Update the product partially", response=Response.class)
