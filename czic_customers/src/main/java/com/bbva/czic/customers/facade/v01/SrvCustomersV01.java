@@ -2,6 +2,7 @@ package com.bbva.czic.customers.facade.v01;
 
 import java.util.List;
 
+import javax.annotation.Resource;
 import javax.ws.rs.DefaultValue;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
@@ -12,6 +13,7 @@ import javax.ws.rs.core.HttpHeaders;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.UriInfo;
 
+import com.bbva.czic.customers.facade.v01.utils.converters.IFilterConverter;
 import org.apache.cxf.jaxrs.model.wadl.ElementClass;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -50,21 +52,27 @@ public class SrvCustomersV01 implements ISrvCustomersV01, com.bbva.jee.arq.sprin
 	@Autowired
 	BusinessServicesToolKit businessServicesToolKit;
 
+	@Resource(name = "customer-resumes-filter-converter")
+	IFilterConverter filterConverter;
+
+	@Autowired
+	ISrvIntCustomers srvIntCustomers;
+
 	public UriInfo uriInfo;
-	
+
 	@Override
 	public void setUriInfo(UriInfo ui) {
-		this.uriInfo = ui;		
+		this.uriInfo = ui;
 	}
 
 	@Override
 	public void setHttpHeaders(HttpHeaders httpHeaders) {
 		this.httpHeaders = httpHeaders;
 	}
-	
-	@Autowired
-	ISrvIntCustomers srvIntCustomers;
 
+	public void setFilterConverter(IFilterConverter filterConverter) {
+		this.filterConverter = filterConverter;
+	}
 	
 	@ApiOperation(value="Returns the relationship between consumption and / or expenses of the customer in different business scopes", notes="these are ordered items for all credit cards a client.",response=List.class)
 	@ApiResponses(value = {
@@ -88,8 +96,8 @@ public class SrvCustomersV01 implements ISrvCustomersV01, com.bbva.jee.arq.sprin
 				|| filter == null || filter.isEmpty()){
 			throw new BusinessServiceException(EnumError.WRONG_PARAMETERS.getAlias());
 		}
-		
-		return srvIntCustomers.getlistCreditCharges(customerId,filter);
+
+		return srvIntCustomers.getlistCreditCharges(customerId, filterConverter.toCustomerResumesFilter(filter));
 	}
 
 		
@@ -98,6 +106,8 @@ public class SrvCustomersV01 implements ISrvCustomersV01, com.bbva.jee.arq.sprin
 		@ApiResponse(code = -1, message = "aliasGCE1"),
 		@ApiResponse(code = -1, message = "aliasGCE2"),
 		@ApiResponse(code = 200, message = "Found Sucessfully", response=List.class),
+		@ApiResponse(code = 400, message = "Wrong parameters"),
+		@ApiResponse(code = 409, message = "Data not found"),
 		@ApiResponse(code = 500, message = "Technical Error")})
 	@GET
 	@ElementClass(response = List.class)
@@ -114,6 +124,6 @@ public class SrvCustomersV01 implements ISrvCustomersV01, com.bbva.jee.arq.sprin
 			throw new BusinessServiceException(EnumError.WRONG_PARAMETERS.getAlias());
 		}
 
-		return srvIntCustomers.getlistAccountsMovementsResume(customerId, filter);
+		return srvIntCustomers.getlistAccountsMovementsResume(customerId, filterConverter.toCustomerResumesFilter(filter));
 	}
 }

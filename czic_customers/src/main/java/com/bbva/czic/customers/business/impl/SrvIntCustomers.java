@@ -1,15 +1,13 @@
 package com.bbva.czic.customers.business.impl;
 
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.cxf.jaxrs.ext.search.ConditionType;
-import org.apache.cxf.jaxrs.ext.search.PrimitiveStatement;
-import org.apache.cxf.jaxrs.ext.search.SearchCondition;
-import org.apache.cxf.jaxrs.ext.search.SearchParseException;
-import org.apache.cxf.jaxrs.ext.search.fiql.FiqlParser;
+import javax.annotation.Resource;
+
+import com.bbva.czic.customers.business.dto.DTOIntFilterCustomerResumes;
+import com.bbva.czic.routine.commons.rm.utils.errors.EnumError;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,10 +15,9 @@ import com.bbva.czic.customers.business.ISrvIntCustomers;
 import com.bbva.czic.customers.business.dto.DTOIntAccMovementsResume;
 import com.bbva.czic.customers.business.dto.DTOIntCardCharge;
 import com.bbva.czic.customers.dao.CustomersDAO;
+import com.bbva.czic.customers.dao.mapper.ICustomerMapper;
 import com.bbva.czic.dto.net.AccMovementsResume;
 import com.bbva.czic.dto.net.CardCharge;
-import com.bbva.czic.mapper.CustomerMapper;
-import com.bbva.czic.routine.commons.rm.utils.errors.EnumError;
 import com.bbva.jee.arq.spring.core.log.I18nLog;
 import com.bbva.jee.arq.spring.core.log.I18nLogFactory;
 import com.bbva.jee.arq.spring.core.servicing.gce.BusinessServiceException;
@@ -34,156 +31,80 @@ public class SrvIntCustomers implements ISrvIntCustomers {
 	private static I18nLog log = I18nLogFactory.getLogI18n(
 			SrvIntCustomers.class, "META-INF/spring/i18n/log/mensajesLog");
 
+	@Resource(name = "customers-dao-impl")
 	private CustomersDAO customersDao;
 
-	
-	private CustomerMapper customerMapper;
-	
+	@Resource(name="customerMapper")
+	private ICustomerMapper customerMapper;
+
 	@Autowired
 	private BusinessServicesToolKit bussinesToolKit;
-	
-	private String fechain = null;
-	private String fechafi = null;
-	
-	
-/***************************AccountMovement***************************************/
+
+
+	public void setCustomerMapper(ICustomerMapper customerMapper) {
+		this.customerMapper = customerMapper;
+	}
+
+	public void setCustomersDao(CustomersDAO customersDao) {
+		this.customersDao = customersDao;
+	}
+
+	/***************************AccountMovement***************************************/
 	@Override
-	public List<AccMovementsResume> getlistAccountsMovementsResume(String idUser,
-			String filter) throws BusinessServiceException {
-		
-		AccMovementsResume accountMovementsResume = null;
+	public List<AccMovementsResume> getlistAccountsMovementsResume(String customerId,
+			DTOIntFilterCustomerResumes filter) throws BusinessServiceException {
+		log.info("Into getlistAccountsMovementsResume... ");
+		log.info("getlistAccountsMovementsResume params: " + filter);
+
 		try {
-
-			if (idUser == null)
-				throw new BusinessServiceException(
-						"wrongParametersListAccountsMovementsResume");
-
-			List<AccMovementsResume> listMovements = new ArrayList<AccMovementsResume>();
-		
-			
-			if (filter != null && !filter.contentEquals("null")) 
-				log.info("A query string (filter) has been sended: " + filter );
-				SearchCondition<DTOIntAccMovementsResume> sc;
-				
-				String property = null;
-				String condition = null;
-				String value = null;
-
-				SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-			
-				try {
-					sc = new FiqlParser<DTOIntAccMovementsResume>(DTOIntAccMovementsResume.class).parse(filter);
-
-					final List<PrimitiveStatement> splitDataFilter = bussinesToolKit.getDataFromFilter(sc);
-					 
-			
-					for (PrimitiveStatement st: splitDataFilter) {
-						property = st.getProperty();
-						condition = st.getCondition().toString();
-						value = st.getProperty().toString();
-						
-						if(condition.equals(ConditionType.GREATER_THAN)){
-							 fechain = (String) st.getValue();
-							
-						}else if (condition.equals(ConditionType.LESS_OR_EQUALS)){
-							fechafi =st.getProperty().toString();
-						}
-						
-					}
-					
-						
-					
-
-					
-				} catch (SearchParseException e) {
-					log.error("SearchParseException - The query string (filter) has failed: " + e);
-					throw new BusinessServiceException(FILTERERROR, filter, e.getMessage());
-					
-				}
-				
+			if(filter != null){
+				List<AccMovementsResume> listMovements = new ArrayList<AccMovementsResume>();
 				List<DTOIntAccMovementsResume> dtoIntAccMovementsResumes = customersDao
-						.getlistAccountsMovementsResume(idUser, fechain, fechafi);
+						.getlistAccountsMovementsResume(filter);
 
 				for (DTOIntAccMovementsResume item : dtoIntAccMovementsResumes) {
-
-					accountMovementsResume = new AccMovementsResume();
-
-					accountMovementsResume = customerMapper.map(item, AccMovementsResume.class);
-					listMovements.add(accountMovementsResume);
-
+					listMovements.add(customerMapper.map(item));
 				}
-
 				return listMovements;
-				
-			} catch (Exception e) {
-				throw new BusinessServiceException(e.getMessage());
+			}else{
+				throw new BusinessServiceException(EnumError.WRONG_PARAMETERS.getAlias());
 			}
-			
+		} catch (BusinessServiceException bse) {
+			log.error("BusinessServiceException - Error during platform: " + bse);
+			throw bse;
+		} catch (Exception e) {
+			log.error("Exception - Unhandled error: " + e);
+			throw new BusinessServiceException(e.getMessage());
 		}
 
-
-/***************************CardCharge***************************************/
+	}
+	/***************************CardCharge***************************************/
 	@Override
 	public List<CardCharge> getlistCreditCharges(String customerId,
-			final String filter) throws BusinessServiceException {
-		log.info("Into getlistCreditCharges...");
-		
+			final DTOIntFilterCustomerResumes filter) throws BusinessServiceException {
+		log.info("Into getlistCreditCharges... ");
+		log.info("getlistCreditCharges params: " + filter);
+
 		try {
-			
-			List<CardCharge> listCardCharge = new ArrayList<CardCharge>();
-			CardCharge cardCharge2 = null;
-			
-			try {
-				
-				log.info("A query string (filter) has been sended: " + filter);
-				SearchCondition<DTOIntCardCharge> sc;
-				
-				String property = null;
-				String condition = null;
-				String value = null;
-				
-				
-				sc = new FiqlParser<DTOIntCardCharge>(DTOIntCardCharge.class).parse(filter);
-				final List<PrimitiveStatement> splitDataFilter = bussinesToolKit.getDataFromFilter(sc);
-				
-				for (PrimitiveStatement st: splitDataFilter) {
-					property = st.getProperty();
-					condition = st.getCondition().toString();
-					value = st.getProperty().toString();
-					
-					if(condition.equals(ConditionType.GREATER_THAN)){
-						 fechain = (String) st.getValue();
-						
-					}else if (condition.equals(ConditionType.LESS_OR_EQUALS)){
-						fechafi =st.getProperty().toString(); 
-					}
-					
+			if(filter != null){
+				List<CardCharge> listCardCharge = new ArrayList<CardCharge>();
+
+				List<DTOIntCardCharge> dtoIntCardCharges = customersDao
+						.getlistCreCardCharges(filter);
+
+				for (DTOIntCardCharge item : dtoIntCardCharges) {
+					listCardCharge.add(customerMapper.map(item 	));
 				}
 
-			} catch (SearchParseException e) {
-				log.error("SearchParseException - The query string (filter) has failed: " + e);
-				throw new BusinessServiceException(FILTERERROR, filter, e.getMessage());
+				return listCardCharge;
+			}else{
+				throw new BusinessServiceException(EnumError.WRONG_PARAMETERS.getAlias());
 			}
-			
-			List<DTOIntCardCharge> dtoIntCardCharges = customersDao
-					.getlistCreCardCharges(customerId, fechafi, fechafi);
-
-			for (DTOIntCardCharge item : dtoIntCardCharges) {
-
-				cardCharge2 = new CardCharge();
-
-				cardCharge2 = customerMapper.map(item, CardCharge.class);
-				listCardCharge.add(cardCharge2);
-
-			}
-
-			return listCardCharge;
 		} catch (Exception e) {
 			throw new BusinessServiceException(e.getMessage());
 		}
-		
-	}
 
+	}
 }
      
 	
