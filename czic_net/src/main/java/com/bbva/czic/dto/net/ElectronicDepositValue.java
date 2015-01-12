@@ -18,7 +18,7 @@ import com.wordnik.swagger.annotations.ApiModelProperty;
 @XmlRootElement(name = "ElectronicDespositValue", namespace = "urn:com:bbva:czic:dto:net")
 @XmlType(name = "ElectronicDespositValue", namespace = "urn:com:bbva:czic:dto:net")
 @XmlAccessorType(XmlAccessType.FIELD)
-public class ElectronicDespositValue
+public class ElectronicDepositValue
     implements Serializable
 {
 
@@ -32,7 +32,7 @@ public class ElectronicDespositValue
     @NotNull
     private EnumMonth month;
 
-    public ElectronicDespositValue() {
+    public ElectronicDepositValue() {
         //default constructor
     }
 

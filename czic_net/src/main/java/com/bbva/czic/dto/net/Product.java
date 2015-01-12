@@ -57,7 +57,7 @@ public class Product implements Serializable {
 
 	@ApiModelProperty("")
 	@NotNull
-	private Conditions conditions;
+	private ConditionsTest conditions;
 
 	@ApiModelProperty("")
 	@NotNull
@@ -146,11 +146,11 @@ public class Product implements Serializable {
 		this.contactInfo = contactInfo;
 	}
 
-	public Conditions getConditions() {
+	public ConditionsTest getConditions() {
 		return conditions;
 	}
 
-	public void setConditions(Conditions conditions) {
+	public void setConditions(ConditionsTest conditions) {
 		this.conditions = conditions;
 	}
 

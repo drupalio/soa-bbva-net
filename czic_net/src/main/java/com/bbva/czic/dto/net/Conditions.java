@@ -27,6 +27,7 @@ public class Conditions implements Serializable {
 	@NotBlank
 	private String category;
 	@ApiModelProperty("Descripcion del tipo de producto")
+	@NotBlank
 	private String description;
 	@XmlSchemaType(name = "dateTime")
 	@ApiModelProperty(value = " Fecha en la que se realizo la apertura del producto", required = true)
