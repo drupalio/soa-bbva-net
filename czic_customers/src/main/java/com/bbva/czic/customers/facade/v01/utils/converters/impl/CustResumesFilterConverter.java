@@ -46,15 +46,18 @@ public class CustResumesFilterConverter implements IFilterConverter {
 
 			for (PrimitiveStatement st: splitDataFilter) {
 				if(st.getCondition().equals(ConditionType.GREATER_OR_EQUALS)){
-					if(st.getValue() != null){
-						filterDto.setStartDate((Date) st.getValue());
-					}else{
-						throw new BusinessServiceException(EnumError.WRONG_PARAMETERS.getAlias());
-					}
+					filterDto.setStartDate((Date) st.getValue());
 				}else if (st.getCondition().equals(ConditionType.LESS_OR_EQUALS)){
 					filterDto.setEndDate((Date) st.getValue());
 				}
 
+			}
+
+			if(filterDto.getEndDate() == null){
+				filterDto.setEndDate(new Date());
+			}
+			if(filterDto.getStartDate() == null){
+				throw new BusinessServiceException(EnumError.WRONG_PARAMETERS.getAlias());
 			}
 
 		} catch (BusinessServiceException bse) {

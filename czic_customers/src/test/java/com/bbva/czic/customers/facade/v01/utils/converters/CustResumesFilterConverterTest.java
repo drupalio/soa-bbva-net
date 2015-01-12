@@ -3,11 +3,13 @@ package com.bbva.czic.customers.facade.v01.utils.converters;
 import com.bbva.czic.customers.business.dto.DTOIntCardCharge;
 import com.bbva.czic.customers.business.dto.DTOIntFilterCustomerResumes;
 import com.bbva.czic.customers.facade.v01.utils.converters.impl.CustResumesFilterConverter;
+import com.bbva.jee.arq.spring.core.servicing.gce.BusinessServiceException;
 import com.bbva.jee.arq.spring.core.servicing.test.BusinessServiceTestContextLoader;
 import com.bbva.jee.arq.spring.core.servicing.utils.BusinessServicesToolKit;
 import org.apache.cxf.jaxrs.ext.search.ConditionType;
 import org.apache.cxf.jaxrs.ext.search.PrimitiveStatement;
 import org.apache.cxf.jaxrs.ext.search.SearchCondition;
+import org.apache.cxf.jaxrs.ext.search.SearchParseException;
 import org.apache.cxf.jaxrs.ext.search.fiql.FiqlParser;
 import org.junit.Before;
 import org.junit.Test;
@@ -45,34 +47,51 @@ public class CustResumesFilterConverterTest {
 
     @Test
     public void testToCustomerResumesFilter(){
-        try {
-            //SetUp
+        //SetUp
 
-            //Setup expectation
+        //Setup expectation
 
+        // SUT execution
+        DTOIntFilterCustomerResumes resumeFilter = converter.
+                toCustomerResumesFilter("(chargeDate=ge=2014-12-24;chargeDate=le=2015-01-10)");
 
-            // SUT execution
-            DTOIntFilterCustomerResumes resumeFilter = converter.
-                    toCustomerResumesFilter("(chargeDate=ge=2014-12-24;chargeDate=le=2015-01-10)");
-
-            //Validation
-            assertNotNull(resumeFilter);
-
-        }catch (Exception e){
-        }
-
+        //Validation
+        assertNotNull(resumeFilter);
     }
 
-    private List<PrimitiveStatement> getPrimitiveStatementList(){
-        Calendar cal = Calendar.getInstance();
-        cal.set(2014,12,24);
-        PrimitiveStatement ps1 = new PrimitiveStatement("date",cal.getTime(), null, ConditionType.GREATER_OR_EQUALS);
-        PrimitiveStatement ps2 = new PrimitiveStatement("date",new Date(), null, ConditionType.LESS_OR_EQUALS);
+    @Test(expected = BusinessServiceException.class)
+    public void testToCustomerResumesFilterInvalidFilterFormat(){
+        //SetUp
 
-        List<PrimitiveStatement> list = new ArrayList<PrimitiveStatement>();
-        list.add(ps1);
-        list.add(ps2);
+        //Setup expectation
 
-        return list;
+        // SUT execution
+        DTOIntFilterCustomerResumes resumeFilter = converter.
+                toCustomerResumesFilter("(chargeDate=ge=2014/12/24;chargeDate=le=2015/01/10)");
+    }
+
+    @Test(expected = BusinessServiceException.class)
+    public void testToCustomerResumesInvalidFilter(){
+        //SetUp
+
+        //Setup expectation
+
+        // SUT execution
+        DTOIntFilterCustomerResumes resumeFilter = converter.
+                toCustomerResumesFilter("(chargeDate=le=2015-01-10)");
+    }
+
+    @Test
+    public void testToCustomerResumesFilterNoEndDate(){
+        //SetUp
+
+        //Setup expectation
+
+        // SUT execution
+        DTOIntFilterCustomerResumes resumeFilter = converter.
+                toCustomerResumesFilter("(chargeDate=ge=2014-12-24)");
+
+        //Validation
+        assertNotNull(resumeFilter);
     }
 }
