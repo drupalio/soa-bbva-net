@@ -19,6 +19,7 @@
 				   servicing:business-service="Customer" xmlns="http://bbva.com/gce"
 				   xmlns:servicing="http://bbva.com/arq-spring-servicing/gce-extension">
 
+
 	<!--
       Definicion de un error. Se requiere indicar:
       - severity: severidad del error, puede ser ERROR, FATAL o CRITICAL
