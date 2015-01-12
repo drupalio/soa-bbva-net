@@ -134,7 +134,8 @@ public class LoanMapper {//extends AbstractConfigurableMapper {
 			auxBalance.setTotal(setMoneyValue(total));
 		}
 		if(trade != null){
-			auxBalance.setTradeBalance(setMoneyValue(trade));
+			//TODO David.Bernal :: porque se pone una tradeBalance en un loan si esto es un atributo de account? :: Sebastian.Gamba
+			//auxBalance.setTradeBalance(setMoneyValue(trade));
 		}
 		
 		return auxBalance;
