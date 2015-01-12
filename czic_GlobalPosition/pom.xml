@@ -10,7 +10,7 @@
 	<groupId>com.bbva.czic.globalposition</groupId>
 	<artifactId>czic_GlobalPosition</artifactId>
 	<packaging>jar</packaging>
-	<version>1.0.1_RC</version>
+	<version>1.0.0</version>
 	<name>czic_GlobalPosition</name>
 
 	<repositories />
@@ -29,11 +29,11 @@
 			<version>1.0.0</version>
 		</dependency>
 
-		<dependency>
+		<!--<dependency>
 			<groupId>ma.glasnost.orika</groupId>
 			<artifactId>orika-core</artifactId>
 			<version>1.4.5</version>
-		</dependency>
+		</dependency>-->
 
 		<!-- INICIO Arquitectura Servicios -->
 
@@ -87,6 +87,7 @@
 			<groupId>org.mockito</groupId>
 			<artifactId>mockito-core</artifactId>
 			<version>1.9.0</version>
+			<scope>test</scope>
 		</dependency>
 
 		<dependency>
@@ -390,7 +391,6 @@
 					<excludes>
 						<exclude>**/*_Roo_*</exclude>
 					</excludes>
-					<skipTests>true</skipTests>
 				</configuration>
 			</plugin>
 			<plugin>

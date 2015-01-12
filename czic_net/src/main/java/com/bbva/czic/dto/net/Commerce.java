@@ -2,11 +2,14 @@
 package com.bbva.czic.dto.net;
 
 import java.io.Serializable;
+
+import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
+import org.hibernate.validator.constraints.NotBlank;
 
 import com.wordnik.swagger.annotations.ApiModelProperty;
 
@@ -19,12 +22,16 @@ public class Commerce
 
     public final static long serialVersionUID = 1L;
     @ApiModelProperty(value = "Red a la que pertenece el comercio", required = true)
+    @NotNull
     private EnumNetType net;
     @ApiModelProperty(value = "C\u00f3digo \u00fanico de comercio de 10 posiciones", required = true)
+    @NotBlank
     private String code;
     @ApiModelProperty(value = "Nombre del establecimiento o comercio", required = true)
+    @NotBlank
     private String name;
     @ApiModelProperty(value = " Ciudad donde esta el establecimiento o comercio", required = true)
+    @NotNull
     private City city;
 
     public Commerce() {

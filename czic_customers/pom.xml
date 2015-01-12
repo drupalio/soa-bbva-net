@@ -14,72 +14,71 @@
 		
 	<repositories/>
     <pluginRepositories/>
-	<dependencies>
-	
-    <!-- INICIO Arquitectura Servicios -->
-  
-     <dependency>
-			<groupId>ma.glasnost.orika</groupId>
-			<artifactId>orika-core</artifactId>
-			<version>1.4.5</version>
+    <dependencies>
+
+        <!-- INICIO Arquitectura Servicios -->
+
+        <!--<dependency>
+            <groupId>ma.glasnost.orika</groupId>
+            <artifactId>orika-core</artifactId>
+            <version>1.4.5</version>
+        </dependency>-->
+
+        <dependency>
+            <groupId>com.bbva.czic</groupId>
+            <artifactId>czic_net</artifactId>
+            <version>1.0.0</version>
+        </dependency>
+        <dependency>
+            <groupId>com.bbva.czic</groupId>
+            <artifactId>czic_commons</artifactId>
+            <version>1.0.0</version>
         </dependency>
 
-    <dependency>
-       <groupId>com.bbva.czic</groupId>
-       <artifactId>czic_net</artifactId>
-       <version>1.0.0</version>
-    </dependency>
 
-    <dependency>
-       <groupId>com.bbva.czic</groupId>
-       <artifactId>czic_commons</artifactId>
-       <version>1.0.0</version>
-    </dependency>
-
-  
-    <dependency>
-       <groupId>com.bbva.jee.arq.spring.core</groupId>
-       <artifactId>arq-spring-servicing-core</artifactId>
-       <version>${arq-spring-servicing-core.version}</version>
-    </dependency>
-    <dependency>
-    	<groupId>com.bbva.jee.arq.spring.core</groupId>
-        <artifactId>arq-spring-restutils</artifactId>
-        <version>${arq-spring-restutils.version}</version>
-    </dependency>
-    <dependency>
-        <groupId>com.bbva.jee.arq.spring.core</groupId>
-        <artifactId>arq-spring-core-spi</artifactId>
-        <version>${arq-spring-core-spi.version}</version>
-   	</dependency>      
-   	<dependency>
-        <groupId>com.bbva.jee.arq.spring.core</groupId>
-        <artifactId>arq-spring-core-api</artifactId>
-        <version>${arq-spring-core-api.version}</version>
-   	</dependency>  
-   	<dependency>
-		<groupId>com.bbva.jee.arq.spring.core</groupId>
-		<artifactId>arq-spring-connector-host</artifactId>
-		<version>${arq.spring.connector.host.version}</version>
-		<scope>test</scope>
-	</dependency>
-	<dependency>
-		<groupId>com.bbva.jee.arq.spring.core</groupId>
-		<artifactId>arq-spring-connector-host-ps9</artifactId>
-		<version>${arq.spring.connector.host.ps9.version}</version>
-		<scope>test</scope>
-	</dependency>
-	<dependency>
-		<groupId>com.bbva.jee.arq.spring.core</groupId>
-		<artifactId>arq-spring-connector-host-api</artifactId>
-		<version>${arq.spring.connector.host.api.version}</version>
-	</dependency>
-	<dependency>
-		<groupId>com.bbva.jee.arq.spring.core</groupId>
-		<artifactId>arq-spring-connector-host-imsconnect</artifactId>
-		<version>${arq.spring.connector.host.imsconnect.version}</version>
-		<scope>test</scope>
-	</dependency>
+        <dependency>
+            <groupId>com.bbva.jee.arq.spring.core</groupId>
+            <artifactId>arq-spring-servicing-core</artifactId>
+            <version>${arq-spring-servicing-core.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.bbva.jee.arq.spring.core</groupId>
+            <artifactId>arq-spring-restutils</artifactId>
+            <version>${arq-spring-restutils.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.bbva.jee.arq.spring.core</groupId>
+            <artifactId>arq-spring-core-spi</artifactId>
+            <version>${arq-spring-core-spi.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.bbva.jee.arq.spring.core</groupId>
+            <artifactId>arq-spring-core-api</artifactId>
+            <version>${arq-spring-core-api.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.bbva.jee.arq.spring.core</groupId>
+            <artifactId>arq-spring-connector-host</artifactId>
+            <version>${arq.spring.connector.host.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.bbva.jee.arq.spring.core</groupId>
+            <artifactId>arq-spring-connector-host-ps9</artifactId>
+            <version>${arq.spring.connector.host.ps9.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.bbva.jee.arq.spring.core</groupId>
+            <artifactId>arq-spring-connector-host-api</artifactId>
+            <version>${arq.spring.connector.host.api.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.bbva.jee.arq.spring.core</groupId>
+            <artifactId>arq-spring-connector-host-imsconnect</artifactId>
+            <version>${arq.spring.connector.host.imsconnect.version}</version>
+            <scope>test</scope>
+        </dependency>
 
 	<!--Dependencias Swagger -->
 	

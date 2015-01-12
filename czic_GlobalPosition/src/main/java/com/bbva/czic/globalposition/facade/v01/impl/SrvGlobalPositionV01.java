@@ -40,13 +40,10 @@ public class SrvGlobalPositionV01 implements ISrvGlobalPositionV01, com.bbva.jee
 	public HttpHeaders httpHeaders;
 
 	@Resource(name = "global-position-filter-converter")
-	IFilterConverter gpFilterConverter;
+	private IFilterConverter gpFilterConverter;
 
-	@Resource(name = "global-position-product-mapper")
-	IGlobalPositionMapper globalPositionMapper;
-	
-	@Autowired
-	ISrvIntGlobalPosition srvIntGlobalPosition;
+	@Resource(name = "global-position-mapper")
+	private IGlobalPositionMapper globalPositionMapper;
 
 	public UriInfo uriInfo;
 	
@@ -59,6 +56,10 @@ public class SrvGlobalPositionV01 implements ISrvGlobalPositionV01, com.bbva.jee
 	public void setHttpHeaders(HttpHeaders httpHeaders) {
 		this.httpHeaders = httpHeaders;
 	}
+	
+	@Autowired
+	ISrvIntGlobalPosition srvIntGlobalPosition;
+
 	
 	@ApiOperation(value="Gets all the users products", notes="List of products that COULD be filtered by product type.", response=List.class)
 	@ApiResponses(value = {
@@ -78,10 +79,12 @@ public class SrvGlobalPositionV01 implements ISrvGlobalPositionV01, com.bbva.jee
 			@ApiParam(value = "Customer identifier") @PathParam("customerId") String customerId,
 			@ApiParam(value = "filter param") @DefaultValue("null") @QueryParam("$filter") String filter) {
 
+		log.info("SrvGlobalPositionV01.getExtractGlobalBalance");
+
 		final DTOIntFilterProduct filterProduct = gpFilterConverter.getDTOIntFilter(customerId, filter);
 		List<DTOIntProduct> products = srvIntGlobalPosition.getExtractGlobalBalance(filterProduct);
 
-		return globalPositionMapper.mapAsList(products, Product.class);
+		return globalPositionMapper.map(products);
 	}
 
 	@ApiOperation(value="Update the product.", notes="Update the product partially", response=Response.class)
@@ -96,7 +99,7 @@ public class SrvGlobalPositionV01 implements ISrvGlobalPositionV01, com.bbva.jee
 	@Consumes({ MediaType.APPLICATION_JSON })
 	public Response update(
 			@ApiParam(value="Product identifier")@PathParam("idProduct") String idProduct,
-			@ApiParam(value="Produc information")Product infoProduct) {
+			@ApiParam(value="Product information")Product infoProduct) {
 
 		infoProduct.setId(idProduct);
 

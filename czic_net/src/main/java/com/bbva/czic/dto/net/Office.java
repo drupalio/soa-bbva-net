@@ -2,11 +2,17 @@
 package com.bbva.czic.dto.net;
 
 import java.io.Serializable;
+
+import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
+
+
+
+import org.hibernate.validator.constraints.NotBlank;
 
 import com.wordnik.swagger.annotations.ApiModelProperty;
 
@@ -19,12 +25,16 @@ public class Office
 
     public final static long serialVersionUID = 1L;
     @ApiModelProperty(value = "Codigo del corresponsal financiero", required = true)
+    @NotBlank
     private String code;
     @ApiModelProperty(value = "Nombre del corresponsal financiero", required = true)
+    @NotBlank
     private String name;
     @ApiModelProperty("Informacion de la ubicacion de un origen")
+    @NotNull
     private Location location;
     @ApiModelProperty(value = "Direccion postal de la oficina donde se realizo la apertura del producto", required = true)
+    @NotBlank
     private String postalAddress;
 
     public Office() {

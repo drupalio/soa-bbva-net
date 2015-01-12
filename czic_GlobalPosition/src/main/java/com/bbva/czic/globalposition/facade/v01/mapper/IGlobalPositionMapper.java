@@ -1,17 +1,21 @@
 package com.bbva.czic.globalposition.facade.v01.mapper;
 
-import com.bbva.czic.dto.net.Balance;
-import com.bbva.czic.dto.net.ContactInfo;
-import com.bbva.czic.dto.net.Contract;
-import com.bbva.czic.dto.net.Product;
-import com.bbva.czic.globalposition.business.dto.DTOIntBalance;
-import com.bbva.czic.globalposition.business.dto.DTOIntContactInfo;
-import com.bbva.czic.globalposition.business.dto.DTOIntContract;
-import com.bbva.czic.globalposition.business.dto.DTOIntProduct;
-import ma.glasnost.orika.MapperFacade;
-import ma.glasnost.orika.MapperFactory;
-import ma.glasnost.orika.impl.ConfigurableMapper;
+import com.bbva.czic.dto.net.*;
+import com.bbva.czic.globalposition.business.dto.*;
 
-public interface IGlobalPositionMapper extends MapperFacade {
+import java.util.List;
 
+public interface IGlobalPositionMapper {
+
+    List<Product> map(List<DTOIntProduct> products);
+
+    Product map(DTOIntProduct intProduct);
+
+    ContactInfo map(DTOIntContactInfo intContactInfo);
+
+    PhoneNumber map(DTOIntPhoneNumber intPhoneNumber);
+
+    Contract map(DTOIntContract intContract);
+
+    Balance map(DTOIntBalance intBalance);
 }

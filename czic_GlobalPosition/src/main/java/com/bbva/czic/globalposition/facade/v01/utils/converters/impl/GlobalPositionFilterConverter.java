@@ -28,14 +28,11 @@ public class GlobalPositionFilterConverter implements IFilterConverter {
     @Autowired
     BusinessServicesToolKit businessToolKit;
 
-    public void setBusinessToolKit(BusinessServicesToolKit businessToolKit) {
-        this.businessToolKit = businessToolKit;
-    }
-
     @Override
     public DTOIntFilterProduct getDTOIntFilter(String customerId, String filter) {
 
         final DTOIntFilterProduct filterProduct = new DTOIntFilterProduct();
+        filterProduct.setProductType(null);
 
         if(customerId == null || customerId.equals("null") || customerId.isEmpty()) {
             throw new BusinessServiceException(EnumError.WRONG_PARAMETERS.getAlias());

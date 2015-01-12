@@ -4,7 +4,7 @@
     <parent>
         <groupId>com.bbva.arq.servicing.spring</groupId>
         <artifactId>pom-padre-frontend</artifactId>
-        <version>1.5.1</version>
+        <version>1.4.0</version>
     </parent>
     <groupId>com.bbva.czic</groupId>
     <artifactId>pom-padre_czic</artifactId>   
@@ -14,11 +14,11 @@
     <!--url>http://maven.apache.org</url-->
     <modules>
         <module>czic_net</module>
-        <module>czic_accounts</module>
+        <!--<module>czic_accounts</module>-->
         <module>czic_commons</module>
         <module>czic_GlobalPosition</module>
-        <module>czic_executives</module>
-        <module>czic_customers</module>
+        <!--<module>czic_executives</module>-->
+        <!--<module>czic_customers</module>-->
         <module>czic_checkbooks</module>
         <module>czic_loan</module>
         <module>czic_cards</module>
