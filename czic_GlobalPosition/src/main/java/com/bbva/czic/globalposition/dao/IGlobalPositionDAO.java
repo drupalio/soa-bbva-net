@@ -7,7 +7,7 @@ import com.bbva.jee.arq.spring.core.host.transporte.ExcepcionTransporte;
 
 import java.util.List;
 
-public interface GlobalPositionDAO {
+public interface IGlobalPositionDAO {
     
     DTOIntProducts getExtractGlobalBalance(DTOIntFilterProduct filterProduct);
 

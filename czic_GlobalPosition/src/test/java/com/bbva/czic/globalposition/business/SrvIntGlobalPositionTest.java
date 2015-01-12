@@ -4,22 +4,15 @@ import com.bbva.czic.globalposition.business.dto.DTOIntFilterProduct;
 import com.bbva.czic.globalposition.business.dto.DTOIntProduct;
 import com.bbva.czic.globalposition.business.dto.DTOIntProducts;
 import com.bbva.czic.globalposition.business.impl.SrvIntGlobalPosition;
-import com.bbva.czic.globalposition.dao.GlobalPositionDAO;
-import com.bbva.jee.arq.spring.core.servicing.gce.BusinessServiceException;
-import com.bbva.jee.arq.spring.core.servicing.test.BusinessServiceTestContextLoader;
+import com.bbva.czic.globalposition.dao.IGlobalPositionDAO;
 import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
-import org.junit.runner.RunWith;
+
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import static org.mockito.Mockito.*;
 import org.mockito.MockitoAnnotations;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.TestExecutionListeners;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.springframework.test.context.support.DependencyInjectionTestExecutionListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -40,7 +33,7 @@ import java.util.List;
 public class SrvIntGlobalPositionTest {
 
 	@Mock
-	GlobalPositionDAO globalPositionDAO;
+	IGlobalPositionDAO globalPositionDAO;
 
 	@InjectMocks
 	//@Autowired
