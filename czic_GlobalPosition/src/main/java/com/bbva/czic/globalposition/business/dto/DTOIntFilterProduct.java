@@ -1,6 +1,5 @@
 package com.bbva.czic.globalposition.business.dto;
 
-import com.bbva.czic.dto.net.EnumProductType;
 
 /**
  * Created by Administrador on 05/01/2015.

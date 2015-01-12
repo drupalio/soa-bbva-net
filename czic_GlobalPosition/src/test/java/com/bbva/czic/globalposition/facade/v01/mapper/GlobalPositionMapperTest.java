@@ -14,7 +14,7 @@ import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 
-public class MapperTest {
+public class GlobalPositionMapperTest {
 
     GlobalPositionMapper mapper;
 
@@ -49,7 +49,6 @@ public class MapperTest {
         assertEquals(intProduct.getProductType(), product.getType());
         assertEquals(intProduct.getBalance().getAvailableBalance(), product.getBalance().getAvailableBalance());
         assertEquals(intProduct.getBalance().getTotal(), product.getBalance().getTotal());
-        assertEquals(intProduct.getBalance().getTradeBalance(), product.getBalance().getTradeBalance());
         assertEquals(intProduct.getAlias(), product.getAlias());
         assertEquals(intProduct.getName(), product.getName());
         assertEquals(intProduct.getFinancialState(), product.getFinancialState());

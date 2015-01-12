@@ -133,9 +133,6 @@ public class LoanMapper {//extends AbstractConfigurableMapper {
 		if(available != null){
 			auxBalance.setTotal(setMoneyValue(total));
 		}
-		if(trade != null){
-			auxBalance.setTradeBalance(setMoneyValue(trade));
-		}
 		
 		return auxBalance;
 	}

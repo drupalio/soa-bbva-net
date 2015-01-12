@@ -133,7 +133,6 @@ public class GlobalPositionMapper /*extends ConfigurableMapper*/  implements IGl
 
         balance.setTotal(intBalance.getTotal());
         balance.setAvailableBalance(intBalance.getAvailableBalance());
-        balance.setTradeBalance(intBalance.getTradeBalance());
 
         return balance;
     }
