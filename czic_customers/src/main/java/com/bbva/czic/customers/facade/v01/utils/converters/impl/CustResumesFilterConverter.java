@@ -60,6 +60,7 @@ public class CustResumesFilterConverter implements IFilterConverter {
 				throw new BusinessServiceException(EnumError.WRONG_PARAMETERS.getAlias());
 			}
 
+
 		} catch (BusinessServiceException bse) {
 			log.error("BusinessServiceException - The query string (filter) has failed: " + bse);
 			throw bse;

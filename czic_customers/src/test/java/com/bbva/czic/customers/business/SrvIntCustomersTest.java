@@ -1,12 +1,21 @@
 package com.bbva.czic.customers.business;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 import static org.mockito.Matchers.anyString;
 import static org.mockito.Mockito.when;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
+import com.bbva.czic.customers.business.dto.*;
+import com.bbva.czic.customers.dao.mapper.ICustomerMapper;
+import com.bbva.czic.dto.net.CardCharge;
+import com.bbva.czic.routine.commons.rm.utils.converter.UtilsConverter;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -19,9 +28,6 @@ import org.springframework.test.context.TestExecutionListeners;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.support.DependencyInjectionTestExecutionListener;
 
-import com.bbva.czic.customers.business.dto.DTOIntAccMovementsResume;
-import com.bbva.czic.customers.business.dto.DTOIntEnumMonth;
-import com.bbva.czic.customers.business.dto.DTOIntProduct;
 import com.bbva.czic.customers.business.impl.SrvIntCustomers;
 import com.bbva.czic.customers.dao.CustomersDAO;
 import com.bbva.czic.dto.net.AccMovementsResume;
@@ -42,93 +48,131 @@ locations = {"classpath*:/META-INF/spring/applicationContext-*.xml",
 public class SrvIntCustomersTest {
 	
 
-		@Mock
-		CustomersDAO cutomersDAO;
-		
+	@Mock
+	CustomersDAO customersDao;
 
-		@InjectMocks
-		public List<DTOIntAccMovementsResume> getlistAccountsMovementsResume;
-		
-		@Autowired
-		SrvIntCustomers srv;
+	@Mock
+	ICustomerMapper customerMapper;
 
-		@Before
-		public void init() {
-			MockitoAnnotations.initMocks(this);
-		}
+	@Autowired
+	@InjectMocks
+	SrvIntCustomers srv;
 
-	@Test
-	public void getListMovements () {
-		/*
-		//setUp - data
-		List<DTOIntAccMovementsResume> accMovementsResumes = getListAccountMovements();
-
-		//setUp - expectation
-		when(cutomersDAO.getlistAccountsMovementsResume(null, null)).thenReturn(accMovementsResumes);
-		//SUT's excecution
-		final List<AccMovementsResume> Result = srv.getlistAccountsMovementsResume("idclie",null);
-		
-
-		//validation
-		assertEquals(5, Result.size());
-		*/
-	}
-	//aplicacion de filtro income para movimientos 
-	
-
-	@Test
-	public void testFilterMovements(){
-		/*/setUp - data
-		final List<DTOIntAccMovementsResume> AccMovementsResume = getListAccountMovements();
-
-		//setUp - expectation
-		//when(CustomersDAO.getlistAccountsMovementsResume(anyString(), String)).thenReturn(AccMovementsResume);
-		when(cutomersDAO.getlistAccountsMovementsResume(anyString(), null, null)).thenReturn(AccMovementsResume);
-
-		//SUT's excecution
-		final List<AccMovementsResume> Result = srv.getlistAccountsMovementsResume("111", "(income==6776)");
-
-		//validation
-		assertEquals(1, Result.size());
-		*/
+	@Before
+	public void init() {
+		MockitoAnnotations.initMocks(this);
 	}
 
 	@Test(expected = BusinessServiceException.class)
-	public void testFilterErrorShouldThrowABusinessException() {
-		/*/setUp - data
-		final List<DTOIntAccMovementsResume> AccMovementsResume = getListAccountMovements();
+	public void testGetlistAccountsMovementsResumeNoFilter() {
+		//Setup
 
-		//setUp - expectation
-		when(cutomersDAO.getlistAccountsMovementsResume(anyString(),null, null)).thenReturn(AccMovementsResume);
+		//Setup expectation
 
-		//SUT's excecution
-		final List<AccMovementsResume> Result = srv.getlistAccountsMovementsResume("111", "(uberTroter==ED)");
-		*/
+		//SUT execution
+		final List<AccMovementsResume> answer = srv.getlistAccountsMovementsResume("123",null);
+		//validation
 	}
 
 	@Test
-	public void testModifyProduct() {
-
+	public void testGetlistAccountsMovementsResume() {
+		//Setup
+		final DTOIntFilterCustomerResumes filter = mockResumesFilter();
+		//Setup expectation
+		when(customersDao.getlistAccountsMovementsResume(filter)).thenReturn(mockListAccMovementsResume());
+		//SUT execution
+		final List<AccMovementsResume> answer = srv.getlistAccountsMovementsResume("123",filter);
+		//validation
+		assertNotNull(answer);
+		assertTrue(answer.size() > 0);
 	}
 
-	private List<DTOIntAccMovementsResume> getListAccountMovements() {
-		/*
-		List<DTOIntAccMovementsResume> intMovements = new ArrayList<DTOIntAccMovementsResume>();
+	@Test(expected = Exception.class)
+	public void testGetlistAccountsMovementsResumeResultNull() {
+		//Setup
+		final DTOIntFilterCustomerResumes filter = mockResumesFilter();
+		//Setup expectation
+		when(customersDao.getlistAccountsMovementsResume(filter)).thenReturn(null);
+		//SUT execution
+		final List<AccMovementsResume> answer = srv.getlistAccountsMovementsResume("123",filter);
+	}
 
+	//GetlistCreditCharges
 
-		DTOIntAccMovementsResume intacc = new DTOIntAccMovementsResume();
-		final Money availableMoney = new Money(Currency.getInstance("COP"),new BigDecimal(availableBalance));
-		final Money availableMoney2 = new Money(Currency.getInstance("COP"),new BigDecimal(availableBalance));
-		intacc.setIncome(availableMoney);
-		intacc.setBalance(availableMoney2);
-		intacc.setOutcome(availableMoney);
-		intacc.setMonth(DTOIntEnumMonth.DECEMBER);
+	@Test(expected = BusinessServiceException.class)
+	public void testGetlistCreditChargesNoFilter() {
+		//Setup
 
+		//Setup expectation
 
-		getlistAccountsMovementsResume.add(intacc);
+		//SUT execution
+		final List<CardCharge> answer = srv.getlistCreditCharges("123",null);
+		//validation
+	}
 
-		return intMovements;
-		*/ return null;
+	@Test
+	public void testGetlistCreditCharges() {
+		//Setup
+		final DTOIntFilterCustomerResumes filter = mockResumesFilter();
+		//Setup expectation
+		when(customersDao.getlistCreCardCharges(filter)).thenReturn(mockListCardCharge());
+		//SUT execution
+		final List<AccMovementsResume> answer = srv.getlistAccountsMovementsResume("123",filter);
+		//validation
+		assertNotNull(answer);
+		assertTrue(answer.size() > 0);
+	}
+
+	@Test(expected = Exception.class)
+	public void testGetlistCreditChargesResultNull() {
+		//Setup
+		final DTOIntFilterCustomerResumes filter = mockResumesFilter();
+		//Setup expectation
+		when(customersDao.getlistCreCardCharges(filter)).thenReturn(null);
+		//SUT execution
+		final List<CardCharge> answer = srv.getlistCreditCharges("123", filter);
+	}
+
+	private DTOIntFilterCustomerResumes mockResumesFilter(){
+		DTOIntFilterCustomerResumes filter = new DTOIntFilterCustomerResumes();
+
+		filter.setEndDate(new Date());
+		Calendar cal = Calendar.getInstance();
+		cal.set(2015,01,01);
+		filter.setStartDate(cal.getTime());
+
+		return  filter;
+	}
+
+	private List<DTOIntAccMovementsResume> mockListAccMovementsResume(){
+		List<DTOIntAccMovementsResume> list = new ArrayList<DTOIntAccMovementsResume>();
+
+		for(DTOIntEnumMonth month : DTOIntEnumMonth.values()){
+			DTOIntAccMovementsResume mr1 = new DTOIntAccMovementsResume();
+			mr1.setIncome(UtilsConverter.getMoneyDTO(new BigDecimal(100)));
+			mr1.setMonth(month);
+			mr1.setBalance(UtilsConverter.getMoneyDTO(new BigDecimal(100)));
+			mr1.setOutcome(UtilsConverter.getMoneyDTO(new BigDecimal(0)));
+
+			list.add(mr1);
+		}
+
+		return list;
+	}
+
+	private List<DTOIntCardCharge> mockListCardCharge(){
+		List<DTOIntCardCharge> list = new ArrayList<DTOIntCardCharge>();
+
+		for(DTOIntEnumCardChargeCategory category : DTOIntEnumCardChargeCategory.values()){
+			DTOIntCardCharge cc = new DTOIntCardCharge();
+			cc.setCategory(category);
+			cc.setAmount(new Money());
+			cc.setChargeDate(new Date());
+
+			list.add(cc);
+		}
+
+		return list;
 	}
 }
 
