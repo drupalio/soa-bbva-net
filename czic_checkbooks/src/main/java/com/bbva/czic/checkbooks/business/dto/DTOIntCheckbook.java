@@ -1,5 +1,7 @@
 package com.bbva.czic.checkbooks.business.dto;
 
+import com.bbva.czic.dto.net.EnumCheckbookStatus;
+
 import java.util.Date;
 import java.util.List;
 
@@ -11,7 +13,7 @@ public class DTOIntCheckbook {
 
 	private Integer firstCheck;
 
-	private Integer lastCheckl;
+	private Integer lastCheck;
 
 	private Integer totalCheck;
 
@@ -19,7 +21,7 @@ public class DTOIntCheckbook {
 
 	private Date deliveryDate;
 
-	private DTOIntEnumCheckbookStatus actualState;
+	private EnumCheckbookStatus actualState;
 
 	private List<DTOIntCheck> checks;
 
@@ -43,12 +45,12 @@ public class DTOIntCheckbook {
 		this.firstCheck = firstCheck;
 	}
 
-	public Integer getLastCheckl() {
-		return lastCheckl;
+	public Integer getLastCheck() {
+		return lastCheck;
 	}
 
-	public void setLastCheckl(Integer lastCheckl) {
-		this.lastCheckl = lastCheckl;
+	public void setLastCheck(Integer lastCheck) {
+		this.lastCheck = lastCheck;
 	}
 
 	public Integer getTotalCheck() {
@@ -75,11 +77,11 @@ public class DTOIntCheckbook {
 		this.deliveryDate = deliveryDate;
 	}
 
-	public DTOIntEnumCheckbookStatus getActualState() {
+	public EnumCheckbookStatus getActualState() {
 		return actualState;
 	}
 
-	public void setActualState(DTOIntEnumCheckbookStatus actualState) {
+	public void setActualState(EnumCheckbookStatus actualState) {
 		this.actualState = actualState;
 	}
 
