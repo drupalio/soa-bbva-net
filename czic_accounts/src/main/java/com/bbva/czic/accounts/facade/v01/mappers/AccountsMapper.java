@@ -1,19 +1,12 @@
-package com.bbva.czic.mapper;
+package com.bbva.czic.accounts.facade.v01.mappers;
 
-import ma.glasnost.orika.MapperFactory;
-import ma.glasnost.orika.impl.DefaultMapperFactory;
-
-import com.bbva.czic.core.stereotype.AbstractConfigurableMapper;
-import com.bbva.czic.core.stereotype.Mapper;
-import com.bbva.czic.accounts.business.dto.DTOIntAccMovementsResume;
 import com.bbva.czic.accounts.business.dto.DTOIntAccount;
-import com.bbva.czic.accounts.business.dto.DTOIntMonthlyBalances;
-import com.bbva.czic.accounts.dao.model.oznu.FormatoOZECNUE0;
 import com.bbva.czic.accounts.dao.model.oznv.FormatoOZECNVE0;
+import com.bbva.czic.routine.commons.rm.utils.mappers.Mapper;
 
 @Mapper(value = "accountsMapper")
-public class AccountsMapper extends AbstractConfigurableMapper {
-
+public class AccountsMapper {
+/*
 	@Override
 	protected void configure(MapperFactory factory) {
 		// Mapeo getAccount
@@ -44,7 +37,7 @@ public class AccountsMapper extends AbstractConfigurableMapper {
 		dtoSal = mapperFactory.getMapperFacade().map(dtoEnt, dtoSal.getClass());
 		return dtoSal;
 	}
-
+*/
 	public DTOIntAccount map(FormatoOZECNVE0 formatoSalida,
 			Class<DTOIntAccount> class1) {
 		// TODO Auto-generated method stub
