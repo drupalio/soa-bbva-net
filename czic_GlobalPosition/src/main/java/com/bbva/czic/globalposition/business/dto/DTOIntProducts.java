@@ -3,7 +3,7 @@ package com.bbva.czic.globalposition.business.dto;
 import java.util.List;
 
 /**
- * Created by Administrador on 05/01/2015.
+ * @author Entelgy Colombia.
  */
 public class DTOIntProducts {
 

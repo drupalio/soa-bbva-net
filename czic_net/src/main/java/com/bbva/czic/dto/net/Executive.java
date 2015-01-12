@@ -3,11 +3,19 @@ package com.bbva.czic.dto.net;
 
 import java.io.Serializable;
 import java.util.List;
+
+import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
+
+
+
+
+import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.NotBlank;
 
 import com.wordnik.swagger.annotations.ApiModelProperty;
 
@@ -20,16 +28,23 @@ public class Executive
 
     public final static long serialVersionUID = 1L;
     @ApiModelProperty(value = "  Identificador del ejecutivo de cuenta", required = true)
+    @NotBlank
     private String id;
     @ApiModelProperty("Nombre del ejecutivo de cuenta")
+    @NotBlank
     private String name;
     @ApiModelProperty("Telefono del ejecutivo de cuenta")
+    @NotBlank
     private String phone;
     @ApiModelProperty("Oficina a la cual esta asignado un ejecutivo de cuenta")
+    @NotNull
     private Office office;
     @ApiModelProperty("Correo electronico de un ejecutivo de cuenta")
+    @NotBlank
+    @Email
     private String email;
     @ApiModelProperty("Clientes que tiene asignado un ejecutivo de cuenta")
+    @NotNull
     private List<ThirdParty> customer;
 
     public Executive() {

@@ -18,10 +18,6 @@ public class DTOIntProduct {
     private DTOIntContactInfo contactInfo;
     private DTOIntContract contract;
 
-    public DTOIntProduct() {
-        //default constructor
-    }
-
     public static long getSerialVersionUID() {
         return serialVersionUID;
     }

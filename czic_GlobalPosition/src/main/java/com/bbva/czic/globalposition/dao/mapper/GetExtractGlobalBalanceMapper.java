@@ -21,6 +21,9 @@ import java.util.List;
 public class GetExtractGlobalBalanceMapper
         implements IPaginatedTransactionMapper <DTOIntFilterProduct, FormatoOZECN1E0, DTOIntProducts, IFormatNotApply, DTOIntProduct, FormatoOZECN1S1, IFormatNotApply> {
 
+    public static final String TRUE_ES = "v";
+    public static final String TRUE_EN = "t";
+
     /**
      * {@inheritDoc}
      */
@@ -73,8 +76,8 @@ public class GetExtractGlobalBalanceMapper
 
         product.setBalance(balanceConverter.convert(outFormat.getSaltota(), outFormat.getSaldisp(), null));
 
-        product.setVisible(outFormat.getIndvisi().equalsIgnoreCase("v") || outFormat.getIndvisi().equalsIgnoreCase("t"));
-        product.setOperable(outFormat.getIndoper().equalsIgnoreCase("v") || outFormat.getIndoper().equalsIgnoreCase("t"));
+        product.setVisible(TRUE_ES.equalsIgnoreCase(outFormat.getIndvisi()) || TRUE_EN.equalsIgnoreCase(outFormat.getIndvisi()));
+        product.setOperable(TRUE_ES.equalsIgnoreCase(outFormat.getIndoper()) || TRUE_EN.equalsIgnoreCase(outFormat.getIndoper()));
         product.setAlias(outFormat.getAlias());
         product.setName(outFormat.getNomprod());
         product.setFinancialState(EnumFinancialStatusType.valueOf(outFormat.getFinstat()));

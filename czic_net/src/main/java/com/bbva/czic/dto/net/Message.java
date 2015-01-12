@@ -3,6 +3,8 @@ package com.bbva.czic.dto.net;
 
 import java.io.Serializable;
 import java.util.Calendar;
+
+import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
@@ -10,6 +12,9 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlSchemaType;
 import javax.xml.bind.annotation.XmlType;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+
+import org.hibernate.validator.constraints.NotBlank;
+
 import com.bbva.jee.arq.spring.core.servicing.utils.CalendarAdapter;
 import com.bbva.jee.arq.spring.core.servicing.utils.MoneyAdapter;
 
@@ -26,22 +31,27 @@ public class Message
 
     public final static long serialVersionUID = 1L;
     @ApiModelProperty("Identificador del mensaje")
+    @NotBlank
     private String id;
     @ApiModelProperty(value = "Titulo del mensaje", required = true)
+    @NotBlank
     private String title;
-    @ApiModelProperty("Descripcion del mensaje")
+    @ApiModelProperty(value = "Plantilla del mensaje", required = true)
+    @NotBlank
     private String template;
-    @ApiModelProperty("Fecha de emidion del mensaje")
-    private EnumMessageType reference;
-//    @XmlJavaTypeAdapter(CalendarAdapter.class)
-    @XmlSchemaType(name = "dateTime")
     @ApiModelProperty(value = "Tipo de mensaje", required = true)
+    @NotNull
+    private EnumMessageType reference;
+    @XmlSchemaType(name = "dateTime")
+    @ApiModelProperty("Tiempo de mensaje")
+    @NotNull
     private Calendar time;
     @XmlJavaTypeAdapter(MoneyAdapter.class)
     @XmlElement(type = Money.class)
     @ApiModelProperty("Valor de mensaje")
+    @NotNull
     private Money value;
-    @ApiModelProperty("Tiempo de mensaje")
+    @ApiModelProperty("Descripcion del mensaje")
     private String info;
 
     public Message() {

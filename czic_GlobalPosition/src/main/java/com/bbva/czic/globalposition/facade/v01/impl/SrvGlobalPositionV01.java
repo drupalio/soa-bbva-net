@@ -40,10 +40,10 @@ public class SrvGlobalPositionV01 implements ISrvGlobalPositionV01, com.bbva.jee
 	public HttpHeaders httpHeaders;
 
 	@Resource(name = "global-position-filter-converter")
-	IFilterConverter gpFilterConverter;
+	private IFilterConverter gpFilterConverter;
 
-	@Resource(name = "global-position-product-mapper")
-	IGlobalPositionMapper globalPositionMapper;
+	@Resource(name = "global-position-mapper")
+	private IGlobalPositionMapper globalPositionMapper;
 
 	public UriInfo uriInfo;
 	
@@ -79,10 +79,12 @@ public class SrvGlobalPositionV01 implements ISrvGlobalPositionV01, com.bbva.jee
 			@ApiParam(value = "Customer identifier") @PathParam("customerId") String customerId,
 			@ApiParam(value = "filter param") @DefaultValue("null") @QueryParam("$filter") String filter) {
 
+		log.info("SrvGlobalPositionV01.getExtractGlobalBalance");
+
 		final DTOIntFilterProduct filterProduct = gpFilterConverter.getDTOIntFilter(customerId, filter);
 		List<DTOIntProduct> products = srvIntGlobalPosition.getExtractGlobalBalance(filterProduct);
 
-		return globalPositionMapper.mapAsList(products, Product.class);
+		return globalPositionMapper.map(products);
 	}
 
 	@ApiOperation(value="Update the product.", notes="Update the product partially", response=Response.class)
@@ -97,7 +99,7 @@ public class SrvGlobalPositionV01 implements ISrvGlobalPositionV01, com.bbva.jee
 	@Consumes({ MediaType.APPLICATION_JSON })
 	public Response update(
 			@ApiParam(value="Product identifier")@PathParam("idProduct") String idProduct,
-			@ApiParam(value="Produc information")Product infoProduct) {
+			@ApiParam(value="Product information")Product infoProduct) {
 
 		infoProduct.setId(idProduct);
 
@@ -133,40 +135,4 @@ public class SrvGlobalPositionV01 implements ISrvGlobalPositionV01, com.bbva.jee
 
 		srvIntGlobalPosition.updateProductOperability(productInt);
 	}
-
-<<<<<<< HEAD:czic_GlobalPosition/src/main/java/com/bbva/czic/globalposition/facade/v01/SrvGlobalPositionV01.java
-	private DTOIntFilterProduct getFilterProduct(String customerId, String filter) {
-
-		final DTOIntFilterProduct filterProduct = new DTOIntFilterProduct();
-		filterProduct.setProductType(null);
-
-		if (filter != null && !filter.contentEquals("null")) {
-			log.info("A query string (filter) has been sent: " + filter);
-			SearchCondition<DTOIntProduct> sc;
-			try {
-				sc = new FiqlParser<DTOIntProduct>(DTOIntProduct.class).parse(filter);
-
-				final List<PrimitiveStatement> splitDataFilter = businessToolKit.getDataFromFilter(sc);
-				for (PrimitiveStatement st : splitDataFilter) {
-					if (st.getProperty().equals("productType")) {
-						filterProduct.setProductType(EnumProductType.valueOf(st.getValue().toString()));
-					}
-				}
-
-			} catch (SearchParseException e) {
-				log.error("SearchParseException - The query string (filter) has failed: " + e);
-				throw new BusinessServiceException(EnumError.WRONG_PARAMETERS.getAlias(), filter, e.getMessage());
-			} catch (IllegalArgumentException e) {
-				log.error("IllegalArgumentException - The product type is an invalid type - does not exist: " + e);
-				throw new BusinessServiceException(EnumError.WRONG_PARAMETERS.getAlias(), filter, e.getMessage());
-			}
-		}
-
-		filterProduct.setIdCustomer(customerId);
-
-		return filterProduct;
-
-	}
-=======
->>>>>>> bd58ae038e728bf05f512007bf7b682934829a64:czic_GlobalPosition/src/main/java/com/bbva/czic/globalposition/facade/v01/impl/SrvGlobalPositionV01.java
 }

@@ -1,5 +1,7 @@
 package com.bbva.czic.loan.business.impl;
 
+import com.bbva.czic.dto.net.Loan;
+import com.bbva.czic.mapper.LoanMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -24,18 +26,20 @@ public class SrvIntLoan implements ISrvIntLoan {
 	private LoanDAO loanDao;
 
 	@Override
-	public DTOIntLoan getRotaryQuota(String idRotaryQuota)
-			throws BusinessServiceException {
+	public Loan getRotaryQuota(String idRotaryQuota) throws BusinessServiceException {
 		try {
 
-			if (idRotaryQuota == null){
+			if (idRotaryQuota == null) {
 				throw new BusinessServiceException("loanPeticiongetRotaryQuota");
 			}
-
 			DTOIntLoan dtoIntLoan = loanDao.getRotaryQuota(idRotaryQuota);
-
-			return dtoIntLoan;
+			Loan loan = LoanMapper.getLoan(dtoIntLoan);
+			return loan;
+		}catch(BusinessServiceException ex){
+			log.error("SrvIntLoan.getRotaryQuota = " + ex.getMessage());
+			throw ex;
 		} catch (Exception e) {
+			log.error("SrvIntLoan.getRotaryQuota.exception = " + e.getMessage());
 			throw new BusinessServiceException(e.getMessage());
 		}
 	}

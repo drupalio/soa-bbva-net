@@ -61,7 +61,7 @@ public class SrvLoanV01 implements ISrvLoanV01,
 	}
 
 	@Autowired
-	ISrvIntLoan srvIntLoan;
+	ISrvIntLoan isrvIntLoan;
 
 	@Override
 	@ApiOperation(value = "Obtiene la informaci�n general del producto de fianciamiento", notes = "Obtiene la informaci�n general del producto de fianciamiento", response = Loan.class)
@@ -75,15 +75,7 @@ public class SrvLoanV01 implements ISrvLoanV01,
 	@SMC(registryID = "SMC201400010", logicalID = "getRotaryQuota")
 	public Loan getRotaryQuota(
 			@ApiParam(value = "Claim identifier param") @PathParam("idLoan") String idLoan) {
-
-		DTOIntLoan dtoIntLoan = srvIntLoan.getRotaryQuota(idLoan);
-
-		Loan loan = new Loan();
-		loan.setPayment(dtoIntLoan.getPayment());
-		loan.setStatus(dtoIntLoan.getStatus());
-		loan.setBalance(dtoIntLoan.getBalance());
-
-		return loan;
+		return  isrvIntLoan.getRotaryQuota(idLoan);
 	}
 
 }

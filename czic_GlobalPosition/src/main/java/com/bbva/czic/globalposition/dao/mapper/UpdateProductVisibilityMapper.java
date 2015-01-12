@@ -19,7 +19,7 @@ public class UpdateProductVisibilityMapper implements ISimpleTransactionMapper<D
 
         formatoEntrada.setNumcta(dtoIn.getId());
 
-        formatoEntrada.setIndcta(dtoIn.isVisible() ? EnumVisibility.SHOW.name() : EnumVisibility.HIDE.name());
+        formatoEntrada.setIndcta(dtoIn.isVisible() ? EnumVisibility.OOOSHOW.name() : EnumVisibility.OOOHIDE.name());
 
         return formatoEntrada;
     }

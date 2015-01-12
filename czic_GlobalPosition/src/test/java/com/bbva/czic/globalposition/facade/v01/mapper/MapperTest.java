@@ -4,6 +4,7 @@ import com.bbva.czic.dto.net.*;
 import com.bbva.czic.globalposition.business.dto.*;
 import com.bbva.czic.globalposition.facade.v01.mapper.impl.GlobalPositionMapper;
 import com.bbva.jee.arq.spring.core.servicing.utils.Money;
+import org.junit.Before;
 import org.junit.Test;
 
 import java.math.BigDecimal;
@@ -13,109 +14,121 @@ import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 
-/**
- * Created by Administrador on 17/12/2014.
- */
 public class MapperTest {
 
     GlobalPositionMapper mapper;
 
+    @Before
+    public void init() {
+        mapper = new GlobalPositionMapper();
+    }
+
+    @Test
+    public void testMapDTOIntPhoneNumberToPhoneNumber() {
+        // Setup data
+        final List<Product> products;
+        final List<DTOIntProduct> intProducts = new ArrayList<DTOIntProduct>();
+        intProducts.add(getIntProduct());
+        intProducts.add(getIntProduct());
+
+        // SUT execution
+        products = mapper.map(intProducts);
+
+        //Validation
+        assertEquals(2, products.size());
+    }
+
     @Test
     public void testMapDTOIntProductToProductAllProducts() {
-        /*
-        final DTOIntProduct product = new DTOIntProduct();
-        final DTOIntBalance balance = new DTOIntBalance();
+        final Product product;
+        final DTOIntProduct intProduct = getIntProduct();
+
+        product = mapper.map(intProduct);
+
+        assertEquals(intProduct.getId(), product.getId());
+        assertEquals(intProduct.getProductType(), product.getType());
+        assertEquals(intProduct.getBalance().getAvailableBalance(), product.getBalance().getAvailableBalance());
+        assertEquals(intProduct.getBalance().getTotal(), product.getBalance().getTotal());
+        assertEquals(intProduct.getBalance().getTradeBalance(), product.getBalance().getTradeBalance());
+        assertEquals(intProduct.getAlias(), product.getAlias());
+        assertEquals(intProduct.getName(), product.getName());
+        assertEquals(intProduct.getFinancialState(), product.getFinancialState());
+        assertEquals(intProduct.getContract().getNumber(), product.getContract().getNumber());
+        assertEquals(
+                (intProduct.getContactInfo().getPhoneNumbers().get(0)).getNumber(),
+                (product.getContactInfo().getPhoneNumbers().get(0)).getNumber()
+        );
+        assertEquals(
+                (intProduct.getContactInfo().getPhoneNumbers().get(0)).getType(),
+                (product.getContactInfo().getPhoneNumbers().get(0)).getType()
+        );
+        assertEquals(intProduct.isVisible(), product.getVisible());
+        assertEquals(product.getOperable(),intProduct.isOperable());
+
+    }
+
+    private List<DTOIntProduct> getIntProducts() {
+
+        List<DTOIntProduct> products = new ArrayList<DTOIntProduct>();
+
+        for(int i = 0; i < 2; i++) {
+            products.add(getIntProduct());
+        }
+
+        return products;
+    }
+
+    private DTOIntProduct getIntProduct() {
+        final DTOIntProduct intProduct = new DTOIntProduct();
+
+        intProduct.setId("0000886940");
+        intProduct.setProductType(EnumProductType.AQ);
+        intProduct.setBalance(getIntBalance());
+        intProduct.setAlias("Mi cuenta");
+        intProduct.setName("Broda");
+        intProduct.setFinancialState(EnumFinancialStatusType.A);
+        intProduct.setContract(getIntContract());
+        intProduct.setContactInfo(getIntContactInfo());
+        intProduct.setVisible(Boolean.TRUE);
+        intProduct.setOperable(Boolean.FALSE);
+
+        return intProduct;
+    }
+
+    private DTOIntContactInfo getIntContactInfo() {
         final DTOIntContactInfo contactInfo = new DTOIntContactInfo();
-        final DTOIntContract contract = new DTOIntContract();
-        final DTOIntPhoneNumber phoneNumber = new DTOIntPhoneNumber();
         final List<DTOIntPhoneNumber> phoneNumbers = new ArrayList<DTOIntPhoneNumber>();
+
+        phoneNumbers.add(getIntPhoneNumber());
+        contactInfo.setPhoneNumbers(phoneNumbers);
+
+        return contactInfo;
+    }
+
+    private DTOIntPhoneNumber getIntPhoneNumber() {
+        final DTOIntPhoneNumber phoneNumber = new DTOIntPhoneNumber();
 
         phoneNumber.setNumber("3193954515");
         phoneNumber.setType(EnumPhoneNumberType.MOBILE);
-        phoneNumbers.add(phoneNumber);
-        contactInfo.setPhoneNumbers(phoneNumbers);
 
-        balance.setAvailableBalance(new Money(Currency.getInstance("COP"), new BigDecimal(12351235)));
-        balance.setTotal(new Money(Currency.getInstance("COP"), new BigDecimal(12351235)));
-
-        product.setId("12345");
-        product.setProductType(EnumProductType.ED);
-
-
-
-        intProduct = Mapper.dtoIntProductMap(product);
-
-        assertEquals(product.getId(), intProduct.getId());
-        assertEquals(product.getType(), intProduct.getProductType());
-*/
+        return phoneNumber;
     }
-/*
-    @Test
-    public void testDeepMappingIfDeepObjectIsSet() {
-        final DTOIntProduct product = new DTOIntProduct();
-        final FormatBalanceToDTOBalanceConverter balanceConverter = new FormatBalanceToDTOBalanceConverter();
+
+    private DTOIntContract getIntContract() {
         final DTOIntContract contract = new DTOIntContract();
 
-        product.setProductType(EnumProductType.valueOf(outFormat.getTipprod()));
-        product.setId(outFormat.getNumprod());
+        contract.setNumber("52345234523452345");
 
-        product.setBalance(balanceConverter.convert(outFormat.getSaltota(), outFormat.getSaldisp(), null));
-
-        product.setVisible(outFormat.getIndvisi().equalsIgnoreCase("v") || outFormat.getIndvisi().equalsIgnoreCase("t"));
-        product.setOperable(outFormat.getIndoper().equalsIgnoreCase("v") || outFormat.getIndoper().equalsIgnoreCase("t"));
-        product.setAlias(outFormat.getAlias());
-        product.setName(outFormat.getNomprod());
-        product.setFinancialState(EnumFinancialStatusType.valueOf(outFormat.getFinstat()));
-        if (outFormat.getNumtarj() != null) {
-            product.setId(outFormat.getNumtarj());
-        }
-        contract.setNumber(outFormat.getNumcont());
-        product.setContract(contract);
-
-        product.setContactInfo(getDtoIntContactInfo(outFormat.getNumcelu()));
-    }*/
-
-    /**
-     * {@inheritDoc}
-     */
-    /*
-    @Override
-    public DTOIntProduct mapToInnerEntity(final FormatoOZECN1S1 outFormat, final DTOIntFilterProduct dtoIn) {
-        final DTOIntProduct product = new DTOIntProduct();
-        final FormatBalanceToDTOBalanceConverter balanceConverter = new FormatBalanceToDTOBalanceConverter();
-        final DTOIntContract contract = new DTOIntContract();
-
-        product.setProductType(EnumProductType.valueOf(outFormat.getTipprod()));
-        product.setId(outFormat.getNumprod());
-
-        product.setBalance(balanceConverter.convert(outFormat.getSaltota(), outFormat.getSaldisp(), null));
-
-        product.setVisible(outFormat.getIndvisi().equalsIgnoreCase("v") || outFormat.getIndvisi().equalsIgnoreCase("t"));
-        product.setOperable(outFormat.getIndoper().equalsIgnoreCase("v") || outFormat.getIndoper().equalsIgnoreCase("t"));
-        product.setAlias(outFormat.getAlias());
-        product.setName(outFormat.getNomprod());
-        product.setFinancialState(EnumFinancialStatusType.valueOf(outFormat.getFinstat()));
-        if (outFormat.getNumtarj() != null) {
-            product.setId(outFormat.getNumtarj());
-        }
-        contract.setNumber(outFormat.getNumcont());
-        product.setContract(contract);
-
-        product.setContactInfo(getDtoIntContactInfo(outFormat.getNumcelu()));
-
-        return product;
+        return contract;
     }
 
-    private DTOIntContactInfo getDtoIntContactInfo(final String mobilePhoneNumber) {
-        final DTOIntContactInfo contactInfo = new DTOIntContactInfo();
-        final DTOIntPhoneNumber phoneNumber = new DTOIntPhoneNumber();
-        final List<DTOIntPhoneNumber> phoneNumbers = new ArrayList<DTOIntPhoneNumber>();
+    private DTOIntBalance getIntBalance() {
+        final DTOIntBalance balance = new DTOIntBalance();
 
-        phoneNumber.setNumber(mobilePhoneNumber);
-        phoneNumber.setType(EnumPhoneNumberType.MOBILE);
-        phoneNumbers.add(phoneNumber);
-        contactInfo.setPhoneNumbers(phoneNumbers);
-        return contactInfo;
+        balance.setTotal(new Money(Currency.getInstance("COP"), new BigDecimal("+1234.09")));
+        balance.setAvailableBalance(new Money(Currency.getInstance("COP"), new BigDecimal("-1234.09")));
+        balance.setTradeBalance(new Money(Currency.getInstance("COP"), new BigDecimal("+1234.09")));
+
+        return balance;
     }
-*/
 }
