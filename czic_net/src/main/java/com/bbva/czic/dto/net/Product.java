@@ -3,10 +3,13 @@ package com.bbva.czic.dto.net;
 import java.io.Serializable;
 import java.util.List;
 
+import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
+
+import org.hibernate.validator.constraints.NotBlank;
 
 import com.wordnik.swagger.annotations.ApiModelProperty;
 
@@ -18,36 +21,46 @@ public class Product implements Serializable {
 	public final static long serialVersionUID = 1L;
 
 	@ApiModelProperty(value = "Identificador del usuario ejecutivo de ventas", required = true)
+	@NotBlank
 	private String id;
 
 	@ApiModelProperty(value = "", required = true)
+	@NotNull
 	private EnumProductType type;
 
 	@ApiModelProperty(value = "Nombre del producto", required = true)
+	@NotBlank
 	private String name;
 
 	@ApiModelProperty("Alias del producto")
 	private String alias;
 
 	@ApiModelProperty(value = "Identificador que referencia si un producto es un activo o un pasivo", required = true)
+	@NotNull
 	private EnumFinancialStatusType financialState;
 
 	@ApiModelProperty(value = "Visibilidad del producto", required = true)
+	@NotNull
 	private Boolean visible;
 
 	@ApiModelProperty(value = "Operatibilidad del producto", required = true)
+	@NotNull
 	private Boolean operable;
 
 	@ApiModelProperty(value = "Entidad con toda la informaci\u00f3n del balance de la cuenta", required = true)
+	@NotNull
 	private Balance balance;
 
 	@ApiModelProperty(value = "description", required = true)
+	@NotNull
 	private ContactInfo contactInfo;
 
 	@ApiModelProperty("")
+	@NotNull
 	private Conditions conditions;
 
 	@ApiModelProperty("")
+	@NotNull
 	private List<Movement> movement;
 
 	@ApiModelProperty("")
