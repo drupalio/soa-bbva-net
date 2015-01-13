@@ -21,9 +21,6 @@ public class Loan extends Product implements Serializable {
 	@NotNull
 	private Balance debt;
 
-	@NotNull
-	private Balance balance;
-
 	@ApiModelProperty("Entidad que posee toda un resumen de pagos del pr\u00e9stamo")
 	@NotNull
 	private Payment payment;
