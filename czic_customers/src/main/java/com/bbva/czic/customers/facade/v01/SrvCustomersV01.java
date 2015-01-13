@@ -99,7 +99,7 @@ public class SrvCustomersV01 implements ISrvCustomersV01, com.bbva.jee.arq.sprin
 			throw new BusinessServiceException(EnumError.WRONG_PARAMETERS.getAlias());
 		}
 
-		return srvIntCustomers.getlistCreditCharges(customerId, filterConverter.toCustomerResumesFilter(filter));
+		return srvIntCustomers.getlistCreditCharges(customerId, filterConverter.toCardChargeFilter(filter));
 	}
 	
 	@ApiOperation(value="Returns the list of summaries of balance all customer accounts per month", notes="(income, expenses and balance)",response=List.class)
@@ -125,7 +125,7 @@ public class SrvCustomersV01 implements ISrvCustomersV01, com.bbva.jee.arq.sprin
 			throw new BusinessServiceException(EnumError.WRONG_PARAMETERS.getAlias());
 		}
 
-		return srvIntCustomers.getlistAccountsMovementsResume(customerId, filterConverter.toCustomerResumesFilter(filter));
+		return srvIntCustomers.getlistAccountsMovementsResume(customerId, filterConverter.toAccountMovementFilter(filter));
 	}
 	
 	@ApiOperation(value="Returns the customer information for showing in global position", notes="Customer Information",response=List.class)

@@ -35,7 +35,7 @@ public class SrvIntAccountsTest {
 		
 		//Configurar Datos
 		String id = null;
-		srv.getAccount(id);
+		//srv.getAccount(id);
 	}
 
 	

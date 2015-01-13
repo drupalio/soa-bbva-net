@@ -13,8 +13,9 @@ import com.bbva.czic.dto.net.Customer;
 import com.bbva.czic.dto.net.EnumCardChargeCategory;
 import com.bbva.czic.dto.net.EnumMonth;
 import com.bbva.czic.routine.commons.rm.utils.converter.UtilsConverter;
-import com.bbva.czic.routine.commons.rm.utils.mappers.Mapper;
 import org.springframework.stereotype.Component;
+
+import java.util.Calendar;
 
 @Component("customerMapper")
 public class CustomerMapper implements ICustomerMapper{
@@ -33,7 +34,9 @@ public class CustomerMapper implements ICustomerMapper{
 		AccMovementsResume resume = new AccMovementsResume();
 		resume.setBalance(item.getBalance());
 		resume.setIncome(item.getIncome());
-		resume.setMonth(EnumMonth.valueOf(item.getMonth().name()));
+		Calendar cal = Calendar.getInstance();
+		cal.setTime(item.getMonth());
+		resume.setMonth(EnumMonth.getByCode("" + cal.get(Calendar.MONTH)));
 		resume.setOutcome(item.getOutcome());
 		return resume;
 	}
@@ -45,7 +48,7 @@ public class CustomerMapper implements ICustomerMapper{
 		resume.setBalance(UtilsConverter.getMoneyDTO(formatoSalida.getSaltota()));
 		resume.setOutcome(UtilsConverter.getMoneyDTO(formatoSalida.getValcarg()));
 		resume.setIncome(UtilsConverter.getMoneyDTO(formatoSalida.getValdepo()));
-		resume.setMonth(DTOIntEnumMonth.valueOf(formatoSalida.getMes()));
+		resume.setMonth(DTOIntEnumMonth.getBycode(formatoSalida.getMes()));
 		return resume;
 	}
 

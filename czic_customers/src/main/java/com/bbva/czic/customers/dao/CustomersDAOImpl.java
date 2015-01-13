@@ -71,11 +71,13 @@ public class CustomersDAOImpl implements CustomersDAO {
 			formatoOZECNQE.setIdusuar(filter.getCustomerId());
 			formatoOZECNQE.setFechain(filter.getStartDate());
 			formatoOZECNQE.setFechafi(filter.getEndDate());
-			
-			
+
+
 			PeticionTransaccionOznq peticion = new PeticionTransaccionOznq();
 			peticion.getCuerpo().getPartes().add(formatoOZECNQE);
+			log.info("getlistAccountsMovementsResume formato entrada:" + peticion);
 			RespuestaTransaccionOznq respuesta = new TransaccionOznq().invocar(peticion);
+			log.info("getlistAccountsMovementsResume respuesta:" + respuesta);
 
 			BusinessServiceException exception = errorMappingHelper.toBusinessServiceException(respuesta);
 			if (exception != null){
@@ -92,11 +94,9 @@ public class CustomersDAOImpl implements CustomersDAO {
 		} catch (BusinessServiceException bse) {
 			log.error("BusinessServiceException - Transaction error happened: " + bse.getMessage());
 			throw bse;
-		} catch (Exception e) {
-			log.error("Exception - Unhandled error happened: " + e.getMessage());
-			throw new BusinessServiceException(EnumError.TECHNICAL_ERROR.getAlias());
+		} catch (Exception e){
+			e.printStackTrace();
 		}
-		
 		return accountMovementDtoList;
 	
 	}
@@ -121,8 +121,10 @@ public class CustomersDAOImpl implements CustomersDAO {
 			PeticionTransaccionOzno peticion = new PeticionTransaccionOzno();
 
 			peticion.getCuerpo().getPartes().add(FormatoOZECNOE0);
+			log.info("getlistCreCardCharges formato de entrada:" + peticion);
 			RespuestaTransaccionOzno respuesta = new TransaccionOzno().invocar(peticion);
-			
+			log.info("getlistCreCardCharges respuesta:" + respuesta);
+
 			BusinessServiceException exception = errorMappingHelper.toBusinessServiceException(respuesta);
 			if (exception != null) {
 				throw new BusinessServiceException(EnumError.NO_DATA.getAlias());
@@ -139,9 +141,6 @@ public class CustomersDAOImpl implements CustomersDAO {
 		} catch (BusinessServiceException bse) {
 			log.error("BusinessServiceException - Transaction error happened: " + bse.getMessage());
 			throw bse;
-		} catch (Exception e) {
-			log.error("Exception - Unhandled error happened: " + e.getMessage());
-			throw new BusinessServiceException(EnumError.TECHNICAL_ERROR.getAlias());
 		}
 		return cardChargetDtoList;
 	}

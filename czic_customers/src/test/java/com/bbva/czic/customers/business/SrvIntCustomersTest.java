@@ -158,7 +158,9 @@ public class SrvIntCustomersTest {
 		for(DTOIntEnumMonth month : DTOIntEnumMonth.values()){
 			DTOIntAccMovementsResume mr1 = new DTOIntAccMovementsResume();
 			mr1.setIncome(UtilsConverter.getMoneyDTO(new BigDecimal(100)));
-			mr1.setMonth(month);
+			Calendar cal = Calendar.getInstance();
+			cal.set(Calendar.MONTH, Integer.valueOf(month.getCode()));
+			mr1.setMonth(cal.getTime());
 			mr1.setBalance(UtilsConverter.getMoneyDTO(new BigDecimal(100)));
 			mr1.setOutcome(UtilsConverter.getMoneyDTO(new BigDecimal(0)));
 
