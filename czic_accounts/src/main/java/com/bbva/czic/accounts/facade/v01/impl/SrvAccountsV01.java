@@ -1,8 +1,9 @@
-package com.bbva.czic.accounts.facade.v01;
+package com.bbva.czic.accounts.facade.v01.impl;
 
 import java.util.Date;
 import java.util.List;
 
+import javax.annotation.Resource;
 import javax.ws.rs.DefaultValue;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
@@ -14,6 +15,12 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
 
+import com.bbva.czic.accounts.business.dto.DTOIntFilterAccount;
+import com.bbva.czic.accounts.facade.v01.ISrvAccountsV01;
+import com.bbva.czic.accounts.facade.v01.mappers.IAccountsMapper;
+import com.bbva.czic.accounts.facade.v01.utils.IFilterConverter;
+import com.bbva.czic.dto.net.AccMovementsResume;
+import com.bbva.czic.dto.net.MonthlyBalances;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -63,7 +70,14 @@ public abstract class SrvAccountsV01 implements ISrvAccountsV01, com.bbva.jee.ar
 
 	@Autowired
 	ISrvIntAccounts srvIntAccounts;
-	
+
+	@Resource(name = "accounts-mapper")
+	private IAccountsMapper iAccountsMapper;
+
+
+	@Resource(name = "accounts-filter-converter")
+	private IFilterConverter accFilterConverter;
+
 	@Override
 	@ApiOperation(value = "Operacion que retorna el resumen de la informacion de una cuenta", notes = "Tipo de Producto", response = AccountsDAO.class)
 	@ApiResponses(value = { @ApiResponse(code = -1, message = "aliasGCE1"),
@@ -73,47 +87,13 @@ public abstract class SrvAccountsV01 implements ISrvAccountsV01, com.bbva.jee.ar
 	@GET
 	@Path("/{id}")
 	@SMC(registryID = "SMC201400334", logicalID = "getAccount")
-	public AccountsDAO getAccount(@ApiParam(value = "identifier param") @PathParam("id") String idAccount) {
-	
-		return srvIntAccounts.getAccount(idAccount);
-	}
-	
-	@ApiOperation(value = "En validacion", notes = "Information Office", response = Response.class)
-	@ApiResponses(value = { @ApiResponse(code = -1, message = "aliasGCE1"),
-			@ApiResponse(code = -1, message = "aliasGCE2"),
-			@ApiResponse(code = 200, message = "Found Sucessfully", response = Response.class),
-			@ApiResponse(code = 500, message = "Technical Error") })
-	@GET
-	@SMC(registryID = "SMC201400334", logicalID = "listMovements")
-	public Response listMovements(
-			@ApiParam(value = "Claimer identifier param") @DefaultValue("null") @QueryParam("$accountId") String accountId,
-			@ApiParam(value = "Claimer identifier param") @DefaultValue("null") @QueryParam("$starDate") String starDate,
-			@ApiParam(value = "Claimer identifier param") @DefaultValue("null") @QueryParam("$endDate") String endDate,
-			@ApiParam(value = "Claimer identifier param") @DefaultValue("null") @QueryParam("$bottomValue") String bottomValue,
-			@ApiParam(value = "Claimer identifier param") @DefaultValue("null") @QueryParam("$topValue") String topValue,
-			@ApiParam(value = "Claimer identifier param") @DefaultValue("null") @QueryParam("$paginationKey") String paginationKey,
-			@ApiParam(value = "Claimer identifier param") @DefaultValue("null") @QueryParam("$pageSize") String pageSize)	{
-				
-		return (Response) srvIntAccounts.listMovements(accountId, starDate, endDate, bottomValue, topValue, paginationKey, pageSize);
+	public Account getAccount(@ApiParam(value = "identifier param") @PathParam("id") String idAccount) {
+		DTOIntFilterAccount dtoIntFilterAccount = new DTOIntFilterAccount();
+		dtoIntFilterAccount.setAccountId(idAccount);
+		return  iAccountsMapper.map(srvIntAccounts.getAccount(dtoIntFilterAccount));
 	}
 
 
-	@Override
-	@ApiOperation(value = "Consulta que trae la informaci�n detallada de un movimiento realizado sobre una cuenta", notes = "Information Producto", response = Account.class)
-	@ApiResponses(value = { @ApiResponse(code = -1, message = "aliasGCE1"),
-			@ApiResponse(code = -1, message = "aliasGCE2"),
-			@ApiResponse(code = 200, message = "Found Sucessfully", response = Response.class),
-			@ApiResponse(code = 500, message = "Technical Error") })
-	@GET
-	@Path("/{idAccount}/movements/{idMovement}")
-	@SMC(registryID = "SMC201400334", logicalID = "getMovement")
-	public List getMovement(@ApiParam(value = "Claim identifier param") @PathParam("idAccount") String idAccount,
-			@ApiParam(value = "Claimer identifier param") @PathParam("idMovement") String idMovement) {
-	
-		 return srvIntAccounts.getAccMovementResume();
-	}
-	
-// En validacion - Pendiente
 	@Override
 	@ApiOperation(value = "Operacion realizada", notes = "Information Operation", response = Response.class)
 	@ApiResponses(value = { @ApiResponse(code = -1, message = "aliasGCE1"),
@@ -122,13 +102,15 @@ public abstract class SrvAccountsV01 implements ISrvAccountsV01, com.bbva.jee.ar
 			@ApiResponse(code = 500, message = "Technical Error") })
 	@GET
 	@SMC(registryID = "SMC201400334", logicalID = "getAccountMonthlyBalance")
-	public Response getAccountMonthlyBalance(
+	public List<MonthlyBalances> getAccountMonthlyBalance(
+			@ApiParam(value = "identifier param") @PathParam("id") String idAccount,
 			@ApiParam(value = "filter param") @DefaultValue("null") @QueryParam("$filter") String filter,
 			@ApiParam(value = "fields param") @DefaultValue("null") @QueryParam("$fields") String fields,
 			@ApiParam(value = "expands param") @DefaultValue("null") @QueryParam("$expands") String expands,
 			@ApiParam(value = "order by param") @DefaultValue("null") @QueryParam("$sort") String sort) {
-		// TODO: autogenerated, complete implementation using internal service
-		return null;
+		DTOIntFilterAccount dtoIntFilterAccount = new DTOIntFilterAccount();
+		dtoIntFilterAccount = accFilterConverter.getDTOIntFilter(idAccount,filter);
+		return iAccountsMapper.mapL(srvIntAccounts.getAccountMonthlyBalance(dtoIntFilterAccount));
 	}
 
 	@Override
@@ -139,30 +121,15 @@ public abstract class SrvAccountsV01 implements ISrvAccountsV01, com.bbva.jee.ar
 			@ApiResponse(code = 500, message = "Technical Error") })
 	@GET
 	@SMC(registryID = "SMC201400334", logicalID = "getAccMovementResume")
-	public Response getAccMovementResume(
+	public List<AccMovementsResume> getAccMovementResume(
+			@ApiParam(value = "identifier param") @PathParam("id") String idAccount,
 			@ApiParam(value = "filter param") @DefaultValue("null") @QueryParam("$filter") String filter,
 			@ApiParam(value = "fields param") @DefaultValue("null") @QueryParam("$fields") String fields,
 			@ApiParam(value = "expands param") @DefaultValue("null") @QueryParam("$expands") String expands,
 			@ApiParam(value = "order by param") @DefaultValue("null") @QueryParam("$sort") String sort) {
-		// TODO: autogenerated, complete implementation using internal service
-		return null;
+		DTOIntFilterAccount dtoIntFilterAccount = new DTOIntFilterAccount();
+		dtoIntFilterAccount = accFilterConverter.getDTOIntFilter(idAccount,filter);
+		return iAccountsMapper.map(srvIntAccounts.getAccMovementResume(dtoIntFilterAccount));
 	}
-
-	@Override
-	public Response listMovements(String accountId, String starDate,
-			String endDate, String bottomValue, String topValue,
-			String paginationKey) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public Response getAccountMonthlyBalance(String id, Date startMonth,
-			Date endMonth) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	
 
 }

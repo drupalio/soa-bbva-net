@@ -1,54 +1,60 @@
 package com.bbva.czic.accounts.business.dto;
 
 import java.util.Date;
+import java.util.List;
 
 import com.bbva.jee.arq.spring.core.servicing.utils.Money;
 
 public class DTOIntAccount {
 
 	public final static long serialVersionUID = 1L;
-	private Money tradeBalance;
-	private Date startMonth;
-	private Date endMonth;
-	private String searchMonth;
+	private String idAccount;
+	private String type;
+	private String name;
+	private DTOIntBalance balance;
+	private List<DTOIntCheckbook> listaCheckBook;
+
 
 	public DTOIntAccount() {
 		// default constructor
 	}
 
-	public Money getTradeBalance() {
-		return tradeBalance;
+	public DTOIntBalance getBalance() {
+		return balance;
 	}
 
-	public void setTradeBalance(Money tradeBalance) {
-		this.tradeBalance = tradeBalance;
+	public void setBalance(DTOIntBalance balance) {
+		this.balance = balance;
+	}
+	public String getName() {
+		return name;
 	}
 
-	// Se agregan los campos startMonth, de acuerdo a la plantilla ASO para el
-	// SMC getAccountMonthlyBalance
-
-	public Date getStartMonth() {
-		return startMonth;
+	public void setName(String name) {
+		this.name = name;
 	}
 
-	public void setStartMonth(Date startMonth) {
-		this.startMonth = startMonth;
+	public String getType() {
+		return type;
 	}
 
-	public Date getEndMonth() {
-		return endMonth;
+	public void setType(String type) {
+		this.type = type;
 	}
 
-	public void setEndMonth(Date endMonth) {
-		this.endMonth = endMonth;
+	public String getIdAccount() {
+		return idAccount;
 	}
 
-	public String getSearchMonth() {
-		return searchMonth;
+	public void setIdAccount(String idAccount) {
+		this.idAccount = idAccount;
 	}
 
-	public void setSearchMonth(String searchMonth) {
-		this.searchMonth = searchMonth;
+	public List<DTOIntCheckbook> getListaCheckBook() {
+		return listaCheckBook;
 	}
 
+	public void setListaCheckBook(List<DTOIntCheckbook> listaCheckBook) {
+		this.listaCheckBook = listaCheckBook;
+	}
 }
