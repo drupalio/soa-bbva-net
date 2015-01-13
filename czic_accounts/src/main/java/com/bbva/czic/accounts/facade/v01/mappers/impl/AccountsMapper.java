@@ -52,7 +52,7 @@ public class AccountsMapper implements IAccountsMapper {
 			Calendar requestDateCalendar = Calendar.getInstance();
 			requestDateCalendar.setTime(dtoIntCheckbook.getRequestDate());
 			checkbook.setRequestDate(requestDateCalendar);
-			checkbook.setTotalCheck(dtoIntCheckbook.getTotalCheck().toString());
+			checkbook.setTotalCheck(dtoIntCheckbook.getTotalCheck());
 			listaCheckbook.add(checkbook);
 		}
 
