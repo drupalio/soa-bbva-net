@@ -7,10 +7,12 @@ import javax.annotation.Resource;
 
 import com.bbva.czic.customers.business.dto.DTOIntFilterCustomerResumes;
 import com.bbva.czic.routine.commons.rm.utils.errors.EnumError;
+
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.bbva.czic.customers.business.dto.DTOIntAccMovementsResume;
 import com.bbva.czic.customers.business.dto.DTOIntCardCharge;
+import com.bbva.czic.customers.business.dto.DTOIntCustomer;
 import com.bbva.czic.customers.business.impl.SrvIntCustomers;
 import com.bbva.czic.customers.dao.model.ozno.FormatoOZECNOE0;
 import com.bbva.czic.customers.dao.model.ozno.FormatoOZECNOS0;
@@ -23,12 +25,14 @@ import com.bbva.czic.customers.dao.model.oznq.PeticionTransaccionOznq;
 import com.bbva.czic.customers.dao.model.oznq.RespuestaTransaccionOznq;
 import com.bbva.czic.customers.dao.model.oznq.TransaccionOznq;
 import com.bbva.czic.customers.dao.mapper.ICustomerMapper;
+import com.bbva.czic.dto.net.Customer;
 import com.bbva.jee.arq.spring.core.host.protocolo.ps9.ErrorMappingHelper;
 import com.bbva.jee.arq.spring.core.host.protocolo.ps9.aplicacion.CopySalida;
 import com.bbva.jee.arq.spring.core.log.I18nLog;
 import com.bbva.jee.arq.spring.core.log.I18nLogFactory;
 import com.bbva.jee.arq.spring.core.servicing.gce.BusinessServiceException;
 import com.bbva.jee.arq.spring.core.servicing.utils.BusinessServicesToolKit;
+
 import org.springframework.stereotype.Component;
 
 @Component(value = "customers-dao-impl")
@@ -44,7 +48,12 @@ public class CustomersDAOImpl implements CustomersDAO {
 
 	@Autowired
 	private ErrorMappingHelper errorMappingHelper;
-	
+
+	@Autowired
+	private TransaccionOznq transaccionOznq;
+	@Autowired
+	private TransaccionOzno transaccionOzno;
+
 	private static I18nLog log = I18nLogFactory.getLogI18n(
 			SrvIntCustomers.class, "META-INF/spring/i18n/log/mensajesLog");
 
@@ -72,7 +81,7 @@ public class CustomersDAOImpl implements CustomersDAO {
 			PeticionTransaccionOznq peticion = new PeticionTransaccionOznq();
 			peticion.getCuerpo().getPartes().add(formatoOZECNQE);
 			log.info("getlistAccountsMovementsResume formato entrada:" + peticion);
-			RespuestaTransaccionOznq respuesta = new TransaccionOznq().invocar(peticion);
+			RespuestaTransaccionOznq respuesta = transaccionOznq.invocar(peticion);
 			log.info("getlistAccountsMovementsResume respuesta:" + respuesta);
 
 			BusinessServiceException exception = errorMappingHelper.toBusinessServiceException(respuesta);
@@ -118,7 +127,7 @@ public class CustomersDAOImpl implements CustomersDAO {
 
 			peticion.getCuerpo().getPartes().add(FormatoOZECNOE0);
 			log.info("getlistCreCardCharges formato de entrada:" + peticion);
-			RespuestaTransaccionOzno respuesta = new TransaccionOzno().invocar(peticion);
+			RespuestaTransaccionOzno respuesta = transaccionOzno.invocar(peticion);
 			log.info("getlistCreCardCharges respuesta:" + respuesta);
 
 			BusinessServiceException exception = errorMappingHelper.toBusinessServiceException(respuesta);
@@ -141,6 +150,16 @@ public class CustomersDAOImpl implements CustomersDAO {
 			e.printStackTrace();
 		}
 		return cardChargetDtoList;
+	}
+	
+	@Override
+	public DTOIntCustomer getCustomer(DTOIntFilterCustomerResumes filter)
+			throws BusinessServiceException {
+		log.info("Into getCustomer...");
+		log.info("getCustomer params(customerId):" + filter.getCustomerId());
+		
+		
+		return null;
 	}
 
 }

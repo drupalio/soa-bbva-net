@@ -1,9 +1,7 @@
 package com.bbva.czic.customers.business;
 
-import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
-import static org.mockito.Matchers.anyString;
 import static org.mockito.Mockito.when;
 
 import java.math.BigDecimal;
@@ -12,10 +10,6 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
-import com.bbva.czic.customers.business.dto.*;
-import com.bbva.czic.customers.dao.mapper.ICustomerMapper;
-import com.bbva.czic.dto.net.CardCharge;
-import com.bbva.czic.routine.commons.rm.utils.converter.UtilsConverter;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -28,9 +22,18 @@ import org.springframework.test.context.TestExecutionListeners;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.support.DependencyInjectionTestExecutionListener;
 
+import com.bbva.czic.customers.business.dto.DTOIntAccMovementsResume;
+import com.bbva.czic.customers.business.dto.DTOIntCardCharge;
+import com.bbva.czic.customers.business.dto.DTOIntEnumCardChargeCategory;
+import com.bbva.czic.customers.business.dto.DTOIntEnumMonth;
+import com.bbva.czic.customers.business.dto.DTOIntFilterCustomerResumes;
 import com.bbva.czic.customers.business.impl.SrvIntCustomers;
 import com.bbva.czic.customers.dao.CustomersDAO;
+import com.bbva.czic.customers.dao.mapper.ICustomerMapper;
 import com.bbva.czic.dto.net.AccMovementsResume;
+import com.bbva.czic.dto.net.CardCharge;
+import com.bbva.czic.dto.net.Customer;
+import com.bbva.czic.routine.commons.rm.utils.converter.UtilsConverter;
 import com.bbva.jee.arq.spring.core.servicing.gce.BusinessServiceException;
 import com.bbva.jee.arq.spring.core.servicing.test.BusinessServiceTestContextLoader;
 import com.bbva.jee.arq.spring.core.servicing.test.MockInvocationContextTestExecutionListener;
@@ -40,11 +43,16 @@ import com.bbva.jee.arq.spring.core.servicing.utils.Money;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(loader = BusinessServiceTestContextLoader.class, 
-locations = {"classpath*:/META-INF/spring/applicationContext-*.xml",
+locations = {
+	"classpath*:/META-INF/spring/applicationContext-*.xml",
 	"classpath:/META-INF/spring/business-service.xml",
-	"classpath:/META-INF/spring/business-service-test.xml"})
+	"classpath:/META-INF/spring/business-service-test.xml"
+	})
 
-@TestExecutionListeners(listeners = {MockInvocationContextTestExecutionListener.class, DependencyInjectionTestExecutionListener.class})
+@TestExecutionListeners(listeners = {
+		MockInvocationContextTestExecutionListener.class, 
+		DependencyInjectionTestExecutionListener.class
+		})
 public class SrvIntCustomersTest {
 	
 
@@ -175,6 +183,17 @@ public class SrvIntCustomersTest {
 		}
 
 		return list;
+	}
+	
+	@Test(expected = BusinessServiceException.class)
+	public void testGetCustomerNoId() {
+		//Setup
+
+		//Setup expectation
+
+		//SUT execution
+		final Customer answer = srv.getCustomer(null);
+		//validation
 	}
 }
 
