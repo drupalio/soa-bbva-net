@@ -1,0 +1,174 @@
+{
+  "bbva": {
+    "uuaa": "czic",
+    "remoteType": "RESTFUL"
+  },
+  "dtos": {
+    "City": {
+      "id": {
+        "type": "String",
+        "description": "Id de la ciudad",
+        "required": true
+      },
+      "name": {
+        "type": "String",
+        "description": "Nombre de la ciudad",
+        "required": true
+      }
+    },
+    "Country": {
+      "id": {
+        "type": "String",
+        "description": "Id del pais",
+        "required": true
+      },
+      "name": {
+        "type": "String",
+        "description": "Nombre del pais",
+        "required": true
+      }
+    },
+    "Location": {
+      "city": {
+        "type": "dto.City",
+        "description": "Id del pais",
+        "required": true
+      },
+      "country": {
+        "type": "dto.Country",
+        "description": "Nombre del pais",
+        "required": true
+      }
+    },
+    "EnumFunctionType": {
+      "#metadata": {
+        "dtoPackage": "com.bbva.czic.dto.net.EnumFunctionType"
+      },
+      "enumValue": "String"
+    },
+    "Function": {
+      "id": {
+        "type": "String",
+        "description": "Id de la funcion",
+        "required": true
+      },
+      "type": {
+        "type": "dto.EnumFunctionType",
+        "description": "Tipo de la funcion",
+        "required": true
+      }
+    },
+    "Office": {
+      "#metadata": {
+        "dtoPackage": "com.bbva.czic.dto.net.Office"
+      },
+      "name": "String",
+      "postalAddress": "String",
+      "location": "dto.Location"
+    },
+    "Activity": {
+      "#metadata": {
+        "dtoPackage": "com.bbva.czic.dto.net.Activity"
+      },
+      "operationDate": "String",
+      "executionDate": "String",
+      "function": "dto.Function",
+      "amount": "String",
+      "reference": "String"
+    },
+    "Conditions": {
+      "alias": {
+        "type": "String",
+        "description": "Alias asociado al titular de la cuenta",
+        "required": true
+      },
+      "category": {
+        "type": "String",
+        "description": "Tipo de plan asociado al producto",
+        "required": true
+      },
+      "description": {
+        "type": "String",
+        "description": "Descripcion del tipo de producto"
+      },
+      "openingDate": {
+        "type": "arq.DATE",
+        "description": " Fecha en la que se realizo la apertura del producto",
+        "required": true
+      },
+      "commission": {
+        "type": "String",
+        "description": "Tipo de comision que aplica para el producto",
+        "required": true
+      },
+      "office": "dto.Office",
+      "mobilizationConditions": {
+        "type": "String",
+        "description": "Condiciones de movilizacion"
+      },
+      "activities": "dto.Activity"
+    },
+    "EnumProductType": {
+      "AC": "String",
+      "CA": "String",
+      "LO": "String",
+      "SI": "String"
+    },
+    "Product": {
+      "#metadata": {
+        "dtoPackage": "com.bbva.czic.dto.net.Product"
+      },
+      "id": {
+        "type": "String",
+        "isKeyField": true,
+        "description": "Identificador del usuario ejecutivo de ventas",
+        "required": true
+      },
+      "type": {
+        "type": "dto.EnumProductType",
+        "required": true
+      },
+      "name": {
+        "type": "String",
+        "description": "Nombre del producto",
+        "required": true
+      },
+      "alias": {
+        "type": "String",
+        "description": "Alias del producto"
+      },
+      "visible": {
+        "type": "Boolean",
+        "description": "Visibilidad del producto",
+        "required": true
+      },
+      "operable": {
+        "type": "Boolean",
+        "description": "Operatibilidad del producto",
+        "required": true
+      },
+      "conditions": {
+        "type": "dto.Conditions"
+      }
+    }
+  },
+  "sn": {
+    "targetDto": "Product",
+    "logicalId": "products",
+    "registryId": "SN201400011",
+    "version": "V01",
+    "description": "Products REST service.",
+    "smcs": {      
+	  "get" : {
+        "all" : [ {
+          "targetDto": "Product",
+          "logicalId": "getConditions",
+          "registryId": "SMC201400022",
+          "description": "Operación  que muestra las condiciones de los productos asociados a un cliente",
+          "notes": "Operación  que muestra las condiciones de los productos asociados a un cliente",
+          "gceErrors" : [ "aliasGCE1", "aliasGCE2" ]
+        } ]
+      }
+    }
+  }
+}
