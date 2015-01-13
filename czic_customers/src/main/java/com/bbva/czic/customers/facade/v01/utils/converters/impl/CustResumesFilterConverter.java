@@ -5,6 +5,7 @@ import com.bbva.czic.customers.business.dto.DTOIntCardCharge;
 import com.bbva.czic.customers.business.dto.DTOIntFilterCustomerResumes;
 import com.bbva.czic.customers.facade.v01.utils.converters.IFilterConverter;
 import com.bbva.czic.routine.commons.rm.utils.errors.EnumError;
+import com.bbva.czic.routine.commons.rm.utils.validator.impl.DateValidator;
 import com.bbva.jee.arq.spring.core.log.I18nLog;
 import com.bbva.jee.arq.spring.core.log.I18nLogFactory;
 import com.bbva.jee.arq.spring.core.servicing.gce.BusinessServiceException;
@@ -62,6 +63,9 @@ public class CustResumesFilterConverter implements IFilterConverter {
 			}
 
 
+			DateValidator validator = (DateValidator) new DateValidator().noFuture(filterDto.getStartDate())
+					.noFuture(filterDto.getEndDate()).validDateRange(filterDto.getStartDate(),filterDto.getEndDate())
+					.validate();
 		} catch (BusinessServiceException bse) {
 			log.error("BusinessServiceException - The query string (filter) has failed: " + bse);
 			throw bse;
@@ -101,6 +105,9 @@ public class CustResumesFilterConverter implements IFilterConverter {
 				throw new BusinessServiceException(EnumError.WRONG_PARAMETERS.getAlias());
 			}
 
+			DateValidator validator = (DateValidator) new DateValidator().noFuture(filterDto.getStartDate())
+					.noFuture(filterDto.getEndDate()).validDateRange(filterDto.getStartDate(),filterDto.getEndDate())
+					.validate();
 
 		} catch (BusinessServiceException bse) {
 			log.error("BusinessServiceException - The query string (filter) has failed: " + bse);

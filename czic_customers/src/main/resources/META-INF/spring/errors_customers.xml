@@ -45,19 +45,4 @@
    - En caso contrario, se elige el mensaje en el idioma por defecto.
    -->
 
-    <error-definition severity="ERROR" alias="wrongParameters" code="1" servicing:http-status="400">
-        <message>Invalid input parameters</message>
-        <message lang="en">Ivalid input parameters</message>
-        <message lang="es">Parámetros inválidos, validelos nuevamente</message>
-    </error-definition>
-    <error-definition severity="ERROR" alias="noData" code="1" servicing:http-status="409">
-        <message>Data not found</message>
-        <message lang="en">Data not found</message>
-        <message lang="es">No existen datos para la búsqueda realizada.</message>
-    </error-definition>
-      <error-definition severity="ERROR" alias="technicalError" code="1" servicing:http-status="500">
-        <message>Platform error</message>
-        <message lang="en">Platform error .</message>
-        <message lang="es">Ocurrrio un fallo con la plataforma.</message>
-    </error-definition>
 </error-definitions>
