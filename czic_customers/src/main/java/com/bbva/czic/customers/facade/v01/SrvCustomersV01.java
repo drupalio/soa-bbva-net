@@ -14,6 +14,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.UriInfo;
 
 import com.bbva.czic.customers.facade.v01.utils.converters.IFilterConverter;
+
 import org.apache.cxf.jaxrs.model.wadl.ElementClass;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,6 +22,7 @@ import org.springframework.stereotype.Service;
 import com.bbva.czic.customers.business.ISrvIntCustomers;
 import com.bbva.czic.dto.net.AccMovementsResume;
 import com.bbva.czic.dto.net.CardCharge;
+import com.bbva.czic.dto.net.Customer;
 import com.bbva.czic.routine.commons.rm.utils.errors.EnumError;
 import com.bbva.jee.arq.spring.core.log.I18nLog;
 import com.bbva.jee.arq.spring.core.log.I18nLogFactory;
@@ -99,8 +101,7 @@ public class SrvCustomersV01 implements ISrvCustomersV01, com.bbva.jee.arq.sprin
 
 		return srvIntCustomers.getlistCreditCharges(customerId, filterConverter.toCustomerResumesFilter(filter));
 	}
-
-		
+	
 	@ApiOperation(value="Returns the list of summaries of balance all customer accounts per month", notes="(income, expenses and balance)",response=List.class)
 	@ApiResponses(value = {
 		@ApiResponse(code = -1, message = "aliasGCE1"),
@@ -125,5 +126,28 @@ public class SrvCustomersV01 implements ISrvCustomersV01, com.bbva.jee.arq.sprin
 		}
 
 		return srvIntCustomers.getlistAccountsMovementsResume(customerId, filterConverter.toCustomerResumesFilter(filter));
+	}
+	
+	@ApiOperation(value="Returns the customer information for showing in global position", notes="Customer Information",response=List.class)
+	@ApiResponses(value = {
+		@ApiResponse(code = -1, message = "aliasGCE1"),
+		@ApiResponse(code = -1, message = "aliasGCE2"),
+		@ApiResponse(code = 200, message = "Found Sucessfully", response=Customer.class),
+		@ApiResponse(code = 400, message = "Wrong parameters"),
+		@ApiResponse(code = 409, message = "Data not found"),
+		@ApiResponse(code = 500, message = "Technical Error")})
+	@GET
+	@ElementClass(response = Customer.class)
+	@Path("/{customerId}")
+	@SMC(registryID="SMCCO1400023",logicalID="getCustomer")
+	public Customer getCustomer(
+			@ApiParam(value = "Claim identifier param") @PathParam("customerId") String customerId) {
+		
+		log.info("Into getCustomer...");
+		
+		if(customerId == null || customerId.isEmpty()){
+			throw new BusinessServiceException(EnumError.WRONG_PARAMETERS.getAlias());
+		}
+		return srvIntCustomers.getCustomer(customerId);
 	}
 }
