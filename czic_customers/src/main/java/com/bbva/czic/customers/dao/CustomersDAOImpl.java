@@ -44,7 +44,12 @@ public class CustomersDAOImpl implements CustomersDAO {
 
 	@Autowired
 	private ErrorMappingHelper errorMappingHelper;
-	
+
+	@Autowired
+	private TransaccionOznq transaccionOznq;
+	@Autowired
+	private TransaccionOzno transaccionOzno;
+
 	private static I18nLog log = I18nLogFactory.getLogI18n(
 			SrvIntCustomers.class, "META-INF/spring/i18n/log/mensajesLog");
 
@@ -72,7 +77,7 @@ public class CustomersDAOImpl implements CustomersDAO {
 			PeticionTransaccionOznq peticion = new PeticionTransaccionOznq();
 			peticion.getCuerpo().getPartes().add(formatoOZECNQE);
 			log.info("getlistAccountsMovementsResume formato entrada:" + peticion);
-			RespuestaTransaccionOznq respuesta = new TransaccionOznq().invocar(peticion);
+			RespuestaTransaccionOznq respuesta = transaccionOznq.invocar(peticion);
 			log.info("getlistAccountsMovementsResume respuesta:" + respuesta);
 
 			BusinessServiceException exception = errorMappingHelper.toBusinessServiceException(respuesta);
@@ -118,7 +123,7 @@ public class CustomersDAOImpl implements CustomersDAO {
 
 			peticion.getCuerpo().getPartes().add(FormatoOZECNOE0);
 			log.info("getlistCreCardCharges formato de entrada:" + peticion);
-			RespuestaTransaccionOzno respuesta = new TransaccionOzno().invocar(peticion);
+			RespuestaTransaccionOzno respuesta = transaccionOzno.invocar(peticion);
 			log.info("getlistCreCardCharges respuesta:" + respuesta);
 
 			BusinessServiceException exception = errorMappingHelper.toBusinessServiceException(respuesta);
