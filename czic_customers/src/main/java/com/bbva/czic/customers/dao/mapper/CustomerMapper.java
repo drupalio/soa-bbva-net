@@ -12,8 +12,9 @@ import com.bbva.czic.dto.net.EnumCardChargeCategory;
 import com.bbva.czic.dto.net.EnumMonth;
 import com.bbva.czic.routine.commons.rm.utils.converter.UtilsConverter;
 import com.bbva.czic.routine.commons.rm.utils.mappers.Mapper;
+import org.springframework.stereotype.Component;
 
-@Mapper("customerMapper")
+@Component("customerMapper")
 public class CustomerMapper implements ICustomerMapper{
 
 	@Override

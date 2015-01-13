@@ -25,3 +25,8 @@ exit
 // ServicesArchitecture log opened at 2015-01-07 01:15:33
 exit
 // ServicesArchitecture log closed at 2015-01-07 01:17:55
+// ServicesArchitecture log opened at 2015-01-12 12:24:10
+sarc importTransaction --protocol PS9_MX --copy DBG.CN.YLQ.QGDTCCT.KNOZNH.txt,DBG.CN.YLQ.QGDTFDF.OZNCEOMH.txt
+ sarc importTransaction --protocol PS9_MX --copy DOF.CN.YLQ.QGDTCCT.KNOZN0.txt,DOF.CN.YLQ.QGDTFDF.OZNCEOM0.txt
+exit
+// ServicesArchitecture log closed at 2015-01-12 12:29:30

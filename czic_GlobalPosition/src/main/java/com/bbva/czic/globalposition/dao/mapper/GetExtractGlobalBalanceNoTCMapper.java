@@ -69,7 +69,7 @@ public class GetExtractGlobalBalanceNoTCMapper
         product.setProductType(EnumProductType.valueOf(outFormat.getTipprod()));
         product.setId(outFormat.getNumprod());
 
-        product.setBalance(balanceConverter.convert(outFormat.getSaltota(), outFormat.getSaldisp(), outFormat.getSalcanj()));
+        product.setBalance(balanceConverter.convert(outFormat.getSaltota(), outFormat.getSaldisp()));
 
         product.setVisible(outFormat.getIndvisi().equalsIgnoreCase("v") || outFormat.getIndvisi().equalsIgnoreCase("t"));
         product.setOperable(outFormat.getIndoper().equalsIgnoreCase("v") || outFormat.getIndoper().equalsIgnoreCase("t"));

@@ -74,7 +74,7 @@ public class GetExtractGlobalBalanceMapper
         product.setProductType(EnumProductType.valueOf(outFormat.getTipprod()));
         product.setId(outFormat.getNumprod());
 
-        product.setBalance(balanceConverter.convert(outFormat.getSaltota(), outFormat.getSaldisp(), null));
+        product.setBalance(balanceConverter.convert(outFormat.getSaltota(), outFormat.getSaldisp()));
 
         product.setVisible(TRUE_ES.equalsIgnoreCase(outFormat.getIndvisi()) || TRUE_EN.equalsIgnoreCase(outFormat.getIndvisi()));
         product.setOperable(TRUE_ES.equalsIgnoreCase(outFormat.getIndoper()) || TRUE_EN.equalsIgnoreCase(outFormat.getIndoper()));
