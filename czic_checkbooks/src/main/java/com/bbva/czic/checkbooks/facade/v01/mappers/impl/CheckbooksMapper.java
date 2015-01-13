@@ -7,17 +7,50 @@ import com.bbva.czic.dto.net.Checkbook;
 import com.bbva.czic.checkbooks.facade.v01.mappers.ICheckbookMapper;
 import org.springframework.stereotype.Component;
 
+import java.util.Calendar;
+
 @Component(value = "checkbooks-mapper")
 public class CheckbooksMapper implements ICheckbookMapper {
 
 	@Override
-	public Checkbook map(DTOIntCheckbook intCheckbook) {
-		return null;
+	public Check map(DTOIntCheck intCheck) {
+		final Check check = new Check();
+
+		check.setId(intCheck.getId());
+
+		final Calendar issueDate = Calendar.getInstance();
+		issueDate.setTime(intCheck.getIssueDate());
+		check.setIssueDate(issueDate);
+		check.setValue(intCheck.getValue());
+		check.setStatus(intCheck.getStatus());
+
+		final Calendar modifiedDate = Calendar.getInstance();
+		modifiedDate.setTime(intCheck.getModifiedDate());
+		check.setModifiedDate(modifiedDate);
+
+		return check;
 	}
 
 	@Override
-	public Check map(DTOIntCheck intCheck) {
-		return null;
+	public Checkbook map(DTOIntCheckbook intCheckbook) {
+		final Checkbook checkbook = new Checkbook();
+
+		checkbook.setId(intCheckbook.getId());
+		checkbook.setFirstCheck(intCheckbook.getFirstCheck());
+		checkbook.setLastCheck(intCheckbook.getLastCheck());
+		checkbook.setTotalCheck(intCheckbook.getTotalCheck());
+
+		final Calendar requestDate = Calendar.getInstance();
+		requestDate.setTime(intCheckbook.getRequestDate());
+		checkbook.setRequestDate(requestDate);
+
+		final Calendar deliveryDate = Calendar.getInstance();
+		deliveryDate.setTime(intCheckbook.getDeliveryDate());
+		checkbook.setDeliveryDate(deliveryDate);
+
+		checkbook.setActualState(intCheckbook.getActualState());
+
+		return checkbook;
 	}
 
 /*

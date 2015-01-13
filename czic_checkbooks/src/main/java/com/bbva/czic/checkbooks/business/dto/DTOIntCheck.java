@@ -1,8 +1,9 @@
 package com.bbva.czic.checkbooks.business.dto;
 
-import java.util.Date;
-
+import com.bbva.czic.dto.net.EnumCheckStatus;
 import com.bbva.jee.arq.spring.core.servicing.utils.Money;
+
+import java.util.Date;
 
 public class DTOIntCheck {
 
@@ -14,7 +15,7 @@ public class DTOIntCheck {
 
 	private Money value;
 
-	private DTOIntEnumCheckStatus status;
+	private EnumCheckStatus status;
 
 	private Date modifiedDate;
 
@@ -46,11 +47,11 @@ public class DTOIntCheck {
 		this.value = value;
 	}
 
-	public DTOIntEnumCheckStatus getStatus() {
+	public EnumCheckStatus getStatus() {
 		return status;
 	}
 
-	public void setStatus(DTOIntEnumCheckStatus status) {
+	public void setStatus(EnumCheckStatus status) {
 		this.status = status;
 	}
 
