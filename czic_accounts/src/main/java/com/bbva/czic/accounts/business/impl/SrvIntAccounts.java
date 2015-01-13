@@ -33,16 +33,14 @@ public abstract class SrvIntAccounts implements ISrvIntAccounts {
 
 		final List<DTOIntMonthlyBalances> initialResult;
 
-	//	initialResult = accountsDAO.getAccountMonthlyBalance(dtoIntFilterAccount);
+		initialResult = accountsDAO.getAccountMonthlyBalance(dtoIntFilterAccount).getListDTOIntMonthlyBalances();
 
-	//	return initialResult;
-		return null;
+		return initialResult;
 	}
 
 	@Override
 	public List<DTOIntAccMovementsResume> getAccMovementResume(DTOIntFilterAccount dtoIntFilterAccount) {
-	//	return accountsDAO.getAccMovementResume(dtoIntFilterAccount);
-		return null;
+		return accountsDAO.getAccountMovementResume(dtoIntFilterAccount).getListDTOIntAccMovementsResume();
 	}
 
 	@Override
