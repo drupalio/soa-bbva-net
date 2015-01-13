@@ -1,29 +1,29 @@
-package com.bbva.czic.products.facade.v01;
+package com.bbva.czic.products.facade.v01.impl;
 
-import com.bbva.czic.dto.net.Product;
+import com.bbva.czic.dto.net.Conditions;
 import com.bbva.czic.products.business.ISrvIntProducts;
 import com.bbva.czic.products.business.dto.DTOIntConditions;
+import com.bbva.czic.products.facade.v01.IProductsMapper;
 import com.bbva.czic.products.facade.v01.ISrvProductsV01;
-import com.bbva.czic.products.facade.v01.mapper.IProductsMapper;
 import com.bbva.jee.arq.spring.core.log.I18nLog;
 import com.bbva.jee.arq.spring.core.log.I18nLogFactory;
 import com.bbva.jee.arq.spring.core.servicing.annotations.SMC;
 import com.bbva.jee.arq.spring.core.servicing.annotations.SN;
 import com.bbva.jee.arq.spring.core.servicing.annotations.VN;
-import com.bbva.jee.arq.spring.core.servicing.gce.BusinessServiceException;
+import com.bbva.jee.arq.spring.core.servicing.utils.BusinessServicesToolKit;
 import com.wordnik.swagger.annotations.*;
-import org.apache.cxf.jaxrs.model.wadl.ElementClass;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
-import javax.ws.rs.*;
+import javax.ws.rs.GET;
+import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
+import javax.ws.rs.Produces;
 import javax.ws.rs.core.HttpHeaders;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
-import java.util.List;
-
 
 
 @Path("/V01")
@@ -70,7 +70,7 @@ public class SrvProductsV01 implements ISrvProductsV01, com.bbva.jee.arq.spring.
 	@Path("/{productId}/conditions")
 	@Produces({MediaType.APPLICATION_JSON})
 	@SMC(registryID="SMC201400022",logicalID="getConditions")
-	public Response getConditions(
+	public Conditions getConditions(
 			@ApiParam(value="Product identifier") @PathParam("productId") String productId) {
 
 		final DTOIntConditions conditions = srvIntProducts.getConditions(productId);

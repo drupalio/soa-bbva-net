@@ -5,6 +5,5 @@ import javax.ws.rs.core.Response;
 
 public interface ISrvProductsV01 {
 
-	public Response getConditions(String productId);
 
 }

@@ -1,43 +1,34 @@
 package com.bbva.czic.products.dao.tx;
 
 import com.bbva.czic.products.business.dto.DTOIntConditions;
-import com.bbva.czic.products.business.dto.DTOIntProducts;
+import com.bbva.czic.products.business.dto.DTOIntProduct;
 import com.bbva.czic.products.dao.model.oznt.*;
-import com.bbva.czic.routine.commons.rm.utils.tx.IFormatNotApply;
-import com.bbva.czic.routine.commons.rm.utils.tx.IPaginatedTransactionMapper;
+import com.bbva.czic.routine.commons.rm.utils.tx.ISimpleTransactionMapper;
+import com.bbva.czic.routine.commons.rm.utils.tx.impl.SimpleTransaction;
 import com.bbva.jee.arq.spring.core.host.InvocadorTransaccion;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
-import scala.unchecked;
 
 /**
  * Created by Administrador on 05/01/2015.
  */
 @Component("tx-get-conditions")
-public class TxGetConditions extends SimpleTra {
+public class TxGetConditions extends SimpleTransaction<PeticionTransaccionOznt, RespuestaTransaccionOznt> {
 
     @Autowired
-    private transient TransaccionOzn1 transaccionOzn1;
-
+    private transient TransaccionOznt transaccionOznt;
     @Autowired
-    @Qualifier("tx-get-extract-global-balance-mapper-tc")
-    private transient IPaginatedTransactionMapper<DTOIntFilterProduct, FormatoOZECN1E0, DTOIntProducts, IFormatNotApply, DTOIntProduct, FormatoOZECN1S1, IFormatNotApply> txGetExtractGlobalBalanceMapper;
+    @Qualifier("tx-get-conditions-mapper")
+    private ISimpleTransactionMapper<DTOIntProduct,FormatoOZECNTE0,DTOIntConditions,FormatoOZECNTS0> txGetConditionsMapper;
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
-    protected InvocadorTransaccion<PeticionTransaccionOzn1, RespuestaTransaccionOzn1> getInvoker() {
-        return transaccionOzn1;
+    protected InvocadorTransaccion<PeticionTransaccionOznt, RespuestaTransaccionOznt> getInvoker() {
+        return transaccionOznt;
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    @SuppressWarnings("unchecked")
     @Override
-    protected IPaginatedTransactionMapper<DTOIntFilterProduct, FormatoOZECN1E0, DTOIntProducts, IFormatNotApply, DTOIntProduct, FormatoOZECN1S1, IFormatNotApply> getMapper() {
-        return txGetExtractGlobalBalanceMapper;
+    protected ISimpleTransactionMapper<DTOIntProduct,FormatoOZECNTE0,DTOIntConditions,FormatoOZECNTS0> getMapper() {
+        return txGetConditionsMapper;
     }
 }
