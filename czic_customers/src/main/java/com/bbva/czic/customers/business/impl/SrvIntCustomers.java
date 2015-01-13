@@ -73,9 +73,6 @@ public class SrvIntCustomers implements ISrvIntCustomers {
 		} catch (BusinessServiceException bse) {
 			log.error("BusinessServiceException - Error during platform: " + bse);
 			throw bse;
-		} catch (Exception e) {
-			log.error("Exception - Unhandled error: " + e);
-			throw new BusinessServiceException(e.getMessage());
 		}
 
 	}
@@ -101,8 +98,9 @@ public class SrvIntCustomers implements ISrvIntCustomers {
 			}else{
 				throw new BusinessServiceException(EnumError.WRONG_PARAMETERS.getAlias());
 			}
-		} catch (Exception e) {
-			throw new BusinessServiceExfception(e.getMessage());
+		} catch (BusinessServiceException bse) {
+			log.error("BusinessServiceException - Error during platform: " + bse);
+			throw bse;
 		}
 
 	}

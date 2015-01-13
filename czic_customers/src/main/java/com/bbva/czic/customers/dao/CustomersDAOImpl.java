@@ -90,6 +90,8 @@ public class CustomersDAOImpl implements CustomersDAO {
 		} catch (BusinessServiceException bse) {
 			log.error("BusinessServiceException - Transaction error happened: " + bse.getMessage());
 			throw bse;
+		} catch (Exception e){
+			e.printStackTrace();
 		}
 		return accountMovementDtoList;
 	
@@ -135,6 +137,8 @@ public class CustomersDAOImpl implements CustomersDAO {
 		} catch (BusinessServiceException bse) {
 			log.error("BusinessServiceException - Transaction error happened: " + bse.getMessage());
 			throw bse;
+		} catch (Exception e){
+			e.printStackTrace();
 		}
 		return cardChargetDtoList;
 	}

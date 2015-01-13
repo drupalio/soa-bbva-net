@@ -4,7 +4,6 @@ import com.bbva.czic.accounts.business.dto.DTOIntEnumMonth;
 import com.bbva.czic.accounts.business.dto.DTOIntFilterAccount;
 import com.bbva.czic.accounts.business.dto.DTOIntMonthlyBalances;
 import com.bbva.czic.accounts.business.dto.DTOIntResponseMonthlyBalances;
-import com.bbva.czic.accounts.dao.model.oznu.FormatoOZECNUE0;
 import com.bbva.czic.accounts.dao.model.oznv.FormatoOZECNVE0;
 import com.bbva.czic.accounts.dao.model.oznv.FormatoOZECNVS0;
 import com.bbva.czic.dto.net.EnumFinancialStatusType;

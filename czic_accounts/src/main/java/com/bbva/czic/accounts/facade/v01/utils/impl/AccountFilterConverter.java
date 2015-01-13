@@ -4,6 +4,7 @@ import com.bbva.czic.accounts.business.dto.DTOIntFilterAccount;
 import com.bbva.czic.accounts.facade.v01.utils.IFilterConverter;
 import com.bbva.czic.dto.net.EnumProductType;
 import com.bbva.czic.routine.commons.rm.utils.errors.EnumError;
+import com.bbva.czic.routine.commons.rm.utils.validator.impl.DateValidator;
 import com.bbva.jee.arq.spring.core.log.I18nLog;
 import com.bbva.jee.arq.spring.core.log.I18nLogFactory;
 import com.bbva.jee.arq.spring.core.servicing.gce.BusinessServiceException;
@@ -89,8 +90,7 @@ public class AccountFilterConverter implements IFilterConverter{
 				 */
                 if (startDate == null || endDate == null
                         || startDate.equals("") || endDate.equals("")) {
-                    throw new BusinessServiceException(
-                            "getDTOIntFilter - Los parametros del filtro son obligatorios");
+                    throw new BusinessServiceException(EnumError.FILTER_EMPTY.getAlias());
                 }
 
 				/*
@@ -103,8 +103,7 @@ public class AccountFilterConverter implements IFilterConverter{
                     startDateFilter = formato.parse(startDate);
                     endDateFilter = formato.parse(endDate);
                 } catch (ParseException ex) {
-                    throw new BusinessServiceException(
-                            "getDTOIntFilter - ParseException - error conviertiendo las fechas a Date.");
+                    throw new BusinessServiceException(EnumError.WRONG_PARAMETERS.getAlias());
                 }
 
                 log.info(" Filter starDateFilter: "+startDateFilter+" SMC : getCreditCardCharges SN Cards ");
@@ -112,12 +111,15 @@ public class AccountFilterConverter implements IFilterConverter{
                 log.info(" Filter endDateFilter: "+endDateFilter+" SMC : getCreditCardCharges SN Cards ");
                 System.out.println(endDate);
 
+                DateValidator dateValidator = (DateValidator) new DateValidator().validDateRange(startDateFilter,endDateFilter).noFuture(startDateFilter).noFuture(endDateFilter).validate();
+
+
                 dtoIntFilterAccount.setStartMonth(startDateFilter);
                 dtoIntFilterAccount.setEndMonth(startDateFilter);
 
             } catch (SearchParseException e) {
                 log.error("SearchParseException - The query string (filter) has failed: " + e);
-                throw new BusinessServiceException(EnumError.WRONG_PARAMETERS.getAlias(), filter, e.getMessage());
+                throw new BusinessServiceException(EnumError.INEXISTENT_FILTER.getAlias(), filter, e.getMessage());
             } catch (IllegalArgumentException e) {
                 log.error("IllegalArgumentException - The product type is an invalid type - does not exist: " + e);
                 throw new BusinessServiceException(EnumError.WRONG_PARAMETERS.getAlias(), filter, e.getMessage());
