@@ -1,9 +1,9 @@
 package com.bbva.czic.globalposition.dao.enums;
 
 /**
- * Created by Julio Cesar on 07-01-2015.
+ * @author Entelgy Colombia.
  */
 public enum EnumVisibility {
-    OOOSHOW,
-    OOOHIDE
+    SHOW,
+    HIDE
 }

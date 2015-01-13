@@ -16,7 +16,13 @@
 	          <groupId>com.bbva.jee.arq.spring.core</groupId>
 	          <artifactId>arq-spring-restutils</artifactId>
 	          <version>${arq-spring-restutils.version}</version>
-	    </dependency> 
+	    </dependency>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.8.2</version>
+			<scope>test</scope>
+		</dependency>
 	    <!--Dependencias Validator -->
 	    <dependency>
 				<groupId>org.hibernate</groupId>
@@ -39,6 +45,12 @@
 	                 <artifactId>jsr311-api</artifactId>
 	            </exclusion>
 	         </exclusions>		
+		</dependency>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.8.2</version>
+			<scope>test</scope>
 		</dependency>
 		<dependency>
 			<groupId>com.wordnik</groupId>

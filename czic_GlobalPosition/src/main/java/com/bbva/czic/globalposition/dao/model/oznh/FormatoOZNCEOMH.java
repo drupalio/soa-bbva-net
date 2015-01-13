@@ -29,7 +29,7 @@ public class FormatoOZNCEOMH {
 	/**
 	 * <p>Campo <code>CODBLQ</code>, &iacute;ndice: <code>2</code>, tipo: <code>ALFANUMERICO</code>
 	 */
-	@Campo(indice = 2, nombre = "CODBLQ", tipo = TipoCampo.ALFANUMERICO, longitudMinima = 4, longitudMaxima = 4)
+	@Campo(indice = 2, nombre = "CODBLQ", tipo = TipoCampo.ALFANUMERICO, longitudMinima = 1, longitudMaxima = 1)
 	private String codblq;
 	
 }
