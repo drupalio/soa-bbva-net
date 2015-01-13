@@ -106,21 +106,19 @@ public class SrvIntCustomers implements ISrvIntCustomers {
 		}
 
 	}
+	
 	/***************************Customer***************************************/
 	@Override
 	public Customer getCustomer(String customerId)
 			throws BusinessServiceException {
 		log.info("Into getCustomer... ");
 		log.info("getCustomerParams(customerId): " + customerId);
-		
-		try {
-			DTOIntFilterCustomerResumes customer = new DTOIntFilterCustomerResumes();
-			customer.setCustomerId(customerId);
-			
-			return customerMapper.map(customersDao.getCustomer(customer));
-		} catch (Exception e) {
-			throw new BusinessServiceException(e.getMessage());
-		}
+
+		DTOIntFilterCustomerResumes customer = new DTOIntFilterCustomerResumes();
+		customer.setCustomerId(customerId);
+
+		return customerMapper.map(customersDao.getCustomer(customer));
+
 	}
 }
      

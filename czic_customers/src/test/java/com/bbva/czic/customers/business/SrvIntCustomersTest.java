@@ -1,7 +1,6 @@
 package com.bbva.czic.customers.business;
 
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 import static org.mockito.Mockito.when;
 
 import java.math.BigDecimal;
@@ -185,15 +184,16 @@ public class SrvIntCustomersTest {
 		return list;
 	}
 	
-	@Test(expected = BusinessServiceException.class)
+	@Test
 	public void testGetCustomerNoId() {
 		//Setup
 
 		//Setup expectation
 
 		//SUT execution
-		final Customer answer = srv.getCustomer(null);
+		Customer answer = srv.getCustomer(null);
 		//validation
+		assertNull(answer);
 	}
 }
 
