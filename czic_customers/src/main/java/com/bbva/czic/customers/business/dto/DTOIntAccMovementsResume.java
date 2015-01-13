@@ -5,13 +5,15 @@ package com.bbva.czic.customers.business.dto;
 
 import com.bbva.jee.arq.spring.core.servicing.utils.Money;
 
+import java.util.Date;
+
 public class DTOIntAccMovementsResume {
 
     public final static long serialVersionUID = 1L;
     private Money income;
     private Money outcome;
     private Money balance;
-    private DTOIntEnumMonth month;
+    private Date month;
 
     public DTOIntAccMovementsResume() {
         //default constructor
@@ -41,11 +43,11 @@ public class DTOIntAccMovementsResume {
         this.balance = balance;
     }
 
-    public DTOIntEnumMonth getMonth() {
+    public Date getMonth() {
         return month;
     }
 
-    public void setMonth(DTOIntEnumMonth month) {
+    public void setMonth(Date month) {
         this.month = month;
     }
 

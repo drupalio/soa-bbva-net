@@ -97,7 +97,7 @@ public class SrvCustomersV01 implements ISrvCustomersV01, com.bbva.jee.arq.sprin
 			throw new BusinessServiceException(EnumError.WRONG_PARAMETERS.getAlias());
 		}
 
-		return srvIntCustomers.getlistCreditCharges(customerId, filterConverter.toCustomerResumesFilter(filter));
+		return srvIntCustomers.getlistCreditCharges(customerId, filterConverter.toCardChargeFilter(filter));
 	}
 
 		
@@ -124,6 +124,6 @@ public class SrvCustomersV01 implements ISrvCustomersV01, com.bbva.jee.arq.sprin
 			throw new BusinessServiceException(EnumError.WRONG_PARAMETERS.getAlias());
 		}
 
-		return srvIntCustomers.getlistAccountsMovementsResume(customerId, filterConverter.toCustomerResumesFilter(filter));
+		return srvIntCustomers.getlistAccountsMovementsResume(customerId, filterConverter.toAccountMovementFilter(filter));
 	}
 }
