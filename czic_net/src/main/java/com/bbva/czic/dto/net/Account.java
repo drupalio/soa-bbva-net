@@ -2,15 +2,17 @@ package com.bbva.czic.dto.net;
 
 import java.io.Serializable;
 import java.util.List;
+
+import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
-import com.bbva.jee.arq.spring.core.servicing.utils.MoneyAdapter;
 
 import com.bbva.jee.arq.spring.core.servicing.utils.Money;
+import com.bbva.jee.arq.spring.core.servicing.utils.MoneyAdapter;
 import com.wordnik.swagger.annotations.ApiModelProperty;
 
 @XmlRootElement(name = "Account", namespace = "urn:com:bbva:czic:dto:net")
@@ -22,8 +24,10 @@ public class Account extends Product implements Serializable {
 	@XmlJavaTypeAdapter(MoneyAdapter.class)
 	@XmlElement(type = Money.class)
 	@ApiModelProperty("Saldo en canje de una cuenta")
+	@NotNull
 	private Money tradeBalance;
 	@ApiModelProperty("Chequeras asociadas a la cuenta")
+	@NotNull
 	private List<Checkbook> checkbooks;
 
 	public Account() {

@@ -17,5 +17,7 @@ public interface IFilterConverter {
 	 * @return
 	 * @throws Exception
 	 */
-	DTOIntFilterCustomerResumes toCustomerResumesFilter(String filter) throws BusinessServiceException;
+	DTOIntFilterCustomerResumes toCardChargeFilter(String filter) throws BusinessServiceException;
+
+	DTOIntFilterCustomerResumes toAccountMovementFilter(String filter) throws BusinessServiceException;
 }

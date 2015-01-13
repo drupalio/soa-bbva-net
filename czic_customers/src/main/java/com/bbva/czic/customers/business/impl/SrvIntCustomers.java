@@ -52,13 +52,14 @@ public class SrvIntCustomers implements ISrvIntCustomers {
 	/***************************AccountMovement***************************************/
 	@Override
 	public List<AccMovementsResume> getlistAccountsMovementsResume(String customerId,
-			DTOIntFilterCustomerResumes filter) throws BusinessServiceException {
+			final DTOIntFilterCustomerResumes filter) throws BusinessServiceException {
 		log.info("Into getlistAccountsMovementsResume... ");
 		log.info("getlistAccountsMovementsResume params: " + filter);
 
 		try {
 			if(filter != null){
 				List<AccMovementsResume> listMovements = new ArrayList<AccMovementsResume>();
+				filter.setCustomerId(customerId);
 				List<DTOIntAccMovementsResume> dtoIntAccMovementsResumes = customersDao
 						.getlistAccountsMovementsResume(filter);
 
@@ -88,7 +89,7 @@ public class SrvIntCustomers implements ISrvIntCustomers {
 		try {
 			if(filter != null){
 				List<CardCharge> listCardCharge = new ArrayList<CardCharge>();
-
+				filter.setCustomerId(customerId);
 				List<DTOIntCardCharge> dtoIntCardCharges = customersDao
 						.getlistCreCardCharges(filter);
 
@@ -101,7 +102,7 @@ public class SrvIntCustomers implements ISrvIntCustomers {
 				throw new BusinessServiceException(EnumError.WRONG_PARAMETERS.getAlias());
 			}
 		} catch (Exception e) {
-			throw new BusinessServiceException(e.getMessage());
+			throw new BusinessServiceExfception(e.getMessage());
 		}
 
 	}

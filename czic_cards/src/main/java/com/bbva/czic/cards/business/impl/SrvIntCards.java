@@ -107,6 +107,10 @@ public class SrvIntCards implements ISrvIntCards {
 							"getCreditCardCharges - ParseException - error conviertiendo las fechas a Date.");
 				}
 
+				log.info(" Filter starDateFilter: "+startDateFilter+" SMC : getCreditCardCharges SN Cards ");
+				log.info(" Filter endDateFilter: "+endDateFilter+" SMC : getCreditCardCharges SN Cards ");
+
+
 				log.info(" Pasó las validaciones, se hace el llamado al DAO SMC : getCreditCardCharges SN Cards ");
 				initialResultList = cardsDAO.getCreditCardCharges(id,
 						startDateFilter, endDateFilter);

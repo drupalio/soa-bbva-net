@@ -1,30 +1,17 @@
 package com.bbva.czic.accounts.facade.v01;
 
-import java.util.Date;
+import com.bbva.czic.dto.net.AccMovementsResume;
+import com.bbva.czic.dto.net.Account;
+import com.bbva.czic.dto.net.MonthlyBalances;
+
 import java.util.List;
 
-import javax.ws.rs.core.Response;
+public interface ISrvAccountsV01{
 
-public interface ISrvAccountsV01<Movement> {
+	public Account getAccount(String idAccount);
 
-	public Movement getMovement(String idProduct, String idMovement);
+	public List<MonthlyBalances> getAccountMonthlyBalance( String idAccount, String filter, String fields, String expands,String sort);
 
-	public Response listMovements(String accountId, String starDate, String endDate, String bottomValue, String topValue, String paginationKey);
-	
-	public <Account> Account getAccount(String idAccount);
-	
-// En validacion de plantillas
-	
-	public Response getAccountMonthlyBalance(String id, Date startMonth,Date endMonth);
-
-	public Response getAccMovementResume(String income, String outcome, String balance, String month);
-
-	Response listMovements(String accountId, String starDate, String endDate,
-			String bottomValue);
-
-	Response getAccountMonthlyBalance(String filter, String fields,
-			String expands, String sort);
-
-	
+	public List<AccMovementsResume> getAccMovementResume(String idAccount, String filter, String fields, String expands,String sort);
 
 }

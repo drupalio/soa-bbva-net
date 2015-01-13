@@ -39,8 +39,9 @@ public class ExecutivesDAOImpl implements ExecutivesDAO {
 		DTOIntExecutive dtoIntExecutive = new DTOIntExecutive();
 
 		formatoEntrada.setIdusuar(thirdPartyId);
+		peticion.getCuerpo().getPartes().add(formatoEntrada);
 
-		peticion.getCuerpo().getParte(FormatoOZECNRS0.class);
+
 
 		log.info("DAO - Se invoca la transaccion de Host SMC : getExecutive SN Executives ");
 		// Respuesta

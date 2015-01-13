@@ -45,51 +45,52 @@ public class CustResumesFilterConverterTest {
     @Resource(name = "customer-resumes-filter-converter")
     CustResumesFilterConverter converter;
 
+    /** toCardChargeFilter */
     @Test
-    public void testToCustomerResumesFilter(){
+    public void testToCardChargeFilter(){
         //SetUp
 
         //Setup expectation
 
         // SUT execution
         DTOIntFilterCustomerResumes resumeFilter = converter.
-                toCustomerResumesFilter("(chargeDate=ge=2014-12-24;chargeDate=le=2015-01-10)");
+                toCardChargeFilter("(chargeDate=ge=2014-12-24;chargeDate=le=2015-01-10)");
 
         //Validation
         assertNotNull(resumeFilter);
     }
 
     @Test(expected = BusinessServiceException.class)
-    public void testToCustomerResumesFilterInvalidFilterFormat(){
+    public void testToCardChargeFilterInvalidFilterFormat(){
         //SetUp
 
         //Setup expectation
 
         // SUT execution
         DTOIntFilterCustomerResumes resumeFilter = converter.
-                toCustomerResumesFilter("(chargeDate=ge=2014/12/24;chargeDate=le=2015/01/10)");
+                toCardChargeFilter("(chargeDate=ge=2014/12/24;chargeDate=le=2015/01/10)");
     }
 
     @Test(expected = BusinessServiceException.class)
-    public void testToCustomerResumesInvalidFilter(){
+    public void testToCardChargeFilterInvalidFilter(){
         //SetUp
 
         //Setup expectation
 
         // SUT execution
         DTOIntFilterCustomerResumes resumeFilter = converter.
-                toCustomerResumesFilter("(chargeDate=le=2015-01-10)");
+                toCardChargeFilter("(chargeDate=le=2015-01-10)");
     }
 
     @Test
-    public void testToCustomerResumesFilterNoEndDate(){
+    public void testToCardChargeFilterNoEndDate(){
         //SetUp
 
         //Setup expectation
 
         // SUT execution
         DTOIntFilterCustomerResumes resumeFilter = converter.
-                toCustomerResumesFilter("(chargeDate=ge=2014-12-24)");
+                toCardChargeFilter("(chargeDate=ge=2014-12-24)");
 
         //Validation
         assertNotNull(resumeFilter);

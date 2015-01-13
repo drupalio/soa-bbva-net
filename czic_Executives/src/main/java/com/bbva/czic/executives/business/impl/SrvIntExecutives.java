@@ -80,6 +80,8 @@ public class SrvIntExecutives implements ISrvIntExecutives {
 					throw new BusinessServiceException("getExecutive - los parametros del filtro son obligatorios.");
 				}
 
+				log.info(" Filter:thirdPartyId: "+thirdPartyId+" SMC : getExecutive SN Executives ");
+				log.info(" Filter:thirdPartyType: "+thirdPartyType+" SMC : getExecutive SN Executives ");
 
 				if (thirdPartyType.equals(EnumThirdPartyType.CUSTOMER.toString())) {
 

@@ -1,20 +1,95 @@
 package com.bbva.czic.accounts.dao.mappers;
 
 import com.bbva.czic.accounts.business.dto.DTOIntAccount;
+import com.bbva.czic.accounts.business.dto.DTOIntBalance;
+import com.bbva.czic.accounts.business.dto.DTOIntCheckbook;
 import com.bbva.czic.accounts.dao.model.ozna.FormatoOZNCENA0;
 import com.bbva.czic.accounts.dao.model.ozna.FormatoOZNCSNA0;
+import com.bbva.czic.dto.net.Checkbook;
 import com.bbva.czic.routine.commons.rm.utils.tx.ISimpleTransactionMapper;
+import com.bbva.jee.arq.spring.core.servicing.utils.Money;
+import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
+import java.util.List;
+
+@Component("tx-get-account-mapper")
 public class GetAccountMapper implements ISimpleTransactionMapper<DTOIntAccount,FormatoOZNCENA0,DTOIntAccount,FormatoOZNCSNA0>{
 
     @Override
     public FormatoOZNCENA0 mapToInner(DTOIntAccount dtoIn) {
-        return null;
+        FormatoOZNCENA0 formatoEntrada = new FormatoOZNCENA0();
+        formatoEntrada.setNumprod(dtoIn.getIdAccount());
+        return formatoEntrada;
     }
 
     @Override
-    public DTOIntAccount mapToOuter(FormatoOZNCSNA0 outFormat, DTOIntAccount dtoIn) {
-        return null;
+    public DTOIntAccount mapToOuter(FormatoOZNCSNA0 outFormat,DTOIntAccount dtoIn) {
+        List<DTOIntCheckbook> listaCheckBooks = new ArrayList<DTOIntCheckbook>();
+        DTOIntAccount dtoIntAccount = new DTOIntAccount();
+
+        dtoIntAccount.setName(outFormat.getNomprod());
+        dtoIntAccount.setType(outFormat.getTipprod());
+        dtoIntAccount.setIdAccount(outFormat.getNumprod());
+
+        //Balance
+        DTOIntBalance dtoIntBalance = new DTOIntBalance();
+        Money total = new Money();
+        Money disponible = new Money();
+        Money canje = new Money();
+
+        total.setAmount(outFormat.getSaltota());
+        disponible.setAmount(outFormat.getSddispo());
+        canje.setAmount(outFormat.getSdcanje());
+
+        dtoIntBalance.setAvailableBalance(disponible);
+        dtoIntBalance.setTotal(total);
+        dtoIntBalance.setTradeBalance(canje);
+        dtoIntAccount.setBalance(dtoIntBalance);
+
+        DTOIntCheckbook dtoIntCheckbook0 = new DTOIntCheckbook();
+        dtoIntCheckbook0.setId(outFormat.getIdcheq0());
+        listaCheckBooks.add(dtoIntCheckbook0);
+
+        DTOIntCheckbook dtoIntCheckbook1 = new DTOIntCheckbook();
+        dtoIntCheckbook1.setId(outFormat.getIdcheq1());
+        listaCheckBooks.add(dtoIntCheckbook1);
+
+        DTOIntCheckbook dtoIntCheckbook2 = new DTOIntCheckbook();
+        dtoIntCheckbook2.setId(outFormat.getIdcheq2());
+        listaCheckBooks.add(dtoIntCheckbook2);
+
+        DTOIntCheckbook dtoIntCheckbook3 = new DTOIntCheckbook();
+        dtoIntCheckbook3.setId(outFormat.getIdcheq3());
+        listaCheckBooks.add(dtoIntCheckbook3);
+
+        DTOIntCheckbook dtoIntCheckbook4 = new DTOIntCheckbook();
+        dtoIntCheckbook4.setId(outFormat.getIdcheq4());
+        listaCheckBooks.add(dtoIntCheckbook4);
+
+        DTOIntCheckbook dtoIntCheckbook5 = new DTOIntCheckbook();
+        dtoIntCheckbook5.setId(outFormat.getIdcheq5());
+        listaCheckBooks.add(dtoIntCheckbook5);
+
+        DTOIntCheckbook dtoIntCheckbook6 = new DTOIntCheckbook();
+        dtoIntCheckbook6.setId(outFormat.getIdcheq6());
+        listaCheckBooks.add(dtoIntCheckbook6);
+
+        DTOIntCheckbook dtoIntCheckbook7 = new DTOIntCheckbook();
+        dtoIntCheckbook7.setId(outFormat.getIdcheq7());
+        listaCheckBooks.add(dtoIntCheckbook7);
+
+        DTOIntCheckbook dtoIntCheckbook8 = new DTOIntCheckbook();
+        dtoIntCheckbook8.setId(outFormat.getIdcheq8());
+        listaCheckBooks.add(dtoIntCheckbook8);
+
+        DTOIntCheckbook dtoIntCheckbook9 = new DTOIntCheckbook();
+        dtoIntCheckbook9.setId(outFormat.getIdcheq9());
+        listaCheckBooks.add(dtoIntCheckbook9);
+
+        dtoIntAccount.setListaCheckBook(listaCheckBooks);
+
+        return dtoIntAccount;
     }
 }
 
