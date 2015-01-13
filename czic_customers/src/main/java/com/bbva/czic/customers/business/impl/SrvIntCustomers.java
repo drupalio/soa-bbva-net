@@ -102,7 +102,7 @@ public class SrvIntCustomers implements ISrvIntCustomers {
 				throw new BusinessServiceException(EnumError.WRONG_PARAMETERS.getAlias());
 			}
 		} catch (Exception e) {
-			throw new BusinessServiceExfception(e.getMessage());
+			throw new BusinessServiceException(e.getMessage());
 		}
 
 	}
