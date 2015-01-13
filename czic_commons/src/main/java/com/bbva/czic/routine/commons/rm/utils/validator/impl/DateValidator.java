@@ -12,7 +12,7 @@ import java.util.Date;
  */
 public class DateValidator extends Validator{
 
-    private DateValidator() {
+    public DateValidator() {
         super();
     }
 
