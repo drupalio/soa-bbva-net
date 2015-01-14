@@ -3,9 +3,11 @@ package com.bbva.czic.customers.dao.mapper;
 import com.bbva.czic.customers.business.dto.DTOIntAccMovementsResume;
 import com.bbva.czic.customers.business.dto.DTOIntCardCharge;
 import com.bbva.czic.customers.dao.model.oznp.FormatoOZECNPS0;
+import com.bbva.czic.customers.business.dto.DTOIntCustomer;
 import com.bbva.czic.customers.dao.model.oznq.FormatoOZECNQS0;
 import com.bbva.czic.dto.net.AccMovementsResume;
 import com.bbva.czic.dto.net.CardCharge;
+import com.bbva.czic.dto.net.Customer;
 
 /**
  * Interfaz del mapper para customer
@@ -21,4 +23,6 @@ public interface ICustomerMapper {
 	DTOIntAccMovementsResume map(FormatoOZECNQS0 formatoSalida);
 
 	CardCharge map(DTOIntCardCharge item);
+	
+	Customer map(DTOIntCustomer item);
 }

@@ -1,7 +1,10 @@
 package com.bbva.czic.customers.dao;
 
+
+
 import com.bbva.czic.customers.business.dto.DTOIntAccMovementsResume;
 import com.bbva.czic.customers.business.dto.DTOIntCardCharge;
+import com.bbva.czic.customers.business.dto.DTOIntCustomer;
 import com.bbva.czic.customers.business.dto.DTOIntFilterCustomerResumes;
 import com.bbva.czic.customers.business.impl.SrvIntCustomers;
 import com.bbva.czic.customers.dao.mapper.ICustomerMapper;
@@ -138,6 +141,16 @@ public class CustomersDAOImpl implements CustomersDAO {
 		}
 		log.info("getlistCreCardCharges response: " + cardChargetDtoList);
 		return cardChargetDtoList;
+	}
+	
+	@Override
+	public DTOIntCustomer getCustomer(DTOIntFilterCustomerResumes filter)
+			throws BusinessServiceException {
+		log.info("Into getCustomer...");
+		log.info("getCustomer params(customerId):" + filter.getCustomerId());
+		
+		
+		return null;
 	}
 
 }

@@ -2,12 +2,14 @@ package com.bbva.czic.customers.dao.mapper;
 
 import com.bbva.czic.customers.business.dto.DTOIntAccMovementsResume;
 import com.bbva.czic.customers.business.dto.DTOIntCardCharge;
+import com.bbva.czic.customers.business.dto.DTOIntCustomer;
 import com.bbva.czic.customers.business.dto.DTOIntEnumCardChargeCategory;
 import com.bbva.czic.customers.business.dto.DTOIntEnumMonth;
 import com.bbva.czic.customers.dao.model.oznp.FormatoOZECNPS0;
 import com.bbva.czic.customers.dao.model.oznq.FormatoOZECNQS0;
 import com.bbva.czic.dto.net.AccMovementsResume;
 import com.bbva.czic.dto.net.CardCharge;
+import com.bbva.czic.dto.net.Customer;
 import com.bbva.czic.dto.net.EnumCardChargeCategory;
 import com.bbva.czic.dto.net.EnumMonth;
 import com.bbva.czic.routine.commons.rm.utils.converter.UtilsConverter;
@@ -57,6 +59,23 @@ public class CustomerMapper implements ICustomerMapper{
 		cardCharge.setAmount(item.getAmount());
 		cardCharge.setCategory(EnumCardChargeCategory.valueOf(item.getCategory().name()));
 		return cardCharge;
+	}
+
+
+	@Override
+	public Customer map(DTOIntCustomer item) {
+		Customer customer = new Customer();
+		customer.setDocument(item.getDocument());
+		customer.setContactInfo(item.getContactInfo());
+		customer.setDwelingType(item.getDwelingType());
+		customer.setHomeLocation(item.getHomeLocation());
+		customer.setHomeMembers(item.getHomeMembers());
+		customer.setLastConnectionTime(item.getLastConnectionTime());
+		customer.setName(item.getName());
+		customer.setOfficeLocation(item.getOfficeLocation());
+		customer.setResidenceYears(item.getResidenceYears());
+		customer.setStratum(item.getStratum());
+		return customer;
 	}
 
 }
