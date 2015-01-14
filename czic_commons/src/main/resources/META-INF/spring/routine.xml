@@ -20,7 +20,5 @@
 	
 	<!-- Declaracion de rutina -->
 	<servicing:routine-metadata routine-id="commons" />
-	<context:property-placeholder location="classpath*:*.properties" />
-
 
 </beans>
