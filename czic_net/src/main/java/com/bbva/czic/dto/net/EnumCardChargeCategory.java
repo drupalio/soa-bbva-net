@@ -16,5 +16,6 @@ public enum EnumCardChargeCategory implements Serializable {
 	OTHERS,
 	BASIC_COMMERCE,
 	GIFT_BOOK_DISC,
-	CLOTHING
+	CLOTHING,
+	OCIO
 }
