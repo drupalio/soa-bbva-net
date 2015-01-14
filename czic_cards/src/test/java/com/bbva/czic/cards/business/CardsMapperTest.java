@@ -21,14 +21,12 @@ public class CardsMapperTest {
 		Money money = new Money();
 		money.setAmount(new BigDecimal("100"));
 		dtoIntCardCharge.setAmount(money);
-		dtoIntCardCharge.setCategory("BASIC_COMMERCE");
-
+		dtoIntCardCharge.setCategory("OCIO");
 		cardCharge = CardsMapper.mapOuter(dtoIntCardCharge);
 
 		assertEquals(dtoIntCardCharge.getAmount().getAmount(), new BigDecimal(
 				"100"));
-		assertEquals(dtoIntCardCharge.getCategory().toString(),
-				EnumCardChargeCategory.BASIC_COMMERCE.toString());
+		assertEquals(dtoIntCardCharge.getCategory().toString(),"OCIO");
 
 	}
 }
