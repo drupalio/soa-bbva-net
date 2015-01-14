@@ -1,0 +1,119 @@
+{
+  "bbva": {
+    "uuaa": "czic",
+    "remoteType": "RESTFUL"
+  },
+  "dtos": {
+    "city": {
+      "id": {
+        "type": "String",
+        "description": "Id de la ciudad",
+        "required": true
+      },
+      "name": {
+        "type": "String",
+        "description": "Nombre de la ciudad",
+        "required": true
+      }
+    },
+    "country": {
+      "id": {
+        "type": "String",
+        "description": "Id del pais",
+        "required": true
+      },
+      "name": {
+        "type": "String",
+        "description": "Nombre del pais",
+        "required": true
+      }
+    },
+    "location": {
+      "city": {
+        "type": "dto.city",
+        "description": "Id del pais",
+        "required": true
+      },
+      "country": {
+        "type": "dto.country",
+        "description": "Nombre del pais",
+        "required": true
+      }
+    },
+    "enumFunctionType": {
+      "#metadata": {
+        "dtoPackage": "com.bbva.czic.dto.net.EnumFunctionType"
+      },
+      "enumValue": "String"
+    },
+    "function": {
+      "id": {
+        "type": "String",
+        "description": "Id de la funcion",
+        "required": true
+      },
+      "type": {
+        "type": "String",
+        "description": "Tipo de la funcion",
+        "required": true
+      }
+    },
+    "office": {
+      "#metadata": {
+        "dtoPackage": "com.bbva.czic.dto.net.Office"
+      },
+      "name": "String",
+      "postalAddress": "String",
+      "location": "dto.location"
+    },
+    "activity": {
+      "#metadata": {
+        "dtoPackage": "com.bbva.czic.dto.net.Activity"
+      },
+      "operationDate": "String",
+      "executionDate": "String",
+      "function": "dto.function",
+      "amount": "String",
+      "reference": "String"
+    },
+    "conditions": {
+      "alias": {
+        "type": "String",
+        "description": "Alias asociado al titular de la cuenta",
+        "required": true
+      },
+      "category": {
+        "type": "String",
+        "description": "Tipo de plan asociado al producto",
+        "required": true
+      },
+      "description": {
+        "type": "String",
+        "description": "Descripcion del tipo de producto"
+      },
+      "openingDate": {
+        "type": "arq.DATE",
+        "description": " Fecha en la que se realizo la apertura del producto",
+        "required": true
+      },
+      "commission": {
+        "type": "String",
+        "description": "Tipo de comision que aplica para el producto",
+        "required": true
+      },
+      "office": "dto.office",
+      "mobilizationConditions": {
+        "type": "String",
+        "description": "Condiciones de movilizacion"
+      },
+      "activities": "dto.activity"
+    }
+  },
+  "sn": {
+    "targetDto": "product",
+    "logicalId": "products",
+    "registryId": "SN201400011",
+    "version": "V01",
+    "description": "Products REST service."
+  }
+}

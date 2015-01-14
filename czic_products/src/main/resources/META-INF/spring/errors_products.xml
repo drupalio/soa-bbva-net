@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<error-definitions application="czic" architecture="SpringServicingArchitecture"
+				   family="products" servicing:business-service="products"
+				   xmlns="http://bbva.com/gce" xmlns:servicing="http://bbva.com/arq-spring-servicing/gce-extension">
+	<!-- Define here your GCE errors. For example:
+	<error-definition severity="FATAL" alias="productsNotFound" code="1" servicing:http-status="409">
+		<message>Products not found.</message>		
+		<message lang="en">Products not found.</message>
+	</error-definition>
+	-->
+
+	<error-definition severity="ERROR" alias="wrongParameters" code="1" servicing:http-status="400">
+		<message>Product conditions found wrong parameters in request.</message>
+		<message lang="en">Wrong parameters.</message>
+		<message lang="es">Parámetros inválidos</message>
+	</error-definition>
+	<error-definition severity="ERROR" alias="noData" code="2" servicing:http-status="409">
+		<message>No product conditions data found.</message>
+		<message lang="en">No data found.</message>
+		<message lang="es">No existen datos para la búsqueda realizada.</message>
+	</error-definition>
+
+</error-definitions>

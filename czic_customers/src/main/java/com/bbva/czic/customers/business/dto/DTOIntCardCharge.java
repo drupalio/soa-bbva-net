@@ -41,4 +41,12 @@ public class DTOIntCardCharge {
         this.chargeDate = chargeDate;
     }
 
+    @Override
+    public String toString() {
+        return "DTOIntCardCharge{" +
+                "category=" + category +
+                ", amount=" + amount +
+                ", chargeDate=" + chargeDate +
+                '}';
+    }
 }
