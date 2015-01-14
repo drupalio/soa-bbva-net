@@ -22,7 +22,6 @@ public class CardsMapperTest {
 		money.setAmount(new BigDecimal("100"));
 		dtoIntCardCharge.setAmount(money);
 		dtoIntCardCharge.setCategory("OCIO");
-
 		cardCharge = CardsMapper.mapOuter(dtoIntCardCharge);
 
 		assertEquals(dtoIntCardCharge.getAmount().getAmount(), new BigDecimal(

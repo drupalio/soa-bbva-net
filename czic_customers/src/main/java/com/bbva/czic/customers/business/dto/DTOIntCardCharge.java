@@ -34,7 +34,7 @@ public class DTOIntCardCharge {
     }
 
     public Date getChargeDate() {
-        return chargeDategit;
+        return chargeDate;
     }
 
     public void setChargeDate(Date chargeDate) {
