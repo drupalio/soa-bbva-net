@@ -5,19 +5,26 @@ import com.bbva.czic.globalposition.business.dto.DTOIntProduct;
 import com.bbva.czic.globalposition.business.dto.DTOIntProducts;
 import com.bbva.czic.globalposition.business.impl.SrvIntGlobalPosition;
 import com.bbva.czic.globalposition.dao.IGlobalPositionDAO;
+import com.bbva.jee.arq.spring.core.servicing.test.BusinessServiceTestContextLoader;
+import com.bbva.jee.arq.spring.core.servicing.test.MockInvocationContextTestExecutionListener;
 import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
+import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import static org.mockito.Mockito.*;
 import org.mockito.MockitoAnnotations;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.TestExecutionListeners;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.context.support.DependencyInjectionTestExecutionListener;
 
 import java.util.ArrayList;
 import java.util.List;
 
-/*
+
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(
 		loader = BusinessServiceTestContextLoader.class,
@@ -27,9 +34,9 @@ import java.util.List;
 				"classpath:/META-INF/spring/business-service-test.xml"
 		})
 @TestExecutionListeners(listeners = {
-		//MockInvocationContextTestExecutionListener.class,
+		MockInvocationContextTestExecutionListener.class,
 		DependencyInjectionTestExecutionListener.class
-})*/
+})
 public class SrvIntGlobalPositionTest {
 
 	@Mock
