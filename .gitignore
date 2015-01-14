@@ -1,7 +1,9 @@
 # Created by https://www.gitignore.io
 deploy/
 log.roo
-
+.classpath
+.project
+czic/.factorypath
 ### Intellij ###
 # Covers JetBrains IDEs: IntelliJ, RubyMine, PhpStorm, AppCode, PyCharm
 
