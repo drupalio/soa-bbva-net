@@ -7,6 +7,7 @@ import com.bbva.czic.globalposition.business.dto.DTOIntProduct;
 import com.bbva.czic.globalposition.facade.v01.ISrvGlobalPositionV01;
 import com.bbva.czic.globalposition.facade.v01.mapper.IGlobalPositionMapper;
 import com.bbva.czic.globalposition.facade.v01.utils.converters.IFilterConverter;
+import com.bbva.czic.routine.commons.rm.utils.errors.EnumError;
 import com.bbva.jee.arq.spring.core.log.I18nLog;
 import com.bbva.jee.arq.spring.core.log.I18nLogFactory;
 import com.bbva.jee.arq.spring.core.servicing.annotations.SMC;
@@ -103,12 +104,14 @@ public class SrvGlobalPositionV01 implements ISrvGlobalPositionV01, com.bbva.jee
 
 		infoProduct.setId(idProduct);
 
+		if (idProduct == null) {
+			throw new BusinessServiceException(EnumError.WRONG_PARAMETERS.getAlias());
+		}
+
 		if (infoProduct.getVisible() != null) {
 			this.updateProductVisibility(idProduct, infoProduct);
 		} else if (infoProduct.getOperable() != null){
 			this.updateProductOperability(idProduct, infoProduct);
-		} else {
-			throw new BusinessServiceException("wrongParameters");
 		}
 
 		return Response.ok().build();
@@ -118,6 +121,7 @@ public class SrvGlobalPositionV01 implements ISrvGlobalPositionV01, com.bbva.jee
 	private void updateProductVisibility(String idProduct, Product infoProduct) {
 
 		final DTOIntProduct productInt = new DTOIntProduct();
+
 
 		productInt.setId(idProduct);
 		productInt.setVisible(infoProduct.getVisible());

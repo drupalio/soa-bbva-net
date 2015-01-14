@@ -74,7 +74,7 @@ public class LoanMapper {//extends AbstractConfigurableMapper {
 		try {
 			log.info("inicio Mapper");
 			dTOIntLoan.setId(formatoSalida.getNumero());
-			dTOIntLoan.setType(EnumProductType.RQ);
+			dTOIntLoan.setType(EnumProductType.RQ.name());
 			dTOIntLoan.setName(formatoSalida.getNomprod());
 			dTOIntLoan.setBalance(setBalance(formatoSalida.getSaldoto(), formatoSalida.getSaldodi(), null));
 			dTOIntLoan.setDebt(setBalance(formatoSalida.getMontoso(), formatoSalida.getSaldope(), null));

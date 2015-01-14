@@ -8,9 +8,11 @@ import com.bbva.czic.globalposition.dao.IGlobalPositionDAO;
 import com.bbva.jee.arq.spring.core.servicing.test.BusinessServiceTestContextLoader;
 import com.bbva.jee.arq.spring.core.servicing.test.MockInvocationContextTestExecutionListener;
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
+import org.junit.rules.ExpectedException;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
@@ -38,6 +40,9 @@ import java.util.List;
 		DependencyInjectionTestExecutionListener.class
 })
 public class SrvIntGlobalPositionTest {
+
+	@Rule
+	public ExpectedException exception = ExpectedException.none();
 
 	@Mock
 	IGlobalPositionDAO globalPositionDAO;
@@ -67,6 +72,6 @@ public class SrvIntGlobalPositionTest {
 		//Validation
 		assertNotNull(products);
 	}
-	
+
 }
 

@@ -8,7 +8,7 @@ public class DTOIntProduct {
 
     public final static long serialVersionUID = 1L;
     private String id;
-    private EnumProductType productType;
+    private String productType;
     private String name;
     private String alias;
     private EnumFinancialStatusType financialState;
@@ -30,11 +30,11 @@ public class DTOIntProduct {
         this.id = id;
     }
 
-    public EnumProductType getProductType() {
+    public String getProductType() {
         return productType;
     }
 
-    public void setProductType(EnumProductType productType) {
+    public void setProductType(String productType) {
         this.productType = productType;
     }
 

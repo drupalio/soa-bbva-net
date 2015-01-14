@@ -136,7 +136,7 @@ public class SrvIntLoanTest {
 		mock.setOperable(true);
 		mock.setPayment(new Payment());
 		mock.setStatus(EnumLoanStatus.NORMAL);
-		mock.setType(EnumProductType.RQ);
+		mock.setType(EnumProductType.RQ.name());
 		mock.setVisible(true);
 		
 		return mock;

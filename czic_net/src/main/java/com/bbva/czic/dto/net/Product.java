@@ -26,7 +26,8 @@ public class Product implements Serializable {
 
 	@ApiModelProperty(value = "", required = true)
 	@NotNull
-	private EnumProductType type;
+	//private EnumProductType type;
+	private String type;
 
 	@ApiModelProperty(value = "Nombre del producto", required = true)
 	@NotBlank
@@ -82,11 +83,11 @@ public class Product implements Serializable {
 		this.id = id;
 	}
 
-	public EnumProductType getType() {
+	public String getType() {
 		return type;
 	}
 
-	public void setType(EnumProductType type) {
+	public void setType(String type) {
 		this.type = type;
 	}
 
