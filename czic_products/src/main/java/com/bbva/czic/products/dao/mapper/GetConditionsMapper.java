@@ -1,0 +1,76 @@
+package com.bbva.czic.products.dao.mapper;
+
+import com.bbva.czic.dto.net.EnumFunctionType;
+import com.bbva.czic.products.business.dto.*;
+import com.bbva.czic.products.dao.model.oznt.FormatoOZECNTE0;
+import com.bbva.czic.products.dao.model.oznt.FormatoOZECNTS0;
+import com.bbva.czic.routine.commons.rm.utils.tx.ISimpleTransactionMapper;
+import org.springframework.stereotype.Component;
+
+/**
+ * Created by Administrador on 05/01/2015.
+ */
+@Component("tx-get-conditions-mapper")
+public class GetConditionsMapper
+        implements ISimpleTransactionMapper<DTOIntProduct, FormatoOZECNTE0, DTOIntConditions, FormatoOZECNTS0> {
+
+    @Override
+    public FormatoOZECNTE0 mapToInner(DTOIntProduct dtoIn) {
+        FormatoOZECNTE0 formatoEntrada = new FormatoOZECNTE0();
+        formatoEntrada.setNumprod(dtoIn.getId());
+        return formatoEntrada;
+    }
+
+    @Override
+    public DTOIntConditions mapToOuter(FormatoOZECNTS0 outFormat, DTOIntProduct dtoIn) {
+        DTOIntConditions dtoIntConditions = new DTOIntConditions();
+
+        dtoIntConditions.setAlias(outFormat.getTialias());
+        dtoIntConditions.setCategory(outFormat.getCategor());
+        dtoIntConditions.setDescription(outFormat.getDesprod());
+        dtoIntConditions.setOpeningDate(outFormat.getFechape());
+        dtoIntConditions.setCommission(outFormat.getComprod());
+        dtoIntConditions.setMobilizationConditions(outFormat.getConprod());
+
+        DTOIntOffice dtoIntOffice = new DTOIntOffice();
+        dtoIntOffice.setName(outFormat.getNomofic());
+        dtoIntOffice.setPostalAddress(outFormat.getDirofic());
+
+        DTOIntLocation dtoIntLocation = new DTOIntLocation();
+
+        DTOIntCity dtoIntCity = new DTOIntCity();
+        dtoIntCity.setName(outFormat.getCiudofi());
+
+        dtoIntLocation.setCity(dtoIntCity);
+
+        DTOIntCountry dtoIntCountry = new DTOIntCountry();
+        dtoIntCountry.setName(outFormat.getPaisofi());
+
+        dtoIntLocation.setCountry(dtoIntCountry);
+
+        dtoIntOffice.setLocation(dtoIntLocation);
+
+        dtoIntConditions.setOffice(dtoIntOffice);
+
+        DTOIntActivity dtoIntActivity = new DTOIntActivity();
+        dtoIntActivity.setOperationDate(outFormat.getFecoper().toString());
+        dtoIntActivity.setExecutionDate(outFormat.getFecejec().toString());
+
+        DTOIntFunction dtoIntFunction = new DTOIntFunction();
+        dtoIntFunction.setId(outFormat.getTipfunc());
+
+        DTOIntEnumFunctionType dtoIntEnumFunctionType = new DTOIntEnumFunctionType();
+        dtoIntEnumFunctionType.setEnumValue(outFormat.getTipprod());
+
+        dtoIntFunction.setType(dtoIntEnumFunctionType);
+
+        dtoIntActivity.setFunction(dtoIntFunction);
+        dtoIntActivity.setAmount(outFormat.getCantdad());
+        dtoIntActivity.setReference(outFormat.getReffunc());
+
+        dtoIntConditions.setActivities(dtoIntActivity);
+
+        return dtoIntConditions;
+    }
+
+}

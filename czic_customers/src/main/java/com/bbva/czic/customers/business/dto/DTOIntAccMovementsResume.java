@@ -51,4 +51,13 @@ public class DTOIntAccMovementsResume {
         this.month = month;
     }
 
+    @Override
+    public String toString() {
+        return "DTOIntAccMovementsResume{" +
+                "income=" + income +
+                ", outcome=" + outcome +
+                ", balance=" + balance +
+                ", month=" + month +
+                '}';
+    }
 }
