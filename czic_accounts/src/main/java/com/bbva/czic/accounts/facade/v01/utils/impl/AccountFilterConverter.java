@@ -111,7 +111,7 @@ public class AccountFilterConverter implements IFilterConverter{
                 log.info(" Filter endDateFilter: "+endDateFilter+" SMC : getCreditCardCharges SN Cards ");
                 System.out.println(endDate);
 
-                DateValidator dateValidator = (DateValidator) new DateValidator().validDateRange(startDateFilter,endDateFilter).noFuture(startDateFilter).noFuture(endDateFilter).validate();
+                DateValidator dateValidator = (DateValidator) new DateValidator().validDateRange(startDateFilter,endDateFilter).validate();
 
 
                 dtoIntFilterAccount.setStartMonth(startDateFilter);

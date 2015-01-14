@@ -101,6 +101,7 @@ public abstract class SrvAccountsV01 implements ISrvAccountsV01, com.bbva.jee.ar
 			@ApiResponse(code = 200, message = "Found Sucessfully", response = Response.class),
 			@ApiResponse(code = 500, message = "Technical Error") })
 	@GET
+	@Path("/{id}/monthlyBalances")
 	@SMC(registryID = "SMC201400334", logicalID = "getAccountMonthlyBalance")
 	public List<MonthlyBalances> getAccountMonthlyBalance(
 			@ApiParam(value = "identifier param") @PathParam("id") String idAccount,
@@ -120,6 +121,7 @@ public abstract class SrvAccountsV01 implements ISrvAccountsV01, com.bbva.jee.ar
 			@ApiResponse(code = 200, message = "Found Sucessfully", response = Response.class),
 			@ApiResponse(code = 500, message = "Technical Error") })
 	@GET
+	@Path("/{id}/movementsResumes")
 	@SMC(registryID = "SMC201400334", logicalID = "getAccMovementResume")
 	public List<AccMovementsResume> getAccMovementResume(
 			@ApiParam(value = "identifier param") @PathParam("id") String idAccount,

@@ -1,27 +1,16 @@
 package com.bbva.czic.accounts.facade.v01.utils.impl;
 
+
 import com.bbva.jee.arq.spring.core.servicing.gce.BusinessServiceException;
 import com.bbva.jee.arq.spring.core.servicing.test.BusinessServiceTestContextLoader;
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.TestExecutionListeners;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.support.DependencyInjectionTestExecutionListener;
 
 import javax.annotation.Resource;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.mockito.Mockito.when;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(loader = BusinessServiceTestContextLoader.class, locations = {
@@ -36,50 +25,34 @@ public class AccountFilterConverterTest {
     @Resource(name = "accounts-filter-converter")
     AccountFilterConverter accountFilterConverter;
 
-    @Test(expected = BusinessServiceException.class)
-    public void testThrowExceptionIfCustomerIdIsEmpty() {
-        // Setup data
-        final String customerId = "";
-        final String filter = "(productType==TC)";
 
-        // SUT execution
-        //gpFilterConverter.getDTOIntFilter(customerId, filter);
+    @Test(expected = BusinessServiceException.class)
+    public void testThrowExceptionIfAccountIdIsEmpty() {
+        // Setup data
+        final String accountId = "";
+        final String filter = "(month=ge==1994/10/11)";
+
+        accountFilterConverter.getDTOIntFilter(accountId,filter);
+    }
+
+
+    @Test(expected = BusinessServiceException.class)
+    public void testUriIncorrecta() {
+        // Setup data
+        final String accountId = "";
+        final String filter = "(mes=ge==1994/10/11)";
+
+        accountFilterConverter.getDTOIntFilter(accountId,filter);
 
     }
 
     @Test(expected = BusinessServiceException.class)
-    public void testThrowExceptionIfCustomerIdIsNull() {
-        // Setup data
-        final String customerId = null;
-        final String filter = "(productType==TC)";
-
-        // SUT execution
-        //      gpFilterConverter.getDTOIntFilter(customerId, filter);
-
-    }
-
-    @Test(expected = BusinessServiceException.class)
-    public void testThrowExceptionIfCustomerIdIsStringNull() {
-        // Setup data
-        final String customerId = "null";
-        final String filter = "(productType==TC)";
-
-        // SUT execution
-        //  gpFilterConverter.getDTOIntFilter(customerId, filter);
-
-    }
-
-    @Test
-    public void testEmptyProductTypeIfFilterIsNull() {
+    public void testFormatosFechaIncorrectos() {
         // Setup data
         final String customerId = "1234";
-        final String filter = null;
+        final String filter = "(mes=ge==1994/10/11)";
 
-        // SUT execution
-        //     final DTOIntFilterProduct filterProduct = gpFilterConverter.getDTOIntFilter(customerId, filter);
 
-        // Validation
-        //    assertEquals(null, filterProduct.getProductType());
     }
 
     @Test(expected = BusinessServiceException.class)
@@ -122,8 +95,8 @@ public class AccountFilterConverterTest {
         //   final DTOIntFilterProduct filterProduct = gpFilterConverter.getDTOIntFilter(customerId, filter);
 
         //Validation
-        //  assertEquals(customerId, filterProduct.getIdCustomer());
-        // assertEquals("TC", filterProduct.getProductType());
+        //    assertEquals(customerId, filterProduct.getIdCustomer());
+        //  assertEquals("TC", filterProduct.getProductType());
     }
 
 }
