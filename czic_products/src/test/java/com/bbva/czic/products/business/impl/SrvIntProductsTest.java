@@ -1,5 +1,6 @@
-package com.bbva.czic.products.business;
+package com.bbva.czic.products.business.impl;
 
+import com.bbva.czic.products.business.ISrvIntProducts;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;

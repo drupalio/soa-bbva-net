@@ -5,7 +5,7 @@ import com.bbva.czic.customers.business.dto.DTOIntCardCharge;
 import com.bbva.czic.customers.business.dto.DTOIntCustomer;
 import com.bbva.czic.customers.business.dto.DTOIntEnumCardChargeCategory;
 import com.bbva.czic.customers.business.dto.DTOIntEnumMonth;
-import com.bbva.czic.customers.dao.model.ozno.FormatoOZECNOS0;
+import com.bbva.czic.customers.dao.model.oznp.FormatoOZECNPS0;
 import com.bbva.czic.customers.dao.model.oznq.FormatoOZECNQS0;
 import com.bbva.czic.dto.net.AccMovementsResume;
 import com.bbva.czic.dto.net.CardCharge;
@@ -21,10 +21,10 @@ import java.util.Calendar;
 public class CustomerMapper implements ICustomerMapper{
 
 	@Override
-	public DTOIntCardCharge map(FormatoOZECNOS0 formatoSalida) {
+	public DTOIntCardCharge map(FormatoOZECNPS0 formatoSalida) {
 		DTOIntCardCharge dto = new DTOIntCardCharge();
 		dto.setAmount(UtilsConverter.getMoneyDTO(formatoSalida.getValcate()));
-		dto.setCategory(DTOIntEnumCardChargeCategory.valueOf(formatoSalida.getCategor()));
+		dto.setCategory(formatoSalida.getCategor());
 		return dto;
 	}
 
@@ -57,7 +57,7 @@ public class CustomerMapper implements ICustomerMapper{
 	public CardCharge map(DTOIntCardCharge item) {
 		CardCharge cardCharge  = new CardCharge();
 		cardCharge.setAmount(item.getAmount());
-		cardCharge.setCategory(EnumCardChargeCategory.valueOf(item.getCategory().name()));
+		cardCharge.setCategory(item.getCategory());
 		return cardCharge;
 	}
 
