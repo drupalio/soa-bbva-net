@@ -21,7 +21,7 @@ public class CardsMapperTest {
 		Money money = new Money();
 		money.setAmount(new BigDecimal("100"));
 		dtoIntCardCharge.setAmount(money);
-		dtoIntCardCharge.setCategory(EnumCardChargeCategory.BASIC_COMMERCE);
+		dtoIntCardCharge.setCategory("BASIC_COMMERCE");
 
 		cardCharge = CardsMapper.mapOuter(dtoIntCardCharge);
 

@@ -24,7 +24,7 @@ public class CustomerMapper implements ICustomerMapper{
 	public DTOIntCardCharge map(FormatoOZECNPS0 formatoSalida) {
 		DTOIntCardCharge dto = new DTOIntCardCharge();
 		dto.setAmount(UtilsConverter.getMoneyDTO(formatoSalida.getValcate()));
-		dto.setCategory(DTOIntEnumCardChargeCategory.valueOf(formatoSalida.getCategor()));
+		dto.setCategory(formatoSalida.getCategor());
 		return dto;
 	}
 
@@ -57,7 +57,7 @@ public class CustomerMapper implements ICustomerMapper{
 	public CardCharge map(DTOIntCardCharge item) {
 		CardCharge cardCharge  = new CardCharge();
 		cardCharge.setAmount(item.getAmount());
-		cardCharge.setCategory(EnumCardChargeCategory.valueOf(item.getCategory().name()));
+		cardCharge.setCategory(item.getCategory());
 		return cardCharge;
 	}
 

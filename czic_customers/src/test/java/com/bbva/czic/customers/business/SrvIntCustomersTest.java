@@ -172,14 +172,12 @@ public class SrvIntCustomersTest {
 	private List<DTOIntCardCharge> mockListCardCharge(){
 		List<DTOIntCardCharge> list = new ArrayList<DTOIntCardCharge>();
 
-		for(DTOIntEnumCardChargeCategory category : DTOIntEnumCardChargeCategory.values()){
 			DTOIntCardCharge cc = new DTOIntCardCharge();
-			cc.setCategory(category);
+			cc.setCategory("category");
 			cc.setAmount(new Money());
 			cc.setChargeDate(new Date());
 
 			list.add(cc);
-		}
 
 		return list;
 	}
