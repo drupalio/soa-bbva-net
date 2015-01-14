@@ -43,6 +43,8 @@
     <import resource="classpath:META-INF/cxf/cxf.xml"/>
     <import resource="classpath:META-INF/cxf/cxf-extension-soap.xml"/>
     <import resource="classpath:META-INF/cxf/cxf-servlet.xml"/>
+
+	<context:property-placeholder location="classpath*:*.properties" />
 		
 	<context:component-scan base-package="com.bbva.czic.accounts">
 		<context:exclude-filter expression=".*_Roo_.*" type="regex"/>
