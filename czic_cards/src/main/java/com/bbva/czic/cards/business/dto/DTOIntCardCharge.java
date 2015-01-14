@@ -6,18 +6,18 @@ import com.bbva.jee.arq.spring.core.servicing.utils.Money;
 public class DTOIntCardCharge {
 
 	public final static long serialVersionUID = 1L;
-	private EnumCardChargeCategory category;
+	private String category;
 	private Money amount;
 
 	public DTOIntCardCharge() {
 		// default constructor
 	}
 
-	public EnumCardChargeCategory getCategory() {
+	public String getCategory() {
 		return category;
 	}
 
-	public void setCategory(EnumCardChargeCategory category) {
+	public void setCategory(String category) {
 		this.category = category;
 	}
 
