@@ -1,14 +1,10 @@
 package com.bbva.czic.products.business.impl;
 
-<<<<<<< HEAD:czic_products/src/test/java/com/bbva/czic/products/business/SrvIntProductsTest.java
+
 import static org.junit.Assert.assertNotNull;
 import static org.mockito.Mockito.when;
 
 import org.junit.Before;
-=======
-import com.bbva.czic.products.business.ISrvIntProducts;
-import org.junit.Assert;
->>>>>>> f29f73747c472f9b255523932e51790827d24861:czic_products/src/test/java/com/bbva/czic/products/business/impl/SrvIntProductsTest.java
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -20,6 +16,7 @@ import org.springframework.test.context.TestExecutionListeners;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.support.DependencyInjectionTestExecutionListener;
 
+import com.bbva.czic.products.business.ISrvIntProducts;
 import com.bbva.czic.products.business.dto.DTOIntConditions;
 import com.bbva.czic.products.dao.IProductsDAO;
 import com.bbva.jee.arq.spring.core.servicing.test.BusinessServiceTestContextLoader;

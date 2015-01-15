@@ -151,21 +151,20 @@ public class CustomersDAOImpl implements CustomersDAO {
 	@Override
 	public DTOIntCustomer getCustomer(DTOIntFilterCustomerResumes filter)
 			throws BusinessServiceException {
-		log.info("Into getCustomer...");
-		log.info("getCustomer params(customerId):" + filter.getCustomerId());
+		log.info("CustDAO: Into getCustomer...");
+		log.info("CustDAO: getCustomer params(customerId):" + filter.getCustomerId());
 		
 		DTOIntCustomer dtoIntCustomer = new DTOIntCustomer();
-		
-		
-		
+
 		FormatoOZNCENB0 formato = new FormatoOZNCENB0();
+		
 		formato.setNumclie(filter.getCustomerId());
 		//Insertado mientras host soluciona lo de este campo
 		formato.setNomclie("NombreDelCliente");
 		
 		PeticionTransaccionOznb peticion = new PeticionTransaccionOznb();
+		
 		peticion.getCuerpo().getPartes().add(formato);
-
 		log.info("getCustomer formato entrada:" + peticion);
 		RespuestaTransaccionOznb respuesta = transaccionOznb.invocar(peticion);
 		log.info("getCustomer respuesta:" + respuesta);

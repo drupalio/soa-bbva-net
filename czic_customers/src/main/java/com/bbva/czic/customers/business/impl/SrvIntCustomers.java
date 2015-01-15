@@ -6,20 +6,20 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
-import com.bbva.czic.customers.business.dto.DTOIntFilterCustomerResumes;
-import com.bbva.czic.routine.commons.rm.utils.errors.EnumError;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.bbva.czic.customers.business.ISrvIntCustomers;
 import com.bbva.czic.customers.business.dto.DTOIntAccMovementsResume;
 import com.bbva.czic.customers.business.dto.DTOIntCardCharge;
+import com.bbva.czic.customers.business.dto.DTOIntCustomer;
+import com.bbva.czic.customers.business.dto.DTOIntFilterCustomerResumes;
 import com.bbva.czic.customers.dao.CustomersDAO;
 import com.bbva.czic.customers.dao.mapper.ICustomerMapper;
 import com.bbva.czic.dto.net.AccMovementsResume;
 import com.bbva.czic.dto.net.CardCharge;
 import com.bbva.czic.dto.net.Customer;
+import com.bbva.czic.routine.commons.rm.utils.errors.EnumError;
 import com.bbva.jee.arq.spring.core.log.I18nLog;
 import com.bbva.jee.arq.spring.core.log.I18nLogFactory;
 import com.bbva.jee.arq.spring.core.servicing.gce.BusinessServiceException;
@@ -111,13 +111,16 @@ public class SrvIntCustomers implements ISrvIntCustomers {
 	@Override
 	public Customer getCustomer(String customerId)
 			throws BusinessServiceException {
-		log.info("Into getCustomer... ");
-		log.info("getCustomerParams(customerId): " + customerId);
+		log.info("SrvInt: Into getCustomer... ");
+		log.info("SrvInt: getCustomerParams(customerId): " + customerId);
 
 		DTOIntFilterCustomerResumes customer = new DTOIntFilterCustomerResumes();
 		customer.setCustomerId(customerId);
-
-		return customerMapper.map(customersDao.getCustomer(customer));
+		
+		DTOIntCustomer dtoIntCustomer = customersDao.getCustomer(customer);
+		
+		log.info("SrvInt: gettingIntoMapper: "+dtoIntCustomer);
+		return customerMapper.map(dtoIntCustomer);
 
 	}
 }
