@@ -1,14 +1,12 @@
 package com.bbva.czic.cards.facade.v01;
 
-import static org.junit.Assert.assertEquals;
+import com.bbva.czic.cards.business.dto.DTOIntCardCharge;
+import com.bbva.czic.cards.dao.model.ozno.FormatoOZECNOS0;
+import org.junit.Test;
 
 import java.math.BigDecimal;
 
-import org.junit.Test;
-
-import com.bbva.czic.cards.business.dto.DTOIntCardCharge;
-import com.bbva.czic.cards.dao.model.ozno.FormatoOZECNOS0;
-import com.bbva.czic.dto.net.EnumCardChargeCategory;
+import static org.junit.Assert.assertEquals;
 
 public class CardsChargesMapperTest {
 
@@ -20,14 +18,13 @@ public class CardsChargesMapperTest {
 		 * Objeto que vamos a mapear
 		 */
 		FormatoOZECNOS0 formatoSalida = new FormatoOZECNOS0();
-		formatoSalida.setCategor(EnumCardChargeCategory.BASIC_COMMERCE
-				.toString());
+		formatoSalida.setCategor("OCIO");
 		formatoSalida.setValcate(new BigDecimal("100"));
 
 		dtoIntCardCharge = CardsChargesMapper.mapToOuter(formatoSalida);
 
-		assertEquals(EnumCardChargeCategory.BASIC_COMMERCE.toString(),
-				dtoIntCardCharge.getCategory().toString());
+		assertEquals("OCIO",
+				dtoIntCardCharge.getCategory());
 
 		assertEquals(new BigDecimal("100"), dtoIntCardCharge.getAmount()
 				.getAmount());

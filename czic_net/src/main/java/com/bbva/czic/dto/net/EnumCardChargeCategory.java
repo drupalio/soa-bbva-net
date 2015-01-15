@@ -11,11 +11,14 @@ import javax.xml.bind.annotation.XmlType;
 @XmlType(name = "EnumCardChargeCategory", namespace = "urn:com:bbva:czic:dto:net")
 @XmlAccessorType(XmlAccessType.FIELD)
 public enum EnumCardChargeCategory implements Serializable {
-	CHANNEL_SALES,
-	LEISURE,
-	OTHERS,
-	BASIC_COMMERCE,
-	GIFT_BOOK_DISC,
-	CLOTHING,
-	OCIO
+	OCIO,
+	REGALOS,
+	LIBROS,
+	DISCOS,
+	COMERCIOBASICO,
+	ROPA,
+	CALZADOPERSONAL,
+	VARIOS,
+	COMPRASPORCANALES
+
 }

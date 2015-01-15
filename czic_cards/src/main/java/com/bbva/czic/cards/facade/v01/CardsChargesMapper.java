@@ -27,8 +27,8 @@ public class CardsChargesMapper {
 		money.setAmount(formato.getValcate());
 		dtoIntCardCharge.setAmount(money);
 		log.info("Informacion recibida de categorias: "+formato.getCategor());
-		dtoIntCardCharge.setCategory(EnumCardChargeCategory.valueOf(formato
-				.getCategor()));
+		dtoIntCardCharge.setCategory(formato
+				.getCategor());
 		return dtoIntCardCharge;
 	}
 }
