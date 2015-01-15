@@ -3,7 +3,7 @@ package com.bbva.czic.customers.business;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -32,6 +32,7 @@ import com.bbva.czic.customers.business.dto.DTOIntFilterCustomerResumes;
 import com.bbva.czic.customers.business.impl.SrvIntCustomers;
 import com.bbva.czic.customers.dao.CustomersDAO;
 import com.bbva.czic.customers.dao.mapper.ICustomerMapper;
+import com.bbva.czic.customers.dao.model.oznp.FormatoOZECNPS0;
 import com.bbva.czic.dto.net.AccMovementsResume;
 import com.bbva.czic.dto.net.CardCharge;
 import com.bbva.czic.dto.net.City;
@@ -213,16 +214,18 @@ public class SrvIntCustomersTest {
 		//Setup
 		DTOIntFilterCustomerResumes customer = new DTOIntFilterCustomerResumes();
 		customer.setCustomerId("1234567890");
-		DTOIntCustomer dtoIntCustomer = mockCustomer();
+		DTOIntCustomer dtoIntCustomer = mockDTOCustomer();
+		Customer mapCustomer = new Customer();
 		//Setup expectation
-		when(customersDao.getCustomer(customer)).thenReturn(dtoIntCustomer);
+		when(customersDao.getCustomer((DTOIntFilterCustomerResumes) anyObject())).thenReturn(dtoIntCustomer);
+		when(customerMapper.map((DTOIntCustomer)anyObject())).thenReturn(mapCustomer);
 		//SUT execution
 		final Customer answer = srv.getCustomer("1234567890");
 		//validation
 		assertNotNull(answer);
 	}
 
-	private DTOIntCustomer mockCustomer() {
+	private DTOIntCustomer mockDTOCustomer() {
 		DTOIntCustomer customer = new DTOIntCustomer();
 		Document documento = new Document();
 		documento.setNumber("1234567890");
