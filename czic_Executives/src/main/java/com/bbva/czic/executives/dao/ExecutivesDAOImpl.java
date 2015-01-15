@@ -1,5 +1,6 @@
 package com.bbva.czic.executives.dao;
 
+import com.bbva.czic.routine.commons.rm.utils.errors.EnumError;
 import com.bbva.jee.arq.spring.core.log.I18nLog;
 import com.bbva.jee.arq.spring.core.log.I18nLogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -61,6 +62,11 @@ public class ExecutivesDAOImpl implements ExecutivesDAO {
 				CopySalida.class);
 		FormatoOZECNRS0 formatoSalida = copiesSalida
 				.getCopy(FormatoOZECNRS0.class);
+
+		if(formatoSalida.getNomejec() == null || formatoSalida.getNomejec().equals("") || formatoSalida.getEmailej() == null || formatoSalida.getEmailej().equals("") || formatoSalida.getOfiejec() == null || formatoSalida.getOfiejec().equals("") || formatoSalida.getTelejec() == null || formatoSalida.getTelejec().equals("")){
+throw new BusinessServiceException(EnumError.NO_DATA.getAlias());
+		}
+
 		log.info("DAO - Se mapea la respuesta para retornarla SMC : getExecutive SN Executives ");
 		dtoIntExecutive = ExecutivesMapper.mapToOuter(formatoSalida);
 

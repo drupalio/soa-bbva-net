@@ -3,6 +3,7 @@ package com.bbva.czic.executives.business.impl;
 import java.util.List;
 
 import com.bbva.czic.executives.business.dto.DTOIntExecutivesFilter;
+import com.bbva.czic.routine.commons.rm.utils.errors.EnumError;
 import org.apache.cxf.jaxrs.ext.search.PrimitiveStatement;
 import org.apache.cxf.jaxrs.ext.search.SearchCondition;
 import org.apache.cxf.jaxrs.ext.search.SearchParseException;
@@ -77,7 +78,7 @@ public class SrvIntExecutives implements ISrvIntExecutives {
 				}
 
 				if(thirdPartyId==null || thirdPartyId.equals("")&& thirdPartyType==null || thirdPartyType.equals("")){
-					throw new BusinessServiceException("getExecutive - los parametros del filtro son obligatorios.");
+					throw new BusinessServiceException(EnumError.FILTER_EMPTY.getAlias());
 				}
 
 				log.info(" Filter:thirdPartyId: "+thirdPartyId+" SMC : getExecutive SN Executives ");
