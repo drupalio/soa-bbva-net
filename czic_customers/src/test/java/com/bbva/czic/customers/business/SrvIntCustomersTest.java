@@ -85,8 +85,9 @@ public class SrvIntCustomersTest {
 	public void testGetlistAccountsMovementsResume() {
 		//Setup
 		final DTOIntFilterCustomerResumes filter = mockResumesFilter();
+		final List<DTOIntAccMovementsResume> resumes = mockListAccMovementsResume();
 		//Setup expectation
-		when(customersDao.getlistAccountsMovementsResume(filter)).thenReturn(mockListAccMovementsResume());
+		when(customersDao.getlistAccountsMovementsResume(filter)).thenReturn(resumes);
 		//SUT execution
 		final List<AccMovementsResume> answer = srv.getlistAccountsMovementsResume("123",filter);
 		//validation
@@ -121,10 +122,11 @@ public class SrvIntCustomersTest {
 	public void testGetlistCreditCharges() {
 		//Setup
 		final DTOIntFilterCustomerResumes filter = mockResumesFilter();
+		final List<DTOIntCardCharge> charges = mockListCardCharge();
 		//Setup expectation
-		when(customersDao.getlistCreCardCharges(filter)).thenReturn(mockListCardCharge());
+		when(customersDao.getlistCreCardCharges(filter)).thenReturn(charges);
 		//SUT execution
-		final List<AccMovementsResume> answer = srv.getlistAccountsMovementsResume("123",filter);
+		final List<CardCharge> answer = srv.getlistCreditCharges("123", filter);
 		//validation
 		assertNotNull(answer);
 		assertTrue(answer.size() > 0);
@@ -174,7 +176,7 @@ public class SrvIntCustomersTest {
 
 			DTOIntCardCharge cc = new DTOIntCardCharge();
 			cc.setCategory("category");
-			cc.setAmount(new Money());
+			cc.setAmount(UtilsConverter.getMoneyDTO(new BigDecimal(100)));
 			cc.setChargeDate(new Date());
 
 			list.add(cc);
