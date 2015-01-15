@@ -22,9 +22,6 @@
         http://www.springframework.org/schema/jee/spring-jee-3.0.xsd   
 		http://www.springframework.org/schema/tx
         http://www.springframework.org/schema/tx/spring-tx-3.0.xsd
-XC01408
-CdrL0075
-
         http://www.springframework.org/schema/util
         http://www.springframework.org/schema/util/spring-util-3.0.xsd
 		http://cxf.apache.org/core http://cxf.apache.org/schemas/core.xsd
