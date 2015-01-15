@@ -7,6 +7,7 @@ import com.bbva.czic.globalposition.business.dto.DTOIntProduct;
 import com.bbva.czic.globalposition.facade.v01.ISrvGlobalPositionV01;
 import com.bbva.czic.globalposition.facade.v01.mapper.IGlobalPositionMapper;
 import com.bbva.czic.globalposition.facade.v01.utils.converters.IFilterConverter;
+import com.bbva.czic.routine.commons.rm.utils.errors.EnumError;
 import com.bbva.jee.arq.spring.core.log.I18nLog;
 import com.bbva.jee.arq.spring.core.log.I18nLogFactory;
 import com.bbva.jee.arq.spring.core.servicing.annotations.SMC;
@@ -28,7 +29,7 @@ import java.util.List;
 
 
 @Path("/V01")
-@SN(registryID="SNCO1400002",logicalID="GlobalPosition")
+@SN(registryID="SNCO1400002",logicalID="globalPosition")
 @VN(vnn="V01")
 @Api(value="/GlobalPosition/V01",description="SN GlobalPosition")
 @Produces({ MediaType.APPLICATION_JSON})
@@ -97,27 +98,31 @@ public class SrvGlobalPositionV01 implements ISrvGlobalPositionV01, com.bbva.jee
 	@PUT
 	@Path("/{idProduct}")
 	@Consumes({ MediaType.APPLICATION_JSON })
+	@SMC(registryID="SMCCO1400004",logicalID="update")
 	public Response update(
 			@ApiParam(value="Product identifier")@PathParam("idProduct") String idProduct,
 			@ApiParam(value="Product information")Product infoProduct) {
 
 		infoProduct.setId(idProduct);
 
-		if (infoProduct.getVisible() != null) {
-			this.updateProductVisibility(idProduct, infoProduct);
-		} else if (infoProduct.getOperable() != null){
-			this.updateProductOperability(idProduct, infoProduct);
-		} else {
-			throw new BusinessServiceException("wrongParameters");
+		if (idProduct == null) {
+			throw new BusinessServiceException(EnumError.WRONG_PARAMETERS.getAlias());
 		}
 
+		//if (infoProduct.getVisible() != null) {
+			this.updateProductVisibility(idProduct, infoProduct);
+		/*} else if (infoProduct.getOperable() != null){
+			this.updateProductOperability(idProduct, infoProduct);
+		}
+		*/
 		return Response.ok().build();
 	}
 
-	@SMC(registryID="SMCCO1400004",logicalID="update")
+	//@SMC(registryID="SMCCO1400004",logicalID="update")
 	private void updateProductVisibility(String idProduct, Product infoProduct) {
 
 		final DTOIntProduct productInt = new DTOIntProduct();
+
 
 		productInt.setId(idProduct);
 		productInt.setVisible(infoProduct.getVisible());
@@ -125,6 +130,7 @@ public class SrvGlobalPositionV01 implements ISrvGlobalPositionV01, com.bbva.jee
 		srvIntGlobalPosition.updateProductVisibility(productInt);
 	}
 
+	/*
 	@SMC(registryID="SMCCO1400005",logicalID="update")
 	private void updateProductOperability(String idProduct, Product infoProduct) {
 
@@ -135,4 +141,5 @@ public class SrvGlobalPositionV01 implements ISrvGlobalPositionV01, com.bbva.jee
 
 		srvIntGlobalPosition.updateProductOperability(productInt);
 	}
+	*/
 }

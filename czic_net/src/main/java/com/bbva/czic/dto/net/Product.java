@@ -1,6 +1,7 @@
 package com.bbva.czic.dto.net;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.validation.constraints.NotNull;
@@ -20,16 +21,17 @@ public class Product implements Serializable {
 
 	public final static long serialVersionUID = 1L;
 
-	@ApiModelProperty(value = "Identificador del usuario ejecutivo de ventas", required = true)
-	@NotBlank
+	@ApiModelProperty(value = "Identificador del producto", required = true)
+	@NotNull
 	private String id;
 
 	@ApiModelProperty(value = "", required = true)
 	@NotNull
-	private EnumProductType type;
+	//private EnumProductType type;
+	private String type;
 
 	@ApiModelProperty(value = "Nombre del producto", required = true)
-	@NotBlank
+	@NotNull
 	private String name;
 
 	@ApiModelProperty("Alias del producto")
@@ -67,7 +69,7 @@ public class Product implements Serializable {
 	private Contract contract;
 
 	public Product() {
-		// default constructor
+		movement = new ArrayList<Movement>();
 	}
 
 	public Product(String id) {
@@ -82,11 +84,11 @@ public class Product implements Serializable {
 		this.id = id;
 	}
 
-	public EnumProductType getType() {
+	public String getType() {
 		return type;
 	}
 
-	public void setType(EnumProductType type) {
+	public void setType(String type) {
 		this.type = type;
 	}
 

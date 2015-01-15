@@ -6,12 +6,14 @@ import com.bbva.czic.routine.commons.rm.utils.tx.ISimpleTransactionMapper;
 import com.bbva.czic.routine.commons.rm.utils.tx.impl.SimpleTransaction;
 import com.bbva.jee.arq.spring.core.host.InvocadorTransaccion;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
 
 /**
  * @author Entelgy Colombia.
  */
+@Component(value = "tx-get-checkbook")
 public class TxGetCheckbook extends SimpleTransaction<PeticionTransaccionOzns, RespuestaTransaccionOzns> {
 
     @Autowired

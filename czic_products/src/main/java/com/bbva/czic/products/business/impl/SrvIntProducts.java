@@ -2,6 +2,7 @@ package com.bbva.czic.products.business.impl;
 
 import com.bbva.czic.products.business.ISrvIntProducts;
 import com.bbva.czic.products.business.dto.DTOIntConditions;
+import com.bbva.czic.products.business.dto.DTOIntProduct;
 import com.bbva.czic.products.dao.IProductsDAO;
 import com.bbva.czic.routine.commons.rm.utils.errors.EnumError;
 import com.bbva.jee.arq.spring.core.log.I18nLog;
@@ -26,9 +27,9 @@ public class SrvIntProducts implements ISrvIntProducts {
 	IProductsDAO productsDAO;
 
 	@Override
-	public DTOIntConditions getConditions(String productId) {
+	public DTOIntConditions getConditions(DTOIntProduct productId) {
 		log.info(" getConditions Conditions ");
-		if(productId == null || productId.equals("null") || productId.isEmpty()) {
+		if(productId.getId() == null || productId.getId().equals("null") || productId.getId().isEmpty()) {
 			log.info(" getConditions invalids parameters");
 			throw new BusinessServiceException(EnumError.PARAMETER_MISSING.getAlias());
 		}

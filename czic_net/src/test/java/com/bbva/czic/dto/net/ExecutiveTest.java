@@ -25,6 +25,7 @@ public class ExecutiveTest {
 	@Test
 	public void executiveFieldsAreNotNull() {
 		Executive executive = new Executive();
+		executive.setCustomer(null);
 		Set<ConstraintViolation<Executive>> constraintViolations = validator.validate(executive);
 		assertEquals(6, constraintViolations.size());
 	}
@@ -34,7 +35,7 @@ public class ExecutiveTest {
 		Executive executive = new Executive();
 		executive.setId("");
 		Set<ConstraintViolation<Executive>> constraintViolations = validator.validate(executive);
-		assertEquals(6, constraintViolations.size());
+		assertEquals(5, constraintViolations.size());
 	}
 
 	@Test
@@ -42,7 +43,7 @@ public class ExecutiveTest {
 		Executive executive = new Executive();
 		executive.setName("");
 		Set<ConstraintViolation<Executive>> constraintViolations = validator.validate(executive);
-		assertEquals(6, constraintViolations.size());
+		assertEquals(5, constraintViolations.size());
 	}
 
 	@Test
@@ -50,7 +51,7 @@ public class ExecutiveTest {
 		Executive executive = new Executive();
 		executive.setEmail("");
 		Set<ConstraintViolation<Executive>> constraintViolations = validator.validate(executive);
-		assertEquals(6, constraintViolations.size());
+		assertEquals(5, constraintViolations.size());
 	}
 	
 	@Test
@@ -58,7 +59,7 @@ public class ExecutiveTest {
 		Executive executive = new Executive();
 		executive.setEmail("fadss");
 		Set<ConstraintViolation<Executive>> constraintViolations = validator.validate(executive);
-		assertEquals(6, constraintViolations.size());
+		assertEquals(5, constraintViolations.size());
 	}
 
 	@Test
@@ -66,6 +67,6 @@ public class ExecutiveTest {
 		Executive executive = new Executive();
 		executive.setPhone("");
 		Set<ConstraintViolation<Executive>> constraintViolations = validator.validate(executive);
-		assertEquals(6, constraintViolations.size());
+		assertEquals(5, constraintViolations.size());
 	}
 }

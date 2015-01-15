@@ -81,7 +81,7 @@ public class GlobalPositionMapperTest {
         final DTOIntProduct intProduct = new DTOIntProduct();
 
         intProduct.setId("0000886940");
-        intProduct.setProductType(EnumProductType.AQ);
+        intProduct.setProductType(EnumProductType.AQ.name());
         intProduct.setBalance(getIntBalance());
         intProduct.setAlias("Mi cuenta");
         intProduct.setName("Broda");
