@@ -5,14 +5,18 @@ import com.bbva.czic.customers.business.dto.DTOIntCardCharge;
 import com.bbva.czic.customers.business.dto.DTOIntCustomer;
 import com.bbva.czic.customers.business.dto.DTOIntEnumCardChargeCategory;
 import com.bbva.czic.customers.business.dto.DTOIntEnumMonth;
+import com.bbva.czic.customers.dao.model.oznb.FormatoOZNCSNB0;
 import com.bbva.czic.customers.dao.model.ozno.FormatoOZECNOS0;
 import com.bbva.czic.customers.dao.model.oznq.FormatoOZECNQS0;
 import com.bbva.czic.dto.net.AccMovementsResume;
 import com.bbva.czic.dto.net.CardCharge;
 import com.bbva.czic.dto.net.Customer;
+import com.bbva.czic.dto.net.Document;
 import com.bbva.czic.dto.net.EnumCardChargeCategory;
+import com.bbva.czic.dto.net.EnumDocumentType;
 import com.bbva.czic.dto.net.EnumMonth;
 import com.bbva.czic.routine.commons.rm.utils.converter.UtilsConverter;
+
 import org.springframework.stereotype.Component;
 
 import java.util.Calendar;
@@ -75,6 +79,16 @@ public class CustomerMapper implements ICustomerMapper{
 		customer.setOfficeLocation(item.getOfficeLocation());
 		customer.setResidenceYears(item.getResidenceYears());
 		customer.setStratum(item.getStratum());
+		return customer;
+	}
+
+
+	public static DTOIntCustomer mapToOuter(FormatoOZNCSNB0 formatoSalida) {
+		DTOIntCustomer customer = new DTOIntCustomer();
+		Document document = new Document();
+		document.setNumber(formatoSalida.getNumclie());
+		document.setType(EnumDocumentType.CEDULACIUDADANIA);
+		customer.setDocument(document);
 		return customer;
 	}
 
