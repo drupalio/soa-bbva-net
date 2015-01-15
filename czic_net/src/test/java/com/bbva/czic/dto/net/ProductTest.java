@@ -25,6 +25,7 @@ public class ProductTest {
 	@Test
 	public void productFieldsAreNotNull() {
 		Product product = new Product();
+		product.setMovement(null);
 		Set<ConstraintViolation<Product>> constraintViolations = validator.validate(product);
 		assertEquals(10, constraintViolations.size());
 	}
@@ -34,7 +35,7 @@ public class ProductTest {
 		Product product = new Product();
 		product.setId("");
 		Set<ConstraintViolation<Product>> constraintViolations = validator.validate(product);
-		assertEquals(10, constraintViolations.size());
+		assertEquals(9, constraintViolations.size());
 		
 	}
 	
@@ -43,7 +44,7 @@ public class ProductTest {
 		Product product = new Product();
 		product.setName("");
 		Set<ConstraintViolation<Product>> constraintViolations = validator.validate(product);
-		assertEquals(10, constraintViolations.size());
+		assertEquals(9, constraintViolations.size());
 		
 	}
 

@@ -92,6 +92,7 @@ public class GlobalPositionMapper /*extends ConfigurableMapper*/  implements IGl
         product.setContactInfo(map(intProduct.getContactInfo()));
         product.setVisible(intProduct.isVisible());
         product.setOperable(intProduct.isOperable());
+        product.setMovement(new ArrayList<Movement>());
         return product;
     }
 
