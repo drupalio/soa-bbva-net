@@ -15,7 +15,13 @@
 	<repositories/>
     <pluginRepositories/>
 	<dependencies>
-	
+
+        <dependency>
+            <groupId>com.bbva.czic</groupId>
+            <artifactId>czic_commons</artifactId>
+            <version>1.0.0</version>
+        </dependency>
+
     <!-- INICIO Arquitectura Servicios -->
 
         <dependency>
