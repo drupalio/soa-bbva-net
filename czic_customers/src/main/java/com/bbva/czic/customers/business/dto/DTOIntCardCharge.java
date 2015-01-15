@@ -9,7 +9,7 @@ import java.util.Date;
 public class DTOIntCardCharge {
 
     public final static long serialVersionUID = 1L;
-    private DTOIntEnumCardChargeCategory category;
+    private String category;
     private Money amount;
     private Date chargeDate;
 
@@ -17,11 +17,11 @@ public class DTOIntCardCharge {
         //default constructor
     }
 
-    public DTOIntEnumCardChargeCategory getCategory() {
+    public String getCategory() {
         return category;
     }
 
-    public void setCategory(DTOIntEnumCardChargeCategory category) {
+    public void setCategory(String category) {
         this.category = category;
     }
 

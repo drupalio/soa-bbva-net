@@ -38,6 +38,7 @@
 	
 	<!-- Declaracion de modulo de servicios -->
 	<servicing:module-metadata  service-logical-id="customers" />
+
     
 	<!-- beans de cxf -->
     <import resource="classpath:META-INF/cxf/cxf.xml"/>

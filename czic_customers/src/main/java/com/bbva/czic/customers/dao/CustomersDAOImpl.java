@@ -1,13 +1,14 @@
 package com.bbva.czic.customers.dao;
 
-
-
 import com.bbva.czic.customers.business.dto.DTOIntAccMovementsResume;
 import com.bbva.czic.customers.business.dto.DTOIntCardCharge;
 import com.bbva.czic.customers.business.dto.DTOIntCustomer;
 import com.bbva.czic.customers.business.dto.DTOIntFilterCustomerResumes;
 import com.bbva.czic.customers.business.impl.SrvIntCustomers;
+
+import com.bbva.czic.customers.dao.mapper.CustomerMapper;
 import com.bbva.czic.customers.dao.mapper.ICustomerMapper;
+import com.bbva.czic.customers.dao.model.oznb.*;
 import com.bbva.czic.customers.dao.model.oznp.*;
 import com.bbva.czic.customers.dao.model.oznq.*;
 import com.bbva.czic.routine.commons.rm.utils.errors.EnumError;
@@ -17,12 +18,14 @@ import com.bbva.jee.arq.spring.core.log.I18nLog;
 import com.bbva.jee.arq.spring.core.log.I18nLogFactory;
 import com.bbva.jee.arq.spring.core.servicing.gce.BusinessServiceException;
 import com.bbva.jee.arq.spring.core.servicing.utils.BusinessServicesToolKit;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.List;
+
 
 @Component(value = "customers-dao-impl")
 public class CustomersDAOImpl implements CustomersDAO {
@@ -39,10 +42,12 @@ public class CustomersDAOImpl implements CustomersDAO {
 	private ErrorMappingHelper errorMappingHelper;
 
 	@Autowired
-	private TransaccionOznq transaccionOznq;
+	private TransaccionOznq transaccionOznq;;
+	@Autowired
+	private TransaccionOznb transaccionOznb;
 	@Autowired
 	private TransaccionOznp transaccionOznp;
-
+	
 	private static I18nLog log = I18nLogFactory.getLogI18n(
 			SrvIntCustomers.class, "META-INF/spring/i18n/log/mensajesLog");
 
@@ -146,11 +151,36 @@ public class CustomersDAOImpl implements CustomersDAO {
 	@Override
 	public DTOIntCustomer getCustomer(DTOIntFilterCustomerResumes filter)
 			throws BusinessServiceException {
-		log.info("Into getCustomer...");
-		log.info("getCustomer params(customerId):" + filter.getCustomerId());
+		log.info("CustDAO: Into getCustomer...");
+		log.info("CustDAO: getCustomer params(customerId):" + filter.getCustomerId());
 		
+		DTOIntCustomer dtoIntCustomer = new DTOIntCustomer();
+
+		FormatoOZNCENB0 formato = new FormatoOZNCENB0();
 		
-		return null;
+		formato.setNumclie(filter.getCustomerId());
+		//Insertado mientras host soluciona lo de este campo
+		formato.setNomclie("NombreDelCliente");
+		
+		PeticionTransaccionOznb peticion = new PeticionTransaccionOznb();
+		
+		peticion.getCuerpo().getPartes().add(formato);
+		log.info("getCustomer formato entrada:" + peticion);
+		RespuestaTransaccionOznb respuesta = transaccionOznb.invocar(peticion);
+		log.info("getCustomer respuesta:" + respuesta);
+		
+		BusinessServiceException exception = errorMappingHelper.toBusinessServiceException(respuesta);
+		if (exception != null) {
+			throw new BusinessServiceException(EnumError.NO_DATA.getAlias());
+		}
+		
+		CopySalida outputCopies = respuesta.getCuerpo().getParte(CopySalida.class);
+		FormatoOZNCSNB0 formatoSalida = outputCopies.getCopy(FormatoOZNCSNB0.class);
+		
+		log.info("DAO - Se mapea la respuesta para retornarla SMC : getCustomer SN Customer ");
+		dtoIntCustomer = CustomerMapper.mapToOuter(formatoSalida);
+
+		return dtoIntCustomer;
 	}
 
 }
