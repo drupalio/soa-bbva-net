@@ -12,7 +12,6 @@ import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
 
-import org.hibernate.ejb.criteria.expression.function.CurrentTimestampFunction;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -28,7 +27,6 @@ import org.springframework.test.context.support.DependencyInjectionTestExecution
 import com.bbva.czic.customers.business.dto.DTOIntAccMovementsResume;
 import com.bbva.czic.customers.business.dto.DTOIntCardCharge;
 import com.bbva.czic.customers.business.dto.DTOIntCustomer;
-import com.bbva.czic.customers.business.dto.DTOIntEnumCardChargeCategory;
 import com.bbva.czic.customers.business.dto.DTOIntEnumMonth;
 import com.bbva.czic.customers.business.dto.DTOIntFilterCustomerResumes;
 import com.bbva.czic.customers.business.impl.SrvIntCustomers;
@@ -50,7 +48,6 @@ import com.bbva.czic.dto.net.State;
 import com.bbva.czic.routine.commons.rm.utils.converter.UtilsConverter;
 import com.bbva.jee.arq.spring.core.servicing.gce.BusinessServiceException;
 import com.bbva.jee.arq.spring.core.servicing.test.BusinessServiceTestContextLoader;
-import com.bbva.jee.arq.spring.core.servicing.test.MockInvocationContextTestExecutionListener;
 import com.bbva.jee.arq.spring.core.servicing.utils.Money;
 
 
@@ -216,10 +213,11 @@ public class SrvIntCustomersTest {
 	@Test
 	public void testGetCustomer() {
 		//Setup
-		DTOIntFilterCustomerResumes filter = new DTOIntFilterCustomerResumes();
-		filter.setCustomerId("1234567890");
+		DTOIntFilterCustomerResumes customer = new DTOIntFilterCustomerResumes();
+		customer.setCustomerId("1234567890");
+		DTOIntCustomer dtoIntCustomer = mockCustomer();
 		//Setup expectation
-		when(customersDao.getCustomer(filter)).thenReturn(mockCustomer());
+		when(customersDao.getCustomer(customer)).thenReturn(dtoIntCustomer);
 		//SUT execution
 		final Customer answer = srv.getCustomer("1234567890");
 		//validation
