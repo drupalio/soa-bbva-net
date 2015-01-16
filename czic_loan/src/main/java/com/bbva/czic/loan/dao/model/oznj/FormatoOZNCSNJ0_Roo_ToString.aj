@@ -9,16 +9,16 @@ privileged aspect FormatoOZNCSNJ0_Roo_ToString {
     
     public String FormatoOZNCSNJ0.toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append("Estado: ").append(getEstado()).append(", ");
+        sb.append("Cuotato: ").append(getCuotato()).append(", ");
+        sb.append("Desctar: ").append(getDesctar()).append(", ");
+        sb.append("Estadot: ").append(getEstadot()).append(", ");
+        sb.append("Fechaca: ").append(getFechaca()).append(", ");
         sb.append("Fechaco: ").append(getFechaco()).append(", ");
-        sb.append("Fechapa: ").append(getFechapa()).append(", ");
-        sb.append("Fechave: ").append(getFechave()).append(", ");
+        sb.append("Fechali: ").append(getFechali()).append(", ");
         sb.append("Honorar: ").append(getHonorar()).append(", ");
-        sb.append("Montoso: ").append(getMontoso()).append(", ");
-        sb.append("Nomprod: ").append(getNomprod()).append(", ");
-        sb.append("Numcout: ").append(getNumcout()).append(", ");
-        sb.append("Numero: ").append(getNumero()).append(", ");
-        sb.append("Saldodi: ").append(getSaldodi()).append(", ");
+        sb.append("Mntosol: ").append(getMntosol()).append(", ");
+        sb.append("Numcont: ").append(getNumcont()).append(", ");
+        sb.append("Pagomin: ").append(getPagomin()).append(", ");
         sb.append("Saldope: ").append(getSaldope()).append(", ");
         sb.append("Saldoto: ").append(getSaldoto()).append(", ");
         sb.append("Tipprod: ").append(getTipprod());

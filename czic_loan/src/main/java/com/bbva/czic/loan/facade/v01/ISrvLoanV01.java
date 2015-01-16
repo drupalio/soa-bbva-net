@@ -1,17 +1,16 @@
 package com.bbva.czic.loan.facade.v01;
 
-import java.util.List;
-
 import com.bbva.czic.dto.net.Loan;
 import com.bbva.czic.dto.net.Movement;
 
+import java.util.List;
+
 public interface ISrvLoanV01 {
 
-	public Loan getRotaryQuota(String idLoan);
+	Loan getRotaryQuota(String idLoan);
 
-	public List<Movement> listRotaryQuotaMovements(String idLoan, String filter, String fields, String expands,
-			String sort);
+	List<Movement> listRotaryQuotaMovements(String idLoan, String paginationKey, String pageSize,
+												   String filter);
 
-	public Movement getRotaryQuotaMovement(String idMovement, String idLoan);
-
+	Movement getRotaryQuotaMovement(String idMovement, String idLoan);
 }

@@ -1,10 +1,9 @@
 package com.bbva.czic.loan.business.dto;
 
+import java.util.Calendar;
 import java.util.Date;
 
-import com.bbva.czic.dto.net.EnumAccountState;
-import com.bbva.czic.dto.net.Office;
-import com.bbva.czic.dto.net.Operation;
+import com.bbva.czic.dto.net.*;
 import com.bbva.jee.arq.spring.core.servicing.utils.Money;
 
 public class DTOIntMovement {
@@ -17,7 +16,7 @@ public class DTOIntMovement {
 
 	private Date transactionDate;
 
-	private Date operationDate;
+	private Calendar operationDate;
 
 	private String sourceReference;
 
@@ -27,11 +26,11 @@ public class DTOIntMovement {
 
 	private Office office;
 
-	private EnumAccountState status;
+	private EnumMovementStatus status;
 
 	private Money value;
 
-	private Money balance;
+	private Balance balance;
 
 	public DTOIntMovement() {
 		// default constructor
@@ -61,11 +60,11 @@ public class DTOIntMovement {
 		this.transactionDate = transactionDate;
 	}
 
-	public Date getOperationDate() {
+	public Calendar getOperationDate() {
 		return operationDate;
 	}
 
-	public void setOperationDate(Date operationDate) {
+	public void setOperationDate(Calendar operationDate) {
 		this.operationDate = operationDate;
 	}
 
@@ -101,11 +100,11 @@ public class DTOIntMovement {
 		this.office = office;
 	}
 
-	public EnumAccountState getStatus() {
+	public EnumMovementStatus getStatus() {
 		return status;
 	}
 
-	public void setStatus(EnumAccountState status) {
+	public void setStatus(EnumMovementStatus status) {
 		this.status = status;
 	}
 
@@ -117,11 +116,11 @@ public class DTOIntMovement {
 		this.value = value;
 	}
 
-	public Money getBalance() {
+	public Balance getBalance() {
 		return balance;
 	}
 
-	public void setBalance(Money balance) {
+	public void setBalance(Balance balance) {
 		this.balance = balance;
 	}
 

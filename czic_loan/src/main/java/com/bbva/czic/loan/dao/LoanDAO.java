@@ -1,18 +1,18 @@
 package com.bbva.czic.loan.dao;
 
-import java.util.List;
-
 import com.bbva.czic.loan.business.dto.DTOIntLoan;
 import com.bbva.czic.loan.business.dto.DTOIntMovement;
 import com.bbva.jee.arq.spring.core.servicing.gce.BusinessServiceException;
 
+import java.util.Date;
+import java.util.List;
+
 public interface LoanDAO {
 
-	public List<DTOIntMovement> listRotaryQuotaMovements(String idLoan, String starDate, String endDate,
-			String paginationKey, String pageSize) throws BusinessServiceException;
+	List<DTOIntMovement> listRotaryQuotaMovements(String idLoan, String paginationKey, String pageSize, String fechaInicial, String fechaFinal) throws BusinessServiceException;
 
-	public DTOIntLoan getRotaryQuota(String idLoan) throws BusinessServiceException;
+	DTOIntLoan getRotaryQuota(String idLoan)	throws BusinessServiceException;
 
-	public DTOIntMovement getRotaryQuotaMovement(String idMovement, String idLoan) throws BusinessServiceException;
+	DTOIntMovement getRotaryQuotaMovement(String idMovement, String idLoan) throws BusinessServiceException;
 
 }
