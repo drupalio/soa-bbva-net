@@ -1,13 +1,10 @@
 package com.bbva.czic.accounts.dao;
 
-import com.bbva.czic.accounts.business.dto.DTOIntFilterAccount;
-import com.bbva.czic.accounts.business.dto.DTOIntResponseAccMovementsResumes;
-import com.bbva.czic.accounts.business.dto.DTOIntResponseMonthlyBalances;
+import com.bbva.czic.accounts.business.dto.*;
 import com.bbva.czic.routine.commons.rm.utils.tx.IPaginatedTransaction;
 import com.bbva.czic.routine.commons.rm.utils.tx.ISimpleTransaction;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.bbva.czic.accounts.business.dto.DTOIntAccount;
 import com.bbva.jee.arq.spring.core.host.protocolo.ps9.ErrorMappingHelper;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
@@ -26,6 +23,10 @@ public class AccountsDAOImpl implements AccountsDAO {
 	@Autowired
 	@Qualifier("tx-get-account-movement-resume")
 	private IPaginatedTransaction txtGetAccountMovementResume;
+
+	@Autowired
+	@Qualifier("tx-lis-check")
+	private IPaginatedTransaction txListCheck;
 
 	@Autowired
 	@Qualifier("tx-get-account")
@@ -49,6 +50,11 @@ public class AccountsDAOImpl implements AccountsDAO {
 	@Override
 	public DTOIntAccount getAccount(final DTOIntFilterAccount dtoIntFilterAccount) {
 		return txtGetAccount.invoke(dtoIntFilterAccount);
+	}
+
+	@Override
+	public DTOIntCheck getListCheck(DTOIntCheck dtoIntCheck) {
+		return null;
 	}
 
 
