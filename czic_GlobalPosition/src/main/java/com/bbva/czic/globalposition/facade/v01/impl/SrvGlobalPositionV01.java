@@ -18,6 +18,7 @@ import com.wordnik.swagger.annotations.*;
 import org.apache.cxf.jaxrs.model.wadl.ElementClass;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.CollectionUtils;
 
 import javax.annotation.Resource;
 import javax.ws.rs.*;
@@ -85,6 +86,10 @@ public class SrvGlobalPositionV01 implements ISrvGlobalPositionV01, com.bbva.jee
 		final DTOIntFilterProduct filterProduct = gpFilterConverter.getDTOIntFilter(customerId, filter);
 		List<DTOIntProduct> products = srvIntGlobalPosition.getExtractGlobalBalance(filterProduct);
 
+		if (CollectionUtils.isEmpty(products)) {
+			throw new BusinessServiceException(EnumError.NO_DATA.getAlias());
+		}
+
 		return globalPositionMapper.map(products);
 	}
 
@@ -97,7 +102,7 @@ public class SrvGlobalPositionV01 implements ISrvGlobalPositionV01, com.bbva.jee
 		@ApiResponse(code = 400, message = "wrongParameters")
 	})
 	@PUT
-	@Path("/{idProduct}")
+	@Path("/{idProduct}/setProductVisibility")
 	@Consumes({ MediaType.APPLICATION_JSON })
 	@SMC(registryID="SMCCO1400004",logicalID="update")
 	public Response updateProductVisibility(
@@ -128,7 +133,7 @@ public class SrvGlobalPositionV01 implements ISrvGlobalPositionV01, com.bbva.jee
 			@ApiResponse(code = 400, message = "wrongParameters")
 	})
 	@PUT
-	@Path("/{idProduct}")
+	@Path("/{idProduct}/setProductOperability")
 	@Consumes({ MediaType.APPLICATION_JSON })
 	@SMC(registryID="SMCCO1400005",logicalID="update")
 	public Response updateProductOperability(
