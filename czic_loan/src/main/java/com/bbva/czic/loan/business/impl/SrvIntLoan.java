@@ -32,8 +32,6 @@ public class SrvIntLoan implements ISrvIntLoan {
 	@Autowired
 	BusinessServicesToolKit businessToolKit;
 
-	@Autowired
-	@Qualifier("loanDao")
 	private LoanDAO loanDao;
 
 	@Override

@@ -9,8 +9,6 @@ import com.bbva.czic.loan.business.dto.DTOIntLoan;
 import com.bbva.czic.loan.business.dto.DTOIntMovement;
 import com.bbva.jee.arq.spring.core.servicing.gce.BusinessServiceException;
 
-@Repository(value = "loanDao")
-@Profile(value = "dev")
 public class LoanDaoImplMock implements LoanDAO{
 
 	@Override

@@ -54,7 +54,6 @@ public class Product implements Serializable {
 	private Balance balance;
 
 	@ApiModelProperty(value = "description", required = true)
-	@NotNull
 	private ContactInfo contactInfo;
 
 	@ApiModelProperty("")
