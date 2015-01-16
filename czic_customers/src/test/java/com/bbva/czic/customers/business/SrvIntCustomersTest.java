@@ -3,7 +3,8 @@ package com.bbva.czic.customers.business;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
-import static org.mockito.Mockito.*;
+import static org.mockito.Matchers.anyObject;
+import static org.mockito.Mockito.when;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -32,7 +33,6 @@ import com.bbva.czic.customers.business.dto.DTOIntFilterCustomerResumes;
 import com.bbva.czic.customers.business.impl.SrvIntCustomers;
 import com.bbva.czic.customers.dao.CustomersDAO;
 import com.bbva.czic.customers.dao.mapper.ICustomerMapper;
-import com.bbva.czic.customers.dao.model.oznp.FormatoOZECNPS0;
 import com.bbva.czic.dto.net.AccMovementsResume;
 import com.bbva.czic.dto.net.CardCharge;
 import com.bbva.czic.dto.net.City;
@@ -43,13 +43,12 @@ import com.bbva.czic.dto.net.Document;
 import com.bbva.czic.dto.net.Email;
 import com.bbva.czic.dto.net.EnumDocumentType;
 import com.bbva.czic.dto.net.EnumDwelingType;
-import com.bbva.czic.dto.net.Location;
 import com.bbva.czic.dto.net.PhoneNumber;
+import com.bbva.czic.dto.net.Place;
 import com.bbva.czic.dto.net.State;
 import com.bbva.czic.routine.commons.rm.utils.converter.UtilsConverter;
 import com.bbva.jee.arq.spring.core.servicing.gce.BusinessServiceException;
 import com.bbva.jee.arq.spring.core.servicing.test.BusinessServiceTestContextLoader;
-import com.bbva.jee.arq.spring.core.servicing.utils.Money;
 
 
 
@@ -229,32 +228,24 @@ public class SrvIntCustomersTest {
 
 	private DTOIntCustomer mockDTOCustomer() {
 		DTOIntCustomer customer = new DTOIntCustomer();
+		
 		Document documento = new Document();
 		documento.setNumber("1234567890");
 		documento.setType(EnumDocumentType.CEDULACIUDADANIA);
+		
 		ContactInfo contacto = new ContactInfo();
 		contacto.setEmails(new ArrayList<Email>());
 		contacto.setPhoneNumbers(new ArrayList<PhoneNumber>());
-		Location homeLocation= new Location();
-		City city = new City();
-		city.setId("1");
-		city.setName("Bogota");
-		State state = new State();
-		state.setId("1");
-		state.setName("Distrito Capital");
-		state.setCities(new ArrayList<City>());
-		Country country = new Country();
-		country.setId("1");
-		country.setName("Colombia");
-		country.setStates(new ArrayList<State>());
-		homeLocation.setCity(city);
-		homeLocation.setCountry(country);
-		homeLocation.setState(state);
+		
+		Place homeLocation= new Place();
+		homeLocation.setCityName("city");
+		homeLocation.setCountryName("Country");
+		homeLocation.setStateName("State");
 		homeLocation.setPostalAddress("BBVA");
 		
 		customer.setDocument(documento);
 		customer.setName("Cliente de prueba");
-		customer.setContactInfo(contacto);
+		customer.setEmails(contacto);
 		customer.setHomeLocation(homeLocation);
 		customer.setOfficeLocation(homeLocation);
 		customer.setStratum(4);

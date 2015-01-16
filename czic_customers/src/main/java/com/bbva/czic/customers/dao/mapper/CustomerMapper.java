@@ -25,8 +25,9 @@ import com.bbva.czic.dto.net.EnumContactSourceType;
 import com.bbva.czic.dto.net.EnumDocumentType;
 import com.bbva.czic.dto.net.EnumDwelingType;
 import com.bbva.czic.dto.net.EnumMonth;
-import com.bbva.czic.dto.net.Location;
+import com.bbva.czic.dto.net.EnumSegmentType;
 import com.bbva.czic.dto.net.PhoneNumber;
+import com.bbva.czic.dto.net.Place;
 import com.bbva.czic.dto.net.State;
 import com.bbva.czic.routine.commons.rm.utils.converter.UtilsConverter;
 
@@ -79,7 +80,7 @@ public class CustomerMapper implements ICustomerMapper{
 	public Customer map(DTOIntCustomer item) {
 		Customer customer = new Customer();
 		customer.setDocument(item.getDocument());
-		customer.setContactInfo(item.getContactInfo());
+		customer.setContactInfo(item.getEmails());
 		customer.setDwelingType(item.getDwelingType());
 		customer.setHomeLocation(item.getHomeLocation());
 		customer.setHomeMembers(item.getHomeMembers());
@@ -94,42 +95,14 @@ public class CustomerMapper implements ICustomerMapper{
 
 	public static DTOIntCustomer mapToOuter(FormatoOZNCSNB0 formatoSalida) {
 		DTOIntCustomer customer = new DTOIntCustomer();
+		
 		Document document = new Document();
+		document.setNumber(formatoSalida.getNumclie());
+		document.setType(EnumDocumentType.CEDULACIUDADANIA);
+		
 		ContactInfo contacto = new ContactInfo();
 		List<Email> emails = new ArrayList<Email>();
 		List<PhoneNumber> phones = new ArrayList<PhoneNumber>();
-		List<City> cities = new ArrayList<City>();
-		List<State> states = new ArrayList<State>();
-		Location home = new Location();
-		Location office = new Location();
-		Country country = new Country();
-		State state = new State();
-		City city = new City();
-		city.setName(formatoSalida.getCiudvia());
-		city.setId("1");
-		cities.add(city);
-		state.setName(formatoSalida.getDepavia());
-		state.setId("1");
-		state.setCities(cities);
-		country.setName(formatoSalida.getPaisvia());
-		country.setId("0013");
-		country.setStates(states);
-		home.setPostalAddress(formatoSalida.getDescvia());
-		
-		cities.clear();
-		states.clear();
-		
-		city.setName(formatoSalida.getCiudofi());
-		city.setId("1");
-		cities.add(city);
-		state.setName(formatoSalida.getDepaofi());
-		state.setId("1");
-		state.setCities(cities);
-		country.setName(formatoSalida.getPaisofi());
-		country.setId("0013");
-		country.setStates(states);
-		home.setPostalAddress(formatoSalida.getDescofi());
-		
 		Email email = new Email();
 		email.setActive(true);
 		email.setAddress("contractor@bbva.com");
@@ -138,11 +111,23 @@ public class CustomerMapper implements ICustomerMapper{
 		emails.add(email);
 		contacto.setEmails(emails);
 		contacto.setPhoneNumbers(phones);
-		document.setNumber(formatoSalida.getNumclie());
-		document.setType(EnumDocumentType.CEDULACIUDADANIA);
+		
+		Place home = new Place();
+		home.setCityName(formatoSalida.getCiudvia());
+		home.setStateName(formatoSalida.getDepavia());
+		home.setCountryName(formatoSalida.getPaisvia());
+		home.setPostalAddress(formatoSalida.getDescvia());
+		
+		Place office = new Place();
+		office.setCityName(formatoSalida.getCiudofi());
+		office.setStateName(formatoSalida.getDepaofi());
+		office.setCountryName(formatoSalida.getPaisofi());
+		office.setPostalAddress(formatoSalida.getDescofi());
+
 		customer.setDocument(document);
 		customer.setName("Nombre");
-		customer.setContactInfo(contacto);
+		customer.setSegment(EnumSegmentType.OTRO);
+		customer.setEmails(contacto);
 		customer.setHomeLocation(home);
 		customer.setStratum(Integer.parseInt(formatoSalida.getEstrato()));
 		customer.setResidenceYears(formatoSalida.getAnosvda().intValue());
