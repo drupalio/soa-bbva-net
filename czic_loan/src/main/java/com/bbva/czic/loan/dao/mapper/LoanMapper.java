@@ -35,7 +35,7 @@ public class LoanMapper {
 		try {
 			log.info("inicio Mapper");
 			dTOIntLoan.setId(formatoSalida.getNumcont());
-			dTOIntLoan.setType(EnumProductType.RQ);
+			dTOIntLoan.setType(formatoSalida.getTipprod());
 			dTOIntLoan.setName(formatoSalida.getDesctar());
 
 			dTOIntLoan.setBalance(setBalance(formatoSalida.getSaldoto(), formatoSalida.getPagomin()));
@@ -131,7 +131,10 @@ public class LoanMapper {
 		payment.setMinimumPayment(setMoneyValue(minimumPayment));
 		payment.setNumbersOfQuota(numbersOfQuota);
 		payment.setPaymentDate(paymentDate);
-		payment.setShortDate(shortDate);
+
+		Calendar calendar = Calendar.getInstance();
+		calendar.setTime(shortDate);
+		payment.setShortDate(calendar);
 		
 		return payment;
 	}
@@ -197,7 +200,6 @@ public class LoanMapper {
 		Movement movement = new Movement();
 
 		movement.setId(dto.getId());
-		movement.setBalance(dto.getBalance());
 		movement.setConcept(dto.getConcept());
 		movement.setOffice(dto.getOffice());
 		movement.setOperation(dto.getOperation());
