@@ -46,7 +46,7 @@ import com.wordnik.swagger.annotations.ApiResponses;
 @Api(value = "/accounts/V01", description = "SN accounts")
 @Produces({ MediaType.APPLICATION_JSON })
 @Service
-public abstract class SrvAccountsV01 implements ISrvAccountsV01, com.bbva.jee.arq.spring.core.servicing.utils.ContextAware {
+public class SrvAccountsV01 implements ISrvAccountsV01, com.bbva.jee.arq.spring.core.servicing.utils.ContextAware {
 
 	private static I18nLog log = I18nLogFactory
 			.getLogI18n(SrvAccountsV01.class, "META-INF/spring/i18n/log/mensajesLog");

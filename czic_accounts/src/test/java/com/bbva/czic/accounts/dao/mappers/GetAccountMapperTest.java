@@ -51,11 +51,11 @@ public class GetAccountMapperTest {
 
         FormatoOZNCSNA0 outFormat = new FormatoOZNCSNA0();
         outFormat.setTipprod("Tipo producto");
-        outFormat.setSddispo(new BigDecimal("1000"));
-        outFormat.setSdcanje(new BigDecimal("500"));
+        outFormat.setSddispo("1000");
+        outFormat.setSdcanje("500");
         outFormat.setNumprod("12345");
         outFormat.setNomprod("Mi producto");
-        outFormat.setSaltota(new BigDecimal("1500"));
+        outFormat.setSaltota("1500");
         outFormat.setIdcheq0("10001");
         outFormat.setIdcheq1("10002");
 

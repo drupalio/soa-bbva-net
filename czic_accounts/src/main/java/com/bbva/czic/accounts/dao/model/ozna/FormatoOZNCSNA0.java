@@ -1,7 +1,5 @@
 package com.bbva.czic.accounts.dao.model.ozna;
 
-import java.math.BigDecimal;
-
 import com.bbva.jee.arq.spring.core.host.Campo;
 import com.bbva.jee.arq.spring.core.host.TipoCampo;
 import com.bbva.jee.arq.spring.core.host.Formato;
@@ -41,22 +39,22 @@ public class FormatoOZNCSNA0 {
 	private String nomprod;
 	
 	/**
-	 * <p>Campo <code>SALTOTA</code>, &iacute;ndice: <code>4</code>, tipo: <code>DECIMAL</code>
+	 * <p>Campo <code>SALTOTA</code>, &iacute;ndice: <code>4</code>, tipo: <code>ALFANUMERICO</code>
 	 */
-	@Campo(indice = 4, nombre = "SALTOTA", tipo = TipoCampo.DECIMAL, longitudMinima = 17, longitudMaxima = 17, signo = true, decimales = 2)
-	private BigDecimal saltota;
+	@Campo(indice = 4, nombre = "SALTOTA", tipo = TipoCampo.ALFANUMERICO, longitudMinima = 18, longitudMaxima = 18)
+	private String saltota;
 	
 	/**
-	 * <p>Campo <code>SDDISPO</code>, &iacute;ndice: <code>5</code>, tipo: <code>DECIMAL</code>
+	 * <p>Campo <code>SDDISPO</code>, &iacute;ndice: <code>5</code>, tipo: <code>ALFANUMERICO</code>
 	 */
-	@Campo(indice = 5, nombre = "SDDISPO", tipo = TipoCampo.DECIMAL, longitudMinima = 17, longitudMaxima = 17, signo = true, decimales = 2)
-	private BigDecimal sddispo;
+	@Campo(indice = 5, nombre = "SDDISPO", tipo = TipoCampo.ALFANUMERICO, longitudMinima = 18, longitudMaxima = 18)
+	private String sddispo;
 	
 	/**
-	 * <p>Campo <code>SDCANJE</code>, &iacute;ndice: <code>6</code>, tipo: <code>DECIMAL</code>
+	 * <p>Campo <code>SDCANJE</code>, &iacute;ndice: <code>6</code>, tipo: <code>ALFANUMERICO</code>
 	 */
-	@Campo(indice = 6, nombre = "SDCANJE", tipo = TipoCampo.DECIMAL, longitudMinima = 17, longitudMaxima = 17, signo = true, decimales = 2)
-	private BigDecimal sdcanje;
+	@Campo(indice = 6, nombre = "SDCANJE", tipo = TipoCampo.ALFANUMERICO, longitudMinima = 18, longitudMaxima = 18)
+	private String sdcanje;
 	
 	/**
 	 * <p>Campo <code>IDCHEQ0</code>, &iacute;ndice: <code>7</code>, tipo: <code>ALFANUMERICO</code>

@@ -7,17 +7,25 @@ import com.bbva.czic.accounts.dao.model.ozna.FormatoOZNCENA0;
 import com.bbva.czic.accounts.dao.model.ozna.FormatoOZNCSNA0;
 import com.bbva.czic.dto.net.Checkbook;
 import com.bbva.czic.routine.commons.rm.utils.tx.ISimpleTransactionMapper;
+import com.bbva.jee.arq.spring.core.log.I18nLog;
+import com.bbva.jee.arq.spring.core.log.I18nLogFactory;
 import com.bbva.jee.arq.spring.core.servicing.utils.Money;
 import org.springframework.stereotype.Component;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
 @Component("tx-get-account-mapper")
 public class GetAccountMapper implements ISimpleTransactionMapper<DTOIntAccount,FormatoOZNCENA0,DTOIntAccount,FormatoOZNCSNA0>{
 
+
+    private static I18nLog log = I18nLogFactory
+            .getLogI18n(GetAccountMapper.class, "META-INF/spring/i18n/log/mensajesLog");
+
     @Override
     public FormatoOZNCENA0 mapToInner(DTOIntAccount dtoIn) {
+log.info("mapToInner-return:FormatoOZNCENA0-parameter:DTOIntAccount");
         FormatoOZNCENA0 formatoEntrada = new FormatoOZNCENA0();
         formatoEntrada.setNumprod(dtoIn.getIdAccount());
         return formatoEntrada;
@@ -25,6 +33,7 @@ public class GetAccountMapper implements ISimpleTransactionMapper<DTOIntAccount,
 
     @Override
     public DTOIntAccount mapToOuter(FormatoOZNCSNA0 outFormat,DTOIntAccount dtoIn) {
+        log.info("mapToOuter-return:DTOIntAccount-parameter:FormatoOZNCSNA0");
         List<DTOIntCheckbook> listaCheckBooks = new ArrayList<DTOIntCheckbook>();
         DTOIntAccount dtoIntAccount = new DTOIntAccount();
 
@@ -38,9 +47,9 @@ public class GetAccountMapper implements ISimpleTransactionMapper<DTOIntAccount,
         Money disponible = new Money();
         Money canje = new Money();
 
-        total.setAmount(outFormat.getSaltota());
-        disponible.setAmount(outFormat.getSddispo());
-        canje.setAmount(outFormat.getSdcanje());
+        total.setAmount(new BigDecimal(outFormat.getSaltota()));
+        disponible.setAmount(new BigDecimal(outFormat.getSddispo()));
+        canje.setAmount(new BigDecimal(outFormat.getSdcanje()));
 
         dtoIntBalance.setAvailableBalance(disponible);
         dtoIntBalance.setTotal(total);

@@ -11,6 +11,8 @@ import com.bbva.czic.dto.net.EnumMonth;
 import com.bbva.czic.dto.net.EnumProductType;
 import com.bbva.czic.routine.commons.rm.utils.tx.IFormatNotApply;
 import com.bbva.czic.routine.commons.rm.utils.tx.IPaginatedTransactionMapper;
+import com.bbva.jee.arq.spring.core.log.I18nLog;
+import com.bbva.jee.arq.spring.core.log.I18nLogFactory;
 import com.bbva.jee.arq.spring.core.servicing.utils.Money;
 import org.springframework.stereotype.Component;
 
@@ -22,8 +24,14 @@ import java.util.ArrayList;
 @Component("tx-get-account-monthly-balance-mapper")
 public class GetAccountMonthlyBalanceMapper    implements IPaginatedTransactionMapper <DTOIntFilterAccount, FormatoOZECNVE0, DTOIntResponseMonthlyBalances, IFormatNotApply, DTOIntMonthlyBalances, FormatoOZECNVS0, IFormatNotApply>{
 
+
+    private static I18nLog log = I18nLogFactory
+            .getLogI18n(GetAccountMonthlyBalanceMapper.class, "META-INF/spring/i18n/log/mensajesLog");
+
     @Override
     public DTOIntMonthlyBalances mapToInnerEntity(FormatoOZECNVS0 outFormat, DTOIntFilterAccount dtoIn) {
+        log.info("mapToInnerEntity-return:DTOIntMonthlyBalances-parameter:FormatoOZECNVS0");
+
         final DTOIntMonthlyBalances dtoIntMonthlyBalances = new DTOIntMonthlyBalances();
 
         Money money = new Money();
@@ -48,6 +56,7 @@ public class GetAccountMonthlyBalanceMapper    implements IPaginatedTransactionM
 
     @Override
     public FormatoOZECNVE0 mapToInner(DTOIntFilterAccount dtoIn) {
+        log.info("mapToInner-return:FormatoOZECNVE0-parameter:DTOIntFilterAccount");
         FormatoOZECNVE0 formatoEntrada = new FormatoOZECNVE0();
         formatoEntrada.setMesini(dtoIn.getStartMonth().toString());
         formatoEntrada.setMesfin(dtoIn.getEndMonth().toString());

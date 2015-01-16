@@ -16,7 +16,7 @@ import javax.annotation.Resource;
 import java.util.List;
 
 @Service
-public abstract class SrvIntAccounts implements ISrvIntAccounts {
+public class SrvIntAccounts implements ISrvIntAccounts {
 
 	private static I18nLog log = I18nLogFactory
 			.getLogI18n(SrvIntAccounts.class, "META-INF/spring/i18n/log/mensajesLog");
@@ -40,11 +40,13 @@ public abstract class SrvIntAccounts implements ISrvIntAccounts {
 
 	@Override
 	public List<DTOIntAccMovementsResume> getAccMovementResume(DTOIntFilterAccount dtoIntFilterAccount) {
+		log.info(" getAccMovementResume ");
 		return accountsDAO.getAccountMovementResume(dtoIntFilterAccount).getListDTOIntAccMovementsResume();
 	}
 
 	@Override
 	public DTOIntAccount getAccount(DTOIntFilterAccount dtoIntFilterAccount) {
+		log.info(" getAccount ");
 		return accountsDAO.getAccount(dtoIntFilterAccount);
 	}
 

@@ -5,6 +5,8 @@ import com.bbva.czic.accounts.dao.model.oznv.FormatoOZECNVE0;
 import com.bbva.czic.accounts.facade.v01.mappers.IAccountsMapper;
 import com.bbva.czic.dto.net.*;
 import com.bbva.czic.routine.commons.rm.utils.mappers.Mapper;
+import com.bbva.jee.arq.spring.core.log.I18nLog;
+import com.bbva.jee.arq.spring.core.log.I18nLogFactory;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -14,6 +16,8 @@ import java.util.List;
 @Component(value = "accounts-mapper")
 public class AccountsMapper implements IAccountsMapper {
 
+	private static I18nLog log = I18nLogFactory
+			.getLogI18n(AccountsMapper.class, "META-INF/spring/i18n/log/mensajesLog");
 	/**
 	 * Metodo encargado de mapear un DTO interno de tipo DTOIntAccount a un DTO externo de tipo Account
 	 * @author David Tafur
@@ -22,6 +26,7 @@ public class AccountsMapper implements IAccountsMapper {
 	 */
 	@Override
 	public Account map(DTOIntAccount dtoIntAccount) {
+		log.info("map- return:Account-parameter:dtoIntAccount");
 		Account account = new Account();
 		account.setName(dtoIntAccount.getName());
 		account.setId(dtoIntAccount.getIdAccount());
@@ -38,6 +43,7 @@ public class AccountsMapper implements IAccountsMapper {
 	 */
 	@Override
 	public List<Checkbook> mapLCheckbook(List<DTOIntCheckbook> listaDTOIntCheckbook){
+		log.info("map- return:List<Checkbook>-parameter:listaDTOIntCheckbook");
 		List<Checkbook> listaCheckbook = new ArrayList<Checkbook>();
 
 		for(DTOIntCheckbook dtoIntCheckbook:listaDTOIntCheckbook){
@@ -67,6 +73,7 @@ public class AccountsMapper implements IAccountsMapper {
 	 */
 	@Override
 	public List<MonthlyBalances> mapL(List<DTOIntMonthlyBalances> listaDtoIntMonthlyBalances){
+		log.info("map- return: List<MonthlyBalances>-parameter:listaDtoIntMonthlyBalances");
 		List<MonthlyBalances> listaMonthlyBalance = new ArrayList<MonthlyBalances>();
 
 		for(DTOIntMonthlyBalances dtoIntMonthlyBalances:listaDtoIntMonthlyBalances){
@@ -87,6 +94,7 @@ public class AccountsMapper implements IAccountsMapper {
 	 */
 	@Override
 	public List<AccMovementsResume> map(List<DTOIntAccMovementsResume> listaDTOIntAccMovementsResume){
+		log.info("map- return:List<AccMovementsResume>-parameter:listaDTOIntAccMovementsResume");
 		List<AccMovementsResume> listaAccMovementResume = new ArrayList<AccMovementsResume>();
 
 		for(DTOIntAccMovementsResume dtoIntAccMovementsResume:listaDTOIntAccMovementsResume){
@@ -109,6 +117,7 @@ public class AccountsMapper implements IAccountsMapper {
 	 */
 	@Override
 	public Balance map(DTOIntBalance intBalance) {
+		log.info("map- return:Balance-parameter:intBalance");
 		final Balance balance = new Balance();
 
 		balance.setTotal(intBalance.getTotal());
