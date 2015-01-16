@@ -11,6 +11,6 @@ import javax.xml.bind.annotation.XmlType;
 @XmlType(name = "EnumFinancialStatusType", namespace = "urn:com:bbva:czic:dto:net")
 @XmlAccessorType(XmlAccessType.FIELD)
 public enum EnumSegmentType implements Serializable {
-	A, P
+	PERSONA, JURIDICA, CORPORATIVO, OTRO
 
 }
