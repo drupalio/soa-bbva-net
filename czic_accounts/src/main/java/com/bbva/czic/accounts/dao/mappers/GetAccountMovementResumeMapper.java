@@ -8,6 +8,8 @@ import com.bbva.czic.accounts.dao.model.oznu.FormatoOZECNUE0;
 import com.bbva.czic.accounts.dao.model.oznu.FormatoOZECNUS0;
 import com.bbva.czic.routine.commons.rm.utils.tx.IFormatNotApply;
 import com.bbva.czic.routine.commons.rm.utils.tx.IPaginatedTransactionMapper;
+import com.bbva.jee.arq.spring.core.log.I18nLog;
+import com.bbva.jee.arq.spring.core.log.I18nLogFactory;
 import com.bbva.jee.arq.spring.core.servicing.utils.Money;
 import org.springframework.stereotype.Component;
 
@@ -18,8 +20,14 @@ import java.util.ArrayList;
  */
 @Component("tx-get-account-movement-resume-mapper")
 public class GetAccountMovementResumeMapper    implements IPaginatedTransactionMapper<DTOIntFilterAccount, FormatoOZECNUE0, DTOIntResponseAccMovementsResumes, IFormatNotApply, DTOIntAccMovementsResume, FormatoOZECNUS0, IFormatNotApply> {
+
+
+    private static I18nLog log = I18nLogFactory
+            .getLogI18n(GetAccountMovementResumeMapper.class, "META-INF/spring/i18n/log/mensajesLog");
+
     @Override
     public DTOIntAccMovementsResume mapToInnerEntity(FormatoOZECNUS0 outFormat, DTOIntFilterAccount dtoIn) {
+        log.info("mapToInnerEntity-return:DTOIntAccMovementsResume-parameter:FormatoOZECNUS0");
         DTOIntAccMovementsResume dtoIntAccMovementsResume = new DTOIntAccMovementsResume();
         DTOIntEnumMonth dtoIntEnumMonth = new DTOIntEnumMonth();
         dtoIntEnumMonth.setMes(outFormat.getMes());
@@ -50,6 +58,7 @@ public class GetAccountMovementResumeMapper    implements IPaginatedTransactionM
 
     @Override
     public FormatoOZECNUE0 mapToInner(DTOIntFilterAccount dtoIn) {
+        log.info("mapToInnerEntity-return:FormatoOZECNUE0-parameter:DTOIntFilterAccount");
         FormatoOZECNUE0 formatoEntrada = new FormatoOZECNUE0();
         //Dado que se usa el mismo mapeador del smc de monthly balance, el valida cuando es month==ge lo setea en la variable starDate
         formatoEntrada.setIntervm(dtoIn.getStartMonth().toString());

@@ -52,6 +52,19 @@
             <artifactId>czic_loan</artifactId>
             <version>1.0.0</version>
         </dependency>
+		
+		
+		<dependency>
+            <groupId>com.bbva.czic.products</groupId>
+            <artifactId>czic_products</artifactId>
+            <version>1.0.0</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.bbva.czic.accounts</groupId>
+            <artifactId>czic_accounts</artifactId>
+            <version>1.0.0</version>
+        </dependency>
 
         <!-- INICIO Arquitectura Servicios -->
 

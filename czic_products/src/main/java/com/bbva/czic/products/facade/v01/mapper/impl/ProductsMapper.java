@@ -2,7 +2,7 @@ package com.bbva.czic.products.facade.v01.mapper.impl;
 
 import com.bbva.czic.dto.net.*;
 import com.bbva.czic.products.business.dto.DTOIntConditions;
-import com.bbva.czic.products.facade.v01.IProductsMapper;
+import com.bbva.czic.products.facade.v01.mapper.IProductsMapper;
 import com.bbva.jee.arq.spring.core.servicing.utils.Money;
 import org.springframework.stereotype.Component;
 
