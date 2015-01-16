@@ -25,8 +25,7 @@ import com.bbva.jee.arq.spring.core.log.I18nLogFactory;
 import java.util.ArrayList;
 import java.util.List;
 
-@Repository(value = "loanDao")
-@Profile(value = "prod")
+
 public class LoanDAOImpl implements LoanDAO {
 	
 	private static I18nLog log = I18nLogFactory.getLogI18n(SrvIntLoan.class,
