@@ -37,6 +37,10 @@ public class Balance implements Serializable {
 		// default constructor
 	}
 
+	public Balance(Money total) {
+		this.total = total;
+	}
+
 	public Money getTotal() {
 		return total;
 	}
