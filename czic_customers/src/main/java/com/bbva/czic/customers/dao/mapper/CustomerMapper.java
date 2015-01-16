@@ -1,27 +1,34 @@
 package com.bbva.czic.customers.dao.mapper;
 
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.List;
+
+import org.springframework.stereotype.Component;
+
 import com.bbva.czic.customers.business.dto.DTOIntAccMovementsResume;
 import com.bbva.czic.customers.business.dto.DTOIntCardCharge;
 import com.bbva.czic.customers.business.dto.DTOIntCustomer;
-import com.bbva.czic.customers.business.dto.DTOIntEnumCardChargeCategory;
 import com.bbva.czic.customers.business.dto.DTOIntEnumMonth;
-
 import com.bbva.czic.customers.dao.model.oznb.FormatoOZNCSNB0;
-import com.bbva.czic.customers.dao.model.ozno.FormatoOZECNOS0;
 import com.bbva.czic.customers.dao.model.oznp.FormatoOZECNPS0;
 import com.bbva.czic.customers.dao.model.oznq.FormatoOZECNQS0;
 import com.bbva.czic.dto.net.AccMovementsResume;
 import com.bbva.czic.dto.net.CardCharge;
+import com.bbva.czic.dto.net.City;
+import com.bbva.czic.dto.net.ContactInfo;
+import com.bbva.czic.dto.net.Country;
 import com.bbva.czic.dto.net.Customer;
 import com.bbva.czic.dto.net.Document;
-import com.bbva.czic.dto.net.EnumCardChargeCategory;
+import com.bbva.czic.dto.net.Email;
+import com.bbva.czic.dto.net.EnumContactSourceType;
 import com.bbva.czic.dto.net.EnumDocumentType;
+import com.bbva.czic.dto.net.EnumDwelingType;
 import com.bbva.czic.dto.net.EnumMonth;
+import com.bbva.czic.dto.net.Location;
+import com.bbva.czic.dto.net.PhoneNumber;
+import com.bbva.czic.dto.net.State;
 import com.bbva.czic.routine.commons.rm.utils.converter.UtilsConverter;
-
-import org.springframework.stereotype.Component;
-
-import java.util.Calendar;
 
 @Component("customerMapper")
 public class CustomerMapper implements ICustomerMapper{
@@ -88,9 +95,63 @@ public class CustomerMapper implements ICustomerMapper{
 	public static DTOIntCustomer mapToOuter(FormatoOZNCSNB0 formatoSalida) {
 		DTOIntCustomer customer = new DTOIntCustomer();
 		Document document = new Document();
+		ContactInfo contacto = new ContactInfo();
+		List<Email> emails = new ArrayList<Email>();
+		List<PhoneNumber> phones = new ArrayList<PhoneNumber>();
+		List<City> cities = new ArrayList<City>();
+		List<State> states = new ArrayList<State>();
+		Location home = new Location();
+		Location office = new Location();
+		Country country = new Country();
+		State state = new State();
+		City city = new City();
+		city.setName(formatoSalida.getCiudvia());
+		city.setId("1");
+		cities.add(city);
+		state.setName(formatoSalida.getDepavia());
+		state.setId("1");
+		state.setCities(cities);
+		country.setName(formatoSalida.getPaisvia());
+		country.setId("0013");
+		country.setStates(states);
+		home.setPostalAddress(formatoSalida.getDescvia());
+		
+		cities.clear();
+		states.clear();
+		
+		city.setName(formatoSalida.getCiudofi());
+		city.setId("1");
+		cities.add(city);
+		state.setName(formatoSalida.getDepaofi());
+		state.setId("1");
+		state.setCities(cities);
+		country.setName(formatoSalida.getPaisofi());
+		country.setId("0013");
+		country.setStates(states);
+		home.setPostalAddress(formatoSalida.getDescofi());
+		
+		Email email = new Email();
+		email.setActive(true);
+		email.setAddress("contractor@bbva.com");
+		email.setPrimary(true);
+		email.setSource(EnumContactSourceType.WEB);
+		emails.add(email);
+		contacto.setEmails(emails);
+		contacto.setPhoneNumbers(phones);
 		document.setNumber(formatoSalida.getNumclie());
 		document.setType(EnumDocumentType.CEDULACIUDADANIA);
 		customer.setDocument(document);
+		customer.setName("Nombre");
+		customer.setContactInfo(contacto);
+		customer.setHomeLocation(home);
+		customer.setStratum(Integer.parseInt(formatoSalida.getEstrato()));
+		customer.setResidenceYears(formatoSalida.getAnosvda().intValue());
+		customer.setHomeMembers(formatoSalida.getNropnas());
+		customer.setDwelingType(EnumDwelingType.valueOf(formatoSalida.getTpovvda()));
+		if(customer.getDwelingType()==null){
+			customer.setDwelingType(EnumDwelingType.VALIDAR);
+		}
+		customer.setOfficeLocation(office);
 		return customer;
 	}
 

@@ -3,8 +3,9 @@ package com.bbva.czic.products.facade.v01.impl;
 import com.bbva.czic.dto.net.Conditions;
 import com.bbva.czic.products.business.ISrvIntProducts;
 import com.bbva.czic.products.business.dto.DTOIntConditions;
-import com.bbva.czic.products.facade.v01.IProductsMapper;
+import com.bbva.czic.products.business.dto.DTOIntProduct;
 import com.bbva.czic.products.facade.v01.ISrvProductsV01;
+import com.bbva.czic.products.facade.v01.mapper.IProductsMapper;
 import com.bbva.jee.arq.spring.core.log.I18nLog;
 import com.bbva.jee.arq.spring.core.log.I18nLogFactory;
 import com.bbva.jee.arq.spring.core.servicing.annotations.SMC;
@@ -72,8 +73,9 @@ public class SrvProductsV01 implements ISrvProductsV01, com.bbva.jee.arq.spring.
 	@SMC(registryID="SMC201400022",logicalID="getConditions")
 	public Conditions getConditions(
 			@ApiParam(value="Product identifier") @PathParam("productId") String productId) {
-
-		final DTOIntConditions conditions = srvIntProducts.getConditions(productId);
+		DTOIntProduct dtoIntProduct = new DTOIntProduct();
+		dtoIntProduct.setId(productId);
+		final DTOIntConditions conditions = srvIntProducts.getConditions(dtoIntProduct);
 
 		return productsMapper.map(conditions);
 	}

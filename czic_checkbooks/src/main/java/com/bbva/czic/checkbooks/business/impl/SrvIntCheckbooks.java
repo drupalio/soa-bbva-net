@@ -10,27 +10,26 @@ import com.bbva.jee.arq.spring.core.servicing.utils.BusinessServicesToolKit;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.Resource;
+
 @Service
 public class SrvIntCheckbooks implements ISrvIntCheckbooks {
 
 	private static I18nLog log = I18nLogFactory.getLogI18n(
 			SrvIntCheckbooks.class, "META-INF/spring/i18n/log/mensajesLog");
 
-	@Autowired
-	BusinessServicesToolKit bussinesToolKit;
-
-
-	private ICheckbooksDAO checkbookDao;
+	@Resource(name = "checkbooks-dao")
+	private ICheckbooksDAO checkbooksDAO;
 
 	@Override
 	public DTOIntCheck getChecks(DTOIntCheck intCheck) {
 
-		return null;
+		return checkbooksDAO.getChecks(intCheck);
 	}
 
 	@Override
 	public DTOIntCheckbook getCheckbooks(DTOIntCheckbook intCheckbook) {
 
-		return null;
+		return checkbooksDAO.getCheckbooks(intCheckbook);
 	}
 }

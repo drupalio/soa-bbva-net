@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import com.bbva.czic.routine.commons.rm.utils.errors.EnumError;
 import org.apache.cxf.jaxrs.ext.search.ConditionType;
 import org.apache.cxf.jaxrs.ext.search.PrimitiveStatement;
 import org.apache.cxf.jaxrs.ext.search.SearchCondition;
@@ -89,8 +90,7 @@ public class SrvIntCards implements ISrvIntCards {
 				 */
 				if (startDate == null || endDate == null
 						|| startDate.equals("") || endDate.equals("")) {
-					throw new BusinessServiceException(
-							"getCreditCardCharges - Los parametros del filtro son obligatorios");
+					throw new BusinessServiceException(EnumError.WRONG_PARAMETERS.getAlias());
 				}
 
 				/*
@@ -103,8 +103,7 @@ public class SrvIntCards implements ISrvIntCards {
 					startDateFilter = formato.parse(startDate);
 					endDateFilter = formato.parse(endDate);
 				} catch (ParseException ex) {
-					throw new BusinessServiceException(
-							"getCreditCardCharges - ParseException - error conviertiendo las fechas a Date.");
+					throw new BusinessServiceException(EnumError.WRONG_PARAMETERS.getAlias(), ex);
 				}
 
 				log.info(" Filter starDateFilter: "+startDateFilter+" SMC : getCreditCardCharges SN Cards ");
@@ -118,13 +117,11 @@ public class SrvIntCards implements ISrvIntCards {
 			} catch (SearchParseException e) {
 				log.error("SearchParseException - The query string (filter) has failed: "
 						+ e);
-				throw new BusinessServiceException(FILTERERROR, filter,
-						e.getMessage());
+				throw new BusinessServiceException(EnumError.WRONG_PARAMETERS.getAlias(), e);
 			}
 
 		} else {
-			throw new BusinessServiceException(
-					"getCreditCardCharges - Los parametros Filter y Id son obligatorios.");
+			throw new BusinessServiceException(EnumError.WRONG_PARAMETERS.getAlias());
 		}
 
 		return initialResultList;

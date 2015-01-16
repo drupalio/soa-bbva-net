@@ -74,7 +74,7 @@ public class LoanMapper {//extends AbstractConfigurableMapper {
 		try {
 			log.info("inicio Mapper");
 			dTOIntLoan.setId(formatoSalida.getNumero());
-			dTOIntLoan.setType(EnumProductType.RQ);
+			dTOIntLoan.setType(EnumProductType.RQ.name());
 			dTOIntLoan.setName(formatoSalida.getNomprod());
 			dTOIntLoan.setBalance(setBalance(formatoSalida.getSaldoto(), formatoSalida.getSaldodi(), null));
 			dTOIntLoan.setDebt(setBalance(formatoSalida.getMontoso(), formatoSalida.getSaldope(), null));
@@ -85,11 +85,13 @@ public class LoanMapper {//extends AbstractConfigurableMapper {
 			Calendar fechaVe = Calendar.getInstance();
 			DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
 			fechaVe.setTime(formatter.parse(formatoSalida.getFechave()));
-			
+
+			Calendar shortDate = Calendar.getInstance();
+			fechaPa.setTime(formatoSalida.getFechaco());
 			
 			dTOIntLoan.setPayment(setPayment(
 					fechaPa, fechaVe, 
-					formatoSalida.getFechaco(), formatoSalida.getHonorar(), 
+					shortDate, formatoSalida.getHonorar(),
 					null, Integer.parseInt(formatoSalida.getNumcout())));
 			
 			dTOIntLoan.setStatus(EnumLoanStatus.valueOf(formatoSalida.getEstado()));
@@ -150,7 +152,7 @@ public class LoanMapper {//extends AbstractConfigurableMapper {
 	 * @return
 	 */
 	private static Payment setPayment(Calendar dueDate, Calendar paymentDate, 
-			Date shortDate, BigDecimal fees, BigDecimal minimumPayment, Integer numbersOfQuota){
+			Calendar shortDate, BigDecimal fees, BigDecimal minimumPayment, Integer numbersOfQuota){
 		Payment payment = new Payment();
 		
 		payment.setDueDate(dueDate);

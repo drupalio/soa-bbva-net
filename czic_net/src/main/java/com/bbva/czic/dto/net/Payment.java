@@ -38,7 +38,7 @@ public class Payment
     @XmlSchemaType(name = "dateTime")
     @ApiModelProperty("Fecha de corte del producto")
     @NotNull
-    private Date shortDate;
+    private Calendar shortDate;
     @XmlJavaTypeAdapter(MoneyAdapter.class)
     @XmlElement(type = Money.class)
     @ApiModelProperty("Honorarios del pago")
@@ -73,11 +73,11 @@ public class Payment
         this.paymentDate = paymentDate;
     }
 
-    public Date getShortDate() {
+    public Calendar getShortDate() {
         return shortDate;
     }
 
-    public void setShortDate(Date shortDate) {
+    public void setShortDate(Calendar shortDate) {
         this.shortDate = shortDate;
     }
 

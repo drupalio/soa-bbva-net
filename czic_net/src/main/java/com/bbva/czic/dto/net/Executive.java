@@ -2,6 +2,7 @@
 package com.bbva.czic.dto.net;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.validation.constraints.NotNull;
@@ -49,6 +50,7 @@ public class Executive
 
     public Executive() {
         //default constructor
+        customer = new ArrayList<ThirdParty>();
     }
 
     public String getId() {
