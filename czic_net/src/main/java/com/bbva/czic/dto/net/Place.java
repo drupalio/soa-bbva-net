@@ -24,9 +24,9 @@ public class Place
     @ApiModelProperty("Ciudad d\u00f3nde se origin\u00f3")
     private String cityName;
     @ApiModelProperty("Pais d\u00f3nde se origin\u00f3")
-    private Country countryName;
+    private String countryName;
     @ApiModelProperty("estado o departamento d\u00f3nde se origin\u00f3")
-    private State stateName;
+    private String stateName;
     @ApiModelProperty("direccion d\u00f3nde se origin\u00f3")
     private String postalAddress;
 
@@ -42,19 +42,19 @@ public class Place
 		this.cityName = cityName;
 	}
 
-	public Country getCountryName() {
+	public String getCountryName() {
 		return countryName;
 	}
 
-	public void setCountryName(Country countryName) {
+	public void setCountryName(String countryName) {
 		this.countryName = countryName;
 	}
 
-	public State getStateName() {
+	public String getStateName() {
 		return stateName;
 	}
 
-	public void setStateName(State stateName) {
+	public void setStateName(String stateName) {
 		this.stateName = stateName;
 	}
 
@@ -64,6 +64,5 @@ public class Place
 
 	public void setPostalAddress(String postalAddress) {
 		this.postalAddress = postalAddress;
-	}
-    
+	}  
 }

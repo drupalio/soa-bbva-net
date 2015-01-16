@@ -6,7 +6,8 @@ import java.util.Calendar;
 import com.bbva.czic.dto.net.ContactInfo;
 import com.bbva.czic.dto.net.Document;
 import com.bbva.czic.dto.net.EnumDwelingType;
-import com.bbva.czic.dto.net.Location;
+import com.bbva.czic.dto.net.EnumSegmentType;
+import com.bbva.czic.dto.net.Place;
 
 
 
@@ -15,20 +16,31 @@ public class DTOIntCustomer {
 
     public final static long serialVersionUID = 1L;
 
-    private Document document;
+	private String id;
+	private Document document;
+	private String username;
 	private String name;
-	private ContactInfo contactInfo;
-	private Location homeLocation;
+	private EnumSegmentType segment;
+	private ContactInfo emails= new ContactInfo();
+	private Place homeLocation;
 	private Integer stratum;
 	private Integer residenceYears;
 	private Integer homeMembers;
 	private EnumDwelingType dwelingType;
-	private Location officeLocation;
+	private Place officeLocation;
 	private Calendar lastConnectionTime;
 
     public DTOIntCustomer() {
         //default constructor
     }
+
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
 
 	public Document getDocument() {
 		return document;
@@ -36,6 +48,14 @@ public class DTOIntCustomer {
 
 	public void setDocument(Document document) {
 		this.document = document;
+	}
+
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
 	}
 
 	public String getName() {
@@ -46,19 +66,27 @@ public class DTOIntCustomer {
 		this.name = name;
 	}
 
-	public ContactInfo getContactInfo() {
-		return contactInfo;
+	public EnumSegmentType getSegment() {
+		return segment;
 	}
 
-	public void setContactInfo(ContactInfo contactInfo) {
-		this.contactInfo = contactInfo;
+	public void setSegment(EnumSegmentType segment) {
+		this.segment = segment;
 	}
 
-	public Location getHomeLocation() {
+	public ContactInfo getEmails() {
+		return emails;
+	}
+
+	public void setEmails(ContactInfo emails) {
+		this.emails = emails;
+	}
+
+	public Place getHomeLocation() {
 		return homeLocation;
 	}
 
-	public void setHomeLocation(Location homeLocation) {
+	public void setHomeLocation(Place homeLocation) {
 		this.homeLocation = homeLocation;
 	}
 
@@ -94,11 +122,11 @@ public class DTOIntCustomer {
 		this.dwelingType = dwelingType;
 	}
 
-	public Location getOfficeLocation() {
+	public Place getOfficeLocation() {
 		return officeLocation;
 	}
 
-	public void setOfficeLocation(Location officeLocation) {
+	public void setOfficeLocation(Place officeLocation) {
 		this.officeLocation = officeLocation;
 	}
 
@@ -110,5 +138,4 @@ public class DTOIntCustomer {
 		this.lastConnectionTime = lastConnectionTime;
 	}
 
-    
 }
