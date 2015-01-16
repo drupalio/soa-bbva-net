@@ -10,10 +10,8 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
-import org.hibernate.validator.constraints.NotBlank;
-
-import com.bbva.jee.arq.spring.core.servicing.utils.MoneyAdapter;
 import com.bbva.jee.arq.spring.core.servicing.utils.Money;
+import com.bbva.jee.arq.spring.core.servicing.utils.MoneyAdapter;
 import com.wordnik.swagger.annotations.ApiModelProperty;
 
 @XmlRootElement(name = "Balance", namespace = "urn:com:bbva:czic:dto:net")
@@ -22,11 +20,13 @@ import com.wordnik.swagger.annotations.ApiModelProperty;
 public class Balance implements Serializable {
 
 	public final static long serialVersionUID = 1L;
+
 	@XmlJavaTypeAdapter(MoneyAdapter.class)
 	@XmlElement(type = Money.class)
 	@ApiModelProperty("Saldo total del producto")
 	@NotNull
 	private Money total;
+
 	@XmlJavaTypeAdapter(MoneyAdapter.class)
 	@XmlElement(type = Money.class)
 	@ApiModelProperty("Saldo disponible del producto")

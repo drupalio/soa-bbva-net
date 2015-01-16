@@ -338,11 +338,6 @@
             <version>${cxf.version}</version>
         </dependency>
 
-    <dependency>
-            <groupId>com.bbva.czic.cards</groupId>
-            <artifactId>czic_cards</artifactId>
-            <version>1.0.0</version>
-        </dependency>
     </dependencies>
     <build>
         <plugins>

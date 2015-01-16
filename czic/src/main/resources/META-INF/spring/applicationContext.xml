@@ -21,7 +21,7 @@
 		api-license="license"
 		api-license-url="http://bbva.com/license"
 		configuration-source="PROPERTIES"
-		local-configuration-filesystem-root="S:/lc"
+		local-configuration-filesystem-root="C:/lc"
 	/>
   		   
 </beans>

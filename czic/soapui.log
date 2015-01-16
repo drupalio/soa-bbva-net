@@ -1,0 +1,8 @@
+2015-01-14 23:55:20,569 WARN  [SoapUI] Missing folder [C:\Users\Entelgy\ext] for external libraries
+2015-01-14 23:55:20,793 INFO  [DefaultSoapUICore] initialized soapui-settings from [C:\Users\Entelgy\soapui-settings.xml]
+2015-01-14 23:55:23,064 INFO  [AbstractAddProjectNatureAction] Adding nature to project: czic_GlobalPosition
+2015-01-14 23:55:23,328 INFO  [WsdlProject] Saved project [czic_GlobalPosition] to [C:\Users\Entelgy\Desarrollo\soa-bbva-net\czic_GlobalPosition\soapui-project.xml - 229 bytes
+2015-01-14 23:55:23,328 INFO  [AbstractAddProjectNatureAction] Create a SoapUI project 'czic_GlobalPosition' in C:\Users\Entelgy\Desarrollo\soa-bbva-net\czic_GlobalPosition\soapui-project.xml
+2015-01-14 23:55:23,333 INFO  [WsdlProject] Saved project [czic_GlobalPosition] to [C:\Users\Entelgy\Desarrollo\soa-bbva-net\czic_GlobalPosition\soapui-project.xml - 229 bytes
+2015-01-15 00:07:08,801 INFO  [WsdlProject] Saved project [czic_GlobalPosition] to [C:\Users\Entelgy\Desarrollo\soa-bbva-net\czic_GlobalPosition\soapui-project.xml - 336 bytes
+2015-01-15 00:07:08,853 INFO  [WorkspaceImpl] Saved workspace to [C:\Users\Entelgy\Documents\workspace-sts-3.6.1.RELEASE\default-soapui-workspace.xml]
