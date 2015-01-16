@@ -1,16 +1,15 @@
 package com.bbva.czic.dto.net;
 
-import static org.junit.Assert.*;
-
-import java.util.Set;
+import org.junit.BeforeClass;
+import org.junit.Test;
 
 import javax.validation.ConstraintViolation;
 import javax.validation.Validation;
 import javax.validation.Validator;
 import javax.validation.ValidatorFactory;
+import java.util.Set;
 
-import org.junit.BeforeClass;
-import org.junit.Test;
+import static org.junit.Assert.assertEquals;
 
 public class CardTest {
 
@@ -26,7 +25,7 @@ public class CardTest {
 	public void cardFieldsAreNotNull() {
 		Card card = new Card();
 		Set<ConstraintViolation<Card>> constraintViolations = validator.validate(card);
-		assertEquals(10, constraintViolations.size());
+		assertEquals(9, constraintViolations.size());
 	}
 	
 	@Test
@@ -34,7 +33,7 @@ public class CardTest {
 		Card card = new Card();
 		card.setCardNumber("");
 		Set<ConstraintViolation<Card>> constraintViolations = validator.validate(card);
-		assertEquals(10, constraintViolations.size());
+		assertEquals(9, constraintViolations.size());
 	}
 
 }
