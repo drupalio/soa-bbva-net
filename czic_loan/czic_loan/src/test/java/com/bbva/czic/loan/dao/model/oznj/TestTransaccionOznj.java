@@ -1,4 +1,4 @@
-package com.bbva.czic.cards.dao.model.ozno;
+package com.bbva.czic.loan.dao.model.oznj;
 
 import org.apache.commons.logging.Log;
 import org.junit.Test;
@@ -17,43 +17,40 @@ import com.bbva.jee.arq.spring.core.servicing.test.BusinessServiceTestContextLoa
 import com.bbva.jee.arq.spring.core.servicing.test.MockInvocationContextTestExecutionListener;
 
 /**
- * Test de la transacci&oacute;n <code>OZNO</code>
+ * Test de la transacci&oacute;n <code>OZNJ</code>
  * 
  * @author Arquitectura Spring BBVA
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(
-	loader = BusinessServiceTestContextLoader.class, 
-	locations = {
-        "classpath*:/META-INF/spring/applicationContext-*.xml", 
-        "classpath:/META-INF/spring/business-service.xml",
-        "classpath:/META-INF/spring/business-service-test.xml"
-    }
-)
-@TestExecutionListeners(listeners = { MockInvocationContextTestExecutionListener.class, DependencyInjectionTestExecutionListener.class })
-public class TestTransaccionOzno {
-	
-	private static final Log LOG = I18nLogFactory.getLog(TestTransaccionOzno.class);
-		
+@ContextConfiguration(loader = BusinessServiceTestContextLoader.class, locations = {
+		"classpath*:/META-INF/spring/applicationContext-*.xml", "classpath:/META-INF/spring/business-service.xml",
+		"classpath:/META-INF/spring/business-service-test.xml" })
+@TestExecutionListeners(listeners = { MockInvocationContextTestExecutionListener.class,
+		DependencyInjectionTestExecutionListener.class })
+public class TestTransaccionOznj {
+
+	private static final Log LOG = I18nLogFactory.getLog(TestTransaccionOznj.class);
+
 	@Autowired
-	private TransaccionOzno transaccion;
-	
+	private TransaccionOznj transaccion;
+
 	@Test
 	public void test() throws ExcepcionTransaccion {
-		
-		PeticionTransaccionOzno peticion = new PeticionTransaccionOzno();		
-		
+
+		PeticionTransaccionOznj peticion = new PeticionTransaccionOznj();
+
 		/*
 		 * TODO: poblar la peticion con valores adecuados
 		 */
-		
+
 		try {
 			LOG.info("Invocando transaccion, peticion: " + peticion);
-			RespuestaTransaccionOzno respuesta = transaccion.invocar(peticion);
+			RespuestaTransaccionOznj respuesta = transaccion.invocar(peticion);
 			LOG.info("Recibida respuesta: " + respuesta);
-		} catch ( ExcepcionRespuestaHost e ) {
-			LOG.error("Error recibido desde host, codigoError: " + e.getCodigoError() + ", descripcion: " + e.getMessage());
-		} catch ( ExcepcionTransporte e ) {
+		} catch (ExcepcionRespuestaHost e) {
+			LOG.error("Error recibido desde host, codigoError: " + e.getCodigoError() + ", descripcion: "
+					+ e.getMessage());
+		} catch (ExcepcionTransporte e) {
 			LOG.error("Error de transporte", e);
 		}
 	}

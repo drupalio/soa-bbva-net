@@ -49,6 +49,11 @@
 		<message lang="en">Card Charges not found.</message>
 		<message lang="es">Parámetros inválidos</message>
 	</error-definition>
+    <error-definition severity="ERROR" alias="parametersMissing" code="1" servicing:http-status="400">
+		<message>Card Charges not found.</message>
+		<message lang="en">Card Charges not found.</message>
+		<message lang="es">Parámetros inválidos</message>
+	</error-definition>
 	<error-definition severity="ERROR" alias="noData" code="2" servicing:http-status="409">
 		<message>Card Charges not found.</message>
 		<message lang="en">Card Charges not found.</message>
