@@ -22,18 +22,25 @@ import com.wordnik.swagger.annotations.ApiModelProperty;
 public class Customer implements Serializable {
 
 	public final static long serialVersionUID = 1L;
-	@ApiModelProperty(value = "docmento del cliente", required = true)
+	@ApiModelProperty(value = "documento del cliente", required = true)
+	@NotNull
+	private String id;
+	@ApiModelProperty(value = "documento del cliente", required = true)
 	@NotNull
 	private Document document;
+	@ApiModelProperty("Nombre de usuario del cliente")
+	private String username;
 	@ApiModelProperty("Nombre del cliente")
 	@NotBlank
 	private String name;
-	@ApiModelProperty("Identificador de la informacion del contacto")
+	@ApiModelProperty("Segmento del cliente")
+	private EnumSegmentType segment;
+	@ApiModelProperty("Información de contacto que contiene los emails del cliente")
 	@NotNull
 	private ContactInfo contactInfo;
 	@ApiModelProperty("Ubicacion de la casa")
 	@NotNull
-	private Location homeLocation;
+	private Place homeLocation;
 	@ApiModelProperty("Estrato del cliente")
 	@NotNull
 	@Min(0)
@@ -48,7 +55,7 @@ public class Customer implements Serializable {
 	@NotNull
 	private EnumDwelingType dwelingType;
 	@ApiModelProperty("Ubicacion de la oficina")
-	private Location officeLocation;
+	private Place officeLocation;
 	@XmlSchemaType(name = "dateTime")
 	@ApiModelProperty("Fecha de última conexión del cliente")
 	@Past
@@ -56,6 +63,14 @@ public class Customer implements Serializable {
 
 	public Customer() {
 		// default constructor
+	}
+
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
 	}
 
 	public Document getDocument() {
@@ -66,12 +81,28 @@ public class Customer implements Serializable {
 		this.document = document;
 	}
 
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
 	public String getName() {
 		return name;
 	}
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public EnumSegmentType getSegment() {
+		return segment;
+	}
+
+	public void setSegment(EnumSegmentType segment) {
+		this.segment = segment;
 	}
 
 	public ContactInfo getContactInfo() {
@@ -82,11 +113,11 @@ public class Customer implements Serializable {
 		this.contactInfo = contactInfo;
 	}
 
-	public Location getHomeLocation() {
+	public Place getHomeLocation() {
 		return homeLocation;
 	}
 
-	public void setHomeLocation(Location homeLocation) {
+	public void setHomeLocation(Place homeLocation) {
 		this.homeLocation = homeLocation;
 	}
 
@@ -122,11 +153,11 @@ public class Customer implements Serializable {
 		this.dwelingType = dwelingType;
 	}
 
-	public Location getOfficeLocation() {
+	public Place getOfficeLocation() {
 		return officeLocation;
 	}
 
-	public void setOfficeLocation(Location officeLocation) {
+	public void setOfficeLocation(Place officeLocation) {
 		this.officeLocation = officeLocation;
 	}
 

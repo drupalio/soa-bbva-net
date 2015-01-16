@@ -4,7 +4,6 @@
 package com.bbva.czic.accounts.dao.model.ozna;
 
 import java.lang.String;
-import java.math.BigDecimal;
 
 privileged aspect FormatoOZNCSNA0_Roo_JavaBean {
     
@@ -32,27 +31,27 @@ privileged aspect FormatoOZNCSNA0_Roo_JavaBean {
         this.nomprod = nomprod;
     }
     
-    public BigDecimal FormatoOZNCSNA0.getSaltota() {
+    public String FormatoOZNCSNA0.getSaltota() {
         return this.saltota;
     }
     
-    public void FormatoOZNCSNA0.setSaltota(BigDecimal saltota) {
+    public void FormatoOZNCSNA0.setSaltota(String saltota) {
         this.saltota = saltota;
     }
     
-    public BigDecimal FormatoOZNCSNA0.getSddispo() {
+    public String FormatoOZNCSNA0.getSddispo() {
         return this.sddispo;
     }
     
-    public void FormatoOZNCSNA0.setSddispo(BigDecimal sddispo) {
+    public void FormatoOZNCSNA0.setSddispo(String sddispo) {
         this.sddispo = sddispo;
     }
     
-    public BigDecimal FormatoOZNCSNA0.getSdcanje() {
+    public String FormatoOZNCSNA0.getSdcanje() {
         return this.sdcanje;
     }
     
-    public void FormatoOZNCSNA0.setSdcanje(BigDecimal sdcanje) {
+    public void FormatoOZNCSNA0.setSdcanje(String sdcanje) {
         this.sdcanje = sdcanje;
     }
     

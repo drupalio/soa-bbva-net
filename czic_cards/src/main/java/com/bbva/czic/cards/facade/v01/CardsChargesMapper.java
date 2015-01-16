@@ -2,6 +2,7 @@ package com.bbva.czic.cards.facade.v01;
 
 import com.bbva.czic.cards.business.dto.DTOIntCardCharge;
 import com.bbva.czic.cards.dao.model.ozno.FormatoOZECNOS0;
+import com.bbva.czic.routine.commons.rm.utils.converter.UtilsConverter;
 import com.bbva.jee.arq.spring.core.log.I18nLog;
 import com.bbva.jee.arq.spring.core.log.I18nLogFactory;
 import com.bbva.jee.arq.spring.core.servicing.utils.Money;
@@ -22,10 +23,7 @@ public class CardsChargesMapper {
 	 */
 	public static DTOIntCardCharge mapToOuter(FormatoOZECNOS0 formato) {
 		DTOIntCardCharge dtoIntCardCharge = new DTOIntCardCharge();
-		// Money
-		Money money = new Money();
-		money.setAmount(formato.getValcate());
-		dtoIntCardCharge.setAmount(money);
+		dtoIntCardCharge.setAmount(UtilsConverter.getMoneyDTO(formato.getValcate()));
 		log.info("Informacion recibida de categorias: "+formato.getCategor());
 		dtoIntCardCharge.setCategory(formato
 				.getCategor());

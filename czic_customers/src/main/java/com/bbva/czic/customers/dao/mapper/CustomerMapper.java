@@ -1,27 +1,35 @@
 package com.bbva.czic.customers.dao.mapper;
 
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.List;
+
+import org.springframework.stereotype.Component;
+
 import com.bbva.czic.customers.business.dto.DTOIntAccMovementsResume;
 import com.bbva.czic.customers.business.dto.DTOIntCardCharge;
 import com.bbva.czic.customers.business.dto.DTOIntCustomer;
-import com.bbva.czic.customers.business.dto.DTOIntEnumCardChargeCategory;
 import com.bbva.czic.customers.business.dto.DTOIntEnumMonth;
-
 import com.bbva.czic.customers.dao.model.oznb.FormatoOZNCSNB0;
-import com.bbva.czic.customers.dao.model.ozno.FormatoOZECNOS0;
 import com.bbva.czic.customers.dao.model.oznp.FormatoOZECNPS0;
 import com.bbva.czic.customers.dao.model.oznq.FormatoOZECNQS0;
 import com.bbva.czic.dto.net.AccMovementsResume;
 import com.bbva.czic.dto.net.CardCharge;
+import com.bbva.czic.dto.net.City;
+import com.bbva.czic.dto.net.ContactInfo;
+import com.bbva.czic.dto.net.Country;
 import com.bbva.czic.dto.net.Customer;
 import com.bbva.czic.dto.net.Document;
-import com.bbva.czic.dto.net.EnumCardChargeCategory;
+import com.bbva.czic.dto.net.Email;
+import com.bbva.czic.dto.net.EnumContactSourceType;
 import com.bbva.czic.dto.net.EnumDocumentType;
+import com.bbva.czic.dto.net.EnumDwelingType;
 import com.bbva.czic.dto.net.EnumMonth;
+import com.bbva.czic.dto.net.EnumSegmentType;
+import com.bbva.czic.dto.net.PhoneNumber;
+import com.bbva.czic.dto.net.Place;
+import com.bbva.czic.dto.net.State;
 import com.bbva.czic.routine.commons.rm.utils.converter.UtilsConverter;
-
-import org.springframework.stereotype.Component;
-
-import java.util.Calendar;
 
 @Component("customerMapper")
 public class CustomerMapper implements ICustomerMapper{
@@ -72,7 +80,7 @@ public class CustomerMapper implements ICustomerMapper{
 	public Customer map(DTOIntCustomer item) {
 		Customer customer = new Customer();
 		customer.setDocument(item.getDocument());
-		customer.setContactInfo(item.getContactInfo());
+		customer.setContactInfo(item.getEmails());
 		customer.setDwelingType(item.getDwelingType());
 		customer.setHomeLocation(item.getHomeLocation());
 		customer.setHomeMembers(item.getHomeMembers());
@@ -87,10 +95,48 @@ public class CustomerMapper implements ICustomerMapper{
 
 	public static DTOIntCustomer mapToOuter(FormatoOZNCSNB0 formatoSalida) {
 		DTOIntCustomer customer = new DTOIntCustomer();
+		
 		Document document = new Document();
 		document.setNumber(formatoSalida.getNumclie());
 		document.setType(EnumDocumentType.CEDULACIUDADANIA);
+		
+		ContactInfo contacto = new ContactInfo();
+		List<Email> emails = new ArrayList<Email>();
+		List<PhoneNumber> phones = new ArrayList<PhoneNumber>();
+		Email email = new Email();
+		email.setActive(true);
+		email.setAddress("contractor@bbva.com");
+		email.setPrimary(true);
+		email.setSource(EnumContactSourceType.WEB);
+		emails.add(email);
+		contacto.setEmails(emails);
+		contacto.setPhoneNumbers(phones);
+		
+		Place home = new Place();
+		home.setCityName(formatoSalida.getCiudvia());
+		home.setStateName(formatoSalida.getDepavia());
+		home.setCountryName(formatoSalida.getPaisvia());
+		home.setPostalAddress(formatoSalida.getDescvia());
+		
+		Place office = new Place();
+		office.setCityName(formatoSalida.getCiudofi());
+		office.setStateName(formatoSalida.getDepaofi());
+		office.setCountryName(formatoSalida.getPaisofi());
+		office.setPostalAddress(formatoSalida.getDescofi());
+
 		customer.setDocument(document);
+		customer.setName("Nombre");
+		customer.setSegment(EnumSegmentType.OTRO);
+		customer.setEmails(contacto);
+		customer.setHomeLocation(home);
+		customer.setStratum(Integer.parseInt(formatoSalida.getEstrato()));
+		customer.setResidenceYears(formatoSalida.getAnosvda().intValue());
+		customer.setHomeMembers(formatoSalida.getNropnas());
+		customer.setDwelingType(EnumDwelingType.valueOf(formatoSalida.getTpovvda()));
+		if(customer.getDwelingType()==null){
+			customer.setDwelingType(EnumDwelingType.VALIDAR);
+		}
+		customer.setOfficeLocation(office);
 		return customer;
 	}
 

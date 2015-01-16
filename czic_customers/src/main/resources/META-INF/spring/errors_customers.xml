@@ -51,6 +51,11 @@
         <message lang="en">Wrong parameters.</message>
         <!--<message lang="es">Parametros inválidos.</message>-->
     </error-definition>
+    <error-definition severity="FATAL" alias="dateIntervalOutOfRange" code="1" servicing:http-status="400">
+        <message>Date interval out of range</message>
+        <message lang="en">Date interval out of range</message>
+        <!--<message lang="es">Parametros inválidos.</message>-->
+    </error-definition>
     <error-definition severity="FATAL" alias="noData" code="2" servicing:http-status="409">
         <message>Product not found.</message>
         <message lang="en">Product not found.</message>

@@ -1,15 +1,15 @@
 package com.bbva.czic.loan.dao.model.oznj;
 
-import java.math.BigDecimal;
 import java.util.Date;
+
+import com.bbva.jee.arq.spring.core.host.Campo;
+import com.bbva.jee.arq.spring.core.host.TipoCampo;
+import com.bbva.jee.arq.spring.core.host.Formato;
 
 import org.springframework.roo.addon.javabean.RooJavaBean;
 import org.springframework.roo.addon.serializable.RooSerializable;
 import org.springframework.roo.addon.tostring.RooToString;
 
-import com.bbva.jee.arq.spring.core.host.Campo;
-import com.bbva.jee.arq.spring.core.host.Formato;
-import com.bbva.jee.arq.spring.core.host.TipoCampo;
 
 /**
  * Formato de datos <code>OZNCSNJ0</code> de la transacci&oacute;n <code>OZNJ</code>
@@ -21,96 +21,83 @@ import com.bbva.jee.arq.spring.core.host.TipoCampo;
 @RooToString
 @RooSerializable
 public class FormatoOZNCSNJ0 {
-
+	
 	/**
-	 * <p>
-	 * Campo <code>TIPPROD</code>, &iacute;ndice: <code>1</code>, tipo: <code>ENTERO</code>
+	 * <p>Campo <code>NUMCONT</code>, &iacute;ndice: <code>1</code>, tipo: <code>ALFANUMERICO</code>
 	 */
-	@Campo(indice = 1, nombre = "TIPPROD", tipo = TipoCampo.ENTERO, longitudMinima = 2, longitudMaxima = 2)
+	@Campo(indice = 1, nombre = "NUMCONT", tipo = TipoCampo.ALFANUMERICO, longitudMinima = 20, longitudMaxima = 20)
+	private String numcont;
+	
+	/**
+	 * <p>Campo <code>TIPPROD</code>, &iacute;ndice: <code>2</code>, tipo: <code>ALFANUMERICO</code>
+	 */
+	@Campo(indice = 2, nombre = "TIPPROD", tipo = TipoCampo.ALFANUMERICO, longitudMinima = 2, longitudMaxima = 2)
 	private String tipprod;
-
+	
 	/**
-	 * <p>
-	 * Campo <code>NOMPROD</code>, &iacute;ndice: <code>2</code>, tipo: <code>ENTERO</code>
+	 * <p>Campo <code>DESCTAR</code>, &iacute;ndice: <code>3</code>, tipo: <code>ALFANUMERICO</code>
 	 */
-	@Campo(indice = 2, nombre = "NOMPROD", tipo = TipoCampo.ENTERO, longitudMinima = 10, longitudMaxima = 10)
-	private String nomprod;
-
+	@Campo(indice = 3, nombre = "DESCTAR", tipo = TipoCampo.ALFANUMERICO, longitudMinima = 20, longitudMaxima = 20)
+	private String desctar;
+	
 	/**
-	 * <p>
-	 * Campo <code>SALDOTO</code>, &iacute;ndice: <code>3</code>, tipo: <code>DECIMAL</code>
+	 * <p>Campo <code>SALDOTO</code>, &iacute;ndice: <code>4</code>, tipo: <code>ALFANUMERICO</code>
 	 */
-	@Campo(indice = 3, nombre = "SALDOTO", tipo = TipoCampo.DECIMAL, longitudMinima = 15, longitudMaxima = 15, signo = true, decimales = 2)
-	private BigDecimal saldoto;
-
+	@Campo(indice = 4, nombre = "SALDOTO", tipo = TipoCampo.ALFANUMERICO, longitudMinima = 12, longitudMaxima = 12)
+	private String saldoto;
+	
 	/**
-	 * <p>
-	 * Campo <code>SALDODI</code>, &iacute;ndice: <code>4</code>, tipo: <code>DECIMAL</code>
+	 * <p>Campo <code>PAGOMIN</code>, &iacute;ndice: <code>5</code>, tipo: <code>ALFANUMERICO</code>
 	 */
-	@Campo(indice = 4, nombre = "SALDODI", tipo = TipoCampo.DECIMAL, longitudMinima = 15, longitudMaxima = 15, signo = true, decimales = 2)
-	private BigDecimal saldodi;
-
+	@Campo(indice = 5, nombre = "PAGOMIN", tipo = TipoCampo.ALFANUMERICO, longitudMinima = 12, longitudMaxima = 12)
+	private String pagomin;
+	
 	/**
-	 * <p>
-	 * Campo <code>MONTOSO</code>, &iacute;ndice: <code>5</code>, tipo: <code>DECIMAL</code>
+	 * <p>Campo <code>MNTOSOL</code>, &iacute;ndice: <code>6</code>, tipo: <code>ALFANUMERICO</code>
 	 */
-	@Campo(indice = 5, nombre = "MONTOSO", tipo = TipoCampo.DECIMAL, longitudMinima = 15, longitudMaxima = 15, signo = true, decimales = 2)
-	private BigDecimal montoso;
-
+	@Campo(indice = 6, nombre = "MNTOSOL", tipo = TipoCampo.ALFANUMERICO, longitudMinima = 12, longitudMaxima = 12)
+	private String mntosol;
+	
 	/**
-	 * <p>
-	 * Campo <code>SALDOPE</code>, &iacute;ndice: <code>6</code>, tipo: <code>DECIMAL</code>
+	 * <p>Campo <code>SALDOPE</code>, &iacute;ndice: <code>7</code>, tipo: <code>ALFANUMERICO</code>
 	 */
-	@Campo(indice = 6, nombre = "SALDOPE", tipo = TipoCampo.DECIMAL, longitudMinima = 15, longitudMaxima = 15, signo = true, decimales = 2)
-	private BigDecimal saldope;
-
+	@Campo(indice = 7, nombre = "SALDOPE", tipo = TipoCampo.ALFANUMERICO, longitudMinima = 12, longitudMaxima = 12)
+	private String saldope;
+	
 	/**
-	 * <p>
-	 * Campo <code>FECHAVE</code>, &iacute;ndice: <code>7</code>, tipo: <code>FECHA</code>
+	 * <p>Campo <code>FECHACA</code>, &iacute;ndice: <code>8</code>, tipo: <code>FECHA</code>
 	 */
-	@Campo(indice = 7, nombre = "FECHAVE", tipo = TipoCampo.FECHA, longitudMinima = 10, longitudMaxima = 10, formato = "yyyy-MM-dd")
-	private String fechave;
-
+	@Campo(indice = 8, nombre = "FECHACA", tipo = TipoCampo.FECHA, longitudMinima = 10, longitudMaxima = 10, formato = "yyyy-MM-dd")
+	private Date fechaca;
+	
 	/**
-	 * <p>
-	 * Campo <code>FECHAPA</code>, &iacute;ndice: <code>8</code>, tipo: <code>FECHA</code>
+	 * <p>Campo <code>FECHALI</code>, &iacute;ndice: <code>9</code>, tipo: <code>FECHA</code>
 	 */
-	@Campo(indice = 8, nombre = "FECHAPA", tipo = TipoCampo.FECHA, longitudMinima = 10, longitudMaxima = 10, formato = "yyyy-MM-dd")
-	private Date fechapa;
-
+	@Campo(indice = 9, nombre = "FECHALI", tipo = TipoCampo.FECHA, longitudMinima = 10, longitudMaxima = 10, formato = "yyyy-MM-dd")
+	private Date fechali;
+	
 	/**
-	 * <p>
-	 * Campo <code>FECHACO</code>, &iacute;ndice: <code>9</code>, tipo: <code>FECHA</code>
+	 * <p>Campo <code>FECHACO</code>, &iacute;ndice: <code>10</code>, tipo: <code>FECHA</code>
 	 */
-	@Campo(indice = 9, nombre = "FECHACO", tipo = TipoCampo.FECHA, longitudMinima = 10, longitudMaxima = 10, formato = "yyyy-MM-dd")
+	@Campo(indice = 10, nombre = "FECHACO", tipo = TipoCampo.FECHA, longitudMinima = 10, longitudMaxima = 10, formato = "yyyy-MM-dd")
 	private Date fechaco;
-
+	
 	/**
-	 * <p>
-	 * Campo <code>HONORAR</code>, &iacute;ndice: <code>10</code>, tipo: <code>DECIMAL</code>
+	 * <p>Campo <code>HONORAR</code>, &iacute;ndice: <code>11</code>, tipo: <code>ALFANUMERICO</code>
 	 */
-	@Campo(indice = 10, nombre = "HONORAR", tipo = TipoCampo.DECIMAL, longitudMinima = 15, longitudMaxima = 15, signo = true, decimales = 2)
-	private BigDecimal honorar;
-
+	@Campo(indice = 11, nombre = "HONORAR", tipo = TipoCampo.ALFANUMERICO, longitudMinima = 12, longitudMaxima = 12)
+	private String honorar;
+	
 	/**
-	 * <p>
-	 * Campo <code>NUMCOUT</code>, &iacute;ndice: <code>11</code>, tipo: <code>ALFANUMERICO</code>
+	 * <p>Campo <code>CUOTATO</code>, &iacute;ndice: <code>12</code>, tipo: <code>ALFANUMERICO</code>
 	 */
-	@Campo(indice = 11, nombre = "NUMCOUT", tipo = TipoCampo.ALFANUMERICO, longitudMinima = 2, longitudMaxima = 2)
-	private String numcout;
-
+	@Campo(indice = 12, nombre = "CUOTATO", tipo = TipoCampo.ALFANUMERICO, longitudMinima = 3, longitudMaxima = 3)
+	private String cuotato;
+	
 	/**
-	 * <p>
-	 * Campo <code>ESTADO</code>, &iacute;ndice: <code>12</code>, tipo: <code>ALFANUMERICO</code>
+	 * <p>Campo <code>ESTADOT</code>, &iacute;ndice: <code>13</code>, tipo: <code>ALFANUMERICO</code>
 	 */
-	@Campo(indice = 12, nombre = "ESTADO", tipo = TipoCampo.ALFANUMERICO, longitudMinima = 2, longitudMaxima = 2)
-	private String estado;
-
-	/**
-	 * <p>
-	 * Campo <code>NUMERO</code>, &iacute;ndice: <code>13</code>, tipo: <code>ALFANUMERICO</code>
-	 */
-	@Campo(indice = 13, nombre = "NUMERO", tipo = TipoCampo.ALFANUMERICO, longitudMinima = 10, longitudMaxima = 10)
-	private String numero;
-
+	@Campo(indice = 13, nombre = "ESTADOT", tipo = TipoCampo.ALFANUMERICO, longitudMinima = 80, longitudMaxima = 80)
+	private String estadot;
+	
 }

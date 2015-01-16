@@ -34,7 +34,7 @@ public class CardTest {
 		Card card = new Card();
 		card.setCardNumber("");
 		Set<ConstraintViolation<Card>> constraintViolations = validator.validate(card);
-		assertEquals(2, constraintViolations.size());
+		assertEquals(10, constraintViolations.size());
 	}
 
 }

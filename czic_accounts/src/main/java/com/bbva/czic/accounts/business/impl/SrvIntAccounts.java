@@ -1,10 +1,7 @@
 package com.bbva.czic.accounts.business.impl;
 
 import com.bbva.czic.accounts.business.ISrvIntAccounts;
-import com.bbva.czic.accounts.business.dto.DTOIntAccMovementsResume;
-import com.bbva.czic.accounts.business.dto.DTOIntAccount;
-import com.bbva.czic.accounts.business.dto.DTOIntFilterAccount;
-import com.bbva.czic.accounts.business.dto.DTOIntMonthlyBalances;
+import com.bbva.czic.accounts.business.dto.*;
 import com.bbva.czic.accounts.dao.AccountsDAO;
 import com.bbva.jee.arq.spring.core.log.I18nLog;
 import com.bbva.jee.arq.spring.core.log.I18nLogFactory;
@@ -16,7 +13,7 @@ import javax.annotation.Resource;
 import java.util.List;
 
 @Service
-public abstract class SrvIntAccounts implements ISrvIntAccounts {
+public class SrvIntAccounts implements ISrvIntAccounts {
 
 	private static I18nLog log = I18nLogFactory
 			.getLogI18n(SrvIntAccounts.class, "META-INF/spring/i18n/log/mensajesLog");
@@ -40,13 +37,19 @@ public abstract class SrvIntAccounts implements ISrvIntAccounts {
 
 	@Override
 	public List<DTOIntAccMovementsResume> getAccMovementResume(DTOIntFilterAccount dtoIntFilterAccount) {
+		log.info(" getAccMovementResume ");
 		return accountsDAO.getAccountMovementResume(dtoIntFilterAccount).getListDTOIntAccMovementsResume();
 	}
 
 	@Override
 	public DTOIntAccount getAccount(DTOIntFilterAccount dtoIntFilterAccount) {
+		log.info(" getAccount ");
 		return accountsDAO.getAccount(dtoIntFilterAccount);
 	}
 
+	@Override
+	public DTOIntCheck listCheck(DTOIntCheck dtoIntCheck) {
+		return accountsDAO.getListCheck(dtoIntCheck);
+	}
 
 }

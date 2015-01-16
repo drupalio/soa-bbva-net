@@ -21,9 +21,9 @@ import com.bbva.jee.arq.spring.core.host.TipoCampo;
 public class FormatoOZNCENJ0 {
 
 	/**
-	 * <p>Campo <code>NUMPROD</code>, &iacute;ndice: <code>1</code>, tipo: <code>ALFANUMERICO</code>
+	 * <p>Campo <code>NOMTARJ</code>, &iacute;ndice: <code>1</code>, tipo: <code>ALFANUMERICO</code>
 	 */
-	@Campo(indice = 1, nombre = "NUMPROD", tipo = TipoCampo.ALFANUMERICO, longitudMinima = 20, longitudMaxima = 20)
-	private String numprod;
+	@Campo(indice = 1, nombre = "NOMTARJ", tipo = TipoCampo.ALFANUMERICO, longitudMinima = 20, longitudMaxima = 20)
+	private String nomtarj;
 	
 }

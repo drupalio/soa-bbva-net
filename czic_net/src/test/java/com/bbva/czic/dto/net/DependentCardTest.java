@@ -34,7 +34,7 @@ public class DependentCardTest {
 		DependentCard dependentCard = new DependentCard();
 		dependentCard.setAccountHolder("");
 		Set<ConstraintViolation<DependentCard>> constraintViolations = validator.validate(dependentCard);
-		assertEquals(3, constraintViolations.size());
+		assertEquals(11, constraintViolations.size());
 		
 	}
 

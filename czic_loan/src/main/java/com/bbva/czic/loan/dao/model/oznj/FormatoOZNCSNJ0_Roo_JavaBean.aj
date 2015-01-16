@@ -4,10 +4,17 @@
 package com.bbva.czic.loan.dao.model.oznj;
 
 import java.lang.String;
-import java.math.BigDecimal;
 import java.util.Date;
 
 privileged aspect FormatoOZNCSNJ0_Roo_JavaBean {
+    
+    public String FormatoOZNCSNJ0.getNumcont() {
+        return this.numcont;
+    }
+    
+    public void FormatoOZNCSNJ0.setNumcont(String numcont) {
+        this.numcont = numcont;
+    }
     
     public String FormatoOZNCSNJ0.getTipprod() {
         return this.tipprod;
@@ -17,60 +24,60 @@ privileged aspect FormatoOZNCSNJ0_Roo_JavaBean {
         this.tipprod = tipprod;
     }
     
-    public String FormatoOZNCSNJ0.getNomprod() {
-        return this.nomprod;
+    public String FormatoOZNCSNJ0.getDesctar() {
+        return this.desctar;
     }
     
-    public void FormatoOZNCSNJ0.setNomprod(String nomprod) {
-        this.nomprod = nomprod;
+    public void FormatoOZNCSNJ0.setDesctar(String desctar) {
+        this.desctar = desctar;
     }
     
-    public BigDecimal FormatoOZNCSNJ0.getSaldoto() {
+    public String FormatoOZNCSNJ0.getSaldoto() {
         return this.saldoto;
     }
     
-    public void FormatoOZNCSNJ0.setSaldoto(BigDecimal saldoto) {
+    public void FormatoOZNCSNJ0.setSaldoto(String saldoto) {
         this.saldoto = saldoto;
     }
     
-    public BigDecimal FormatoOZNCSNJ0.getSaldodi() {
-        return this.saldodi;
+    public String FormatoOZNCSNJ0.getPagomin() {
+        return this.pagomin;
     }
     
-    public void FormatoOZNCSNJ0.setSaldodi(BigDecimal saldodi) {
-        this.saldodi = saldodi;
+    public void FormatoOZNCSNJ0.setPagomin(String pagomin) {
+        this.pagomin = pagomin;
     }
     
-    public BigDecimal FormatoOZNCSNJ0.getMontoso() {
-        return this.montoso;
+    public String FormatoOZNCSNJ0.getMntosol() {
+        return this.mntosol;
     }
     
-    public void FormatoOZNCSNJ0.setMontoso(BigDecimal montoso) {
-        this.montoso = montoso;
+    public void FormatoOZNCSNJ0.setMntosol(String mntosol) {
+        this.mntosol = mntosol;
     }
     
-    public BigDecimal FormatoOZNCSNJ0.getSaldope() {
+    public String FormatoOZNCSNJ0.getSaldope() {
         return this.saldope;
     }
     
-    public void FormatoOZNCSNJ0.setSaldope(BigDecimal saldope) {
+    public void FormatoOZNCSNJ0.setSaldope(String saldope) {
         this.saldope = saldope;
     }
     
-    public String FormatoOZNCSNJ0.getFechave() {
-        return this.fechave;
+    public Date FormatoOZNCSNJ0.getFechaca() {
+        return this.fechaca;
     }
     
-    public void FormatoOZNCSNJ0.setFechave(String fechave) {
-        this.fechave = fechave;
+    public void FormatoOZNCSNJ0.setFechaca(Date fechaca) {
+        this.fechaca = fechaca;
     }
     
-    public Date FormatoOZNCSNJ0.getFechapa() {
-        return this.fechapa;
+    public Date FormatoOZNCSNJ0.getFechali() {
+        return this.fechali;
     }
     
-    public void FormatoOZNCSNJ0.setFechapa(Date fechapa) {
-        this.fechapa = fechapa;
+    public void FormatoOZNCSNJ0.setFechali(Date fechali) {
+        this.fechali = fechali;
     }
     
     public Date FormatoOZNCSNJ0.getFechaco() {
@@ -81,36 +88,28 @@ privileged aspect FormatoOZNCSNJ0_Roo_JavaBean {
         this.fechaco = fechaco;
     }
     
-    public BigDecimal FormatoOZNCSNJ0.getHonorar() {
+    public String FormatoOZNCSNJ0.getHonorar() {
         return this.honorar;
     }
     
-    public void FormatoOZNCSNJ0.setHonorar(BigDecimal honorar) {
+    public void FormatoOZNCSNJ0.setHonorar(String honorar) {
         this.honorar = honorar;
     }
     
-    public String FormatoOZNCSNJ0.getNumcout() {
-        return this.numcout;
+    public String FormatoOZNCSNJ0.getCuotato() {
+        return this.cuotato;
     }
     
-    public void FormatoOZNCSNJ0.setNumcout(String numcout) {
-        this.numcout = numcout;
+    public void FormatoOZNCSNJ0.setCuotato(String cuotato) {
+        this.cuotato = cuotato;
     }
     
-    public String FormatoOZNCSNJ0.getEstado() {
-        return this.estado;
+    public String FormatoOZNCSNJ0.getEstadot() {
+        return this.estadot;
     }
     
-    public void FormatoOZNCSNJ0.setEstado(String estado) {
-        this.estado = estado;
-    }
-    
-    public String FormatoOZNCSNJ0.getNumero() {
-        return this.numero;
-    }
-    
-    public void FormatoOZNCSNJ0.setNumero(String numero) {
-        this.numero = numero;
+    public void FormatoOZNCSNJ0.setEstadot(String estadot) {
+        this.estadot = estadot;
     }
     
 }

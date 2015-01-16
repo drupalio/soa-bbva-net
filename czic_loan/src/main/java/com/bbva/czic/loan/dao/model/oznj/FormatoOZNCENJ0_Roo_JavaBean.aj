@@ -7,12 +7,12 @@ import java.lang.String;
 
 privileged aspect FormatoOZNCENJ0_Roo_JavaBean {
     
-    public String FormatoOZNCENJ0.getNumprod() {
-        return this.numprod;
+    public String FormatoOZNCENJ0.getNomtarj() {
+        return this.nomtarj;
     }
     
-    public void FormatoOZNCENJ0.setNumprod(String numprod) {
-        this.numprod = numprod;
+    public void FormatoOZNCENJ0.setNomtarj(String nomtarj) {
+        this.nomtarj = nomtarj;
     }
     
 }
