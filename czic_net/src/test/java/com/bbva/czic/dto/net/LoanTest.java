@@ -25,7 +25,7 @@ public class LoanTest {
 	public void loanFieldsAreNotNull() {
 		Loan loan = new Loan();
 		Set<ConstraintViolation<Loan>> constraintViolations = validator.validate(loan);
-		assertEquals(12, constraintViolations.size());
+		assertEquals(4, constraintViolations.size());
 	}
 
 }

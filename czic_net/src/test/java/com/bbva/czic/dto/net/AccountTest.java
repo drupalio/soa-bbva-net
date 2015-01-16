@@ -26,7 +26,7 @@ public class AccountTest {
 	public void accountFieldsAreNotNull(){
 		Account account = new Account();
 		Set<ConstraintViolation<Account>> constraintViolations = validator.validate(account);
-		assertEquals(11, constraintViolations.size());
+		assertEquals(3, constraintViolations.size());
 	}
 
 }
