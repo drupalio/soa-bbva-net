@@ -1,22 +1,18 @@
 package com.bbva.czic.accounts.facade.v01.mapper.impl;
 
 import com.bbva.czic.accounts.business.dto.*;
-import com.bbva.czic.accounts.dao.mappers.GetAccountMapper;
 import com.bbva.czic.accounts.facade.v01.mappers.impl.AccountsMapper;
 import com.bbva.czic.dto.net.*;
 import com.bbva.jee.arq.spring.core.servicing.utils.Money;
 import org.junit.Before;
 import org.junit.Test;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
-
 import java.math.BigDecimal;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+
+import static org.junit.Assert.*;
 
 /**
  * Created by Entelgy on 13/01/2015.
@@ -164,5 +160,33 @@ public class AccountsMapperTest {
         assertEquals(listaDTOIntAccMovementsResume.get(0).getMonth().getMes(),dtoIntAccMovementsResume.getMonth().getMes());
     }
 
+    /**
+     * Metodo encargado de mapear una lista de DTO internos de tipo DTOIntCheck, a una lista de DTO de tipo ListCheck
+     *@author Cristian Rojas
+     * @return
+     */
+    @Test
+    public void testMapDtoIntCheckToCheck() {
+
+        final Check check;
+
+        final DTOIntCheck intCheck = new DTOIntCheck();
+
+        intCheck.setId("123");
+        intCheck.setIssueDate(new Date());
+        intCheck.setValue(new Money(java.util.Currency.getInstance("COP"), new BigDecimal(12341234)));
+        intCheck.setStatus(EnumCheckStatus.HABILITADO);
+        intCheck.setModifiedDate(new Date());
+
+
+        check = accountsMapper.mapChecks(intCheck);
+
+
+        assertEquals(intCheck.getId(),check.getId());
+        assertEquals(intCheck.getIssueDate(),check.getIssueDate().getTime());
+        assertEquals(intCheck.getValue(),check.getValue());
+        assertEquals(intCheck.getStatus(),check.getStatus());
+        assertEquals(intCheck.getModifiedDate(),check.getModifiedDate().getTime());
+    }
 
 }

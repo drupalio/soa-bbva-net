@@ -1,10 +1,8 @@
 package com.bbva.czic.accounts.business;
 
-import java.util.Date;
-import java.util.List;
-
 import com.bbva.czic.accounts.business.dto.*;
-import com.bbva.czic.accounts.dao.AccountsDAO;
+
+import java.util.List;
 
 public interface ISrvIntAccounts<Account> {
 
@@ -13,5 +11,12 @@ public interface ISrvIntAccounts<Account> {
 	public List<DTOIntAccMovementsResume> getAccMovementResume(DTOIntFilterAccount dtoIntFilterAccount);
 
 	public DTOIntAccount getAccount(DTOIntFilterAccount dtoIntFilterAccount) ;
+
+	/**
+	 * Created by Entelgy on 12/01/2015.
+	 * Metodo incluido manualmente para completar el total de los SMC - listCheck
+	 */
+
+	public DTOIntCheck listCheck(DTOIntCheck dtoIntCheck) ;
 
 }
