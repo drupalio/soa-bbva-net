@@ -25,12 +25,10 @@ public class Balance implements Serializable {
 	@XmlJavaTypeAdapter(MoneyAdapter.class)
 	@XmlElement(type = Money.class)
 	@ApiModelProperty("Saldo total del producto")
-	@NotNull
 	private Money total;
 	@XmlJavaTypeAdapter(MoneyAdapter.class)
 	@XmlElement(type = Money.class)
 	@ApiModelProperty("Saldo disponible del producto")
-	@NotNull
 	private Money availableBalance;
 
 	public Balance() {

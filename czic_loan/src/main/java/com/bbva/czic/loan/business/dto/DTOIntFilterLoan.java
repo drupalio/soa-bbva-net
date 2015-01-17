@@ -12,6 +12,7 @@ public class DTOIntFilterLoan {
     private Date fechaInicial;
     private Date fechaFianl;
     private String idLoan;
+	private String transactionDate;
 	/**
 	 * @return the fechaFianl
 	 */
@@ -50,4 +51,11 @@ public class DTOIntFilterLoan {
 	}
 
 
+	public String getTransactionDate() {
+		return transactionDate;
+	}
+
+	public void setTransactionDate(String transactionDate) {
+		this.transactionDate = transactionDate;
+	}
 }

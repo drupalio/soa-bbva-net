@@ -1,17 +1,17 @@
 package com.bbva.czic.dto.net;
 
-import static org.junit.Assert.*;
-
-import java.util.GregorianCalendar;
-import java.util.Set;
+import org.junit.BeforeClass;
+import org.junit.Test;
 
 import javax.validation.ConstraintViolation;
 import javax.validation.Validation;
 import javax.validation.Validator;
 import javax.validation.ValidatorFactory;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
+import java.util.Set;
 
-import org.junit.BeforeClass;
-import org.junit.Test;
+import static org.junit.Assert.assertEquals;
 
 public class CheckbookTest {
 
@@ -23,26 +23,50 @@ public class CheckbookTest {
 		validator = factory.getValidator();
 	}
 
+	// TODO realizar test de validación de campos. Los test deben ser funcionales. ej. Longitud del número de una tarjeta
+
 	@Test
-	public void checkBookFieldsAreNotNull() {
+	public void testValidationFailsIfDeliverDateIsInFuture() {
 		Checkbook checkbook = new Checkbook();
+		checkbook.setDeliveryDate(getFutureDate());
 		Set<ConstraintViolation<Checkbook>> constraintViolations = validator.validate(checkbook);
-		assertEquals(8, constraintViolations.size());
-	}
-	
-	@Test
-	public void deliverDateIsNotInFuture() {
-		Checkbook checkbook = new Checkbook();
-		checkbook.setDeliveryDate(new GregorianCalendar(2016,1,28,13,24,56));
-		Set<ConstraintViolation<Checkbook>> constraintViolations = validator.validate(checkbook);
-		assertEquals(8, constraintViolations.size());
+		assertEquals(1, constraintViolations.size());
 	}
 
 	@Test
-	public void requestDateIsNotInFuture() {
+	public void testValidationFailsIfRequestDateIsInFuture() {
 		Checkbook checkbook = new Checkbook();
-		checkbook.setRequestDate(new GregorianCalendar(2016,1,28,13,24,56));
+		checkbook.setRequestDate(getFutureDate());
 		Set<ConstraintViolation<Checkbook>> constraintViolations = validator.validate(checkbook);
-		assertEquals(8, constraintViolations.size());
+		assertEquals(1, constraintViolations.size());
+	}
+
+	@Test
+	public void testValidationPassIfDeliverDateIsInFuture() {
+		Checkbook checkbook = new Checkbook();
+		checkbook.setDeliveryDate(getPastDate());
+		Set<ConstraintViolation<Checkbook>> constraintViolations = validator.validate(checkbook);
+		assertEquals(0, constraintViolations.size());
+	}
+
+	@Test
+	public void testValidationPassIfRequestDateIsInFuture() {
+		Checkbook checkbook = new Checkbook();
+		checkbook.setRequestDate(getPastDate());
+		Set<ConstraintViolation<Checkbook>> constraintViolations = validator.validate(checkbook);
+		assertEquals(0, constraintViolations.size());
+	}
+
+
+	private Calendar getFutureDate() {
+		Calendar futureCalendar = GregorianCalendar.getInstance();
+		futureCalendar.add(Calendar.MONTH, 1);
+		return futureCalendar;
+	}
+
+	private Calendar getPastDate() {
+		Calendar futureCalendar = GregorianCalendar.getInstance();
+		futureCalendar.add(Calendar.MONTH, -1);
+		return futureCalendar;
 	}
 }

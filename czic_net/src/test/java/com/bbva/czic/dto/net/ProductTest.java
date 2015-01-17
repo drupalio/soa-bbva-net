@@ -1,16 +1,15 @@
 package com.bbva.czic.dto.net;
 
-import static org.junit.Assert.*;
-
-import java.util.Set;
+import org.junit.BeforeClass;
+import org.junit.Test;
 
 import javax.validation.ConstraintViolation;
 import javax.validation.Validation;
 import javax.validation.Validator;
 import javax.validation.ValidatorFactory;
+import java.util.Set;
 
-import org.junit.BeforeClass;
-import org.junit.Test;
+import static org.junit.Assert.assertEquals;
 
 public class ProductTest {
 
@@ -22,30 +21,6 @@ public class ProductTest {
 		validator = factory.getValidator();
 	}
 
-	@Test
-	public void productFieldsAreNotNull() {
-		Product product = new Product();
-		product.setMovement(null);
-		Set<ConstraintViolation<Product>> constraintViolations = validator.validate(product);
-		assertEquals(9, constraintViolations.size());
-	}
-	
-	@Test
-	public void productIdIsNotEmpty() {
-		Product product = new Product();
-		product.setId("");
-		Set<ConstraintViolation<Product>> constraintViolations = validator.validate(product);
-		assertEquals(7, constraintViolations.size());
-		
-	}
-	
-	@Test
-	public void productNameIsNotEmpty() {
-		Product product = new Product();
-		product.setName("");
-		Set<ConstraintViolation<Product>> constraintViolations = validator.validate(product);
-		assertEquals(7, constraintViolations.size());
-		
-	}
+	// TODO realizar test de validación de campos. Los test deben ser funcionales. ej. Longitud del número de una tarjeta
 
 }

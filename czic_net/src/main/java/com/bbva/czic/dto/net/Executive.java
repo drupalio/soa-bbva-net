@@ -1,24 +1,15 @@
 
 package com.bbva.czic.dto.net;
 
-import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
+import com.wordnik.swagger.annotations.ApiModelProperty;
+import org.hibernate.validator.constraints.Email;
 
-import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
-
-
-
-
-
-import org.hibernate.validator.constraints.Email;
-import org.hibernate.validator.constraints.NotBlank;
-
-import com.wordnik.swagger.annotations.ApiModelProperty;
+import java.io.Serializable;
+import java.util.List;
 
 @XmlRootElement(name = "Executive", namespace = "urn:com:bbva:czic:dto:net")
 @XmlType(name = "Executive", namespace = "urn:com:bbva:czic:dto:net")
@@ -29,28 +20,20 @@ public class Executive
 
     public final static long serialVersionUID = 1L;
     @ApiModelProperty(value = "  Identificador del ejecutivo de cuenta", required = true)
-    @NotBlank
     private String id;
     @ApiModelProperty("Nombre del ejecutivo de cuenta")
-    @NotBlank
     private String name;
     @ApiModelProperty("Telefono del ejecutivo de cuenta")
-    @NotBlank
     private String phone;
     @ApiModelProperty("Oficina a la cual esta asignado un ejecutivo de cuenta")
-    @NotNull
     private Office office;
     @ApiModelProperty("Correo electronico de un ejecutivo de cuenta")
-    @NotBlank
     @Email
     private String email;
     @ApiModelProperty("Clientes que tiene asignado un ejecutivo de cuenta")
-    @NotNull
     private List<ThirdParty> customer;
 
     public Executive() {
-        //default constructor
-        customer = new ArrayList<ThirdParty>();
     }
 
     public String getId() {
@@ -93,6 +76,14 @@ public class Executive
         this.email = email;
     }
 
+    /*public Email getEmail() {
+            return email;
+        }
+
+        public void setEmail(Email email) {
+            this.email = email;
+        }
+    */
     public List<ThirdParty> getCustomer() {
         return customer;
     }

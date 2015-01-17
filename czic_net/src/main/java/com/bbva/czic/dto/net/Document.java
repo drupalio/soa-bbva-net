@@ -22,10 +22,8 @@ public class Document
 
     public final static long serialVersionUID = 1L;
     @ApiModelProperty(value = "Numero de documento", required = true)
-    @NotBlank
     private String number;
     @ApiModelProperty(value = "Tipo de documento", required = true)
-    @NotNull
     private EnumDocumentType type;
 
     public Document() {

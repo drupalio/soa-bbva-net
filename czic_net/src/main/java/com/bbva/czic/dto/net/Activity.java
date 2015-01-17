@@ -23,22 +23,17 @@ public class Activity implements Serializable {
 	public final static long serialVersionUID = 1L;
 	@XmlSchemaType(name = "dateTime")
 	@ApiModelProperty(value = "Fecha en que la operación se ejecutó", required = true)
-	@NotNull
 	@Past
 	private Calendar operationDate;
 	@XmlSchemaType(name = "dateTime")
 	@ApiModelProperty("Fecha en que la operación se efectuó en el banco")
-	@NotNull
 	@Past
 	private Calendar executionDate;
 	@ApiModelProperty("Entidad que encapsula la función de la operación")
-	@NotNull
 	private Function function;
 	@ApiModelProperty("Valor de la operación")
-	@NotNull
 	private Money amount;
 	@ApiModelProperty("Valor de la operación")
-	@NotBlank
 	private String reference;
 
 	public Activity() {

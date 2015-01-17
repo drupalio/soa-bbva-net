@@ -3,14 +3,16 @@ package com.bbva.czic.checkbooks.facade.v01;
 import com.bbva.czic.checkbooks.business.ISrvIntCheckbooks;
 import com.bbva.czic.checkbooks.business.dto.DTOIntCheck;
 import com.bbva.czic.checkbooks.business.dto.DTOIntCheckbook;
+import com.bbva.czic.checkbooks.facade.v01.mappers.ICheckbookMapper;
 import com.bbva.czic.dto.net.Check;
 import com.bbva.czic.dto.net.Checkbook;
-import com.bbva.czic.checkbooks.facade.v01.mappers.ICheckbookMapper;
+import com.bbva.czic.routine.commons.rm.utils.errors.EnumError;
 import com.bbva.jee.arq.spring.core.log.I18nLog;
 import com.bbva.jee.arq.spring.core.log.I18nLogFactory;
 import com.bbva.jee.arq.spring.core.servicing.annotations.SMC;
 import com.bbva.jee.arq.spring.core.servicing.annotations.SN;
 import com.bbva.jee.arq.spring.core.servicing.annotations.VN;
+import com.bbva.jee.arq.spring.core.servicing.gce.BusinessServiceException;
 import com.wordnik.swagger.annotations.*;
 import org.apache.cxf.jaxrs.model.wadl.ElementClass;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -73,6 +75,10 @@ public class SrvCheckbooksV01 implements ISrvCheckbooksV01, com.bbva.jee.arq.spr
 	@SMC(registryID = "SMCCO1400013", logicalID = "getCheckbooks")
 	public Checkbook  getCheckbook(
 			@ApiParam(value = "Checkbooks identifier") @PathParam("checkbookId") String checkbookId) {
+
+		if (checkbookId == "checks" || checkbookId.equals("checks")){
+			throw new BusinessServiceException(EnumError.WRONG_PARAMETERS.getAlias());
+		}
 
 		final DTOIntCheckbook intCheckbook = new DTOIntCheckbook();
 		intCheckbook.setId(checkbookId);

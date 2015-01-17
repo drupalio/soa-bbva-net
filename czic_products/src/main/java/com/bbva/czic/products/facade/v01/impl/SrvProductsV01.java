@@ -6,11 +6,13 @@ import com.bbva.czic.products.business.dto.DTOIntConditions;
 import com.bbva.czic.products.business.dto.DTOIntProduct;
 import com.bbva.czic.products.facade.v01.ISrvProductsV01;
 import com.bbva.czic.products.facade.v01.mapper.IProductsMapper;
+import com.bbva.czic.routine.commons.rm.utils.errors.EnumError;
 import com.bbva.jee.arq.spring.core.log.I18nLog;
 import com.bbva.jee.arq.spring.core.log.I18nLogFactory;
 import com.bbva.jee.arq.spring.core.servicing.annotations.SMC;
 import com.bbva.jee.arq.spring.core.servicing.annotations.SN;
 import com.bbva.jee.arq.spring.core.servicing.annotations.VN;
+import com.bbva.jee.arq.spring.core.servicing.gce.BusinessServiceException;
 import com.bbva.jee.arq.spring.core.servicing.utils.BusinessServicesToolKit;
 import com.wordnik.swagger.annotations.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -73,6 +75,10 @@ public class SrvProductsV01 implements ISrvProductsV01, com.bbva.jee.arq.spring.
 	@SMC(registryID="SMC201400022",logicalID="getConditions")
 	public Conditions getConditions(
 			@ApiParam(value="Product identifier") @PathParam("productId") String productId) {
+		if(productId == null || productId.trim().isEmpty()){
+			throw new BusinessServiceException(EnumError.WRONG_PARAMETERS.getAlias());
+		}
+
 		DTOIntProduct dtoIntProduct = new DTOIntProduct();
 		dtoIntProduct.setId(productId);
 		final DTOIntConditions conditions = srvIntProducts.getConditions(dtoIntProduct);

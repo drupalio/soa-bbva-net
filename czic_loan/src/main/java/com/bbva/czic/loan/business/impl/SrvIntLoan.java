@@ -3,9 +3,12 @@ package com.bbva.czic.loan.business.impl;
 
 import com.bbva.czic.dto.net.Loan;
 import com.bbva.czic.dto.net.Movement;
+import com.bbva.czic.dto.net.RotaryQuotaMove;
 import com.bbva.czic.loan.business.dto.DTOIntMovement;
+import com.bbva.czic.loan.business.dto.DTOIntRotaryQuotaMove;
 import com.bbva.czic.loan.dao.mapper.LoanMapper;
 
+import com.bbva.czic.routine.commons.rm.utils.errors.EnumError;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
@@ -17,7 +20,9 @@ import com.bbva.jee.arq.spring.core.log.I18nLog;
 import com.bbva.jee.arq.spring.core.log.I18nLogFactory;
 import com.bbva.jee.arq.spring.core.servicing.gce.BusinessServiceException;
 import com.bbva.jee.arq.spring.core.servicing.utils.BusinessServicesToolKit;
+import org.springframework.util.CollectionUtils;
 
+import javax.annotation.Resource;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -32,14 +37,15 @@ public class SrvIntLoan implements ISrvIntLoan {
 	@Autowired
 	BusinessServicesToolKit businessToolKit;
 
+	@Resource(name = "loanDao")
 	private LoanDAO loanDao;
 
 	@Override
 	public Loan getRotaryQuota(final String idRotaryQuota) throws BusinessServiceException {
 		try {
 			log.info("SrvIntLoan.getRotaryQuota = " + idRotaryQuota);
-			if (idRotaryQuota == null) {
-				throw new BusinessServiceException("loanPeticiongetRotaryQuota");
+			if (idRotaryQuota == null || idRotaryQuota.equals("null") || idRotaryQuota.isEmpty()) {
+				throw new BusinessServiceException(EnumError.WRONG_PARAMETERS.getAlias());
 			}
 			final DTOIntLoan dtoIntLoan = loanDao.getRotaryQuota(idRotaryQuota);
 			Loan loan = LoanMapper.getLoan(dtoIntLoan);
@@ -49,7 +55,7 @@ public class SrvIntLoan implements ISrvIntLoan {
 			throw ex;
 		} catch (Exception e) {
 			log.error("SrvIntLoan.getRotaryQuota.exception = " + e.getMessage());
-			throw new BusinessServiceException(e.getMessage());
+			throw new BusinessServiceException(EnumError.TECHNICAL_ERROR.getAlias());
 		}
 	}
 
@@ -65,10 +71,10 @@ public class SrvIntLoan implements ISrvIntLoan {
 			if (paginationKey == null || paginationKey.equals("null") ||
 					pageSize == null || pageSize.equals("null")){
 				log.info("SrvIntLoan.listRotaryQuotaMovements.nullParameters------------ " );
-				throw new BusinessServiceException("loanPeticionListRotary");
+				throw new BusinessServiceException(EnumError.WRONG_PARAMETERS.getAlias());
 			}		
 
-			SimpleDateFormat simpleDateFormat = new SimpleDateFormat("YYYY-MM-dd");
+			SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
             String fechaIni = simpleDateFormat.format(fechaInicila);
 			String fechaFin = simpleDateFormat.format(fechaFinal);
 
@@ -82,27 +88,30 @@ public class SrvIntLoan implements ISrvIntLoan {
 				movementList.add(movement);
 			}
 			return movementList;
+		} catch (BusinessServiceException be) {
+			log.error("error en listRotaryQuotaMovements = " + be.getMessage());
+			throw be;
 		} catch (Exception e) {
 			log.error("error en listRotaryQuotaMovements = " + e.getMessage());
-			throw new BusinessServiceException(e.getMessage());
+			throw new BusinessServiceException(EnumError.TECHNICAL_ERROR.getAlias());
 		}
 
 	}
 	@Override
-	public Movement getRotaryQuotaMovement(final String idLoan, final String idMovement) throws BusinessServiceException {
+	public RotaryQuotaMove getRotaryQuotaMovement(final String idLoan, final String idMovement) throws BusinessServiceException {
 
 		try {
-			Movement movement = null;
+			RotaryQuotaMove movement = null;
 			log.info("SrvIntLoan.getRotaryQuotaMovement = " + idMovement + ", " + idLoan);
-			if (idMovement == null || idLoan == null) throw new BusinessServiceException("loanPeticionRotaryMovement");
+			if (idMovement == null || idMovement.isEmpty() || idLoan == null || idLoan.isEmpty()) throw new BusinessServiceException(EnumError.WRONG_PARAMETERS.getAlias());
 
-			final DTOIntMovement dtoIntMovement = loanDao.getRotaryQuotaMovement(idMovement, idLoan);
-			movement = LoanMapper.getMovementByDTOIntMovement(dtoIntMovement);
+			final DTOIntRotaryQuotaMove dtoIntRotaryQuotaMove = loanDao.getRotaryQuotaMovement(idMovement, idLoan);
+			movement = LoanMapper.getMovementByDTOIntMovement(dtoIntRotaryQuotaMove);
 
 			return movement;
 		} catch (Exception e) {
 			log.info("SrvIntLoan.getRotaryQuotaMovement.exception = " + e.getMessage());
-			throw new BusinessServiceException(e.getMessage());
+			throw new BusinessServiceException(EnumError.TECHNICAL_ERROR.getAlias());
 		}
 	}
 }
