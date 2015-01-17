@@ -15,12 +15,4 @@ privileged aspect FormatoOZNCENB0_Roo_JavaBean {
         this.numclie = numclie;
     }
     
-    public String FormatoOZNCENB0.getNomclie() {
-        return this.nomclie;
-    }
-    
-    public void FormatoOZNCENB0.setNomclie(String nomclie) {
-        this.nomclie = nomclie;
-    }
-    
 }

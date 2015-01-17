@@ -15,20 +15,15 @@ import com.bbva.czic.customers.dao.model.oznp.FormatoOZECNPS0;
 import com.bbva.czic.customers.dao.model.oznq.FormatoOZECNQS0;
 import com.bbva.czic.dto.net.AccMovementsResume;
 import com.bbva.czic.dto.net.CardCharge;
-import com.bbva.czic.dto.net.City;
 import com.bbva.czic.dto.net.ContactInfo;
-import com.bbva.czic.dto.net.Country;
 import com.bbva.czic.dto.net.Customer;
-import com.bbva.czic.dto.net.Document;
 import com.bbva.czic.dto.net.Email;
 import com.bbva.czic.dto.net.EnumContactSourceType;
-import com.bbva.czic.dto.net.EnumDocumentType;
 import com.bbva.czic.dto.net.EnumDwelingType;
 import com.bbva.czic.dto.net.EnumMonth;
 import com.bbva.czic.dto.net.EnumSegmentType;
 import com.bbva.czic.dto.net.PhoneNumber;
 import com.bbva.czic.dto.net.Place;
-import com.bbva.czic.dto.net.State;
 import com.bbva.czic.routine.commons.rm.utils.converter.UtilsConverter;
 
 @Component("customerMapper")
@@ -79,6 +74,9 @@ public class CustomerMapper implements ICustomerMapper{
 	@Override
 	public Customer map(DTOIntCustomer item) {
 		Customer customer = new Customer();
+		customer.setId(item.getId());
+		customer.setName(item.getName());
+		customer.setUsername(item.getUsername());
 		customer.setDocument(item.getDocument());
 		customer.setContactInfo(item.getEmails());
 		customer.setDwelingType(item.getDwelingType());
@@ -95,45 +93,46 @@ public class CustomerMapper implements ICustomerMapper{
 
 	public static DTOIntCustomer mapToOuter(FormatoOZNCSNB0 formatoSalida) {
 		DTOIntCustomer customer = new DTOIntCustomer();
-		
-		Document document = new Document();
-		document.setNumber(formatoSalida.getNumclie());
-		document.setType(EnumDocumentType.CEDULACIUDADANIA);
-		
+//		Entidad contact info
 		ContactInfo contacto = new ContactInfo();
 		List<Email> emails = new ArrayList<Email>();
 		List<PhoneNumber> phones = new ArrayList<PhoneNumber>();
 		Email email = new Email();
 		email.setActive(true);
-		email.setAddress("contractor@bbva.com");
+		email.setAddress(formatoSalida.getCorreo());
 		email.setPrimary(true);
 		email.setSource(EnumContactSourceType.WEB);
 		emails.add(email);
 		contacto.setEmails(emails);
 		contacto.setPhoneNumbers(phones);
-		
+//		Entidad place para ubicacion hogar
 		Place home = new Place();
 		home.setCityName(formatoSalida.getCiudvia());
 		home.setStateName(formatoSalida.getDepavia());
 		home.setCountryName(formatoSalida.getPaisvia());
 		home.setPostalAddress(formatoSalida.getDescvia());
-		
+//		Entidad place para ubicacion oficina
 		Place office = new Place();
 		office.setCityName(formatoSalida.getCiudofi());
 		office.setStateName(formatoSalida.getDepaofi());
 		office.setCountryName(formatoSalida.getPaisofi());
 		office.setPostalAddress(formatoSalida.getDescofi());
-
-		customer.setDocument(document);
-		customer.setName("Nombre");
-		customer.setSegment(EnumSegmentType.OTRO);
+//		Entidad de retorno customer
+		customer.setId(formatoSalida.getNumclie());
+		customer.setName(formatoSalida.getNomclie());
+		try {
+			customer.setSegment(EnumSegmentType.valueOf(formatoSalida.getSegment()));
+		} catch (IllegalArgumentException e) {
+			customer.setSegment(EnumSegmentType.OTRO);
+		}
 		customer.setEmails(contacto);
 		customer.setHomeLocation(home);
 		customer.setStratum(Integer.parseInt(formatoSalida.getEstrato()));
-		customer.setResidenceYears(formatoSalida.getAnosvda().intValue());
-		customer.setHomeMembers(formatoSalida.getNropnas());
-		customer.setDwelingType(EnumDwelingType.valueOf(formatoSalida.getTpovvda()));
-		if(customer.getDwelingType()==null){
+		customer.setResidenceYears(Integer.parseInt(formatoSalida.getAnosvda()));
+		customer.setHomeMembers(Integer.parseInt(formatoSalida.getNropnas()));
+		try {
+			customer.setDwelingType(EnumDwelingType.valueOf(formatoSalida.getTpovvda()));
+		} catch (IllegalArgumentException e) {
 			customer.setDwelingType(EnumDwelingType.VALIDAR);
 		}
 		customer.setOfficeLocation(office);

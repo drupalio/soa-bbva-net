@@ -9,7 +9,6 @@ privileged aspect FormatoOZNCENB0_Roo_ToString {
     
     public String FormatoOZNCENB0.toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append("Nomclie: ").append(getNomclie()).append(", ");
         sb.append("Numclie: ").append(getNumclie());
         return sb.toString();
     }

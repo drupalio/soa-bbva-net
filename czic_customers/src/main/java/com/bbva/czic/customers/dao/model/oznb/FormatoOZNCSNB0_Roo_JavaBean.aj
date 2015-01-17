@@ -3,9 +3,7 @@
 
 package com.bbva.czic.customers.dao.model.oznb;
 
-import java.lang.Integer;
 import java.lang.String;
-import java.math.BigDecimal;
 
 privileged aspect FormatoOZNCSNB0_Roo_JavaBean {
     
@@ -15,6 +13,22 @@ privileged aspect FormatoOZNCSNB0_Roo_JavaBean {
     
     public void FormatoOZNCSNB0.setNumclie(String numclie) {
         this.numclie = numclie;
+    }
+    
+    public String FormatoOZNCSNB0.getNomclie() {
+        return this.nomclie;
+    }
+    
+    public void FormatoOZNCSNB0.setNomclie(String nomclie) {
+        this.nomclie = nomclie;
+    }
+    
+    public String FormatoOZNCSNB0.getCorreo() {
+        return this.correo;
+    }
+    
+    public void FormatoOZNCSNB0.setCorreo(String correo) {
+        this.correo = correo;
     }
     
     public String FormatoOZNCSNB0.getDescvia() {
@@ -57,19 +71,19 @@ privileged aspect FormatoOZNCSNB0_Roo_JavaBean {
         this.estrato = estrato;
     }
     
-    public BigDecimal FormatoOZNCSNB0.getAnosvda() {
+    public String FormatoOZNCSNB0.getAnosvda() {
         return this.anosvda;
     }
     
-    public void FormatoOZNCSNB0.setAnosvda(BigDecimal anosvda) {
+    public void FormatoOZNCSNB0.setAnosvda(String anosvda) {
         this.anosvda = anosvda;
     }
     
-    public Integer FormatoOZNCSNB0.getNropnas() {
+    public String FormatoOZNCSNB0.getNropnas() {
         return this.nropnas;
     }
     
-    public void FormatoOZNCSNB0.setNropnas(Integer nropnas) {
+    public void FormatoOZNCSNB0.setNropnas(String nropnas) {
         this.nropnas = nropnas;
     }
     
@@ -111,6 +125,22 @@ privileged aspect FormatoOZNCSNB0_Roo_JavaBean {
     
     public void FormatoOZNCSNB0.setPaisofi(String paisofi) {
         this.paisofi = paisofi;
+    }
+    
+    public String FormatoOZNCSNB0.getSegment() {
+        return this.segment;
+    }
+    
+    public void FormatoOZNCSNB0.setSegment(String segment) {
+        this.segment = segment;
+    }
+    
+    public String FormatoOZNCSNB0.getUltcone() {
+        return this.ultcone;
+    }
+    
+    public void FormatoOZNCSNB0.setUltcone(String ultcone) {
+        this.ultcone = ultcone;
     }
     
 }
