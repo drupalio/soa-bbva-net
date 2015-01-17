@@ -2,6 +2,7 @@
 package com.bbva.czic.dto.net;
 
 import com.wordnik.swagger.annotations.ApiModelProperty;
+import org.hibernate.validator.constraints.Email;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -27,6 +28,7 @@ public class Executive
     @ApiModelProperty("Oficina a la cual esta asignado un ejecutivo de cuenta")
     private Office office;
     @ApiModelProperty("Correo electronico de un ejecutivo de cuenta")
+    @Email
     private String email;
     @ApiModelProperty("Clientes que tiene asignado un ejecutivo de cuenta")
     private List<ThirdParty> customer;
