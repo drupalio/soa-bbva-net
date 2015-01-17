@@ -27,7 +27,7 @@ public class Executive
     @ApiModelProperty("Oficina a la cual esta asignado un ejecutivo de cuenta")
     private Office office;
     @ApiModelProperty("Correo electronico de un ejecutivo de cuenta")
-    private Email email;
+    private String email;
     @ApiModelProperty("Clientes que tiene asignado un ejecutivo de cuenta")
     private List<ThirdParty> customer;
 
@@ -66,14 +66,22 @@ public class Executive
         this.office = office;
     }
 
-    public Email getEmail() {
+    public String getEmail() {
         return email;
     }
 
-    public void setEmail(Email email) {
+    public void setEmail(String email) {
         this.email = email;
     }
 
+    /*public Email getEmail() {
+            return email;
+        }
+
+        public void setEmail(Email email) {
+            this.email = email;
+        }
+    */
     public List<ThirdParty> getCustomer() {
         return customer;
     }

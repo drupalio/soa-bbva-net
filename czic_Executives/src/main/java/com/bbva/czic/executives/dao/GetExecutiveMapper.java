@@ -16,9 +16,10 @@ public class GetExecutiveMapper {
 	 */
 	public static Executive mapOuter(final DTOIntExecutive dtoIntExecutive) {
 		final Executive executive = new Executive();
-		final Email email = new Email();
+		/*final Email email = new Email();
 		email.setAddress(dtoIntExecutive.getEmail());
-		executive.setEmail(email);
+		executive.setEmail(email);*/
+		executive.setEmail(dtoIntExecutive.getEmail());
 		executive.setId(dtoIntExecutive.getExecutiveId());
 		executive.setName(dtoIntExecutive.getName());
 		executive.setOffice(dtoIntExecutive.getOffice());
