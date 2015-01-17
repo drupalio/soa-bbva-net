@@ -1,10 +1,6 @@
 package com.bbva.czic.accounts.dao;
 
-import com.bbva.czic.accounts.business.dto.DTOIntAccount;
-import com.bbva.czic.accounts.business.dto.DTOIntCheck;
-import com.bbva.czic.accounts.business.dto.DTOIntFilterAccount;
-import com.bbva.czic.accounts.business.dto.DTOIntResponseAccMovementsResumes;
-import com.bbva.czic.accounts.business.dto.DTOIntResponseMonthlyBalances;
+import com.bbva.czic.accounts.business.dto.*;
 
 public interface AccountsDAO {
 

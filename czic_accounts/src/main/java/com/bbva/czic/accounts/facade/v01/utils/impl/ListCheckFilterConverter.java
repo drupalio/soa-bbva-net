@@ -1,7 +1,7 @@
 package com.bbva.czic.accounts.facade.v01.utils.impl;
 
 import com.bbva.czic.accounts.business.dto.DTOIntCheck;
-import com.bbva.czic.accounts.business.dto.DTOIntFilterAccount;
+import com.bbva.czic.accounts.business.dto.DTOIntFilterChecks;
 import com.bbva.czic.accounts.facade.v01.utils.IListCheckFilterConverter;
 import com.bbva.czic.routine.commons.rm.utils.errors.EnumError;
 import com.bbva.jee.arq.spring.core.log.I18nLog;
@@ -40,15 +40,16 @@ public class ListCheckFilterConverter implements IListCheckFilterConverter{
      * @param filter
      * @return
      */
-    public DTOIntFilterAccount getDTOIntFilter(String accountId, String filter) {
+    public DTOIntFilterChecks getDTOIntFilter(String accountId, String filter, String status, String paginationKey, String pageSize) {
 
         //Variables
-        final DTOIntFilterAccount dtoIntFilterAccount = new DTOIntFilterAccount();
+        final DTOIntFilterChecks dtoIntFilterChecks = new DTOIntFilterChecks();
         String startDate = "";
         String endDate = "";
 
         //Comprobamos que el id account no sea nullo dado que es obligatorio
-        if(accountId == null || accountId.equals("null") || accountId.isEmpty()) {
+        if(accountId == null || accountId.trim().isEmpty() || status == null || status.trim().isEmpty() || pageSize
+                == null || pageSize.trim().isEmpty() || paginationKey == null || paginationKey.trim().isEmpty()) {
             throw new BusinessServiceException(EnumError.WRONG_PARAMETERS.getAlias());
         }
 
@@ -109,8 +110,8 @@ public class ListCheckFilterConverter implements IListCheckFilterConverter{
                 log.info(" Filter endDateFilter: "+endDateFilter+" SMC : listChecks SN Account ");
                 System.out.println(endDate);
 
-                dtoIntFilterAccount.setStartDate(startDateFilter);
-                dtoIntFilterAccount.setStartDate(startDateFilter);
+                dtoIntFilterChecks.setStartDate(startDateFilter);
+                dtoIntFilterChecks.setStartDate(startDateFilter);
 
             } catch (SearchParseException e) {
                 log.error("SearchParseException - The query string (filter) has failed: " + e);
@@ -121,9 +122,9 @@ public class ListCheckFilterConverter implements IListCheckFilterConverter{
             }
         }
 
-        dtoIntFilterAccount.setAccountId(accountId);
+        dtoIntFilterChecks.setAccountId(accountId);
 
-        return dtoIntFilterAccount;
+        return dtoIntFilterChecks;
 
     }
 

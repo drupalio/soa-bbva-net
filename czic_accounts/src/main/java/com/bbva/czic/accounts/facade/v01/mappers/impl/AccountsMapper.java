@@ -1,30 +1,16 @@
 package com.bbva.czic.accounts.facade.v01.mappers.impl;
 
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.List;
-
+import com.bbva.czic.accounts.business.dto.*;
+import com.bbva.czic.accounts.facade.v01.mappers.IAccountsMapper;
+import com.bbva.czic.dto.net.*;
+import com.bbva.jee.arq.spring.core.log.I18nLog;
+import com.bbva.jee.arq.spring.core.log.I18nLogFactory;
 import org.springframework.stereotype.Component;
 import org.springframework.util.CollectionUtils;
 
-import com.bbva.czic.accounts.business.dto.DTOIntAccMovementsResume;
-import com.bbva.czic.accounts.business.dto.DTOIntAccount;
-import com.bbva.czic.accounts.business.dto.DTOIntBalance;
-import com.bbva.czic.accounts.business.dto.DTOIntCheck;
-import com.bbva.czic.accounts.business.dto.DTOIntCheckbook;
-import com.bbva.czic.accounts.business.dto.DTOIntMonthlyBalances;
-import com.bbva.czic.accounts.facade.v01.mappers.IAccountsMapper;
-import com.bbva.czic.dto.net.AccMovementsResume;
-import com.bbva.czic.dto.net.Account;
-import com.bbva.czic.dto.net.Balance;
-import com.bbva.czic.dto.net.Check;
-import com.bbva.czic.dto.net.Checkbook;
-import com.bbva.czic.dto.net.EnumCheckStatus;
-import com.bbva.czic.dto.net.EnumCheckbookStatus;
-import com.bbva.czic.dto.net.EnumMonth;
-import com.bbva.czic.dto.net.MonthlyBalances;
-import com.bbva.jee.arq.spring.core.log.I18nLog;
-import com.bbva.jee.arq.spring.core.log.I18nLogFactory;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.List;
 
 @Component(value = "accounts-mapper")
 public class AccountsMapper implements IAccountsMapper {
@@ -34,7 +20,7 @@ public class AccountsMapper implements IAccountsMapper {
 
 	/**
 	 * Metodo encargado de mapear un DTO interno de tipo DTOIntAccount a un DTO externo de tipo Account
-	 * 
+	 *
 	 * @author David Tafur
 	 * @param dtoIntAccount
 	 * @return
@@ -52,7 +38,7 @@ public class AccountsMapper implements IAccountsMapper {
 
 	/**
 	 * Metodo encargado de mapear una lista de tipo DTOIntCheckbook a una lista Checkbook
-	 * 
+	 *
 	 * @author David Tafur
 	 * @param listaDTOIntCheckbook
 	 * @return
@@ -108,7 +94,7 @@ public class AccountsMapper implements IAccountsMapper {
 
 	/**
 	 * Metodo encargado de mapear una lista de tipo DTOIntMonthlyBalances a una lista MonthlyBalances
-	 * 
+	 *
 	 * @author David Tafur
 	 * @param listaDtoIntMonthlyBalances
 	 * @return
@@ -155,7 +141,7 @@ public class AccountsMapper implements IAccountsMapper {
 
 	/**
 	 * Metodo encargado de mapear un DTOIntBalance a un Balance
-	 * 
+	 *
 	 * @author David Tafur
 	 * @param intBalance
 	 * @return
@@ -173,30 +159,4 @@ public class AccountsMapper implements IAccountsMapper {
 		return balance;
 	}
 
-<<<<<<< HEAD
-=======
-	/**
-	 * Metodo encargado de mapear una lista de tipo DTOIntCheck a una lista Check
-	 * 
-	 * @author Cristian Rojas
-	 * @param listaDTOIntCheck
-	 * @return
-	 */
-	public List<Check> mapLCheck(List<DTOIntCheck> listaDTOIntCheck) {
-		List<Check> listaCheck = new ArrayList<Check>();
-
-		for (DTOIntCheck dtoIntCheck : listaDTOIntCheck) {
-			Check check = new Check();
-			check.setId(String.valueOf(dtoIntCheck.getId()));
-			check.setStatus(EnumCheckStatus.valueOf(dtoIntCheck.getStatus().toString()));
-			final Calendar issueDate = Calendar.getInstance();
-			issueDate.setTime(dtoIntCheck.getIssueDate());
-			check.setIssueDate(issueDate);
-			check.setValue(dtoIntCheck.getValue());
-			listaCheck.add(check);
-		}
-		return listaCheck;
-	}
-
->>>>>>> 2668e14f216b6eaf0b908a28101d54c1bf7e7f50
 }
