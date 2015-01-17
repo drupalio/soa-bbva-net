@@ -7,69 +7,75 @@ import java.util.Date;
  */
 public class DTOIntFilterAccount {
 
-    private String accountId;
-    private String month;
-   private Date startMonth;
-    private Date endMonth;
-    private Date startDate;
-    private Date endDate;
-    private Date issuedate;
+	private String accountId;
 
-    public String getAccountId() {
-        return accountId;
-    }
+	private String month;
 
-    public void setAccountId(String accountId) {
-        this.accountId = accountId;
-    }
+	private Date startMonth;
 
-    public String getMonth() {
-        return month;
-    }
+	private Date endMonth;
 
-    public void setMonth(String month) {
-        this.month = month;
-    }
+	private Date startDate;
 
-    public Date getStartMonth() {
-        return startMonth;
-    }
+	private Date endDate;
 
-    public void setStartMonth(Date startMonth) {
-        this.startMonth = startMonth;
-    }
+	private Date issuedate;
 
-    public Date getEndMonth() {
-        return endMonth;
-    }
+	public String getAccountId() {
+		return accountId;
+	}
 
-    public void setEndMonth(Date endMonth) {
-        this.endMonth = endMonth;
-    }
+	public void setAccountId(String accountId) {
+		this.accountId = accountId;
+	}
 
-    public Date getStartDate() {
-        return startDate;
-    }
+	public String getMonth() {
+		return month;
+	}
 
-    public Date getIssuedate() {
-        return issuedate;
-    }
+	public void setMonth(String month) {
+		this.month = month;
+	}
 
-    public void setIssuedate(Date issuedate) {
-        this.issuedate = issuedate;
-    }
+	public Date getStartMonth() {
+		return startMonth;
+	}
 
-    public Date getEndDate() {
+	public void setStartMonth(Date startMonth) {
+		this.startMonth = startMonth;
+	}
 
-        return endDate;
-    }
+	public Date getEndMonth() {
+		return endMonth;
+	}
 
-    public void setEndDate(Date endDate) {
-        this.endDate = endDate;
-    }
+	public void setEndMonth(Date endMonth) {
+		this.endMonth = endMonth;
+	}
 
-    public void setStartDate(Date startDate) {
-        this.startDate = startDate;
+	public Date getStartDate() {
+		return startDate;
+	}
 
-    }
+	public Date getIssuedate() {
+		return issuedate;
+	}
+
+	public void setIssuedate(Date issuedate) {
+		this.issuedate = issuedate;
+	}
+
+	public Date getEndDate() {
+
+		return endDate;
+	}
+
+	public void setEndDate(Date endDate) {
+		this.endDate = endDate;
+	}
+
+	public void setStartDate(Date startDate) {
+		this.startDate = startDate;
+
+	}
 }
