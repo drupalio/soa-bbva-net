@@ -3,6 +3,7 @@ package com.bbva.czic.accounts.facade.v01.impl;
 import com.bbva.czic.accounts.business.ISrvIntAccounts;
 import com.bbva.czic.accounts.business.dto.DTOIntCheck;
 import com.bbva.czic.accounts.business.dto.DTOIntFilterAccount;
+import com.bbva.czic.accounts.business.dto.DTOIntFilterChecks;
 import com.bbva.czic.accounts.dao.AccountsDAO;
 import com.bbva.czic.accounts.facade.v01.ISrvAccountsV01;
 import com.bbva.czic.accounts.facade.v01.mappers.IAccountsMapper;
@@ -140,15 +141,15 @@ public class SrvAccountsV01 implements ISrvAccountsV01, com.bbva.jee.arq.spring.
 	@GET
 	@Path("/{id}/listChecks")
 	@SMC(registryID = "SMC201400026", logicalID = "listCheck")
-	public Check listCheck(
+	public List<Check> listCheck(
 			@ApiParam(value = "identifier param") @PathParam("accountId") String accountId,
 			@ApiParam(value = "filter param") @DefaultValue("null") @QueryParam("$filter") String filter,
 			@ApiParam(value = "fields param") @DefaultValue("null") @QueryParam("$status") String status,
 			@ApiParam(value = "fields param") @DefaultValue("null") @QueryParam("$paginationKey") String paginationKey,
 			@ApiParam(value = "expands param") @DefaultValue("null") @QueryParam("$pageSize") String pageSize) {
-		DTOIntCheck dtoIntCheck = new DTOIntCheck();
-		dtoIntCheck = (DTOIntCheck) listCheckFilterConverter.getDTOIntFilter(accountId,filter);
-		return iAccountsMapper.mapChecks(srvIntAccounts.listCheck(dtoIntCheck));
+		DTOIntFilterChecks dtoIntFilterCheck = new DTOIntFilterChecks();
+		dtoIntFilterCheck = listCheckFilterConverter.getDTOIntFilter(accountId,filter,status,paginationKey,pageSize);
+		return iAccountsMapper.mapChecks(srvIntAccounts.listCheck(dtoIntFilterCheck));
 	}
 
 }

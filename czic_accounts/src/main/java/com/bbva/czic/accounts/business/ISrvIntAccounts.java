@@ -17,6 +17,6 @@ public interface ISrvIntAccounts<Account> {
 	 * Metodo incluido manualmente para completar el total de los SMC - listCheck
 	 */
 
-	public DTOIntCheck listCheck(DTOIntCheck dtoIntCheck) ;
+	public DTOIntCheck listCheck(DTOIntFilterChecks dtoIntFilterChecks) ;
 
 }

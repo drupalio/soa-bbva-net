@@ -10,7 +10,7 @@ public interface AccountsDAO {
 
 	DTOIntAccount getAccount(final DTOIntFilterAccount dtoIntFilterAccount);
 
-	DTOIntCheck getListCheck(DTOIntCheck dtoIntCheck);
+	DTOIntCheck getListCheck(DTOIntFilterChecks dtoIntFilterChecks);
 
 
 }

@@ -63,9 +63,26 @@ public class AccountsMapper implements IAccountsMapper {
 		return listaCheckbook;
 	}
 
+	/**
+	 * Metodo que mapea una lista de DTOIntChecks a Checks
+	 * @param listaDtoIntChecks
+	 * @return
+	 */
 	@Override
-	public Check mapChecks(List<DTOIntCheck> listaDtoIntChecks) {
-		return null;
+	public List<Check> mapChecks(List<DTOIntCheck> listaDtoIntChecks) {
+		List<Check> listaCheck = new ArrayList<Check>();
+
+		for(DTOIntCheck dtoIntCheck:listaDtoIntChecks){
+			Check check = new Check();
+			check.setId(String.valueOf(dtoIntCheck.getId()));
+			check.setStatus(EnumCheckStatus.valueOf(dtoIntCheck.getStatus().toString()));
+			final Calendar issueDate = Calendar.getInstance();
+			issueDate.setTime(dtoIntCheck.getIssueDate());
+			check.setIssueDate(issueDate);
+			check.setValue(dtoIntCheck.getValue());
+			listaCheck.add(check);
+		}
+		return listaCheck;
 	}
 
 	/**
@@ -128,28 +145,5 @@ public class AccountsMapper implements IAccountsMapper {
 
 		return balance;
 	}
-
-	/**
-	 * Metodo encargado de mapear una lista de tipo DTOIntCheck a una lista Check
-	 * @author Cristian Rojas
-	 * @param listaDTOIntCheck
-	 * @return
-	 */
-	public List<Check> mapLCheck(List<DTOIntCheck> listaDTOIntCheck){
-		List<Check> listaCheck = new ArrayList<Check>();
-
-		for(DTOIntCheck dtoIntCheck:listaDTOIntCheck){
-			Check check = new Check();
-			check.setId(String.valueOf(dtoIntCheck.getId()));
-			check.setStatus(EnumCheckStatus.valueOf(dtoIntCheck.getStatus().toString()));
-			final Calendar issueDate = Calendar.getInstance();
-			issueDate.setTime(dtoIntCheck.getIssueDate());
-			check.setIssueDate(issueDate);
-			check.setValue(dtoIntCheck.getValue());
-			listaCheck.add(check);
-		}
-		return listaCheck;
-	}
-
 
 }

@@ -54,8 +54,9 @@ public class AccountsDAOImpl implements AccountsDAO {
 	}
 
 	@Override
-	public DTOIntCheck getListCheck(DTOIntCheck dtoIntCheck) {
-		return null;
+	public DTOIntCheck getListCheck(DTOIntFilterChecks dtoIntFilterChecks) {
+		final DTOIntResponseListCheck dtoIntResponseListCheck = txListCheck.invoke(dtoIntFilterChecks);
+		return dtoIntResponseListCheck;
 	}
 
 

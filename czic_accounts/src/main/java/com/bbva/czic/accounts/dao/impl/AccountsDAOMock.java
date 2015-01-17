@@ -58,7 +58,7 @@ public class AccountsDAOMock implements AccountsDAO {
 	}
 
 	@Override
-	public DTOIntCheck getListCheck(DTOIntCheck dtoIntCheck) {
+	public DTOIntCheck getListCheck(DTOIntFilterChecks dtoIntCheck) {
 		return null;
 	}
 }
