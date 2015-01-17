@@ -3,7 +3,6 @@ package com.bbva.czic.accounts.dao.impl;
 import javax.annotation.Resource;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
 
 import com.bbva.czic.accounts.business.dto.DTOIntAccount;
@@ -15,7 +14,6 @@ import com.bbva.czic.accounts.dao.AccountsDAO;
 import com.bbva.czic.accounts.dao.tx.impl.TxGetAccountImpl;
 import com.bbva.czic.accounts.dao.tx.impl.TxGetAccountMonthlyBalanceImpl;
 import com.bbva.czic.accounts.dao.tx.impl.TxGetAccountMovementResumeImpl;
-import com.bbva.czic.routine.commons.rm.utils.tx.IPaginatedTransaction;
 import com.bbva.jee.arq.spring.core.host.protocolo.ps9.ErrorMappingHelper;
 
 @Repository(value = "accounts-dao")
@@ -24,9 +22,9 @@ public class AccountsDAOImpl implements AccountsDAO {
 	@Autowired
 	private ErrorMappingHelper errorMappingHelper;
 
-	@Autowired
-	@Qualifier("tx-list-check")
-	private IPaginatedTransaction txListCheck;
+	// @Autowired
+	// @Qualifier("tx-list-check")
+	// private IPaginatedTransaction txListCheck;
 
 	@Resource(name = "tx-get-account")
 	private TxGetAccountImpl txtGetAccount;
