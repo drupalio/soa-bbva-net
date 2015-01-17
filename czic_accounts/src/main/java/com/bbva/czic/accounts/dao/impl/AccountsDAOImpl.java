@@ -1,6 +1,7 @@
-package com.bbva.czic.accounts.dao;
+package com.bbva.czic.accounts.dao.impl;
 
 import com.bbva.czic.accounts.business.dto.*;
+import com.bbva.czic.accounts.dao.AccountsDAO;
 import com.bbva.czic.routine.commons.rm.utils.tx.IPaginatedTransaction;
 import com.bbva.czic.routine.commons.rm.utils.tx.ISimpleTransaction;
 import org.springframework.beans.factory.annotation.Autowired;

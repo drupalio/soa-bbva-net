@@ -1,1 +1,84 @@
-{"products":[{"name":"Cuenta Personal 1","id":"1233-1232-4564-4565","productType":"PC","alias":"Cuenta 1","financialState":null,"visible":true,"operable":true,"balance":{"total":"1320.00 USD","availableBalance":"1120.00 USD","tradeBalance":"120.00 USD"},"contactInfo":null,"contract":null},{"name":"Cuenta Personal 1","id":"2982-1222-4569-4567","productType":"PC","alias":"Cuenta 1","financialState":null,"visible":true,"operable":true,"balance":{"total":"320.00 USD","availableBalance":"120.00 USD","tradeBalance":"120.00 USD"},"contactInfo":null,"contract":null},{"name":"Tarjeta Personal 1","id":"2982-1222-4569-4567","productType":"TC","alias":"Tarjeta 1","financialState":null,"visible":true,"operable":true,"balance":{"total":"320.00 USD","availableBalance":"120.00 USD","tradeBalance":"120.00 USD"},"contactInfo":null,"contract":null},{"name":"Tarjeta Personal 2","id":"2982-1222-4569-4898","productType":"TC","alias":"Tarjeta 2","financialState":null,"visible":true,"operable":true,"balance":{"total":"320.00 USD","availableBalance":"120.00 USD","tradeBalance":"120.00 USD"},"contactInfo":null,"contract":null},{"name":"Fondo Personal 1","id":"9877-1222-4569-4898","productType":"LI","alias":"Fondo 1","financialState":null,"visible":true,"operable":true,"balance":{"total":"320.00 USD","availableBalance":"120.00 USD","tradeBalance":"120.00 USD"},"contactInfo":null,"contract":null}]}
+{
+  "products": [
+    {
+      "name": "Cuenta Personal 1",
+      "id": "1233-1232-4564-4565",
+      "productType": "PC",
+      "alias": "Cuenta 1",
+      "financialState": null,
+      "visible": true,
+      "operable": true,
+      "balance": {
+        "total": "1320.00 USD",
+        "availableBalance": "1120.00 USD",
+        "tradeBalance": "120.00 USD"
+      },
+      "contactInfo": null,
+      "contract": null
+    },
+    {
+      "name": "Cuenta Personal 1",
+      "id": "2982-1222-4569-4567",
+      "productType": "PC",
+      "alias": "Cuenta 1",
+      "financialState": null,
+      "visible": true,
+      "operable": true,
+      "balance": {
+        "total": "320.00 USD",
+        "availableBalance": "120.00 USD",
+        "tradeBalance": "120.00 USD"
+      },
+      "contactInfo": null,
+      "contract": null
+    },
+    {
+      "name": "Tarjeta Personal 1",
+      "id": "2982-1222-4569-4567",
+      "productType": "TC",
+      "alias": "Tarjeta 1",
+      "financialState": null,
+      "visible": true,
+      "operable": true,
+      "balance": {
+        "total": "320.00 USD",
+        "availableBalance": "120.00 USD",
+        "tradeBalance": "120.00 USD"
+      },
+      "contactInfo": null,
+      "contract": null
+    },
+    {
+      "name": "Tarjeta Personal 2",
+      "id": "2982-1222-4569-4898",
+      "productType": "TC",
+      "alias": "Tarjeta 2",
+      "financialState": null,
+      "visible": true,
+      "operable": true,
+      "balance": {
+        "total": "320.00 USD",
+        "availableBalance": "120.00 USD",
+        "tradeBalance": "120.00 USD"
+      },
+      "contactInfo": null,
+      "contract": null
+    },
+    {
+      "name": "Fondo Personal 1",
+      "id": "9877-1222-4569-4898",
+      "productType": "LI",
+      "alias": "Fondo 1",
+      "financialState": null,
+      "visible": true,
+      "operable": true,
+      "balance": {
+        "total": "320.00 USD",
+        "availableBalance": "120.00 USD",
+        "tradeBalance": "120.00 USD"
+      },
+      "contactInfo": null,
+      "contract": null
+    }
+  ]
+}

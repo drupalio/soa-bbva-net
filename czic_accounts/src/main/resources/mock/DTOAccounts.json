@@ -1,0 +1,14 @@
+{
+  "accountsMontlyBalances": [
+    {
+      "accountId": "13424324324",
+      "month": "Enero",
+      "startMonth": "20140123",
+      "endMonth": "20140117",
+      "startDate": "20140924",
+      "endDate": "20150123",
+      "issuedate": "20150118"
+
+      }
+  ]
+}
