@@ -1,20 +1,16 @@
 package com.bbva.czic.accounts.dao.impl;
 
-import javax.annotation.Resource;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Repository;
-
-import com.bbva.czic.accounts.business.dto.DTOIntAccount;
-import com.bbva.czic.accounts.business.dto.DTOIntCheck;
-import com.bbva.czic.accounts.business.dto.DTOIntFilterAccount;
-import com.bbva.czic.accounts.business.dto.DTOIntResponseAccMovementsResumes;
-import com.bbva.czic.accounts.business.dto.DTOIntResponseMonthlyBalances;
+import com.bbva.czic.accounts.business.dto.*;
 import com.bbva.czic.accounts.dao.AccountsDAO;
 import com.bbva.czic.accounts.dao.tx.impl.TxGetAccountImpl;
 import com.bbva.czic.accounts.dao.tx.impl.TxGetAccountMonthlyBalanceImpl;
 import com.bbva.czic.accounts.dao.tx.impl.TxGetAccountMovementResumeImpl;
+import com.bbva.czic.accounts.dao.tx.impl.TxListCheckImpl;
 import com.bbva.jee.arq.spring.core.host.protocolo.ps9.ErrorMappingHelper;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
+
+import javax.annotation.Resource;
 
 @Repository(value = "accounts-dao")
 public class AccountsDAOImpl implements AccountsDAO {
@@ -34,6 +30,9 @@ public class AccountsDAOImpl implements AccountsDAO {
 
 	@Resource(name = "tx-get-account-movement-resume")
 	private TxGetAccountMovementResumeImpl txGetAccountMovementResume;
+
+	@Resource(name = "tx-list-Check-mapperc")
+	private TxListCheckImpl txListCheck;
 
 	@Override
 	public DTOIntResponseMonthlyBalances getAccountMonthlyBalance(final DTOIntFilterAccount dtoIntFilterAccount) {
