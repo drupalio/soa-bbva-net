@@ -1,14 +1,20 @@
 package com.bbva.czic.accounts.dao.impl;
 
-import com.bbva.czic.accounts.business.dto.*;
-import com.bbva.czic.accounts.dao.AccountsDAO;
-import com.bbva.czic.routine.commons.rm.utils.tx.IPaginatedTransaction;
-import com.bbva.czic.routine.commons.rm.utils.tx.ISimpleTransaction;
-import org.springframework.beans.factory.annotation.Autowired;
+import javax.annotation.Resource;
 
-import com.bbva.jee.arq.spring.core.host.protocolo.ps9.ErrorMappingHelper;
-import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+
+import com.bbva.czic.accounts.business.dto.DTOIntAccount;
+import com.bbva.czic.accounts.business.dto.DTOIntCheck;
+import com.bbva.czic.accounts.business.dto.DTOIntFilterAccount;
+import com.bbva.czic.accounts.business.dto.DTOIntResponseAccMovementsResumes;
+import com.bbva.czic.accounts.business.dto.DTOIntResponseMonthlyBalances;
+import com.bbva.czic.accounts.dao.AccountsDAO;
+import com.bbva.czic.accounts.dao.tx.impl.TxGetAccountImpl;
+import com.bbva.czic.accounts.dao.tx.impl.TxGetAccountMonthlyBalanceImpl;
+import com.bbva.czic.accounts.dao.tx.impl.TxGetAccountMovementResumeImpl;
+import com.bbva.jee.arq.spring.core.host.protocolo.ps9.ErrorMappingHelper;
 
 @Repository(value = "accounts-dao")
 public class AccountsDAOImpl implements AccountsDAO {
@@ -16,36 +22,29 @@ public class AccountsDAOImpl implements AccountsDAO {
 	@Autowired
 	private ErrorMappingHelper errorMappingHelper;
 
+	// @Autowired
+	// @Qualifier("tx-list-check")
+	// private IPaginatedTransaction txListCheck;
 
-	@Autowired
-	@Qualifier("tx-get-account-monthly-balance")
-	private IPaginatedTransaction txtGetAccountMonthlyBalance;
+	@Resource(name = "tx-get-account")
+	private TxGetAccountImpl txtGetAccount;
 
-	@Autowired
-	@Qualifier("tx-get-account-movement-resume")
-	private IPaginatedTransaction txtGetAccountMovementResume;
+	@Resource(name = "tx-get-account-monthly-balance")
+	private TxGetAccountMonthlyBalanceImpl txGetAccountMonthlyBalance;
 
-	@Autowired
-	@Qualifier("tx-list-check")
-	private IPaginatedTransaction txListCheck;
-
-	@Autowired
-	@Qualifier("tx-get-account")
-	private ISimpleTransaction txtGetAccount;
-
+	@Resource(name = "tx-get-account-movement-resume")
+	private TxGetAccountMovementResumeImpl txGetAccountMovementResume;
 
 	@Override
 	public DTOIntResponseMonthlyBalances getAccountMonthlyBalance(final DTOIntFilterAccount dtoIntFilterAccount) {
 
-		final DTOIntResponseMonthlyBalances dtoIntResponseMonthlyBalances = txtGetAccountMonthlyBalance.invoke(dtoIntFilterAccount);
-		return dtoIntResponseMonthlyBalances;
+		return txGetAccountMonthlyBalance.invoke(dtoIntFilterAccount);
 	}
 
 	@Override
 	public DTOIntResponseAccMovementsResumes getAccountMovementResume(final DTOIntFilterAccount dtoIntFilterAccount) {
 
-		final DTOIntResponseAccMovementsResumes dtoIntResponseAccMovementsResumes = txtGetAccountMovementResume.invoke(dtoIntFilterAccount);
-		return dtoIntResponseAccMovementsResumes;
+		return txGetAccountMovementResume.invoke(dtoIntFilterAccount);
 	}
 
 	@Override
@@ -57,6 +56,5 @@ public class AccountsDAOImpl implements AccountsDAO {
 	public DTOIntCheck getListCheck(DTOIntCheck dtoIntCheck) {
 		return null;
 	}
-
 
 }
