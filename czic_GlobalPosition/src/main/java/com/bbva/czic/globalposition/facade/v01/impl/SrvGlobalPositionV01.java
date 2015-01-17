@@ -104,7 +104,7 @@ public class SrvGlobalPositionV01 implements ISrvGlobalPositionV01, com.bbva.jee
 	@PUT
 	@Path("/{idProduct}/setProductVisibility")
 	@Consumes({ MediaType.APPLICATION_JSON })
-	@SMC(registryID="SMCCO1400004",logicalID="update")
+	@SMC(registryID="SMCCO1400004",logicalID="updateProductVisibility")
 	public Response updateProductVisibility(
 			@ApiParam(value = "Product identifier") @PathParam("idProduct") String idProduct,
 			@ApiParam(value = "Product information") Product infoProduct) {
@@ -135,7 +135,7 @@ public class SrvGlobalPositionV01 implements ISrvGlobalPositionV01, com.bbva.jee
 	@PUT
 	@Path("/{idProduct}/setProductOperability")
 	@Consumes({ MediaType.APPLICATION_JSON })
-	@SMC(registryID="SMCCO1400005",logicalID="update")
+	@SMC(registryID="SMCCO1400005",logicalID="updateProductOperability")
 	public Response updateProductOperability(
 			@ApiParam(value = "Product identifier") @PathParam("idProduct") String idProduct,
 			@ApiParam(value = "Product information") Product infoProduct) {
@@ -143,11 +143,11 @@ public class SrvGlobalPositionV01 implements ISrvGlobalPositionV01, com.bbva.jee
 		final DTOIntProduct productInt = new DTOIntProduct();
 		infoProduct.setId(idProduct);
 
-		if (idProduct == null) {
+		if (idProduct == null || infoProduct == null || infoProduct.getOperable() == null) {
 			throw new BusinessServiceException(EnumError.WRONG_PARAMETERS.getAlias());
 		}
 		productInt.setId(idProduct);
-		productInt.setVisible(infoProduct.getVisible());
+		productInt.setOperable(infoProduct.getOperable());
 
 		srvIntGlobalPosition.updateProductOperability(productInt);
 		return Response.ok().build();

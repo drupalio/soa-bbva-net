@@ -81,7 +81,7 @@ public class GetExtractGlobalBalanceMapper
         product.setOperable(TRUE_ES.equalsIgnoreCase(outFormat.getIndoper()) || TRUE_EN.equalsIgnoreCase(outFormat.getIndoper()));
         product.setAlias(outFormat.getAlias());
         product.setName(outFormat.getNomprod());
-        product.setFinancialState(EnumFinancialStatusType.valueOf(outFormat.getFinstat()));
+        product.setFinancialState(outFormat.getFinstat());
         if (outFormat.getNumtarj() != null) {
             product.setId(outFormat.getNumtarj());
         }

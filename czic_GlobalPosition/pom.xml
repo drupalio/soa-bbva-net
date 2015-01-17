@@ -29,13 +29,14 @@
 			<version>1.0.0</version>
 		</dependency>
 
-		<!--<dependency>
-			<groupId>ma.glasnost.orika</groupId>
-			<artifactId>orika-core</artifactId>
-			<version>1.4.5</version>
-		</dependency>-->
-
 		<!-- INICIO Arquitectura Servicios -->
+
+
+		<dependency>
+			<groupId>org.mockito</groupId>
+			<artifactId>mockito-core</artifactId>
+			<version>1.9.0</version>
+		</dependency>
 
 		<dependency>
 			<groupId>com.bbva.jee.arq.spring.core</groupId>
@@ -82,13 +83,6 @@
 		</dependency>
 
 		<!--Dependencias Swagger -->
-
-		<dependency>
-			<groupId>org.mockito</groupId>
-			<artifactId>mockito-core</artifactId>
-			<version>1.9.0</version>
-			<scope>test</scope>
-		</dependency>
 
 		<dependency>
 			<groupId>com.wordnik</groupId>

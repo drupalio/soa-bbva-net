@@ -35,7 +35,7 @@ public class Product implements Serializable {
 	private String alias;
 
 	@ApiModelProperty(value = "Identificador que referencia si un producto es un activo o un pasivo", required = true)
-	private EnumFinancialStatusType financialState;
+	private String financialState;
 
 	@ApiModelProperty(value = "Visibilidad del producto", required = true)
 	private Boolean visible;
@@ -98,11 +98,11 @@ public class Product implements Serializable {
 		this.alias = alias;
 	}
 
-	public EnumFinancialStatusType getFinancialState() {
+	public String getFinancialState() {
 		return financialState;
 	}
 
-	public void setFinancialState(EnumFinancialStatusType financialState) {
+	public void setFinancialState(String financialState) {
 		this.financialState = financialState;
 	}
 
