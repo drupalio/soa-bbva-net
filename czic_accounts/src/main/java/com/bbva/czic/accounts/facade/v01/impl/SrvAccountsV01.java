@@ -148,7 +148,7 @@ public class SrvAccountsV01 implements ISrvAccountsV01, com.bbva.jee.arq.spring.
 			@ApiParam(value = "expands param") @DefaultValue("null") @QueryParam("$pageSize") String pageSize) {
 		DTOIntCheck dtoIntCheck = new DTOIntCheck();
 		dtoIntCheck = (DTOIntCheck) listCheckFilterConverter.getDTOIntFilter(accountId,filter);
-		return iAccountsMapper.mapChecks(srvIntAccounts.listCheck(dtoIntCheck));
+		return null;
 	}
 
 }
