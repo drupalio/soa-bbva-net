@@ -1,9 +1,15 @@
 package com.bbva.czic.executives.business.impl;
 
-import java.util.List;
-
+import com.bbva.czic.dto.net.EnumThirdPartyType;
+import com.bbva.czic.executives.business.ISrvIntExecutives;
+import com.bbva.czic.executives.business.dto.DTOIntExecutive;
 import com.bbva.czic.executives.business.dto.DTOIntExecutivesFilter;
+import com.bbva.czic.executives.dao.ExecutivesDAO;
 import com.bbva.czic.routine.commons.rm.utils.errors.EnumError;
+import com.bbva.jee.arq.spring.core.log.I18nLog;
+import com.bbva.jee.arq.spring.core.log.I18nLogFactory;
+import com.bbva.jee.arq.spring.core.servicing.gce.BusinessServiceException;
+import com.bbva.jee.arq.spring.core.servicing.utils.BusinessServicesToolKit;
 import org.apache.cxf.jaxrs.ext.search.PrimitiveStatement;
 import org.apache.cxf.jaxrs.ext.search.SearchCondition;
 import org.apache.cxf.jaxrs.ext.search.SearchParseException;
@@ -11,14 +17,7 @@ import org.apache.cxf.jaxrs.ext.search.fiql.FiqlParser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.bbva.czic.dto.net.EnumThirdPartyType;
-import com.bbva.czic.executives.business.ISrvIntExecutives;
-import com.bbva.czic.executives.business.dto.DTOIntExecutive;
-import com.bbva.czic.executives.dao.ExecutivesDAO;
-import com.bbva.jee.arq.spring.core.log.I18nLog;
-import com.bbva.jee.arq.spring.core.log.I18nLogFactory;
-import com.bbva.jee.arq.spring.core.servicing.gce.BusinessServiceException;
-import com.bbva.jee.arq.spring.core.servicing.utils.BusinessServicesToolKit;
+import java.util.List;
 
 @Service
 public class SrvIntExecutives implements ISrvIntExecutives {
@@ -34,7 +33,7 @@ public class SrvIntExecutives implements ISrvIntExecutives {
 
 	/**
 	 * Metodo encargado de traer el ejecutivo
-	 * 
+	 *
 	 * @author David Tafur
 	 * @param
 	 *            filter
@@ -77,7 +76,7 @@ public class SrvIntExecutives implements ISrvIntExecutives {
 					}
 				}
 
-				if(thirdPartyId==null || thirdPartyId.equals("")&& thirdPartyType==null || thirdPartyType.equals("")){
+				if(thirdPartyId==null || thirdPartyId.trim().isEmpty() || thirdPartyType==null || thirdPartyType.trim().isEmpty()){
 					throw new BusinessServiceException(EnumError.FILTER_EMPTY.getAlias());
 				}
 
@@ -94,10 +93,11 @@ public class SrvIntExecutives implements ISrvIntExecutives {
 			} catch (SearchParseException e) {
 				log.error("SearchParseException - The query string (filter) has failed: "
 						+ e);
-				throw new BusinessServiceException(FILTERERROR, filter,
-						e.getMessage());
+				throw new BusinessServiceException(EnumError.FILTER_EMPTY.getAlias());
 			}
 
+		}else {
+			throw new BusinessServiceException(EnumError.FILTER_EMPTY.getAlias());
 		}
 
 		return initialResult;
