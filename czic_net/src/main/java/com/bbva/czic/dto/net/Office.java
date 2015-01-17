@@ -25,16 +25,12 @@ public class Office
 
     public final static long serialVersionUID = 1L;
     @ApiModelProperty(value = "Codigo del corresponsal financiero", required = true)
-    @NotBlank
     private String code;
     @ApiModelProperty(value = "Nombre del corresponsal financiero", required = true)
-    @NotBlank
     private String name;
     @ApiModelProperty("Informacion de la ubicacion de un origen")
-    @NotNull
     private Location location;
     @ApiModelProperty(value = "Direccion postal de la oficina donde se realizo la apertura del producto", required = true)
-    @NotBlank
     private String postalAddress;
 
     public Office() {

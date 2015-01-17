@@ -18,10 +18,8 @@ public class City implements Serializable {
 
 	public final static long serialVersionUID = 1L;
 	@ApiModelProperty(value = " Identificador de la ciudad", required = true)
-	@NotBlank
 	private String id;
 	@ApiModelProperty(value = " nombre", required = true)
-	@NotBlank
 	private String name;
 
 	public City() {

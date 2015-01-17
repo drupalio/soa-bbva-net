@@ -1,16 +1,15 @@
 package com.bbva.czic.dto.net;
 
-import static org.junit.Assert.*;
-
-import java.util.Set;
+import org.junit.BeforeClass;
+import org.junit.Test;
 
 import javax.validation.ConstraintViolation;
 import javax.validation.Validation;
 import javax.validation.Validator;
 import javax.validation.ValidatorFactory;
+import java.util.Set;
 
-import org.junit.BeforeClass;
-import org.junit.Test;
+import static org.junit.Assert.assertEquals;
 
 public class OfficeTest {
 
@@ -22,39 +21,6 @@ public class OfficeTest {
 		validator = factory.getValidator();
 	}
 
-	@Test
-	public void officeFieldsAreNotNull() {
-		Office office = new Office();
-		Set<ConstraintViolation<Office>> constraintViolations = validator.validate(office);
-		assertEquals(4, constraintViolations.size());
-	}
-	
-	@Test
-	public void officeCodeIsNotEmpty() {
-		Office office = new Office();
-		office.setCode("");
-		Set<ConstraintViolation<Office>> constraintViolations = validator.validate(office);
-		assertEquals(4, constraintViolations.size());
-		
-	}
+	// TODO realizar test de validación de campos. Los test deben ser funcionales. ej. Longitud del número de una tarjeta
 
-	@Test
-	public void officeNameIsNotEmpty() {
-		Office office = new Office();
-		office.setName("");
-		Set<ConstraintViolation<Office>> constraintViolations = validator.validate(office);
-		assertEquals(4, constraintViolations.size());
-		
-	}
-	
-	@Test
-	public void officePostalAddressIsNotEmpty() {
-		Office office = new Office();
-		office.setPostalAddress("");
-		Set<ConstraintViolation<Office>> constraintViolations = validator.validate(office);
-		assertEquals(4, constraintViolations.size());
-		
-	}
-	
-	
 }

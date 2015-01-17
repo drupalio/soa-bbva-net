@@ -18,7 +18,6 @@ public class DependentCard extends Card implements Serializable {
 
 	public final static long serialVersionUID = 1L;
 	@ApiModelProperty("Portador o titular de la tarjeta amparada")
-	@NotBlank
 	private String accountHolder;
 
 	public DependentCard() {

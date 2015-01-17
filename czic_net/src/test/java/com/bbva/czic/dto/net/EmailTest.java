@@ -1,16 +1,15 @@
 package com.bbva.czic.dto.net;
 
-import static org.junit.Assert.*;
-
-import java.util.Set;
+import org.junit.BeforeClass;
+import org.junit.Test;
 
 import javax.validation.ConstraintViolation;
 import javax.validation.Validation;
 import javax.validation.Validator;
 import javax.validation.ValidatorFactory;
+import java.util.Set;
 
-import org.junit.BeforeClass;
-import org.junit.Test;
+import static org.junit.Assert.assertEquals;
 
 public class EmailTest {
 
@@ -21,29 +20,22 @@ public class EmailTest {
 		ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
 		validator = factory.getValidator();
 	}
-
-	@Test
-	public void emailFieldsAreNotNull() {
-		Email email = new Email();
-		Set<ConstraintViolation<Email>> constraintViolations = validator.validate(email);
-		assertEquals(4, constraintViolations.size());
-	}
 	
 	@Test
-	public void emailAddressIsNotEmpty() {
+	public void testValidationPassIfAddressWellFormed() {
 		Email email = new Email();
-		email.setAddress("");
+		email.setAddress("this@is.mail");
 		Set<ConstraintViolation<Email>> constraintViolations = validator.validate(email);
-		assertEquals(4, constraintViolations.size());
+		assertEquals(0, constraintViolations.size());
 		
 	}
 	
 	@Test
-	public void emailAddressIsValidEmail() {
+	public void testValidationFailIfMalformedAddress() {
 		Email email = new Email();
 		email.setAddress("adsadsasd");
 		Set<ConstraintViolation<Email>> constraintViolations = validator.validate(email);
-		assertEquals(4, constraintViolations.size());
+		assertEquals(1, constraintViolations.size());
 		
 	}
 

@@ -7,6 +7,8 @@ import com.bbva.czic.products.dao.model.oznt.FormatoOZECNTS0;
 import com.bbva.czic.routine.commons.rm.utils.tx.ISimpleTransactionMapper;
 import org.springframework.stereotype.Component;
 
+import java.util.Date;
+
 /**
  * Created by Administrador on 05/01/2015.
  */

@@ -12,19 +12,19 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
+import javax.annotation.Resource;
+
 /**
  * Created by Entelgy on 14/01/2015.
  */
-@Component("tx-list-Check-mapperc")
+@Component("tx-list-check")
 public class TxListCheck extends PaginatedTransaction<PeticionTransaccionOznx, RespuestaTransaccionOznx> {
-
 
     @Autowired
     private transient TransaccionOznx transaccionOznx;
 
-    @Autowired
-    @Qualifier("tx-listCheck-resume-mapper")
-    private transient IPaginatedTransactionMapper<DTOIntFilterAccount, FormatoOZECNXE0, DTOIntResponseListCheck, IFormatNotApply, DTOIntCheck, FormatoOZECNXS0, IFormatNotApply> txGetAccountMovementResumeMapper;
+    @Resource(name = "tx-list-check-mapper")
+    private transient IPaginatedTransactionMapper<DTOIntFilterAccount, FormatoOZECNXE0, DTOIntResponseListCheck, IFormatNotApply, DTOIntCheck, FormatoOZECNXS0, IFormatNotApply> txListCheckMapper;
 
     @Override
     protected InvocadorTransaccion<PeticionTransaccionOznx, RespuestaTransaccionOznx> getInvoker() {

@@ -22,17 +22,13 @@ public class Email
 
     public final static long serialVersionUID = 1L;
     @ApiModelProperty("Fuente de los contactos")
-    @NotNull
     private EnumContactSourceType source;
     @ApiModelProperty("Direccion de correo electronico")
-    @NotBlank
 	@org.hibernate.validator.constraints.Email
     private String address;
     @ApiModelProperty(" Correo por defecto")
-    @NotNull
     private Boolean primary;
     @ApiModelProperty("Correo activo")
-	@NotNull
     private Boolean active;
 
     public Email() {
