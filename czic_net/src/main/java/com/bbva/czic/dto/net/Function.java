@@ -26,7 +26,7 @@ public class Function
     private String id;
     @ApiModelProperty(value = "Descripcion de la funcion", required = true)
     @NotNull
-    private EnumFunctionType type;
+    private String type;
 
     public Function() {
         //default constructor
@@ -40,11 +40,11 @@ public class Function
 		this.id = id;
 	}
 
-	public EnumFunctionType getType() {
+	public String getType() {
 		return type;
 	}
 
-	public void setType(EnumFunctionType type) {
+	public void setType(String type) {
 		this.type = type;
 	}
 
