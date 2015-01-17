@@ -24,7 +24,7 @@ import java.util.List;
 /**
  * Created by Entelgy on 14/01/2015.
  */
-@Component(value = "accounts-filter-converter")
+@Component(value = "listCheck-filter-converter")
 public class ListCheckFilterConverter implements IListCheckFilterConverter{
 
     private static I18nLog log = I18nLogFactory.getLogI18n(ListCheckFilterConverter.class, "META-INF/spring/i18n/log/mensajesLog");
