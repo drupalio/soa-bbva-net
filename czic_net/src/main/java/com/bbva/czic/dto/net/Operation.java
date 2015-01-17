@@ -31,6 +31,10 @@ public class Operation
         //default constructor
     }
 
+    public Operation(String description) {
+        this.description = description;
+    }
+
     public String getCode() {
         return code;
     }
