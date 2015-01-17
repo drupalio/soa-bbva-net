@@ -26,10 +26,8 @@ public class ElectronicDepositValue
     @XmlJavaTypeAdapter(MoneyAdapter.class)
     @XmlElement(type = Money.class)
     @ApiModelProperty(value = "saldo total que se dispone para el usuario", required = true)
-    @NotNull
     private Money overallInvestment;
     @ApiModelProperty(value = "Mes sobre el cual se hace el analisis o evaluo", required = true)
-    @NotNull
     private EnumMonth month;
 
     public ElectronicDepositValue() {

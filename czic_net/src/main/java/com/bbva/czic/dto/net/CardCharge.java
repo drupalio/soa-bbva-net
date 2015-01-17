@@ -23,12 +23,10 @@ public class CardCharge implements Serializable {
 
 	public final static long serialVersionUID = 1L;
 	@ApiModelProperty(value = "Aspecto comercial", required = true)
-	@NotNull
 	private String category;
 	@XmlJavaTypeAdapter(MoneyAdapter.class)
 	@XmlElement(type = Money.class)
 	@ApiModelProperty("Valor del consumo total diferido a cada una de las categorias")
-	@NotNull
 	private Money amount;
 
 	public CardCharge() {

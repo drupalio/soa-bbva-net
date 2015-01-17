@@ -22,7 +22,6 @@ public class Contract implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
 	@ApiModelProperty(value = "Identificador del contrato", required = true)
-    @NotBlank
 	private String number;
 
     public String getNumber() {

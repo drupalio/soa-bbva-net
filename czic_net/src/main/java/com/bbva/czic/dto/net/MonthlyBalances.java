@@ -26,10 +26,8 @@ public class MonthlyBalances
     @XmlJavaTypeAdapter(MoneyAdapter.class)
     @XmlElement(type = Money.class)
     @ApiModelProperty("saldo consolidado del mes")
-    @NotNull
     private Money balance;
     @ApiModelProperty("mes de evaluacion para el saldo")
-    @NotNull
     private EnumMonth month;
 
     public MonthlyBalances() {

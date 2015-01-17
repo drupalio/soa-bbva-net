@@ -22,46 +22,37 @@ public class Product implements Serializable {
 	public final static long serialVersionUID = 1L;
 
 	@ApiModelProperty(value = "Identificador del producto", required = true)
-	@NotNull
 	private String id;
 
 	@ApiModelProperty(value = "", required = true)
-	@NotNull
 	//private EnumProductType type;
 	private String type;
 
 	@ApiModelProperty(value = "Nombre del producto", required = true)
-	@NotNull
 	private String name;
 
 	@ApiModelProperty("Alias del producto")
 	private String alias;
 
 	@ApiModelProperty(value = "Identificador que referencia si un producto es un activo o un pasivo", required = true)
-	@NotNull
 	private EnumFinancialStatusType financialState;
 
 	@ApiModelProperty(value = "Visibilidad del producto", required = true)
-	@NotNull
 	private Boolean visible;
 
 	@ApiModelProperty(value = "Operatibilidad del producto", required = true)
-	@NotNull
 	private Boolean operable;
 
 	@ApiModelProperty(value = "Entidad con toda la informaci\u00f3n del balance de la cuenta", required = true)
-	@NotNull
 	private Balance balance;
 
 	@ApiModelProperty(value = "description", required = true)
 	private ContactInfo contactInfo;
 
 	@ApiModelProperty("")
-	@NotNull
 	private Conditions conditions;
 
 	@ApiModelProperty("")
-	@NotNull
 	private List<Movement> movement;
 
 	@ApiModelProperty("")

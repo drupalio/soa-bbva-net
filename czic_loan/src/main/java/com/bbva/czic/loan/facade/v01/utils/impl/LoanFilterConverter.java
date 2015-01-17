@@ -6,6 +6,7 @@ import java.util.Date;
 import java.util.List;
 
 import com.bbva.czic.loan.business.dto.DTOIntFilterLoan;
+import com.bbva.czic.routine.commons.rm.utils.errors.EnumError;
 import com.bbva.jee.arq.spring.core.log.I18nLog;
 import com.bbva.jee.arq.spring.core.log.I18nLogFactory;
 import com.bbva.jee.arq.spring.core.servicing.gce.BusinessServiceException;
@@ -23,7 +24,7 @@ import org.springframework.stereotype.Component;
 /**
  * Created by Entelgy on 12/01/2015.
  */
-@Component(value = "accounts-filter-converter")
+@Component(value = "loan-filter-converter")
 public class LoanFilterConverter{
 
     private static I18nLog log = I18nLogFactory.getLogI18n(LoanFilterConverter.class, "META-INF/spring/i18n/log/mensajesLog");
@@ -48,7 +49,7 @@ public class LoanFilterConverter{
         
         //Comprobamos que el id del loan no sea nullo dado que es obligatorio
         if(loanId == null || loanId.equals("null") || loanId.isEmpty()) {
-            throw new BusinessServiceException("");
+            throw new BusinessServiceException(EnumError.WRONG_PARAMETERS.getAlias());
         }
 
         //Manejamos el filter
@@ -58,7 +59,7 @@ public class LoanFilterConverter{
             try {
                 sc = new FiqlParser<DTOIntFilterLoan>(DTOIntFilterLoan.class).parse(filter);
 
-                final List<PrimitiveStatement> splitDataFilter = businessToolKit.getDataFromFilter(sc);
+                List<PrimitiveStatement> splitDataFilter = businessToolKit.getDataFromFilter(sc);
 
                 for (PrimitiveStatement st : splitDataFilter) {
 
@@ -70,9 +71,9 @@ public class LoanFilterConverter{
                     condition = st.getCondition().toString();
                     value = st.getValue().toString();
 
-                    if (property.toLowerCase().equals("transactionDate") && condition.equals(ConditionType.GREATER_THAN.toString())) {
+                    if (property.toLowerCase().equals("transactiondate") && condition.equals(ConditionType.GREATER_OR_EQUALS.toString())) {
                     	fechaInicial = value;
-                    } else if (property.toLowerCase().equals("transactionDate") && condition.equals(ConditionType.LESS_THAN.toString())) {
+                    } else if (property.toLowerCase().equals("transactiondate") && condition.equals(ConditionType.LESS_OR_EQUALS.toString())) {
                     	fechaFinal = value;
                     }
                 }
@@ -82,7 +83,7 @@ public class LoanFilterConverter{
 				 * tengan valor
 				 */
                 if (fechaInicial == null || fechaInicial.equals("") || fechaFinal == null || fechaFinal.equals("")) {
-                    throw new BusinessServiceException("EnumError.FILTER_EMPTY.getAlias()");
+                    throw new BusinessServiceException(EnumError.FILTER_EMPTY.getAlias());
                 }
 
 				/*
@@ -96,7 +97,7 @@ public class LoanFilterConverter{
                 	startDateFilter = formato.parse(fechaInicial);
                 	endtDateFilter = formato.parse(fechaInicial);
                 } catch (ParseException ex) {
-                    throw new BusinessServiceException("");
+                    throw new BusinessServiceException(EnumError.WRONG_PARAMETERS.getAlias());
                 }
 
                 log.info(" Filter starDateFilter: "+startDateFilter+" SMC : getCreditCardCharges SN Cards ");              
@@ -108,10 +109,10 @@ public class LoanFilterConverter{
 
             } catch (SearchParseException e) {
                 log.error("SearchParseException - The query string (filter) has failed: " + e.getMessage());
-                throw new BusinessServiceException("EnumError.INEXISTENT_FILTER.getAlias(), filter, e.getMessage()");
+                throw new BusinessServiceException(EnumError.INEXISTENT_FILTER.getAlias(), filter, e.getMessage());
             } catch (IllegalArgumentException e) {
                 log.error("IllegalArgumentException - The product type is an invalid type - does not exist: " + e.getMessage());
-                throw new BusinessServiceException("EnumError.WRONG_PARAMETERS.getAlias(), filter, e.getMessage()");
+                throw new BusinessServiceException(EnumError.WRONG_PARAMETERS.getAlias(), filter, e.getMessage());
             }
         }        
 

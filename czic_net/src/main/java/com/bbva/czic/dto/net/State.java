@@ -27,13 +27,10 @@ public class State
 
     public final static long serialVersionUID = 1L;
     @ApiModelProperty(value = " Identificador del estado", required = true)
-    @NotBlank
     private String id;
     @ApiModelProperty(value = "Nombre", required = true)
-    @NotBlank
     private String name;
     @ApiModelProperty("ciudades pertenecientes al estado o departamento")
-    @NotNull
     private List<City> cities;
 
     public State() {

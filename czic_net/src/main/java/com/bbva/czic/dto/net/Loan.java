@@ -18,15 +18,12 @@ public class Loan extends Product implements Serializable {
 	public final static long serialVersionUID = 1L;
 
 	@ApiModelProperty("Entidad con toda la informaci\u00f3n del balance del pr\u00e9stamo")
-	@NotNull
 	private Balance debt;
 
 	@ApiModelProperty("Entidad que posee toda un resumen de pagos del pr\u00e9stamo")
-	@NotNull
 	private Payment payment;
 
 	@ApiModelProperty(value = "Estado del prestamo", required = true)
-	@NotNull
 	private EnumLoanStatus status;
 
 	public Loan() {

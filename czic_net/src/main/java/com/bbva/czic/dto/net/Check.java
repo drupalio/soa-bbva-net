@@ -17,23 +17,18 @@ public class Check implements Serializable {
 
 	public final static long serialVersionUID = 1L;
 	@ApiModelProperty(value = "Identificador del cheque", required = true)
-	@NotBlank
 	private String id;
 	@XmlSchemaType(name = "dateTime")
 	@ApiModelProperty(value = "description", required = true)
-	@NotNull
 	@Past
 	private Calendar issueDate;
 	@XmlElement(type = Money.class)
 	@ApiModelProperty(value = "Valor del cheque", required = true)
-	@NotNull
 	private Money value;
 	@ApiModelProperty(value = "Estado actual del cheque", required = true)
-	@NotNull
 	private EnumCheckStatus status;
 	@XmlSchemaType(name = "dateTime")
 	@ApiModelProperty(value = "Fecha de modificacion", required = true)
-	@NotNull
 	@Past
 	private Calendar modifiedDate;
 

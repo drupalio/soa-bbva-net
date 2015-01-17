@@ -10,6 +10,7 @@ import java.util.Date;
 import com.bbva.czic.dto.net.*;
 import com.bbva.czic.loan.business.dto.DTOIntLoan;
 import com.bbva.czic.loan.business.dto.DTOIntMovement;
+import com.bbva.czic.loan.business.dto.DTOIntRotaryQuotaMove;
 import com.bbva.czic.loan.dao.model.ozni.FormatoOZNCSNI0;
 import com.bbva.czic.loan.dao.model.oznj.FormatoOZNCSNJ0;
 import com.bbva.czic.loan.dao.model.oznk.FormatoOZNCSNK0;
@@ -164,17 +165,20 @@ public class LoanMapper {
 
 	public static DTOIntMovement getDTOIntMovementByCopy(final FormatoOZNCSNI0 copy) {
 		DTOIntMovement dTOIntMovement = new DTOIntMovement();
+		Calendar calendar = Calendar.getInstance();
+		calendar.setTime(getFormat(copy.getFechaop()));
+
 		dTOIntMovement.setId(copy.getNumeope());
-		dTOIntMovement.setTransactionDate(getFormat(copy.getFechaop()));
+		dTOIntMovement.setTransactionDate(calendar);
 		dTOIntMovement.setConcept(copy.getResto().toString());
-		dTOIntMovement.setValue(setMoneyValue( copy.getValorop()));
-		dTOIntMovement.getOperation().setDescription(copy.getTipope());
+		dTOIntMovement.setValue(setMoneyValue(copy.getValorop()));
+		dTOIntMovement.setOperation(new Operation(copy.getTipope()));
 
 		return dTOIntMovement;
 	}
 
 	private static Date getFormat(final String fecha){
-		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		Date retorno = null;
 		try {
 			retorno = sdf.parse(fecha);
@@ -184,29 +188,51 @@ public class LoanMapper {
 		return retorno;
 	}
 
-	public static DTOIntMovement getDTOIntMovementByCopy(final FormatoOZNCSNK0 copy) {
-		DTOIntMovement dTOIntMovement = new DTOIntMovement();
 
-		dTOIntMovement.setTransactionDate(getFormat(copy.getFechao()));
-		dTOIntMovement.setConcept(copy.getResto().toString());
-		dTOIntMovement.setValue(setMoneyValue(copy.getImporte()));
-		dTOIntMovement.setBalance(new Balance(setMoneyValue(copy.getBalance())));
-		dTOIntMovement.getOperation().setDescription(copy.getDescop());
-		dTOIntMovement.setStatus(EnumMovementStatus.valueOf(copy.getEstado()));
-		return dTOIntMovement;
+
+	public static DTOIntRotaryQuotaMove getDTOIntMovementByCopy(final FormatoOZNCSNK0 copy) {
+		DTOIntRotaryQuotaMove dtoIntRotaryQuotaMove = new DTOIntRotaryQuotaMove();
+
+        Calendar calendar = Calendar.getInstance();
+		calendar.setTime(getFormat(copy.getFechao()));
+
+		dtoIntRotaryQuotaMove.setTransactionDate(calendar);
+		dtoIntRotaryQuotaMove.setConcept(copy.getResto().toString());
+		dtoIntRotaryQuotaMove.setValue(setMoneyValue(copy.getImporte()));
+		dtoIntRotaryQuotaMove.setBalance(setMoneyValue(copy.getBalance()));
+		dtoIntRotaryQuotaMove.setOperation(new Operation(copy.getDescop()));
+		dtoIntRotaryQuotaMove.setStatus(EnumMovementStatus.valueOf(copy.getEstado()));
+		return dtoIntRotaryQuotaMove;
+	}
+
+	public static RotaryQuotaMove getMovementByDTOIntMovement(final DTOIntRotaryQuotaMove dto) {
+		RotaryQuotaMove rotaryQuotaMove = new RotaryQuotaMove();
+
+		rotaryQuotaMove.setId(dto.getId());
+		rotaryQuotaMove.setTransactionDate(dto.getTransactionDate());
+		rotaryQuotaMove.setConcept(dto.getConcept());
+		rotaryQuotaMove.setValue(dto.getValue());
+		rotaryQuotaMove.setBalance(dto.getBalance());
+
+		rotaryQuotaMove.setOperation(new Operation(dto.getOperation().getDescription()));
+		rotaryQuotaMove.setStatus(dto.getStatus());
+		rotaryQuotaMove.setOperation(dto.getOperation());
+
+		return rotaryQuotaMove;
 	}
 
 	public static Movement getMovementByDTOIntMovement(final DTOIntMovement dto) {
-		Movement movement = new Movement();
+		Movement Movement = new Movement();
 
-		movement.setId(dto.getId());
-		movement.setConcept(dto.getConcept());
-		movement.setOffice(dto.getOffice());
-		movement.setOperation(dto.getOperation());
-		movement.setOperationDate(dto.getOperationDate());
-		movement.setStatus(dto.getStatus());
-		movement.setValue(dto.getValue());
-		return movement;
+		Movement.setId(dto.getId());
+		Movement.setTransactionDate(dto.getTransactionDate());
+		Movement.setConcept(dto.getConcept());
+		Movement.setValue(dto.getValue());
+		Movement.setBalance(dto.getBalance());
+		Movement.setStatus(dto.getStatus());
+		Movement.setOperation(dto.getOperation());
+
+		return Movement;
 	}
 
 	public static Loan getLoanByDTOIntLoan(final DTOIntLoan dto) {

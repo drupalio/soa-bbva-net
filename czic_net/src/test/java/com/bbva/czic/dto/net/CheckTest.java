@@ -1,17 +1,17 @@
 package com.bbva.czic.dto.net;
 
-import static org.junit.Assert.*;
-
-import java.util.GregorianCalendar;
-import java.util.Set;
+import org.junit.BeforeClass;
+import org.junit.Test;
 
 import javax.validation.ConstraintViolation;
 import javax.validation.Validation;
 import javax.validation.Validator;
 import javax.validation.ValidatorFactory;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
+import java.util.Set;
 
-import org.junit.BeforeClass;
-import org.junit.Test;
+import static org.junit.Assert.assertEquals;
 
 public class CheckTest {
 
@@ -23,37 +23,51 @@ public class CheckTest {
 		validator = factory.getValidator();
 	}
 
+	// TODO realizar test de validación de campos. Los test deben ser funcionales. ej. Longitud del número de una tarjeta
+
 	@Test
-	public void checkFieldsAreNotNull() {
+	public void testValidationFailsIfIssueDateIsInFuture() {
 		Check check = new Check();
+		check.setIssueDate(getFutureDate());
 		Set<ConstraintViolation<Check>> constraintViolations = validator.validate(check);
-		assertEquals(5, constraintViolations.size());
+		assertEquals(1, constraintViolations.size());
+
 	}
 
 	@Test
-	public void idCheckIsNotEmpty() {
+	public void testValidationPassIfIssueDateIsNotInFuture() {
 		Check check = new Check();
-		check.setId("");
+		check.setIssueDate(getPastDate());
 		Set<ConstraintViolation<Check>> constraintViolations = validator.validate(check);
-		assertEquals(5, constraintViolations.size());
-		
+		assertEquals(0, constraintViolations.size());
+
 	}
 	
 	@Test
-	public void issueDateIsNotInFuture() {
+	public void testValidationFailsIfModifiedDateIsInFuture() {
 		Check check = new Check();
-		check.setIssueDate(new GregorianCalendar(2016,1,28,13,24,56));
+		check.setModifiedDate(getFutureDate());
 		Set<ConstraintViolation<Check>> constraintViolations = validator.validate(check);
-		assertEquals(5, constraintViolations.size());
-		
+		assertEquals(1, constraintViolations.size());
 	}
-	
+
 	@Test
-	public void modifiedDateIsNotInFuture() {
+	public void testValidationPassIfModifiedDateIsNotInFuture() {
 		Check check = new Check();
-		check.setModifiedDate(new GregorianCalendar(2016,1,28,13,24,56));
+		check.setModifiedDate(getPastDate());
 		Set<ConstraintViolation<Check>> constraintViolations = validator.validate(check);
-		assertEquals(5, constraintViolations.size());
-		
+		assertEquals(0, constraintViolations.size());
+	}
+
+	private Calendar getFutureDate() {
+		Calendar futureCalendar = GregorianCalendar.getInstance();
+		futureCalendar.add(Calendar.MONTH, 1);
+		return futureCalendar;
+	}
+
+	private Calendar getPastDate() {
+		Calendar futureCalendar = GregorianCalendar.getInstance();
+		futureCalendar.add(Calendar.MONTH, -1);
+		return futureCalendar;
 	}
 }

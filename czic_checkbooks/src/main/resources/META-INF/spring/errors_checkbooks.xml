@@ -44,17 +44,17 @@
    - En caso contrario, se elige el mensaje en el idioma por defecto.
    -->
 
-    <error-definition severity="ERROR" alias="wrongParametersCheckbooks" code="1" servicing:http-status="400">
+    <error-definition severity="ERROR" alias="wrongParameters" code="1" servicing:http-status="400">
         <message>checkbooks not found.</message>
         <message lang="en">checkbooks not found.</message>
         <message lang="es">Parámetros inválidos</message>
     </error-definition>
-    <error-definition severity="ERROR" alias="noDataCheckbooks" code="1" servicing:http-status="409">
+    <error-definition severity="ERROR" alias="noData" code="1" servicing:http-status="409">
         <message>checkbooks not found.</message>
         <message lang="en">no data to search.</message>
         <message lang="es">No existen datos para la búsqueda realizada.</message>
     </error-definition>
-      <error-definition severity="ERROR" alias="technicalErrorCheckbooks" code="1" servicing:http-status="500">
+      <error-definition severity="ERROR" alias="technicalError" code="1" servicing:http-status="500">
         <message>check not found.</message>
         <message lang="en">Platform error .</message>
         <message lang="es">Ocurrrio un fallo con alguna plataforma.</message>
