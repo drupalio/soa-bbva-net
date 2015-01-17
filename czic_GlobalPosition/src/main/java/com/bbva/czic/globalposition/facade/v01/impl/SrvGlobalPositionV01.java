@@ -18,6 +18,7 @@ import com.wordnik.swagger.annotations.*;
 import org.apache.cxf.jaxrs.model.wadl.ElementClass;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.CollectionUtils;
 
 import javax.annotation.Resource;
 import javax.ws.rs.*;
@@ -29,7 +30,7 @@ import java.util.List;
 
 
 @Path("/V01")
-@SN(registryID="SNCO1400002",logicalID="globalPosition")
+@SN(registryID="SNCO1400002",logicalID="GlobalPosition")
 @VN(vnn="V01")
 @Api(value="/GlobalPosition/V01",description="SN GlobalPosition")
 @Produces({ MediaType.APPLICATION_JSON})
@@ -85,9 +86,14 @@ public class SrvGlobalPositionV01 implements ISrvGlobalPositionV01, com.bbva.jee
 		final DTOIntFilterProduct filterProduct = gpFilterConverter.getDTOIntFilter(customerId, filter);
 		List<DTOIntProduct> products = srvIntGlobalPosition.getExtractGlobalBalance(filterProduct);
 
+		if (CollectionUtils.isEmpty(products)) {
+			throw new BusinessServiceException(EnumError.NO_DATA.getAlias());
+		}
+
 		return globalPositionMapper.map(products);
 	}
 
+	@Override
 	@ApiOperation(value="Update the product.", notes="Update the product partially", response=Response.class)
 	@ApiResponses(value = {
 		@ApiResponse(code = -1, message = "wrongParameters"),
@@ -96,50 +102,54 @@ public class SrvGlobalPositionV01 implements ISrvGlobalPositionV01, com.bbva.jee
 		@ApiResponse(code = 400, message = "wrongParameters")
 	})
 	@PUT
-	@Path("/{idProduct}")
+	@Path("/{idProduct}/setProductVisibility")
 	@Consumes({ MediaType.APPLICATION_JSON })
 	@SMC(registryID="SMCCO1400004",logicalID="update")
-	public Response update(
-			@ApiParam(value="Product identifier")@PathParam("idProduct") String idProduct,
-			@ApiParam(value="Product information")Product infoProduct) {
-
-		infoProduct.setId(idProduct);
-
-		if (idProduct == null) {
-			throw new BusinessServiceException(EnumError.WRONG_PARAMETERS.getAlias());
-		}
-
-		//if (infoProduct.getVisible() != null) {
-			this.updateProductVisibility(idProduct, infoProduct);
-		/*} else if (infoProduct.getOperable() != null){
-			this.updateProductOperability(idProduct, infoProduct);
-		}
-		*/
-		return Response.ok().build();
-	}
-
-	//@SMC(registryID="SMCCO1400004",logicalID="update")
-	private void updateProductVisibility(String idProduct, Product infoProduct) {
+	public Response updateProductVisibility(
+			@ApiParam(value = "Product identifier") @PathParam("idProduct") String idProduct,
+			@ApiParam(value = "Product information") Product infoProduct) {
 
 		final DTOIntProduct productInt = new DTOIntProduct();
+		infoProduct.setId(idProduct);
 
+		if (idProduct == null || infoProduct == null || infoProduct.getVisible() == null) {
+			throw new BusinessServiceException(EnumError.WRONG_PARAMETERS.getAlias());
+		}
 
 		productInt.setId(idProduct);
 		productInt.setVisible(infoProduct.getVisible());
 
 		srvIntGlobalPosition.updateProductVisibility(productInt);
+
+		return Response.ok().build();
 	}
 
-	/*
+	@Override
+	@ApiOperation(value="Update the product.", notes="Update the product partially", response=Response.class)
+	@ApiResponses(value = {
+			@ApiResponse(code = -1, message = "wrongParameters"),
+			@ApiResponse(code = 200, message = "Modified Sucessfully", response=Response.class),
+			@ApiResponse(code = 500, message = "Technical Error"),
+			@ApiResponse(code = 400, message = "wrongParameters")
+	})
+	@PUT
+	@Path("/{idProduct}/setProductOperability")
+	@Consumes({ MediaType.APPLICATION_JSON })
 	@SMC(registryID="SMCCO1400005",logicalID="update")
-	private void updateProductOperability(String idProduct, Product infoProduct) {
+	public Response updateProductOperability(
+			@ApiParam(value = "Product identifier") @PathParam("idProduct") String idProduct,
+			@ApiParam(value = "Product information") Product infoProduct) {
 
 		final DTOIntProduct productInt = new DTOIntProduct();
+		infoProduct.setId(idProduct);
 
+		if (idProduct == null) {
+			throw new BusinessServiceException(EnumError.WRONG_PARAMETERS.getAlias());
+		}
 		productInt.setId(idProduct);
-		productInt.setOperable(infoProduct.getOperable());
+		productInt.setVisible(infoProduct.getVisible());
 
 		srvIntGlobalPosition.updateProductOperability(productInt);
+		return Response.ok().build();
 	}
-	*/
 }

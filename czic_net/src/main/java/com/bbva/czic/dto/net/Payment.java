@@ -29,25 +29,20 @@ public class Payment
     public final static long serialVersionUID = 1L;
     @XmlSchemaType(name = "dateTime")
     @ApiModelProperty("Fecha de vencimiento del pago")
-    @NotNull
     private Calendar dueDate;
     @XmlSchemaType(name = "dateTime")
     @ApiModelProperty("Fecha de pago")
-    @NotNull
     private Calendar paymentDate;
     @XmlSchemaType(name = "dateTime")
     @ApiModelProperty("Fecha de corte del producto")
-    @NotNull
     private Calendar shortDate;
     @XmlJavaTypeAdapter(MoneyAdapter.class)
     @XmlElement(type = Money.class)
     @ApiModelProperty("Honorarios del pago")
-    @NotNull
     private Money fees;
     @XmlJavaTypeAdapter(MoneyAdapter.class)
     @XmlElement(type = Money.class)
     @ApiModelProperty("Pago minimo")
-    @NotNull
     private Money minimumPayment;
     @ApiModelProperty("Numero de cuotas")
     @Min(0)

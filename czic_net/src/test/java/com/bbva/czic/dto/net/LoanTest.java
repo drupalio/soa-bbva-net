@@ -9,7 +9,7 @@ import javax.validation.Validator;
 import javax.validation.ValidatorFactory;
 import java.util.Set;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 public class LoanTest {
 
@@ -21,11 +21,6 @@ public class LoanTest {
 		validator = factory.getValidator();
 	}
 
-	@Test
-	public void loanFieldsAreNotNull() {
-		Loan loan = new Loan();
-		Set<ConstraintViolation<Loan>> constraintViolations = validator.validate(loan);
-		assertEquals(12, constraintViolations.size());
-	}
+	// TODO realizar test de validación de campos. Los test deben ser funcionales. ej. Longitud del número de una tarjeta
 
 }

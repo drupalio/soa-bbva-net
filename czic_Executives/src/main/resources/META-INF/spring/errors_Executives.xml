@@ -16,10 +16,10 @@
  - indiquen un servicio (servicing:business-service) igual al logicalId del servicio que esta arrancando.
 -->
 <error-definitions family="Executives" architecture="SpringServicingArchitecture" application="czic"
-				   servicing:business-service="Executives" xmlns="http://bbva.com/gce"
-				   xmlns:servicing="http://bbva.com/arq-spring-servicing/gce-extension">
+                   servicing:business-service="Executives" xmlns="http://bbva.com/gce"
+                   xmlns:servicing="http://bbva.com/arq-spring-servicing/gce-extension">
 
-	<!--
+    <!--
       Definicion de un error. Se requiere indicar:
       - severity: severidad del error, puede ser ERROR, FATAL o CRITICAL
       - alias: alias del error, para identificarlo al lanzar BusinessServiceException
@@ -27,7 +27,7 @@
       - servicing:http-status: codigo http asociado a este error
      -->
 
-	<!--
+    <!--
        Descripcion del error.
        Se requiere indicar al menos un mensaje en el idioma por defecto.
        Cada mensaje puede informar:
@@ -44,15 +44,20 @@
 - En caso contrario, se elige el mensaje en el idioma por defecto.
 -->
 
-	<error-definition severity="ERROR" alias="wrongParameters" code="1" servicing:http-status="400">
-		<message>Executives not found.</message>
-		<message lang="en">Executives not found.</message>
-		<message lang="es">Parámetros inválidos</message>
-	</error-definition>
-	<error-definition severity="ERROR" alias="noData" code="2" servicing:http-status="409">
-		<message>Executives not found.</message>
-		<message lang="en">Executives not found.</message>
-		<message lang="es">No existen datos para la búsqueda realizada.</message>
-	</error-definition>
+    <error-definition severity="ERROR" alias="wrongParameters" code="1" servicing:http-status="400">
+        <message>Executives not found.</message>
+        <message lang="en">Executives not found.</message>
+        <message lang="es">Parámetros inválidos</message>
+    </error-definition>
+    <error-definition severity="ERROR" alias="noData" code="2" servicing:http-status="409">
+        <message>Executives not found.</message>
+        <message lang="en">Executives not found.</message>
+        <message lang="es">No existen datos para la búsqueda realizada.</message>
+    </error-definition>
+    <error-definition severity="ERROR" alias="filterEmpty" code="2" servicing:http-status="400">
+        <message>Executives not found.</message>
+        <message lang="en">Executives not found.</message>
+        <message lang="es">Parametros de filtro invalidos y/o incompletos.</message>
+    </error-definition>
 
 </error-definitions>

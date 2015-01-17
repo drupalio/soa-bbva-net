@@ -1,10 +1,8 @@
 package com.bbva.czic.accounts.facade.v01.mappers.impl;
 
 import com.bbva.czic.accounts.business.dto.*;
-import com.bbva.czic.accounts.dao.model.oznv.FormatoOZECNVE0;
 import com.bbva.czic.accounts.facade.v01.mappers.IAccountsMapper;
 import com.bbva.czic.dto.net.*;
-import com.bbva.czic.routine.commons.rm.utils.mappers.Mapper;
 import com.bbva.jee.arq.spring.core.log.I18nLog;
 import com.bbva.jee.arq.spring.core.log.I18nLogFactory;
 import org.springframework.stereotype.Component;
@@ -63,6 +61,11 @@ public class AccountsMapper implements IAccountsMapper {
 		}
 
 		return listaCheckbook;
+	}
+
+	@Override
+	public Check mapChecks(List<DTOIntCheck> listaDtoIntChecks) {
+		return null;
 	}
 
 	/**
@@ -125,4 +128,28 @@ public class AccountsMapper implements IAccountsMapper {
 
 		return balance;
 	}
+
+	/**
+	 * Metodo encargado de mapear una lista de tipo DTOIntCheck a una lista Check
+	 * @author Cristian Rojas
+	 * @param listaDTOIntCheck
+	 * @return
+	 */
+	public List<Check> mapLCheck(List<DTOIntCheck> listaDTOIntCheck){
+		List<Check> listaCheck = new ArrayList<Check>();
+
+		for(DTOIntCheck dtoIntCheck:listaDTOIntCheck){
+			Check check = new Check();
+			check.setId(String.valueOf(dtoIntCheck.getId()));
+			check.setStatus(EnumCheckStatus.valueOf(dtoIntCheck.getStatus().toString()));
+			final Calendar issueDate = Calendar.getInstance();
+			issueDate.setTime(dtoIntCheck.getIssueDate());
+			check.setIssueDate(issueDate);
+			check.setValue(dtoIntCheck.getValue());
+			listaCheck.add(check);
+		}
+		return listaCheck;
+	}
+
+
 }

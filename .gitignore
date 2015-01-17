@@ -1,11 +1,18 @@
 # Created by https://www.gitignore.io
 deploy/
 log.roo
+bin
+global-groovy.log
+soapui-errors.log
+soapui.log
 
 ### Intellij ###
 # Covers JetBrains IDEs: IntelliJ, RubyMine, PhpStorm, AppCode, PyCharm
 
 *.iml
+
+.classpath
+.project
 
 ## Directory-based project format:
 .idea/
@@ -64,6 +71,8 @@ tmp/
 local.properties
 .settings/
 .loadpath
+.project
+.classpath
 
 # External tool builders
 .externalToolBuilders/

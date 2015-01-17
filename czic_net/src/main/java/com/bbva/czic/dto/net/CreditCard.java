@@ -17,10 +17,8 @@ public class CreditCard extends Card implements Serializable {
 
 	public final static long serialVersionUID = 1L;
 	@ApiModelProperty("Entidad que posee toda un resumen de pagos de la tarjeta de cr\u00e9dito")
-	@NotNull
 	private Payment payment;
 	@ApiModelProperty("Entidad que posee toda la informaci\u00f3n acerca de las cuotas de la tarjeta de cr\u00e9dito")
-	@NotNull
 	private Balance quota;
 
 	public CreditCard() {

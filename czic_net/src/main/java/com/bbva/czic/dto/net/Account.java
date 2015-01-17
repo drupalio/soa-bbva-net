@@ -24,10 +24,8 @@ public class Account extends Product implements Serializable {
 	@XmlJavaTypeAdapter(MoneyAdapter.class)
 	@XmlElement(type = Money.class)
 	@ApiModelProperty("Saldo en canje de una cuenta")
-	@NotNull
 	private Money tradeBalance;
 	@ApiModelProperty("Chequeras asociadas a la cuenta")
-	@NotNull
 	private List<Checkbook> checkbooks;
 
 	public Account() {

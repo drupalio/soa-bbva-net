@@ -1,16 +1,10 @@
 package com.bbva.czic.dto.net;
 
-import static org.junit.Assert.*;
+import org.junit.BeforeClass;
 
-import java.util.Set;
-
-import javax.validation.ConstraintViolation;
 import javax.validation.Validation;
 import javax.validation.Validator;
 import javax.validation.ValidatorFactory;
-
-import org.junit.BeforeClass;
-import org.junit.Test;
 
 public class CurrencyTest {
 
@@ -22,34 +16,6 @@ public class CurrencyTest {
 		validator = factory.getValidator();
 	}
 
-	@Test
-	public void currencyFieldsAreNotNull() {
-		Currency currency = new Currency();
-		Set<ConstraintViolation<Currency>> constraintViolations = validator.validate(currency);
-		assertEquals(3, constraintViolations.size());
-	}
-	
-	@Test
-	public void currencyidIsNotEmpty() {
-		Currency currency = new Currency();
-		currency.setId("");
-		Set<ConstraintViolation<Currency>> constraintViolations = validator.validate(currency);
-		assertEquals(3, constraintViolations.size());
-	}
-	
-	@Test
-	public void currencyCodeIsNotEmpty() {
-		Currency currency = new Currency();
-		currency.setCode("");
-		Set<ConstraintViolation<Currency>> constraintViolations = validator.validate(currency);
-		assertEquals(3, constraintViolations.size());
-	}
-	
-	@Test
-	public void currencyNameIsNotEmpty() {
-		Currency currency = new Currency();
-		currency.setName("");
-		Set<ConstraintViolation<Currency>> constraintViolations = validator.validate(currency);
-		assertEquals(3, constraintViolations.size());
-	}
+	// TODO realizar test de validación de campos. Los test deben ser funcionales. ej. Longitud del número de una tarjeta
+
 }

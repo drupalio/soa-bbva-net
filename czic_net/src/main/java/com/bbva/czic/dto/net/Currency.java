@@ -23,13 +23,10 @@ public class Currency
 
     public final static long serialVersionUID = 1L;
     @ApiModelProperty(value = "C\u00f3digo ISO alfab\u00e9tico de la divisa", required = true)
-    @NotBlank
     private String id;
     @ApiModelProperty("C\u00f3digo ISO num\u00e9rico de la divisa")
-    @NotBlank
     private String code;
     @ApiModelProperty("Nombre de la divisa")
-    @NotBlank
     private String name;
 
     public Currency() {

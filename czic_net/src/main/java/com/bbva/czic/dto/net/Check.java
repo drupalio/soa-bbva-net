@@ -1,25 +1,14 @@
 package com.bbva.czic.dto.net;
 
-import java.io.Serializable;
-import java.util.Calendar;
-import java.util.Date;
+import com.bbva.jee.arq.spring.core.servicing.utils.Money;
+import com.wordnik.swagger.annotations.ApiModelProperty;
+import org.hibernate.validator.constraints.NotBlank;
 
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Past;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlSchemaType;
-import javax.xml.bind.annotation.XmlType;
-import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
-
-import org.hibernate.validator.constraints.NotBlank;
-
-import com.bbva.jee.arq.spring.core.servicing.utils.MoneyAdapter;
-import com.bbva.jee.arq.spring.core.servicing.utils.CalendarAdapter;
-import com.bbva.jee.arq.spring.core.servicing.utils.Money;
-import com.wordnik.swagger.annotations.ApiModelProperty;
+import javax.xml.bind.annotation.*;
+import java.io.Serializable;
+import java.util.Calendar;
 
 @XmlRootElement(name = "Check", namespace = "urn:com:bbva:czic:dto:net")
 @XmlType(name = "Check", namespace = "urn:com:bbva:czic:dto:net")
@@ -28,23 +17,18 @@ public class Check implements Serializable {
 
 	public final static long serialVersionUID = 1L;
 	@ApiModelProperty(value = "Identificador del cheque", required = true)
-	@NotBlank
 	private String id;
 	@XmlSchemaType(name = "dateTime")
 	@ApiModelProperty(value = "description", required = true)
-	@NotNull
 	@Past
 	private Calendar issueDate;
 	@XmlElement(type = Money.class)
 	@ApiModelProperty(value = "Valor del cheque", required = true)
-	@NotNull
 	private Money value;
 	@ApiModelProperty(value = "Estado actual del cheque", required = true)
-	@NotNull
 	private EnumCheckStatus status;
 	@XmlSchemaType(name = "dateTime")
 	@ApiModelProperty(value = "Fecha de modificacion", required = true)
-	@NotNull
 	@Past
 	private Calendar modifiedDate;
 

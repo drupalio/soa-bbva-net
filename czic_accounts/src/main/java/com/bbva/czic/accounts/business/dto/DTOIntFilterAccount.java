@@ -11,6 +11,9 @@ public class DTOIntFilterAccount {
     private String month;
    private Date startMonth;
     private Date endMonth;
+    private Date startDate;
+    private Date endDate;
+    private Date issuedate;
 
     public String getAccountId() {
         return accountId;
@@ -42,5 +45,31 @@ public class DTOIntFilterAccount {
 
     public void setEndMonth(Date endMonth) {
         this.endMonth = endMonth;
+    }
+
+    public Date getStartDate() {
+        return startDate;
+    }
+
+    public Date getIssuedate() {
+        return issuedate;
+    }
+
+    public void setIssuedate(Date issuedate) {
+        this.issuedate = issuedate;
+    }
+
+    public Date getEndDate() {
+
+        return endDate;
+    }
+
+    public void setEndDate(Date endDate) {
+        this.endDate = endDate;
+    }
+
+    public void setStartDate(Date startDate) {
+        this.startDate = startDate;
+
     }
 }

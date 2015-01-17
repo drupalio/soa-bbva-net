@@ -144,10 +144,7 @@ public class SrvCustomersV01 implements ISrvCustomersV01, com.bbva.jee.arq.sprin
 			@ApiParam(value = "Claim identifier param") @PathParam("customerId") String customerId) {
 		
 		log.info("Into getCustomer...");
-		
-		if(customerId == null || customerId.isEmpty()){
-			throw new BusinessServiceException(EnumError.WRONG_PARAMETERS.getAlias());
-		}
+
 		return srvIntCustomers.getCustomer(customerId);
 	}
 }

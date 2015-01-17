@@ -22,14 +22,11 @@ public class Consignment implements Serializable {
 
 	public final static long serialVersionUID = 1L;
 	@ApiModelProperty(value = "Numero de la consignacion", required = true)
-	@NotBlank
 	private String number;
 	@ApiModelProperty(value = "Campo alfab\u00e9tico que identifica la forma como se realiza la consignacion", required = true)
-	@NotNull
 	private EnumConsignmentType type;
 	@XmlSchemaType(name = "dateTime")
 	@ApiModelProperty(value = "Fecha de la consignacion", required = true)
-	@NotNull
 	@Past
 	private Calendar date;
 

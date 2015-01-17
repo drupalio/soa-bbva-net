@@ -30,46 +30,36 @@ public class Movement
 
     public final static long serialVersionUID = 1L;
     @ApiModelProperty(value = "Identificador de la operacion", required = true)
-    @NotBlank
     private String id;
     @ApiModelProperty(value = "concepto de la operacion", required = true)
-    @NotBlank
     private String concept;
     @XmlJavaTypeAdapter(CalendarAdapter.class)
     @XmlSchemaType(name = "dateTime")
     @ApiModelProperty(value = " fecha de la transaccion", required = true)
-    @NotNull
     @Past
     private Calendar transactionDate;
     @XmlJavaTypeAdapter(CalendarAdapter.class)
     @XmlSchemaType(name = "dateTime")
     @ApiModelProperty(value = " fecha y hora de la operacion", required = true)
-    @NotNull
     @Past
     private Calendar operationDate;
     @ApiModelProperty("Cuenta origen del movimiento")
-    @NotBlank
     private String sourceReference;
     @ApiModelProperty("Cuenta destino del movimiento")
-    @NotBlank
     private String destinationReference;
     @ApiModelProperty(value = "Informacion de la operacion (codigo y descripcion)", required = true)
-    @NotNull
     private Operation operation;
     @ApiModelProperty(value = "Informacion de la operacion (codigo y descripcion)", required = true)
-    @NotNull
     private Office office;
     @ApiModelProperty(value = "Campo alfanum\u00e9rico que permite identificar la red utilizada para la operaci\u00f3n", required = true)
     private EnumMovementStatus status;
     @XmlJavaTypeAdapter(MoneyAdapter.class)
     @XmlElement(type = Money.class)
     @ApiModelProperty("valor de la operacion")
-    @NotNull
     private Money value;
     @XmlJavaTypeAdapter(MoneyAdapter.class)
     @XmlElement(type = Money.class)
     @ApiModelProperty("")
-    @NotNull
     private Money balance;
     @ApiModelProperty("Numero de cuotas del pago o movimiento")
     private String numberOfQuotas;

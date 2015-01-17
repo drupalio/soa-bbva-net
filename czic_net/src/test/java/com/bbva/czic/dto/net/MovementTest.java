@@ -1,17 +1,17 @@
 package com.bbva.czic.dto.net;
 
-import static org.junit.Assert.*;
-
-import java.util.GregorianCalendar;
-import java.util.Set;
+import org.junit.BeforeClass;
+import org.junit.Test;
 
 import javax.validation.ConstraintViolation;
 import javax.validation.Validation;
 import javax.validation.Validator;
 import javax.validation.ValidatorFactory;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
+import java.util.Set;
 
-import org.junit.BeforeClass;
-import org.junit.Test;
+import static org.junit.Assert.assertEquals;
 
 public class MovementTest {
 
@@ -23,63 +23,28 @@ public class MovementTest {
 		validator = factory.getValidator();
 	}
 
+	// TODO realizar test de validación de campos. Los test deben ser funcionales. ej. Longitud del número de una tarjeta
+
 	@Test
-	public void movementFieldsAreNotNull() {
+	public void testValidationFailsIfMovementOperationDateIsInFuture() {
 		Movement movement = new Movement();
+		movement.setOperationDate(getFutureDate());
 		Set<ConstraintViolation<Movement>> constraintViolations = validator.validate(movement);
-		assertEquals(10, constraintViolations.size());
+		assertEquals(1, constraintViolations.size());
 	}
 	
 	@Test
-	public void movementIdIsNotEmpty() {
+	public void testValidationFailsIfMovementTransactionDateIsInFuture() {
 		Movement movement = new Movement();
-		movement.setId("");
+		movement.setTransactionDate(getFutureDate());
 		Set<ConstraintViolation<Movement>> constraintViolations = validator.validate(movement);
-		assertEquals(10, constraintViolations.size());
-		
+		assertEquals(1, constraintViolations.size());
 	}
-	
-	@Test
-	public void movementConceptIsNotEmpty() {
-		Movement movement = new Movement();
-		movement.setConcept("");
-		Set<ConstraintViolation<Movement>> constraintViolations = validator.validate(movement);
-		assertEquals(10, constraintViolations.size());
-		
-	}
-	
-	@Test
-	public void movementSourceReferenceIsNotEmpty() {
-		Movement movement = new Movement();
-		movement.setSourceReference("");
-		Set<ConstraintViolation<Movement>> constraintViolations = validator.validate(movement);
-		assertEquals(10, constraintViolations.size());
-		
-	}
-	
-	@Test
-	public void movementDestinationReferenceIsNotEmpty() {
-		Movement movement = new Movement();
-		movement.setDestinationReference("");
-		Set<ConstraintViolation<Movement>> constraintViolations = validator.validate(movement);
-		assertEquals(10, constraintViolations.size());
-		
-	}
-	
-	@Test
-	public void movementOperationDateIsNotInFuture() {
-		Movement movement = new Movement();
-		movement.setOperationDate(new GregorianCalendar(2016,1,28,13,24,56));
-		Set<ConstraintViolation<Movement>> constraintViolations = validator.validate(movement);
-		assertEquals(10, constraintViolations.size());
-	}
-	
-	@Test
-	public void movementTransactionDateIsNotInFuture() {
-		Movement movement = new Movement();
-		movement.setTransactionDate(new GregorianCalendar(2016,1,28,13,24,56));
-		Set<ConstraintViolation<Movement>> constraintViolations = validator.validate(movement);
-		assertEquals(10, constraintViolations.size());
+
+	private Calendar getFutureDate() {
+		Calendar futureCalendar = GregorianCalendar.getInstance();
+		futureCalendar.add(Calendar.MONTH, 1);
+		return futureCalendar;
 	}
 
 }

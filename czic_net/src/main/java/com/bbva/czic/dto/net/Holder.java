@@ -17,7 +17,6 @@ public class Holder extends User implements Serializable {
 
 	public final static long serialVersionUID = 1L;
 	@ApiModelProperty("Alias de un titular de la cuenta")
-	@NotNull
 	private String alias;
 
 	public Holder() {

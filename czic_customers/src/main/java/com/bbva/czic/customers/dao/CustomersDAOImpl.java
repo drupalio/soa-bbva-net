@@ -5,7 +5,6 @@ import com.bbva.czic.customers.business.dto.DTOIntCardCharge;
 import com.bbva.czic.customers.business.dto.DTOIntCustomer;
 import com.bbva.czic.customers.business.dto.DTOIntFilterCustomerResumes;
 import com.bbva.czic.customers.business.impl.SrvIntCustomers;
-
 import com.bbva.czic.customers.dao.mapper.CustomerMapper;
 import com.bbva.czic.customers.dao.mapper.ICustomerMapper;
 import com.bbva.czic.customers.dao.model.oznb.*;
@@ -18,7 +17,6 @@ import com.bbva.jee.arq.spring.core.log.I18nLog;
 import com.bbva.jee.arq.spring.core.log.I18nLogFactory;
 import com.bbva.jee.arq.spring.core.servicing.gce.BusinessServiceException;
 import com.bbva.jee.arq.spring.core.servicing.utils.BusinessServicesToolKit;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -31,7 +29,7 @@ import java.util.List;
 public class CustomersDAOImpl implements CustomersDAO {
 
 	private static final String FILTERERROR = null;
-	
+
 	@Resource(name="customerMapper")
 	private ICustomerMapper customerMapper;
 
@@ -47,11 +45,11 @@ public class CustomersDAOImpl implements CustomersDAO {
 	private TransaccionOznb transaccionOznb;
 	@Autowired
 	private TransaccionOznp transaccionOznp;
-	
+
 	private static I18nLog log = I18nLogFactory.getLogI18n(
 			SrvIntCustomers.class, "META-INF/spring/i18n/log/mensajesLog");
 
-	
+
 	public void setCustomerMapper(ICustomerMapper customerMapper) {
 		this.customerMapper = customerMapper;
 	}
@@ -84,7 +82,7 @@ public class CustomersDAOImpl implements CustomersDAO {
 			}
 
 			List<CopySalida> outputCopies = respuesta.getCuerpo().getPartes(CopySalida.class);
-			
+
 			for (CopySalida outputCopy : outputCopies) {
 				FormatoOZECNQS0 formatoSalida = outputCopy.getCopy(FormatoOZECNQS0.class);
 				dtoIntAccountAccMovementsResume = customerMapper.map(formatoSalida);
@@ -98,7 +96,7 @@ public class CustomersDAOImpl implements CustomersDAO {
 		}
 		log.info("getlistAccountsMovementsResume response: " + accountMovementDtoList);
 		return accountMovementDtoList;
-	
+
 	}
 
 	@Override
@@ -131,13 +129,13 @@ public class CustomersDAOImpl implements CustomersDAO {
 			}
 
 			List<CopySalida> outputCopies = respuesta.getCuerpo().getPartes(CopySalida.class);
-			
+
 			for(CopySalida outputCopy :outputCopies){
 				FormatoOZECNPS0 formatoSalida = outputCopy.getCopy(FormatoOZECNPS0.class);
 				dtoIntCardCharge = customerMapper.map(formatoSalida);
 				cardChargetDtoList.add(dtoIntCardCharge);
 			}
-			
+
 		} catch (BusinessServiceException bse) {
 			log.error("BusinessServiceException - Transaction error happened: " + bse.getMessage());
 			throw bse;
@@ -147,36 +145,35 @@ public class CustomersDAOImpl implements CustomersDAO {
 		log.info("getlistCreCardCharges response: " + cardChargetDtoList);
 		return cardChargetDtoList;
 	}
-	
+
 	@Override
 	public DTOIntCustomer getCustomer(DTOIntFilterCustomerResumes filter)
 			throws BusinessServiceException {
 		log.info("CustDAO: Into getCustomer...");
 		log.info("CustDAO: getCustomer params(customerId):" + filter.getCustomerId());
-		
+
 		DTOIntCustomer dtoIntCustomer = new DTOIntCustomer();
 
 		FormatoOZNCENB0 formato = new FormatoOZNCENB0();
-		
+
 		formato.setNumclie(filter.getCustomerId());
-		//Insertado mientras host soluciona lo de este campo
-		formato.setNomclie("NombreDelCliente");
-		
+
 		PeticionTransaccionOznb peticion = new PeticionTransaccionOznb();
-		
+
 		peticion.getCuerpo().getPartes().add(formato);
 		log.info("getCustomer formato entrada:" + peticion);
 		RespuestaTransaccionOznb respuesta = transaccionOznb.invocar(peticion);
 		log.info("getCustomer respuesta:" + respuesta);
-		
+
 		BusinessServiceException exception = errorMappingHelper.toBusinessServiceException(respuesta);
 		if (exception != null) {
 			throw new BusinessServiceException(EnumError.NO_DATA.getAlias());
 		}
-		
+
 		CopySalida outputCopies = respuesta.getCuerpo().getParte(CopySalida.class);
+
 		FormatoOZNCSNB0 formatoSalida = outputCopies.getCopy(FormatoOZNCSNB0.class);
-		
+
 		log.info("DAO - Se mapea la respuesta para retornarla SMC : getCustomer SN Customer ");
 		dtoIntCustomer = CustomerMapper.mapToOuter(formatoSalida);
 
