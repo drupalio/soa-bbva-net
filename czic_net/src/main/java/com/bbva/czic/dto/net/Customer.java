@@ -26,7 +26,6 @@ public class Customer implements Serializable {
 	@NotNull
 	private String id;
 	@ApiModelProperty(value = "documento del cliente", required = true)
-	@NotNull
 	private Document document;
 	@ApiModelProperty("Nombre de usuario del cliente")
 	private String username;

@@ -26,7 +26,7 @@ public class CreditCardTest {
 	public void creditCardFieldsAreNotNull() {
 		CreditCard creditCard = new CreditCard();
 		Set<ConstraintViolation<CreditCard>> constraintViolations = validator.validate(creditCard);
-		assertEquals(12, constraintViolations.size());
+		assertEquals(11, constraintViolations.size());
 	}
 
 }

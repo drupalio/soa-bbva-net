@@ -26,7 +26,7 @@ public class CardTest {
 	public void cardFieldsAreNotNull() {
 		Card card = new Card();
 		Set<ConstraintViolation<Card>> constraintViolations = validator.validate(card);
-		assertEquals(10, constraintViolations.size());
+		assertEquals(9, constraintViolations.size());
 	}
 	
 	@Test
@@ -34,7 +34,7 @@ public class CardTest {
 		Card card = new Card();
 		card.setCardNumber("");
 		Set<ConstraintViolation<Card>> constraintViolations = validator.validate(card);
-		assertEquals(10, constraintViolations.size());
+		assertEquals(9, constraintViolations.size());
 	}
 
 }
