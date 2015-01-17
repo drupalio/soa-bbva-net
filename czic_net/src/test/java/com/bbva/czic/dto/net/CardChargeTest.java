@@ -1,16 +1,10 @@
 package com.bbva.czic.dto.net;
 
-import static org.junit.Assert.*;
+import org.junit.BeforeClass;
 
-import java.util.Set;
-
-import javax.validation.ConstraintViolation;
 import javax.validation.Validation;
 import javax.validation.Validator;
 import javax.validation.ValidatorFactory;
-
-import org.junit.BeforeClass;
-import org.junit.Test;
 
 public class CardChargeTest {
 
@@ -22,11 +16,6 @@ public class CardChargeTest {
 		validator = factory.getValidator();
 	}
 
-	@Test
-	public void cardChargeFieldsAreNotNull() {
-		CardCharge cardCharge = new CardCharge();
-		Set<ConstraintViolation<CardCharge>> constraintViolations = validator.validate(cardCharge);
-		assertEquals(2, constraintViolations.size());
-	}
+	// TODO realizar test de validación de campos. Los test deben ser funcionales. ej. Longitud del número de una tarjeta
 
 }

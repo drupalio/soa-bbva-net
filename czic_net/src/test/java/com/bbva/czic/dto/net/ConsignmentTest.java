@@ -1,17 +1,17 @@
 package com.bbva.czic.dto.net;
 
-import static org.junit.Assert.*;
-
-import java.util.GregorianCalendar;
-import java.util.Set;
+import org.junit.BeforeClass;
+import org.junit.Test;
 
 import javax.validation.ConstraintViolation;
 import javax.validation.Validation;
 import javax.validation.Validator;
 import javax.validation.ValidatorFactory;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
+import java.util.Set;
 
-import org.junit.BeforeClass;
-import org.junit.Test;
+import static org.junit.Assert.assertEquals;
 
 public class ConsignmentTest {
 
@@ -23,27 +23,34 @@ public class ConsignmentTest {
 		validator = factory.getValidator();
 	}
 
+	// TODO realizar test de validación de campos. Los test deben ser funcionales. ej. Longitud del número de una tarjeta
+
 	@Test
-	public void consigmentFieldsAreNotNull() {
+	public void testValidationFailsIfConsigmentOperationDateIsInFuture() {
 		Consignment consigment = new Consignment();
+		consigment.setDate(getFutureDate());
 		Set<ConstraintViolation<Consignment>> constraintViolations = validator.validate(consigment);
-		assertEquals(3, constraintViolations.size());
+		assertEquals(1, constraintViolations.size());
 	}
-	
+
 	@Test
-	public void consigmentReferenceIsEmpty() {
+	public void testValidationPassIfConsigmentOperationDateIsInPast() {
 		Consignment consigment = new Consignment();
-		consigment.setNumber("");
+		consigment.setDate(getPastDate());
 		Set<ConstraintViolation<Consignment>> constraintViolations = validator.validate(consigment);
-		assertEquals(3, constraintViolations.size());		
+		assertEquals(0, constraintViolations.size());
 	}
-	
-	@Test
-	public void consigmentOperationDateIsNotInFuture() {
-		Consignment consigment = new Consignment();
-		consigment.setDate(new GregorianCalendar(2016,1,28,13,24,56));
-		Set<ConstraintViolation<Consignment>> constraintViolations = validator.validate(consigment);
-		assertEquals(3, constraintViolations.size());
+
+	private Calendar getFutureDate() {
+		Calendar futureCalendar = GregorianCalendar.getInstance();
+		futureCalendar.add(Calendar.MONTH, 1);
+		return futureCalendar;
+	}
+
+	private Calendar getPastDate() {
+		Calendar futureCalendar = GregorianCalendar.getInstance();
+		futureCalendar.add(Calendar.MONTH, -1);
+		return futureCalendar;
 	}
 
 }

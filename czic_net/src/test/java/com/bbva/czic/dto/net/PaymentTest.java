@@ -1,20 +1,21 @@
 package com.bbva.czic.dto.net;
 
-import static org.junit.Assert.*;
-
-import java.util.Set;
+import org.junit.BeforeClass;
+import org.junit.Test;
 
 import javax.validation.ConstraintViolation;
 import javax.validation.Validation;
 import javax.validation.Validator;
 import javax.validation.ValidatorFactory;
+import java.util.Set;
 
-import org.junit.BeforeClass;
-import org.junit.Test;
+import static org.junit.Assert.assertEquals;
 
 public class PaymentTest {
 
 	private static Validator validator;
+
+	private static int NEGATIVE_INT = -1;
 
 	@BeforeClass
 	public static void init() {
@@ -22,19 +23,15 @@ public class PaymentTest {
 		validator = factory.getValidator();
 	}
 
+	// TODO realizar test de validación de campos. Los test deben ser funcionales. ej. Longitud del número de una tarjeta
+
 	@Test
-	public void paymentFieldsAreNotNull() {
+	public void testValidationFailsIfPaymentNumberOfQuotasIsNegative() {
 		Payment payment = new Payment();
+		payment.setNumbersOfQuota(NEGATIVE_INT);
 		Set<ConstraintViolation<Payment>> constraintViolations = validator.validate(payment);
-		assertEquals(5, constraintViolations.size());
-	}
-	
-	@Test
-	public void paymentNumberOfQuotasIsNotNegative() {
-		Payment payment = new Payment();
-		payment.setNumbersOfQuota(-20);
-		Set<ConstraintViolation<Payment>> constraintViolations = validator.validate(payment);
-		assertEquals(6, constraintViolations.size());
+		assertEquals(1, constraintViolations.size());
 		
 	}
+
 }

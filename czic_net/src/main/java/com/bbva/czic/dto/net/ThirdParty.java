@@ -22,10 +22,8 @@ public class ThirdParty
 
     public final static long serialVersionUID = 1L;
     @ApiModelProperty("Identificador del tercero")
-    @NotNull
     private User customerId;
     @ApiModelProperty(value = "Tipo de tercero: (CUSTOMER, LEAD, AGGREGATE)", required = true)
-    @NotNull
     private EnumThirdPartyType type;
 
     public ThirdParty() {

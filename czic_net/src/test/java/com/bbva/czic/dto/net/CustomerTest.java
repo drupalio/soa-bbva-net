@@ -1,21 +1,23 @@
 package com.bbva.czic.dto.net;
 
-import static org.junit.Assert.*;
-
-import java.util.GregorianCalendar;
-import java.util.Set;
+import org.junit.BeforeClass;
+import org.junit.Test;
 
 import javax.validation.ConstraintViolation;
 import javax.validation.Validation;
 import javax.validation.Validator;
 import javax.validation.ValidatorFactory;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
+import java.util.Set;
 
-import org.junit.BeforeClass;
-import org.junit.Test;
+import static org.junit.Assert.assertEquals;
 
 public class CustomerTest {
 
 	private static Validator validator;
+
+	private static int NEGATIVE_INT = -1;
 
 	@BeforeClass
 	public static void init() {
@@ -23,52 +25,44 @@ public class CustomerTest {
 		validator = factory.getValidator();
 	}
 
+	// TODO realizar test de validación de campos. Los test deben ser funcionales. ej. Longitud del número de una tarjeta
+
 	@Test
-	public void customerFieldsAreNotNull() {
+	public void testValidationFailsIfCustomerLastConnectionDateIsInFuture() {
 		Customer customer = new Customer();
+		customer.setLastConnectionTime(getFutureDate());
 		Set<ConstraintViolation<Customer>> constraintViolations = validator.validate(customer);
-		assertEquals(7, constraintViolations.size());
+		assertEquals(1, constraintViolations.size());
+	}
+
+	@Test
+	public void testValidationFailsIfCustomerStratumIsNegative() {
+		Customer customer = new Customer();
+		customer.setStratum(NEGATIVE_INT);
+		Set<ConstraintViolation<Customer>> constraintViolations = validator.validate(customer);
+		assertEquals(1, constraintViolations.size());
 	}
 	
 	@Test
-	public void customerNameIsNotEmpty() {
+	public void testValidationFailsIfCustomerResidenceYearsIsNegative() {
 		Customer customer = new Customer();
-		customer.setName("");
+		customer.setResidenceYears(NEGATIVE_INT);
 		Set<ConstraintViolation<Customer>> constraintViolations = validator.validate(customer);
-		assertEquals(7, constraintViolations.size());
-		
+		assertEquals(1, constraintViolations.size());
 	}
 	
 	@Test
-	public void customerLastConnectionDateIsNotInFuture() {
+	public void testValidationFailsIfCustomerHomeMembersIsNegative() {
 		Customer customer = new Customer();
-		customer.setLastConnectionTime(new GregorianCalendar(2016,1,28,13,24,56));
+		customer.setHomeMembers(NEGATIVE_INT);
 		Set<ConstraintViolation<Customer>> constraintViolations = validator.validate(customer);
-		assertEquals(8, constraintViolations.size());
+		assertEquals(1, constraintViolations.size());
 	}
-	
-	@Test
-	public void customerStratumIsNotNegative() {
-		Customer customer = new Customer();
-		customer.setStratum(-20);
-		Set<ConstraintViolation<Customer>> constraintViolations = validator.validate(customer);
-		assertEquals(7, constraintViolations.size());
-	}
-	
-	@Test
-	public void customerResidenceYearsIsNotNegative() {
-		Customer customer = new Customer();
-		customer.setResidenceYears(-20);
-		Set<ConstraintViolation<Customer>> constraintViolations = validator.validate(customer);
-		assertEquals(8, constraintViolations.size());
-	}
-	
-	@Test
-	public void customerHomeMembersIsNotNegative() {
-		Customer customer = new Customer();
-		customer.setHomeMembers(-20);
-		Set<ConstraintViolation<Customer>> constraintViolations = validator.validate(customer);
-		assertEquals(8, constraintViolations.size());
+
+	private Calendar getFutureDate() {
+		Calendar futureCalendar = GregorianCalendar.getInstance();
+		futureCalendar.add(Calendar.MONTH, 1);
+		return futureCalendar;
 	}
 
 }

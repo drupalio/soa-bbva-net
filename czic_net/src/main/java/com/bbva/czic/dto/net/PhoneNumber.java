@@ -23,25 +23,18 @@ public class PhoneNumber
 
     public final static long serialVersionUID = 1L;
     @ApiModelProperty("Fuente de los contactos")
-    @NotNull
     private EnumContactSourceType contactSource;
     @ApiModelProperty("Codigo del pais")
-    @NotBlank
     private String countryCode;
     @ApiModelProperty(" Codigo de la region")
-    @NotBlank
     private String regionalCode;
     @ApiModelProperty("Numero de telefono")
-    @NotBlank
     private String number;
     @ApiModelProperty("Fuente de tipo de numero")
-    @NotNull
     private EnumPhoneNumberType type;
     @ApiModelProperty("Numero por defecto")
-    @NotNull
     private Boolean primary;
     @ApiModelProperty("Numero activo")
-    @NotNull
     private Boolean active;
 
     public PhoneNumber() {

@@ -26,32 +26,24 @@ public class Checkbook implements Serializable {
 
 	public final static long serialVersionUID = 1L;
 	@ApiModelProperty(value = "Numero identificativo del cheque", required = true)
-	@NotBlank
 	private String id;
 	@ApiModelProperty(value = "Numero del primer cheque del intervalo de consulta", required = true)
-	@NotNull
 	private Integer firstCheck;
 	@ApiModelProperty(" ultimo cheque de intervalo de consulta")
-	@NotNull
 	private Integer lastCheck;
 	@ApiModelProperty(" numero de cheques totales de la chequera ")
-	@NotNull
 	private Integer totalCheck;
 	@XmlSchemaType(name = "dateTime")
 	@ApiModelProperty("Fecha de solicitud de la chequera ")
-	@NotNull
 	@Past
 	private Calendar requestDate;
 	@XmlSchemaType(name = "dateTime")
 	@ApiModelProperty("Fecha de entrega de la nueva chequera")
-	@NotNull
 	@Past
 	private Calendar deliveryDate;
 	@ApiModelProperty(value = "Estado actual de la chequera solicitada", required = true)
-	@NotNull
 	private EnumCheckbookStatus actualState;
 	@ApiModelProperty(value = "Cheques asociados a una chequera", required = true)
-	@NotNull
 	private List<Check> checks;
 
 	public Checkbook() {

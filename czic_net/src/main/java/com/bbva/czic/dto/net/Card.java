@@ -18,7 +18,6 @@ public class Card extends Product implements Serializable {
 
 	public final static long serialVersionUID = 1L;
 	@ApiModelProperty("Numero de la tarjeta")
-	@NotBlank
 	private String cardNumber;
 
 	public Card() {

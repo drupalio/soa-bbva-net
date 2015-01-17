@@ -22,7 +22,6 @@ public class Product implements Serializable {
 	public final static long serialVersionUID = 1L;
 
 	@ApiModelProperty(value = "Identificador del producto", required = true)
-	@NotNull
 	private String id;
 
 	@ApiModelProperty(value = "", required = true)

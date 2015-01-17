@@ -26,27 +26,20 @@ public class User
 
     public final static long serialVersionUID = 1L;
     @ApiModelProperty(value = "Identificador del usuario", required = true)
-    @NotBlank
     private String customerId;
     @ApiModelProperty("Nombre del usuario")
-    @NotBlank
     private String name;
     @ApiModelProperty("Identificador de la informacion del contacto")
-    @NotNull
     private ContactInfo contactInfo;
     @ApiModelProperty("Entidad con toda la informaci\u00f3n del ejecutivo de ventas")
-    @NotNull
     private Executive salesExecutive;
     @XmlSchemaType(name = "dateTime")
     @ApiModelProperty("Fecha de la \u00faltima vez que accedi\u00f3 el usuario al portal")
-    @NotNull
     @Past
     private Calendar lastAccessDate;
     @ApiModelProperty("Arreglo de los mensajes de alerta generados para el usuario")
-    @NotNull
     private List<Message> message;
     @ApiModelProperty("Arreglo de los productos correspondientes al usuario")
-    @NotNull
     private List<Product> products;
 
     public User() {
