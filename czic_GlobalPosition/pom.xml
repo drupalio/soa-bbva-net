@@ -30,7 +30,8 @@
 		</dependency>
 
 		<!--<dependency>
-			<groupId>ma.glasnost.orika</groupId>
+			<groupId>
+			ma.glasnost.orika</groupId>
 			<artifactId>orika-core</artifactId>
 			<version>1.4.5</version>
 		</dependency>-->
@@ -87,7 +88,7 @@
 			<groupId>org.mockito</groupId>
 			<artifactId>mockito-core</artifactId>
 			<version>1.9.0</version>
-			<scope>test</scope>
+			<!--scope>test</scope-->
 		</dependency>
 
 		<dependency>

@@ -169,36 +169,28 @@ public class LoanDAOImpl implements LoanDAO {
 
 			peticion.getCuerpo().getPartes().add(peticion);
 
-		//	RespuestaTransaccionOznk respuesta = new TransaccionOznk().invocar(peticion);
+			RespuestaTransaccionOznk respuesta = new TransaccionOznk().invocar(peticion);
 
-		//	BusinessServiceException exception = errorMappingHelper.toBusinessServiceException(respuesta);
+			BusinessServiceException exception = errorMappingHelper.toBusinessServiceException(respuesta);
 
-		/*	if (exception != null){
+			if (exception != null){
 				log.info("LoanDAOImpl.getRotaryQuotaMovement = exception ->" + exception.getErrorMessage() );
 				throw new BusinessServiceException(EnumError.TECHNICAL_ERROR.getAlias());
-			}*/
+			}
 
-			//final CopySalida outputCopy = respuesta.getCuerpo().getParte(CopySalida.class);
-			//if (outputCopy != null) {
-				final FormatoOZNCSNK0 formatoSalida = new FormatoOZNCSNK0(); // outputCopy.getCopy(FormatoOZNCSNK0.class);
+			final CopySalida outputCopy = respuesta.getCuerpo().getParte(CopySalida.class);
+			if (outputCopy != null) {
+				final FormatoOZNCSNK0 formatoSalida =  outputCopy.getCopy(FormatoOZNCSNK0.class);
 
-			formatoSalida.setFechao("2014-01-03");
-			formatoSalida.setResto(new BigDecimal("0.00"));
-			formatoSalida.setImporte("23.000");
-			formatoSalida.setBalance(new BigDecimal("0.00"));
-			formatoSalida.setDescop("");
-			formatoSalida.setCoutas("");
 
-			formatoSalida.setCoutat("");
-			formatoSalida.setEstado("ACCEPTED");
 
 				if (formatoSalida != null) {
 					rotaryQuotaMove = LoanMapper.getDTOIntMovementByCopy(formatoSalida);
-				}/*else{
+				}else{
 					log.info("No se encontraron datos para la paticion = " + exception.getMessage());
 					throw new BusinessServiceException(EnumError.NO_DATA.getAlias());
-				}*/
-			//}
+				}
+			}
 			return rotaryQuotaMove;
 		}
 		catch(BusinessServiceException bex) {
