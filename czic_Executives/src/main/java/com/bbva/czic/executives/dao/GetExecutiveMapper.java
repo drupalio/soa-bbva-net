@@ -9,16 +9,14 @@ public class GetExecutiveMapper {
 	/**
 	 * Metodo encargado de hacer ek mapeo de un dto interno de executive a un
 	 * externo
-	 * 
+	 *
 	 * @author David Tafur
 	 * @param dtoIntExecutive
 	 * @return
 	 */
 	public static Executive mapOuter(final DTOIntExecutive dtoIntExecutive) {
 		final Executive executive = new Executive();
-		/*final Email email = new Email();
-		email.setAddress(dtoIntExecutive.getEmail());
-		executive.setEmail(email);*/
+
 		executive.setEmail(dtoIntExecutive.getEmail());
 		executive.setId(dtoIntExecutive.getExecutiveId());
 		executive.setName(dtoIntExecutive.getName());

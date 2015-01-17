@@ -1,21 +1,16 @@
 package com.bbva.czic.executives.dao;
 
-import com.bbva.czic.routine.commons.rm.utils.errors.EnumError;
-import com.bbva.jee.arq.spring.core.log.I18nLog;
-import com.bbva.jee.arq.spring.core.log.I18nLogFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-
 import com.bbva.czic.executives.business.dto.DTOIntExecutive;
-import com.bbva.czic.executives.dao.model.oznr.FormatoOZECNRE0;
-import com.bbva.czic.executives.dao.model.oznr.FormatoOZECNRS0;
-import com.bbva.czic.executives.dao.model.oznr.PeticionTransaccionOznr;
-import com.bbva.czic.executives.dao.model.oznr.RespuestaTransaccionOznr;
-import com.bbva.czic.executives.dao.model.oznr.TransaccionOznr;
+import com.bbva.czic.executives.dao.model.oznr.*;
 import com.bbva.czic.executives.facade.v01.ExecutivesMapper;
+import com.bbva.czic.routine.commons.rm.utils.errors.EnumError;
 import com.bbva.jee.arq.spring.core.host.protocolo.ps9.ErrorMappingHelper;
 import com.bbva.jee.arq.spring.core.host.protocolo.ps9.aplicacion.CopySalida;
 import com.bbva.jee.arq.spring.core.host.transporte.ExcepcionTransporte;
+import com.bbva.jee.arq.spring.core.log.I18nLog;
+import com.bbva.jee.arq.spring.core.log.I18nLogFactory;
 import com.bbva.jee.arq.spring.core.servicing.gce.BusinessServiceException;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 @Repository
@@ -60,11 +55,11 @@ public class ExecutivesDAOImpl implements ExecutivesDAO {
 
 		CopySalida copiesSalida = respuesta.getCuerpo().getParte(
 				CopySalida.class);
-		FormatoOZECNRS0 formatoSalida = copiesSalida
-				.getCopy(FormatoOZECNRS0.class);
+
+		FormatoOZECNRS0 formatoSalida = copiesSalida.getCopy(FormatoOZECNRS0.class);
 
 		if(formatoSalida.getNomejec() == null || formatoSalida.getNomejec().equals("") || formatoSalida.getEmailej() == null || formatoSalida.getEmailej().equals("") || formatoSalida.getOfiejec() == null || formatoSalida.getOfiejec().equals("") || formatoSalida.getTelejec() == null || formatoSalida.getTelejec().equals("")){
-throw new BusinessServiceException(EnumError.NO_DATA.getAlias());
+			throw new BusinessServiceException(EnumError.NO_DATA.getAlias());
 		}
 
 		log.info("DAO - Se mapea la respuesta para retornarla SMC : getExecutive SN Executives ");
