@@ -2,7 +2,9 @@
 deploy/
 log.roo
 bin
-
+global-groovy.log
+soapui-errors.log
+soapui.log
 
 ### Intellij ###
 # Covers JetBrains IDEs: IntelliJ, RubyMine, PhpStorm, AppCode, PyCharm
