@@ -1,17 +1,17 @@
 package com.bbva.czic.dto.net;
 
-import static org.junit.Assert.assertEquals;
-
-import java.util.GregorianCalendar;
-import java.util.Set;
+import org.junit.BeforeClass;
+import org.junit.Test;
 
 import javax.validation.ConstraintViolation;
 import javax.validation.Validation;
 import javax.validation.Validator;
 import javax.validation.ValidatorFactory;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
+import java.util.Set;
 
-import org.junit.BeforeClass;
-import org.junit.Test;
+import static org.junit.Assert.assertEquals;
 
 public class ActivityTest {
 
@@ -23,38 +23,50 @@ public class ActivityTest {
 		validator = factory.getValidator();
 	}
 
+	// TODO realizar test de validación de campos. Los test deben ser funcionales. ej. Longitud del número de una tarjeta
+
 	@Test
-	public void activityFieldsAreNotNull() {
+	public void testValidationFailsIfActivityOperationDateIsInFuture() {
 		Activity activity = new Activity();
+		activity.setOperationDate(getFutureDate());
 		Set<ConstraintViolation<Activity>> constraintViolations = validator.validate(activity);
-		assertEquals(5, constraintViolations.size());
+		assertEquals(1, constraintViolations.size());
 	}
-	
+
 	@Test
-	public void activityReferenceIsNotEmpty() {
+	public void testValidationPassIfActivityOperationDateIsInPast() {
 		Activity activity = new Activity();
-		activity.setReference("");
+		activity.setOperationDate(getPastDate());
 		Set<ConstraintViolation<Activity>> constraintViolations = validator.validate(activity);
-		assertEquals(5, constraintViolations.size());
-		
+		assertEquals(0, constraintViolations.size());
 	}
-	
+
 	@Test
-	public void activityOperationDateIsNotInFuture() {
+	public void testValidatioFailsIfActivityExecutionDateIsInFuture() {
 		Activity activity = new Activity();
-		activity.setOperationDate(new GregorianCalendar(2016,1,28,13,24,56));
+		activity.setExecutionDate(getFutureDate());
 		Set<ConstraintViolation<Activity>> constraintViolations = validator.validate(activity);
-		assertEquals(5, constraintViolations.size());
+		assertEquals(1, constraintViolations.size());
 	}
-	
+
 	@Test
-	public void activityExecutionDateIsNotInFuture() {
+	public void testValidatioFailsIfActivityExecutionDateIsInPast() {
 		Activity activity = new Activity();
-		activity.setExecutionDate(new GregorianCalendar(2016,1,28,13,24,56));
+		activity.setExecutionDate(getPastDate());
 		Set<ConstraintViolation<Activity>> constraintViolations = validator.validate(activity);
-		assertEquals(5, constraintViolations.size());
+		assertEquals(0, constraintViolations.size());
 	}
-	
-	
+
+	private Calendar getFutureDate() {
+		Calendar futureCalendar = GregorianCalendar.getInstance();
+		futureCalendar.add(Calendar.MONTH, 1);
+		return futureCalendar;
+	}
+
+	private Calendar getPastDate() {
+		Calendar futureCalendar = GregorianCalendar.getInstance();
+		futureCalendar.add(Calendar.MONTH, -1);
+		return futureCalendar;
+	}
 
 }

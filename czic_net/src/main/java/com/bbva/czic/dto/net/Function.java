@@ -24,8 +24,7 @@ public class Function
     @ApiModelProperty(value = "C\u00f3digo del tipo de funci\u00f3n", required = true)
     @NotNull
     private String id;
-    @ApiModelProperty(value = "Descripcion de la funcion", required = true)
-    @NotNull
+    @ApiModelProperty(value = "Descripcion de la funcion", required = true)    @NotNull
     private String type;
 
     public Function() {

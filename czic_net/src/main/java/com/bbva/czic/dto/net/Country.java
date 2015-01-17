@@ -23,13 +23,10 @@ public class Country
 
     public final static long serialVersionUID = 1L;
     @ApiModelProperty(value = " Identificador del pais", required = true)
-    @NotBlank
     private String id;
     @ApiModelProperty("Nombre del pais")
-    @NotBlank
     private String name;
     @ApiModelProperty("Estados pertenecientes al pais")
-    @NotNull
     private List<State> states;
 
     public Country() {

@@ -25,7 +25,7 @@ public class AccountsDAOImpl implements AccountsDAO {
 	private IPaginatedTransaction txtGetAccountMovementResume;
 
 	@Autowired
-	@Qualifier("tx-lis-check")
+	@Qualifier("tx-list-check")
 	private IPaginatedTransaction txListCheck;
 
 	@Autowired

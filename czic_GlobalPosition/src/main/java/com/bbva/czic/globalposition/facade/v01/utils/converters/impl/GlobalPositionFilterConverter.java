@@ -18,7 +18,7 @@ import org.springframework.stereotype.Component;
 import java.util.List;
 
 /**
- * Created by Administrador on 10/01/2015.
+ * @author Entelgy Colombia.
  */
 @Component(value = "global-position-filter-converter")
 public class GlobalPositionFilterConverter implements IFilterConverter {

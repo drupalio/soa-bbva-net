@@ -31,25 +31,19 @@ public class Message
 
     public final static long serialVersionUID = 1L;
     @ApiModelProperty("Identificador del mensaje")
-    @NotBlank
     private String id;
     @ApiModelProperty(value = "Titulo del mensaje", required = true)
-    @NotBlank
     private String title;
     @ApiModelProperty(value = "Plantilla del mensaje", required = true)
-    @NotBlank
     private String template;
     @ApiModelProperty(value = "Tipo de mensaje", required = true)
-    @NotNull
     private EnumMessageType reference;
     @XmlSchemaType(name = "dateTime")
     @ApiModelProperty("Tiempo de mensaje")
-    @NotNull
     private Calendar time;
     @XmlJavaTypeAdapter(MoneyAdapter.class)
     @XmlElement(type = Money.class)
     @ApiModelProperty("Valor de mensaje")
-    @NotNull
     private Money value;
     @ApiModelProperty("Descripcion del mensaje")
     private String info;

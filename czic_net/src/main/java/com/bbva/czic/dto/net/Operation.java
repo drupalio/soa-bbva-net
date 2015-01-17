@@ -21,10 +21,8 @@ public class Operation
 
     public final static long serialVersionUID = 1L;
     @ApiModelProperty(value = "C\u00f3digo del tipo de operaci\u00f3n", required = true)
-    @NotBlank
     private String code;
     @ApiModelProperty(value = "Descripcion de la operacion", required = true)
-    @NotBlank
     private String description;
 
     public Operation() {

@@ -23,25 +23,20 @@ public class Customer implements Serializable {
 
 	public final static long serialVersionUID = 1L;
 	@ApiModelProperty(value = "documento del cliente", required = true)
-	@NotNull
 	private String id;
 	@ApiModelProperty(value = "documento del cliente", required = true)
 	private Document document;
 	@ApiModelProperty("Nombre de usuario del cliente")
 	private String username;
 	@ApiModelProperty("Nombre del cliente")
-	@NotBlank
 	private String name;
 	@ApiModelProperty("Segmento del cliente")
 	private EnumSegmentType segment;
 	@ApiModelProperty("Información de contacto que contiene los emails del cliente")
-	@NotNull
 	private ContactInfo contactInfo;
 	@ApiModelProperty("Ubicacion de la casa")
-	@NotNull
 	private Place homeLocation;
 	@ApiModelProperty("Estrato del cliente")
-	@NotNull
 	@Min(0)
 	private Integer stratum;
 	@ApiModelProperty("Años de residencia en la ciudad")
@@ -51,7 +46,6 @@ public class Customer implements Serializable {
 	@Min(0)
 	private Integer homeMembers;
 	@ApiModelProperty("Estrato del cliente")
-	@NotNull
 	private EnumDwelingType dwelingType;
 	@ApiModelProperty("Ubicacion de la oficina")
 	private Place officeLocation;

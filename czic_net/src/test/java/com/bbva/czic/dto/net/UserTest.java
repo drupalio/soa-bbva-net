@@ -1,17 +1,17 @@
 package com.bbva.czic.dto.net;
 
-import static org.junit.Assert.*;
-
-import java.util.GregorianCalendar;
-import java.util.Set;
+import org.junit.BeforeClass;
+import org.junit.Test;
 
 import javax.validation.ConstraintViolation;
 import javax.validation.Validation;
 import javax.validation.Validator;
 import javax.validation.ValidatorFactory;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
+import java.util.Set;
 
-import org.junit.BeforeClass;
-import org.junit.Test;
+import static org.junit.Assert.assertEquals;
 
 public class UserTest {
 
@@ -23,37 +23,20 @@ public class UserTest {
 		validator = factory.getValidator();
 	}
 
+	// TODO realizar test de validación de campos. Los test deben ser funcionales. ej. Longitud del número de una tarjeta
+
 	@Test
-	public void userFieldsAreNotNull() {
+	public void testValidationFailsIfUserOperationDateIsInFuture() {
 		User user = new User();
+		user.setLastAccessDate(getFutureDate());
 		Set<ConstraintViolation<User>> constraintViolations = validator.validate(user);
-		assertEquals(7, constraintViolations.size());
+		assertEquals(1, constraintViolations.size());
 	}
-	
-	@Test
-	public void userCustomerIdIsNotEmpty() {
-		User user = new User();
-		user.setCustomerId("");
-		Set<ConstraintViolation<User>> constraintViolations = validator.validate(user);
-		assertEquals(7, constraintViolations.size());
-		
-	}
-	
-	@Test
-	public void userNameIsNotEmpty() {
-		User user = new User();
-		user.setName("");
-		Set<ConstraintViolation<User>> constraintViolations = validator.validate(user);
-		assertEquals(7, constraintViolations.size());
-		
-	}
-	
-	@Test
-	public void userOperationDateIsNotInFuture() {
-		User user = new User();
-		user.setLastAccessDate(new GregorianCalendar(2016,1,28,13,24,56));
-		Set<ConstraintViolation<User>> constraintViolations = validator.validate(user);
-		assertEquals(7, constraintViolations.size());
+
+	private Calendar getFutureDate() {
+		Calendar futureCalendar = GregorianCalendar.getInstance();
+		futureCalendar.add(Calendar.MONTH, 1);
+		return futureCalendar;
 	}
 
 }

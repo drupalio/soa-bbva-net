@@ -24,25 +24,19 @@ public class Conditions implements Serializable {
 	@ApiModelProperty(value = "Alias asociado al titular de la cuenta", required = true)
 	private String alias;
 	@ApiModelProperty(value = "Tipo de plan asociado al producto", required = true)
-	@NotBlank
 	private String category;
 	@ApiModelProperty("Descripcion del tipo de producto")
-	@NotBlank
 	private String description;
 	@XmlSchemaType(name = "dateTime")
 	@ApiModelProperty(value = " Fecha en la que se realizo la apertura del producto", required = true)
-	@NotNull
 	private Calendar openingDate;
 	@ApiModelProperty(value = "Tipo de comision que aplica para el producto", required = true)
-	@NotBlank
 	private String commission;
 	@ApiModelProperty(value = "Datos de la oficina donde se realizo la apertura del producto", required = true)
-	@NotNull
 	private Office office;
 	@ApiModelProperty("")
 	private String mobilizationConditions;
 	@ApiModelProperty(value = "ultimas actividades realizadas", required = true)
-	@NotNull
 	private List<Activity> activities;
 
 	public Conditions() {

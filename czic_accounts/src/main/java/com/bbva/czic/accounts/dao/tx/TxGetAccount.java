@@ -13,7 +13,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
 /**
- * Created by Entelgy on 09/01/2015.
+ * Created by Entelgy Colombia
  */
 @Component("tx-get-account")
 public class TxGetAccount extends SimpleTransaction<PeticionTransaccionOzna,RespuestaTransaccionOzna> {

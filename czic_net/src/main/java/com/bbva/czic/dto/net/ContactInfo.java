@@ -18,10 +18,8 @@ public class ContactInfo implements Serializable {
 
 	public final static long serialVersionUID = 1L;
 	@ApiModelProperty(" Listado de numeros de telefono del usuario")
-	@NotNull
 	private List<PhoneNumber> phoneNumbers;
 	@ApiModelProperty("Listado de mails del usuario")
-	@NotNull
 	private List<Email> emails;
 
 	public ContactInfo() {
