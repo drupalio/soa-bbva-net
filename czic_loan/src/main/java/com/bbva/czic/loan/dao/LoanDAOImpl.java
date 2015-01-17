@@ -3,6 +3,7 @@ package com.bbva.czic.loan.dao;
 import com.bbva.czic.loan.business.dto.DTOIntMovement;
 import com.bbva.czic.loan.dao.model.ozni.*;
 import com.bbva.czic.loan.dao.model.oznk.*;
+import com.bbva.czic.routine.commons.rm.utils.errors.EnumError;
 import com.bbva.jee.arq.spring.core.servicing.gce.BusinessServiceException;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +22,7 @@ import com.bbva.jee.arq.spring.core.host.protocolo.ps9.ErrorMappingHelper;
 import com.bbva.jee.arq.spring.core.host.protocolo.ps9.aplicacion.CopySalida;
 import com.bbva.jee.arq.spring.core.log.I18nLog;
 import com.bbva.jee.arq.spring.core.log.I18nLogFactory;
+import org.springframework.util.CollectionUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -62,7 +64,7 @@ public class LoanDAOImpl implements LoanDAO {
 
 			if (exception != null) { 
 				log.info("LoanDAOImpl.getRotaryQuota transaccion Exception = " + exception.getMessage());
-				throw new BusinessServiceException("");
+				throw new BusinessServiceException(EnumError.TECHNICAL_ERROR.getAlias());
 			}
 			final CopySalida outputCopy = respuesta.getCuerpo().getParte(CopySalida.class);
 			if (outputCopy != null) {
@@ -70,6 +72,9 @@ public class LoanDAOImpl implements LoanDAO {
 				final FormatoOZNCSNJ0 formatoSalida = outputCopy.getCopy(FormatoOZNCSNJ0.class);
 				if (formatoSalida != null) {
 					dTOIntLoan = LoanMapper.dtoIntLoanMapper(formatoSalida);
+				}else{
+					log.info("No se encontraron datos para la paticion = " + exception.getMessage());
+					throw new BusinessServiceException(EnumError.NO_DATA.getAlias());
 				}
 			}
 			log.info("LoanDAOImpl.getRotaryQuota.respuesta --- fin");
@@ -80,7 +85,7 @@ public class LoanDAOImpl implements LoanDAO {
 			throw bse;
 		} catch (Exception e) {
 			log.error("Exception > An error happened while calling transaction = " + e.getMessage());
-			throw new BusinessServiceException("Exception > An error happened while calling transaction -> " + e.getMessage());
+			throw new BusinessServiceException(EnumError.TECHNICAL_ERROR.getAlias());
 		}
 	}
 
@@ -112,11 +117,14 @@ public class LoanDAOImpl implements LoanDAO {
 
 			if (exception != null) {
 				log.info("fin preInvocar LoanDAOImpl.getRotaryQuotaMovement.Exception" + exception.getErrorMessage());
-				throw new BusinessServiceException("loanServerListRotary");
+				throw new BusinessServiceException(EnumError.TECHNICAL_ERROR.getAlias());
 			}
 
 			final List<CopySalida> outputCopyList = respuesta.getCuerpo().getPartes(CopySalida.class);
 
+			if(CollectionUtils.isEmpty(outputCopyList)) {
+				throw new BusinessServiceException(EnumError.NO_DATA.getAlias());
+			}
 			log.info("LoanDAOImpl.listRotaryQuotaMovements.list = " + outputCopyList.size());
 
 			for (CopySalida item : outputCopyList) {
@@ -133,7 +141,7 @@ public class LoanDAOImpl implements LoanDAO {
 			throw bex;
 		} catch (Exception ex) {
 			log.error("fin preInvocar LoanDAOImpl.getRotaryQuotaMovement.Exception" + ex.getMessage());
-			throw new BusinessServiceException("exception generic = " + ex.getMessage());
+			throw new BusinessServiceException(EnumError.TECHNICAL_ERROR.getAlias());
 		}
 	}
 
@@ -158,7 +166,7 @@ public class LoanDAOImpl implements LoanDAO {
 
 			if (exception != null){
 				log.info("LoanDAOImpl.getRotaryQuotaMovement = exception ->" + exception.getErrorMessage() );
-				throw new BusinessServiceException("loanPeticionRotaryMuvement");
+				throw new BusinessServiceException(EnumError.TECHNICAL_ERROR.getAlias());
 			}
 
 			final CopySalida outputCopy = respuesta.getCuerpo().getParte(CopySalida.class);
@@ -166,6 +174,9 @@ public class LoanDAOImpl implements LoanDAO {
 				final FormatoOZNCSNK0 formatoSalida = outputCopy.getCopy(FormatoOZNCSNK0.class);
 				if (formatoSalida != null) {
 					 dtoIntMovement = LoanMapper.getDTOIntMovementByCopy(formatoSalida);
+				}else{
+					log.info("No se encontraron datos para la paticion = " + exception.getMessage());
+					throw new BusinessServiceException(EnumError.NO_DATA.getAlias());
 				}
 			}
 			return dtoIntMovement;
@@ -176,7 +187,7 @@ public class LoanDAOImpl implements LoanDAO {
 		}
 		catch (Exception e) {
 			log.info("LoanDAOImpl.getRotaryQuotaMovement.exception ->" + e.getMessage() );
-			throw new BusinessServiceException(e.getMessage());
+			throw new BusinessServiceException(EnumError.TECHNICAL_ERROR.getAlias());
 		}
 	}
 }

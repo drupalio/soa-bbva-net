@@ -15,7 +15,7 @@ public class LoanDaoImplMock implements LoanDAO{
 	public List<DTOIntMovement> listRotaryQuotaMovements(String idLoan,
 			String paginationKey, String pageSize, String fechaInicial,
 			String fechaFinal) throws BusinessServiceException {
-		// TODO Auto-generated method stub
+		// TODO Auto-generate method stub
 		return null;
 	}
 

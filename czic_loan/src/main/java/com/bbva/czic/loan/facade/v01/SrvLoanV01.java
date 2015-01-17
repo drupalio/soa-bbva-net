@@ -86,7 +86,7 @@ public class SrvLoanV01 implements ISrvLoanV01,
 			@ApiResponse(code = 500, message = "Technical Error") })
 	@GET
 	@ElementClass(response = List.class)
-	@Path("/rotaryQuota/{loanId}/movements/{paginationKey}/{pageSize}")
+	@Path("/rotaryQuota/{loanId}/movements")
 	@SMC(registryID = "SMC201400011", logicalID = "listRotaryQuotaMovements")
 	public List<Movement> listRotaryQuotaMovements(@ApiParam(value = "Loan identifier") @PathParam("loanId") String loanId,
 												   @ApiParam(value = "Loan pagination Key") @PathParam("paginationKey")  String paginationKey,

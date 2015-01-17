@@ -26,6 +26,12 @@
        <artifactId>czic_net</artifactId>
        <version>1.0.0</version>
     </dependency>
+
+    <dependency>
+       <groupId>com.bbva.czic</groupId>
+       <artifactId>czic_commons</artifactId>
+       <version>1.0.0</version>
+    </dependency>
    
     <dependency>
        <groupId>com.bbva.jee.arq.spring.core</groupId>
