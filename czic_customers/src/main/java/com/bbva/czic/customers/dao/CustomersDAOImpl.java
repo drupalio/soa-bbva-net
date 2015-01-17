@@ -159,8 +159,6 @@ public class CustomersDAOImpl implements CustomersDAO {
 		FormatoOZNCENB0 formato = new FormatoOZNCENB0();
 		
 		formato.setNumclie(filter.getCustomerId());
-		//Insertado mientras host soluciona lo de este campo
-		formato.setNomclie("NombreDelCliente");
 		
 		PeticionTransaccionOznb peticion = new PeticionTransaccionOznb();
 		
