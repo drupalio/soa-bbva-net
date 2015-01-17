@@ -1,10 +1,7 @@
 package com.bbva.czic.accounts.business.impl;
 
 import com.bbva.czic.accounts.business.ISrvIntAccounts;
-import com.bbva.czic.accounts.business.dto.DTOIntAccMovementsResume;
-import com.bbva.czic.accounts.business.dto.DTOIntAccount;
-import com.bbva.czic.accounts.business.dto.DTOIntFilterAccount;
-import com.bbva.czic.accounts.business.dto.DTOIntMonthlyBalances;
+import com.bbva.czic.accounts.business.dto.*;
 import com.bbva.czic.accounts.dao.AccountsDAO;
 import com.bbva.jee.arq.spring.core.log.I18nLog;
 import com.bbva.jee.arq.spring.core.log.I18nLogFactory;
@@ -50,5 +47,9 @@ public class SrvIntAccounts implements ISrvIntAccounts {
 		return accountsDAO.getAccount(dtoIntFilterAccount);
 	}
 
+	@Override
+	public DTOIntCheck listCheck(DTOIntCheck dtoIntCheck) {
+		return accountsDAO.getListCheck(dtoIntCheck);
+	}
 
 }

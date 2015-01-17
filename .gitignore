@@ -1,11 +1,16 @@
 # Created by https://www.gitignore.io
 deploy/
 log.roo
+bin
+
 
 ### Intellij ###
 # Covers JetBrains IDEs: IntelliJ, RubyMine, PhpStorm, AppCode, PyCharm
 
 *.iml
+
+.classpath
+.project
 
 ## Directory-based project format:
 .idea/

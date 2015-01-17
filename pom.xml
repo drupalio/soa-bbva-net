@@ -20,7 +20,7 @@
         <module>czic_executives</module>
         <module>czic_customers</module>
         <module>czic_checkbooks</module>
-        <module>czic_loan</module>
+         <!-- <module>czic_loan</module> -->
         <module>czic_cards</module>
         <module>czic_products</module>
         <module>czic</module>
