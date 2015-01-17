@@ -1,7 +1,7 @@
 package com.bbva.czic.dto.net;
 
 public class RotaryQuotaMove extends Movement{
-
+  
     private String id;
     private Operation operation;
 
