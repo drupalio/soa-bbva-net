@@ -27,7 +27,7 @@ public class CustomerTest {
 	public void customerFieldsAreNotNull() {
 		Customer customer = new Customer();
 		Set<ConstraintViolation<Customer>> constraintViolations = validator.validate(customer);
-		assertEquals(7, constraintViolations.size());
+		assertEquals(6, constraintViolations.size());
 	}
 	
 	@Test
@@ -35,7 +35,7 @@ public class CustomerTest {
 		Customer customer = new Customer();
 		customer.setName("");
 		Set<ConstraintViolation<Customer>> constraintViolations = validator.validate(customer);
-		assertEquals(7, constraintViolations.size());
+		assertEquals(6, constraintViolations.size());
 		
 	}
 	
@@ -44,7 +44,7 @@ public class CustomerTest {
 		Customer customer = new Customer();
 		customer.setLastConnectionTime(new GregorianCalendar(2016,1,28,13,24,56));
 		Set<ConstraintViolation<Customer>> constraintViolations = validator.validate(customer);
-		assertEquals(8, constraintViolations.size());
+		assertEquals(7, constraintViolations.size());
 	}
 	
 	@Test
@@ -52,7 +52,7 @@ public class CustomerTest {
 		Customer customer = new Customer();
 		customer.setStratum(-20);
 		Set<ConstraintViolation<Customer>> constraintViolations = validator.validate(customer);
-		assertEquals(7, constraintViolations.size());
+		assertEquals(6, constraintViolations.size());
 	}
 	
 	@Test
@@ -60,7 +60,7 @@ public class CustomerTest {
 		Customer customer = new Customer();
 		customer.setResidenceYears(-20);
 		Set<ConstraintViolation<Customer>> constraintViolations = validator.validate(customer);
-		assertEquals(8, constraintViolations.size());
+		assertEquals(7, constraintViolations.size());
 	}
 	
 	@Test
@@ -68,7 +68,7 @@ public class CustomerTest {
 		Customer customer = new Customer();
 		customer.setHomeMembers(-20);
 		Set<ConstraintViolation<Customer>> constraintViolations = validator.validate(customer);
-		assertEquals(8, constraintViolations.size());
+		assertEquals(7, constraintViolations.size());
 	}
 
 }

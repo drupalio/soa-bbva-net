@@ -41,8 +41,10 @@ import com.bbva.czic.dto.net.Country;
 import com.bbva.czic.dto.net.Customer;
 import com.bbva.czic.dto.net.Document;
 import com.bbva.czic.dto.net.Email;
+import com.bbva.czic.dto.net.EnumContactSourceType;
 import com.bbva.czic.dto.net.EnumDocumentType;
 import com.bbva.czic.dto.net.EnumDwelingType;
+import com.bbva.czic.dto.net.EnumSegmentType;
 import com.bbva.czic.dto.net.PhoneNumber;
 import com.bbva.czic.dto.net.Place;
 import com.bbva.czic.dto.net.State;
@@ -226,15 +228,22 @@ public class SrvIntCustomersTest {
 		assertNotNull(answer);
 	}
 
-	private DTOIntCustomer mockDTOCustomer() {
+	public static DTOIntCustomer mockDTOCustomer() {
 		DTOIntCustomer customer = new DTOIntCustomer();
 		
-		Document documento = new Document();
-		documento.setNumber("1234567890");
-		documento.setType(EnumDocumentType.CEDULACIUDADANIA);
+//		Document documento = new Document();
+//		documento.setNumber("1234567890");
+//		documento.setType(EnumDocumentType.CEDULACIUDADANIA);
 		
 		ContactInfo contacto = new ContactInfo();
-		contacto.setEmails(new ArrayList<Email>());
+		List<Email> emails = new ArrayList<Email>();
+		Email email = new Email();
+		email.setActive(true);
+		email.setAddress("prueba@bbva.com");
+		email.setPrimary(true);
+		email.setSource(EnumContactSourceType.WEB);
+		emails.add(email);
+		contacto.setEmails(emails);
 		contacto.setPhoneNumbers(new ArrayList<PhoneNumber>());
 		
 		Place homeLocation= new Place();
@@ -243,7 +252,9 @@ public class SrvIntCustomersTest {
 		homeLocation.setStateName("State");
 		homeLocation.setPostalAddress("BBVA");
 		
-		customer.setDocument(documento);
+		customer.setId("1");
+//		customer.setDocument(documento);
+		customer.setSegment(EnumSegmentType.PERSONA);
 		customer.setName("Cliente de prueba");
 		customer.setEmails(contacto);
 		customer.setHomeLocation(homeLocation);

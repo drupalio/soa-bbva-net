@@ -68,7 +68,7 @@ public class SrvAccountsV01 implements ISrvAccountsV01, com.bbva.jee.arq.spring.
 	@Resource(name = "accounts-filter-converter")
 	private IFilterConverter accFilterConverter;
 
-	@Resource(name = "checks-filter-converter")
+	@Resource(name = "listCheck-filter-converter")
 	private IListCheckFilterConverter listCheckFilterConverter;
 
 	@Override
