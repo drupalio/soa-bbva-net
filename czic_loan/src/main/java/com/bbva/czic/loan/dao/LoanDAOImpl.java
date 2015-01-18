@@ -79,7 +79,7 @@ public class LoanDAOImpl implements LoanDAO {
 				if (formatoSalida != null) {
 					dTOIntLoan = LoanMapper.dtoIntLoanMapper(formatoSalida);
 				}else{
-					log.info("No se encontraron datos para la paticion = " + exception.getMessage());
+					log.info("No se encontraron datos para la peticion = " + exception.getMessage());
 					throw new BusinessServiceException(EnumError.NO_DATA.getAlias());
 				}
 			}

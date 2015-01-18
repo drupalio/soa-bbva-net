@@ -14,6 +14,7 @@ import com.bbva.czic.loan.business.dto.DTOIntRotaryQuotaMove;
 import com.bbva.czic.loan.dao.model.ozni.FormatoOZNCSNI0;
 import com.bbva.czic.loan.dao.model.oznj.FormatoOZNCSNJ0;
 import com.bbva.czic.loan.dao.model.oznk.FormatoOZNCSNK0;
+import com.bbva.czic.routine.commons.rm.utils.errors.EnumError;
 import com.bbva.jee.arq.spring.core.log.I18nLog;
 import com.bbva.jee.arq.spring.core.log.I18nLogFactory;
 import com.bbva.jee.arq.spring.core.servicing.gce.BusinessServiceException;
@@ -35,6 +36,12 @@ public class LoanMapper {
 		DTOIntLoan dTOIntLoan = new DTOIntLoan();
 		try {
 			log.info("inicio Mapper");
+
+			log.info("inicio Mapper datos----------------");
+			log.info("formatoSalida.getSaldoto = " + formatoSalida.getSaldoto() + ", formatoSalida.getPagomin = " + formatoSalida.getPagomin() + ", formatoSalida.getMntosol = " +formatoSalida.getMntosol()+
+			", formatoSalida.getSaldope = " + formatoSalida.getSaldope() + ", formatoSalida.getFechali = " + formatoSalida.getFechali()+ ", formatoSalida.getFechali = " + formatoSalida.getFechali()+
+			", formatoSalida.getFechaco = " + formatoSalida.getFechaco() + ", formatoSalida.getHonorar = " + formatoSalida.getHonorar() + ", formatoSalida.getCuotato = " + formatoSalida.getCuotato()+
+			", formatoSalida.getEstadot = " + formatoSalida.getEstadot());
 			dTOIntLoan.setId(formatoSalida.getNumcont());
 			dTOIntLoan.setType(formatoSalida.getTipprod());
 			dTOIntLoan.setName(formatoSalida.getDesctar());
@@ -57,7 +64,7 @@ public class LoanMapper {
 			log.info("fin Mapper");
 		} catch (Exception e) {
 			log.error("An error happened while mapping");
-			throw new BusinessServiceException("An error happened while mapping" + e.getMessage());
+			throw new BusinessServiceException(EnumError.NO_DATA.getAlias());
 		}
 		return dTOIntLoan;
 	}
