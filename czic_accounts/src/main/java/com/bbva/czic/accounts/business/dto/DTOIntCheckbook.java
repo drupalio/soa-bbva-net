@@ -1,7 +1,6 @@
 package com.bbva.czic.accounts.business.dto;
 
 import java.util.Date;
-import java.util.List;
 
 public class DTOIntCheckbook {
 
@@ -23,6 +22,10 @@ public class DTOIntCheckbook {
 
 	public DTOIntCheckbook() {
 		// default constructor
+	}
+
+	public DTOIntCheckbook(String id) {
+		this.id = id;
 	}
 
 	public String getId() {
