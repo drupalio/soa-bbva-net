@@ -13,20 +13,26 @@ import java.util.Currency;
  */
 public class FormatBalanceToDTOBalanceConverter {
 
+    @Value("locale.default.currency.iso")
+    private String CURRENCY;
+
+    @Value("currency.default.decimal.divider")
+    private BigDecimal DECIMAL_DIVIDER;
+
     public DTOIntBalance convert(String totalBalance, String availableBalance) {
         final DTOIntBalance balance = new DTOIntBalance();
 
         if (totalBalance != null) {
             final Money totalMoney = new Money(
-                    Currency.getInstance(CurrencyEnum.COP.toString()),
-                    new BigDecimal(totalBalance));
+                    Currency.getInstance(CURRENCY),
+                    new BigDecimal(totalBalance).divide(DECIMAL_DIVIDER));
             balance.setTotal(totalMoney);
         }
 
         if (availableBalance != null) {
             final Money availableMoney = new Money(
-                    Currency.getInstance(CurrencyEnum.COP.toString()),
-                    new BigDecimal(availableBalance));
+                    Currency.getInstance(CURRENCY),
+                    new BigDecimal(availableBalance).divide(DECIMAL_DIVIDER));
             balance.setAvailableBalance(availableMoney);
         }
 

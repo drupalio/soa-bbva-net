@@ -125,7 +125,7 @@ public class SrvAccountsV01 implements ISrvAccountsV01, com.bbva.jee.arq.spring.
 			@ApiParam(value = "order by param") @DefaultValue("null") @QueryParam("$sort") String sort) {
 		DTOIntFilterAccount dtoIntFilterAccount = new DTOIntFilterAccount();
 		dtoIntFilterAccount = accFilterConverter.getDTOIntFilter(idAccount,filter);
-		return iAccountsMapper.map(srvIntAccounts.getAccMovementResume(dtoIntFilterAccount));
+		return null; // iAccountsMapper.map(srvIntAccounts.getAccMovementResume(dtoIntFilterAccount));
 	}
 
 	/*
@@ -149,7 +149,7 @@ public class SrvAccountsV01 implements ISrvAccountsV01, com.bbva.jee.arq.spring.
 			@ApiParam(value = "expands param") @DefaultValue("null") @QueryParam("$pageSize") String pageSize) {
 		DTOIntFilterChecks dtoIntFilterCheck = new DTOIntFilterChecks();
 		dtoIntFilterCheck = listCheckFilterConverter.getDTOIntFilter(accountId,filter,status,paginationKey,pageSize);
-		return iAccountsMapper.mapChecks(srvIntAccounts.listCheck(dtoIntFilterCheck));
+		return null; //iAccountsMapper.mapChecks(srvIntAccounts.listCheck(dtoIntFilterCheck));
 	}
 
 }
