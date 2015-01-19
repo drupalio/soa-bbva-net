@@ -16,7 +16,7 @@ public class DTOIntMovement {
 
 	private Operation operation;
 
-	private EnumMovementStatus status;
+	private String status;
 
 	private Money value;
 
@@ -59,12 +59,12 @@ public class DTOIntMovement {
 		this.operation = operation;
 	}
 
-	public EnumMovementStatus getStatus() {
+	public String getStatus() {
 		return status;
 	}
 
 
-	public void setStatus(EnumMovementStatus status) {
+	public void setStatus(String status) {
 		this.status = status;
 	}
 
