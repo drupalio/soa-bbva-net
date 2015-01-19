@@ -13,7 +13,6 @@ privileged aspect FormatoOZNCENI0_Roo_ToString {
         sb.append("Fechini: ").append(getFechini()).append(", ");
         sb.append("Indpag: ").append(getIndpag()).append(", ");
         sb.append("Notarje: ").append(getNotarje()).append(", ");
-        sb.append("Periodo: ").append(getPeriodo()).append(", ");
         sb.append("Pospag: ").append(getPospag());
         return sb.toString();
     }

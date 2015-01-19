@@ -4,6 +4,7 @@
 package com.bbva.czic.loan.dao.model.ozni;
 
 import java.lang.String;
+import java.util.Date;
 
 privileged aspect FormatoOZNCENI0_Roo_JavaBean {
     
@@ -15,27 +16,19 @@ privileged aspect FormatoOZNCENI0_Roo_JavaBean {
         this.notarje = notarje;
     }
     
-    public String FormatoOZNCENI0.getPeriodo() {
-        return this.periodo;
-    }
-    
-    public void FormatoOZNCENI0.setPeriodo(String periodo) {
-        this.periodo = periodo;
-    }
-    
-    public String FormatoOZNCENI0.getFechini() {
+    public Date FormatoOZNCENI0.getFechini() {
         return this.fechini;
     }
     
-    public void FormatoOZNCENI0.setFechini(String fechini) {
+    public void FormatoOZNCENI0.setFechini(Date fechini) {
         this.fechini = fechini;
     }
     
-    public String FormatoOZNCENI0.getFechafi() {
+    public Date FormatoOZNCENI0.getFechafi() {
         return this.fechafi;
     }
     
-    public void FormatoOZNCENI0.setFechafi(String fechafi) {
+    public void FormatoOZNCENI0.setFechafi(Date fechafi) {
         this.fechafi = fechafi;
     }
     
