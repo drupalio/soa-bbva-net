@@ -82,31 +82,55 @@ public class MovementsFilterConverter implements IFilterConverter {
     }
 
     @Override
-    public DTOIntMovementsFilter dtoIntMovementsFilter(String filter) {
-        DTOIntMovementsFilter dtofilter = null;
+    public DTOIntMovementsFilter dtoIntMovementsFilter(String filter,String idMovement) {
 
-        if (filter != null && !filter.trim().isEmpty()
-                && !filter.contentEquals("null")) {
+        //Variables
+        DTOIntMovementsFilter dtoIntFilterMovements = new DTOIntMovementsFilter();
+
+        //Comprobamos que el id del idMovement no sea nullo dado que es obligatorio
+        if(idMovement == null || idMovement.equals("null") || idMovement.isEmpty()) {
+            throw new BusinessServiceException(EnumError.WRONG_PARAMETERS.getAlias());
+        }
+
+        //Manejamos el filter
+        if (filter != null && !filter.contentEquals("null")) {
             log.info("A query string (filter) has been sended: " + filter);
             SearchCondition<DTOIntMovementsFilter> sc;
-
             try {
                 sc = new FiqlParser<DTOIntMovementsFilter>(DTOIntMovementsFilter.class).parse(filter);
 
                 final List<PrimitiveStatement> splitDataFilter = businessToolKit.getDataFromFilter(sc);
+
                 for (PrimitiveStatement st : splitDataFilter) {
 
+                    String property = null;
+                    String condition = null;
+                    String value = null;
+
+                    property = st.getProperty();
+                    condition = st.getCondition().toString();
+                    value = st.getValue().toString();
+
+                    if(property.equals("productType")){
+                        dtoIntFilterMovements.setProductType(EnumProductType.valueOf(value));
+                    }
                 }
-            } catch (SearchParseException se) {
-                log.error("SearchParseException - The query string (filter) has failed: " + se);
-                throw new BusinessServiceException(EnumError.WRONG_PARAMETERS.getAlias(), filter, se.getMessage());
-            } catch (IllegalArgumentException ie) {
-                log.error("IllegalArgumentException - The product type is an invalid type - does not exist: " + ie);
-                throw new BusinessServiceException(EnumError.WRONG_PARAMETERS.getAlias(), filter, ie.getMessage());
+
+
+            } catch (SearchParseException e) {
+                log.error("SearchParseException - The query string (filter) has failed: " + e);
+                throw new BusinessServiceException(EnumError.INEXISTENT_FILTER.getAlias(), filter, e.getMessage());
+            } catch (IllegalArgumentException e) {
+                log.error("IllegalArgumentException - The product type is an invalid type - does not exist: " + e);
+                throw new BusinessServiceException(EnumError.WRONG_PARAMETERS.getAlias(), filter, e.getMessage());
             }
         }
 
-        return dtofilter;
+        dtoIntFilterMovements.setMovementId(idMovement);
+
+        validateFilter(dtoIntFilterMovements);
+
+        return dtoIntFilterMovements;
     }
 
     private void validateFilter(DTOIntMovementsFilter filter){

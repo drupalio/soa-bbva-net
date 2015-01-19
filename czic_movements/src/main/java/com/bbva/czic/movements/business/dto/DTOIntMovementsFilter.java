@@ -17,6 +17,7 @@ public class DTOIntMovementsFilter implements Serializable {
     private Date endDate;
     private BigDecimal bottomValue;
     private BigDecimal topValue;
+    private String movementId;
 
     public DTOIntMovementsFilter() {
     }
@@ -67,6 +68,14 @@ public class DTOIntMovementsFilter implements Serializable {
 
     public void setTopValue(BigDecimal topValue) {
         this.topValue= topValue;
+    }
+
+    public String getMovementId() {
+        return movementId;
+    }
+
+    public void setMovementId(String movementId) {
+        this.movementId = movementId;
     }
 
     @Override

@@ -3,100 +3,40 @@ package com.bbva.czic.movements.facade.v01.mapper.impl;
 import com.bbva.czic.dto.net.*;
 import com.bbva.czic.movements.business.dto.*;
 import com.bbva.czic.movements.facade.v01.mapper.IMovementsMapper;
+import com.bbva.czic.routine.mapper.MapperFactory;
+import com.bbva.czic.routine.mapper.factory.MoneyFactory;
+import com.bbva.czic.routine.mapper.impl.ConfigurableMapper;
+import com.bbva.czic.routine.mapper.metadata.TypeFactory;
+import com.bbva.jee.arq.spring.core.servicing.utils.Money;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Component;
 
 
 @Component(value = "movements-mapper")
-public class MovementsMapper implements IMovementsMapper{
+public class MovementsMapper extends ConfigurableMapper implements IMovementsMapper{
 
 	@Override
-	public  DTOIntEnumProductType dtoIntEnumProductTypeMap(EnumProductType enumProductType) {
-		DTOIntEnumProductType dtoIntEnumProductType = new DTOIntEnumProductType();
-		BeanUtils.copyProperties(enumProductType, dtoIntEnumProductType);
-		return dtoIntEnumProductType;
-	}
+	protected void configure(MapperFactory factory) {
 
+		// Add ProductDTO Factory
+		factory.registerObjectFactory(new MoneyFactory(), TypeFactory.<Money> valueOf(Money.class));
 
-	@Override
-	public  Office officeMap(DTOIntOffice dtoIntOffice) {
-		Office office = new Office();
-		BeanUtils.copyProperties(dtoIntOffice, office);
-		return office;
-	}
+		// Movement
+		factory.classMap(Movement.class, DTOIntMovement.class).field("id", "id").field("concept", "concept")
+				.field("transactionDate", "transactionDate").field("operationDate", "operationDate").field("office", "office")
+				.field("status", "status").field("value", "value").field("balance", "balance").byDefault().register();
+		// CONTRACT
+		factory.classMap(Office.class, DTOIntOffice.class).field("number", "number").byDefault().register();
 
-
-	@Override
-	public  DTOIntOffice dtoIntOfficeMap(Office office) {
-		DTOIntOffice dtoIntOffice = new DTOIntOffice();
-		BeanUtils.copyProperties(office, dtoIntOffice);
-		return dtoIntOffice;
-	}
-
-
-	@Override
-	public  Operation operationMap(DTOIntOperation dtoIntOperation) {
-		Operation operation = new Operation();
-		BeanUtils.copyProperties(dtoIntOperation, operation);
-		return operation;
-	}
-
-
-	@Override
-	public  DTOIntOperation dtoIntOperationMap(Operation operation) {
-		DTOIntOperation dtoIntOperation = new DTOIntOperation();
-		BeanUtils.copyProperties(operation, dtoIntOperation);
-		return dtoIntOperation;
-	}
-
-
-	@Override
-	public  AccMoveDetail accMoveDetailMap(DTOIntAccMoveDetail dtoIntAccMoveDetail) {
-		AccMoveDetail accMoveDetail = new AccMoveDetail();
-		BeanUtils.copyProperties(dtoIntAccMoveDetail, accMoveDetail);
-		return accMoveDetail;
-	}
-
-
-	@Override
-	public  DTOIntAccMoveDetail dtoIntAccMoveDetailMap(AccMoveDetail accMoveDetail) {
-		DTOIntAccMoveDetail dtoIntAccMoveDetail = new DTOIntAccMoveDetail();
-		BeanUtils.copyProperties(accMoveDetail, dtoIntAccMoveDetail);
-		return dtoIntAccMoveDetail;
-	}
-
-
-	@Override
-	public  Movement movementMap(DTOIntMovement dtoIntMovement) {
-		Movement movement = new Movement();
-		BeanUtils.copyProperties(dtoIntMovement, movement);
-		return movement;
-	}
-
-
-	@Override
-	public  DTOIntMovement dtoIntMovementMap(Movement movement) {
-		DTOIntMovement dtoIntMovement = new DTOIntMovement();
-		BeanUtils.copyProperties(movement, dtoIntMovement);
-		return dtoIntMovement;
-	}
-
-
-	@Override
-	public  DTOIntEnumAccountMoveStatus dtoIntEnumAccountMoveStatusMap(EnumAccountMoveStatus enumAccountMoveStatus) {
-		DTOIntEnumAccountMoveStatus dtoIntEnumAccountMoveStatus = new DTOIntEnumAccountMoveStatus();
-		BeanUtils.copyProperties(enumAccountMoveStatus, dtoIntEnumAccountMoveStatus);
-		return dtoIntEnumAccountMoveStatus;
+		// BALANCE
+		factory.classMap(Money.class, Money.class).field("amount", "amount")
+				.field("currency", "currency").byDefault().register();
 	}
 
 	@Override
-	public  DTOIntEnumAccountState dtoIntEnumAccountStateMap(EnumAccountState enumAccountState) {
-		DTOIntEnumAccountState dtoIntEnumAccountState = new DTOIntEnumAccountState();
-		BeanUtils.copyProperties(enumAccountState, dtoIntEnumAccountState);
-		return dtoIntEnumAccountState;
+	public Movement movementMap(DTOIntMovement dtoIntMovement) {
+		return null;
 	}
-
-
 
 }
 

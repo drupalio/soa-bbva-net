@@ -93,7 +93,7 @@ public class SrvMovementsV01 implements ISrvMovementsV01, com.bbva.jee.arq.sprin
 			throw new BusinessServiceException(EnumError.WRONG_PARAMETERS.getAlias());
 		}
 
-		DTOIntMovementsFilter dtoIntMovementsFilter =	movFilterConverter.dtoIntMovementsFilter(filter);
+		DTOIntMovementsFilter dtoIntMovementsFilter =	movFilterConverter.dtoIntMovementsFilter(filter,idMovement);
 
 		return  iMovementsMapper.movementMap(srvIntMovements.getMovement(dtoIntMovementsFilter));
 	}
