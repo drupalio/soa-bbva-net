@@ -117,7 +117,7 @@ public class SrvMovementsV01 implements ISrvMovementsV01, com.bbva.jee.arq.sprin
 								  @ApiParam(value = "pagination key") @DefaultValue("null") @QueryParam("paginationKey") Integer paginationKey,
 								  @ApiParam(value = "pagination size") @DefaultValue("null") @QueryParam("pageSize") Integer pageSize) {
 
-		DTOIntMovementsFilter dtoIntMovementsFilter =	movFilterConverter.dtoIntMovementsFilter(filter);
+		DTOIntMovementsFilter dtoIntMovementsFilter =	movFilterConverter.toDtoIntMovementsFilter(filter);
 
 		return null;
 	}
