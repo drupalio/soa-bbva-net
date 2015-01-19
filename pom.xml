@@ -13,6 +13,7 @@
     <version>1.4.0</version>
     <!--url>http://maven.apache.org</url-->
     <modules>
+        <module>czic_movements</module>
         <module>czic_net</module>
         <module>czic_accounts</module>
         <module>czic_commons</module>

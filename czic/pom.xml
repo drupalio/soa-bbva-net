@@ -362,6 +362,16 @@
             <artifactId>czic_cards</artifactId>
             <version>1.0.0</version>
         </dependency>
+    <dependency>
+            <groupId>com.bbva.czic.movements</groupId>
+            <artifactId>czic_movements</artifactId>
+            <version>1.0.0</version>
+        </dependency>
+    <dependency>
+            <groupId>com.bbva.czic.movements</groupId>
+            <artifactId>czic_movements</artifactId>
+            <version>1.0.0</version>
+        </dependency>
     </dependencies>
     <build>
         <plugins>

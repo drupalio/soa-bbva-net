@@ -168,7 +168,7 @@ public class AccountsMapperTest {
     @Test
     public void testMapDtoIntCheckToCheck() {
 
-        final Check check;
+        /**final Check check = new Check();
 
         final DTOIntCheck intCheck = new DTOIntCheck();
 
@@ -178,15 +178,18 @@ public class AccountsMapperTest {
         intCheck.setStatus(EnumCheckStatus.HABILITADO);
         intCheck.setModifiedDate(new Date());
 
-/*
-        check = accountsMapper.mapChecks(intCheck);
+        List<Check> checks = new ArrayList<Check>();
+        checks.add(check);
+
+        check = accountsMapper.mapChecks(checks);
 
 
         assertEquals(intCheck.getId(),check.getId());
         assertEquals(intCheck.getIssueDate(),check.getIssueDate().getTime());
         assertEquals(intCheck.getValue(),check.getValue());
         assertEquals(intCheck.getStatus(),check.getStatus());
-        assertEquals(intCheck.getModifiedDate(),check.getModifiedDate().getTime())*/;
+        assertEquals(intCheck.getModifiedDate(),check.getModifiedDate().getTime());**/
+
     }
 
 }

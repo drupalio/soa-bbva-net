@@ -2,8 +2,6 @@ package com.bbva.czic.accounts.dao.impl;
 
 import com.bbva.czic.accounts.business.dto.*;
 import com.bbva.czic.accounts.dao.AccountsDAO;
-import com.bbva.czic.accounts.business.dto.DTOIntFilterAccount;
-import com.bbva.czic.accounts.business.dto.DTOIntAccount;
 import org.codehaus.jackson.JsonParseException;
 import org.codehaus.jackson.map.JsonMappingException;
 import org.codehaus.jackson.map.ObjectMapper;
@@ -37,7 +35,7 @@ public class AccountsDAOMock implements AccountsDAO {
 		Mockito.when(getAccount(Mockito.any(DTOIntFilterAccount.class))).thenReturn(accounts);
 
 		mock = Mockito.mock(AccountsDAOMock.class);
-		Mockito.when(getListCheck(Mockito.any(DTOIntCheck.class))).thenReturn(check);
+		Mockito.when(getListCheck(Mockito.any(DTOIntFilterChecks.class))).thenReturn(check);
 
 	}
 
@@ -58,7 +56,7 @@ public class AccountsDAOMock implements AccountsDAO {
 	}
 
 	@Override
-	public DTOIntCheck getListCheck(DTOIntCheck dtoIntCheck) {
+	public DTOIntCheck getListCheck(DTOIntFilterChecks dtoIntCheck) {
 		return null;
 	}
 }

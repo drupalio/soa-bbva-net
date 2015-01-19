@@ -94,7 +94,7 @@ public class SrvCustomersV01 implements ISrvCustomersV01, com.bbva.jee.arq.sprin
 		
 		log.info("Into listCreditCardsCharges...");
 		
-		if(customerId == null || customerId.isEmpty()
+		if(customerId == null || customerId.trim().isEmpty()
 				|| filter == null || filter.isEmpty()){
 			throw new BusinessServiceException(EnumError.WRONG_PARAMETERS.getAlias());
 		}
@@ -120,7 +120,7 @@ public class SrvCustomersV01 implements ISrvCustomersV01, com.bbva.jee.arq.sprin
 		
 		log.info("Into listAccountsMovementsResume...");
 		
-		if(customerId == null || customerId.isEmpty() 
+		if(customerId == null || customerId.trim().isEmpty()
 				|| filter == null || filter.isEmpty()){
 			throw new BusinessServiceException(EnumError.WRONG_PARAMETERS.getAlias());
 		}
@@ -144,7 +144,10 @@ public class SrvCustomersV01 implements ISrvCustomersV01, com.bbva.jee.arq.sprin
 			@ApiParam(value = "Claim identifier param") @PathParam("customerId") String customerId) {
 		
 		log.info("Into getCustomer...");
-
+		
+		if(customerId == null || customerId.trim().isEmpty()){
+			throw new BusinessServiceException(EnumError.WRONG_PARAMETERS.getAlias());
+		}
 		return srvIntCustomers.getCustomer(customerId);
 	}
 }

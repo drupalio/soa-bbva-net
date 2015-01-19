@@ -48,8 +48,8 @@ public class SrvIntAccounts implements ISrvIntAccounts {
 	}
 
 	@Override
-	public DTOIntCheck listCheck(DTOIntCheck dtoIntCheck) {
-		return accountsDAO.getListCheck(dtoIntCheck);
+	public DTOIntCheck listCheck(DTOIntFilterChecks dtoIntFilterChecks) {
+		return accountsDAO.getListCheck(dtoIntFilterChecks);
 	}
 
 }

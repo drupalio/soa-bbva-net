@@ -16,6 +16,6 @@ public interface ISrvAccountsV01{
 	public List<AccMovementsResume> getAccMovementResume(String idAccount, String filter, String fields, String expands,String sort);
 
 
-	Check listCheck(  String accountId, String filter, String status, String paginationKey, String pageSize);
+	List<Check> listCheck(String accountId, String filter, String status, String paginationKey, String pageSize);
 
 }

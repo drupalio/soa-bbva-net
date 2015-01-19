@@ -20,6 +20,6 @@ public interface IAccountsMapper {
 
     public List<Checkbook> mapLCheckbook(List<DTOIntCheckbook> listaDTOIntCheckbook);
 
-    public Check mapChecks(List<DTOIntCheck> listaDtoIntChecks);
+    public List<Check> mapChecks(List<DTOIntCheck> listaDtoIntChecks);
 
 }
