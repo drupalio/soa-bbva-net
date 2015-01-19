@@ -72,13 +72,9 @@ public class SrvIntLoan implements ISrvIntLoan {
 					pageSize == null || pageSize.equals("null")){
 				log.info("SrvIntLoan.listRotaryQuotaMovements.nullParameters------------ " );
 				throw new BusinessServiceException(EnumError.WRONG_PARAMETERS.getAlias());
-			}		
+			}
 
-			SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
-            String fechaIni = simpleDateFormat.format(fechaInicila);
-			String fechaFin = simpleDateFormat.format(fechaFinal);
-
-			final List<DTOIntMovement> intLoan = loanDao.listRotaryQuotaMovements(idLoan, paginationKey, pageSize, fechaIni, fechaFin);
+			final List<DTOIntMovement> intLoan = loanDao.listRotaryQuotaMovements(idLoan, paginationKey, pageSize, fechaInicila, fechaFinal);
 
 			for (DTOIntMovement item : intLoan) {
 				movement = new Movement();
@@ -105,7 +101,7 @@ public class SrvIntLoan implements ISrvIntLoan {
 			log.info("SrvIntLoan.getRotaryQuotaMovement = " + idMovement + ", " + idLoan);
 			if (idMovement == null || idMovement.isEmpty() || idLoan == null || idLoan.isEmpty()) throw new BusinessServiceException(EnumError.WRONG_PARAMETERS.getAlias());
 
-			final DTOIntRotaryQuotaMove dtoIntRotaryQuotaMove = loanDao.getRotaryQuotaMovement(idMovement, idLoan);
+			final DTOIntRotaryQuotaMove dtoIntRotaryQuotaMove = loanDao.getRotaryQuotaMovement(Integer.parseInt(idMovement), idLoan);
 			movement = LoanMapper.getMovementByDTOIntMovement(dtoIntRotaryQuotaMove);
 
 			return movement;

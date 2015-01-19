@@ -17,14 +17,14 @@ public class DateValidator extends Validator{
     }
 
     public DateValidator noFuture(Date date){
-        if(date.after(new Date())){
+        if(date != null && date.after(new Date())){
             exceptions.add(new BusinessServiceException(EnumError.DATE_INTERVAL_OUT_OF_RANGE.getAlias()));
         }
         return this;
     }
 
     public DateValidator validDateRange(Date from, Date to){
-        if(from.after(to)){
+        if(from != null && to != null && from.after(to)){
             exceptions.add(new BusinessServiceException(EnumError.DATE_INTERVAL_OUT_OF_RANGE.getAlias()));
         }
         return this;

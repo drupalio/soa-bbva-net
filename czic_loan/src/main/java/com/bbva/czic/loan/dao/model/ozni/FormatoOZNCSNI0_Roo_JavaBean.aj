@@ -4,7 +4,7 @@
 package com.bbva.czic.loan.dao.model.ozni;
 
 import java.lang.String;
-import java.math.BigDecimal;
+import java.util.Date;
 
 privileged aspect FormatoOZNCSNI0_Roo_JavaBean {
     
@@ -16,35 +16,35 @@ privileged aspect FormatoOZNCSNI0_Roo_JavaBean {
         this.numeope = numeope;
     }
     
-    public String FormatoOZNCSNI0.getFechaop() {
+    public Date FormatoOZNCSNI0.getFechaop() {
         return this.fechaop;
     }
     
-    public void FormatoOZNCSNI0.setFechaop(String fechaop) {
+    public void FormatoOZNCSNI0.setFechaop(Date fechaop) {
         this.fechaop = fechaop;
     }
     
-    public BigDecimal FormatoOZNCSNI0.getResto() {
+    public String FormatoOZNCSNI0.getResto() {
         return this.resto;
     }
     
-    public void FormatoOZNCSNI0.setResto(BigDecimal resto) {
+    public void FormatoOZNCSNI0.setResto(String resto) {
         this.resto = resto;
     }
     
-    public BigDecimal FormatoOZNCSNI0.getValorop() {
+    public String FormatoOZNCSNI0.getValorop() {
         return this.valorop;
     }
     
-    public void FormatoOZNCSNI0.setValorop(BigDecimal valorop) {
+    public void FormatoOZNCSNI0.setValorop(String valorop) {
         this.valorop = valorop;
     }
     
-    public BigDecimal FormatoOZNCSNI0.getBalance() {
+    public String FormatoOZNCSNI0.getBalance() {
         return this.balance;
     }
     
-    public void FormatoOZNCSNI0.setBalance(BigDecimal balance) {
+    public void FormatoOZNCSNI0.setBalance(String balance) {
         this.balance = balance;
     }
     

@@ -15,8 +15,9 @@ public class DTOIntMovementsFilter implements Serializable {
     private String productId;
     private Date startDate;
     private Date endDate;
-    private BigDecimal bottomDate;
-    private BigDecimal topDate;
+    private BigDecimal bottomValue;
+    private BigDecimal topValue;
+    private String movementId;
 
     public DTOIntMovementsFilter() {
     }
@@ -53,20 +54,28 @@ public class DTOIntMovementsFilter implements Serializable {
         this.endDate = endDate;
     }
 
-    public BigDecimal getBottomDate() {
-        return bottomDate;
+    public BigDecimal getBottomValue() {
+        return bottomValue;
     }
 
-    public void setBottomDate(BigDecimal bottomDate) {
-        this.bottomDate = bottomDate;
+    public void setBottomValue(BigDecimal bottomValue) {
+        this.bottomValue= bottomValue;
     }
 
-    public BigDecimal getTopDate() {
-        return topDate;
+    public BigDecimal getTopValue() {
+        return topValue;
     }
 
-    public void setTopDate(BigDecimal topDate) {
-        this.topDate = topDate;
+    public void setTopValue(BigDecimal topValue) {
+        this.topValue= topValue;
+    }
+
+    public String getMovementId() {
+        return movementId;
+    }
+
+    public void setMovementId(String movementId) {
+        this.movementId = movementId;
     }
 
     @Override
@@ -76,8 +85,8 @@ public class DTOIntMovementsFilter implements Serializable {
                 ", productId='" + productId + '\'' +
                 ", startDate=" + startDate +
                 ", endDate=" + endDate +
-                ", bottomDate=" + bottomDate +
-                ", topDate=" + topDate +
+                ", bottomValue=" + bottomValue +
+                ", topValue=" + topValue +
                 '}';
     }
 }

@@ -11,10 +11,10 @@ import java.util.List;
 
 public interface LoanDAO {
 
-	List<DTOIntMovement> listRotaryQuotaMovements(String idLoan, String paginationKey, String pageSize, String fechaInicial, String fechaFinal) throws BusinessServiceException;
+	List<DTOIntMovement> listRotaryQuotaMovements(final String idLoan, final String paginationKey, final String pageSize, final Date fechaInicial, final Date fechaFinal) throws BusinessServiceException;
 
-	DTOIntLoan getRotaryQuota(String idLoan)	throws BusinessServiceException;
+	DTOIntLoan getRotaryQuota(final String idLoan)	throws BusinessServiceException;
 
-	DTOIntRotaryQuotaMove getRotaryQuotaMovement(String idMovement, String idLoan) throws BusinessServiceException;
+	DTOIntRotaryQuotaMove getRotaryQuotaMovement(final Integer idMovement, final String idLoan) throws BusinessServiceException;
 
 }
