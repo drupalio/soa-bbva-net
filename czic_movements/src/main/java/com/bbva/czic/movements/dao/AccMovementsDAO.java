@@ -1,6 +1,6 @@
 package com.bbva.czic.movements.dao;
 
-public interface MovementsDAO {
+public interface AccMovementsDAO {
 
 	//TODO: method signatures for DAO
 	

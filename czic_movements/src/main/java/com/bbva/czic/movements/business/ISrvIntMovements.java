@@ -10,7 +10,5 @@ import com.bbva.czic.movements.business.dto.*;
 public interface ISrvIntMovements {
 	public DTOIntMovement getMovement(DTOIntMovementsFilter dtoIntMovementsFilter);
 
-	public DTOIntMovement listMovements( String idMovement);
-
-	
+	public DTOIntMovement listMovements( DTOIntMovementsFilter filter);
 }
