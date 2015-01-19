@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<error-definitions application="czic" architecture="SpringServicingArchitecture" family="movements" servicing:business-service="movements" xmlns="http://bbva.com/gce" xmlns:servicing="http://bbva.com/arq-spring-servicing/gce-extension">
+	<!-- Define here your GCE errors. For example:
+	<error-definition severity="FATAL" alias="movementsNotFound" code="1" servicing:http-status="409">
+		<message>Movements not found.</message>		
+		<message lang="en">Movements not found.</message>
+	</error-definition>
+	-->
+</error-definitions>
