@@ -29,6 +29,7 @@ import org.springframework.util.CollectionUtils;
 import java.math.BigDecimal;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Repository(value = "loanDao")
@@ -79,7 +80,7 @@ public class LoanDAOImpl implements LoanDAO {
 				if (formatoSalida != null) {
 					dTOIntLoan = LoanMapper.dtoIntLoanMapper(formatoSalida);
 				}else{
-					log.info("No se encontraron datos para la paticion = " + exception.getMessage());
+					log.info("No se encontraron datos para la peticion = " + exception.getMessage());
 					throw new BusinessServiceException(EnumError.NO_DATA.getAlias());
 				}
 			}
@@ -97,7 +98,7 @@ public class LoanDAOImpl implements LoanDAO {
 
 	@Override
 	public List<DTOIntMovement> listRotaryQuotaMovements(final String idLoan, final String paginationKey, final String pageSize,
-														final String fechaInicial, String fechaFinal) throws BusinessServiceException {
+														final Date fechaInicial, Date fechaFinal) throws BusinessServiceException {
 
 		log.info("ingreso LoanDAOImpl.listRotaryQuotaMovements");
 
@@ -156,7 +157,7 @@ public class LoanDAOImpl implements LoanDAO {
 
 
 	@Override
-	public DTOIntRotaryQuotaMove getRotaryQuotaMovement(final String idMovement, final String idLoan) throws BusinessServiceException {
+	public DTOIntRotaryQuotaMove getRotaryQuotaMovement(final Integer idMovement, final String idLoan) throws BusinessServiceException {
 
 		DTOIntRotaryQuotaMove rotaryQuotaMove = new DTOIntRotaryQuotaMove();
 		FormatoOZNCENK0 formatoOZNCENK0 = new FormatoOZNCENK0();

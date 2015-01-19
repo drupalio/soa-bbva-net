@@ -4,23 +4,31 @@
 package com.bbva.czic.loan.dao.model.oznk;
 
 import java.lang.String;
-import java.math.BigDecimal;
+import java.util.Date;
 
 privileged aspect FormatoOZNCSNK0_Roo_JavaBean {
     
-    public String FormatoOZNCSNK0.getFechao() {
-        return this.fechao;
+    public String FormatoOZNCSNK0.getNumemov() {
+        return this.numemov;
     }
     
-    public void FormatoOZNCSNK0.setFechao(String fechao) {
-        this.fechao = fechao;
+    public void FormatoOZNCSNK0.setNumemov(String numemov) {
+        this.numemov = numemov;
     }
     
-    public BigDecimal FormatoOZNCSNK0.getResto() {
+    public Date FormatoOZNCSNK0.getFechaop() {
+        return this.fechaop;
+    }
+    
+    public void FormatoOZNCSNK0.setFechaop(Date fechaop) {
+        this.fechaop = fechaop;
+    }
+    
+    public String FormatoOZNCSNK0.getResto() {
         return this.resto;
     }
     
-    public void FormatoOZNCSNK0.setResto(BigDecimal resto) {
+    public void FormatoOZNCSNK0.setResto(String resto) {
         this.resto = resto;
     }
     
@@ -32,11 +40,11 @@ privileged aspect FormatoOZNCSNK0_Roo_JavaBean {
         this.importe = importe;
     }
     
-    public BigDecimal FormatoOZNCSNK0.getBalance() {
+    public String FormatoOZNCSNK0.getBalance() {
         return this.balance;
     }
     
-    public void FormatoOZNCSNK0.setBalance(BigDecimal balance) {
+    public void FormatoOZNCSNK0.setBalance(String balance) {
         this.balance = balance;
     }
     
@@ -48,12 +56,12 @@ privileged aspect FormatoOZNCSNK0_Roo_JavaBean {
         this.descop = descop;
     }
     
-    public String FormatoOZNCSNK0.getCoutas() {
-        return this.coutas;
+    public String FormatoOZNCSNK0.getCoutaf() {
+        return this.coutaf;
     }
     
-    public void FormatoOZNCSNK0.setCoutas(String coutas) {
-        this.coutas = coutas;
+    public void FormatoOZNCSNK0.setCoutaf(String coutaf) {
+        this.coutaf = coutaf;
     }
     
     public String FormatoOZNCSNK0.getCoutat() {
