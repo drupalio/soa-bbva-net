@@ -6,7 +6,7 @@ import com.bbva.czic.dto.net.Movement;
 
 public interface ISrvMovementsV01 {
 
-	AccMoveDetail getMovement(String idMovement, String filter);
+	Movement getMovement(String idMovement, String filter);
 
 	Movement listMovements(String idMovement, String filter, Integer paginationKey, Integer pageSize);
 }

@@ -553,7 +553,8 @@
 						<redirectTestOutputToFile>true</redirectTestOutputToFile>
 						<excludes>
 							<exclude>**/*_Roo_*</exclude>
-						</excludes>
+						</excludes>						
+						<skipTests>true</skipTests>
 					</configuration>
 				</plugin>
 				<plugin>
