@@ -25,17 +25,26 @@ public class MovementsMapper extends ConfigurableMapper implements IMovementsMap
 		factory.classMap(Movement.class, DTOIntMovement.class).field("id", "id").field("concept", "concept")
 				.field("transactionDate", "transactionDate").field("operationDate", "operationDate").field("office", "office")
 				.field("status", "status").field("value", "value").field("balance", "balance").byDefault().register();
-		// CONTRACT
-		factory.classMap(Office.class, DTOIntOffice.class).field("number", "number").byDefault().register();
+		// Office
+		factory.classMap(Office.class, DTOIntOffice.class).field("code", "code").field("name", "name").field("location", "dtoIntLocation").byDefault().register();
 
-		// BALANCE
+		// Location
+		factory.classMap(Location.class, DTOIntLocation.class).field("city", "dtoIntCity").field("state", "dtoIntState").byDefault().register();
+
+		// City
+		factory.classMap(City.class, DTOIntCity.class).field("id", "id").field("name", "name").byDefault().register();
+
+		// State
+		factory.classMap(State.class, DTOIntState.class).field("id", "id").field("name", "name").byDefault().register();
+
+		// Money
 		factory.classMap(Money.class, Money.class).field("amount", "amount")
 				.field("currency", "currency").byDefault().register();
 	}
 
 	@Override
 	public Movement movementMap(DTOIntMovement dtoIntMovement) {
-		return null;
+		return map(dtoIntMovement,Movement.class);
 	}
 
 }
