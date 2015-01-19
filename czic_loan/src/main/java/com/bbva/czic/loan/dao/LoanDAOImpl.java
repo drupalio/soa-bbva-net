@@ -33,7 +33,7 @@ import java.util.Date;
 import java.util.List;
 
 @Repository(value = "loanDao")
-//@Profile(value = "prod")
+
 public class LoanDAOImpl implements LoanDAO {
 	
 	private static I18nLog log = I18nLogFactory.getLogI18n(SrvIntLoan.class,

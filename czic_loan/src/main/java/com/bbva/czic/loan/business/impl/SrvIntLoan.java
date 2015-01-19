@@ -9,8 +9,9 @@ import com.bbva.czic.loan.business.dto.DTOIntRotaryQuotaMove;
 import com.bbva.czic.loan.dao.mapper.LoanMapper;
 
 import com.bbva.czic.routine.commons.rm.utils.errors.EnumError;
+import com.bbva.czic.routine.commons.rm.utils.validator.impl.DateValidator;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
+
 import org.springframework.stereotype.Service;
 
 import com.bbva.czic.loan.business.ISrvIntLoan;
@@ -20,10 +21,9 @@ import com.bbva.jee.arq.spring.core.log.I18nLog;
 import com.bbva.jee.arq.spring.core.log.I18nLogFactory;
 import com.bbva.jee.arq.spring.core.servicing.gce.BusinessServiceException;
 import com.bbva.jee.arq.spring.core.servicing.utils.BusinessServicesToolKit;
-import org.springframework.util.CollectionUtils;
 
 import javax.annotation.Resource;
-import java.text.SimpleDateFormat;
+
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -44,7 +44,7 @@ public class SrvIntLoan implements ISrvIntLoan {
 	public Loan getRotaryQuota(final String idRotaryQuota) throws BusinessServiceException {
 		try {
 			log.info("SrvIntLoan.getRotaryQuota = " + idRotaryQuota);
-			if (idRotaryQuota == null || idRotaryQuota.equals("null") || idRotaryQuota.isEmpty()) {
+			if (idRotaryQuota == null || idRotaryQuota.equals("null") || idRotaryQuota.trim().isEmpty()) {
 				throw new BusinessServiceException(EnumError.WRONG_PARAMETERS.getAlias());
 			}
 			final DTOIntLoan dtoIntLoan = loanDao.getRotaryQuota(idRotaryQuota);
@@ -60,7 +60,7 @@ public class SrvIntLoan implements ISrvIntLoan {
 	}
 
 	@Override
-	public List<Movement> listRotaryQuotaMovements(final String idLoan, final String paginationKey, final String pageSize, final Date fechaInicila, Date fechaFinal) throws BusinessServiceException {
+	public List<Movement> listRotaryQuotaMovements(final String idLoan, final String paginationKey, final String pageSize, final Date fechaInicila, final Date fechaFinal) throws BusinessServiceException {
 
 		try {
 			Movement movement = null;
@@ -73,6 +73,10 @@ public class SrvIntLoan implements ISrvIntLoan {
 				log.info("SrvIntLoan.listRotaryQuotaMovements.nullParameters------------ " );
 				throw new BusinessServiceException(EnumError.WRONG_PARAMETERS.getAlias());
 			}
+
+			DateValidator validator = (DateValidator) new DateValidator().noFuture(fechaInicila)
+					.noFuture(fechaFinal).validDateRange(fechaInicila,fechaFinal)
+					.validate();
 
 			final List<DTOIntMovement> intLoan = loanDao.listRotaryQuotaMovements(idLoan, paginationKey, pageSize, fechaInicila, fechaFinal);
 
@@ -99,9 +103,9 @@ public class SrvIntLoan implements ISrvIntLoan {
 		try {
 			RotaryQuotaMove movement = null;
 			log.info("SrvIntLoan.getRotaryQuotaMovement = " + idMovement + ", " + idLoan);
-			if (idMovement == null || idMovement.isEmpty() || idLoan == null || idLoan.isEmpty()) throw new BusinessServiceException(EnumError.WRONG_PARAMETERS.getAlias());
+			if (idMovement == null || idMovement.isEmpty() || idLoan == null || idLoan.trim().isEmpty()) throw new BusinessServiceException(EnumError.WRONG_PARAMETERS.getAlias());
 
-			final DTOIntRotaryQuotaMove dtoIntRotaryQuotaMove = loanDao.getRotaryQuotaMovement(Integer.parseInt(idMovement), idLoan);
+			final DTOIntRotaryQuotaMove dtoIntRotaryQuotaMove = loanDao.getRotaryQuotaMovement( Integer.parseInt(idMovement), idLoan);
 			movement = LoanMapper.getMovementByDTOIntMovement(dtoIntRotaryQuotaMove);
 
 			return movement;
