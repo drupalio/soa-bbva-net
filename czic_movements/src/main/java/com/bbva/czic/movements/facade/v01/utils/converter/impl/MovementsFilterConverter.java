@@ -4,16 +4,21 @@ import com.bbva.czic.dto.net.EnumProductType;
 import com.bbva.czic.movements.business.dto.DTOIntMovementsFilter;
 import com.bbva.czic.movements.facade.v01.utils.converter.IFilterConverter;
 import com.bbva.czic.routine.commons.rm.utils.errors.EnumError;
+import com.bbva.czic.routine.commons.rm.utils.validator.impl.AmountValidator;
+import com.bbva.czic.routine.commons.rm.utils.validator.impl.DateValidator;
 import com.bbva.jee.arq.spring.core.log.I18nLog;
 import com.bbva.jee.arq.spring.core.log.I18nLogFactory;
 import com.bbva.jee.arq.spring.core.servicing.gce.BusinessServiceException;
 import com.bbva.jee.arq.spring.core.servicing.utils.BusinessServicesToolKit;
+import org.apache.cxf.jaxrs.ext.search.ConditionType;
 import org.apache.cxf.jaxrs.ext.search.PrimitiveStatement;
 import org.apache.cxf.jaxrs.ext.search.SearchCondition;
 import org.apache.cxf.jaxrs.ext.search.SearchParseException;
 import org.apache.cxf.jaxrs.ext.search.fiql.FiqlParser;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.math.BigDecimal;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -39,9 +44,29 @@ public class MovementsFilterConverter implements IFilterConverter {
                 sc = new FiqlParser<DTOIntMovementsFilter>(DTOIntMovementsFilter.class).parse(filter);
 
                 final List<PrimitiveStatement> splitDataFilter = businessToolKit.getDataFromFilter(sc);
+                dtofilter = new DTOIntMovementsFilter();
                 for (PrimitiveStatement st : splitDataFilter) {
-
+                    if(st.getProperty().equals("productId")){
+                        dtofilter.setProductId((String) st.getValue());
+                    }else if (st.getProperty().equals("productType")){
+                        dtofilter.setProductType(EnumProductType.valueOf((String)st.getValue()));
+                    }else if(st.getProperty().equals("transactionDate")){
+                        if(st.getCondition().equals(ConditionType.GREATER_OR_EQUALS)){
+                            dtofilter.setStartDate((Date) st.getValue());
+                        }else if(st.getCondition().equals(ConditionType.LESS_OR_EQUALS)){
+                            dtofilter.setEndDate((Date) st.getValue());
+                        }
+                    }else if(st.getProperty().equals("value")){
+                        if(st.getCondition().equals(ConditionType.GREATER_OR_EQUALS)){
+                            dtofilter.setBottomValue((BigDecimal) st.getValue());
+                        }else if(st.getCondition().equals(ConditionType.LESS_OR_EQUALS)){
+                            dtofilter.setTopValue((BigDecimal) st.getValue());
+                        }
+                    }
                 }
+                //Validaciones del filtro
+                validateFilter(dtofilter);
+
             }catch (SearchParseException se){
                 log.error("SearchParseException - The query string (filter) has failed: " + se);
                 throw new BusinessServiceException(EnumError.WRONG_PARAMETERS.getAlias(), filter, se.getMessage());
@@ -52,5 +77,30 @@ public class MovementsFilterConverter implements IFilterConverter {
         }
 
         return dtofilter;
+    }
+
+    private void validateFilter(DTOIntMovementsFilter filter){
+        if(filter != null){
+            if(filter.getProductId() == null || filter.getProductId().trim().isEmpty()
+                    || filter.getProductId().equalsIgnoreCase("null")){
+                throw new BusinessServiceException(EnumError.WRONG_PARAMETERS.getAlias());
+            }
+            if(filter.getProductType() == null){
+                throw new BusinessServiceException(EnumError.WRONG_PARAMETERS.getAlias());
+            }
+
+            // Validacion de fechas
+            DateValidator dateVal = (DateValidator) new DateValidator().noFuture(filter.getStartDate())
+                    .noFuture(filter.getEndDate()).validDateRange(filter.getStartDate(), filter.getEndDate()).validate();
+
+            // Validacion de importes
+            if(filter.getBottomValue() != null && filter.getTopValue() != null) {
+                AmountValidator amVal = (AmountValidator) new AmountValidator()
+                        .validateRange(filter.getBottomValue(),filter.getTopValue()).validate();
+            }
+
+        }else{
+            throw new BusinessServiceException(EnumError.FILTER_EMPTY.getAlias());
+        }
     }
 }
