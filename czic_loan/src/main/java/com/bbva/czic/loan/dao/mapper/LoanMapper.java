@@ -184,7 +184,7 @@ public class LoanMapper {
 		dtoIntRotaryQuotaMove.setValue(setMoneyValue(copy.getImporte()));
 		dtoIntRotaryQuotaMove.setBalance(setMoneyValue((copy.getBalance())));
 		dtoIntRotaryQuotaMove.setOperation(new Operation(copy.getDescop()));
-		dtoIntRotaryQuotaMove.setStatus(EnumMovementStatus.valueOf(copy.getEstado()));
+		dtoIntRotaryQuotaMove.setStatus(copy.getEstado());
 
 		log.info("inicio mapeo getDTOIntMovementByCopy.DTOIntRotaryQuotaMove");
 		return dtoIntRotaryQuotaMove;

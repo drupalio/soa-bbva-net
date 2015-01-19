@@ -52,7 +52,7 @@ public class Movement
     @ApiModelProperty(value = "Informacion de la operacion (codigo y descripcion)", required = true)
     private Office office;
     @ApiModelProperty(value = "Campo alfanum\u00e9rico que permite identificar la red utilizada para la operaci\u00f3n", required = true)
-    private EnumMovementStatus status;
+    private String status;
     @XmlJavaTypeAdapter(MoneyAdapter.class)
     @XmlElement(type = Money.class)
     @ApiModelProperty("valor de la operacion")
@@ -132,11 +132,11 @@ public class Movement
         this.office = office;
     }
 
-    public EnumMovementStatus getStatus() {
+    public String getStatus() {
 		return status;
 	}
 
-	public void setStatus(EnumMovementStatus status) {
+	public void setStatus(String status) {
 		this.status = status;
 	}
 
