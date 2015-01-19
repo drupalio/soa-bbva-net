@@ -16,14 +16,14 @@ public class FormatBalanceToDTOBalanceConverter {
     public DTOIntBalance convert(String totalBalance, String availableBalance) {
         final DTOIntBalance balance = new DTOIntBalance();
 
-        if (!totalBalance.equals(null)) {
+        if (totalBalance != null) {
             final Money totalMoney = new Money(
                     Currency.getInstance(CurrencyEnum.COP.toString()),
                     new BigDecimal(totalBalance));
             balance.setTotal(totalMoney);
         }
 
-        if (!availableBalance.equals(null)) {
+        if (availableBalance != null) {
             final Money availableMoney = new Money(
                     Currency.getInstance(CurrencyEnum.COP.toString()),
                     new BigDecimal(availableBalance));

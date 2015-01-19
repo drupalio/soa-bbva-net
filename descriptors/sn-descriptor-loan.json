@@ -1,0 +1,87 @@
+{
+  "bbva" : {
+    "uuaa" : "czic",
+    "remoteType" : "RESTFUL"
+  },
+  "dtos" : {
+    "loan" : {
+      "#metadata" : {
+        "dtoPackage" : "com.bbva.czic.dto.net.Loan"
+      },
+      "loanId" : {
+        "type" : "String",
+        "isKeyField" : true,
+        "description" : "Identificador del prestamo.",
+        "required" : true
+      }
+    },
+    "rotaryQuota" : {
+      "#metadata" : {
+        "dtoPackage" : "com.bbva.czic.dto.net.Loan"
+      },
+      "operationCode" : {
+        "type" : "String",
+        "isKeyField" : true,
+        "description" : "Identificador del movimiento.",
+        "required" : true
+      }
+    },
+    "rotaryQuotaMovement" : {
+      "#metadata" : {
+        "dtoPackage" : "com.bbva.czic.dto.net.RotaryQuotaMove"
+      },
+      "rotaryQuotaMovementId" : {
+        "type" : "String",
+        "isKeyField" : true,
+        "description" : "Identificador del rotary.",
+        "required" : true
+      }
+    },
+    "movement" : {
+      "#metadata" : {
+        "dtoPackage" : "com.bbva.czic.dto.net.Movement"
+      },
+      "movementId" : {
+        "type" : "String",
+        "isKeyField" : true,
+        "description" : "Identificador del movimiento.",
+        "required" : true
+      }
+    }
+  },
+  "sn" : {
+    "targetDto" : "loan",
+    "logicalId" : "loan",
+    "registryId" : "SN201400006",
+    "version" : "V01",
+    "description" : "SN loan",
+    "smcs" : {
+      "get" : {
+        "all" : [
+		{
+          "targetDto" : "rotaryQuotaMovement",
+          "logicalId" : "listRotaryQuotaMovements",
+          "registryId" : "SMC201400011",
+          "description" : "Obtiene un resumen de movimientos realizados sobre el producto de financiamiento. Éste servicio es paginado",
+          "notes" : "Obtiene un resumen de movimientos realizados sobre el producto de financiamiento. Éste servicio es paginado",
+          "gceErrors" : [ "aliasGCE1", "aliasGCE2" ]
+        } ],
+        "byKey" : [  {
+          "targetDto" : "rotaryQuota",
+          "logicalId" : "getRotaryQuota",
+          "registryId" : "SMC201400010",
+          "description" : "Obtiene la información general del producto de fianciamiento",
+          "notes" : "Obtiene la información general del producto de fianciamiento",
+          "gceErrors" : [ "aliasGCE1", "aliasGCE2" ]
+        }, {
+          "targetDto" : "rotaryQuotaMovement",
+          "logicalId" : "getRotaryQuotaMovement",
+          "registryId" : "SMC201400012",
+          "description" : "Obtiene los detalles del movimiento seleccionado para el producto de financiamiento",
+          "notes" : "Obtiene los detalles del movimiento seleccionado para el producto de financiamiento",
+          "gceErrors" : [ "aliasGCE1", "aliasGCE2" ]
+        } ]
+      }
+    }
+  }
+}
