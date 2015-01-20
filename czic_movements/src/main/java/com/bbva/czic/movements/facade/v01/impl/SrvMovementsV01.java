@@ -112,14 +112,14 @@ public class SrvMovementsV01 implements ISrvMovementsV01, com.bbva.jee.arq.sprin
 	@Path("/movements/V01")
 	@ElementClass(response = List.class)
 	@SMC(registryID="SMC201500002",logicalID="listMovements")
-	public Movement listMovements(@ApiParam(value = "identifier param") @PathParam("id") String idMovement,
+	public List<Movement> listMovements(@ApiParam(value = "identifier param") @PathParam("id") String idMovement,
 								  @ApiParam(value = "filter param") @DefaultValue("null") @QueryParam("$filter") String filter,
 								  @ApiParam(value = "pagination key") @DefaultValue("null") @QueryParam("paginationKey") Integer paginationKey,
 								  @ApiParam(value = "pagination size") @DefaultValue("null") @QueryParam("pageSize") Integer pageSize) {
 
 		DTOIntMovementsFilter dtoIntMovementsFilter =	movFilterConverter.toDtoIntMovementsFilter(filter);
 
-		return null;
+		return iMovementsMapper.listMovementMap(srvIntMovements.listMovements(dtoIntMovementsFilter));
 	}
 
 	

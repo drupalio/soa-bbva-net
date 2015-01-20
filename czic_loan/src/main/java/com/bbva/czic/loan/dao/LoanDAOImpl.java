@@ -130,7 +130,6 @@ public class LoanDAOImpl implements LoanDAO {
 
 			final List<CopySalida> outputCopyList = respuesta.getCuerpo().getPartes(CopySalida.class);
 
-
 			if(CollectionUtils.isEmpty(outputCopyList)) {
 				throw new BusinessServiceException(EnumError.NO_DATA.getAlias());
 			}

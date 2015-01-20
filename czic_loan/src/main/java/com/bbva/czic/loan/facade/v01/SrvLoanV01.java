@@ -81,6 +81,9 @@ public class SrvLoanV01 implements ISrvLoanV01,
 	@SMC(registryID = "SMC201400010", logicalID = "getRotaryQuota")
 	public Loan getRotaryQuota(
 			@ApiParam(value = "Claim identifier param") @PathParam("idLoan") String idLoan) {
+		if(idLoan == null || idLoan.equals("null") || idLoan.isEmpty()) {
+			throw new BusinessServiceException(EnumError.WRONG_PARAMETERS.getAlias());
+		}
 		return  isrvIntLoan.getRotaryQuota(idLoan);
 	}
 
@@ -99,6 +102,9 @@ public class SrvLoanV01 implements ISrvLoanV01,
 												   @ApiParam(value = "Loan pagination Key") @QueryParam("paginationKey")  String paginationKey,
 												   @ApiParam(value = "Loan page Size") @QueryParam("pageSize") String pageSize,
 												   @ApiParam(value = "order by param") @DefaultValue("null") @QueryParam("$filter") String filter) {
+		if(loanId == null || loanId.equals("null") || loanId.isEmpty()) {
+			throw new BusinessServiceException(EnumError.WRONG_PARAMETERS.getAlias());
+		}
 
 		if (paginationKey == null || paginationKey.equals("null") ||
 				pageSize == null || pageSize.equals("null")){
@@ -123,6 +129,7 @@ public class SrvLoanV01 implements ISrvLoanV01,
 	public RotaryQuotaMove getRotaryQuotaMovement(
 			@ApiParam(value = "Claimer identifier param") @PathParam("idLoan") String idLoan,
 			@ApiParam(value = "Claimer identifier param") @PathParam("idMovement") String idMovement) {
+
 		if (idMovement == null || idMovement.trim().isEmpty() || idLoan == null || idLoan.trim().isEmpty()){
 			throw new BusinessServiceException(EnumError.WRONG_PARAMETERS.getAlias());
 		}
