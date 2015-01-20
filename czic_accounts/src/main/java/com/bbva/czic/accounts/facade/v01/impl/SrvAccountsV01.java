@@ -1,7 +1,23 @@
 package com.bbva.czic.accounts.facade.v01.impl;
 
+import java.util.List;
+
+import javax.annotation.Resource;
+import javax.ws.rs.DefaultValue;
+import javax.ws.rs.GET;
+import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
+import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
+import javax.ws.rs.core.HttpHeaders;
+import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
+import javax.ws.rs.core.UriInfo;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import com.bbva.czic.accounts.business.ISrvIntAccounts;
-import com.bbva.czic.accounts.business.dto.DTOIntCheck;
 import com.bbva.czic.accounts.business.dto.DTOIntFilterAccount;
 import com.bbva.czic.accounts.business.dto.DTOIntFilterChecks;
 import com.bbva.czic.accounts.dao.AccountsDAO;
@@ -19,17 +35,11 @@ import com.bbva.jee.arq.spring.core.servicing.annotations.SMC;
 import com.bbva.jee.arq.spring.core.servicing.annotations.SN;
 import com.bbva.jee.arq.spring.core.servicing.annotations.VN;
 import com.bbva.jee.arq.spring.core.servicing.utils.BusinessServicesToolKit;
-import com.wordnik.swagger.annotations.*;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
-import javax.annotation.Resource;
-import javax.ws.rs.*;
-import javax.ws.rs.core.HttpHeaders;
-import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
-import javax.ws.rs.core.UriInfo;
-import java.util.List;
+import com.wordnik.swagger.annotations.Api;
+import com.wordnik.swagger.annotations.ApiOperation;
+import com.wordnik.swagger.annotations.ApiParam;
+import com.wordnik.swagger.annotations.ApiResponse;
+import com.wordnik.swagger.annotations.ApiResponses;
 
 @Path("/V01")
 @SN(registryID = "SN201400333", logicalID = "accounts")
@@ -60,11 +70,10 @@ public class SrvAccountsV01 implements ISrvAccountsV01, com.bbva.jee.arq.spring.
 	}
 
 	@Autowired
-	ISrvIntAccounts srvIntAccounts;
+	private ISrvIntAccounts srvIntAccounts;
 
 	@Resource(name = "accounts-mapper")
 	private IAccountsMapper iAccountsMapper;
-
 
 	@Resource(name = "accounts-filter-converter")
 	private IFilterConverter accFilterConverter;
@@ -82,11 +91,10 @@ public class SrvAccountsV01 implements ISrvAccountsV01, com.bbva.jee.arq.spring.
 	@Path("/{id}")
 	@SMC(registryID = "SMC201400334", logicalID = "getAccount")
 	public Account getAccount(@ApiParam(value = "identifier param") @PathParam("id") String idAccount) {
-		DTOIntFilterAccount dtoIntFilterAccount = new DTOIntFilterAccount();
+		final DTOIntFilterAccount dtoIntFilterAccount = new DTOIntFilterAccount();
 		dtoIntFilterAccount.setAccountId(idAccount);
-		return  iAccountsMapper.map(srvIntAccounts.getAccount(dtoIntFilterAccount));
+		return iAccountsMapper.map(srvIntAccounts.getAccount(dtoIntFilterAccount));
 	}
-
 
 	@Override
 	@ApiOperation(value = "Operacion realizada", notes = "Information Operation", response = Response.class)
@@ -104,7 +112,7 @@ public class SrvAccountsV01 implements ISrvAccountsV01, com.bbva.jee.arq.spring.
 			@ApiParam(value = "expands param") @DefaultValue("null") @QueryParam("$expands") String expands,
 			@ApiParam(value = "order by param") @DefaultValue("null") @QueryParam("$sort") String sort) {
 		DTOIntFilterAccount dtoIntFilterAccount = new DTOIntFilterAccount();
-		dtoIntFilterAccount = accFilterConverter.getDTOIntFilter(idAccount,filter);
+		dtoIntFilterAccount = accFilterConverter.getDTOIntFilter(idAccount, filter);
 		return iAccountsMapper.mapL(srvIntAccounts.getAccountMonthlyBalance(dtoIntFilterAccount));
 	}
 
@@ -124,13 +132,13 @@ public class SrvAccountsV01 implements ISrvAccountsV01, com.bbva.jee.arq.spring.
 			@ApiParam(value = "expands param") @DefaultValue("null") @QueryParam("$expands") String expands,
 			@ApiParam(value = "order by param") @DefaultValue("null") @QueryParam("$sort") String sort) {
 		DTOIntFilterAccount dtoIntFilterAccount = new DTOIntFilterAccount();
-		dtoIntFilterAccount = accFilterConverter.getDTOIntFilter(idAccount,filter);
+		dtoIntFilterAccount = accFilterConverter.getDTOIntFilter(idAccount, filter);
 		return iAccountsMapper.map(srvIntAccounts.getAccMovementResume(dtoIntFilterAccount));
 	}
 
 	/*
-	* Se crea manualmente
- 	*/
+	 * Se crea manualmente
+	 */
 
 	@Override
 	@ApiOperation(value = "Listado Cheques", notes = "Listado De Chequeras ", response = Response.class)
@@ -141,15 +149,17 @@ public class SrvAccountsV01 implements ISrvAccountsV01, com.bbva.jee.arq.spring.
 	@GET
 	@Path("/{id}/listChecks")
 	@SMC(registryID = "SMC201400026", logicalID = "listCheck")
-	public List<Check> listCheck(
-			@ApiParam(value = "identifier param") @PathParam("accountId") String accountId,
+	public List<Check> listCheck(@ApiParam(value = "identifier param") @PathParam("accountId") String accountId,
 			@ApiParam(value = "filter param") @DefaultValue("null") @QueryParam("$filter") String filter,
 			@ApiParam(value = "fields param") @DefaultValue("null") @QueryParam("$status") String status,
 			@ApiParam(value = "fields param") @DefaultValue("null") @QueryParam("$paginationKey") String paginationKey,
 			@ApiParam(value = "expands param") @DefaultValue("null") @QueryParam("$pageSize") String pageSize) {
 		DTOIntFilterChecks dtoIntFilterCheck = new DTOIntFilterChecks();
-		dtoIntFilterCheck = listCheckFilterConverter.getDTOIntFilter(accountId,filter,status,paginationKey,pageSize);
-		return iAccountsMapper.mapChecks(srvIntAccounts.listCheck(dtoIntFilterCheck));
+		dtoIntFilterCheck = listCheckFilterConverter
+				.getDTOIntFilter(accountId, filter, status, paginationKey, pageSize);
+		// return iAccountsMapper.map(srvIntAccounts.listCheck(dtoIntFilterCheck));
+
+		return null;
 	}
 
 }

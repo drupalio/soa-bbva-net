@@ -15,7 +15,7 @@ public class AmountValidator extends Validator{
     }
 
     public AmountValidator validateRange(BigDecimal from, BigDecimal to){
-        if(from.compareTo(to) == 1){
+        if(from != null && to != null && from.compareTo(to) == 1){
             throw new BusinessServiceException(EnumError.WRONG_PARAMETERS.getAlias());
         }
         return this;

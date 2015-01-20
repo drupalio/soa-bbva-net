@@ -7,5 +7,5 @@ import com.bbva.czic.movements.business.dto.DTOIntMovementsFilter;
  */
 public interface IFilterConverter {
     DTOIntMovementsFilter toDtoIntMovementsFilter(String filter);
-    DTOIntMovementsFilter dtoIntMovementsFilter(String filter);
+    DTOIntMovementsFilter dtoIntMovementsFilter(String filter,String idMovement);
 }

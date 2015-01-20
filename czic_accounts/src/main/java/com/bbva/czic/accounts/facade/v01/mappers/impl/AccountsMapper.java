@@ -1,22 +1,65 @@
 package com.bbva.czic.accounts.facade.v01.mappers.impl;
 
-import com.bbva.czic.accounts.business.dto.*;
-import com.bbva.czic.accounts.facade.v01.mappers.IAccountsMapper;
-import com.bbva.czic.dto.net.*;
-import com.bbva.jee.arq.spring.core.log.I18nLog;
-import com.bbva.jee.arq.spring.core.log.I18nLogFactory;
-import org.springframework.stereotype.Component;
-import org.springframework.util.CollectionUtils;
-
-import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
 
-@Component(value = "accounts-mapper")
-public class AccountsMapper implements IAccountsMapper {
+import com.bbva.czic.accounts.business.dto.DTOIntAccMovementsResume;
+import com.bbva.czic.accounts.business.dto.DTOIntAccount;
+import com.bbva.czic.accounts.business.dto.DTOIntBalance;
+import com.bbva.czic.accounts.business.dto.DTOIntCheck;
+import com.bbva.czic.accounts.business.dto.DTOIntCheckbook;
+import com.bbva.czic.accounts.business.dto.DTOIntMonthlyBalances;
+import com.bbva.czic.accounts.facade.v01.mappers.IAccountsMapper;
+import com.bbva.czic.dto.net.AccMovementsResume;
+import com.bbva.czic.dto.net.Account;
+import com.bbva.czic.dto.net.Balance;
+import com.bbva.czic.dto.net.Check;
+import com.bbva.czic.dto.net.Checkbook;
+import com.bbva.czic.dto.net.MonthlyBalances;
+import com.bbva.czic.routine.commons.rm.utils.converter.CalendarConverter;
+import com.bbva.czic.routine.commons.rm.utils.mappers.Mapper;
+import com.bbva.czic.routine.mapper.MapperFactory;
+import com.bbva.czic.routine.mapper.impl.ConfigurableMapper;
+import com.bbva.jee.arq.spring.core.log.I18nLog;
+import com.bbva.jee.arq.spring.core.log.I18nLogFactory;
+
+@Mapper(value = "accounts-mapper")
+public class AccountsMapper extends ConfigurableMapper implements IAccountsMapper {
 
 	private static I18nLog log = I18nLogFactory
 			.getLogI18n(AccountsMapper.class, "META-INF/spring/i18n/log/mensajesLog");
+
+	@Override
+	protected void configure(MapperFactory factory) {
+
+		// Add Converter
+		factory.getConverterFactory().registerConverter(new CalendarConverter());
+
+		// Map DTOIntCheckbook <-> CheckBook
+		factory.classMap(DTOIntCheckbook.class, Checkbook.class).field("id", "id").field("firstCheck", "firstCheck")
+				.field("lastCheckl", "lastCheck").field("totalCheck", "totalCheck").field("actualState", "actualState")
+				.field("deliveryDate", "deliveryDate").field("requestDate", "requestDate").byDefault().register();
+
+		factory.classMap(DTOIntBalance.class, Balance.class).field("total", "total")
+				.field("availableBalance", "availableBalance").byDefault().register();
+
+		// // Map DTOIntAccount <-> FormatoOZECNVE0
+		factory.classMap(DTOIntAccount.class, Account.class).field("name", "name").field("idAccount", "id")
+				.field("balance", "balance").field("listaCheckBook", "checkbooks").byDefault().register();
+		//
+		// // Map DTOIntCheck <-> FormatoOZECNVE0
+		factory.classMap(DTOIntCheck.class, Check.class).field("id", "id").field("status", "status")
+				.field("issueDate", "issueDate").field("value", "value").byDefault().register();
+		//
+		// // Map DTOIntMonthlyBalances <-> MonthlyBalances
+		factory.classMap(DTOIntMonthlyBalances.class, MonthlyBalances.class).field("balance", "balance")
+				.field("month.mes", "month").byDefault().register();
+
+		// // Map DTOIntAccMovementsResume <-> AccMovementsResume
+		factory.classMap(DTOIntAccMovementsResume.class, AccMovementsResume.class).field("month.mes", "month")
+				.field("balance", "balance").field("income", "income").field("outcome", "outcome").byDefault()
+				.register();
+
+	}
 
 	/**
 	 * Metodo encargado de mapear un DTO interno de tipo DTOIntAccount a un DTO externo de tipo Account
@@ -28,68 +71,18 @@ public class AccountsMapper implements IAccountsMapper {
 	@Override
 	public Account map(DTOIntAccount dtoIntAccount) {
 		log.info("map- return:Account-parameter:dtoIntAccount");
-		Account account = new Account();
-		account.setName(dtoIntAccount.getName());
-		account.setId(dtoIntAccount.getIdAccount());
-		account.setBalance(map(dtoIntAccount.getBalance()));
-		account.setCheckbooks(mapLCheckbook(dtoIntAccount.getListaCheckBook()));
-		return account;
-	}
-
-	/**
-	 * Metodo encargado de mapear una lista de tipo DTOIntCheckbook a una lista Checkbook
-	 *
-	 * @author David Tafur
-	 * @param listaDTOIntCheckbook
-	 * @return
-	 */
-	@Override
-	public List<Checkbook> mapLCheckbook(List<DTOIntCheckbook> listaDTOIntCheckbook) {
-		log.info("map- return:List<Checkbook>-parameter:listaDTOIntCheckbook");
-		List<Checkbook> listaCheckbook = new ArrayList<Checkbook>();
-
-		if (!CollectionUtils.isEmpty(listaDTOIntCheckbook)) {
-
-			for (DTOIntCheckbook dtoIntCheckbook : listaDTOIntCheckbook) {
-				Checkbook checkbook = new Checkbook();
-				checkbook.setId(dtoIntCheckbook.getId());
-				checkbook.setActualState(EnumCheckbookStatus.valueOf(dtoIntCheckbook.getActualState().toString()));
-				Calendar delivCalendar = Calendar.getInstance();
-				delivCalendar.setTime(dtoIntCheckbook.getDeliveryDate());
-				checkbook.setDeliveryDate(delivCalendar);
-				checkbook.setFirstCheck(dtoIntCheckbook.getFirstCheck());
-				checkbook.setLastCheck(dtoIntCheckbook.getLastCheckl());
-				Calendar requestDateCalendar = Calendar.getInstance();
-				requestDateCalendar.setTime(dtoIntCheckbook.getRequestDate());
-				checkbook.setRequestDate(requestDateCalendar);
-				checkbook.setTotalCheck(dtoIntCheckbook.getTotalCheck());
-				listaCheckbook.add(checkbook);
-			}
-		}
-
-		return listaCheckbook;
+		return map(dtoIntAccount, Account.class);
 	}
 
 	/**
 	 * Metodo que mapea una lista de DTOIntChecks a Checks
+	 * 
 	 * @param listaDtoIntChecks
 	 * @return
 	 */
 	@Override
 	public List<Check> mapChecks(List<DTOIntCheck> listaDtoIntChecks) {
-		List<Check> listaCheck = new ArrayList<Check>();
-
-		for(DTOIntCheck dtoIntCheck:listaDtoIntChecks){
-			Check check = new Check();
-			check.setId(String.valueOf(dtoIntCheck.getId()));
-			check.setStatus(EnumCheckStatus.valueOf(dtoIntCheck.getStatus().toString()));
-			final Calendar issueDate = Calendar.getInstance();
-			issueDate.setTime(dtoIntCheck.getIssueDate());
-			check.setIssueDate(issueDate);
-			check.setValue(dtoIntCheck.getValue());
-			listaCheck.add(check);
-		}
-		return listaCheck;
+		return mapAsList(listaDtoIntChecks, Check.class);
 	}
 
 	/**
@@ -102,16 +95,7 @@ public class AccountsMapper implements IAccountsMapper {
 	@Override
 	public List<MonthlyBalances> mapL(List<DTOIntMonthlyBalances> listaDtoIntMonthlyBalances) {
 		log.info("map- return: List<MonthlyBalances>-parameter:listaDtoIntMonthlyBalances");
-		List<MonthlyBalances> listaMonthlyBalance = new ArrayList<MonthlyBalances>();
-
-		for (DTOIntMonthlyBalances dtoIntMonthlyBalances : listaDtoIntMonthlyBalances) {
-			MonthlyBalances monthlyBalances = new MonthlyBalances();
-			monthlyBalances.setBalance(dtoIntMonthlyBalances.getBalance());
-			monthlyBalances.setMonth(EnumMonth.valueOf(dtoIntMonthlyBalances.getMonth().getMes().toString()));
-			listaMonthlyBalance.add(monthlyBalances);
-		}
-
-		return listaMonthlyBalance;
+		return mapAsList(listaDtoIntMonthlyBalances, MonthlyBalances.class);
 	}
 
 	/**
@@ -125,38 +109,7 @@ public class AccountsMapper implements IAccountsMapper {
 	@Override
 	public List<AccMovementsResume> map(List<DTOIntAccMovementsResume> listaDTOIntAccMovementsResume) {
 		log.info("map- return:List<AccMovementsResume>-parameter:listaDTOIntAccMovementsResume");
-		List<AccMovementsResume> listaAccMovementResume = new ArrayList<AccMovementsResume>();
-
-		for (DTOIntAccMovementsResume dtoIntAccMovementsResume : listaDTOIntAccMovementsResume) {
-			AccMovementsResume accMovementsResume = new AccMovementsResume();
-			accMovementsResume.setMonth(EnumMonth.valueOf(dtoIntAccMovementsResume.getMonth().getMes().toString()));
-			accMovementsResume.setBalance(dtoIntAccMovementsResume.getBalance());
-			accMovementsResume.setIncome(dtoIntAccMovementsResume.getIncome());
-			accMovementsResume.setOutcome(dtoIntAccMovementsResume.getOutcome());
-			listaAccMovementResume.add(accMovementsResume);
-		}
-
-		return listaAccMovementResume;
-	}
-
-	/**
-	 * Metodo encargado de mapear un DTOIntBalance a un Balance
-	 *
-	 * @author David Tafur
-	 * @param intBalance
-	 * @return
-	 */
-	@Override
-	public Balance map(DTOIntBalance intBalance) {
-		log.info("map- return:Balance-parameter:intBalance");
-		final Balance balance = new Balance();
-
-		if (intBalance != null) {
-
-			balance.setTotal(intBalance.getTotal());
-			balance.setAvailableBalance(intBalance.getAvailableBalance());
-		}
-		return balance;
+		return mapAsList(listaDTOIntAccMovementsResume, AccMovementsResume.class);
 	}
 
 }
