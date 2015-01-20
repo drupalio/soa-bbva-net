@@ -7,6 +7,7 @@ import java.util.List;
 
 import com.bbva.czic.loan.business.dto.DTOIntFilterLoan;
 import com.bbva.czic.routine.commons.rm.utils.errors.EnumError;
+import com.bbva.czic.routine.commons.rm.utils.validator.impl.DateValidator;
 import com.bbva.jee.arq.spring.core.log.I18nLog;
 import com.bbva.jee.arq.spring.core.log.I18nLogFactory;
 import com.bbva.jee.arq.spring.core.servicing.gce.BusinessServiceException;
@@ -99,6 +100,10 @@ public class LoanFilterConverter{
                 } catch (ParseException ex) {
                     throw new BusinessServiceException(EnumError.WRONG_PARAMETERS.getAlias());
                 }
+
+                DateValidator validator = (DateValidator) new DateValidator().noFuture(startDateFilter)
+                        .noFuture(endtDateFilter).validDateRange(startDateFilter, endtDateFilter)
+                        .validate();
 
                 log.info(" Filter starDateFilter: "+startDateFilter+" SMC : getCreditCardCharges SN Cards ");              
                       

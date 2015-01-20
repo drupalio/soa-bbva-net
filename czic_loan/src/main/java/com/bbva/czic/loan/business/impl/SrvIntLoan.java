@@ -67,10 +67,6 @@ public class SrvIntLoan implements ISrvIntLoan {
 
 			log.info("A query string (filter) has been sent Loan -----> : " + idLoan + ", " + paginationKey + ", " + pageSize + ", " + fechaInicila + ", " + fechaFinal);
 
-			DateValidator validator = (DateValidator) new DateValidator().noFuture(fechaInicila)
-					.noFuture(fechaFinal).validDateRange(fechaInicila,fechaFinal)
-					.validate();
-
 			final List<DTOIntMovement> intLoan = loanDao.listRotaryQuotaMovements(idLoan, paginationKey, pageSize, fechaInicila, fechaFinal);
 
 			for (DTOIntMovement item : intLoan) {
