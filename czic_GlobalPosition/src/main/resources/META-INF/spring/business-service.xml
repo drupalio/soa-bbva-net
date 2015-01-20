@@ -28,7 +28,7 @@
 	<context:annotation-config />
 	
 	<!-- Declaracion de modulo de servicios -->
-	<servicing:module-metadata  service-logical-id="GlobalPosition" />
+	<servicing:module-metadata  service-logical-id="globalPosition" />
     
 	<!-- beans de cxf -->
     <import resource="classpath:META-INF/cxf/cxf.xml"/>

@@ -1,17 +1,23 @@
 package com.bbva.czic.accounts.dao.impl;
 
-import com.bbva.czic.accounts.business.dto.*;
-import com.bbva.czic.accounts.dao.AccountsDAO;
+import java.io.IOException;
+import java.util.List;
+
 import org.codehaus.jackson.JsonParseException;
 import org.codehaus.jackson.map.JsonMappingException;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.mockito.Mockito;
 import org.springframework.context.annotation.Profile;
-import org.springframework.stereotype.Repository;
 
-import java.io.IOException;
+import com.bbva.czic.accounts.business.dto.DTOIntAccMovementsResume;
+import com.bbva.czic.accounts.business.dto.DTOIntAccount;
+import com.bbva.czic.accounts.business.dto.DTOIntCheck;
+import com.bbva.czic.accounts.business.dto.DTOIntFilterAccount;
+import com.bbva.czic.accounts.business.dto.DTOIntFilterChecks;
+import com.bbva.czic.accounts.business.dto.DTOIntMonthlyBalances;
+import com.bbva.czic.accounts.dao.AccountsDAO;
 
-@Repository(value = "accounts-dao")
+// @Repository(value = "accounts-dao")
 @Profile(value = "dev")
 public class AccountsDAOMock implements AccountsDAO {
 
@@ -27,9 +33,7 @@ public class AccountsDAOMock implements AccountsDAO {
 				this.getClass().getClassLoader().getResourceAsStream("mock/DTOAccounts.json"), DTOIntAccount.class);
 
 		check = new ObjectMapper().readValue(
-				this.getClass().getClassLoader().getResourceAsStream("mock/DTOListCheck.json"),DTOIntCheck.class);
-
-
+				this.getClass().getClassLoader().getResourceAsStream("mock/DTOListCheck.json"), DTOIntCheck.class);
 
 		mock = Mockito.mock(AccountsDAOMock.class);
 		Mockito.when(getAccount(Mockito.any(DTOIntFilterAccount.class))).thenReturn(accounts);
@@ -39,14 +43,13 @@ public class AccountsDAOMock implements AccountsDAO {
 
 	}
 
-
 	@Override
-	public DTOIntResponseMonthlyBalances getAccountMonthlyBalance(DTOIntFilterAccount dtoIntFilterAccount) {
+	public List<DTOIntMonthlyBalances> getAccountMonthlyBalance(DTOIntFilterAccount dtoIntFilterAccount) {
 		return null;
 	}
 
 	@Override
-	public DTOIntResponseAccMovementsResumes getAccountMovementResume(DTOIntFilterAccount dtoIntFilterAccount) {
+	public List<DTOIntAccMovementsResume> getAccountMovementResume(DTOIntFilterAccount dtoIntFilterAccount) {
 		return null;
 	}
 

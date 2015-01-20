@@ -1,7 +1,6 @@
 package com.bbva.czic.globalposition.dao.utils.converters;
 
 import com.bbva.czic.globalposition.business.dto.DTOIntBalance;
-import com.bbva.czic.routine.commons.rm.utils.CurrencyEnum;
 import com.bbva.jee.arq.spring.core.servicing.utils.Money;
 import org.springframework.beans.factory.annotation.Value;
 

@@ -1,16 +1,23 @@
 package com.bbva.czic.accounts.business.impl;
 
+import java.util.List;
+
+import javax.annotation.Resource;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import com.bbva.czic.accounts.business.ISrvIntAccounts;
-import com.bbva.czic.accounts.business.dto.*;
+import com.bbva.czic.accounts.business.dto.DTOIntAccMovementsResume;
+import com.bbva.czic.accounts.business.dto.DTOIntAccount;
+import com.bbva.czic.accounts.business.dto.DTOIntCheck;
+import com.bbva.czic.accounts.business.dto.DTOIntFilterAccount;
+import com.bbva.czic.accounts.business.dto.DTOIntFilterChecks;
+import com.bbva.czic.accounts.business.dto.DTOIntMonthlyBalances;
 import com.bbva.czic.accounts.dao.AccountsDAO;
 import com.bbva.jee.arq.spring.core.log.I18nLog;
 import com.bbva.jee.arq.spring.core.log.I18nLogFactory;
 import com.bbva.jee.arq.spring.core.servicing.utils.BusinessServicesToolKit;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
-import javax.annotation.Resource;
-import java.util.List;
 
 @Service
 public class SrvIntAccounts implements ISrvIntAccounts {
@@ -19,26 +26,21 @@ public class SrvIntAccounts implements ISrvIntAccounts {
 			.getLogI18n(SrvIntAccounts.class, "META-INF/spring/i18n/log/mensajesLog");
 
 	@Autowired
-	BusinessServicesToolKit bussinesToolKit;
-	@Resource(name = "accounts-dao")
-	AccountsDAO accountsDAO;
+	private BusinessServicesToolKit bussinesToolKit;
 
+	@Resource(name = "accounts-dao")
+	private AccountsDAO accountsDAO;
 
 	@Override
 	public List<DTOIntMonthlyBalances> getAccountMonthlyBalance(DTOIntFilterAccount dtoIntFilterAccount) {
 		log.info(" getExtractGlobalBalance product ");
-
-		final List<DTOIntMonthlyBalances> initialResult;
-
-		initialResult = accountsDAO.getAccountMonthlyBalance(dtoIntFilterAccount).getListDTOIntMonthlyBalances();
-
-		return initialResult;
+		return accountsDAO.getAccountMonthlyBalance(dtoIntFilterAccount);
 	}
 
 	@Override
 	public List<DTOIntAccMovementsResume> getAccMovementResume(DTOIntFilterAccount dtoIntFilterAccount) {
 		log.info(" getAccMovementResume ");
-		return accountsDAO.getAccountMovementResume(dtoIntFilterAccount).getListDTOIntAccMovementsResume();
+		return accountsDAO.getAccountMovementResume(dtoIntFilterAccount);
 	}
 
 	@Override

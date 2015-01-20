@@ -1,14 +1,13 @@
 package com.bbva.czic.globalposition.dao.mapper;
 
+import com.bbva.czic.dto.net.EnumFinancialStatusType;
+import com.bbva.czic.dto.net.EnumProductType;
 import com.bbva.czic.globalposition.business.dto.*;
 import com.bbva.czic.globalposition.dao.model.ozn1.FormatoOZECN1E0;
 import com.bbva.czic.globalposition.dao.model.ozn1.FormatoOZECN1S0;
 import com.bbva.czic.globalposition.dao.utils.converters.FormatBalanceToDTOBalanceConverter;
-import com.bbva.czic.routine.commons.rm.utils.errors.EnumError;
 import com.bbva.czic.routine.commons.rm.utils.tx.IFormatNotApply;
 import com.bbva.czic.routine.commons.rm.utils.tx.IPaginatedTransactionMapper;
-import com.bbva.jee.arq.spring.core.servicing.gce.BusinessServiceException;
-import org.apache.commons.lang.Validate;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -83,26 +82,6 @@ public class GetExtractGlobalBalanceNoTCMapper
         product.setFinancialState(outFormat.getFinstat());
 
         return product;
-    }
-
-    private boolean isValidNotNullOutFormat(FormatoOZECN1S0 outFormat){
-        try {
-
-            Validate.notEmpty(outFormat.getTipprod());
-            Validate.notEmpty(outFormat.getNumprod());
-            Validate.notEmpty(outFormat.getSaldisp());
-            Validate.notEmpty(outFormat.getSaltota());
-            Validate.notEmpty(outFormat.getIndvisi());
-            Validate.notEmpty(outFormat.getIndoper());
-            Validate.notEmpty(outFormat.getAlias());
-            Validate.notEmpty(outFormat.getNomprod());
-            Validate.notEmpty(outFormat.getFinstat());
-
-        } catch (IllegalArgumentException iae) {
-            throw new BusinessServiceException(EnumError.MANDATORY_PARAMETERES_MISSING.getAlias(), iae);
-        }
-
-        return true;
     }
 
 }
