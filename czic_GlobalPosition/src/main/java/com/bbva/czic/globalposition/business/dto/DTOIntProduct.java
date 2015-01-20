@@ -11,7 +11,7 @@ public class DTOIntProduct {
     private String productType;
     private String name;
     private String alias;
-    private EnumFinancialStatusType financialState;
+    private String financialState;
     private Boolean visible;
     private Boolean operable;
     private DTOIntBalance balance;
@@ -54,11 +54,11 @@ public class DTOIntProduct {
         this.alias = alias;
     }
 
-    public EnumFinancialStatusType getFinancialState() {
+    public String getFinancialState() {
         return financialState;
     }
 
-    public void setFinancialState(EnumFinancialStatusType financialState) {
+    public void setFinancialState(String financialState) {
         this.financialState = financialState;
     }
 

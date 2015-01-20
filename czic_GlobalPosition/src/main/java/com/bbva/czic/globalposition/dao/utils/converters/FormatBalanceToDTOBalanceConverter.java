@@ -1,7 +1,6 @@
 package com.bbva.czic.globalposition.dao.utils.converters;
 
 import com.bbva.czic.globalposition.business.dto.DTOIntBalance;
-import com.bbva.czic.routine.commons.rm.utils.CurrencyEnum;
 import com.bbva.jee.arq.spring.core.servicing.utils.Money;
 import org.springframework.beans.factory.annotation.Value;
 
@@ -13,20 +12,26 @@ import java.util.Currency;
  */
 public class FormatBalanceToDTOBalanceConverter {
 
+    @Value("${locale.default.currency.iso}")
+    private String CURRENCY;
+
+    @Value("${currency.default.decimal.divider}")
+    private String DECIMAL_DIVIDER;
+
     public DTOIntBalance convert(String totalBalance, String availableBalance) {
         final DTOIntBalance balance = new DTOIntBalance();
 
-        if (!totalBalance.equals(null)) {
+        if (totalBalance != null) {
             final Money totalMoney = new Money(
-                    Currency.getInstance(CurrencyEnum.COP.toString()),
-                    new BigDecimal(totalBalance));
+                    Currency.getInstance(CURRENCY),
+                    new BigDecimal(totalBalance).divide(new BigDecimal(DECIMAL_DIVIDER)));
             balance.setTotal(totalMoney);
         }
 
-        if (!availableBalance.equals(null)) {
+        if (availableBalance != null) {
             final Money availableMoney = new Money(
-                    Currency.getInstance(CurrencyEnum.COP.toString()),
-                    new BigDecimal(availableBalance));
+                    Currency.getInstance(CURRENCY),
+                    new BigDecimal(availableBalance).divide(new BigDecimal(DECIMAL_DIVIDER)));
             balance.setAvailableBalance(availableMoney);
         }
 

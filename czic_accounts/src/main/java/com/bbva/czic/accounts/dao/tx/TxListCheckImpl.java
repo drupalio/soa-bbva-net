@@ -1,4 +1,4 @@
-package com.bbva.czic.accounts.dao.tx.impl;
+package com.bbva.czic.accounts.dao.tx;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;

@@ -40,7 +40,7 @@ public class CustomersDAOImpl implements CustomersDAO {
 	private ErrorMappingHelper errorMappingHelper;
 
 	@Autowired
-	private TransaccionOznq transaccionOznq;;
+	private TransaccionOznq transaccionOznq;
 	@Autowired
 	private TransaccionOznb transaccionOznb;
 	@Autowired
@@ -78,15 +78,18 @@ public class CustomersDAOImpl implements CustomersDAO {
 
 			BusinessServiceException exception = errorMappingHelper.toBusinessServiceException(respuesta);
 			if (exception != null){
-				throw new BusinessServiceException(EnumError.NO_DATA.getAlias());
+				throw exception;
 			}
 
 			List<CopySalida> outputCopies = respuesta.getCuerpo().getPartes(CopySalida.class);
-
-			for (CopySalida outputCopy : outputCopies) {
-				FormatoOZECNQS0 formatoSalida = outputCopy.getCopy(FormatoOZECNQS0.class);
-				dtoIntAccountAccMovementsResume = customerMapper.map(formatoSalida);
-				accountMovementDtoList.add(dtoIntAccountAccMovementsResume);
+			if(!outputCopies.isEmpty()) {
+				for (CopySalida outputCopy : outputCopies) {
+					FormatoOZECNQS0 formatoSalida = outputCopy.getCopy(FormatoOZECNQS0.class);
+					dtoIntAccountAccMovementsResume = customerMapper.map(formatoSalida);
+					accountMovementDtoList.add(dtoIntAccountAccMovementsResume);
+				}
+			}else{
+				throw  new BusinessServiceException(EnumError.NO_DATA.getAlias());
 			}
 		} catch (BusinessServiceException bse) {
 			log.error("BusinessServiceException - Transaction error happened: " + bse.getMessage());
@@ -125,17 +128,20 @@ public class CustomersDAOImpl implements CustomersDAO {
 
 			BusinessServiceException exception = errorMappingHelper.toBusinessServiceException(respuesta);
 			if (exception != null) {
-				throw new BusinessServiceException(EnumError.NO_DATA.getAlias());
+				throw exception;
 			}
 
 			List<CopySalida> outputCopies = respuesta.getCuerpo().getPartes(CopySalida.class);
 
-			for(CopySalida outputCopy :outputCopies){
-				FormatoOZECNPS0 formatoSalida = outputCopy.getCopy(FormatoOZECNPS0.class);
-				dtoIntCardCharge = customerMapper.map(formatoSalida);
-				cardChargetDtoList.add(dtoIntCardCharge);
+			if(!outputCopies.isEmpty()) {
+				for (CopySalida outputCopy : outputCopies) {
+					FormatoOZECNPS0 formatoSalida = outputCopy.getCopy(FormatoOZECNPS0.class);
+					dtoIntCardCharge = customerMapper.map(formatoSalida);
+					cardChargetDtoList.add(dtoIntCardCharge);
+				}
+			}else{
+				throw  new BusinessServiceException(EnumError.NO_DATA.getAlias());
 			}
-
 		} catch (BusinessServiceException bse) {
 			log.error("BusinessServiceException - Transaction error happened: " + bse.getMessage());
 			throw bse;
@@ -167,12 +173,16 @@ public class CustomersDAOImpl implements CustomersDAO {
 
 		BusinessServiceException exception = errorMappingHelper.toBusinessServiceException(respuesta);
 		if (exception != null) {
-			throw new BusinessServiceException(EnumError.NO_DATA.getAlias());
+			throw exception;
 		}
 
 		CopySalida outputCopies = respuesta.getCuerpo().getParte(CopySalida.class);
 
 		FormatoOZNCSNB0 formatoSalida = outputCopies.getCopy(FormatoOZNCSNB0.class);
+
+		if (formatoSalida == null){
+			throw new BusinessServiceException(EnumError.NO_DATA.getAlias());
+		}
 
 		log.info("DAO - Se mapea la respuesta para retornarla SMC : getCustomer SN Customer ");
 		dtoIntCustomer = CustomerMapper.mapToOuter(formatoSalida);

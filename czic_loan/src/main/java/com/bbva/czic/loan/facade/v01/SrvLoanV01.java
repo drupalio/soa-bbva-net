@@ -8,6 +8,8 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.UriInfo;
 
 import com.bbva.czic.dto.net.RotaryQuotaMove;
+import com.bbva.czic.routine.commons.rm.utils.errors.EnumError;
+import com.bbva.jee.arq.spring.core.servicing.gce.BusinessServiceException;
 import org.apache.cxf.jaxrs.model.wadl.ElementClass;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -97,6 +99,15 @@ public class SrvLoanV01 implements ISrvLoanV01,
 												   @ApiParam(value = "Loan pagination Key") @QueryParam("paginationKey")  String paginationKey,
 												   @ApiParam(value = "Loan page Size") @QueryParam("pageSize") String pageSize,
 												   @ApiParam(value = "order by param") @DefaultValue("null") @QueryParam("$filter") String filter) {
+		if(loanId == null || loanId.equals("null") || loanId.isEmpty()) {
+			throw new BusinessServiceException(EnumError.WRONG_PARAMETERS.getAlias());
+		}
+
+		if (paginationKey == null || paginationKey.equals("null") ||
+				pageSize == null || pageSize.equals("null")){
+			log.info("SrvLoanV01.listRotaryQuotaMovements.nullParameters------------ " );
+			throw new BusinessServiceException(EnumError.WRONG_PARAMETERS.getAlias());
+		}
 		DTOIntFilterLoan loanFilter = loanFilterConverter.getDTOIntFilter(loanId, filter);
 		return isrvIntLoan.listRotaryQuotaMovements(loanFilter.getIdLoan(), paginationKey, pageSize, loanFilter.getFechaInicial(), loanFilter.getFechaFianl());
 	}
@@ -115,6 +126,10 @@ public class SrvLoanV01 implements ISrvLoanV01,
 	public RotaryQuotaMove getRotaryQuotaMovement(
 			@ApiParam(value = "Claimer identifier param") @PathParam("idLoan") String idLoan,
 			@ApiParam(value = "Claimer identifier param") @PathParam("idMovement") String idMovement) {
+		if (idMovement == null || idMovement.trim().isEmpty() || idLoan == null || idLoan.trim().isEmpty()){
+			throw new BusinessServiceException(EnumError.WRONG_PARAMETERS.getAlias());
+		}
+
 		return isrvIntLoan.getRotaryQuotaMovement(idMovement, idLoan);
 	}
 }

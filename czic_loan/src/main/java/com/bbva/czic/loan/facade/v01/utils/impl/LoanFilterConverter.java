@@ -7,6 +7,7 @@ import java.util.List;
 
 import com.bbva.czic.loan.business.dto.DTOIntFilterLoan;
 import com.bbva.czic.routine.commons.rm.utils.errors.EnumError;
+import com.bbva.czic.routine.commons.rm.utils.validator.impl.DateValidator;
 import com.bbva.jee.arq.spring.core.log.I18nLog;
 import com.bbva.jee.arq.spring.core.log.I18nLogFactory;
 import com.bbva.jee.arq.spring.core.servicing.gce.BusinessServiceException;
@@ -46,12 +47,8 @@ public class LoanFilterConverter{
         final DTOIntFilterLoan dtoIntFilterLoan = new DTOIntFilterLoan();
         String fechaInicial = "";
         String fechaFinal = "";
-        
-        //Comprobamos que el id del loan no sea nullo dado que es obligatorio
-        if(loanId == null || loanId.equals("null") || loanId.isEmpty()) {
-            throw new BusinessServiceException(EnumError.WRONG_PARAMETERS.getAlias());
-        }
 
+        dtoIntFilterLoan.setIdLoan(loanId);
         //Manejamos el filter
         if (filter != null && !filter.contentEquals("null")) {
             log.info("A query string (filter) has been sended Loan ---> : " + filter);
@@ -82,7 +79,7 @@ public class LoanFilterConverter{
 				 * Se hace la comprobacion de que los dos parametros del filtros
 				 * tengan valor
 				 */
-                if (fechaInicial == null || fechaInicial.equals("") || fechaFinal == null || fechaFinal.equals("")) {
+                if (fechaInicial == null || fechaInicial.trim().isEmpty() || fechaFinal == null || fechaFinal.trim().isEmpty()) {
                     throw new BusinessServiceException(EnumError.FILTER_EMPTY.getAlias());
                 }
 
@@ -100,12 +97,14 @@ public class LoanFilterConverter{
                     throw new BusinessServiceException(EnumError.WRONG_PARAMETERS.getAlias());
                 }
 
+                DateValidator validator = (DateValidator) new DateValidator().noFuture(startDateFilter)
+                        .noFuture(endtDateFilter).validDateRange(startDateFilter, endtDateFilter)
+                        .validate();
+
                 log.info(" Filter starDateFilter: "+startDateFilter+" SMC : getCreditCardCharges SN Cards ");              
                       
                 dtoIntFilterLoan.setFechaInicial(startDateFilter);
                 dtoIntFilterLoan.setFechaFianl(endtDateFilter);
-                dtoIntFilterLoan.setIdLoan(loanId); 
-              
 
             } catch (SearchParseException e) {
                 log.error("SearchParseException - The query string (filter) has failed: " + e.getMessage());

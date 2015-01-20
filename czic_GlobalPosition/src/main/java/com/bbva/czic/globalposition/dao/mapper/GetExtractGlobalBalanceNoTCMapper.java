@@ -66,6 +66,8 @@ public class GetExtractGlobalBalanceNoTCMapper
         final FormatBalanceToDTOBalanceConverter balanceConverter = new FormatBalanceToDTOBalanceConverter();
         final DTOIntContract contract = new DTOIntContract();
 
+        // isValidNotNullOutFormat(outFormat);
+
         //product.setProductType(EnumProductType.valueOf(outFormat.getTipprod()));
         product.setProductType(outFormat.getTipprod());
 
@@ -77,7 +79,7 @@ public class GetExtractGlobalBalanceNoTCMapper
         product.setOperable(outFormat.getIndoper().equalsIgnoreCase("v") || outFormat.getIndoper().equalsIgnoreCase("t"));
         product.setAlias(outFormat.getAlias());
         product.setName(outFormat.getNomprod());
-        product.setFinancialState(EnumFinancialStatusType.valueOf(outFormat.getFinstat()));
+        product.setFinancialState(outFormat.getFinstat());
 
         return product;
     }
