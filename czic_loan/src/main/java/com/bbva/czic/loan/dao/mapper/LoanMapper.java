@@ -38,29 +38,33 @@ public class LoanMapper {
 			log.info("inicio Mapper");
 
 			log.info("inicio Mapper datos----------------");
-			log.info("formatoSalida.getSaldoto = " + formatoSalida.getSaldoto() + ", formatoSalida.getPagomin = " + formatoSalida.getPagomin() + ", formatoSalida.getMntosol = " +formatoSalida.getMntosol()+
-			", formatoSalida.getSaldope = " + formatoSalida.getSaldope() + ", formatoSalida.getFechali = " + formatoSalida.getFechali()+ ", formatoSalida.getFechali = " + formatoSalida.getFechali()+
-			", formatoSalida.getFechaco = " + formatoSalida.getFechaco() + ", formatoSalida.getHonorar = " + formatoSalida.getHonorar() + ", formatoSalida.getCuotato = " + formatoSalida.getCuotato()+
-			", formatoSalida.getEstadot = " + formatoSalida.getEstadot());
+			log.info("formatoSalida.getSaldoto = " + formatoSalida.getSaldoto() + ", formatoSalida.getPagomin = " + formatoSalida.getPagomin() + ", formatoSalida.getMntosol = " + formatoSalida.getMntosol() +
+					", formatoSalida.getSaldope = " + formatoSalida.getSaldope() + ", formatoSalida.getFechali = " + formatoSalida.getFechali() + ", formatoSalida.getFechali = " + formatoSalida.getFechali() +
+					", formatoSalida.getFechaco = " + formatoSalida.getFechaco() + ", formatoSalida.getHonorar = " + formatoSalida.getHonorar() + ", formatoSalida.getCuotato = " + formatoSalida.getCuotato() +
+					", formatoSalida.getEstadot = " + formatoSalida.getEstadot());
 			dTOIntLoan.setId(formatoSalida.getNumcont());
 			dTOIntLoan.setType(formatoSalida.getTipprod());
 			dTOIntLoan.setName(formatoSalida.getDesctar());
 
 			dTOIntLoan.setBalance(setBalance(formatoSalida.getSaldoto(), formatoSalida.getPagomin()));
 			dTOIntLoan.setDebt(setBalance(formatoSalida.getMntosol(), formatoSalida.getSaldope()));
-			
+
 			Calendar fechaPa = Calendar.getInstance();
-			fechaPa.setTime(formatoSalida.getFechali());
-			
+
+			if (formatoSalida.getFechali() != null){
+				fechaPa.setTime(formatoSalida.getFechali());
+		    }
+
 			Calendar fechaVe = Calendar.getInstance();
 
-			fechaVe.setTime(formatoSalida.getFechali());
-			
+			if(formatoSalida.getFechali() != null) {
+				fechaVe.setTime(formatoSalida.getFechali());
+			}
 			
 			dTOIntLoan.setPayment(setPayment(fechaPa, fechaVe,formatoSalida.getFechaco(), formatoSalida.getHonorar(),
 					              null, Integer.parseInt(formatoSalida.getCuotato())));
 			
-			dTOIntLoan.setStatus(EnumLoanStatus.valueOf(formatoSalida.getEstadot()));
+			dTOIntLoan.setStatus(formatoSalida.getEstadot());
 			log.info("fin Mapper");
 		} catch (Exception e) {
 			log.error("An error happened while mapping");
@@ -126,7 +130,10 @@ public class LoanMapper {
 		payment.setPaymentDate(paymentDate);
 
 		Calendar calendar = Calendar.getInstance();
-		calendar.setTime(shortDate);
+
+		if(shortDate != null) {
+			calendar.setTime(shortDate);
+		}
 		payment.setShortDate(calendar);
 		log.info("fin mapeo setPayment.Payment");
 		return payment;
@@ -162,8 +169,10 @@ public class LoanMapper {
 		Calendar calendar = Calendar.getInstance();
 
 		log.info("inicio mapeo getDTOIntMovementByCopy.DTOIntMovement");
-		calendar.setTime(copy.getFechaop());
 
+		if(copy.getFechaop() != null) {
+			calendar.setTime(copy.getFechaop());
+		}
 		dTOIntMovement.setId(copy.getNumeope());
 		dTOIntMovement.setTransactionDate(calendar);
 		dTOIntMovement.setConcept(copy.getResto().toString());
@@ -177,10 +186,12 @@ public class LoanMapper {
 		DTOIntRotaryQuotaMove dtoIntRotaryQuotaMove = new DTOIntRotaryQuotaMove();
 		log.info("inicio mapeo getDTOIntMovementByCopy.DTOIntRotaryQuotaMove");
         Calendar calendar = Calendar.getInstance();
-		calendar.setTime(copy.getFechaop());
 
+		if(copy.getFechaop() != null) {
+			calendar.setTime(copy.getFechaop());
+		}
 		dtoIntRotaryQuotaMove.setTransactionDate(calendar);
-		dtoIntRotaryQuotaMove.setConcept(copy.getResto().toString());
+		dtoIntRotaryQuotaMove.setConcept(copy.getResto());
 		dtoIntRotaryQuotaMove.setValue(setMoneyValue(copy.getImporte()));
 		dtoIntRotaryQuotaMove.setBalance(setMoneyValue((copy.getBalance())));
 		dtoIntRotaryQuotaMove.setOperation(new Operation(copy.getDescop()));

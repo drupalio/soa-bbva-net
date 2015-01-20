@@ -24,7 +24,7 @@ public class Loan extends Product implements Serializable {
 	private Payment payment;
 
 	@ApiModelProperty(value = "Estado del prestamo", required = true)
-	private EnumLoanStatus status;
+	private String status;
 
 	public Loan() {
 		// default constructor
@@ -46,11 +46,11 @@ public class Loan extends Product implements Serializable {
 		this.payment = payment;
 	}
 
-	public EnumLoanStatus getStatus() {
+	public String getStatus() {
 		return status;
 	}
 
-	public void setStatus(EnumLoanStatus status) {
+	public void setStatus(String status) {
 		this.status = status;
 	}
 

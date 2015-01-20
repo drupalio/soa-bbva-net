@@ -11,7 +11,7 @@ public class RotaryQuotaMove extends Movement {
 
 	private Operation operation;
 
-	@Override  
+	@Override
 	public String getId() {
 		return id;
 	}
