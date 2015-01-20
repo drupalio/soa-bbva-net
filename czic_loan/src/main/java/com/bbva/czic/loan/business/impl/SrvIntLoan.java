@@ -96,10 +96,10 @@ public class SrvIntLoan implements ISrvIntLoan {
 		try {
 			RotaryQuotaMove movement = null;
 			log.info("SrvIntLoan.getRotaryQuotaMovement = " + idMovement + ", " + idLoan);
-<<<<<<< HEAD
-=======
-			if (idMovement == null || idMovement.isEmpty() || idLoan == null || idLoan.trim().isEmpty()) throw new BusinessServiceException(EnumError.WRONG_PARAMETERS.getAlias());
->>>>>>> 099530478342371d2ca178a72a632fd69aa32eff
+
+			if (idMovement == null || idMovement.isEmpty() || idLoan == null || idLoan.trim().isEmpty()){
+				throw new BusinessServiceException(EnumError.WRONG_PARAMETERS.getAlias());
+			}
 
 			final DTOIntRotaryQuotaMove dtoIntRotaryQuotaMove = loanDao.getRotaryQuotaMovement( Integer.parseInt(idMovement), idLoan);
 			movement = LoanMapper.getMovementByDTOIntMovement(dtoIntRotaryQuotaMove);
