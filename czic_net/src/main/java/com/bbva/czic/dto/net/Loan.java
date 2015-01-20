@@ -30,6 +30,7 @@ public class Loan extends Product implements Serializable {
 		// default constructor
 	}
 
+
 	public Balance getDebt() {
 		return debt;
 	}
@@ -53,5 +54,4 @@ public class Loan extends Product implements Serializable {
 	public void setStatus(String status) {
 		this.status = status;
 	}
-
 }
