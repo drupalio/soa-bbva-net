@@ -3,17 +3,25 @@ package com.bbva.czic.globalposition.business.dto;
 
 import com.bbva.czic.dto.net.EnumFinancialStatusType;
 import com.bbva.czic.dto.net.EnumProductType;
+import org.hibernate.validator.constraints.NotEmpty;
+
+import javax.validation.constraints.NotNull;
 
 public class DTOIntProduct {
 
     public final static long serialVersionUID = 1L;
+    @NotEmpty
     private String id;
+    @NotEmpty
     private String productType;
     private String name;
     private String alias;
     private String financialState;
+    @NotNull
     private Boolean visible;
+    @NotNull
     private Boolean operable;
+    @NotNull
     private DTOIntBalance balance;
     private DTOIntContactInfo contactInfo;
     private DTOIntContract contract;
