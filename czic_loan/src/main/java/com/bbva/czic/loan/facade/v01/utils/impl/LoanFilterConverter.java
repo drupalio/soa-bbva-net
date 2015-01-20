@@ -52,7 +52,7 @@ public class LoanFilterConverter{
         if(loanId == null || loanId.equals("null") || loanId.isEmpty()) {
             throw new BusinessServiceException(EnumError.WRONG_PARAMETERS.getAlias());
         }
-
+        dtoIntFilterLoan.setIdLoan(loanId);
         //Manejamos el filter
         if (filter != null && !filter.contentEquals("null")) {
             log.info("A query string (filter) has been sended Loan ---> : " + filter);
@@ -83,7 +83,7 @@ public class LoanFilterConverter{
 				 * Se hace la comprobacion de que los dos parametros del filtros
 				 * tengan valor
 				 */
-                if (fechaInicial == null || fechaInicial.equals("") || fechaFinal == null || fechaFinal.equals("")) {
+                if (fechaInicial == null || fechaInicial.trim().isEmpty() || fechaFinal == null || fechaFinal.trim().isEmpty()) {
                     throw new BusinessServiceException(EnumError.FILTER_EMPTY.getAlias());
                 }
 
@@ -109,8 +109,6 @@ public class LoanFilterConverter{
                       
                 dtoIntFilterLoan.setFechaInicial(startDateFilter);
                 dtoIntFilterLoan.setFechaFianl(endtDateFilter);
-                dtoIntFilterLoan.setIdLoan(loanId); 
-              
 
             } catch (SearchParseException e) {
                 log.error("SearchParseException - The query string (filter) has failed: " + e.getMessage());

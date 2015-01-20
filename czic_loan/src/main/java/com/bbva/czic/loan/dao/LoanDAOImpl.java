@@ -71,7 +71,7 @@ public class LoanDAOImpl implements LoanDAO {
 
 			if (exception != null) { 
 				log.info("LoanDAOImpl.getRotaryQuota transaccion Exception = " + exception.getMessage());
-				throw new BusinessServiceException(EnumError.TECHNICAL_ERROR.getAlias());
+				throw exception;
 			}
 			final CopySalida outputCopy = respuesta.getCuerpo().getParte(CopySalida.class);
 			if (outputCopy != null) {
@@ -102,7 +102,6 @@ public class LoanDAOImpl implements LoanDAO {
 
 		log.info("ingreso LoanDAOImpl.listRotaryQuotaMovements");
 
-		DTOIntMovement movement = null;
 		List<DTOIntMovement> movementList = new ArrayList<DTOIntMovement>();
 
 		try {
@@ -126,7 +125,7 @@ public class LoanDAOImpl implements LoanDAO {
 
 			if (exception != null) {
 				log.info("fin preInvocar LoanDAOImpl.getRotaryQuotaMovement.Exception" + exception.getErrorMessage());
-				throw new BusinessServiceException(EnumError.TECHNICAL_ERROR.getAlias());
+				throw exception;
 			}
 
 			final List<CopySalida> outputCopyList = respuesta.getCuerpo().getPartes(CopySalida.class);
@@ -138,12 +137,12 @@ public class LoanDAOImpl implements LoanDAO {
 			log.info("LoanDAOImpl.listRotaryQuotaMovements.list = " + outputCopyList.size());
 
 			for (CopySalida item : outputCopyList) {
-				movement = new DTOIntMovement();
+				DTOIntMovement movement = new DTOIntMovement();
 
-		       FormatoOZNCSNI0 formatoSalida = item.getCopy(FormatoOZNCSNI0.class);
-			   movement = LoanMapper.getDTOIntMovementByCopy(formatoSalida);
+		       	FormatoOZNCSNI0 formatoSalida = item.getCopy(FormatoOZNCSNI0.class);
+			   	movement = LoanMapper.getDTOIntMovementByCopy(formatoSalida);
 
-			  movementList.add(movement);
+			  	movementList.add(movement);
 			}
 			return movementList;
 		} catch (BusinessServiceException bex) {
@@ -176,14 +175,12 @@ public class LoanDAOImpl implements LoanDAO {
 
 			if (exception != null){
 				log.info("LoanDAOImpl.getRotaryQuotaMovement = exception ->" + exception.getErrorMessage() );
-				throw new BusinessServiceException(EnumError.TECHNICAL_ERROR.getAlias());
+				throw exception;
 			}
 
 			final CopySalida outputCopy = respuesta.getCuerpo().getParte(CopySalida.class);
 			if (outputCopy != null) {
 				final FormatoOZNCSNK0 formatoSalida =  outputCopy.getCopy(FormatoOZNCSNK0.class);
-
-
 
 				if (formatoSalida != null) {
 					rotaryQuotaMove = LoanMapper.getDTOIntMovementByCopy(formatoSalida);
