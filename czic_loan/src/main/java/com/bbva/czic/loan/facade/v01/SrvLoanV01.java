@@ -99,6 +99,9 @@ public class SrvLoanV01 implements ISrvLoanV01,
 												   @ApiParam(value = "Loan pagination Key") @QueryParam("paginationKey")  String paginationKey,
 												   @ApiParam(value = "Loan page Size") @QueryParam("pageSize") String pageSize,
 												   @ApiParam(value = "order by param") @DefaultValue("null") @QueryParam("$filter") String filter) {
+		if(loanId == null || loanId.equals("null") || loanId.isEmpty()) {
+			throw new BusinessServiceException(EnumError.WRONG_PARAMETERS.getAlias());
+		}
 
 		if (paginationKey == null || paginationKey.equals("null") ||
 				pageSize == null || pageSize.equals("null")){

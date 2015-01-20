@@ -47,11 +47,7 @@ public class LoanFilterConverter{
         final DTOIntFilterLoan dtoIntFilterLoan = new DTOIntFilterLoan();
         String fechaInicial = "";
         String fechaFinal = "";
-        
-        //Comprobamos que el id del loan no sea nullo dado que es obligatorio
-        if(loanId == null || loanId.equals("null") || loanId.isEmpty()) {
-            throw new BusinessServiceException(EnumError.WRONG_PARAMETERS.getAlias());
-        }
+
         dtoIntFilterLoan.setIdLoan(loanId);
         //Manejamos el filter
         if (filter != null && !filter.contentEquals("null")) {
