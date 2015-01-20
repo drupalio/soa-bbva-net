@@ -2,9 +2,6 @@ package com.bbva.czic.dto.net;
 
 public class RotaryQuotaMove extends Movement {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 
 	private String id;
