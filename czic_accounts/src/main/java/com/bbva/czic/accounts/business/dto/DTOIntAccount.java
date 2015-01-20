@@ -1,22 +1,24 @@
 package com.bbva.czic.accounts.business.dto;
 
-import java.util.Date;
+import java.util.ArrayList;
 import java.util.List;
-
-import com.bbva.jee.arq.spring.core.servicing.utils.Money;
 
 public class DTOIntAccount {
 
 	public final static long serialVersionUID = 1L;
+
 	private String idAccount;
+
 	private String type;
+
 	private String name;
+
 	private DTOIntBalance balance;
+
 	private List<DTOIntCheckbook> listaCheckBook;
 
-
 	public DTOIntAccount() {
-		// default constructor
+		this.listaCheckBook = new ArrayList<DTOIntCheckbook>();
 	}
 
 	public DTOIntBalance getBalance() {
@@ -26,6 +28,7 @@ public class DTOIntAccount {
 	public void setBalance(DTOIntBalance balance) {
 		this.balance = balance;
 	}
+
 	public String getName() {
 		return name;
 	}

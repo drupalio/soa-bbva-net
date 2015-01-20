@@ -11,9 +11,9 @@ public class DTOIntFilterAccount {
 
 	private String month;
 
-	private Date startMonth;
+	private String startMonth;
 
-	private Date endMonth;
+	private String endMonth;
 
 	private Date startDate;
 
@@ -37,19 +37,19 @@ public class DTOIntFilterAccount {
 		this.month = month;
 	}
 
-	public Date getStartMonth() {
+	public String getStartMonth() {
 		return startMonth;
 	}
 
-	public void setStartMonth(Date startMonth) {
+	public void setStartMonth(String startMonth) {
 		this.startMonth = startMonth;
 	}
 
-	public Date getEndMonth() {
+	public String getEndMonth() {
 		return endMonth;
 	}
 
-	public void setEndMonth(Date endMonth) {
+	public void setEndMonth(String endMonth) {
 		this.endMonth = endMonth;
 	}
 

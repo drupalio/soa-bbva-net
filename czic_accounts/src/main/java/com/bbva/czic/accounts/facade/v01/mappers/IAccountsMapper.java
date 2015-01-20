@@ -1,25 +1,27 @@
 package com.bbva.czic.accounts.facade.v01.mappers;
 
-import com.bbva.czic.accounts.business.dto.*;
-import com.bbva.czic.dto.net.*;
-
 import java.util.List;
+
+import com.bbva.czic.accounts.business.dto.DTOIntAccMovementsResume;
+import com.bbva.czic.accounts.business.dto.DTOIntAccount;
+import com.bbva.czic.accounts.business.dto.DTOIntCheck;
+import com.bbva.czic.accounts.business.dto.DTOIntMonthlyBalances;
+import com.bbva.czic.dto.net.AccMovementsResume;
+import com.bbva.czic.dto.net.Account;
+import com.bbva.czic.dto.net.Check;
+import com.bbva.czic.dto.net.MonthlyBalances;
 
 /**
  * Created by Entelgy on 12/01/2015.
  */
 public interface IAccountsMapper {
 
-    public Account map(DTOIntAccount dtoIntAccount);
+	Account map(DTOIntAccount dtoIntAccount);
 
-    public List<MonthlyBalances> mapL(List<DTOIntMonthlyBalances> listaDtoIntMonthlyBalances);
+	List<MonthlyBalances> mapL(List<DTOIntMonthlyBalances> listaDtoIntMonthlyBalances);
 
-    public List<AccMovementsResume> map(List<DTOIntAccMovementsResume> listaDTOIntAccMovementsResume);
+	List<AccMovementsResume> map(List<DTOIntAccMovementsResume> listaDTOIntAccMovementsResume);
 
-    public Balance map(DTOIntBalance intBalance) ;
-
-    public List<Checkbook> mapLCheckbook(List<DTOIntCheckbook> listaDTOIntCheckbook);
-
-    public List<Check> mapChecks(List<DTOIntCheck> listaDtoIntChecks);
+	List<Check> mapChecks(List<DTOIntCheck> listaDtoIntChecks);
 
 }
