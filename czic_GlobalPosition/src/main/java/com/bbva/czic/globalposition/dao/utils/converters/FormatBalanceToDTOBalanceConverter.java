@@ -13,11 +13,11 @@ import java.util.Currency;
  */
 public class FormatBalanceToDTOBalanceConverter {
 
-    @Value("locale.default.currency.iso")
+    @Value("${locale.default.currency.iso}")
     private String CURRENCY;
 
-    @Value("currency.default.decimal.divider")
-    private BigDecimal DECIMAL_DIVIDER;
+    @Value("${currency.default.decimal.divider}")
+    private String DECIMAL_DIVIDER;
 
     public DTOIntBalance convert(String totalBalance, String availableBalance) {
         final DTOIntBalance balance = new DTOIntBalance();
@@ -25,14 +25,14 @@ public class FormatBalanceToDTOBalanceConverter {
         if (totalBalance != null) {
             final Money totalMoney = new Money(
                     Currency.getInstance(CURRENCY),
-                    new BigDecimal(totalBalance).divide(DECIMAL_DIVIDER));
+                    new BigDecimal(totalBalance).divide(new BigDecimal(DECIMAL_DIVIDER)));
             balance.setTotal(totalMoney);
         }
 
         if (availableBalance != null) {
             final Money availableMoney = new Money(
                     Currency.getInstance(CURRENCY),
-                    new BigDecimal(availableBalance).divide(DECIMAL_DIVIDER));
+                    new BigDecimal(availableBalance).divide(new BigDecimal(DECIMAL_DIVIDER)));
             balance.setAvailableBalance(availableMoney);
         }
 

@@ -17,6 +17,7 @@ import com.bbva.jee.arq.spring.core.servicing.gce.BusinessServiceException;
 import com.wordnik.swagger.annotations.*;
 import org.apache.cxf.jaxrs.model.wadl.ElementClass;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
@@ -26,6 +27,7 @@ import javax.ws.rs.core.HttpHeaders;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
+import java.math.BigDecimal;
 import java.util.List;
 
 
@@ -48,7 +50,7 @@ public class SrvGlobalPositionV01 implements ISrvGlobalPositionV01, com.bbva.jee
 	private IGlobalPositionMapper globalPositionMapper;
 
 	public UriInfo uriInfo;
-	
+
 	@Override
 	public void setUriInfo(UriInfo ui) {
 		this.uriInfo = ui;		
