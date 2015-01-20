@@ -74,10 +74,6 @@ public class SrvIntLoan implements ISrvIntLoan {
 				throw new BusinessServiceException(EnumError.WRONG_PARAMETERS.getAlias());
 			}
 
-			DateValidator validator = (DateValidator) new DateValidator().noFuture(fechaInicila)
-					.noFuture(fechaFinal).validDateRange(fechaInicila,fechaFinal)
-					.validate();
-
 			final List<DTOIntMovement> intLoan = loanDao.listRotaryQuotaMovements(idLoan, paginationKey, pageSize, fechaInicila, fechaFinal);
 
 			for (DTOIntMovement item : intLoan) {
