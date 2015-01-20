@@ -2,6 +2,7 @@ package com.bbva.czic.movements.facade.v01.mapper.impl;
 
 import com.bbva.czic.dto.net.*;
 import com.bbva.czic.movements.business.dto.*;
+import com.bbva.czic.movements.dao.model.oznm.FormatoOZNCSNM0;
 import com.bbva.czic.movements.facade.v01.mapper.IMovementsMapper;
 import com.bbva.czic.routine.mapper.MapperFactory;
 import com.bbva.czic.routine.mapper.factory.MoneyFactory;
@@ -10,6 +11,8 @@ import com.bbva.czic.routine.mapper.metadata.TypeFactory;
 import com.bbva.jee.arq.spring.core.servicing.utils.Money;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Component;
+
+import java.util.List;
 
 
 @Component(value = "movements-mapper")
@@ -40,6 +43,40 @@ public class MovementsMapper extends ConfigurableMapper implements IMovementsMap
 		// Money
 		factory.classMap(Money.class, Money.class).field("amount", "amount")
 				.field("currency", "currency").byDefault().register();
+
+
+/*factory.classMap(FormatoOZNCSNM0.class, DTOIntMovement.class).field("NUMECTA", "")
+		.field("NOMOVIM", "")
+		.field("FCHOPER", "")
+		.field("FCHVALR", "")
+		.field("HRAOPER", "")
+		.field("VALOR", "")
+		.field("SALDO", "")
+		.field("CHEQUE", "")
+		.field("CODIGO", "")
+		.field("DESCODI", "")
+		.field("OBSERVA", "")
+		.field("CTROORG", "")
+		.field("PLAZA", "")
+		.field("CTATRAS", "")
+		.field("TIPO", "").byDefault().register();*/
+
+
+		/*movements.id
+		product.productType
+		movements.concept
+		movements.value
+		movements.balance
+		movements.operation.code
+		movements.operation.description
+		movements.transactionDate
+		movements.operationDate
+		movements.office.code
+		movements.office.name
+		movements.office.location.city.name
+		movements.office.location.state.name
+		movements.status*/
+
 	}
 
 	@Override
@@ -47,5 +84,13 @@ public class MovementsMapper extends ConfigurableMapper implements IMovementsMap
 		return map(dtoIntMovement,Movement.class);
 	}
 
+	@Override
+	public List<Movement> listMovementMap(List<DTOIntMovement> listDTOIntMovements){
+		return mapAsList(listDTOIntMovements, Movement.class);
+	}
+
+	public DTOIntMovement mapOutGetMovement(FormatoOZNCSNM0 outFormat){
+		return map(outFormat,DTOIntMovement.class);
+	}
 }
 
