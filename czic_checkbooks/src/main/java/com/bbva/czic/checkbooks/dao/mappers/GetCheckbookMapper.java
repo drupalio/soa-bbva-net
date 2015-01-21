@@ -15,6 +15,7 @@ public class GetCheckbookMapper implements ISimpleTransactionMapper<DTOIntCheckb
         FormatoOZECNSE0 formatoOZECNSE0 = new FormatoOZECNSE0();
 
         formatoOZECNSE0.setNumcheq(dtoIn.getId());
+        formatoOZECNSE0.setNumcuen(dtoIn.getNumeroCuenta());
 
         return formatoOZECNSE0;
     }

@@ -74,7 +74,8 @@ public class SrvCheckbooksV01 implements ISrvCheckbooksV01, com.bbva.jee.arq.spr
 	@ElementClass(response = Checkbook.class)
 	@SMC(registryID = "SMCCO1400013", logicalID = "getCheckbooks")
 	public Checkbook  getCheckbook(
-			@ApiParam(value = "Checkbooks identifier") @PathParam("checkbookId") String checkbookId) {
+			@ApiParam(value = "Checkbooks identifier") @PathParam("checkbookId") String checkbookId,
+			@ApiParam(value = "Checkbooks identifier") @PathParam("checkbookId") String accountId) {
 
 		if (checkbookId == "checks" || checkbookId.equals("checks")){
 			throw new BusinessServiceException(EnumError.WRONG_PARAMETERS.getAlias());
@@ -82,6 +83,7 @@ public class SrvCheckbooksV01 implements ISrvCheckbooksV01, com.bbva.jee.arq.spr
 
 		final DTOIntCheckbook intCheckbook = new DTOIntCheckbook();
 		intCheckbook.setId(checkbookId);
+		intCheckbook.setNumeroCuenta(accountId);
 		return checkbookMapper.map(srvIntCheckbooks.getCheckbooks(intCheckbook));
 	}
 
