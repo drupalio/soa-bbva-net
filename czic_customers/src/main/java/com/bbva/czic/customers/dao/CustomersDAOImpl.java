@@ -100,7 +100,7 @@ public class CustomersDAOImpl implements CustomersDAO {
 		} catch (Exception e){
 			e.printStackTrace();
 		}
-		log.info("getlistAccountsMovementsResume response: " + accountMovementDtoList);
+		log.info("CustomersDAOImpl.getlistAccountsMovementsResume response: " + accountMovementDtoList);
 		return accountMovementDtoList;
 
 	}
