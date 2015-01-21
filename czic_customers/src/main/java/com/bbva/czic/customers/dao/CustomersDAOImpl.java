@@ -82,6 +82,7 @@ public class CustomersDAOImpl implements CustomersDAO {
 			}
 
 			List<CopySalida> outputCopies = respuesta.getCuerpo().getPartes(CopySalida.class);
+			log.info("getlistAccountsMovementsResume return:" + outputCopies);
 			if(!outputCopies.isEmpty()) {
 				for (CopySalida outputCopy : outputCopies) {
 					FormatoOZECNQS0 formatoSalida = outputCopy.getCopy(FormatoOZECNQS0.class);
