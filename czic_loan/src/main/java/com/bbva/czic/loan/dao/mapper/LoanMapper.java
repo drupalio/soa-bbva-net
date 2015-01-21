@@ -1,6 +1,7 @@
 package com.bbva.czic.loan.dao.mapper;
 
 import java.math.BigDecimal;
+import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -50,19 +51,13 @@ public class LoanMapper {
 			dTOIntLoan.setDebt(setBalance(formatoSalida.getMntosol(), formatoSalida.getSaldope()));
 
 			Calendar fechaPa = Calendar.getInstance();
-
-			if (formatoSalida.getFechali() != null){
-				fechaPa.setTime(formatoSalida.getFechali());
-		    }
+			fechaPa.setTime(formatoSalida.getFechali());
 
 			Calendar fechaVe = Calendar.getInstance();
+			fechaVe.setTime(formatoSalida.getFechali());
 
-			if(formatoSalida.getFechali() != null) {
-				fechaVe.setTime(formatoSalida.getFechali());
-			}
-			
 			dTOIntLoan.setPayment(setPayment(fechaPa, fechaVe,formatoSalida.getFechaco(), formatoSalida.getHonorar(),
-					              null, Integer.parseInt(formatoSalida.getCuotato())));
+					              setMoneyValue(formatoSalida.getPagomin()), Integer.parseInt(formatoSalida.getCuotato())));
 			
 			dTOIntLoan.setStatus(formatoSalida.getEstadot());
 			log.info("fin Mapper");
@@ -120,20 +115,18 @@ public class LoanMapper {
 	 * @return
 	 */
 	private static Payment setPayment(final Calendar dueDate, final Calendar paymentDate,
-			final Date shortDate, final String fees, final BigDecimal minimumPayment, final Integer numbersOfQuota){
+			final Date shortDate, final String fees, final Money minimumPayment, final Integer numbersOfQuota){
 		Payment payment = new Payment();
 		log.info("inicio mapeo setPayment.Payment");
 		payment.setDueDate(dueDate);
 		payment.setFees(setMoneyValue(fees));
-		payment.setMinimumPayment(UtilsConverter.getMoneyDTO((minimumPayment)));
+		payment.setMinimumPayment(minimumPayment);
 		payment.setNumbersOfQuota(numbersOfQuota);
 		payment.setPaymentDate(paymentDate);
 
 		Calendar calendar = Calendar.getInstance();
+		calendar.setTime(shortDate);
 
-		if(shortDate != null) {
-			calendar.setTime(shortDate);
-		}
 		payment.setShortDate(calendar);
 		log.info("fin mapeo setPayment.Payment");
 		return payment;
@@ -170,9 +163,8 @@ public class LoanMapper {
 
 		log.info("inicio mapeo getDTOIntMovementByCopy.DTOIntMovement");
 
-		if(copy.getFechaop() != null) {
-			calendar.setTime(copy.getFechaop());
-		}
+		calendar.setTime(copy.getFechaop());
+
 		dTOIntMovement.setId(copy.getNumeope());
 		dTOIntMovement.setTransactionDate(calendar);
 		dTOIntMovement.setConcept(copy.getResto().toString());
@@ -185,11 +177,10 @@ public class LoanMapper {
 	public static DTOIntRotaryQuotaMove getDTOIntMovementByCopy(final FormatoOZNCSNK0 copy) {
 		DTOIntRotaryQuotaMove dtoIntRotaryQuotaMove = new DTOIntRotaryQuotaMove();
 		log.info("inicio mapeo getDTOIntMovementByCopy.DTOIntRotaryQuotaMove");
-        Calendar calendar = Calendar.getInstance();
 
-		if(copy.getFechaop() != null) {
-			calendar.setTime(copy.getFechaop());
-		}
+        Calendar calendar = Calendar.getInstance();
+		calendar.setTime(copy.getFechaop());
+
 		dtoIntRotaryQuotaMove.setTransactionDate(calendar);
 		dtoIntRotaryQuotaMove.setConcept(copy.getResto());
 		dtoIntRotaryQuotaMove.setValue(setMoneyValue(copy.getImporte()));

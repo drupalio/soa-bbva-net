@@ -91,11 +91,12 @@ public class SrvIntLoan implements ISrvIntLoan {
 			log.info("SrvIntLoan.getRotaryQuotaMovement = " + idMovement + ", " + idLoan);
 
 			final DTOIntRotaryQuotaMove dtoIntRotaryQuotaMove = loanDao.getRotaryQuotaMovement( Integer.parseInt(idMovement), idLoan);
+			log.info("SrvIntLoan.getRotaryQuotaMovement retorno exitoso inicio mapeo... ");
 			RotaryQuotaMove movement = LoanMapper.getMovementByDTOIntMovement(dtoIntRotaryQuotaMove);
-
+			log.info("SrvIntLoan.getRotaryQuotaMovement mapeo OK... ");
 			return movement;
 		} catch (BusinessServiceException be) {
-			log.info("SrvIntLoan.getRotaryQuotaMovement.exception = " + be.getMessage());
+			log.info("SrvIntLoan.getRotaryQuotaMovement.BusinessServiceException = " + be.getMessage());
 			throw be;
 		} catch (Exception e) {
 			log.info("SrvIntLoan.getRotaryQuotaMovement.exception = " + e.getMessage());

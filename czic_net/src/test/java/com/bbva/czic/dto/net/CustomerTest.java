@@ -28,14 +28,6 @@ public class CustomerTest {
 	// TODO realizar test de validación de campos. Los test deben ser funcionales. ej. Longitud del número de una tarjeta
 
 	@Test
-	public void testValidationFailsIfCustomerLastConnectionDateIsInFuture() {
-		Customer customer = new Customer();
-		customer.setLastConnectionTime(getFutureDate());
-		Set<ConstraintViolation<Customer>> constraintViolations = validator.validate(customer);
-		assertEquals(1, constraintViolations.size());
-	}
-
-	@Test
 	public void testValidationFailsIfCustomerStratumIsNegative() {
 		Customer customer = new Customer();
 		customer.setStratum(NEGATIVE_INT);
