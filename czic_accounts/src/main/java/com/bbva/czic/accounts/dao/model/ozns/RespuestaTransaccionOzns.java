@@ -1,4 +1,4 @@
-package com.bbva.czic.checkbooks.dao.model.ozns;
+package com.bbva.czic.accounts.dao.model.ozns;
 
 import org.springframework.roo.addon.javabean.RooJavaBean;
 import org.springframework.roo.addon.serializable.RooSerializable;

@@ -1,5 +1,7 @@
-package com.bbva.czic.checkbooks.dao.model.ozns;
+package com.bbva.czic.accounts.dao.model.ozns;
 
+import com.bbva.czic.accounts.dao.model.ozns.PeticionTransaccionOzns;
+import com.bbva.czic.accounts.dao.model.ozns.RespuestaTransaccionOzns;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
