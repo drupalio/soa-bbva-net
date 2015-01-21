@@ -66,8 +66,6 @@ public class LoanDAOImpl implements LoanDAO {
 			log.info("LoanDAOImpl.getRotaryQuota.invocar ");
 			RespuestaTransaccionOznj respuesta = transaccionOznj.invocar(peticion);
 
-			log.info("LoanDAOImpl.getRotaryQuota.respuesta = " + respuesta.getCodigoRetorno());
-
 			BusinessServiceException exception = errorMappingHelper.toBusinessServiceException(respuesta);
 
 			if (exception != null) {
