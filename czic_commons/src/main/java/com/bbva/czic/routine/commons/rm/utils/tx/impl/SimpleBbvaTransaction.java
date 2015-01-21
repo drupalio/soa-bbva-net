@@ -13,6 +13,13 @@ import com.bbva.jee.arq.spring.core.host.protocolo.ps9.ErrorMappingHelper;
 import com.bbva.jee.arq.spring.core.host.protocolo.ps9.aplicacion.CopySalida;
 import com.bbva.jee.arq.spring.core.servicing.gce.BusinessServiceException;
 
+/**
+ * @author Entelgy
+ * @param <E>
+ * @param <FE>
+ * @param <S>
+ * @param <FS>
+ */
 public abstract class SimpleBbvaTransaction<E, FE, S, FS> implements ISimpleBbvaTransaction<E, S> {
 
 	@Autowired
@@ -41,7 +48,7 @@ public abstract class SimpleBbvaTransaction<E, FE, S, FS> implements ISimpleBbva
 	 * @return
 	 */
 	@Override
-	@SuppressWarnings({ "unchecked", "null" })
+	@SuppressWarnings({ "unchecked" })
 	public S invoke(E entrada) {
 
 		try {
@@ -75,15 +82,18 @@ public abstract class SimpleBbvaTransaction<E, FE, S, FS> implements ISimpleBbva
 			// ... y obtener la copy de salida
 			final CopySalida copySalida = respuesta.getCuerpo().getParte(CopySalida.class);
 
+			final ParameterizedType typeInterfaceOutput = (ParameterizedType)this.getClass().getGenericSuperclass();
+			final Type[] typesSimpleTransaction = typeInterfaceOutput.getActualTypeArguments();
+
 			// Obtenemos el formato de salida
 			FS formatoSalida = null;
 			if (copySalida != null) {
-				formatoSalida = (FS)copySalida.getCopy(formatoSalida.getClass());
+				final Class<FS> claseFormatoSalida = (Class<FS>)typesSimpleTransaction[3];
+				formatoSalida = copySalida.getCopy(claseFormatoSalida);
 			}
 
 			// Get output class
-			final ParameterizedType typeInterfaceOutput = (ParameterizedType)this.getClass().getGenericSuperclass();
-			final Type[] typesSimpleTransaction = typeInterfaceOutput.getActualTypeArguments();
+
 			final Class<?> claseSalida = (Class<?>)typesSimpleTransaction[2];
 
 			// E invocamos al mapper que lo mapeará a la entidad esperada

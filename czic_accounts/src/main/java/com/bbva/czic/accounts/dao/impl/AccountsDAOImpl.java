@@ -31,12 +31,21 @@ public class AccountsDAOImpl implements AccountsDAO {
 	// @Qualifier("tx-list-check")
 	// private IPaginatedTransaction txListCheck;
 
+	/**
+	 * OZNA
+	 */
 	@Resource(name = "tx-get-account")
 	private TxGetAccount txtGetAccount;
 
+	/**
+	 * OZNV
+	 */
 	@Resource(name = "tx-get-account-monthly-balance")
 	private TxGetAccountMonthlyBalance txGetAccountMonthlyBalance;
 
+	/**
+	 * OZNU
+	 */
 	@Resource(name = "tx-get-account-movement-resume")
 	private TxGetAccountMovementResume txGetAccountMovementResume;
 
