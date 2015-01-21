@@ -35,33 +35,33 @@ public class FormatoOZECNLS0 {
 	private Date fechope;
 	
 	/**
-	 * <p>Campo <code>TIPOOPR</code>, &iacute;ndice: <code>3</code>, tipo: <code>ALFANUMERICO</code>
+	 * <p>Campo <code>DESCOPR</code>, &iacute;ndice: <code>3</code>, tipo: <code>ALFANUMERICO</code>
 	 */
-	@Campo(indice = 3, nombre = "TIPOOPR", tipo = TipoCampo.ALFANUMERICO, longitudMinima = 3, longitudMaxima = 3)
-	private String tipoopr;
-	
-	/**
-	 * <p>Campo <code>VALOROP</code>, &iacute;ndice: <code>4</code>, tipo: <code>ENTERO</code>
-	 */
-	@Campo(indice = 4, nombre = "VALOROP", tipo = TipoCampo.ENTERO, longitudMinima = 15, longitudMaxima = 15, signo = true)
-	private Long valorop;
-	
-	/**
-	 * <p>Campo <code>BALANCE</code>, &iacute;ndice: <code>5</code>, tipo: <code>ENTERO</code>
-	 */
-	@Campo(indice = 5, nombre = "BALANCE", tipo = TipoCampo.ENTERO, longitudMinima = 15, longitudMaxima = 15, signo = true)
-	private Long balance;
-	
-	/**
-	 * <p>Campo <code>DESCOPR</code>, &iacute;ndice: <code>6</code>, tipo: <code>ALFANUMERICO</code>
-	 */
-	@Campo(indice = 6, nombre = "DESCOPR", tipo = TipoCampo.ALFANUMERICO, longitudMinima = 30, longitudMaxima = 30)
+	@Campo(indice = 3, nombre = "DESCOPR", tipo = TipoCampo.ALFANUMERICO, longitudMinima = 30, longitudMaxima = 30)
 	private String descopr;
 	
 	/**
-	 * <p>Campo <code>RESTO</code>, &iacute;ndice: <code>7</code>, tipo: <code>ALFANUMERICO</code>
+	 * <p>Campo <code>VALOROP</code>, &iacute;ndice: <code>4</code>, tipo: <code>ALFANUMERICO</code>
 	 */
-	@Campo(indice = 7, nombre = "RESTO", tipo = TipoCampo.ALFANUMERICO, longitudMinima = 20, longitudMaxima = 20)
+	@Campo(indice = 4, nombre = "VALOROP", tipo = TipoCampo.ALFANUMERICO, longitudMinima = 18, longitudMaxima = 18)
+	private String valorop;
+	
+	/**
+	 * <p>Campo <code>BALANCE</code>, &iacute;ndice: <code>5</code>, tipo: <code>ALFANUMERICO</code>
+	 */
+	@Campo(indice = 5, nombre = "BALANCE", tipo = TipoCampo.ALFANUMERICO, longitudMinima = 18, longitudMaxima = 18)
+	private String balance;
+	
+	/**
+	 * <p>Campo <code>RESTO</code>, &iacute;ndice: <code>6</code>, tipo: <code>ALFANUMERICO</code>
+	 */
+	@Campo(indice = 6, nombre = "RESTO", tipo = TipoCampo.ALFANUMERICO, longitudMinima = 20, longitudMaxima = 20)
 	private String resto;
+	
+	/**
+	 * <p>Campo <code>TIPOOPR</code>, &iacute;ndice: <code>7</code>, tipo: <code>ALFANUMERICO</code>
+	 */
+	@Campo(indice = 7, nombre = "TIPOOPR", tipo = TipoCampo.ALFANUMERICO, longitudMinima = 3, longitudMaxima = 3)
+	private String tipoopr;
 	
 }

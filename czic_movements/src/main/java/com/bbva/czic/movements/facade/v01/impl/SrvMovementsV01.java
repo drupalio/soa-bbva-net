@@ -50,7 +50,7 @@ public class SrvMovementsV01 implements ISrvMovementsV01, com.bbva.jee.arq.sprin
 	private IFilterConverter movFilterConverter;
 
 
-	@Resource(name = "accounts-mapper")
+	@Resource(name = "movements-mapper")
 	private IMovementsMapper iMovementsMapper;
 
 	public UriInfo uriInfo;

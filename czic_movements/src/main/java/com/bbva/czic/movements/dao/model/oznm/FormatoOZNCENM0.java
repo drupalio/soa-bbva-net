@@ -21,15 +21,15 @@ import com.bbva.jee.arq.spring.core.host.TipoCampo;
 public class FormatoOZNCENM0 {
 
 	/**
-	 * <p>Campo <code>NUMMOV</code>, &iacute;ndice: <code>1</code>, tipo: <code>ALFANUMERICO</code>
+	 * <p>Campo <code>NOCUENT</code>, &iacute;ndice: <code>1</code>, tipo: <code>ALFANUMERICO</code>
 	 */
-	@Campo(indice = 1, nombre = "NUMMOV", tipo = TipoCampo.ALFANUMERICO, longitudMinima = 9, longitudMaxima = 9)
-	private String nummov;
+	@Campo(indice = 1, nombre = "NOCUENT", tipo = TipoCampo.ALFANUMERICO, longitudMinima = 20, longitudMaxima = 20)
+	private String nocuent;
 	
 	/**
-	 * <p>Campo <code>NOCUENT</code>, &iacute;ndice: <code>2</code>, tipo: <code>ALFANUMERICO</code>
+	 * <p>Campo <code>NUMMOV</code>, &iacute;ndice: <code>2</code>, tipo: <code>ALFANUMERICO</code>
 	 */
-	@Campo(indice = 2, nombre = "NOCUENT", tipo = TipoCampo.ALFANUMERICO, longitudMinima = 20, longitudMaxima = 20)
-	private String nocuent;
+	@Campo(indice = 2, nombre = "NUMMOV", tipo = TipoCampo.ALFANUMERICO, longitudMinima = 9, longitudMaxima = 9)
+	private String nummov;
 	
 }

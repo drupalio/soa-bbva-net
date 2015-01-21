@@ -34,19 +34,19 @@ import com.bbva.jee.arq.spring.core.servicing.test.MockInvocationContextTestExec
 public class TestTransaccionOznl {
 	
 	private static final Log LOG = I18nLogFactory.getLog(TestTransaccionOznl.class);
-		
+/*
 	@Autowired
 	private TransaccionOznl transaccion;
-	
+
 	@Test
 	public void test() throws ExcepcionTransaccion {
-		
+
 		PeticionTransaccionOznl peticion = new PeticionTransaccionOznl();		
 		
-		/*
+		*//*
 		 * TODO: poblar la peticion con valores adecuados
-		 */
-		
+		 *//*
+
 		try {
 			LOG.info("Invocando transaccion, peticion: " + peticion);
 			RespuestaTransaccionOznl respuesta = transaccion.invocar(peticion);
@@ -56,5 +56,5 @@ public class TestTransaccionOznl {
 		} catch ( ExcepcionTransporte e ) {
 			LOG.error("Error de transporte", e);
 		}
-	}
+	}*/
 }
