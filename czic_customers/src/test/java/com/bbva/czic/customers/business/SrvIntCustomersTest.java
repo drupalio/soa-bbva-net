@@ -263,7 +263,6 @@ public class SrvIntCustomersTest {
 		customer.setResidenceYears(1);
 		customer.setHomeMembers(1);
 		customer.setDwelingType(EnumDwelingType.VALIDAR);
-		customer.setLastConnectionTime(new GregorianCalendar(2014,1,28,13,24,56));
 		return customer;
 	}
 }

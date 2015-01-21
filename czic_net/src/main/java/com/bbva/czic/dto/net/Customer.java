@@ -49,10 +49,6 @@ public class Customer implements Serializable {
 	private EnumDwelingType dwelingType;
 	@ApiModelProperty("Ubicacion de la oficina")
 	private Place officeLocation;
-	@XmlSchemaType(name = "dateTime")
-	@ApiModelProperty("Fecha de última conexión del cliente")
-	@Past
-	private Calendar lastConnectionTime;
 
 	public Customer() {
 		// default constructor
@@ -152,14 +148,6 @@ public class Customer implements Serializable {
 
 	public void setOfficeLocation(Place officeLocation) {
 		this.officeLocation = officeLocation;
-	}
-
-	public Calendar getLastConnectionTime() {
-		return lastConnectionTime;
-	}
-
-	public void setLastConnectionTime(Calendar lastConnectionTime) {
-		this.lastConnectionTime = lastConnectionTime;
 	}
 
 }

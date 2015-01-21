@@ -64,6 +64,7 @@ public class SrvIntCustomers implements ISrvIntCustomers {
 				filter.setCustomerId(customerId);
 				List<DTOIntAccMovementsResume> dtoIntAccMovementsResumes = customersDao
 						.getlistAccountsMovementsResume(filter);
+				log.info("getlistAccountsMovementsResume dao response: " + dtoIntAccMovementsResumes);
 
 				for (DTOIntAccMovementsResume item : dtoIntAccMovementsResumes) {
 					listMovements.add(customerMapper.map(item));
