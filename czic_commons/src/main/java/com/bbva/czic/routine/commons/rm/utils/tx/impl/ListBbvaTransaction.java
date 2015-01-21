@@ -14,15 +14,34 @@ import com.bbva.jee.arq.spring.core.host.protocolo.ps9.ErrorMappingHelper;
 import com.bbva.jee.arq.spring.core.host.protocolo.ps9.aplicacion.CopySalida;
 import com.bbva.jee.arq.spring.core.servicing.gce.BusinessServiceException;
 
+/**
+ * @author Entelgy
+ * @param <E>
+ * @param <FE>
+ * @param <S>
+ * @param <FS>
+ */
 public abstract class ListBbvaTransaction<E, FE, S, FS> {
 
 	@Autowired
 	private ErrorMappingHelper errorMappingHelper;
 
+	/**
+	 * @param dtoIn
+	 * @return
+	 */
 	protected abstract FE mapDtoInToRequestFormat(E dtoIn);
 
+	/**
+	 * @param formatOutput
+	 * @param dtoIn
+	 * @return
+	 */
 	protected abstract S mapResponseFormatToDtoOut(FS formatOutput, E dtoIn);
 
+	/**
+	 * @return
+	 */
 	protected abstract InvocadorTransaccion<?, ?> getTransaction();
 
 	/**
@@ -63,13 +82,19 @@ public abstract class ListBbvaTransaction<E, FE, S, FS> {
 			final List<CopySalida> copysSalida = respuesta.getCuerpo().getPartes(CopySalida.class);
 
 			final List<S> salidaList = new ArrayList<S>();
-			FS formatoSalida = null;
+
 			S salida = null;
 
+			final ParameterizedType typeInterfaceOutput = (ParameterizedType)this.getClass().getGenericSuperclass();
+			final Type[] typesListTransaction = typeInterfaceOutput.getActualTypeArguments();
+			FS formatoSalida = null;
 			for (final CopySalida copySalida : copysSalida) {
 				// Obtenemos el formato de salida
+
 				if (copySalida != null) {
-					formatoSalida = (FS)copySalida.getCopy(formatoSalida.getClass());
+					@SuppressWarnings("unchecked")
+					final Class<FS> claseFormatoSalida = (Class<FS>)typesListTransaction[3];
+					formatoSalida = copySalida.getCopy(claseFormatoSalida);
 				}
 				salida = mapResponseFormatToDtoOut(formatoSalida, entrada);
 				salidaList.add(salida);

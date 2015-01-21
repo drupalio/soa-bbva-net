@@ -1,3 +1,4 @@
 .classpath
 .project
 .checkstyle
+src/main/resources/META-INF/spring/applicationContext.xml
