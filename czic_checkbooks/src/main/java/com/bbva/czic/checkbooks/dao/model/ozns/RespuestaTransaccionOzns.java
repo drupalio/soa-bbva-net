@@ -47,6 +47,7 @@ public class RespuestaTransaccionOzns implements MensajeMultiparte {
 	/**
 	 * <p>Permite obtener el cuerpo del mensaje de petici&oacute;n multiparte</p>
 	 */
+	@Override
 	public CuerpoMultiparte getCuerpo() {
 		return cuerpo;
 	}
