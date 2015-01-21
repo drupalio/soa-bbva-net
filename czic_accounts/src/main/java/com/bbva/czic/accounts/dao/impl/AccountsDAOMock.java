@@ -3,18 +3,13 @@ package com.bbva.czic.accounts.dao.impl;
 import java.io.IOException;
 import java.util.List;
 
+import com.bbva.czic.accounts.business.dto.*;
 import org.codehaus.jackson.JsonParseException;
 import org.codehaus.jackson.map.JsonMappingException;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.mockito.Mockito;
 import org.springframework.context.annotation.Profile;
 
-import com.bbva.czic.accounts.business.dto.DTOIntAccMovementsResume;
-import com.bbva.czic.accounts.business.dto.DTOIntAccount;
-import com.bbva.czic.accounts.business.dto.DTOIntCheck;
-import com.bbva.czic.accounts.business.dto.DTOIntFilterAccount;
-import com.bbva.czic.accounts.business.dto.DTOIntFilterChecks;
-import com.bbva.czic.accounts.business.dto.DTOIntMonthlyBalances;
 import com.bbva.czic.accounts.dao.AccountsDAO;
 
 // @Repository(value = "accounts-dao")
@@ -60,6 +55,11 @@ public class AccountsDAOMock implements AccountsDAO {
 
 	@Override
 	public DTOIntCheck getListCheck(DTOIntFilterChecks dtoIntCheck) {
+		return null;
+	}
+
+	@Override
+	public DTOIntCheckbook getCheckbooks(DTOIntCheckbook intCheckbook) {
 		return null;
 	}
 }

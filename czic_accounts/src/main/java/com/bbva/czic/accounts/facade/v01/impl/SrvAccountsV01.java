@@ -14,6 +14,11 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
 
+import com.bbva.czic.accounts.business.dto.DTOIntCheckbook;
+import com.bbva.czic.dto.net.*;
+import com.bbva.czic.routine.commons.rm.utils.errors.EnumError;
+import com.bbva.jee.arq.spring.core.servicing.gce.BusinessServiceException;
+import org.apache.cxf.jaxrs.model.wadl.ElementClass;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -25,10 +30,6 @@ import com.bbva.czic.accounts.facade.v01.ISrvAccountsV01;
 import com.bbva.czic.accounts.facade.v01.mappers.IAccountsMapper;
 import com.bbva.czic.accounts.facade.v01.utils.IFilterConverter;
 import com.bbva.czic.accounts.facade.v01.utils.IListCheckFilterConverter;
-import com.bbva.czic.dto.net.AccMovementsResume;
-import com.bbva.czic.dto.net.Account;
-import com.bbva.czic.dto.net.Check;
-import com.bbva.czic.dto.net.MonthlyBalances;
 import com.bbva.jee.arq.spring.core.log.I18nLog;
 import com.bbva.jee.arq.spring.core.log.I18nLogFactory;
 import com.bbva.jee.arq.spring.core.servicing.annotations.SMC;
@@ -162,4 +163,31 @@ public class SrvAccountsV01 implements ISrvAccountsV01, com.bbva.jee.arq.spring.
 		return null;
 	}
 
+	@Override
+	@ApiOperation(value = "Operation obtaining checkbooks related to a client's product.", notes = "----", response = Checkbook.class)
+	@ApiResponses(value = {
+			@ApiResponse(code = -1, message = "aliasGCE1"),
+			@ApiResponse(code = -1, message = "aliasGCE2"),
+			@ApiResponse(code = 200, message = "Found Successfully", response = Checkbook.class),
+			@ApiResponse(code = 400, message = "Request Error"),
+			@ApiResponse(code = 409, message = "Functional Error"),
+			@ApiResponse(code = 500, message = "Technical Error")
+	})
+	@GET
+	@Path("{checkbookId}")
+	@ElementClass(response = Checkbook.class)
+	@SMC(registryID = "SMCCO1400013", logicalID = "getCheckbooks")
+	public Checkbook  getCheckbook(
+			@ApiParam(value = "Checkbooks identifier") @PathParam("checkbookId") String checkbookId,
+			@ApiParam(value = "Checkbooks identifier") @PathParam("checkbookId") String accountId) {
+
+		if (checkbookId == "checks" || checkbookId.equals("checks")){
+			throw new BusinessServiceException(EnumError.WRONG_PARAMETERS.getAlias());
+		}
+
+		final DTOIntCheckbook intCheckbook = new DTOIntCheckbook();
+		intCheckbook.setId(checkbookId);
+		intCheckbook.setNumeroCuenta(accountId);
+		return iAccountsMapper.mapCheckbook(srvIntAccounts.getCheckbooks(intCheckbook));
+	}
 }
