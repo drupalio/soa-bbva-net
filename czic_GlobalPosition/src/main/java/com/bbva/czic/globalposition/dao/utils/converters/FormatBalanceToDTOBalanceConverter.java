@@ -1,33 +1,41 @@
 package com.bbva.czic.globalposition.dao.utils.converters;
 
+import com.bbva.czic.globalposition.business.dto.DTOIntBalance;
+import com.bbva.jee.arq.spring.core.servicing.utils.Money;
+import org.springframework.beans.factory.annotation.Value;
+
 import java.math.BigDecimal;
 import java.util.Currency;
-
-import com.bbva.czic.globalposition.business.dto.DTOIntBalance;
-import com.bbva.czic.routine.commons.rm.utils.CurrencyEnum;
-import com.bbva.jee.arq.spring.core.servicing.utils.Money;
 
 /**
  * @author Entelgy Colombia
  */
 public class FormatBalanceToDTOBalanceConverter {
 
-	public DTOIntBalance convert(String totalBalance, String availableBalance) {
-		final DTOIntBalance balance = new DTOIntBalance();
+    @Value("${locale.default.currency.iso}")
+    private String CURRENCY;
 
-		if (!totalBalance.equals(null)) {
-			final Money totalMoney = new Money(Currency.getInstance(CurrencyEnum.COP.toString()), new BigDecimal(
-					totalBalance));
-			balance.setTotal(totalMoney);
-		}
+    @Value("${currency.default.decimal.divider}")
+    private String DECIMAL_DIVIDER;
 
-		if (!availableBalance.equals(null)) {
-			final Money availableMoney = new Money(Currency.getInstance(CurrencyEnum.COP.toString()), new BigDecimal(
-					availableBalance));
-			balance.setAvailableBalance(availableMoney);
-		}
+    public DTOIntBalance convert(String totalBalance, String availableBalance) {
+        final DTOIntBalance balance = new DTOIntBalance();
 
-		return balance;
-	}
+        if (totalBalance != null) {
+            final Money totalMoney = new Money(
+                    Currency.getInstance(CURRENCY),
+                    new BigDecimal(totalBalance).divide(new BigDecimal(DECIMAL_DIVIDER)));
+            balance.setTotal(totalMoney);
+        }
+
+        if (availableBalance != null) {
+            final Money availableMoney = new Money(
+                    Currency.getInstance(CURRENCY),
+                    new BigDecimal(availableBalance).divide(new BigDecimal(DECIMAL_DIVIDER)));
+            balance.setAvailableBalance(availableMoney);
+        }
+
+        return balance;
+    }
 
 }

@@ -15,7 +15,7 @@ public class DTOIntLoan extends Product {
 
 	private Payment payment;
 
-	private EnumLoanStatus status;
+	private String status;
 
 	public DTOIntLoan() {
 		// default constructor
@@ -39,11 +39,11 @@ public class DTOIntLoan extends Product {
 		this.payment = payment;
 	}
 
-	public EnumLoanStatus getStatus() {
+	public String getStatus() {
 		return status;
 	}
 
-	public void setStatus(EnumLoanStatus status) {
+	public void setStatus(String status) {
 		this.status = status;
 	}
 

@@ -1,9 +1,9 @@
 package com.bbva.czic.accounts.business.dto;
 
-import java.util.Date;
-
 import com.bbva.czic.dto.net.EnumCheckStatus;
 import com.bbva.jee.arq.spring.core.servicing.utils.Money;
+
+import java.util.*;
 
 public class DTOIntCheck extends DTOIntFilterAccount {
 
@@ -65,8 +65,8 @@ public class DTOIntCheck extends DTOIntFilterAccount {
 		this.modifiedDate = modifiedDate;
 	}
 
-	public int getpaginationKey() {
-		return paginationKey;
-	}
+	public int getpaginationKey(){return paginationKey;}
+
+	public void setPaginationKey (String paginationKey1) {this.paginationKey = paginationKey;}
 
 }

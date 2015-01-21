@@ -85,7 +85,7 @@ public class GlobalPositionMapperTest {
         intProduct.setBalance(getIntBalance());
         intProduct.setAlias("Mi cuenta");
         intProduct.setName("Broda");
-        intProduct.setFinancialState(EnumFinancialStatusType.A);
+        intProduct.setFinancialState(EnumFinancialStatusType.A.name());
         intProduct.setContract(getIntContract());
         intProduct.setContactInfo(getIntContactInfo());
         intProduct.setVisible(Boolean.TRUE);

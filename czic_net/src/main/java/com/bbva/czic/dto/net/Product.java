@@ -10,6 +10,7 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
+import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotBlank;
 
 import com.wordnik.swagger.annotations.ApiModelProperty;
@@ -22,6 +23,7 @@ public class Product implements Serializable {
 	public final static long serialVersionUID = 1L;
 
 	@ApiModelProperty(value = "Identificador del producto", required = true)
+	@Length(min = 20, max = 20)
 	private String id;
 
 	@ApiModelProperty(value = "", required = true)
@@ -35,7 +37,7 @@ public class Product implements Serializable {
 	private String alias;
 
 	@ApiModelProperty(value = "Identificador que referencia si un producto es un activo o un pasivo", required = true)
-	private EnumFinancialStatusType financialState;
+	private String financialState;
 
 	@ApiModelProperty(value = "Visibilidad del producto", required = true)
 	private Boolean visible;
@@ -98,11 +100,11 @@ public class Product implements Serializable {
 		this.alias = alias;
 	}
 
-	public EnumFinancialStatusType getFinancialState() {
+	public String getFinancialState() {
 		return financialState;
 	}
 
-	public void setFinancialState(EnumFinancialStatusType financialState) {
+	public void setFinancialState(String financialState) {
 		this.financialState = financialState;
 	}
 

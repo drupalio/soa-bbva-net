@@ -36,7 +36,6 @@ public class GlobalPositionMapper /*extends ConfigurableMapper*/  implements IGl
         // BALANCE
         factory.classMap(Balance.class, DTOIntBalance.class)
                 .field("total", "total")
-                .field("tradeBalance", "tradeBalance")
                 .field("availableBalance","availableBalance");
 
 
