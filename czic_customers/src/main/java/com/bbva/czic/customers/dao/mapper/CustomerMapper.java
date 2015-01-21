@@ -82,7 +82,6 @@ public class CustomerMapper implements ICustomerMapper{
 		customer.setDwelingType(item.getDwelingType());
 		customer.setHomeLocation(item.getHomeLocation());
 		customer.setHomeMembers(item.getHomeMembers());
-		customer.setLastConnectionTime(item.getLastConnectionTime());
 		customer.setName(item.getName());
 		customer.setOfficeLocation(item.getOfficeLocation());
 		customer.setResidenceYears(item.getResidenceYears());
@@ -93,6 +92,7 @@ public class CustomerMapper implements ICustomerMapper{
 
 	public static DTOIntCustomer mapToOuter(FormatoOZNCSNB0 formatoSalida) {
 		DTOIntCustomer customer = new DTOIntCustomer();
+		
 //		Entidad contact info
 		ContactInfo contacto = new ContactInfo();
 		List<Email> emails = new ArrayList<Email>();
@@ -105,18 +105,21 @@ public class CustomerMapper implements ICustomerMapper{
 		emails.add(email);
 		contacto.setEmails(emails);
 		contacto.setPhoneNumbers(phones);
+		
 //		Entidad place para ubicacion hogar
 		Place home = new Place();
 		home.setCityName(formatoSalida.getCiudvia());
 		home.setStateName(formatoSalida.getDepavia());
 		home.setCountryName(formatoSalida.getPaisvia());
 		home.setPostalAddress(formatoSalida.getDescvia());
+		
 //		Entidad place para ubicacion oficina
 		Place office = new Place();
 		office.setCityName(formatoSalida.getCiudofi());
 		office.setStateName(formatoSalida.getDepaofi());
 		office.setCountryName(formatoSalida.getPaisofi());
 		office.setPostalAddress(formatoSalida.getDescofi());
+		
 //		Entidad de retorno customer
 		customer.setId(formatoSalida.getNumclie());
 		customer.setName(formatoSalida.getNomclie());

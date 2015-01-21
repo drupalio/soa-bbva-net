@@ -82,9 +82,12 @@ public class CustomersDAOImpl implements CustomersDAO {
 			}
 
 			List<CopySalida> outputCopies = respuesta.getCuerpo().getPartes(CopySalida.class);
+			log.info("CustomersDAOImpl.getlistAccountsMovementsResume return:" + outputCopies);
 			if(!outputCopies.isEmpty()) {
+				accountMovementDtoList = new ArrayList<DTOIntAccMovementsResume>();
 				for (CopySalida outputCopy : outputCopies) {
 					FormatoOZECNQS0 formatoSalida = outputCopy.getCopy(FormatoOZECNQS0.class);
+					log.info("CustomersDAOImpl.getlistAccountsMovementsResume salida:" + formatoSalida);
 					dtoIntAccountAccMovementsResume = customerMapper.map(formatoSalida);
 					accountMovementDtoList.add(dtoIntAccountAccMovementsResume);
 				}

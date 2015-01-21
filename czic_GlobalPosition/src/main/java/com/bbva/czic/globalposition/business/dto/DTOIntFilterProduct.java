@@ -1,13 +1,19 @@
 package com.bbva.czic.globalposition.business.dto;
 
 
+import org.hibernate.validator.constraints.Length;
+import org.hibernate.validator.constraints.NotEmpty;
+
 /**
- * Created by Administrador on 05/01/2015.
+ * @author Entelgy Colombia.
  */
 public class DTOIntFilterProduct {
 
+    @NotEmpty
+    @Length(min = 8, max = 8)
     private String idCustomer;
 
+    @Length(min = 2, max = 2)
     private String productType;
 
     public String getIdCustomer() {

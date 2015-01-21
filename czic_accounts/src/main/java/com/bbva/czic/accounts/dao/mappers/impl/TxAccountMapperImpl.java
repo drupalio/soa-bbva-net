@@ -29,29 +29,35 @@ public class TxAccountMapperImpl extends ConfigurableMapper implements TxAccount
 	@Override
 	protected void configure(MapperFactory factory) {
 
-		// Map DTOIntFilter <-> FormatoOZNCENA0
+		/**
+		 * MAPEO DE ENTRADAS
+		 */
+		// Map DTOIntFilter <-> FormatoOZNCENA0 (OZNA)
 		factory.classMap(DTOIntFilterAccount.class, FormatoOZNCENA0.class).field("accountId", "numprod").byDefault()
 				.register();
 
-		// Map DTOIntFilter <-> FormatoOZECNVE0
+		// Map DTOIntFilter <-> FormatoOZECNVE0 (OZNV)
 		factory.classMap(DTOIntFilterAccount.class, FormatoOZECNVE0.class).field("startMonth", "mesini")
 				.field("endMonth", "mesfin").field("accountId", "numcta").byDefault().register();
 
-		// Map DTOIntFilter <-> FormatoOZECNUE0
+		// Map DTOIntFilter <-> FormatoOZECNUE0 (OZNU)
 		factory.classMap(DTOIntFilterAccount.class, FormatoOZECNUE0.class).field("startMonth", "intervm")
 				.field("accountId", "numprod").byDefault().register();
 
-		// Map FormatoOZECNVS0 <-> DTOIntMonthlyBalances
+		/**
+		 * MAPEO DE SALIDAS
+		 */
+		// Map FormatoOZECNVS0 <-> DTOIntMonthlyBalances (OZNA)
 		factory.classMap(DTOIntAccount.class, FormatoOZNCSNA0.class).field("name", "nomprod").field("type", "tipprod")
 				.field("idAccount", "numprod").field("balance.total", "saltota")
 				.field("balance.availableBalance", "sddispo").field("balance.tradeBalance", "sdcanje").byDefault()
 				.customize(new CheckBookListMapper()).register();
 
-		// Map FormatoOZECNVS0 <-> DTOIntMonthlyBalances
+		// Map FormatoOZECNVS0 <-> DTOIntMonthlyBalances (OZNV)
 		factory.classMap(DTOIntMonthlyBalances.class, FormatoOZECNVS0.class).field("balance", "salddis")
 				.field("month.mes", "mes").byDefault().register();
 
-		// Map FormatoOZECNUS0 <-> DTOIntAccMovementsResume
+		// Map FormatoOZECNUS0 <-> DTOIntAccMovementsResume (OZNU)
 		factory.classMap(DTOIntAccMovementsResume.class, FormatoOZECNUS0.class).field("balance", "saldtot")
 				.field("income", "valdepo").field("outcome", "valcarg").field("month.mes", "mes").byDefault()
 				.register();

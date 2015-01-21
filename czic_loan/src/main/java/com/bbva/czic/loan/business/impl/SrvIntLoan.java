@@ -44,9 +44,7 @@ public class SrvIntLoan implements ISrvIntLoan {
 	public Loan getRotaryQuota(final String idRotaryQuota) throws BusinessServiceException {
 		try {
 			log.info("SrvIntLoan.getRotaryQuota = " + idRotaryQuota);
-			if (idRotaryQuota == null || idRotaryQuota.equals("null") || idRotaryQuota.trim().isEmpty()) {
-				throw new BusinessServiceException(EnumError.WRONG_PARAMETERS.getAlias());
-			}
+
 			final DTOIntLoan dtoIntLoan = loanDao.getRotaryQuota(idRotaryQuota);
 			Loan loan = LoanMapper.getLoan(dtoIntLoan);
 			return loan;
@@ -90,19 +88,15 @@ public class SrvIntLoan implements ISrvIntLoan {
 	public RotaryQuotaMove getRotaryQuotaMovement(final String idLoan, final String idMovement) throws BusinessServiceException {
 
 		try {
-			RotaryQuotaMove movement = null;
 			log.info("SrvIntLoan.getRotaryQuotaMovement = " + idMovement + ", " + idLoan);
 
-			if (idMovement == null || idMovement.isEmpty() || idLoan == null || idLoan.trim().isEmpty()){
-				throw new BusinessServiceException(EnumError.WRONG_PARAMETERS.getAlias());
-			}
-
 			final DTOIntRotaryQuotaMove dtoIntRotaryQuotaMove = loanDao.getRotaryQuotaMovement( Integer.parseInt(idMovement), idLoan);
-			movement = LoanMapper.getMovementByDTOIntMovement(dtoIntRotaryQuotaMove);
-
+			log.info("SrvIntLoan.getRotaryQuotaMovement retorno exitoso inicio mapeo... ");
+			RotaryQuotaMove movement = LoanMapper.getMovementByDTOIntMovement(dtoIntRotaryQuotaMove);
+			log.info("SrvIntLoan.getRotaryQuotaMovement mapeo OK... ");
 			return movement;
 		} catch (BusinessServiceException be) {
-			log.info("SrvIntLoan.getRotaryQuotaMovement.exception = " + be.getMessage());
+			log.info("SrvIntLoan.getRotaryQuotaMovement.BusinessServiceException = " + be.getMessage());
 			throw be;
 		} catch (Exception e) {
 			log.info("SrvIntLoan.getRotaryQuotaMovement.exception = " + e.getMessage());

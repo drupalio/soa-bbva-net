@@ -45,6 +45,12 @@ public class LoanDAOImpl implements LoanDAO {
 	@Autowired
 	private TransaccionOznj transaccionOznj;
 
+	@Autowired
+	private TransaccionOzni transaccionOzni;
+
+	@Autowired
+	private TransaccionOznk transaccionOznk;
+
 	private static final String COP = "COP";
 
 	@Override
@@ -118,7 +124,7 @@ public class LoanDAOImpl implements LoanDAO {
 			peticion.getCuerpo().getPartes().add(formatoOZNCENI0);
 			log.info("ingreso preInvocar LoanDAOImpl.listRotaryQuotaMovements");
 
-			RespuestaTransaccionOzni respuesta = new TransaccionOzni().invocar(peticion);
+			RespuestaTransaccionOzni respuesta = transaccionOzni.invocar(peticion);
 
 			log.info("Fin preInvocar LoanDAOImpl.listRotaryQuotaMovements");
 			BusinessServiceException exception = errorMappingHelper.toBusinessServiceException(respuesta);
@@ -129,7 +135,6 @@ public class LoanDAOImpl implements LoanDAO {
 			}
 
 			final List<CopySalida> outputCopyList = respuesta.getCuerpo().getPartes(CopySalida.class);
-
 
 			if(CollectionUtils.isEmpty(outputCopyList)) {
 				throw new BusinessServiceException(EnumError.NO_DATA.getAlias());
@@ -161,7 +166,7 @@ public class LoanDAOImpl implements LoanDAO {
 		DTOIntRotaryQuotaMove rotaryQuotaMove = new DTOIntRotaryQuotaMove();
 		FormatoOZNCENK0 formatoOZNCENK0 = new FormatoOZNCENK0();
 		try {
-			log.info("LoanDAOImpl.getRotaryQuotaMovement" + idMovement + ", " +idLoan);
+			log.info("LoanDAOImpl.getRotaryQuotaMovement " + idMovement + ", " +idLoan);
 			formatoOZNCENK0.setNommovi(idMovement);
 			formatoOZNCENK0.setNomtarj(idLoan);
 
@@ -169,12 +174,14 @@ public class LoanDAOImpl implements LoanDAO {
 
 			peticion.getCuerpo().getPartes().add(peticion);
 
-			RespuestaTransaccionOznk respuesta = new TransaccionOznk().invocar(peticion);
+			RespuestaTransaccionOznk respuesta = transaccionOznk.invocar(peticion);
+
+			log.info("Finaliza peticion exitosa LoanDAOImpl.getRotaryQuotaMovement = " + respuesta.getCodigoRetorno());
 
 			BusinessServiceException exception = errorMappingHelper.toBusinessServiceException(respuesta);
-
+			log.info("Finaliza peticion exitosa LoanDAOImpl.getRotaryQuotaMovement..exception = " + exception.getErrorMessage());
 			if (exception != null){
-				log.info("LoanDAOImpl.getRotaryQuotaMovement = exception ->" + exception.getErrorMessage() );
+				log.info("LoanDAOImpl.getRotaryQuotaMovement = exception -> " + exception.getErrorMessage() );
 				throw exception;
 			}
 

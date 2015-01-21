@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by Entelgy on 12/01/2015.
+ * @author Entelgy Colombia.
  */
 public abstract class Validator implements IValidator {
 
@@ -18,7 +18,7 @@ public abstract class Validator implements IValidator {
     }
 
     public boolean hasException() {
-        return exceptions.isEmpty();
+        return !exceptions.isEmpty();
     }
 
     public List<BusinessServiceException> getAllExceptions() {

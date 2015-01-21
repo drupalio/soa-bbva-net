@@ -60,13 +60,9 @@ public class LoanFilterConverter{
 
                 for (PrimitiveStatement st : splitDataFilter) {
 
-                    String property = null;
-                    String condition = null;
-                    String value = null;
-
-                    property = st.getProperty();
-                    condition = st.getCondition().toString();
-                    value = st.getValue().toString();
+                    String property = st.getProperty();
+                    String condition = st.getCondition().toString();
+                    String value = st.getValue().toString();
 
                     if (property.toLowerCase().equals("transactiondate") && condition.equals(ConditionType.GREATER_OR_EQUALS.toString())) {
                     	fechaInicial = value;

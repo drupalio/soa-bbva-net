@@ -28,7 +28,6 @@ public class DTOIntCustomer {
 	private Integer homeMembers;
 	private EnumDwelingType dwelingType;
 	private Place officeLocation;
-	private Calendar lastConnectionTime;
 
     public DTOIntCustomer() {
         //default constructor
@@ -128,14 +127,6 @@ public class DTOIntCustomer {
 
 	public void setOfficeLocation(Place officeLocation) {
 		this.officeLocation = officeLocation;
-	}
-
-	public Calendar getLastConnectionTime() {
-		return lastConnectionTime;
-	}
-
-	public void setLastConnectionTime(Calendar lastConnectionTime) {
-		this.lastConnectionTime = lastConnectionTime;
 	}
 
 }
