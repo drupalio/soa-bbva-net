@@ -87,7 +87,6 @@ public class SrvLoanV01 implements ISrvLoanV01,
 		return  isrvIntLoan.getRotaryQuota(idLoan);
 	}
 
-	@SuppressWarnings("unchecked")
 	@ApiOperation(value = "Obtiene un resumen de movimientos realizados sobre el producto de financiamiento. �ste servicio es paginado", notes = "Obtiene un resumen de movimientos realizados sobre el producto de financiamiento. �ste servicio es paginado", response = List.class)
 	@ApiResponses(value = {
 			@ApiResponse(code = -1, message = "aliasGCE1"),
@@ -130,10 +129,10 @@ public class SrvLoanV01 implements ISrvLoanV01,
 			@ApiParam(value = "Claimer identifier param") @PathParam("idLoan") String idLoan,
 			@ApiParam(value = "Claimer identifier param") @PathParam("idMovement") String idMovement) {
 
-		if (idMovement == null || idMovement.trim().isEmpty() || idLoan == null || idLoan.trim().isEmpty()){
+		if (idLoan == null || idLoan.trim().isEmpty() || idMovement == null || idMovement.trim().isEmpty()){
 			throw new BusinessServiceException(EnumError.WRONG_PARAMETERS.getAlias());
 		}
 
-		return isrvIntLoan.getRotaryQuotaMovement(idMovement, idLoan);
+		return isrvIntLoan.getRotaryQuotaMovement(idLoan, idMovement);
 	}
 }
