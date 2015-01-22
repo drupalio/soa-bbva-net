@@ -10,12 +10,7 @@ privileged aspect FormatoOZECNYE0_Roo_ToString {
     public String FormatoOZECNYE0.toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("Estcheq: ").append(getEstcheq()).append(", ");
-        sb.append("Fechfin: ").append(getFechfin()).append(", ");
-        sb.append("Fechini: ").append(getFechini()).append(", ");
-        sb.append("Indpagi: ").append(getIndpagi()).append(", ");
-        sb.append("Numcheq: ").append(getNumcheq()).append(", ");
-        sb.append("Numcta: ").append(getNumcta()).append(", ");
-        sb.append("Tampagi: ").append(getTampagi());
+        sb.append("Numcheq: ").append(getNumcheq());
         return sb.toString();
     }
     

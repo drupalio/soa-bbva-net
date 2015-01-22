@@ -16,7 +16,7 @@ import java.util.List;
 
 public interface ISrvCheckbooksV01 {
 
-	Checkbook  getCheckbook(String checkbookId,String accountId);
+//	Checkbook  getCheckbook(String checkbookId,String accountId);
 
-	Check getCheck(String checkId);
+	Check getCheck(String checkId, String filter);
 }

@@ -26,33 +26,7 @@ public class CheckbooksMapperTest {
         mapper = new CheckbooksMapper();
     }
 
-    @Test
-    public void testMapDtoIntCheckbookToCheckbook() {
-        // Setup data
-        final Checkbook checkbook;
 
-        final DTOIntCheckbook intCheckbook = new DTOIntCheckbook();
-
-        intCheckbook.setId("123");
-        intCheckbook.setFirstCheck(10);
-        intCheckbook.setLastCheck(50);
-        intCheckbook.setTotalCheck(40);
-        intCheckbook.setRequestDate(new Date());
-        intCheckbook.setDeliveryDate(new Date());
-        intCheckbook.setActualState(EnumCheckbookStatus.HABILITADO);
-
-        // SUT execution
-        checkbook = mapper.map(intCheckbook);
-
-        //Validation
-        assertEquals(intCheckbook.getId(),checkbook.getId());
-        assertEquals(intCheckbook.getFirstCheck(),checkbook.getFirstCheck());
-        assertEquals(intCheckbook.getLastCheck(),checkbook.getLastCheck());
-        assertEquals(intCheckbook.getTotalCheck(),checkbook.getTotalCheck());
-        assertEquals(intCheckbook.getRequestDate(),checkbook.getRequestDate().getTime());
-        assertEquals(intCheckbook.getDeliveryDate(),checkbook.getDeliveryDate().getTime());
-        assertEquals(intCheckbook.getActualState(),checkbook.getActualState());
-    }
 
     @Test
     public void testMapDtoIntCheckToCheck() {
@@ -64,7 +38,7 @@ public class CheckbooksMapperTest {
         intCheck.setId("123");
         intCheck.setIssueDate(new Date());
         intCheck.setValue(new Money(java.util.Currency.getInstance("COP"), new BigDecimal(12341234)));
-        intCheck.setStatus(EnumCheckStatus.HABILITADO);
+        intCheck.setStatus("HABILITADO");
         intCheck.setModifiedDate(new Date());
 
         // SUT execution

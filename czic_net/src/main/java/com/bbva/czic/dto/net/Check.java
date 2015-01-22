@@ -26,7 +26,7 @@ public class Check implements Serializable {
 	@ApiModelProperty(value = "Valor del cheque", required = true)
 	private Money value;
 	@ApiModelProperty(value = "Estado actual del cheque", required = true)
-	private EnumCheckStatus status;
+	private String status;
 	@XmlSchemaType(name = "dateTime")
 	@ApiModelProperty(value = "Fecha de modificacion", required = true)
 	@Past
@@ -60,11 +60,11 @@ public class Check implements Serializable {
 		this.value = value;
 	}
 
-	public EnumCheckStatus getStatus() {
+	public String getStatus() {
 		return status;
 	}
 
-	public void setStatus(EnumCheckStatus status) {
+	public void setStatus(String status) {
 		this.status = status;
 	}
 

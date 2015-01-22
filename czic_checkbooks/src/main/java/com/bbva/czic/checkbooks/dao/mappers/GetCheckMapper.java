@@ -8,6 +8,9 @@ import com.bbva.czic.routine.commons.rm.utils.converter.UtilsConverter;
 import com.bbva.czic.routine.commons.rm.utils.tx.ISimpleTransactionMapper;
 import org.springframework.stereotype.Component;
 
+import java.math.BigDecimal;
+import java.util.Date;
+
 @Component(value = "tx-get-checks-mapper")
 public class GetCheckMapper implements ISimpleTransactionMapper<DTOIntCheck, FormatoOZECNYE0, DTOIntCheck, FormatoOZECNYS0> {
 
@@ -17,7 +20,7 @@ public class GetCheckMapper implements ISimpleTransactionMapper<DTOIntCheck, For
         final FormatoOZECNYE0 formatoOZECNYE0 = new FormatoOZECNYE0();
 
         formatoOZECNYE0.setNumcheq(dtoIn.getId());
-
+        formatoOZECNYE0.setEstcheq(dtoIn.getStatus());
 
         return formatoOZECNYE0;
     }
@@ -26,11 +29,18 @@ public class GetCheckMapper implements ISimpleTransactionMapper<DTOIntCheck, For
     public DTOIntCheck mapToOuter(FormatoOZECNYS0 outFormat, DTOIntCheck dtoIn) {
         final DTOIntCheck intCheck = new DTOIntCheck();
 
-        intCheck.setId(outFormat.getNumcheq());
+        //parsear
+        /*intCheck.setId(outFormat.getNumcheq());
         intCheck.setIssueDate(outFormat.getFechemi());
         intCheck.setValue(UtilsConverter.getMoneyDTO(outFormat.getValcheq()));
         intCheck.setStatus(EnumCheckStatus.valueOf(outFormat.getEstcheq()));
         intCheck.setModifiedDate(outFormat.getFechmod());
+*/
+        intCheck.setId("123456789765");
+        intCheck.setIssueDate(new Date());
+        intCheck.setValue(UtilsConverter.getMoneyDTO(new BigDecimal("1234")));
+        intCheck.setStatus("SOLICITADO");
+        intCheck.setModifiedDate(new Date());
 
         return intCheck;
     }

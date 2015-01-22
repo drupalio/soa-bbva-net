@@ -8,8 +8,6 @@ import com.bbva.czic.dto.net.Checkbook;
 
 public interface ICheckbookMapper {
 
-    Checkbook map(DTOIntCheckbook intCheckbook);
-
     Check map(DTOIntCheck intCheck);
 
 }

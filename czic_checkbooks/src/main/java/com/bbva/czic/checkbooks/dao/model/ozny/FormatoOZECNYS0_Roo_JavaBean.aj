@@ -3,20 +3,11 @@
 
 package com.bbva.czic.checkbooks.dao.model.ozny;
 
-import java.lang.Integer;
 import java.lang.String;
 import java.math.BigDecimal;
 import java.util.Date;
 
 privileged aspect FormatoOZECNYS0_Roo_JavaBean {
-    
-    public Integer FormatoOZECNYS0.getIndpagi() {
-        return this.indpagi;
-    }
-    
-    public void FormatoOZECNYS0.setIndpagi(Integer indpagi) {
-        this.indpagi = indpagi;
-    }
     
     public String FormatoOZECNYS0.getNumcheq() {
         return this.numcheq;

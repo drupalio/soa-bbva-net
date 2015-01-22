@@ -3,35 +3,9 @@
 
 package com.bbva.czic.checkbooks.dao.model.ozny;
 
-import java.lang.Integer;
 import java.lang.String;
-import java.util.Date;
 
 privileged aspect FormatoOZECNYE0_Roo_JavaBean {
-    
-    public Integer FormatoOZECNYE0.getIndpagi() {
-        return this.indpagi;
-    }
-    
-    public void FormatoOZECNYE0.setIndpagi(Integer indpagi) {
-        this.indpagi = indpagi;
-    }
-    
-    public Integer FormatoOZECNYE0.getTampagi() {
-        return this.tampagi;
-    }
-    
-    public void FormatoOZECNYE0.setTampagi(Integer tampagi) {
-        this.tampagi = tampagi;
-    }
-    
-    public String FormatoOZECNYE0.getNumcta() {
-        return this.numcta;
-    }
-    
-    public void FormatoOZECNYE0.setNumcta(String numcta) {
-        this.numcta = numcta;
-    }
     
     public String FormatoOZECNYE0.getNumcheq() {
         return this.numcheq;
@@ -39,22 +13,6 @@ privileged aspect FormatoOZECNYE0_Roo_JavaBean {
     
     public void FormatoOZECNYE0.setNumcheq(String numcheq) {
         this.numcheq = numcheq;
-    }
-    
-    public Date FormatoOZECNYE0.getFechini() {
-        return this.fechini;
-    }
-    
-    public void FormatoOZECNYE0.setFechini(Date fechini) {
-        this.fechini = fechini;
-    }
-    
-    public Date FormatoOZECNYE0.getFechfin() {
-        return this.fechfin;
-    }
-    
-    public void FormatoOZECNYE0.setFechfin(Date fechfin) {
-        this.fechfin = fechfin;
     }
     
     public String FormatoOZECNYE0.getEstcheq() {

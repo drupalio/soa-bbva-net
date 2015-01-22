@@ -24,39 +24,33 @@ import org.springframework.roo.addon.tostring.RooToString;
 public class FormatoOZECNYS0 {
 	
 	/**
-	 * <p>Campo <code>INDPAGI</code>, &iacute;ndice: <code>1</code>, tipo: <code>ENTERO</code>
+	 * <p>Campo <code>NUMCHEQ</code>, &iacute;ndice: <code>1</code>, tipo: <code>ALFANUMERICO</code>
 	 */
-	@Campo(indice = 1, nombre = "INDPAGI", tipo = TipoCampo.ENTERO, longitudMinima = 3, longitudMaxima = 3, signo = true)
-	private Integer indpagi;
-	
-	/**
-	 * <p>Campo <code>NUMCHEQ</code>, &iacute;ndice: <code>2</code>, tipo: <code>ALFANUMERICO</code>
-	 */
-	@Campo(indice = 2, nombre = "NUMCHEQ", tipo = TipoCampo.ALFANUMERICO, longitudMinima = 9, longitudMaxima = 9)
+	@Campo(indice = 1, nombre = "NUMCHEQ", tipo = TipoCampo.ALFANUMERICO, longitudMinima = 9, longitudMaxima = 9)
 	private String numcheq;
 	
 	/**
-	 * <p>Campo <code>FECHEMI</code>, &iacute;ndice: <code>3</code>, tipo: <code>FECHA</code>
+	 * <p>Campo <code>FECHEMI</code>, &iacute;ndice: <code>2</code>, tipo: <code>FECHA</code>
 	 */
-	@Campo(indice = 3, nombre = "FECHEMI", tipo = TipoCampo.FECHA, longitudMinima = 10, longitudMaxima = 10, formato = "yyyy-MM-dd")
+	@Campo(indice = 2, nombre = "FECHEMI", tipo = TipoCampo.FECHA, longitudMinima = 10, longitudMaxima = 10, formato = "yyyy-MM-dd")
 	private Date fechemi;
 	
 	/**
-	 * <p>Campo <code>VALCHEQ</code>, &iacute;ndice: <code>4</code>, tipo: <code>DECIMAL</code>
+	 * <p>Campo <code>VALCHEQ</code>, &iacute;ndice: <code>3</code>, tipo: <code>DECIMAL</code>
 	 */
-	@Campo(indice = 4, nombre = "VALCHEQ", tipo = TipoCampo.DECIMAL, longitudMinima = 15, longitudMaxima = 15, signo = true, decimales = 2)
+	@Campo(indice = 3, nombre = "VALCHEQ", tipo = TipoCampo.DECIMAL, longitudMinima = 17, longitudMaxima = 17, signo = true, decimales = 2)
 	private BigDecimal valcheq;
 	
 	/**
-	 * <p>Campo <code>ESTCHEQ</code>, &iacute;ndice: <code>5</code>, tipo: <code>ALFANUMERICO</code>
+	 * <p>Campo <code>ESTCHEQ</code>, &iacute;ndice: <code>4</code>, tipo: <code>ALFANUMERICO</code>
 	 */
-	@Campo(indice = 5, nombre = "ESTCHEQ", tipo = TipoCampo.ALFANUMERICO, longitudMinima = 1, longitudMaxima = 1)
+	@Campo(indice = 4, nombre = "ESTCHEQ", tipo = TipoCampo.ALFANUMERICO, longitudMinima = 1, longitudMaxima = 1)
 	private String estcheq;
 	
 	/**
-	 * <p>Campo <code>FECHMOD</code>, &iacute;ndice: <code>6</code>, tipo: <code>FECHA</code>
+	 * <p>Campo <code>FECHMOD</code>, &iacute;ndice: <code>5</code>, tipo: <code>FECHA</code>
 	 */
-	@Campo(indice = 6, nombre = "FECHMOD", tipo = TipoCampo.FECHA, longitudMinima = 10, longitudMaxima = 10, formato = "yyyy-MM-dd")
+	@Campo(indice = 5, nombre = "FECHMOD", tipo = TipoCampo.FECHA, longitudMinima = 10, longitudMaxima = 10, formato = "yyyy-MM-dd")
 	private Date fechmod;
 	
 }

@@ -4,6 +4,7 @@ import com.bbva.czic.checkbooks.business.ISrvIntCheckbooks;
 import com.bbva.czic.checkbooks.business.dto.DTOIntCheck;
 import com.bbva.czic.checkbooks.business.dto.DTOIntCheckbook;
 import com.bbva.czic.checkbooks.facade.v01.mappers.ICheckbookMapper;
+import com.bbva.czic.checkbooks.facade.v01.util.impl.CheckFilterComverter;
 import com.bbva.czic.dto.net.Check;
 import com.bbva.czic.dto.net.Checkbook;
 import com.bbva.czic.routine.commons.rm.utils.errors.EnumError;
@@ -19,10 +20,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
-import javax.ws.rs.Produces;
+import javax.ws.rs.*;
 import javax.ws.rs.core.HttpHeaders;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.UriInfo;
@@ -46,6 +44,9 @@ public class SrvCheckbooksV01 implements ISrvCheckbooksV01, com.bbva.jee.arq.spr
 	@Resource(name = "checkbooks-mapper")
 	private ICheckbookMapper checkbookMapper;
 
+	@Resource(name = "check-filter-converter")
+	private CheckFilterComverter checkFilterComverter;
+
 	@Override
 	public void setUriInfo(UriInfo ui) {
 		this.uriInfo = ui;
@@ -59,41 +60,13 @@ public class SrvCheckbooksV01 implements ISrvCheckbooksV01, com.bbva.jee.arq.spr
 	@Autowired
 	ISrvIntCheckbooks srvIntCheckbooks;
 
-	@Override
-	@ApiOperation(value = "Operation obtaining checkbooks related to a client's product.", notes = "----", response = Checkbook.class)
-	@ApiResponses(value = {
-			@ApiResponse(code = -1, message = "aliasGCE1"),
-			@ApiResponse(code = -1, message = "aliasGCE2"),
-			@ApiResponse(code = 200, message = "Found Successfully", response = Checkbook.class),
-			@ApiResponse(code = 400, message = "Request Error"),
-			@ApiResponse(code = 409, message = "Functional Error"),
-			@ApiResponse(code = 500, message = "Technical Error")
-	})
-	@GET
-	@Path("{checkbookId}")
-	@ElementClass(response = Checkbook.class)
-	@SMC(registryID = "SMCCO1400013", logicalID = "getCheckbooks")
-	public Checkbook  getCheckbook(
-			@ApiParam(value = "Checkbooks identifier") @PathParam("checkbookId") String checkbookId,
-			@ApiParam(value = "Checkbooks identifier") @PathParam("checkbookId") String accountId) {
-
-		if (checkbookId == "checks" || checkbookId.equals("checks")){
-			throw new BusinessServiceException(EnumError.WRONG_PARAMETERS.getAlias());
-		}
-
-		final DTOIntCheckbook intCheckbook = new DTOIntCheckbook();
-		intCheckbook.setId(checkbookId);
-		intCheckbook.setNumeroCuenta(accountId);
-		return checkbookMapper.map(srvIntCheckbooks.getCheckbooks(intCheckbook));
-	}
-
 
 	@Override
 	@ApiOperation(value = "Operation to get the details of a check associated with a checkbook for the account associated with a client.", notes = "--", response = Check.class)
 	@ApiResponses(value = {
 			@ApiResponse(code = -1, message = "aliasGCE1"),
 			@ApiResponse(code = -1, message = "aliasGCE2"),
-			@ApiResponse(code = 200, message = "Found Successfully", response = List.class),
+			@ApiResponse(code = 200, message = "Found Successfully", response = Check.class),
 			@ApiResponse(code = 400, message = "Request Error"),
 			@ApiResponse(code = 409, message = "Functional Error"),
 			@ApiResponse(code = 500, message = "Technical Error")
@@ -103,10 +76,19 @@ public class SrvCheckbooksV01 implements ISrvCheckbooksV01, com.bbva.jee.arq.spr
 	@Path("/checks/{checkId}")
 	@SMC(registryID = "SMCCO1400014", logicalID = "getChecks")
 	public Check getCheck(
-			@ApiParam(value = "Claim identifier param") @PathParam("checkId") String checkId) {
+			@ApiParam(value = "Claim identifier param") @PathParam("checkId") String checkId,
+			@ApiParam(value = "order by param") @DefaultValue("null") @QueryParam("$filter") String filter) {
 
-		final DTOIntCheck intCheck = new DTOIntCheck();
-		intCheck.setId(checkId);
+		if (checkId == null || checkId.equals("null") || checkId.trim().isEmpty()){
+			throw new BusinessServiceException(EnumError.WRONG_PARAMETERS.getAlias());
+		}
+
+		if (filter == null || filter.equals("null") || filter.trim().isEmpty()){
+			throw new BusinessServiceException(EnumError.WRONG_PARAMETERS.getAlias());
+		}
+
+		final DTOIntCheck intCheck = checkFilterComverter.getDTOIntFilter(checkId, filter);
+
 		return checkbookMapper.map(srvIntCheckbooks.getChecks(intCheck));
 
 	}
