@@ -27,7 +27,7 @@ public class AccountsMapper extends ConfigurableMapper implements IAccountsMappe
 
 		// Map DTOIntCheckbook <-> CheckBook
 		factory.classMap(DTOIntCheckbook.class, Checkbook.class).field("id", "id").field("firstCheck", "firstCheck")
-				.field("lastCheckl", "lastCheck").field("totalCheck", "totalCheck").field("actualState", "actualState")
+				.field("lastCheck", "lastCheck").field("totalCheck", "totalCheck").field("actualState", "actualState")
 				.field("deliveryDate", "deliveryDate").field("requestDate", "requestDate").byDefault().register();
 
 		factory.classMap(DTOIntBalance.class, Balance.class).field("total", "total")

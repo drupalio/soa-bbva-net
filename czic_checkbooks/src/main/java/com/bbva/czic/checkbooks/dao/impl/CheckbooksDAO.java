@@ -11,16 +11,8 @@ import javax.annotation.Resource;
 @Repository ("checkbooks-dao")
 public class CheckbooksDAO implements ICheckbooksDAO {
 
-	@Resource(name = "tx-get-checkbook")
-	ISimpleTransaction txGetCheckbook;
-
 	@Resource(name = "tx-get-check")
 	ISimpleTransaction txGetCheck;
-
-	@Override
-	public DTOIntCheckbook getCheckbooks(DTOIntCheckbook intCheckbook) {
-		return txGetCheckbook.invoke(intCheckbook);
-	}
 
 	@Override
 	public DTOIntCheck getChecks(DTOIntCheck intCheck) {
