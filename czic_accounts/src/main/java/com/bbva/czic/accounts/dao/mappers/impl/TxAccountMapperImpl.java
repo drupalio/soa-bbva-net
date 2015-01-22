@@ -14,6 +14,7 @@ import com.bbva.czic.accounts.dao.model.oznu.FormatoOZECNUE0;
 import com.bbva.czic.accounts.dao.model.oznu.FormatoOZECNUS0;
 import com.bbva.czic.accounts.dao.model.oznv.FormatoOZECNVE0;
 import com.bbva.czic.accounts.dao.model.oznv.FormatoOZECNVS0;
+import com.bbva.czic.routine.commons.rm.utils.converter.StringMoneyConverter;
 import com.bbva.czic.routine.commons.rm.utils.mappers.Mapper;
 import com.bbva.czic.routine.mapper.CustomMapper;
 import com.bbva.czic.routine.mapper.MapperFactory;
@@ -28,6 +29,11 @@ public class TxAccountMapperImpl extends ConfigurableMapper implements TxAccount
 	 */
 	@Override
 	protected void configure(MapperFactory factory) {
+
+		/**
+		 * Convert HOST FORMAT (+EEEEEEEEDD) to COP Money
+		 */
+		factory.getConverterFactory().registerConverter(new StringMoneyConverter());
 
 		/**
 		 * MAPEO DE ENTRADAS

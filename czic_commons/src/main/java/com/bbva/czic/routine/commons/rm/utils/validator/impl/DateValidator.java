@@ -10,10 +10,6 @@ import com.bbva.jee.arq.spring.core.servicing.gce.BusinessServiceException;
  */
 public class DateValidator extends Validator {
 
-	public DateValidator() {
-		super();
-	}
-
 	public DateValidator noFuture(Date date) {
 		if (date.after(new Date())) {
 			exceptions.add(new BusinessServiceException(EnumError.DATE_INTERVAL_OUT_OF_RANGE.getAlias()));
