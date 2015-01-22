@@ -1,7 +1,7 @@
 package com.bbva.czic.globalposition.facade.v01.utils.converters.impl;
 
 import com.bbva.czic.dto.net.EnumProductType;
-import com.bbva.czic.globalposition.business.dto.DTOIntFilterProduct;
+import com.bbva.czic.globalposition.business.dto.DTOIntProductFilter;
 import com.bbva.czic.globalposition.facade.v01.utils.converters.IFilterConverter;
 import com.bbva.czic.routine.commons.rm.utils.errors.EnumError;
 import com.bbva.jee.arq.spring.core.log.I18nLog;
@@ -29,9 +29,9 @@ public class GlobalPositionFilterConverter implements IFilterConverter {
     BusinessServicesToolKit businessToolKit;
 
     @Override
-    public DTOIntFilterProduct getDTOIntFilter(String customerId, String filter) {
+    public DTOIntProductFilter getDTOIntFilter(String customerId, String filter) {
 
-        final DTOIntFilterProduct filterProduct = new DTOIntFilterProduct();
+        final DTOIntProductFilter filterProduct = new DTOIntProductFilter();
         filterProduct.setProductType(null);
 
         if(customerId == null || customerId.equals("null") || customerId.isEmpty()) {
@@ -39,9 +39,9 @@ public class GlobalPositionFilterConverter implements IFilterConverter {
         }
         if (filter != null && !filter.contentEquals("null")) {
             log.info("A query string (filter) has been sended: " + filter);
-            SearchCondition<DTOIntFilterProduct> sc;
+            SearchCondition<DTOIntProductFilter> sc;
             try {
-                sc = new FiqlParser<DTOIntFilterProduct>(DTOIntFilterProduct.class).parse(filter);
+                sc = new FiqlParser<DTOIntProductFilter>(DTOIntProductFilter.class).parse(filter);
 
                 final List<PrimitiveStatement> splitDataFilter = businessToolKit.getDataFromFilter(sc);
                 for (PrimitiveStatement st : splitDataFilter) {

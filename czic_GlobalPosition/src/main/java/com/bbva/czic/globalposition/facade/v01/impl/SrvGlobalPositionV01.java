@@ -2,7 +2,7 @@ package com.bbva.czic.globalposition.facade.v01.impl;
 
 import com.bbva.czic.dto.net.Product;
 import com.bbva.czic.globalposition.business.ISrvIntGlobalPosition;
-import com.bbva.czic.globalposition.business.dto.DTOIntFilterProduct;
+import com.bbva.czic.globalposition.business.dto.DTOIntProductFilter;
 import com.bbva.czic.globalposition.business.dto.DTOIntProduct;
 import com.bbva.czic.globalposition.facade.v01.ISrvGlobalPositionV01;
 import com.bbva.czic.globalposition.facade.v01.mapper.IGlobalPositionMapper;
@@ -17,7 +17,6 @@ import com.bbva.jee.arq.spring.core.servicing.gce.BusinessServiceException;
 import com.wordnik.swagger.annotations.*;
 import org.apache.cxf.jaxrs.model.wadl.ElementClass;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
@@ -27,7 +26,6 @@ import javax.ws.rs.core.HttpHeaders;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
-import java.math.BigDecimal;
 import java.util.List;
 
 
@@ -85,9 +83,10 @@ public class SrvGlobalPositionV01 implements ISrvGlobalPositionV01, com.bbva.jee
 
 		log.info("SrvGlobalPositionV01.getExtractGlobalBalance : HOT SWAP");
 
-		final DTOIntFilterProduct filterProduct = gpFilterConverter.getDTOIntFilter(customerId, filter);
+		final DTOIntProductFilter filterProduct = gpFilterConverter.getDTOIntFilter(customerId, filter);
 		List<DTOIntProduct> products = srvIntGlobalPosition.getExtractGlobalBalance(filterProduct);
 
+		log.info("SrvGlobalPositionV01#getExtractGlobalBalance");
 		if (CollectionUtils.isEmpty(products)) {
 			throw new BusinessServiceException(EnumError.NO_DATA.getAlias());
 		}
@@ -114,7 +113,7 @@ public class SrvGlobalPositionV01 implements ISrvGlobalPositionV01, com.bbva.jee
 		final DTOIntProduct productInt = new DTOIntProduct();
 		infoProduct.setId(idProduct);
 
-		if (idProduct == null || infoProduct == null || infoProduct.getVisible() == null) {
+		if (idProduct == null || infoProduct.getVisible() == null) {
 			throw new BusinessServiceException(EnumError.WRONG_PARAMETERS.getAlias());
 		}
 
@@ -145,7 +144,7 @@ public class SrvGlobalPositionV01 implements ISrvGlobalPositionV01, com.bbva.jee
 		final DTOIntProduct productInt = new DTOIntProduct();
 		infoProduct.setId(idProduct);
 
-		if (idProduct == null || infoProduct == null || infoProduct.getOperable() == null) {
+		if (idProduct == null || infoProduct.getOperable() == null) {
 			throw new BusinessServiceException(EnumError.WRONG_PARAMETERS.getAlias());
 		}
 		productInt.setId(idProduct);

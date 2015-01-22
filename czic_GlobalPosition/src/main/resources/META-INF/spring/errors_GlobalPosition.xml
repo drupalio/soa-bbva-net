@@ -56,10 +56,16 @@
         <message lang="es">No existen datos para la búsqueda realizada.</message>
     </error-definition>
 
-    <error-definition severity="FATAL" alias="mandatoryParametersMissing" code="2" servicing:http-status="409">
+    <error-definition severity="FATAL" alias="mandatoryParametersMissing" code="3" servicing:http-status="409">
         <message>Missing Attributes</message>
         <message lang="en">Missing Attributes</message>
         <message lang="es">Artibutos obligatorios vacíos.</message>
+    </error-definition>
+
+    <error-definition severity="FATAL" alias="technicalError" code="4" servicing:http-status="500">
+        <message>Technical error.</message>
+        <message lang="en">Technical error.</message>
+        <message lang="es">Error Tecnico.</message>
     </error-definition>
 
 </error-definitions>
