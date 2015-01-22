@@ -174,12 +174,12 @@ public class SrvAccountsV01 implements ISrvAccountsV01, com.bbva.jee.arq.spring.
 			@ApiResponse(code = 500, message = "Technical Error")
 	})
 	@GET
-	@Path("{checkbookId}")
+	@Path("/{accountId}/checkbooks/{checkbookId}")
 	@ElementClass(response = Checkbook.class)
 	@SMC(registryID = "SMCCO1400013", logicalID = "getCheckbooks")
 	public Checkbook  getCheckbook(
 			@ApiParam(value = "Checkbooks identifier") @PathParam("checkbookId") String checkbookId,
-			@ApiParam(value = "Checkbooks identifier") @PathParam("checkbookId") String accountId) {
+			@ApiParam(value = "Checkbooks identifier") @PathParam("accountId") String accountId) {
 
 		if (checkbookId == "checks" || checkbookId.equals("checks")){
 			throw new BusinessServiceException(EnumError.WRONG_PARAMETERS.getAlias());

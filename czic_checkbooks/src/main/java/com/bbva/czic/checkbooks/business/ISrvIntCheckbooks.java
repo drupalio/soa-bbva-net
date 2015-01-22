@@ -9,8 +9,6 @@ import com.bbva.czic.dto.net.Checkbook;
 
 public interface ISrvIntCheckbooks {
 
-	DTOIntCheckbook getCheckbooks(DTOIntCheckbook intCheckbook);
-
 	DTOIntCheck getChecks(DTOIntCheck intCheck);
 
 }

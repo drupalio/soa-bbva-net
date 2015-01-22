@@ -1,8 +1,9 @@
-package com.bbva.czic.checkbooks.dao.mappers;
+package com.bbva.czic.accounts.dao.mappers.impl;
 
-import com.bbva.czic.checkbooks.business.dto.DTOIntCheckbook;
-import com.bbva.czic.checkbooks.dao.model.ozns.FormatoOZECNSE0;
-import com.bbva.czic.checkbooks.dao.model.ozns.FormatoOZECNSS0;
+import com.bbva.czic.accounts.business.dto.DTOIntCheckbook;
+import com.bbva.czic.accounts.business.dto.DTOIntEnumCheckbookStatus;
+import com.bbva.czic.accounts.dao.model.ozns.FormatoOZECNSE0;
+import com.bbva.czic.accounts.dao.model.ozns.FormatoOZECNSS0;
 import com.bbva.czic.dto.net.EnumCheckbookStatus;
 import com.bbva.czic.routine.commons.rm.utils.tx.ISimpleTransactionMapper;
 import org.springframework.stereotype.Component;
@@ -33,7 +34,7 @@ public class GetCheckbookMapper implements ISimpleTransactionMapper<DTOIntCheckb
         dtoIntCheckbook.setTotalCheck(new Integer("5"));
         dtoIntCheckbook.setRequestDate(new Date());
         dtoIntCheckbook.setDeliveryDate(new Date());
-        dtoIntCheckbook.setActualState(EnumCheckbookStatus.HABILITADO);
+        dtoIntCheckbook.setActualState(DTOIntEnumCheckbookStatus.valueOf(EnumCheckbookStatus.HABILITADO.toString()));
 
         return dtoIntCheckbook;
     }
