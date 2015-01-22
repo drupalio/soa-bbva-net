@@ -9,18 +9,15 @@ privileged aspect FormatoOZNCSNM0_Roo_ToString {
     
     public String FormatoOZNCSNM0.toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append("Cheque: ").append(getCheque()).append(", ");
-        sb.append("Codigo: ").append(getCodigo()).append(", ");
-        sb.append("Ctatras: ").append(getCtatras()).append(", ");
+        sb.append("Baloper: ").append(getBaloper()).append(", ");
         sb.append("Ctroorg: ").append(getCtroorg()).append(", ");
         sb.append("Descodi: ").append(getDescodi()).append(", ");
         sb.append("Fchoper: ").append(getFchoper()).append(", ");
         sb.append("Fchvalr: ").append(getFchvalr()).append(", ");
-        sb.append("Hraoper: ").append(getHraoper()).append(", ");
         sb.append("Nomovim: ").append(getNomovim()).append(", ");
         sb.append("Numecta: ").append(getNumecta()).append(", ");
-        sb.append("Observa: ").append(getObserva()).append(", ");
         sb.append("Plaza: ").append(getPlaza()).append(", ");
+        sb.append("Resto: ").append(getResto()).append(", ");
         sb.append("Saldo: ").append(getSaldo()).append(", ");
         sb.append("Tipo: ").append(getTipo()).append(", ");
         sb.append("Valor: ").append(getValor());

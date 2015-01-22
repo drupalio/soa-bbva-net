@@ -2,6 +2,7 @@ package com.bbva.czic.movements.facade.v01.mapper.impl;
 
 import com.bbva.czic.dto.net.*;
 import com.bbva.czic.movements.business.dto.*;
+import com.bbva.czic.movements.dao.model.oznl.FormatoOZECNLS0;
 import com.bbva.czic.movements.dao.model.oznm.FormatoOZNCSNM0;
 import com.bbva.czic.movements.facade.v01.mapper.IMovementsMapper;
 import com.bbva.czic.routine.mapper.MapperFactory;
@@ -35,10 +36,10 @@ public class MovementsMapper extends ConfigurableMapper implements IMovementsMap
 		factory.classMap(Location.class, DTOIntLocation.class).field("city", "dtoIntCity").field("state", "dtoIntState").byDefault().register();
 
 		// City
-		factory.classMap(City.class, DTOIntCity.class).field("id", "id").field("name", "name").byDefault().register();
+		factory.classMap(City.class, DTOIntCity.class).field("name", "name").byDefault().register();
 
 		// State
-		factory.classMap(State.class, DTOIntState.class).field("id", "id").field("name", "name").byDefault().register();
+		factory.classMap(State.class, DTOIntState.class).field("name", "name").byDefault().register();
 
 		// Money
 		factory.classMap(Money.class, Money.class).field("amount", "amount")
@@ -46,36 +47,27 @@ public class MovementsMapper extends ConfigurableMapper implements IMovementsMap
 
 
 /*factory.classMap(FormatoOZNCSNM0.class, DTOIntMovement.class).field("NUMECTA", "")
-		.field("NOMOVIM", "")
-		.field("FCHOPER", "")
-		.field("FCHVALR", "")
-		.field("HRAOPER", "")
+		.field("NOMOVIM", "id")
+		.field("FCHOPER", "transactionDate")
+		.field("RESTO", "")
 		.field("VALOR", "")
-		.field("SALDO", "")
-		.field("CHEQUE", "")
-		.field("CODIGO", "")
+		.field("BALOPER", "balance")
+		.field("TIPO", "productType")
 		.field("DESCODI", "")
-		.field("OBSERVA", "")
-		.field("CTROORG", "")
+		.field("FCHVALR", "operationDate")
 		.field("PLAZA", "")
-		.field("CTATRAS", "")
-		.field("TIPO", "").byDefault().register();*/
+		.field("SALDO", "")
+		.field("CTROORG", "")
+		.field("PLAZA", "").byDefault().register();*/
 
+		factory.classMap(FormatoOZECNLS0.class, DTOIntMovement.class).field("numoper", "id")
+				.field("fechope", "transactionDate")
+				.field("descopr", "operation.description")
+				.field("valorop", "value")
+				.field("balance", "balance")
+				.field("resto", "concept")
+				.field("tipoopr", "operation.code").byDefault().register();
 
-		/*movements.id
-		product.productType
-		movements.concept
-		movements.value
-		movements.balance
-		movements.operation.code
-		movements.operation.description
-		movements.transactionDate
-		movements.operationDate
-		movements.office.code
-		movements.office.name
-		movements.office.location.city.name
-		movements.office.location.state.name
-		movements.status*/
 
 	}
 

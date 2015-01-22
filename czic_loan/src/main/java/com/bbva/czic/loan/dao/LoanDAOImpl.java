@@ -66,8 +66,6 @@ public class LoanDAOImpl implements LoanDAO {
 			log.info("LoanDAOImpl.getRotaryQuota.invocar ");
 			RespuestaTransaccionOznj respuesta = transaccionOznj.invocar(peticion);
 
-			log.info("LoanDAOImpl.getRotaryQuota.respuesta = " + respuesta.getCodigoRetorno());
-
 			BusinessServiceException exception = errorMappingHelper.toBusinessServiceException(respuesta);
 
 			if (exception != null) {
@@ -82,7 +80,6 @@ public class LoanDAOImpl implements LoanDAO {
 				dTOIntLoan = LoanMapper.dtoIntLoanMapper(formatoSalida);
 
 			}else {
-				log.info("No se encontraron datos para la peticion = " + exception.getMessage());
 				throw new BusinessServiceException(EnumError.NO_DATA.getAlias());
 			}
 			log.info("LoanDAOImpl.getRotaryQuota.respuesta --- fin");
@@ -167,14 +164,13 @@ public class LoanDAOImpl implements LoanDAO {
 
 			PeticionTransaccionOznk peticion = new PeticionTransaccionOznk();
 
-			peticion.getCuerpo().getPartes().add(peticion);
+			peticion.getCuerpo().getPartes().add(formatoOZNCENK0);
 
 			RespuestaTransaccionOznk respuesta = transaccionOznk.invocar(peticion);
 
 			log.info("Finaliza peticion exitosa LoanDAOImpl.getRotaryQuotaMovement = " + respuesta.getCodigoRetorno());
 
 			BusinessServiceException exception = errorMappingHelper.toBusinessServiceException(respuesta);
-			log.info("Finaliza peticion exitosa LoanDAOImpl.getRotaryQuotaMovement..exception = " + exception.getErrorMessage());
 			if (exception != null){
 				log.info("LoanDAOImpl.getRotaryQuotaMovement = exception -> " + exception.getErrorMessage() );
 				throw exception;
@@ -186,7 +182,6 @@ public class LoanDAOImpl implements LoanDAO {
 
 				rotaryQuotaMove = LoanMapper.getDTOIntMovementByCopy(formatoSalida);
 			}else{
-				log.info("No se encontraron datos para la paticion = " + exception.getMessage());
 				throw new BusinessServiceException(EnumError.NO_DATA.getAlias());
 			}
 			return rotaryQuotaMove;

@@ -3,9 +3,7 @@
 
 package com.bbva.czic.movements.dao.model.oznm;
 
-import java.lang.Integer;
 import java.lang.String;
-import java.math.BigDecimal;
 
 privileged aspect FormatoOZNCSNM0_Roo_JavaBean {
     
@@ -17,11 +15,11 @@ privileged aspect FormatoOZNCSNM0_Roo_JavaBean {
         this.numecta = numecta;
     }
     
-    public Integer FormatoOZNCSNM0.getNomovim() {
+    public String FormatoOZNCSNM0.getNomovim() {
         return this.nomovim;
     }
     
-    public void FormatoOZNCSNM0.setNomovim(Integer nomovim) {
+    public void FormatoOZNCSNM0.setNomovim(String nomovim) {
         this.nomovim = nomovim;
     }
     
@@ -33,52 +31,36 @@ privileged aspect FormatoOZNCSNM0_Roo_JavaBean {
         this.fchoper = fchoper;
     }
     
-    public String FormatoOZNCSNM0.getFchvalr() {
-        return this.fchvalr;
+    public String FormatoOZNCSNM0.getResto() {
+        return this.resto;
     }
     
-    public void FormatoOZNCSNM0.setFchvalr(String fchvalr) {
-        this.fchvalr = fchvalr;
+    public void FormatoOZNCSNM0.setResto(String resto) {
+        this.resto = resto;
     }
     
-    public String FormatoOZNCSNM0.getHraoper() {
-        return this.hraoper;
-    }
-    
-    public void FormatoOZNCSNM0.setHraoper(String hraoper) {
-        this.hraoper = hraoper;
-    }
-    
-    public BigDecimal FormatoOZNCSNM0.getValor() {
+    public String FormatoOZNCSNM0.getValor() {
         return this.valor;
     }
     
-    public void FormatoOZNCSNM0.setValor(BigDecimal valor) {
+    public void FormatoOZNCSNM0.setValor(String valor) {
         this.valor = valor;
     }
     
-    public BigDecimal FormatoOZNCSNM0.getSaldo() {
-        return this.saldo;
+    public String FormatoOZNCSNM0.getBaloper() {
+        return this.baloper;
     }
     
-    public void FormatoOZNCSNM0.setSaldo(BigDecimal saldo) {
-        this.saldo = saldo;
+    public void FormatoOZNCSNM0.setBaloper(String baloper) {
+        this.baloper = baloper;
     }
     
-    public Integer FormatoOZNCSNM0.getCheque() {
-        return this.cheque;
+    public String FormatoOZNCSNM0.getTipo() {
+        return this.tipo;
     }
     
-    public void FormatoOZNCSNM0.setCheque(Integer cheque) {
-        this.cheque = cheque;
-    }
-    
-    public String FormatoOZNCSNM0.getCodigo() {
-        return this.codigo;
-    }
-    
-    public void FormatoOZNCSNM0.setCodigo(String codigo) {
-        this.codigo = codigo;
+    public void FormatoOZNCSNM0.setTipo(String tipo) {
+        this.tipo = tipo;
     }
     
     public String FormatoOZNCSNM0.getDescodi() {
@@ -89,20 +71,12 @@ privileged aspect FormatoOZNCSNM0_Roo_JavaBean {
         this.descodi = descodi;
     }
     
-    public String FormatoOZNCSNM0.getObserva() {
-        return this.observa;
+    public String FormatoOZNCSNM0.getFchvalr() {
+        return this.fchvalr;
     }
     
-    public void FormatoOZNCSNM0.setObserva(String observa) {
-        this.observa = observa;
-    }
-    
-    public String FormatoOZNCSNM0.getCtroorg() {
-        return this.ctroorg;
-    }
-    
-    public void FormatoOZNCSNM0.setCtroorg(String ctroorg) {
-        this.ctroorg = ctroorg;
+    public void FormatoOZNCSNM0.setFchvalr(String fchvalr) {
+        this.fchvalr = fchvalr;
     }
     
     public String FormatoOZNCSNM0.getPlaza() {
@@ -113,20 +87,20 @@ privileged aspect FormatoOZNCSNM0_Roo_JavaBean {
         this.plaza = plaza;
     }
     
-    public String FormatoOZNCSNM0.getCtatras() {
-        return this.ctatras;
+    public String FormatoOZNCSNM0.getSaldo() {
+        return this.saldo;
     }
     
-    public void FormatoOZNCSNM0.setCtatras(String ctatras) {
-        this.ctatras = ctatras;
+    public void FormatoOZNCSNM0.setSaldo(String saldo) {
+        this.saldo = saldo;
     }
     
-    public String FormatoOZNCSNM0.getTipo() {
-        return this.tipo;
+    public String FormatoOZNCSNM0.getCtroorg() {
+        return this.ctroorg;
     }
     
-    public void FormatoOZNCSNM0.setTipo(String tipo) {
-        this.tipo = tipo;
+    public void FormatoOZNCSNM0.setCtroorg(String ctroorg) {
+        this.ctroorg = ctroorg;
     }
     
 }

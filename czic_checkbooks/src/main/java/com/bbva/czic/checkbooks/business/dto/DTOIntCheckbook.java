@@ -2,6 +2,7 @@ package com.bbva.czic.checkbooks.business.dto;
 
 import com.bbva.czic.dto.net.EnumCheckbookStatus;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -25,7 +26,10 @@ public class DTOIntCheckbook {
 
 	private List<DTOIntCheck> checks;
 
+	private String numeroCuenta;
+
 	public DTOIntCheckbook() {
+		checks = new ArrayList<DTOIntCheck>();
 		// default constructor
 	}
 
@@ -93,4 +97,11 @@ public class DTOIntCheckbook {
 		this.checks = checks;
 	}
 
+	public String getNumeroCuenta() {
+		return numeroCuenta;
+	}
+
+	public void setNumeroCuenta(String numeroCuenta) {
+		this.numeroCuenta = numeroCuenta;
+	}
 }

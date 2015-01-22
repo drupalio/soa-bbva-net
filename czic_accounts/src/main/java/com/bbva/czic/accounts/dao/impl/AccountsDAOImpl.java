@@ -4,16 +4,11 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
+import com.bbva.czic.accounts.business.dto.*;
+import com.bbva.czic.routine.commons.rm.utils.tx.ISimpleTransaction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.bbva.czic.accounts.business.dto.DTOIntAccMovementsResume;
-import com.bbva.czic.accounts.business.dto.DTOIntAccount;
-import com.bbva.czic.accounts.business.dto.DTOIntCheck;
-import com.bbva.czic.accounts.business.dto.DTOIntFilterAccount;
-import com.bbva.czic.accounts.business.dto.DTOIntFilterChecks;
-import com.bbva.czic.accounts.business.dto.DTOIntMonthlyBalances;
-import com.bbva.czic.accounts.business.dto.DTOIntResponseListCheck;
 import com.bbva.czic.accounts.dao.AccountsDAO;
 import com.bbva.czic.accounts.dao.tx.TxGetAccount;
 import com.bbva.czic.accounts.dao.tx.TxGetAccountMonthlyBalance;
@@ -52,6 +47,9 @@ public class AccountsDAOImpl implements AccountsDAO {
 	@Resource(name = "tx-list-Check-mapperc")
 	private TxListCheckImpl txListCheck;
 
+	@Resource(name = "tx-get-checkbook")
+	ISimpleTransaction txGetCheckbook;
+
 	@Override
 	public List<DTOIntMonthlyBalances> getAccountMonthlyBalance(final DTOIntFilterAccount dtoIntFilterAccount) {
 		return txGetAccountMonthlyBalance.invoke(dtoIntFilterAccount);
@@ -73,4 +71,8 @@ public class AccountsDAOImpl implements AccountsDAO {
 		return dtoIntResponseListCheck;
 	}
 
+	@Override
+	public DTOIntCheckbook getCheckbooks(DTOIntCheckbook intCheckbook) {
+		return txGetCheckbook.invoke(intCheckbook);
+	}
 }

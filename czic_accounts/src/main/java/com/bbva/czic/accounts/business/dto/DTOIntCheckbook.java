@@ -10,7 +10,7 @@ public class DTOIntCheckbook {
 
 	private Integer firstCheck;
 
-	private Integer lastCheckl;
+	private Integer lastCheck;
 
 	private Integer totalCheck;
 
@@ -19,6 +19,8 @@ public class DTOIntCheckbook {
 	private Date deliveryDate;
 
 	private DTOIntEnumCheckbookStatus actualState;
+
+	private String numeroCuenta;
 
 	public DTOIntCheckbook() {
 		// default constructor
@@ -44,12 +46,12 @@ public class DTOIntCheckbook {
 		this.firstCheck = firstCheck;
 	}
 
-	public Integer getLastCheckl() {
-		return lastCheckl;
+	public Integer getLastCheck() {
+		return lastCheck;
 	}
 
-	public void setLastCheckl(Integer lastCheckl) {
-		this.lastCheckl = lastCheckl;
+	public void setLastCheck(Integer lastCheck) {
+		this.lastCheck = lastCheck;
 	}
 
 	public Integer getTotalCheck() {
@@ -84,4 +86,11 @@ public class DTOIntCheckbook {
 		this.actualState = actualState;
 	}
 
+	public String getNumeroCuenta() {
+		return numeroCuenta;
+	}
+
+	public void setNumeroCuenta(String numeroCuenta) {
+		this.numeroCuenta = numeroCuenta;
+	}
 }

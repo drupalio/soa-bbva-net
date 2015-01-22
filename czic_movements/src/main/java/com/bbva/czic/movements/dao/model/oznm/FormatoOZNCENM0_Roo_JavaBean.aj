@@ -7,20 +7,20 @@ import java.lang.String;
 
 privileged aspect FormatoOZNCENM0_Roo_JavaBean {
     
-    public String FormatoOZNCENM0.getNummov() {
-        return this.nummov;
-    }
-    
-    public void FormatoOZNCENM0.setNummov(String nummov) {
-        this.nummov = nummov;
-    }
-    
     public String FormatoOZNCENM0.getNocuent() {
         return this.nocuent;
     }
     
     public void FormatoOZNCENM0.setNocuent(String nocuent) {
         this.nocuent = nocuent;
+    }
+    
+    public String FormatoOZNCENM0.getNummov() {
+        return this.nummov;
+    }
+    
+    public void FormatoOZNCENM0.setNummov(String nummov) {
+        this.nummov = nummov;
     }
     
 }
