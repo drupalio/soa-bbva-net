@@ -97,7 +97,7 @@ public class LoanFilterConverter{
                         .noFuture(endtDateFilter).validDateRange(startDateFilter, endtDateFilter)
                         .validate();
 
-                log.info(" Filter starDateFilter: "+startDateFilter+" SMC : getCreditCardCharges SN Cards ");              
+                log.info(" Filter starDateFilter: "+startDateFilter+" SMC : getCreditCardCharges SN Loan ");
                       
                 dtoIntFilterLoan.setFechaInicial(startDateFilter);
                 dtoIntFilterLoan.setFechaFianl(endtDateFilter);

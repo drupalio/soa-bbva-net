@@ -92,7 +92,6 @@ public class CustomerMapperTest {
 		formatoS.setPaisofi("Country");
 		formatoS.setDescofi("BBVA");
 		formatoS.setNropnas("1");
-		formatoS.setUltcone(new GregorianCalendar(2014,1,28,13,24,56).toString());
 		return formatoS;
 	}
 }

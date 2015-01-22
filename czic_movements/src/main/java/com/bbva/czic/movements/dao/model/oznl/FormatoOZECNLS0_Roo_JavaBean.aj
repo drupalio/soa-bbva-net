@@ -4,7 +4,6 @@
 package com.bbva.czic.movements.dao.model.oznl;
 
 import java.lang.Integer;
-import java.lang.Long;
 import java.lang.String;
 import java.util.Date;
 
@@ -26,30 +25,6 @@ privileged aspect FormatoOZECNLS0_Roo_JavaBean {
         this.fechope = fechope;
     }
     
-    public String FormatoOZECNLS0.getTipoopr() {
-        return this.tipoopr;
-    }
-    
-    public void FormatoOZECNLS0.setTipoopr(String tipoopr) {
-        this.tipoopr = tipoopr;
-    }
-    
-    public Long FormatoOZECNLS0.getValorop() {
-        return this.valorop;
-    }
-    
-    public void FormatoOZECNLS0.setValorop(Long valorop) {
-        this.valorop = valorop;
-    }
-    
-    public Long FormatoOZECNLS0.getBalance() {
-        return this.balance;
-    }
-    
-    public void FormatoOZECNLS0.setBalance(Long balance) {
-        this.balance = balance;
-    }
-    
     public String FormatoOZECNLS0.getDescopr() {
         return this.descopr;
     }
@@ -58,12 +33,36 @@ privileged aspect FormatoOZECNLS0_Roo_JavaBean {
         this.descopr = descopr;
     }
     
+    public String FormatoOZECNLS0.getValorop() {
+        return this.valorop;
+    }
+    
+    public void FormatoOZECNLS0.setValorop(String valorop) {
+        this.valorop = valorop;
+    }
+    
+    public String FormatoOZECNLS0.getBalance() {
+        return this.balance;
+    }
+    
+    public void FormatoOZECNLS0.setBalance(String balance) {
+        this.balance = balance;
+    }
+    
     public String FormatoOZECNLS0.getResto() {
         return this.resto;
     }
     
     public void FormatoOZECNLS0.setResto(String resto) {
         this.resto = resto;
+    }
+    
+    public String FormatoOZECNLS0.getTipoopr() {
+        return this.tipoopr;
+    }
+    
+    public void FormatoOZECNLS0.setTipoopr(String tipoopr) {
+        this.tipoopr = tipoopr;
     }
     
 }

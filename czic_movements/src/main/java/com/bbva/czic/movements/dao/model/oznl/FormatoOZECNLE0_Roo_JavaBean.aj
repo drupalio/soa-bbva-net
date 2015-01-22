@@ -4,8 +4,8 @@
 package com.bbva.czic.movements.dao.model.oznl;
 
 import java.lang.Integer;
-import java.lang.Long;
 import java.lang.String;
+import java.math.BigDecimal;
 import java.util.Date;
 
 privileged aspect FormatoOZECNLE0_Roo_JavaBean {
@@ -18,12 +18,20 @@ privileged aspect FormatoOZECNLE0_Roo_JavaBean {
         this.numcuen = numcuen;
     }
     
-    public String FormatoOZECNLE0.getNumclie() {
-        return this.numclie;
+    public Integer FormatoOZECNLE0.getIndpagi() {
+        return this.indpagi;
     }
     
-    public void FormatoOZECNLE0.setNumclie(String numclie) {
-        this.numclie = numclie;
+    public void FormatoOZECNLE0.setIndpagi(Integer indpagi) {
+        this.indpagi = indpagi;
+    }
+    
+    public Integer FormatoOZECNLE0.getTampagi() {
+        return this.tampagi;
+    }
+    
+    public void FormatoOZECNLE0.setTampagi(Integer tampagi) {
+        this.tampagi = tampagi;
     }
     
     public Date FormatoOZECNLE0.getFecini() {
@@ -42,28 +50,20 @@ privileged aspect FormatoOZECNLE0_Roo_JavaBean {
         this.fecfin = fecfin;
     }
     
-    public Long FormatoOZECNLE0.getSalini() {
-        return this.salini;
+    public BigDecimal FormatoOZECNLE0.getSalinc() {
+        return this.salinc;
     }
     
-    public void FormatoOZECNLE0.setSalini(Long salini) {
-        this.salini = salini;
+    public void FormatoOZECNLE0.setSalinc(BigDecimal salinc) {
+        this.salinc = salinc;
     }
     
-    public Long FormatoOZECNLE0.getSalfin() {
+    public BigDecimal FormatoOZECNLE0.getSalfin() {
         return this.salfin;
     }
     
-    public void FormatoOZECNLE0.setSalfin(Long salfin) {
+    public void FormatoOZECNLE0.setSalfin(BigDecimal salfin) {
         this.salfin = salfin;
-    }
-    
-    public Integer FormatoOZECNLE0.getIndpagi() {
-        return this.indpagi;
-    }
-    
-    public void FormatoOZECNLE0.setIndpagi(Integer indpagi) {
-        this.indpagi = indpagi;
     }
     
 }

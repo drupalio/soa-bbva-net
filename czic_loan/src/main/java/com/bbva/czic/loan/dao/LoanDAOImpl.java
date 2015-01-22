@@ -1,6 +1,6 @@
 package com.bbva.czic.loan.dao;
 
-import com.bbva.czic.dto.net.RotaryQuotaMove;
+
 import com.bbva.czic.loan.business.dto.DTOIntMovement;
 import com.bbva.czic.loan.business.dto.DTOIntRotaryQuotaMove;
 import com.bbva.czic.loan.dao.model.ozni.*;
@@ -9,7 +9,7 @@ import com.bbva.czic.routine.commons.rm.utils.errors.EnumError;
 import com.bbva.jee.arq.spring.core.servicing.gce.BusinessServiceException;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Profile;
+
 import org.springframework.stereotype.Repository;
 
 import com.bbva.czic.loan.business.dto.DTOIntLoan;
@@ -26,14 +26,11 @@ import com.bbva.jee.arq.spring.core.log.I18nLog;
 import com.bbva.jee.arq.spring.core.log.I18nLogFactory;
 import org.springframework.util.CollectionUtils;
 
-import java.math.BigDecimal;
-import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 @Repository(value = "loanDao")
-
 public class LoanDAOImpl implements LoanDAO {
 	
 	private static I18nLog log = I18nLogFactory.getLogI18n(SrvIntLoan.class,
@@ -50,8 +47,6 @@ public class LoanDAOImpl implements LoanDAO {
 
 	@Autowired
 	private TransaccionOznk transaccionOznk;
-
-	private static final String COP = "COP";
 
 	@Override
 	public DTOIntLoan getRotaryQuota(final String idLoan)	throws BusinessServiceException {
@@ -71,24 +66,21 @@ public class LoanDAOImpl implements LoanDAO {
 			log.info("LoanDAOImpl.getRotaryQuota.invocar ");
 			RespuestaTransaccionOznj respuesta = transaccionOznj.invocar(peticion);
 
-			log.info("LoanDAOImpl.getRotaryQuota.respuesta = " + respuesta.getCodigoRetorno());
-
 			BusinessServiceException exception = errorMappingHelper.toBusinessServiceException(respuesta);
 
-			if (exception != null) { 
+			if (exception != null) {
 				log.info("LoanDAOImpl.getRotaryQuota transaccion Exception = " + exception.getMessage());
 				throw exception;
 			}
 			final CopySalida outputCopy = respuesta.getCuerpo().getParte(CopySalida.class);
 			if (outputCopy != null) {
-
 				final FormatoOZNCSNJ0 formatoSalida = outputCopy.getCopy(FormatoOZNCSNJ0.class);
-				if (formatoSalida != null) {
-					dTOIntLoan = LoanMapper.dtoIntLoanMapper(formatoSalida);
-				}else{
-					log.info("No se encontraron datos para la peticion = " + exception.getMessage());
-					throw new BusinessServiceException(EnumError.NO_DATA.getAlias());
-				}
+				log.info("iniciando mapeo formatoSalida.... 1 of 2");
+
+				dTOIntLoan = LoanMapper.dtoIntLoanMapper(formatoSalida);
+
+			}else {
+				throw new BusinessServiceException(EnumError.NO_DATA.getAlias());
 			}
 			log.info("LoanDAOImpl.getRotaryQuota.respuesta --- fin");
 
@@ -172,14 +164,13 @@ public class LoanDAOImpl implements LoanDAO {
 
 			PeticionTransaccionOznk peticion = new PeticionTransaccionOznk();
 
-			peticion.getCuerpo().getPartes().add(peticion);
+			peticion.getCuerpo().getPartes().add(formatoOZNCENK0);
 
 			RespuestaTransaccionOznk respuesta = transaccionOznk.invocar(peticion);
 
 			log.info("Finaliza peticion exitosa LoanDAOImpl.getRotaryQuotaMovement = " + respuesta.getCodigoRetorno());
 
 			BusinessServiceException exception = errorMappingHelper.toBusinessServiceException(respuesta);
-			log.info("Finaliza peticion exitosa LoanDAOImpl.getRotaryQuotaMovement..exception = " + exception.getErrorMessage());
 			if (exception != null){
 				log.info("LoanDAOImpl.getRotaryQuotaMovement = exception -> " + exception.getErrorMessage() );
 				throw exception;
@@ -189,12 +180,9 @@ public class LoanDAOImpl implements LoanDAO {
 			if (outputCopy != null) {
 				final FormatoOZNCSNK0 formatoSalida =  outputCopy.getCopy(FormatoOZNCSNK0.class);
 
-				if (formatoSalida != null) {
-					rotaryQuotaMove = LoanMapper.getDTOIntMovementByCopy(formatoSalida);
-				}else{
-					log.info("No se encontraron datos para la paticion = " + exception.getMessage());
-					throw new BusinessServiceException(EnumError.NO_DATA.getAlias());
-				}
+				rotaryQuotaMove = LoanMapper.getDTOIntMovementByCopy(formatoSalida);
+			}else{
+				throw new BusinessServiceException(EnumError.NO_DATA.getAlias());
 			}
 			return rotaryQuotaMove;
 		}

@@ -2,12 +2,7 @@ package com.bbva.czic.accounts.business;
 
 import java.util.List;
 
-import com.bbva.czic.accounts.business.dto.DTOIntAccMovementsResume;
-import com.bbva.czic.accounts.business.dto.DTOIntAccount;
-import com.bbva.czic.accounts.business.dto.DTOIntCheck;
-import com.bbva.czic.accounts.business.dto.DTOIntFilterAccount;
-import com.bbva.czic.accounts.business.dto.DTOIntFilterChecks;
-import com.bbva.czic.accounts.business.dto.DTOIntMonthlyBalances;
+import com.bbva.czic.accounts.business.dto.*;
 
 /**
  * @author Entelgy
@@ -36,5 +31,8 @@ public interface ISrvIntAccounts {
 	 * Created by Entelgy on 12/01/2015. Metodo incluido manualmente para completar el total de los SMC - listCheck
 	 */
 	public DTOIntCheck listCheck(DTOIntFilterChecks dtoIntFilterChecks);
+
+
+	public DTOIntCheckbook getCheckbooks(DTOIntCheckbook intCheckbook);
 
 }

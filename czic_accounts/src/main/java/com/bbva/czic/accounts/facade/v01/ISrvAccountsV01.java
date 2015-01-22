@@ -1,10 +1,9 @@
 package com.bbva.czic.accounts.facade.v01;
 
-import com.bbva.czic.dto.net.AccMovementsResume;
-import com.bbva.czic.dto.net.Account;
-import com.bbva.czic.dto.net.Check;
-import com.bbva.czic.dto.net.MonthlyBalances;
+import com.bbva.czic.dto.net.*;
+import com.wordnik.swagger.annotations.ApiParam;
 
+import javax.ws.rs.PathParam;
 import java.util.List;
 
 public interface ISrvAccountsV01{
@@ -17,5 +16,7 @@ public interface ISrvAccountsV01{
 
 
 	List<Check> listCheck(String accountId, String filter, String status, String paginationKey, String pageSize);
+
+	public Checkbook getCheckbook(String checkbookId, String accountId);
 
 }

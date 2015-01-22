@@ -11,8 +11,6 @@ import com.bbva.czic.dto.net.EnumCheckStatus;
 
 public interface ICheckbooksDAO {
 
-	DTOIntCheckbook getCheckbooks(DTOIntCheckbook intCheckbook);
-
 	DTOIntCheck getChecks(DTOIntCheck intCheck);
 
 }

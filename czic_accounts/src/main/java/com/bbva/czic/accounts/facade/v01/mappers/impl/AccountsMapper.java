@@ -1,20 +1,11 @@
 package com.bbva.czic.accounts.facade.v01.mappers.impl;
 
+import java.util.Calendar;
 import java.util.List;
 
-import com.bbva.czic.accounts.business.dto.DTOIntAccMovementsResume;
-import com.bbva.czic.accounts.business.dto.DTOIntAccount;
-import com.bbva.czic.accounts.business.dto.DTOIntBalance;
-import com.bbva.czic.accounts.business.dto.DTOIntCheck;
-import com.bbva.czic.accounts.business.dto.DTOIntCheckbook;
-import com.bbva.czic.accounts.business.dto.DTOIntMonthlyBalances;
+import com.bbva.czic.accounts.business.dto.*;
 import com.bbva.czic.accounts.facade.v01.mappers.IAccountsMapper;
-import com.bbva.czic.dto.net.AccMovementsResume;
-import com.bbva.czic.dto.net.Account;
-import com.bbva.czic.dto.net.Balance;
-import com.bbva.czic.dto.net.Check;
-import com.bbva.czic.dto.net.Checkbook;
-import com.bbva.czic.dto.net.MonthlyBalances;
+import com.bbva.czic.dto.net.*;
 import com.bbva.czic.routine.commons.rm.utils.converter.CalendarConverter;
 import com.bbva.czic.routine.commons.rm.utils.mappers.Mapper;
 import com.bbva.czic.routine.mapper.MapperFactory;
@@ -41,7 +32,7 @@ public class AccountsMapper extends ConfigurableMapper implements IAccountsMappe
 
 		// Map DTOIntCheckbook <-> CheckBook
 		factory.classMap(DTOIntCheckbook.class, Checkbook.class).field("id", "id").field("firstCheck", "firstCheck")
-				.field("lastCheckl", "lastCheck").field("totalCheck", "totalCheck").field("actualState", "actualState")
+				.field("lastCheck", "lastCheck").field("totalCheck", "totalCheck").field("actualState", "actualState")
 				.field("deliveryDate", "deliveryDate").field("requestDate", "requestDate").byDefault().register();
 
 		factory.classMap(DTOIntBalance.class, Balance.class).field("total", "total")
@@ -115,6 +106,47 @@ public class AccountsMapper extends ConfigurableMapper implements IAccountsMappe
 	public List<AccMovementsResume> map(List<DTOIntAccMovementsResume> listaDTOIntAccMovementsResume) {
 		log.info("map- return:List<AccMovementsResume>-parameter:listaDTOIntAccMovementsResume");
 		return mapAsList(listaDTOIntAccMovementsResume, AccMovementsResume.class);
+	}
+
+	@Override
+	public Check mapCheck(DTOIntCheck intCheck) {
+		final Check check = new Check();
+
+		check.setId(intCheck.getId());
+
+		final Calendar issueDate = Calendar.getInstance();
+		issueDate.setTime(intCheck.getIssueDate());
+		check.setIssueDate(issueDate);
+		check.setValue(intCheck.getValue());
+		check.setStatus(intCheck.getStatus());
+
+		final Calendar modifiedDate = Calendar.getInstance();
+		modifiedDate.setTime(intCheck.getModifiedDate());
+		check.setModifiedDate(modifiedDate);
+
+		return check;
+	}
+
+	@Override
+	public Checkbook mapCheckbook(DTOIntCheckbook intCheckbook) {
+		final Checkbook checkbook = new Checkbook();
+
+		checkbook.setId(intCheckbook.getId());
+		checkbook.setFirstCheck(intCheckbook.getFirstCheck());
+		checkbook.setLastCheck(intCheckbook.getLastCheck());
+		checkbook.setTotalCheck(intCheckbook.getTotalCheck());
+
+		final Calendar requestDate = Calendar.getInstance();
+		requestDate.setTime(intCheckbook.getRequestDate());
+		checkbook.setRequestDate(requestDate);
+
+		final Calendar deliveryDate = Calendar.getInstance();
+		deliveryDate.setTime(intCheckbook.getDeliveryDate());
+		checkbook.setDeliveryDate(deliveryDate);
+
+		checkbook.setActualState(EnumCheckbookStatus.valueOf(intCheckbook.getActualState().toString()));
+
+		return checkbook;
 	}
 
 }

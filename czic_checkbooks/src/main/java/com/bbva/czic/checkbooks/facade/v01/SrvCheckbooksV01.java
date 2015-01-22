@@ -60,33 +60,6 @@ public class SrvCheckbooksV01 implements ISrvCheckbooksV01, com.bbva.jee.arq.spr
 	ISrvIntCheckbooks srvIntCheckbooks;
 
 	@Override
-	@ApiOperation(value = "Operation obtaining checkbooks related to a client's product.", notes = "----", response = Checkbook.class)
-	@ApiResponses(value = {
-			@ApiResponse(code = -1, message = "aliasGCE1"),
-			@ApiResponse(code = -1, message = "aliasGCE2"),
-			@ApiResponse(code = 200, message = "Found Successfully", response = Checkbook.class),
-			@ApiResponse(code = 400, message = "Request Error"),
-			@ApiResponse(code = 409, message = "Functional Error"),
-			@ApiResponse(code = 500, message = "Technical Error")
-	})
-	@GET
-	@Path("{checkbookId}")
-	@ElementClass(response = Checkbook.class)
-	@SMC(registryID = "SMCCO1400013", logicalID = "getCheckbooks")
-	public Checkbook  getCheckbook(
-			@ApiParam(value = "Checkbooks identifier") @PathParam("checkbookId") String checkbookId) {
-
-		if (checkbookId == "checks" || checkbookId.equals("checks")){
-			throw new BusinessServiceException(EnumError.WRONG_PARAMETERS.getAlias());
-		}
-
-		final DTOIntCheckbook intCheckbook = new DTOIntCheckbook();
-		intCheckbook.setId(checkbookId);
-		return checkbookMapper.map(srvIntCheckbooks.getCheckbooks(intCheckbook));
-	}
-
-
-	@Override
 	@ApiOperation(value = "Operation to get the details of a check associated with a checkbook for the account associated with a client.", notes = "--", response = Check.class)
 	@ApiResponses(value = {
 			@ApiResponse(code = -1, message = "aliasGCE1"),
