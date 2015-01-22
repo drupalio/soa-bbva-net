@@ -29,18 +29,11 @@ public class GetCheckMapper implements ISimpleTransactionMapper<DTOIntCheck, For
     public DTOIntCheck mapToOuter(FormatoOZECNYS0 outFormat, DTOIntCheck dtoIn) {
         final DTOIntCheck intCheck = new DTOIntCheck();
 
-        //parsear
-        /*intCheck.setId(outFormat.getNumcheq());
+        intCheck.setId(outFormat.getNumcheq());
         intCheck.setIssueDate(outFormat.getFechemi());
         intCheck.setValue(UtilsConverter.getMoneyDTO(outFormat.getValcheq()));
-        intCheck.setStatus(EnumCheckStatus.valueOf(outFormat.getEstcheq()));
+        intCheck.setStatus(outFormat.getEstcheq());
         intCheck.setModifiedDate(outFormat.getFechmod());
-*/
-        intCheck.setId("123456789765");
-        intCheck.setIssueDate(new Date());
-        intCheck.setValue(UtilsConverter.getMoneyDTO(new BigDecimal("1234")));
-        intCheck.setStatus("SOLICITADO");
-        intCheck.setModifiedDate(new Date());
 
         return intCheck;
     }
