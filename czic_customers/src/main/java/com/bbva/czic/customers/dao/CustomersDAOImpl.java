@@ -181,11 +181,12 @@ public class CustomersDAOImpl implements CustomersDAO {
 
 		CopySalida outputCopies = respuesta.getCuerpo().getParte(CopySalida.class);
 
-		FormatoOZNCSNB0 formatoSalida = outputCopies.getCopy(FormatoOZNCSNB0.class);
-
-		if (formatoSalida == null){
+		if (outputCopies == null){
 			throw new BusinessServiceException(EnumError.NO_DATA.getAlias());
 		}
+
+		FormatoOZNCSNB0 formatoSalida = outputCopies.getCopy(FormatoOZNCSNB0.class);
+
 
 		log.info("DAO - Se mapea la respuesta para retornarla SMC : getCustomer SN Customer ");
 		dtoIntCustomer = CustomerMapper.mapToOuter(formatoSalida);
