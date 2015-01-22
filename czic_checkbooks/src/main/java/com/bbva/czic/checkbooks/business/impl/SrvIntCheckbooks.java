@@ -26,10 +26,4 @@ public class SrvIntCheckbooks implements ISrvIntCheckbooks {
 
 		return checkbooksDAO.getChecks(intCheck);
 	}
-
-	@Override
-	public DTOIntCheckbook getCheckbooks(DTOIntCheckbook intCheckbook) {
-
-		return checkbooksDAO.getCheckbooks(intCheckbook);
-	}
 }

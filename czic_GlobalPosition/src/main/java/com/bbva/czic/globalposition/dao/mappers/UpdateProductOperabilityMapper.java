@@ -1,4 +1,4 @@
-package com.bbva.czic.globalposition.dao.mapper;
+package com.bbva.czic.globalposition.dao.mappers;
 
 import com.bbva.czic.globalposition.business.dto.DTOIntProduct;
 import com.bbva.czic.globalposition.dao.enums.EnumOperability;

@@ -1,44 +1,43 @@
 package com.bbva.czic.globalposition.dao.tx;
 
-import com.bbva.czic.globalposition.business.dto.DTOIntFilterProduct;
 import com.bbva.czic.globalposition.business.dto.DTOIntProduct;
-import com.bbva.czic.globalposition.business.dto.DTOIntProducts;
-import com.bbva.czic.globalposition.dao.model.ozn1.*;
-import com.bbva.czic.routine.commons.rm.utils.tx.IFormatNotApply;
-import com.bbva.czic.routine.commons.rm.utils.tx.IPaginatedTransactionMapper;
-import com.bbva.czic.routine.commons.rm.utils.tx.impl.PaginatedTransaction;
+import com.bbva.czic.globalposition.business.dto.DTOIntProductFilter;
+import com.bbva.czic.globalposition.dao.mappers.ITxGlobalPositionMapper;
+import com.bbva.czic.globalposition.dao.model.ozn1.FormatoOZECN1E0;
+import com.bbva.czic.globalposition.dao.model.ozn1.FormatoOZECN1S0;
+import com.bbva.czic.globalposition.dao.model.ozn1.TransaccionOzn1;
+import com.bbva.czic.routine.commons.rm.utils.tx.impl.ListBbvaTransaction;
 import com.bbva.jee.arq.spring.core.host.InvocadorTransaccion;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
+import javax.annotation.Resource;
+
 /**
- * Created by Administrador on 05/01/2015.
+ * @author Entelgy Colombia.
  */
 @Component("tx-get-extract-global-balance-no-tc")
-public class TxGetExtractGlobalBalanceNoTC extends PaginatedTransaction<PeticionTransaccionOzn1, RespuestaTransaccionOzn1> {
+public class TxGetExtractGlobalBalanceNoTC extends ListBbvaTransaction<DTOIntProductFilter, FormatoOZECN1E0, DTOIntProduct, FormatoOZECN1S0> {
 
     @Autowired
     private transient TransaccionOzn1 transaccionOzn1;
 
-    @Autowired
-    @Qualifier("tx-get-extract-global-balance-mapper")
-    private transient IPaginatedTransactionMapper<DTOIntFilterProduct, FormatoOZECN1E0, DTOIntProducts, IFormatNotApply, DTOIntProduct, FormatoOZECN1S0, IFormatNotApply> txGetExtractGlobalBalanceMapper;
+    @Resource(name = "txGlobalPositionMapper")
+    private transient ITxGlobalPositionMapper txGlobalPositionMapper;
 
-    /**
-     * {@inheritDoc}
-     */
+
     @Override
-    protected InvocadorTransaccion<PeticionTransaccionOzn1, RespuestaTransaccionOzn1> getInvoker() {
-        return transaccionOzn1;
+    protected FormatoOZECN1E0 mapDtoInToRequestFormat(DTOIntProductFilter dtoIn) {
+        return txGlobalPositionMapper.mapInOzn1(dtoIn);
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    @SuppressWarnings("unchecked")
     @Override
-    protected IPaginatedTransactionMapper<DTOIntFilterProduct, FormatoOZECN1E0, DTOIntProducts, IFormatNotApply, DTOIntProduct, FormatoOZECN1S0, IFormatNotApply> getMapper() {
-        return txGetExtractGlobalBalanceMapper;
+    protected DTOIntProduct mapResponseFormatToDtoOut(FormatoOZECN1S0 formatOutput, DTOIntProductFilter dtoIn) {
+        return txGlobalPositionMapper.mapOutOzn1S0(formatOutput);
+    }
+
+    @Override
+    protected InvocadorTransaccion<?, ?> getTransaction() {
+        return transaccionOzn1;
     }
 }

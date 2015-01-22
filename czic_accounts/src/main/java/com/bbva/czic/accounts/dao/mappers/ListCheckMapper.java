@@ -30,7 +30,7 @@ public class ListCheckMapper
 		intCheck.setId(outFormat.getNumcheq());
 		intCheck.setIssueDate(outFormat.getFechemi());
 		intCheck.setValue(new Money(Currency.getInstance(CurrencyEnum.COP.toString()), outFormat.getValcheq()));
-		intCheck.setStatus(EnumCheckStatus.valueOf(outFormat.getEstcheq()));
+		intCheck.setStatus(outFormat.getEstcheq());
 		intCheck.setModifiedDate(outFormat.getFechmod());
 
 		return intCheck;

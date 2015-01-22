@@ -1,8 +1,7 @@
 package com.bbva.czic.globalposition.business;
 
-import com.bbva.czic.globalposition.business.dto.DTOIntFilterProduct;
 import com.bbva.czic.globalposition.business.dto.DTOIntProduct;
-import com.bbva.czic.globalposition.business.dto.DTOIntProducts;
+import com.bbva.czic.globalposition.business.dto.DTOIntProductFilter;
 import com.bbva.czic.globalposition.business.impl.SrvIntGlobalPosition;
 import com.bbva.czic.globalposition.dao.IGlobalPositionDAO;
 import com.bbva.jee.arq.spring.core.servicing.test.BusinessServiceTestContextLoader;
@@ -10,13 +9,10 @@ import com.bbva.jee.arq.spring.core.servicing.test.MockInvocationContextTestExec
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
-import static org.junit.Assert.*;
-
 import org.junit.rules.ExpectedException;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import static org.mockito.Mockito.*;
 import org.mockito.MockitoAnnotations;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.TestExecutionListeners;
@@ -25,6 +21,9 @@ import org.springframework.test.context.support.DependencyInjectionTestExecution
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static org.junit.Assert.assertNotNull;
+import static org.mockito.Mockito.when;
 
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -59,9 +58,8 @@ public class SrvIntGlobalPositionTest {
 	@Test
 	public void testNotNullIfProductExist() {
 		// Setup data
-		final DTOIntProducts intProducts = new DTOIntProducts();
-		intProducts.setProducts(new ArrayList<DTOIntProduct>());
-		final DTOIntFilterProduct filterProduct = new DTOIntFilterProduct();
+		final List<DTOIntProduct> intProducts = new ArrayList<DTOIntProduct>();
+		final DTOIntProductFilter filterProduct = new DTOIntProductFilter();
 
 		// Setup expectation
 		when(globalPositionDAO.getExtractGlobalBalance(filterProduct)).thenReturn(intProducts);

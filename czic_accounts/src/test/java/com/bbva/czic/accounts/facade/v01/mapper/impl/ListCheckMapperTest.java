@@ -63,7 +63,7 @@ public class ListCheckMapperTest {
 		dtoIntCheck.setEndDate(new Date());
 		dtoIntCheck.setStartDate(new Date());
 		dtoIntCheck.setAccountId("102030");
-		dtoIntCheck.setStatus(EnumCheckStatus.HABILITADO);
+		dtoIntCheck.setStatus("HABILITADO");
 
 		FormatoOZECNXE0 formatoEntrada = new FormatoOZECNXE0();
 		formatoEntrada = listCheckMapper.mapToInner(dtoIntCheck);

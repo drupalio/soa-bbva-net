@@ -1,7 +1,7 @@
 package com.bbva.czic.globalposition.business.impl;
 
 import com.bbva.czic.globalposition.business.ISrvIntGlobalPosition;
-import com.bbva.czic.globalposition.business.dto.DTOIntFilterProduct;
+import com.bbva.czic.globalposition.business.dto.DTOIntProductFilter;
 import com.bbva.czic.globalposition.business.dto.DTOIntProduct;
 import com.bbva.czic.globalposition.dao.IGlobalPositionDAO;
 import com.bbva.jee.arq.spring.core.log.I18nLog;
@@ -21,14 +21,9 @@ public class SrvIntGlobalPosition implements ISrvIntGlobalPosition {
 	IGlobalPositionDAO globalPositionDAO;
 
 	@Override
-	public List<DTOIntProduct> getExtractGlobalBalance(DTOIntFilterProduct filterProduct) {
+	public List<DTOIntProduct> getExtractGlobalBalance(DTOIntProductFilter filterProduct) {
 		log.info(" getExtractGlobalBalance product ");
-
-		final List<DTOIntProduct> initialResult;
-
-		initialResult = globalPositionDAO.getExtractGlobalBalance(filterProduct).getProducts();
-
-		return initialResult;
+		return  globalPositionDAO.getExtractGlobalBalance(filterProduct);
 	}
 
 	@Override

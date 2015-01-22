@@ -2,11 +2,11 @@ package com.bbva.czic.checkbooks.facade.v01;
 
 import com.bbva.czic.checkbooks.business.ISrvIntCheckbooks;
 import com.bbva.czic.checkbooks.business.dto.DTOIntCheck;
-import com.bbva.czic.checkbooks.business.dto.DTOIntCheckbook;
+
 import com.bbva.czic.checkbooks.facade.v01.mappers.ICheckbookMapper;
 import com.bbva.czic.checkbooks.facade.v01.util.impl.CheckFilterComverter;
 import com.bbva.czic.dto.net.Check;
-import com.bbva.czic.dto.net.Checkbook;
+
 import com.bbva.czic.routine.commons.rm.utils.errors.EnumError;
 import com.bbva.jee.arq.spring.core.log.I18nLog;
 import com.bbva.jee.arq.spring.core.log.I18nLogFactory;
@@ -24,7 +24,7 @@ import javax.ws.rs.*;
 import javax.ws.rs.core.HttpHeaders;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.UriInfo;
-import java.util.List;
+
 
 @Path("/V01")
 @SN(registryID = "SNCO1400007", logicalID = "checkbooks")

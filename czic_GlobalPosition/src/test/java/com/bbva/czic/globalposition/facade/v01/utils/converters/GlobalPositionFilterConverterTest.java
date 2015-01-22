@@ -1,6 +1,6 @@
 package com.bbva.czic.globalposition.facade.v01.utils.converters;
 
-import com.bbva.czic.globalposition.business.dto.DTOIntFilterProduct;
+import com.bbva.czic.globalposition.business.dto.DTOIntProductFilter;
 import com.bbva.czic.globalposition.facade.v01.utils.converters.impl.GlobalPositionFilterConverter;
 import com.bbva.jee.arq.spring.core.servicing.gce.BusinessServiceException;
 import com.bbva.jee.arq.spring.core.servicing.test.BusinessServiceTestContextLoader;
@@ -65,7 +65,7 @@ public class GlobalPositionFilterConverterTest {
         final String filter = null;
 
         // SUT execution
-        final DTOIntFilterProduct filterProduct = gpFilterConverter.getDTOIntFilter(customerId, filter);
+        final DTOIntProductFilter filterProduct = gpFilterConverter.getDTOIntFilter(customerId, filter);
 
         // Validation
         assertEquals(null, filterProduct.getProductType());
@@ -78,7 +78,7 @@ public class GlobalPositionFilterConverterTest {
         final String filter = "(productType=)TR";
 
         // SUT execution
-        final DTOIntFilterProduct filterProduct = gpFilterConverter.getDTOIntFilter(customerId, filter);
+        final DTOIntProductFilter filterProduct = gpFilterConverter.getDTOIntFilter(customerId, filter);
     }
 
     @Test(expected = BusinessServiceException.class)
@@ -88,7 +88,7 @@ public class GlobalPositionFilterConverterTest {
         final String filter = "(excalibur==TC)";
 
         // SUT execution
-        final DTOIntFilterProduct filterProduct = gpFilterConverter.getDTOIntFilter(customerId, filter);
+        final DTOIntProductFilter filterProduct = gpFilterConverter.getDTOIntFilter(customerId, filter);
     }
 
     @Test(expected = BusinessServiceException.class)
@@ -98,7 +98,7 @@ public class GlobalPositionFilterConverterTest {
         final String filter = "(productType==3MO4)";
 
         // SUT execution
-        final DTOIntFilterProduct filterProduct = gpFilterConverter.getDTOIntFilter(customerId, filter);
+        final DTOIntProductFilter filterProduct = gpFilterConverter.getDTOIntFilter(customerId, filter);
     }
 
     @Test
@@ -108,7 +108,7 @@ public class GlobalPositionFilterConverterTest {
         final String filter = "(productType==TC)";
 
         // SUT execution
-        final DTOIntFilterProduct filterProduct = gpFilterConverter.getDTOIntFilter(customerId, filter);
+        final DTOIntProductFilter filterProduct = gpFilterConverter.getDTOIntFilter(customerId, filter);
 
         //Validation
         assertEquals(customerId, filterProduct.getIdCustomer());

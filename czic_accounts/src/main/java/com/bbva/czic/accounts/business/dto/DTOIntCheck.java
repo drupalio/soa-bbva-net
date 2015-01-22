@@ -15,7 +15,7 @@ public class DTOIntCheck extends DTOIntFilterAccount {
 
 	private Money value;
 
-	private EnumCheckStatus status;
+	private String status;
 
 	private Date modifiedDate;
 
@@ -49,11 +49,11 @@ public class DTOIntCheck extends DTOIntFilterAccount {
 		this.value = value;
 	}
 
-	public EnumCheckStatus getStatus() {
+	public String getStatus() {
 		return status;
 	}
 
-	public void setStatus(EnumCheckStatus status) {
+	public void setStatus(String status) {
 		this.status = status;
 	}
 

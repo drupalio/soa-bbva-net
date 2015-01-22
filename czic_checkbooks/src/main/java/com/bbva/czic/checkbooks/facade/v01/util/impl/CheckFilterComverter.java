@@ -1,7 +1,7 @@
 package com.bbva.czic.checkbooks.facade.v01.util.impl;
 
 import com.bbva.czic.checkbooks.business.dto.DTOIntCheck;
-import com.bbva.czic.checkbooks.business.dto.DTOIntCheckFilter;
+
 import com.bbva.czic.routine.commons.rm.utils.errors.EnumError;
 import com.bbva.czic.routine.commons.rm.utils.validator.impl.DateValidator;
 import com.bbva.jee.arq.spring.core.log.I18nLog;

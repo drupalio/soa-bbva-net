@@ -7,7 +7,7 @@ import org.hibernate.validator.constraints.NotEmpty;
 /**
  * @author Entelgy Colombia.
  */
-public class DTOIntFilterProduct {
+public class DTOIntProductFilter {
 
     @NotEmpty
     @Length(min = 8, max = 8)
