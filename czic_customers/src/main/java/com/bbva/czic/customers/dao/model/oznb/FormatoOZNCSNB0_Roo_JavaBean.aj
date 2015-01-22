@@ -23,6 +23,14 @@ privileged aspect FormatoOZNCSNB0_Roo_JavaBean {
         this.nomclie = nomclie;
     }
     
+    public String FormatoOZNCSNB0.getSegment() {
+        return this.segment;
+    }
+    
+    public void FormatoOZNCSNB0.setSegment(String segment) {
+        this.segment = segment;
+    }
+    
     public String FormatoOZNCSNB0.getCorreo() {
         return this.correo;
     }
@@ -125,22 +133,6 @@ privileged aspect FormatoOZNCSNB0_Roo_JavaBean {
     
     public void FormatoOZNCSNB0.setPaisofi(String paisofi) {
         this.paisofi = paisofi;
-    }
-    
-    public String FormatoOZNCSNB0.getSegment() {
-        return this.segment;
-    }
-    
-    public void FormatoOZNCSNB0.setSegment(String segment) {
-        this.segment = segment;
-    }
-    
-    public String FormatoOZNCSNB0.getUltcone() {
-        return this.ultcone;
-    }
-    
-    public void FormatoOZNCSNB0.setUltcone(String ultcone) {
-        this.ultcone = ultcone;
     }
     
 }
