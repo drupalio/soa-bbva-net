@@ -1,5 +1,6 @@
 package com.bbva.czic.customers.business.dto;
 
+import javax.validation.constraints.NotNull;
 import java.util.Date;
 
 /**
@@ -9,7 +10,9 @@ import java.util.Date;
  */
 public class DTOIntFilterCustomerResumes {
 
+	@NotNull
 	private String customerId;
+	@NotNull
 	private Date startDate;
 	private Date endDate;
 	
