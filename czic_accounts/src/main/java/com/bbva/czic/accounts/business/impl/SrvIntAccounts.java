@@ -5,6 +5,9 @@ import java.util.List;
 import javax.annotation.Resource;
 
 import com.bbva.czic.accounts.business.dto.*;
+import com.bbva.czic.accounts.facade.v01.utils.IListCheckFilterConverter;
+import com.bbva.czic.routine.commons.rm.utils.validator.DtoValidator;
+import com.bbva.czic.routine.commons.rm.utils.validator.impl.FiqlValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -25,6 +28,9 @@ public class SrvIntAccounts implements ISrvIntAccounts {
 
 	@Resource(name = "accounts-dao")
 	private AccountsDAO accountsDAO;
+
+	@Resource(name = "listCheck-filter-converter")
+	private IListCheckFilterConverter listCheckFilterConverter;
 
 	@Override
 	public List<DTOIntMonthlyBalances> getAccountMonthlyBalance(DTOIntFilterAccount dtoIntFilterAccount) {
@@ -51,7 +57,19 @@ public class SrvIntAccounts implements ISrvIntAccounts {
 	}
 
 	@Override
-	public DTOIntCheck listCheck(DTOIntFilterChecks dtoIntFilterChecks) {
+	public List<DTOIntCheck> listCheck(String accountId, String filter, Integer paginationKey, Integer pageSize) {
+		log.info("Into SrvIntAccounts.listCheck...");
+		// Validacion del filtro
+		FiqlValidator fiqlValidator = (FiqlValidator) new FiqlValidator(filter)
+				.exist().hasGeAndLeDate("check.issueDate").hasEq("check.status").validate();
+
+		// Mapeo del  filtro a DTO
+		DTOIntFilterChecks dtoIntFilterChecks  = listCheckFilterConverter
+				.getDTOIntFilter(accountId, filter, paginationKey, pageSize);
+
+		// Validacion del dto de filtro
+		DtoValidator.validate(dtoIntFilterChecks);
+
 		return accountsDAO.getListCheck(dtoIntFilterChecks);
 	}
 

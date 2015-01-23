@@ -1,20 +1,17 @@
 package com.bbva.czic.accounts.dao.impl;
 
-import java.io.IOException;
-import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.List;
-
 import com.bbva.czic.accounts.business.dto.*;
+import com.bbva.czic.accounts.dao.AccountsDAO;
 import com.bbva.jee.arq.spring.core.servicing.utils.Money;
 import org.codehaus.jackson.JsonParseException;
 import org.codehaus.jackson.map.JsonMappingException;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.mockito.Mockito;
-import org.springframework.context.annotation.Profile;
 
-import com.bbva.czic.accounts.dao.AccountsDAO;
-import org.springframework.stereotype.Repository;
+import java.io.IOException;
+import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.List;
 
 //@Repository(value = "accounts-dao")
 //@Profile(value = "dev")
@@ -73,7 +70,9 @@ public class AccountsDAOMock implements AccountsDAO {
 		Mockito.when(getAccount(Mockito.any(DTOIntFilterAccount.class))).thenReturn(accounts);
 
 		mock = Mockito.mock(AccountsDAOMock.class);
-		Mockito.when(getListCheck(Mockito.any(DTOIntFilterChecks.class))).thenReturn(check);
+		List<DTOIntCheck>  checks = new ArrayList<DTOIntCheck>();
+		checks.add(check);
+		Mockito.when(getListCheck(Mockito.any(DTOIntFilterChecks.class))).thenReturn(checks);
 
 		mock = Mockito.mock(AccountsDAOMock.class);
 		Mockito.when(getCheckbooks(Mockito.any(DTOIntCheckbook.class))).thenReturn(dtoIntCheckbook);
@@ -103,7 +102,7 @@ public class AccountsDAOMock implements AccountsDAO {
 	}
 
 	@Override
-	public DTOIntCheck getListCheck(DTOIntFilterChecks dtoIntCheck) {
+	public List<DTOIntCheck> getListCheck(DTOIntFilterChecks dtoIntCheck) {
 		return null;
 	}
 

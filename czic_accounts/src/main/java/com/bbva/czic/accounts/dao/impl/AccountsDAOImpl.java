@@ -14,7 +14,7 @@ import com.bbva.czic.accounts.dao.AccountsDAO;
 import com.bbva.czic.accounts.dao.tx.TxGetAccount;
 import com.bbva.czic.accounts.dao.tx.TxGetAccountMonthlyBalance;
 import com.bbva.czic.accounts.dao.tx.TxGetAccountMovementResume;
-import com.bbva.czic.accounts.dao.tx.TxListCheckImpl;
+import com.bbva.czic.accounts.dao.tx.TxListChecks;
 import com.bbva.jee.arq.spring.core.host.protocolo.ps9.ErrorMappingHelper;
 
 //@Profile(value = "prod")
@@ -47,7 +47,7 @@ public class AccountsDAOImpl implements AccountsDAO {
 	private TxGetAccountMovementResume txGetAccountMovementResume;
 
 	@Resource(name = "tx-list-Check-mapperc")
-	private TxListCheckImpl txListCheck;
+	private TxListChecks txListCheck;
 
 	@Resource(name = "tx-get-checkbook")
 	ISimpleTransaction txGetCheckbook;
@@ -68,7 +68,7 @@ public class AccountsDAOImpl implements AccountsDAO {
 	}
 
 	@Override
-	public DTOIntCheck getListCheck(DTOIntFilterChecks dtoIntFilterChecks) {
+	public List<DTOIntCheck> getListCheck(DTOIntFilterChecks dtoIntFilterChecks) {
 		return txListCheck.invoke(dtoIntFilterChecks);
 	}
 

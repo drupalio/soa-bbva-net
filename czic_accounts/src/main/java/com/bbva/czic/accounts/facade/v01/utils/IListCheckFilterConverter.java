@@ -6,5 +6,5 @@ import com.bbva.czic.accounts.business.dto.DTOIntFilterChecks;
  * Created by user on 15/01/2015.
  */
 public interface IListCheckFilterConverter {
-    public DTOIntFilterChecks getDTOIntFilter(String accountId, String filter, String status, String paginationKey, String pageSize);
+    public DTOIntFilterChecks getDTOIntFilter(String accountId, String filter, Integer paginationKey, Integer pageSize);
 }
