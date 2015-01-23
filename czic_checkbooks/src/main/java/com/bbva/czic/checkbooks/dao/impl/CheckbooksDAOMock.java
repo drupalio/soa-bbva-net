@@ -3,7 +3,6 @@ package com.bbva.czic.checkbooks.dao.impl;
 import java.io.IOException;
 import java.util.List;
 
-import com.bbva.czic.accounts.business.dto.*;
 import com.bbva.czic.checkbooks.business.dto.DTOIntCheck;
 import com.bbva.czic.checkbooks.business.dto.DTOIntCheckbook;
 import com.bbva.czic.checkbooks.dao.ICheckbooksDAO;
