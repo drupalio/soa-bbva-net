@@ -25,13 +25,13 @@ public class FormatoOZECNVS0 {
 	/**
 	 * <p>Campo <code>SALDDIS</code>, &iacute;ndice: <code>1</code>, tipo: <code>DECIMAL</code>
 	 */
-	@Campo(indice = 1, nombre = "SALDDIS", tipo = TipoCampo.DECIMAL, longitudMinima = 15, longitudMaxima = 15, decimales = 2)
+	@Campo(indice = 1, nombre = "SALDDIS", tipo = TipoCampo.DECIMAL, longitudMinima = 17, longitudMaxima = 17, decimales = 2)
 	private BigDecimal salddis;
 	
 	/**
 	 * <p>Campo <code>MES</code>, &iacute;ndice: <code>2</code>, tipo: <code>ALFANUMERICO</code>
 	 */
-	@Campo(indice = 2, nombre = "MES", tipo = TipoCampo.ALFANUMERICO, longitudMinima = 2, longitudMaxima = 2)
+	@Campo(indice = 2, nombre = "MES", tipo = TipoCampo.ALFANUMERICO, longitudMinima = 6, longitudMaxima = 6)
 	private String mes;
 	
 }

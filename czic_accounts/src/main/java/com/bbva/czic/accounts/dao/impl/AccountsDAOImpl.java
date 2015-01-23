@@ -7,6 +7,7 @@ import javax.annotation.Resource;
 import com.bbva.czic.accounts.business.dto.*;
 import com.bbva.czic.routine.commons.rm.utils.tx.ISimpleTransaction;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Repository;
 
 import com.bbva.czic.accounts.dao.AccountsDAO;
@@ -16,6 +17,7 @@ import com.bbva.czic.accounts.dao.tx.TxGetAccountMovementResume;
 import com.bbva.czic.accounts.dao.tx.TxListChecks;
 import com.bbva.jee.arq.spring.core.host.protocolo.ps9.ErrorMappingHelper;
 
+//@Profile(value = "prod")
 @Repository(value = "accounts-dao")
 public class AccountsDAOImpl implements AccountsDAO {
 
