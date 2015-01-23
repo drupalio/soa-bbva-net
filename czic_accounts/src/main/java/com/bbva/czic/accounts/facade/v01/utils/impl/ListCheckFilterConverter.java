@@ -2,6 +2,7 @@ package com.bbva.czic.accounts.facade.v01.utils.impl;
 
 import com.bbva.czic.accounts.business.dto.DTOIntCheck;
 import com.bbva.czic.accounts.business.dto.DTOIntFilterChecks;
+import com.bbva.czic.accounts.business.dto.DTOIntListCheck;
 import com.bbva.czic.accounts.facade.v01.utils.IListCheckFilterConverter;
 import com.bbva.czic.routine.commons.rm.utils.errors.EnumError;
 import com.bbva.jee.arq.spring.core.log.I18nLog;
@@ -51,9 +52,9 @@ public class ListCheckFilterConverter implements IListCheckFilterConverter{
         dtoIntFilterChecks.setPageSize(pageSize);
 
         log.info("A query string (filter) has been sended: " + filter);
-        SearchCondition<DTOIntCheck> sc;
+        SearchCondition<DTOIntListCheck> sc;
         try {
-            sc = new FiqlParser<DTOIntCheck>(DTOIntCheck.class).parse(filter);
+            sc = new FiqlParser<DTOIntListCheck>(DTOIntListCheck.class).parse(filter);
 
             final List<PrimitiveStatement> splitDataFilter = businessToolKit.getDataFromFilter(sc);
 
@@ -61,17 +62,17 @@ public class ListCheckFilterConverter implements IListCheckFilterConverter{
 
                 String property = st.getProperty();
                 ConditionType condition = st.getCondition();
-                Object value = st.getValue();
+                DTOIntCheck value = (DTOIntCheck) st.getValue();
 
-                if (property.toLowerCase().equals("check.issueDate")
+                if (property.equalsIgnoreCase("check.issueDate")
                         && condition.equals(ConditionType.GREATER_OR_EQUALS)) {
-                    dtoIntFilterChecks.setStartDate((Date) value);
-                } else if (property.toLowerCase().equals("check.issueDate")
+                    dtoIntFilterChecks.setStartDate(value.getIssueDate());
+                } else if (property.equalsIgnoreCase("check.issueDate")
                         && condition.equals(ConditionType.LESS_OR_EQUALS)) {
-                    dtoIntFilterChecks.setEndDate((Date) value);
-                } else if (property.toLowerCase().equals("check.status")
+                    dtoIntFilterChecks.setEndDate(value.getIssueDate());
+                } else if (property.equalsIgnoreCase("check.status")
                         && condition.equals(ConditionType.EQUALS)) {
-                    dtoIntFilterChecks.setStatus((String) value);
+                    dtoIntFilterChecks.setStatus(value.getStatus());
                 }
             }
 
