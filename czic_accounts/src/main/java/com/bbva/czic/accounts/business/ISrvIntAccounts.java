@@ -30,7 +30,7 @@ public interface ISrvIntAccounts {
 	/**
 	 * Created by Entelgy on 12/01/2015. Metodo incluido manualmente para completar el total de los SMC - listCheck
 	 */
-	public DTOIntCheck listCheck(DTOIntFilterChecks dtoIntFilterChecks);
+	public List<DTOIntCheck> listCheck(String accountId, String filter, Integer paginationKey, Integer pageSize);
 
 
 	public DTOIntCheckbook getCheckbooks(DTOIntCheckbook intCheckbook);

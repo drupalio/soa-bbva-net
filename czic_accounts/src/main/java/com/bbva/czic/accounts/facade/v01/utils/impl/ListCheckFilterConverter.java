@@ -40,89 +40,52 @@ public class ListCheckFilterConverter implements IListCheckFilterConverter{
      * @param filter
      * @return
      */
-    public DTOIntFilterChecks getDTOIntFilter(String accountId, String filter, String status, String paginationKey, String pageSize) {
+    public DTOIntFilterChecks getDTOIntFilter(String accountId, String filter, Integer paginationKey, Integer pageSize) {
 
         //Variables
         final DTOIntFilterChecks dtoIntFilterChecks = new DTOIntFilterChecks();
-        String startDate = "";
-        String endDate = "";
 
-        //Comprobamos que el id account no sea nullo dado que es obligatorio
-        if(accountId == null || accountId.trim().isEmpty() || status == null || status.trim().isEmpty() || pageSize
-                == null || pageSize.trim().isEmpty() || paginationKey == null || paginationKey.trim().isEmpty()) {
-            throw new BusinessServiceException(EnumError.WRONG_PARAMETERS.getAlias());
-        }
-
-        //Manejamos el filter
-        if (filter != null && !filter.contentEquals("null")) {
-            log.info("A query string (filter) has been sended: " + filter);
-            SearchCondition<DTOIntCheck> sc;
-            try {
-                sc = new FiqlParser<DTOIntCheck>(DTOIntCheck.class).parse(filter);
-
-                final List<PrimitiveStatement> splitDataFilter = businessToolKit.getDataFromFilter(sc);
-
-                for (PrimitiveStatement st : splitDataFilter) {
-
-                    String property = null;
-                    String condition = null;
-                    String value = null;
-
-                    property = st.getProperty();
-                    condition = st.getCondition().toString();
-                    value = st.getValue().toString();
-
-                    if (property.toLowerCase().equals("issueDate")
-                            && condition.equals(ConditionType.GREATER_OR_EQUALS
-                            .toString())) {
-                        startDate = value;
-                    } else if (property.toLowerCase().equals("issueDate")
-                            && condition.equals(ConditionType.LESS_OR_EQUALS
-                            .toString())) {
-                        endDate = value;
-                    }
-                }
-
-				/*
-				 * Se hace la comprobacion de que los dos parametros del filtros
-				 * tengan valor
-				 */
-                if (startDate == null || endDate == null
-                        || startDate.equals("") || endDate.equals("")) {
-                    throw new BusinessServiceException(EnumError.FILTER_EMPTY.getAlias());
-                }
-
-				/*
-				 * Transformacion de fechas
-				 */
-                SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd");
-                Date startDateFilter = null;
-                Date endDateFilter = null;
-                try {
-                    startDateFilter = formato.parse(startDate);
-                    endDateFilter = formato.parse(endDate);
-                } catch (ParseException ex) {
-                    throw new BusinessServiceException(EnumError.WRONG_PARAMETERS.getAlias());
-                }
-
-                log.info(" Filter starDateFilter: "+startDateFilter+" SMC : listChecks SN Account ");
-                System.out.println(startDate);
-                log.info(" Filter endDateFilter: "+endDateFilter+" SMC : listChecks SN Account ");
-                System.out.println(endDate);
-
-                dtoIntFilterChecks.setStartDate(startDateFilter);
-                dtoIntFilterChecks.setStartDate(startDateFilter);
-
-            } catch (SearchParseException e) {
-                log.error("SearchParseException - The query string (filter) has failed: " + e);
-                throw new BusinessServiceException(EnumError.WRONG_PARAMETERS.getAlias(), filter, e.getMessage());
-            } catch (IllegalArgumentException e) {
-                log.error("IllegalArgumentException - The product type is an invalid type - does not exist: " + e);
-                throw new BusinessServiceException(EnumError.WRONG_PARAMETERS.getAlias(), filter, e.getMessage());
-            }
-        }
 
         dtoIntFilterChecks.setAccountId(accountId);
+        dtoIntFilterChecks.setPaginationKey(paginationKey);
+        dtoIntFilterChecks.setPageSize(pageSize);
+
+        log.info("A query string (filter) has been sended: " + filter);
+        SearchCondition<DTOIntCheck> sc;
+        try {
+            sc = new FiqlParser<DTOIntCheck>(DTOIntCheck.class).parse(filter);
+
+            final List<PrimitiveStatement> splitDataFilter = businessToolKit.getDataFromFilter(sc);
+
+            for (PrimitiveStatement st : splitDataFilter) {
+
+                String property = st.getProperty();
+                ConditionType condition = st.getCondition();
+                Object value = st.getValue();
+
+                if (property.toLowerCase().equals("check.issueDate")
+                        && condition.equals(ConditionType.GREATER_OR_EQUALS)) {
+                    dtoIntFilterChecks.setStartDate((Date) value);
+                } else if (property.toLowerCase().equals("check.issueDate")
+                        && condition.equals(ConditionType.LESS_OR_EQUALS)) {
+                    dtoIntFilterChecks.setEndDate((Date) value);
+                } else if (property.toLowerCase().equals("check.status")
+                        && condition.equals(ConditionType.EQUALS)) {
+                    dtoIntFilterChecks.setStatus((String) value);
+                }
+            }
+
+            log.info(" Filter starDateFilter: "+dtoIntFilterChecks.getStartDate()+" SMC : listChecks SN Account ");
+            log.info(" Filter endDateFilter: " + dtoIntFilterChecks.getEndDate()+" SMC : listChecks SN Account ");
+
+
+        } catch (SearchParseException e) {
+            log.error("SearchParseException - The query string (filter) has failed: " + e);
+            throw new BusinessServiceException(EnumError.WRONG_PARAMETERS.getAlias(), filter, e.getMessage());
+        } catch (IllegalArgumentException e) {
+            log.error("IllegalArgumentException - The product type is an invalid type - does not exist: " + e);
+            throw new BusinessServiceException(EnumError.WRONG_PARAMETERS.getAlias(), filter, e.getMessage());
+        }
 
         return dtoIntFilterChecks;
 

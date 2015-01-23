@@ -20,7 +20,9 @@ public class GetCheckMapper implements ISimpleTransactionMapper<DTOIntCheck, For
         final FormatoOZECNYE0 formatoOZECNYE0 = new FormatoOZECNYE0();
 
         formatoOZECNYE0.setNumcheq(dtoIn.getId());
-        formatoOZECNYE0.setEstcheq(dtoIn.getStatus());
+
+        if(dtoIn.getStatus() != null)
+          formatoOZECNYE0.setEstcheq(dtoIn.getStatus());
 
         return formatoOZECNYE0;
     }
