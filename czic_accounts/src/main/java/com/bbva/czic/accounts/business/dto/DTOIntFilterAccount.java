@@ -2,11 +2,14 @@ package com.bbva.czic.accounts.business.dto;
 
 import java.util.Date;
 
+import com.sun.istack.NotNull;
+
 /**
  * Created by Entelgy on 12/01/2015.
  */
 public class DTOIntFilterAccount {
 
+	@NotNull
 	private String accountId;
 
 	private String month;

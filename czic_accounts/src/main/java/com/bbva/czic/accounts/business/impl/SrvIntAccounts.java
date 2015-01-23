@@ -4,12 +4,19 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
-import com.bbva.czic.accounts.business.dto.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.bbva.czic.accounts.business.ISrvIntAccounts;
+import com.bbva.czic.accounts.business.dto.DTOIntAccMovementsResume;
+import com.bbva.czic.accounts.business.dto.DTOIntAccount;
+import com.bbva.czic.accounts.business.dto.DTOIntCheck;
+import com.bbva.czic.accounts.business.dto.DTOIntCheckbook;
+import com.bbva.czic.accounts.business.dto.DTOIntFilterAccount;
+import com.bbva.czic.accounts.business.dto.DTOIntFilterChecks;
+import com.bbva.czic.accounts.business.dto.DTOIntMonthlyBalances;
 import com.bbva.czic.accounts.dao.AccountsDAO;
+import com.bbva.czic.routine.commons.rm.utils.validator.DtoValidator;
 import com.bbva.jee.arq.spring.core.log.I18nLog;
 import com.bbva.jee.arq.spring.core.log.I18nLogFactory;
 import com.bbva.jee.arq.spring.core.servicing.utils.BusinessServicesToolKit;
@@ -40,7 +47,9 @@ public class SrvIntAccounts implements ISrvIntAccounts {
 
 	@Override
 	public DTOIntAccount getAccount(DTOIntFilterAccount dtoIntFilterAccount) {
-		log.info(" getAccount ");
+
+		DtoValidator.validate(dtoIntFilterAccount);
+
 		return accountsDAO.getAccount(dtoIntFilterAccount);
 	}
 
