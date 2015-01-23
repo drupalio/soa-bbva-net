@@ -79,18 +79,15 @@ public class SrvCheckbooksV01 implements ISrvCheckbooksV01, com.bbva.jee.arq.spr
 			@ApiParam(value = "Claim identifier param") @PathParam("checkId") String checkId,
 			@ApiParam(value = "order by param") @DefaultValue("null") @QueryParam("$filter") String filter) {
 
+		DTOIntCheck intCheck = null;
+
 		if (checkId == null || checkId.equals("null") || checkId.trim().isEmpty()){
 			throw new BusinessServiceException(EnumError.WRONG_PARAMETERS.getAlias());
 		}
 
-		if (filter == null || filter.equals("null") || filter.trim().isEmpty()){
-			throw new BusinessServiceException(EnumError.WRONG_PARAMETERS.getAlias());
-		}
-
-		final DTOIntCheck intCheck = checkFilterComverter.getDTOIntFilter(checkId, filter);
+		intCheck = checkFilterComverter.getDTOIntFilter(checkId, filter);
 
 		return checkbookMapper.map(srvIntCheckbooks.getChecks(intCheck));
-
 	}
 
 }
