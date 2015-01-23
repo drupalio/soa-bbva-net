@@ -24,17 +24,26 @@ public class AccountsDAOMock implements AccountsDAO {
 
 		DTOIntCheck check = null;
 
+		DTOIntCheckbook dtoIntCheckbook = null;
+
 		accounts = new ObjectMapper().readValue(
 				this.getClass().getClassLoader().getResourceAsStream("mock/DTOAccounts.json"), DTOIntAccount.class);
 
 		check = new ObjectMapper().readValue(
 				this.getClass().getClassLoader().getResourceAsStream("mock/DTOListCheck.json"), DTOIntCheck.class);
 
+		dtoIntCheckbook = new ObjectMapper().readValue(
+				this.getClass().getClassLoader().getResourceAsStream("mock/DTOCheckbook.json"), DTOIntCheckbook.class);
+
+
 		mock = Mockito.mock(AccountsDAOMock.class);
 		Mockito.when(getAccount(Mockito.any(DTOIntFilterAccount.class))).thenReturn(accounts);
 
 		mock = Mockito.mock(AccountsDAOMock.class);
 		Mockito.when(getListCheck(Mockito.any(DTOIntFilterChecks.class))).thenReturn(check);
+
+		mock = Mockito.mock(AccountsDAOMock.class);
+		Mockito.when(getCheckbooks(Mockito.any(DTOIntCheckbook.class))).thenReturn(dtoIntCheckbook);
 
 	}
 
