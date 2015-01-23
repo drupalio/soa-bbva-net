@@ -114,6 +114,9 @@ public class AccountFilterConverter implements IFilterConverter {
 				dtoIntFilterAccount.setStartMonth(Integer.valueOf(startDateFilter.getMonth()).toString());
 				dtoIntFilterAccount.setEndMonth(Integer.valueOf(startDateFilter.getMonth()).toString());
 
+				dtoIntFilterAccount.setStartMonth(startDate);
+				dtoIntFilterAccount.setEndMonth(endDate);
+
 			} catch (SearchParseException e) {
 				log.error("SearchParseException - The query string (filter) has failed: " + e);
 				throw new BusinessServiceException(EnumError.INEXISTENT_FILTER.getAlias(), filter, e.getMessage());
