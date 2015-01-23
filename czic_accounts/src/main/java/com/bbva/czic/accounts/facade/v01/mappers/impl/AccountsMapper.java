@@ -48,7 +48,7 @@ public class AccountsMapper extends ConfigurableMapper implements IAccountsMappe
 		//
 		// // Map DTOIntMonthlyBalances <-> MonthlyBalances
 		factory.classMap(DTOIntMonthlyBalances.class, MonthlyBalances.class).field("balance", "balance")
-				.field("month.mes", "month").byDefault().register();
+				.field("month", "month").byDefault().register();
 
 		// // Map DTOIntAccMovementsResume <-> AccMovementsResume
 		factory.classMap(DTOIntAccMovementsResume.class, AccMovementsResume.class).field("month.mes", "month")

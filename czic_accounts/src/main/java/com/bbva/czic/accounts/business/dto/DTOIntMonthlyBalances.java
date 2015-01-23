@@ -6,7 +6,7 @@ public class DTOIntMonthlyBalances {
 
 	public final static long serialVersionUID = 1L;
 	private Money balance;
-	private DTOIntEnumMonth month;
+	private String month;
 
 	public DTOIntMonthlyBalances() {
 		// default constructor
@@ -20,12 +20,11 @@ public class DTOIntMonthlyBalances {
 		this.balance = balance;
 	}
 
-	public DTOIntEnumMonth getMonth() {
+	public String getMonth() {
 		return month;
 	}
 
-	public void setMonth(DTOIntEnumMonth month) {
+	public void setMonth(String month) {
 		this.month = month;
 	}
-
 }
