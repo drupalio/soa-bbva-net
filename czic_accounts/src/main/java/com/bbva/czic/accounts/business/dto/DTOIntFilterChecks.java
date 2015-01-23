@@ -1,5 +1,8 @@
 package com.bbva.czic.accounts.business.dto;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
+import javax.validation.constraints.NotNull;
 import java.util.Date;
 
 /**
@@ -7,11 +10,27 @@ import java.util.Date;
  */
 public class DTOIntFilterChecks {
 
+    @NotNull
     private String accountId;
+    @NotNull
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date startDate;
     private Date endDate;
-    private String paginationKey;
-    private String pageSize;
+    @NotNull
+    private Integer paginationKey;
+    @NotNull
+    private Integer pageSize;
+    @NotNull
+    private String status;
+
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
 
     public String getAccountId() {
         return accountId;
@@ -37,19 +56,19 @@ public class DTOIntFilterChecks {
         this.endDate = endDate;
     }
 
-    public String getPaginationKey() {
+    public Integer getPaginationKey() {
         return paginationKey;
     }
 
-    public void setPaginationKey(String paginationKey) {
+    public void setPaginationKey(Integer paginationKey) {
         this.paginationKey = paginationKey;
     }
 
-    public String getPageSize() {
+    public Integer getPageSize() {
         return pageSize;
     }
 
-    public void setPageSize(String pageSize) {
+    public void setPageSize(Integer pageSize) {
         this.pageSize = pageSize;
     }
 

@@ -31,7 +31,8 @@ public interface AccountsDAO {
 	 * @param dtoIntFilterChecks
 	 * @return
 	 */
-	DTOIntCheck getListCheck(DTOIntFilterChecks dtoIntFilterChecks);
+	List<DTOIntCheck> getListCheck(DTOIntFilterChecks dtoIntFilterChecks);
+
 	DTOIntCheckbook getCheckbooks(DTOIntCheckbook intCheckbook);
 
 

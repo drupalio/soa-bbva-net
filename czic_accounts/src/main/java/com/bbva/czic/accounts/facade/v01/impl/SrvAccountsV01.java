@@ -79,9 +79,6 @@ public class SrvAccountsV01 implements ISrvAccountsV01, com.bbva.jee.arq.spring.
 	@Resource(name = "accounts-filter-converter")
 	private IFilterConverter accFilterConverter;
 
-	@Resource(name = "listCheck-filter-converter")
-	private IListCheckFilterConverter listCheckFilterConverter;
-
 	@Override
 	@ApiOperation(value = "Operacion que retorna el resumen de la informacion de una cuenta", notes = "Tipo de Producto", response = AccountsDAO.class)
 	@ApiResponses(value = { @ApiResponse(code = -1, message = "aliasGCE1"),
@@ -151,17 +148,12 @@ public class SrvAccountsV01 implements ISrvAccountsV01, com.bbva.jee.arq.spring.
 	@GET
 	@Path("/{id}/listChecks")
 	@SMC(registryID = "SMC201400026", logicalID = "listCheck")
-	public List<Check> listCheck(@ApiParam(value = "identifier param") @PathParam("accountId") String accountId,
+	public List<Check> listCheck(@ApiParam(value = "identifier param") @PathParam("id") String accountId,
 			@ApiParam(value = "filter param") @DefaultValue("null") @QueryParam("$filter") String filter,
-			@ApiParam(value = "fields param") @DefaultValue("null") @QueryParam("$status") String status,
-			@ApiParam(value = "fields param") @DefaultValue("null") @QueryParam("$paginationKey") String paginationKey,
-			@ApiParam(value = "expands param") @DefaultValue("null") @QueryParam("$pageSize") String pageSize) {
-		DTOIntFilterChecks dtoIntFilterCheck = new DTOIntFilterChecks();
-		dtoIntFilterCheck = listCheckFilterConverter
-				.getDTOIntFilter(accountId, filter, status, paginationKey, pageSize);
-		// return iAccountsMapper.map(srvIntAccounts.listCheck(dtoIntFilterCheck));
+			@ApiParam(value = "fields param") @DefaultValue("null") @QueryParam("paginationKey") Integer paginationKey,
+			@ApiParam(value = "expands param") @DefaultValue("null") @QueryParam("pageSize") Integer pageSize) {
 
-		return null;
+		return iAccountsMapper.mapChecks(srvIntAccounts.listCheck(accountId,filter,paginationKey,pageSize));
 	}
 
 	@Override
