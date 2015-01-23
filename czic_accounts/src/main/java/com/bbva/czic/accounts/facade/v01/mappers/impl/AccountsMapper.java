@@ -9,9 +9,12 @@ import com.bbva.czic.dto.net.*;
 import com.bbva.czic.routine.commons.rm.utils.converter.CalendarConverter;
 import com.bbva.czic.routine.commons.rm.utils.mappers.Mapper;
 import com.bbva.czic.routine.mapper.MapperFactory;
+import com.bbva.czic.routine.mapper.factory.MoneyFactory;
 import com.bbva.czic.routine.mapper.impl.ConfigurableMapper;
+import com.bbva.czic.routine.mapper.metadata.TypeFactory;
 import com.bbva.jee.arq.spring.core.log.I18nLog;
 import com.bbva.jee.arq.spring.core.log.I18nLogFactory;
+import com.bbva.jee.arq.spring.core.servicing.utils.Money;
 
 @Mapper(value = "accounts-mapper")
 public class AccountsMapper extends ConfigurableMapper implements IAccountsMapper {
@@ -25,6 +28,8 @@ public class AccountsMapper extends ConfigurableMapper implements IAccountsMappe
 		// Add Converter
 		factory.getConverterFactory().registerConverter(new CalendarConverter());
 
+		factory.registerObjectFactory(new MoneyFactory(), TypeFactory.<Money> valueOf(Money.class));
+
 		// Map DTOIntCheckbook <-> CheckBook
 		factory.classMap(DTOIntCheckbook.class, Checkbook.class).field("id", "id").field("firstCheck", "firstCheck")
 				.field("lastCheck", "lastCheck").field("totalCheck", "totalCheck").field("actualState", "actualState")
@@ -33,10 +38,10 @@ public class AccountsMapper extends ConfigurableMapper implements IAccountsMappe
 		factory.classMap(DTOIntBalance.class, Balance.class).field("total", "total")
 				.field("availableBalance", "availableBalance").byDefault().register();
 
-		// // Map DTOIntAccount <-> FormatoOZECNVE0
+		// Map DTOIntAccount <-> FormatoOZECNVE0
 		factory.classMap(DTOIntAccount.class, Account.class).field("name", "name").field("idAccount", "id")
 				.field("balance", "balance").field("listaCheckBook", "checkbooks").byDefault().register();
-		//
+
 		// // Map DTOIntCheck <-> FormatoOZECNVE0
 		factory.classMap(DTOIntCheck.class, Check.class).field("id", "id").field("status", "status")
 				.field("issueDate", "issueDate").field("value", "value").byDefault().register();

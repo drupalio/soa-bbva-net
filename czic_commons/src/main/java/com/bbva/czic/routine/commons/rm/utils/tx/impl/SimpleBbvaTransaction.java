@@ -83,18 +83,18 @@ public abstract class SimpleBbvaTransaction<E, FE, S, FS> implements ISimpleBbva
 			final CopySalida copySalida = respuesta.getCuerpo().getParte(CopySalida.class);
 
 			final ParameterizedType typeInterfaceOutput = (ParameterizedType)this.getClass().getGenericSuperclass();
-			final Type[] typesSimpleTransaction = typeInterfaceOutput.getActualTypeArguments();
+			final Type[] typesOutput = typeInterfaceOutput.getActualTypeArguments();
 
 			// Obtenemos el formato de salida
 			FS formatoSalida = null;
 			if (copySalida != null) {
-				final Class<FS> claseFormatoSalida = (Class<FS>)typesSimpleTransaction[3];
+				final Class<FS> claseFormatoSalida = (Class<FS>)typesOutput[3];
 				formatoSalida = copySalida.getCopy(claseFormatoSalida);
 			}
 
 			// Get output class
 
-			final Class<?> claseSalida = (Class<?>)typesSimpleTransaction[2];
+			final Class<?> claseSalida = (Class<?>)typesOutput[2];
 
 			// E invocamos al mapper que lo mapeará a la entidad esperada
 			final S outputReturn = mapResponseFormatToDtoOut(formatoSalida, entrada);
