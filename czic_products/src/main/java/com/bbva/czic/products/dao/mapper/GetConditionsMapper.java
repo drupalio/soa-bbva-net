@@ -27,12 +27,13 @@ public class GetConditionsMapper
     public DTOIntConditions mapToOuter(FormatoOZECNTS0 outFormat, DTOIntProduct dtoIn) {
         DTOIntConditions dtoIntConditions = new DTOIntConditions();
 
-        dtoIntConditions.setAlias(outFormat.getTialias());
-        dtoIntConditions.setCategory(outFormat.getCategor());
+        // Todos los campos comentados son campos para uso futuro
+        //dtoIntConditions.setAlias(outFormat.getTialias());
+        dtoIntConditions.setCategory(outFormat.getTipprod());
         dtoIntConditions.setDescription(outFormat.getDesprod());
         dtoIntConditions.setOpeningDate(outFormat.getFechape());
         dtoIntConditions.setCommission(outFormat.getComprod());
-        dtoIntConditions.setMobilizationConditions(outFormat.getConprod());
+        //dtoIntConditions.setMobilizationConditions(outFormat.getConprod());
 
         DTOIntOffice dtoIntOffice = new DTOIntOffice();
         dtoIntOffice.setName(outFormat.getNomofic());
@@ -54,23 +55,23 @@ public class GetConditionsMapper
 
         dtoIntConditions.setOffice(dtoIntOffice);
 
-        DTOIntActivity dtoIntActivity = new DTOIntActivity();
-        dtoIntActivity.setOperationDate(outFormat.getFecoper().toString());
-        dtoIntActivity.setExecutionDate(outFormat.getFecejec().toString());
+        //DTOIntActivity dtoIntActivity = new DTOIntActivity();
+        //dtoIntActivity.setOperationDate(outFormat.getFecoper().toString());
+        //dtoIntActivity.setExecutionDate(outFormat.getFecejec().toString());
 
-        DTOIntFunction dtoIntFunction = new DTOIntFunction();
-        dtoIntFunction.setId(outFormat.getTipfunc());
+        //DTOIntFunction dtoIntFunction = new DTOIntFunction();
+        //dtoIntFunction.setId(outFormat.getTipfunc());
 
-        DTOIntEnumFunctionType dtoIntEnumFunctionType = new DTOIntEnumFunctionType();
-        dtoIntEnumFunctionType.setEnumValue(outFormat.getTipprod());
+        //DTOIntEnumFunctionType dtoIntEnumFunctionType = new DTOIntEnumFunctionType();
+        //dtoIntEnumFunctionType.setEnumValue(outFormat.getCategor());
 
-        dtoIntFunction.setType(dtoIntEnumFunctionType);
+        //dtoIntFunction.setType(dtoIntEnumFunctionType);
 
-        dtoIntActivity.setFunction(dtoIntFunction);
-        dtoIntActivity.setAmount(outFormat.getCantdad());
-        dtoIntActivity.setReference(outFormat.getReffunc());
+        //dtoIntActivity.setFunction(dtoIntFunction);
+        //dtoIntActivity.setAmount(outFormat.getCantdad());
+        //dtoIntActivity.setReference(outFormat.getReffunc());
 
-        dtoIntConditions.setActivities(dtoIntActivity);
+        //dtoIntConditions.setActivities(dtoIntActivity);
 
         return dtoIntConditions;
     }
