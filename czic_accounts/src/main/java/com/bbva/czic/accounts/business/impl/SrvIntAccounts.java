@@ -39,7 +39,7 @@ public class SrvIntAccounts implements ISrvIntAccounts {
 	private IListCheckFilterConverter listCheckFilterConverter;
 
 	@Override
-	public List<DTOIntMonthlyBalances> getAccountMonthlyBalance(DTOIntFilterAccount dtoIntFilterAccount) {
+	public List<DTOIntMonthlyBalances> getAccountMonthlyBalance(final DTOIntFilterAccount dtoIntFilterAccount) {
 
 		// 1. Validate DtoIntFilterAccount
 		DtoValidator.validate(dtoIntFilterAccount);
@@ -55,13 +55,13 @@ public class SrvIntAccounts implements ISrvIntAccounts {
 	}
 
 	@Override
-	public List<DTOIntAccMovementsResume> getAccMovementResume(DTOIntFilterAccount dtoIntFilterAccount) {
+	public List<DTOIntAccMovementsResume> getAccMovementResume(final DTOIntFilterAccount dtoIntFilterAccount) {
 		log.info(" getAccMovementResume ");
 		return accountsDAO.getAccountMovementResume(dtoIntFilterAccount);
 	}
 
 	@Override
-	public DTOIntAccount getAccount(DTOIntFilterAccount dtoIntFilterAccount) {
+	public DTOIntAccount getAccount(final DTOIntFilterAccount dtoIntFilterAccount) {
 
 		DtoValidator.validate(dtoIntFilterAccount);
 		log.info(" getAccount ");
