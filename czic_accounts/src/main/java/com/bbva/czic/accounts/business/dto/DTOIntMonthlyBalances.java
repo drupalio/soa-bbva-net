@@ -1,12 +1,17 @@
 package com.bbva.czic.accounts.business.dto;
 
 import com.bbva.jee.arq.spring.core.servicing.utils.Money;
+import com.sun.istack.NotNull;
 
 public class DTOIntMonthlyBalances {
 
 	public final static long serialVersionUID = 1L;
+
+	@NotNull
 	private Money balance;
-	private DTOIntEnumMonth month;
+
+	@NotNull
+	private String month;
 
 	public DTOIntMonthlyBalances() {
 		// default constructor
@@ -20,12 +25,11 @@ public class DTOIntMonthlyBalances {
 		this.balance = balance;
 	}
 
-	public DTOIntEnumMonth getMonth() {
+	public String getMonth() {
 		return month;
 	}
 
-	public void setMonth(DTOIntEnumMonth month) {
+	public void setMonth(String month) {
 		this.month = month;
 	}
-
 }

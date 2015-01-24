@@ -28,10 +28,10 @@ public class MonthlyBalances
     @ApiModelProperty("saldo consolidado del mes")
     private Money balance;
     @ApiModelProperty("mes de evaluacion para el saldo")
-    private EnumMonth month;
+    private String month;
 
     public MonthlyBalances() {
-        //default constructor
+        this.balance = new Money();
     }
 
     public Money getBalance() {
@@ -42,14 +42,11 @@ public class MonthlyBalances
         this.balance = balance;
     }
 
-	public EnumMonth getMonth() {
-		return month;
-	}
+    public String getMonth() {
+        return month;
+    }
 
-	public void setMonth(EnumMonth month) {
-		this.month = month;
-	}
-
-    
-
+    public void setMonth(String month) {
+        this.month = month;
+    }
 }

@@ -29,13 +29,13 @@ public class FormatoOZECNVE0 {
 	/**
 	 * <p>Campo <code>MESINI</code>, &iacute;ndice: <code>2</code>, tipo: <code>ALFANUMERICO</code>
 	 */
-	@Campo(indice = 2, nombre = "MESINI", tipo = TipoCampo.ALFANUMERICO, longitudMinima = 2, longitudMaxima = 2)
+	@Campo(indice = 2, nombre = "MESINI", tipo = TipoCampo.ALFANUMERICO, longitudMinima = 6, longitudMaxima = 6)
 	private String mesini;
 	
 	/**
 	 * <p>Campo <code>MESFIN</code>, &iacute;ndice: <code>3</code>, tipo: <code>ALFANUMERICO</code>
 	 */
-	@Campo(indice = 3, nombre = "MESFIN", tipo = TipoCampo.ALFANUMERICO, longitudMinima = 2, longitudMaxima = 2)
+	@Campo(indice = 3, nombre = "MESFIN", tipo = TipoCampo.ALFANUMERICO, longitudMinima = 6, longitudMaxima = 6)
 	private String mesfin;
 	
 }

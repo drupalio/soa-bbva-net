@@ -27,8 +27,6 @@ public class DtoValidator {
 			final String message = propertyViolated + " " + violation.getMessage();
 
 			throwBusinessException(violation, message);
-			//
-			//
 		}
 	}
 

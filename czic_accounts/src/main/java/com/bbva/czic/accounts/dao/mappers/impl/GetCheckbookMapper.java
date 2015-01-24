@@ -28,23 +28,23 @@ public class GetCheckbookMapper implements ISimpleTransactionMapper<DTOIntCheckb
 
         final DTOIntCheckbook dtoIntCheckbook = new DTOIntCheckbook();
 
-       // dtoIntCheckbook.setId();
+   /*    // dtoIntCheckbook.setId();
         dtoIntCheckbook.setFirstCheck(Integer.parseInt(outFormat.getPrimchq()));
         dtoIntCheckbook.setLastCheck(Integer.parseInt(outFormat.getUltichq()));
         dtoIntCheckbook.setTotalCheck(Integer.parseInt(outFormat.getTotachq()));
         dtoIntCheckbook.setRequestDate(outFormat.getFecentr());
         dtoIntCheckbook.setDeliveryDate(outFormat.getFecemis());
         dtoIntCheckbook.setActualState(DTOIntEnumCheckbookStatus.valueOf(outFormat.getEstachq()));
-/*
+*/
 
         dtoIntCheckbook.setId("12345");
-        dtoIntCheckbook.setFirstCheck(new Integer("123"));
-        dtoIntCheckbook.setLastCheck(new Integer("456"));
-        dtoIntCheckbook.setTotalCheck(new Integer("5"));
+        dtoIntCheckbook.setFirstCheck(new Integer("000193824"));
+        dtoIntCheckbook.setLastCheck(new Integer("000193900"));
+        dtoIntCheckbook.setTotalCheck(new Integer("176"));
         dtoIntCheckbook.setRequestDate(new Date());
         dtoIntCheckbook.setDeliveryDate(new Date());
         dtoIntCheckbook.setActualState(DTOIntEnumCheckbookStatus.valueOf(EnumCheckbookStatus.HABILITADO.toString()));
-*/
+
         return dtoIntCheckbook;
     }
 }
