@@ -31,7 +31,7 @@ public class MonthlyBalances
     private String month;
 
     public MonthlyBalances() {
-        //default constructor
+        this.balance = new Money();
     }
 
     public Money getBalance() {

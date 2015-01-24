@@ -6,6 +6,7 @@ import com.bbva.czic.checkbooks.dao.model.ozny.FormatoOZECNYS0;
 import com.bbva.czic.dto.net.EnumCheckStatus;
 import com.bbva.czic.routine.commons.rm.utils.converter.UtilsConverter;
 import com.bbva.czic.routine.commons.rm.utils.tx.ISimpleTransactionMapper;
+import com.bbva.jee.arq.spring.core.servicing.utils.Money;
 import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
@@ -31,11 +32,19 @@ public class GetCheckMapper implements ISimpleTransactionMapper<DTOIntCheck, For
     public DTOIntCheck mapToOuter(FormatoOZECNYS0 outFormat, DTOIntCheck dtoIn) {
         final DTOIntCheck intCheck = new DTOIntCheck();
 
-        intCheck.setId(outFormat.getNumcheq());
+        /*intCheck.setId(outFormat.getNumcheq());
         intCheck.setIssueDate(outFormat.getFechemi());
         intCheck.setValue(UtilsConverter.getMoneyDTO(outFormat.getValcheq()));
         intCheck.setStatus(outFormat.getEstcheq());
-        intCheck.setModifiedDate(outFormat.getFechmod());
+        intCheck.setModifiedDate(outFormat.getFechmod());*/
+
+        intCheck.setId("12345678");
+        intCheck.setIssueDate(new Date());
+        intCheck.setModifiedDate(new Date());
+        intCheck.setStatus("ON");
+        Money value = new Money();
+        value.setAmount(new BigDecimal("500"));
+        intCheck.setValue(value);
 
         return intCheck;
     }
