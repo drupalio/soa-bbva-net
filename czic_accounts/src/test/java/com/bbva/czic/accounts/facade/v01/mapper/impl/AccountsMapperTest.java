@@ -77,7 +77,7 @@ public class AccountsMapperTest {
 		DTOIntMonthlyBalances dtoIntMonthlyBalances = new DTOIntMonthlyBalances();
 		DTOIntEnumMonth dtoIntEnumMonth = new DTOIntEnumMonth();
 		dtoIntEnumMonth.setMes("JANUARY");
-		dtoIntMonthlyBalances.setMonth(dtoIntEnumMonth);
+		//dtoIntMonthlyBalances.setMonth(dtoIntEnumMonth);
 		Money money = new Money();
 		money.setAmount(new BigDecimal("100"));
 		dtoIntMonthlyBalances.setBalance(money);
@@ -89,7 +89,7 @@ public class AccountsMapperTest {
 
 		assertNotNull(listaMonthlyBalance);
 		assertTrue(listaMonthlyBalance.size() == 2);
-		assertEquals(listaMonthlyBalance.get(0).getMonth().toString(), dtoIntMonthlyBalances.getMonth().getMes());
+		//assertEquals(listaMonthlyBalance.get(0).getMonth().toString(), dtoIntMonthlyBalances.getMonth().getMes());
 		assertEquals(listaMonthlyBalance.get(0).getBalance().getAmount(), dtoIntMonthlyBalances.getBalance()
 				.getAmount());
 	}
