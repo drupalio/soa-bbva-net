@@ -18,6 +18,7 @@ import com.bbva.czic.dto.net.Check;
 import com.bbva.czic.dto.net.Checkbook;
 import com.bbva.czic.dto.net.EnumCheckbookStatus;
 import com.bbva.czic.dto.net.MonthlyBalances;
+import com.bbva.czic.routine.commons.rm.utils.fiql.FiqlType;
 import com.bbva.czic.routine.commons.rm.utils.mappers.AbstractBbvaConfigurableMapper;
 import com.bbva.czic.routine.commons.rm.utils.mappers.Mapper;
 import com.bbva.czic.routine.mapper.MapperFactory;
@@ -65,8 +66,8 @@ public class AccountsMapper extends AbstractBbvaConfigurableMapper implements IA
 	@Override
 	public DTOIntFilterAccount getDTOIntFilter(String idAccount, String filter) {
 
-		final String ge = getGeValue(filter, "month");
-		final String le = getLeValue(filter, "month");
+		final String ge = this.getGeValue(filter, FiqlType.month.name());
+		final String le = this.getLeValue(filter, FiqlType.month.name());
 
 		final DTOIntFilterAccount dtoIntFilterAccount = new DTOIntFilterAccount();
 		dtoIntFilterAccount.setStartMonth(ge);

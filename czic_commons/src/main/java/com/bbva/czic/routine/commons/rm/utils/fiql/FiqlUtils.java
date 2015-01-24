@@ -1,4 +1,4 @@
-package com.bbva.czic.routine.commons.rm.utils;
+package com.bbva.czic.routine.commons.rm.utils.fiql;
 
 import java.util.ArrayList;
 import java.util.List;
