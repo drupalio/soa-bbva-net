@@ -41,7 +41,7 @@ public class LoanFilterConverter{
      * @param filter
      * @return
      */
-    public DTOIntFilterLoan getDTOIntFilter(String loanId, String filter) {
+    public DTOIntFilterLoan getDTOIntFilter(String loanId, String paginationKey, String pageSize, String filter) {
 
         //Variables
         final DTOIntFilterLoan dtoIntFilterLoan = new DTOIntFilterLoan();
@@ -49,6 +49,9 @@ public class LoanFilterConverter{
         String fechaFinal = "";
 
         dtoIntFilterLoan.setIdLoan(loanId);
+        dtoIntFilterLoan.setPaginationKey(pageSize);
+        dtoIntFilterLoan.setPageSize(paginationKey);
+
         //Manejamos el filter
         if (filter != null && !filter.contentEquals("null")) {
             log.info("A query string (filter) has been sended Loan ---> : " + filter);
@@ -97,10 +100,10 @@ public class LoanFilterConverter{
                         .noFuture(endtDateFilter).validDateRange(startDateFilter, endtDateFilter)
                         .validate();
 
-                log.info(" Filter starDateFilter: "+startDateFilter+" SMC : getCreditCardCharges SN Loan ");
+                log.info(" Filter starDateFilter: " + startDateFilter + " SMC : getCreditCardCharges SN Loan ");
                       
                 dtoIntFilterLoan.setFechaInicial(startDateFilter);
-                dtoIntFilterLoan.setFechaFianl(endtDateFilter);
+                dtoIntFilterLoan.setFechaFinal(endtDateFilter);
 
             } catch (SearchParseException e) {
                 log.error("SearchParseException - The query string (filter) has failed: " + e.getMessage());
