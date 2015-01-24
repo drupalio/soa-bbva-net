@@ -1,5 +1,13 @@
 package com.bbva.czic.customers.dao;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.annotation.Resource;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
 import com.bbva.czic.customers.business.dto.DTOIntAccMovementsResume;
 import com.bbva.czic.customers.business.dto.DTOIntCardCharge;
 import com.bbva.czic.customers.business.dto.DTOIntCustomer;
@@ -7,9 +15,21 @@ import com.bbva.czic.customers.business.dto.DTOIntFilterCustomerResumes;
 import com.bbva.czic.customers.business.impl.SrvIntCustomers;
 import com.bbva.czic.customers.dao.mapper.CustomerMapper;
 import com.bbva.czic.customers.dao.mapper.ICustomerMapper;
-import com.bbva.czic.customers.dao.model.oznb.*;
-import com.bbva.czic.customers.dao.model.oznp.*;
-import com.bbva.czic.customers.dao.model.oznq.*;
+import com.bbva.czic.customers.dao.model.oznb.FormatoOZNCENB0;
+import com.bbva.czic.customers.dao.model.oznb.FormatoOZNCSNB0;
+import com.bbva.czic.customers.dao.model.oznb.PeticionTransaccionOznb;
+import com.bbva.czic.customers.dao.model.oznb.RespuestaTransaccionOznb;
+import com.bbva.czic.customers.dao.model.oznb.TransaccionOznb;
+import com.bbva.czic.customers.dao.model.oznp.FormatoOZECNPE0;
+import com.bbva.czic.customers.dao.model.oznp.FormatoOZECNPS0;
+import com.bbva.czic.customers.dao.model.oznp.PeticionTransaccionOznp;
+import com.bbva.czic.customers.dao.model.oznp.RespuestaTransaccionOznp;
+import com.bbva.czic.customers.dao.model.oznp.TransaccionOznp;
+import com.bbva.czic.customers.dao.model.oznq.FormatoOZECNQE0;
+import com.bbva.czic.customers.dao.model.oznq.FormatoOZECNQS0;
+import com.bbva.czic.customers.dao.model.oznq.PeticionTransaccionOznq;
+import com.bbva.czic.customers.dao.model.oznq.RespuestaTransaccionOznq;
+import com.bbva.czic.customers.dao.model.oznq.TransaccionOznq;
 import com.bbva.czic.routine.commons.rm.utils.errors.EnumError;
 import com.bbva.jee.arq.spring.core.host.protocolo.ps9.ErrorMappingHelper;
 import com.bbva.jee.arq.spring.core.host.protocolo.ps9.aplicacion.CopySalida;
@@ -17,12 +37,6 @@ import com.bbva.jee.arq.spring.core.log.I18nLog;
 import com.bbva.jee.arq.spring.core.log.I18nLogFactory;
 import com.bbva.jee.arq.spring.core.servicing.gce.BusinessServiceException;
 import com.bbva.jee.arq.spring.core.servicing.utils.BusinessServicesToolKit;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
-
-import javax.annotation.Resource;
-import java.util.ArrayList;
-import java.util.List;
 
 
 @Component(value = "customers-dao-impl")
@@ -86,7 +100,8 @@ public class CustomersDAOImpl implements CustomersDAO {
 			if(!outputCopies.isEmpty()) {
 				accountMovementDtoList = new ArrayList<DTOIntAccMovementsResume>();
 				for (CopySalida outputCopy : outputCopies) {
-					FormatoOZECNQS0 formatoSalida = outputCopy.getCopy(FormatoOZECNQS0.class);
+//					FormatoOZECNQS0 formatoSalida = outputCopy.getCopy(FormatoOZECNQS0.class);
+					FormatoOZECNQS0 formatoSalida = CustomersDAOMock.getListAccountMovementsResume();
 					log.info("CustomersDAOImpl.getlistAccountsMovementsResume salida:" + formatoSalida);
 					dtoIntAccountAccMovementsResume = customerMapper.map(formatoSalida);
 					accountMovementDtoList.add(dtoIntAccountAccMovementsResume);
@@ -138,7 +153,8 @@ public class CustomersDAOImpl implements CustomersDAO {
 
 			if(!outputCopies.isEmpty()) {
 				for (CopySalida outputCopy : outputCopies) {
-					FormatoOZECNPS0 formatoSalida = outputCopy.getCopy(FormatoOZECNPS0.class);
+//					FormatoOZECNPS0 formatoSalida = outputCopy.getCopy(FormatoOZECNPS0.class);
+					FormatoOZECNPS0 formatoSalida = CustomersDAOMock.getListCreditCardCharges();
 					dtoIntCardCharge = customerMapper.map(formatoSalida);
 					cardChargetDtoList.add(dtoIntCardCharge);
 				}
@@ -156,16 +172,16 @@ public class CustomersDAOImpl implements CustomersDAO {
 	}
 
 	@Override
-	public DTOIntCustomer getCustomer(DTOIntFilterCustomerResumes filter)
+	public DTOIntCustomer getCustomer(String customerId)
 			throws BusinessServiceException {
 		log.info("CustDAO: Into getCustomer...");
-		log.info("CustDAO: getCustomer params(customerId):" + filter.getCustomerId());
+		log.info("CustDAO: getCustomer params(customerId):" + customerId);
 
 		DTOIntCustomer dtoIntCustomer = new DTOIntCustomer();
 
 		FormatoOZNCENB0 formato = new FormatoOZNCENB0();
 
-		formato.setNumclie(filter.getCustomerId());
+		formato.setNumclie(customerId);
 
 		PeticionTransaccionOznb peticion = new PeticionTransaccionOznb();
 
@@ -185,9 +201,9 @@ public class CustomersDAOImpl implements CustomersDAO {
 			throw new BusinessServiceException(EnumError.NO_DATA.getAlias());
 		}
 
-		FormatoOZNCSNB0 formatoSalida = outputCopies.getCopy(FormatoOZNCSNB0.class);
-
-
+//		FormatoOZNCSNB0 formatoSalida = outputCopies.getCopy(FormatoOZNCSNB0.class);
+		FormatoOZNCSNB0 formatoSalida = CustomersDAOMock.getCustomer();
+		
 		log.info("DAO - Se mapea la respuesta para retornarla SMC : getCustomer SN Customer ");
 		dtoIntCustomer = CustomerMapper.mapToOuter(formatoSalida);
 

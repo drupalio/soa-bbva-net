@@ -16,8 +16,8 @@ public interface CustomersDAO {
 
 	public List<DTOIntCardCharge> getlistCreCardCharges(
 			DTOIntFilterCustomerResumes filter) throws BusinessServiceException;
-	
-	public DTOIntCustomer getCustomer(
-			DTOIntFilterCustomerResumes filter) throws BusinessServiceException;
+
+	public DTOIntCustomer getCustomer(String customerId)
+			throws BusinessServiceException;
 }
 
