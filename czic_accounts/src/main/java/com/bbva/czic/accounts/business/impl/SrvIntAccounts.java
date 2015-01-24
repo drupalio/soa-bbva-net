@@ -40,8 +40,18 @@ public class SrvIntAccounts implements ISrvIntAccounts {
 
 	@Override
 	public List<DTOIntMonthlyBalances> getAccountMonthlyBalance(DTOIntFilterAccount dtoIntFilterAccount) {
+
+		// 1. Validate DtoIntFilterAccount
+		DtoValidator.validate(dtoIntFilterAccount);
+
+		// 2. Get response
+		final List<DTOIntMonthlyBalances> result = accountsDAO.getAccountMonthlyBalance(dtoIntFilterAccount);
+
+		// 3. Validate output
+		DtoValidator.validate(result);
+
 		log.info(" getExtractGlobalBalance product ");
-		return accountsDAO.getAccountMonthlyBalance(dtoIntFilterAccount);
+		return result;
 	}
 
 	@Override

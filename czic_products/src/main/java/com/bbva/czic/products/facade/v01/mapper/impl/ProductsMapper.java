@@ -49,31 +49,31 @@ public class ProductsMapper implements IProductsMapper{
 			office.setLocation(location);
 
 			conditions.setOffice(office);
-			conditions.setMobilizationConditions(intConditions.getMobilizationConditions());
+			//conditions.setMobilizationConditions(intConditions.getMobilizationConditions());
 
-			Activity activity = new Activity();
+			//Activity activity = new Activity();
 
-			Calendar operationDate = Calendar.getInstance();
-			DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+			//Calendar operationDate = Calendar.getInstance();
+			//DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 
-			operationDate.setTime(dateFormat.parse(intConditions.getActivities().getOperationDate()));
-			activity.setOperationDate(operationDate);
+			//operationDate.setTime(dateFormat.parse(intConditions.getActivities().getOperationDate()));
+			//activity.setOperationDate(operationDate);
 
-			Calendar executionDate = Calendar.getInstance();
-			executionDate.setTime(Date.valueOf(intConditions.getActivities().getExecutionDate()));
-			activity.setExecutionDate(executionDate);
+			//Calendar executionDate = Calendar.getInstance();
+			//executionDate.setTime(Date.valueOf(intConditions.getActivities().getExecutionDate()));
+			//activity.setExecutionDate(executionDate);
 
-			Function function = new Function();
-			function.setId(intConditions.getActivities().getFunction().getId());
-			function.setType(intConditions.getActivities().getFunction().getType().getEnumValue().toString());
-			activity.setFunction(function);
-			activity.setAmount(UtilsConverter.getMoneyDTO(new BigDecimal(intConditions.getActivities().getAmount())));
+			//Function function = new Function();
+			//function.setId(intConditions.getActivities().getFunction().getId());
+			//function.setType(intConditions.getActivities().getFunction().getType().getEnumValue().toString());
+			//activity.setFunction(function);
+			//activity.setAmount(UtilsConverter.getMoneyDTO(new BigDecimal(intConditions.getActivities().getAmount())));
 
-			activity.setReference(intConditions.getActivities().getReference());
+			//activity.setReference(intConditions.getActivities().getReference());
 
-			List<Activity> activities = new ArrayList<Activity>();
-			activities.add(activity);
-			conditions.setActivities(activities);
+			//List<Activity> activities = new ArrayList<Activity>();
+			//activities.add(activity);
+			//conditions.setActivities(activities);
 		} catch (Exception e) {
 			throw new BusinessServiceException(EnumError.TECHNICAL_ERROR.getAlias());
 		}
