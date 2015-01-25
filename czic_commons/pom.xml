@@ -52,6 +52,13 @@
 			<artifactId>arq-spring-connector-host-api</artifactId>
 			<version>${arq.spring.connector.host.api.version}</version>
 		</dependency>
+
+		<dependency>
+			<groupId>org.fluttercode.datafactory</groupId>
+			<artifactId>datafactory</artifactId>
+			<version>0.8</version>
+		</dependency>
+
 		<dependency>
 			<groupId>com.bbva.jee.arq.spring.core</groupId>
 			<artifactId>arq-spring-connector-host-imsconnect</artifactId>

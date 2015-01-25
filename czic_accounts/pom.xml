@@ -86,11 +86,8 @@
 			<version>${arq.spring.connector.host.imsconnect.version}</version>
 			<scope>test</scope>
 		</dependency>
-
+		
 		<!--Dependencias Swagger -->
-
-	
-
 		<dependency>
 			<groupId>com.wordnik</groupId>
 			<artifactId>swagger-core_2.10</artifactId>
