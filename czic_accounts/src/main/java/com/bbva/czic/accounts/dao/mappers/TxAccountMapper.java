@@ -1,9 +1,6 @@
 package com.bbva.czic.accounts.dao.mappers;
 
-import com.bbva.czic.accounts.business.dto.DTOIntAccMovementsResume;
-import com.bbva.czic.accounts.business.dto.DTOIntAccount;
-import com.bbva.czic.accounts.business.dto.DTOIntFilterAccount;
-import com.bbva.czic.accounts.business.dto.DTOIntMonthlyBalances;
+import com.bbva.czic.accounts.business.dto.*;
 import com.bbva.czic.accounts.dao.model.ozna.FormatoOZNCENA0;
 import com.bbva.czic.accounts.dao.model.ozna.FormatoOZNCSNA0;
 import com.bbva.czic.accounts.dao.model.oznu.FormatoOZECNUE0;
@@ -32,7 +29,7 @@ public interface TxAccountMapper {
 	 * @param dtoIn
 	 * @return
 	 */
-	FormatoOZECNUE0 mapInOznu(DTOIntFilterAccount dtoIn);
+	FormatoOZECNUE0 mapInOznu(DTOIntFilterMovResumes dtoIn);
 
 	/**
 	 * @param formatOutput

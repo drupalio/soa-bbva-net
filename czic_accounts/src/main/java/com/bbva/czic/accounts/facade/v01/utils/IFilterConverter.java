@@ -1,6 +1,7 @@
 package com.bbva.czic.accounts.facade.v01.utils;
 
 import com.bbva.czic.accounts.business.dto.DTOIntFilterAccount;
+import com.bbva.czic.accounts.business.dto.DTOIntFilterMovResumes;
 
 /**
  * Created by Entelgy on 12/01/2015.
@@ -16,4 +17,6 @@ public interface IFilterConverter {
      * @return
      */
     public DTOIntFilterAccount getDTOIntFilter(String accountId, String filter);
+
+    public DTOIntFilterMovResumes getDTOIntFilterMovRes(String accountId, String filter);
 }

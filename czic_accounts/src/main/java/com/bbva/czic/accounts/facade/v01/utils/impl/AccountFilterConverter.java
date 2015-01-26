@@ -5,6 +5,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
+import com.bbva.czic.accounts.business.dto.DTOIntFilterMovResumes;
 import org.apache.cxf.jaxrs.ext.search.ConditionType;
 import org.apache.cxf.jaxrs.ext.search.PrimitiveStatement;
 import org.apache.cxf.jaxrs.ext.search.SearchCondition;
@@ -84,13 +85,6 @@ public class AccountFilterConverter implements IFilterConverter {
 				}
 
 				/*
-				 * Se hace la comprobacion de que los dos parametros del filtros tengan valor
-				 */
-				if (startDate == null || endDate == null || startDate.equals("") || endDate.equals("")) {
-					throw new BusinessServiceException(EnumError.FILTER_EMPTY.getAlias());
-				}
-
-				/*
 				 * Transformacion de fechas
 				 */
 				SimpleDateFormat formato = new SimpleDateFormat("MM");
@@ -130,6 +124,43 @@ public class AccountFilterConverter implements IFilterConverter {
 
 		return dtoIntFilterAccount;
 
+	}
+
+	@Override
+	public DTOIntFilterMovResumes getDTOIntFilterMovRes(String accountId, String filter) {
+
+		// Variables
+		final DTOIntFilterMovResumes dtoIntFilterMovResumes = new DTOIntFilterMovResumes();
+		dtoIntFilterMovResumes.setAccountId(accountId);
+
+		// Manejamos el filter
+		log.info("A query string (filter) has been sended: " + filter);
+		SearchCondition<DTOIntFilterMovResumes> sc;
+		try {
+			sc = new FiqlParser<DTOIntFilterMovResumes>(DTOIntFilterMovResumes.class).parse(filter);
+
+			final List<PrimitiveStatement> splitDataFilter = businessToolKit.getDataFromFilter(sc);
+
+			for (PrimitiveStatement st : splitDataFilter) {
+
+				String property = st.getProperty();
+				ConditionType condition = st.getCondition();
+				Object value = st.getValue();
+
+				if (property.toLowerCase().equals("month")
+						&& condition.equals(ConditionType.GREATER_OR_EQUALS)) {
+					dtoIntFilterMovResumes.setMonth((String) value);
+				}
+			}
+
+		} catch (SearchParseException e) {
+			log.error("SearchParseException - The query string (filter) has failed: " + e);
+			throw new BusinessServiceException(EnumError.INEXISTENT_FILTER.getAlias(), filter, e.getMessage());
+		} catch (IllegalArgumentException e) {
+			log.error("IllegalArgumentException - The product type is an invalid type - does not exist: " + e);
+			throw new BusinessServiceException(EnumError.WRONG_PARAMETERS.getAlias(), filter, e.getMessage());
+		}
+		return dtoIntFilterMovResumes;
 	}
 
 }

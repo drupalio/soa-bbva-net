@@ -4,17 +4,12 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
+import com.bbva.czic.accounts.business.dto.*;
+import com.bbva.czic.accounts.facade.v01.utils.IFilterConverter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.bbva.czic.accounts.business.ISrvIntAccounts;
-import com.bbva.czic.accounts.business.dto.DTOIntAccMovementsResume;
-import com.bbva.czic.accounts.business.dto.DTOIntAccount;
-import com.bbva.czic.accounts.business.dto.DTOIntCheck;
-import com.bbva.czic.accounts.business.dto.DTOIntCheckbook;
-import com.bbva.czic.accounts.business.dto.DTOIntFilterAccount;
-import com.bbva.czic.accounts.business.dto.DTOIntFilterChecks;
-import com.bbva.czic.accounts.business.dto.DTOIntMonthlyBalances;
 import com.bbva.czic.accounts.dao.AccountsDAO;
 import com.bbva.czic.accounts.facade.v01.utils.IListCheckFilterConverter;
 import com.bbva.czic.routine.commons.rm.utils.validator.DtoValidator;
@@ -38,16 +33,26 @@ public class SrvIntAccounts implements ISrvIntAccounts {
 	@Resource(name = "listCheck-filter-converter")
 	private IListCheckFilterConverter listCheckFilterConverter;
 
+	@Resource(name = "accounts-filter-converter")
+	private IFilterConverter accFilterConverter;
+
+
 	@Override
 	public List<DTOIntMonthlyBalances> getAccountMonthlyBalance(DTOIntFilterAccount dtoIntFilterAccount) {
 		log.info(" getExtractGlobalBalance product ");
+
+
 		return accountsDAO.getAccountMonthlyBalance(dtoIntFilterAccount);
 	}
 
 	@Override
-	public List<DTOIntAccMovementsResume> getAccMovementResume(DTOIntFilterAccount dtoIntFilterAccount) {
+	public List<DTOIntAccMovementsResume> getAccMovementResume(String accountId, String filter) {
 		log.info(" getAccMovementResume ");
-		return accountsDAO.getAccountMovementResume(dtoIntFilterAccount);
+		DTOIntFilterMovResumes dtoIntFilter = accFilterConverter.getDTOIntFilterMovRes(accountId, filter);
+
+		DtoValidator.validate(dtoIntFilter);
+
+		return accountsDAO.getAccountMovementResume(dtoIntFilter);
 	}
 
 	@Override

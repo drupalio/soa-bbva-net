@@ -2,6 +2,7 @@ package com.bbva.czic.accounts.dao.tx;
 
 import javax.annotation.Resource;
 
+import com.bbva.czic.accounts.business.dto.DTOIntFilterMovResumes;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -20,7 +21,7 @@ import com.bbva.jee.arq.spring.core.host.InvocadorTransaccion;
 
 @Component("tx-get-account-movement-resume")
 public class TxGetAccountMovementResume extends
-		ListBbvaTransaction<DTOIntFilterAccount, FormatoOZECNUE0, DTOIntAccMovementsResume, FormatoOZECNUS0> {
+		ListBbvaTransaction<DTOIntFilterMovResumes, FormatoOZECNUE0, DTOIntAccMovementsResume, FormatoOZECNUS0> {
 
 	@Autowired
 	private transient TransaccionOznu transaccionOznu;
@@ -29,12 +30,12 @@ public class TxGetAccountMovementResume extends
 	private TxAccountMapper txAccountMapper;
 
 	@Override
-	protected FormatoOZECNUE0 mapDtoInToRequestFormat(DTOIntFilterAccount dtoIn) {
+	protected FormatoOZECNUE0 mapDtoInToRequestFormat(DTOIntFilterMovResumes dtoIn) {
 		return txAccountMapper.mapInOznu(dtoIn);
 	}
 
 	@Override
-	protected DTOIntAccMovementsResume mapResponseFormatToDtoOut(FormatoOZECNUS0 formatOutput, DTOIntFilterAccount dtoIn) {
+	protected DTOIntAccMovementsResume mapResponseFormatToDtoOut(FormatoOZECNUS0 formatOutput, DTOIntFilterMovResumes dtoIn) {
 		return txAccountMapper.mapOutOznu(formatOutput);
 	}
 

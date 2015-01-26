@@ -14,6 +14,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
 
+import com.bbva.czic.accounts.business.dto.DTOIntFilterMovResumes;
 import org.apache.cxf.jaxrs.model.wadl.ElementClass;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -122,6 +123,7 @@ public class SrvAccountsV01 implements ISrvAccountsV01, com.bbva.jee.arq.spring.
 		// Mapping to DTOIntFilter
 		DTOIntFilterAccount dtoIntFilterAccount = iAccountsMapper.getDTOIntFilter(idAccount, filter);
 
+
 		// Invoke SrvIntAccounts and Mapping to canonical DTO
 		return iAccountsMapper.mapL(srvIntAccounts.getAccountMonthlyBalance(dtoIntFilterAccount));
 	}
@@ -141,9 +143,8 @@ public class SrvAccountsV01 implements ISrvAccountsV01, com.bbva.jee.arq.spring.
 			@ApiParam(value = "fields param") @DefaultValue("null") @QueryParam("$fields") String fields,
 			@ApiParam(value = "expands param") @DefaultValue("null") @QueryParam("$expands") String expands,
 			@ApiParam(value = "order by param") @DefaultValue("null") @QueryParam("$sort") String sort) {
-		DTOIntFilterAccount dtoIntFilterAccount = new DTOIntFilterAccount();
-		dtoIntFilterAccount = accFilterConverter.getDTOIntFilter(idAccount, filter);
-		return iAccountsMapper.map(srvIntAccounts.getAccMovementResume(dtoIntFilterAccount));
+
+		return iAccountsMapper.map(srvIntAccounts.getAccMovementResume(idAccount, filter));
 	}
 
 	/*
@@ -160,9 +161,9 @@ public class SrvAccountsV01 implements ISrvAccountsV01, com.bbva.jee.arq.spring.
 	@Path("/{id}/listChecks")
 	@SMC(registryID = "SMC201400026", logicalID = "listCheck")
 	public List<Check> listCheck(@ApiParam(value = "identifier param") @PathParam("id") String accountId,
-			@ApiParam(value = "filter param") @DefaultValue("null") @QueryParam("$filter") String filter,
-			@ApiParam(value = "fields param") @DefaultValue("null") @QueryParam("paginationKey") Integer paginationKey,
-			@ApiParam(value = "expands param") @DefaultValue("null") @QueryParam("pageSize") Integer pageSize) {
+								 @ApiParam(value = "filter param") @DefaultValue("null") @QueryParam("$filter") String filter,
+								 @ApiParam(value = "fields param") @DefaultValue("null") @QueryParam("paginationKey") Integer paginationKey,
+								 @ApiParam(value = "expands param") @DefaultValue("null") @QueryParam("pageSize") Integer pageSize) {
 
 		return iAccountsMapper.mapChecks(srvIntAccounts.listCheck(accountId,filter,paginationKey,pageSize));
 	}

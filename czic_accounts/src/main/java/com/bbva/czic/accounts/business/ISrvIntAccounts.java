@@ -15,11 +15,8 @@ public interface ISrvIntAccounts {
 	 */
 	public List<DTOIntMonthlyBalances> getAccountMonthlyBalance(DTOIntFilterAccount dtoIntFilterAccount);
 
-	/**
-	 * @param dtoIntFilterAccount
-	 * @return
-	 */
-	public List<DTOIntAccMovementsResume> getAccMovementResume(DTOIntFilterAccount dtoIntFilterAccount);
+
+	public List<DTOIntAccMovementsResume> getAccMovementResume(String accountId, String filter);
 
 	/**
 	 * @param dtoIntFilterAccount
