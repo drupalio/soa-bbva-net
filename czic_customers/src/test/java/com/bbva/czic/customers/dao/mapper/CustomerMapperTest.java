@@ -16,6 +16,7 @@ import org.springframework.test.context.support.DependencyInjectionTestExecution
 
 import com.bbva.czic.customers.business.SrvIntCustomersTest;
 import com.bbva.czic.customers.business.dto.DTOIntCustomer;
+import com.bbva.czic.customers.dao.mapper.impl.CustomerMapper;
 import com.bbva.czic.customers.dao.model.oznb.FormatoOZNCSNB0;
 import com.bbva.czic.customers.dao.model.oznp.FormatoOZECNPS0;
 import com.bbva.czic.dto.net.ContactInfo;
