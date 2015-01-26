@@ -15,6 +15,7 @@ public class DTOIntProduct {
     @NotEmpty
     @Length(min = 2, max = 2)
     private String productType;
+    @NotEmpty
     private String name;
     private String alias;
     private String financialState;
@@ -22,10 +23,15 @@ public class DTOIntProduct {
     private Boolean visible;
     @NotNull
     private Boolean operable;
-    @NotNull
     private DTOIntBalance balance;
     private DTOIntContactInfo contactInfo;
     private DTOIntContract contract;
+
+    public DTOIntProduct() {
+        balance = new DTOIntBalance();
+        contactInfo = new DTOIntContactInfo();
+        contract = new DTOIntContract();
+    }
 
     public static long getSerialVersionUID() {
         return serialVersionUID;

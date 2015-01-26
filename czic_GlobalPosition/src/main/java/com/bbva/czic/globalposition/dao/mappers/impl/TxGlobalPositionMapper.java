@@ -38,27 +38,27 @@ public class TxGlobalPositionMapper implements ITxGlobalPositionMapper {
     }
 
     @Override
-    public DTOIntProduct mapOutOzn1S0(FormatoOZECN1S0 formatoOZECN1S1) {
-        log.info("INICIO - TxGlobalPositionMapper#mapOutOzn1S0 - outFormat: " + formatoOZECN1S1);
+    public DTOIntProduct mapOutOzn1S0(FormatoOZECN1S0 formatoOZECN1S0) {
+        log.info("INICIO - TxGlobalPositionMapper#mapOutOzn1S0 - outFormat: " + formatoOZECN1S0);
         final DTOIntProduct product = new DTOIntProduct();
         final FormatBalanceToDTOBalanceConverter balanceConverter = new FormatBalanceToDTOBalanceConverter();
 
         // isValidNotNullOutFormat(outFormat);
 
         //product.setProductType(EnumProductType.valueOf(outFormat.getTipprod()));
-        product.setProductType(formatoOZECN1S1.getTipprod());
+        product.setProductType(formatoOZECN1S0.getTipprod());
 
-        product.setId(formatoOZECN1S1.getNumprod());
+        product.setId(formatoOZECN1S0.getNumprod());
 
-        product.setBalance(balanceConverter.convert(formatoOZECN1S1.getSaltota(), formatoOZECN1S1.getSaldisp()));
+        product.setBalance(balanceConverter.convert(formatoOZECN1S0.getSaltota(), formatoOZECN1S0.getSaldisp()));
 
-        product.setVisible(formatoOZECN1S1.getIndvisi().equalsIgnoreCase("v") || formatoOZECN1S1.getIndvisi().equalsIgnoreCase("t"));
-        product.setOperable(formatoOZECN1S1.getIndoper().equalsIgnoreCase("v") || formatoOZECN1S1.getIndoper().equalsIgnoreCase("t"));
-        product.setAlias(formatoOZECN1S1.getAlias());
-        product.setName(formatoOZECN1S1.getNomprod());
-        product.setFinancialState(formatoOZECN1S1.getFinstat());
+        product.setVisible(TRUE.equalsIgnoreCase(formatoOZECN1S0.getIndoper()));
+        product.setOperable(TRUE.equalsIgnoreCase(formatoOZECN1S0.getIndoper()));
+        product.setAlias(formatoOZECN1S0.getAlias());
+        product.setName(formatoOZECN1S0.getNomprod());
+        product.setFinancialState(formatoOZECN1S0.getFinstat());
 
-        log.info("FIN - TxGlobalPositionMapper#mapOutOzn1S0 - outFormat: " + formatoOZECN1S1 + " - product: " + product);
+        log.info("FIN - TxGlobalPositionMapper#mapOutOzn1S0 - outFormat: " + formatoOZECN1S0 + " - product: " + product);
 
         return product;
     }
@@ -76,8 +76,8 @@ public class TxGlobalPositionMapper implements ITxGlobalPositionMapper {
 
         product.setBalance(balanceConverter.convert(formatoOZECN1S1.getSaltota(), formatoOZECN1S1.getSaldisp()));
 
-        product.setVisible(TRUE.equalsIgnoreCase(formatoOZECN1S1.getIndvisi()) || TRUE.equalsIgnoreCase(formatoOZECN1S1.getIndvisi()));
-        product.setOperable(TRUE.equalsIgnoreCase(formatoOZECN1S1.getIndoper()) || TRUE.equalsIgnoreCase(formatoOZECN1S1.getIndoper()));
+        product.setVisible(TRUE.equalsIgnoreCase(formatoOZECN1S1.getIndvisi()));
+        product.setOperable(TRUE.equalsIgnoreCase(formatoOZECN1S1.getIndoper()));
         product.setAlias(formatoOZECN1S1.getAlias());
         product.setName(formatoOZECN1S1.getNomprod());
         product.setFinancialState(formatoOZECN1S1.getFinstat());

@@ -1,8 +1,8 @@
-package com.bbva.czic.globalposition.facade.v01.mapper;
+package com.bbva.czic.globalposition.facade.v01.mappers;
 
 import com.bbva.czic.dto.net.*;
 import com.bbva.czic.globalposition.business.dto.*;
-import com.bbva.czic.globalposition.facade.v01.mapper.impl.GlobalPositionMapper;
+import com.bbva.czic.globalposition.facade.v01.mappers.impl.GlobalPositionMapper;
 import com.bbva.jee.arq.spring.core.servicing.utils.Money;
 import org.junit.Before;
 import org.junit.Test;
@@ -42,13 +42,18 @@ public class GlobalPositionMapperTest {
     public void testMapDTOIntProductToProductAllProducts() {
         final Product product;
         final DTOIntProduct intProduct = getIntProduct();
+        final List<DTOIntProduct> intProducts = new ArrayList<DTOIntProduct>();
+        intProducts.add(getIntProduct());
+        intProducts.add(getIntProduct());
 
-        product = mapper.map(intProduct);
+        product = mapper.map(intProducts).get(0);
 
         assertEquals(intProduct.getId(), product.getId());
         assertEquals(intProduct.getProductType(), product.getType());
-        assertEquals(intProduct.getBalance().getAvailableBalance(), product.getBalance().getAvailableBalance());
-        assertEquals(intProduct.getBalance().getTotal(), product.getBalance().getTotal());
+        assertEquals(intProduct.getBalance().getAvailableBalance().getAmount(), product.getBalance().getAvailableBalance().getAmount());
+        assertEquals(intProduct.getBalance().getTotal().getAmount(), product.getBalance().getTotal().getAmount());
+        assertEquals(intProduct.getBalance().getAvailableBalance().getCurrency(), product.getBalance().getAvailableBalance().getCurrency());
+        assertEquals(intProduct.getBalance().getTotal().getCurrency(), product.getBalance().getTotal().getCurrency());
         assertEquals(intProduct.getAlias(), product.getAlias());
         assertEquals(intProduct.getName(), product.getName());
         assertEquals(intProduct.getFinancialState(), product.getFinancialState());

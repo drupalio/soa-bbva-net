@@ -2,21 +2,26 @@ package com.bbva.czic.globalposition.business.dto;
 
 import com.bbva.jee.arq.spring.core.servicing.utils.Money;
 
+import javax.validation.constraints.NotNull;
+
 /**
- * Created by Administrador on 05/01/2015.
+ * @author Entelgy Colombia.
  */
 public class DTOIntBalance {
 
     public final static long serialVersionUID = 1L;
 
+    @NotNull
     private Money total;
 
+    @NotNull
     private Money availableBalance;
 
+    @NotNull
     private Money tradeBalance;
 
     public DTOIntBalance() {
-        //default constructor
+
     }
 
     public Money getTotal() {
