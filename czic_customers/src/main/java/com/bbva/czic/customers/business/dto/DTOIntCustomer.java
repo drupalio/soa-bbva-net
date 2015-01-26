@@ -1,7 +1,9 @@
 
 package com.bbva.czic.customers.business.dto;
 
-import java.util.Calendar;
+import javax.validation.constraints.NotNull;
+
+import org.hibernate.validator.constraints.NotBlank;
 
 import com.bbva.czic.dto.net.ContactInfo;
 import com.bbva.czic.dto.net.Document;
@@ -16,12 +18,17 @@ public class DTOIntCustomer {
 
     public final static long serialVersionUID = 1L;
 
+    
 	private String id;
 	private Document document;
 	private String username;
+	@NotBlank
 	private String name;
+	@NotNull
 	private EnumSegmentType segment;
+	@NotNull
 	private ContactInfo emails= new ContactInfo();
+	@NotNull
 	private Place homeLocation;
 	private Integer stratum;
 	private Integer residenceYears;

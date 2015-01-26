@@ -17,7 +17,6 @@ List<AccMovementsResume> getlistAccountsMovementsResume(String customerId,
 List<CardCharge> getlistCreditCharges(String customerId, DTOIntFilterCustomerResumes filter)
 		throws BusinessServiceException;
 
-Customer getCustomer(String customerId)
-		throws BusinessServiceException;
+Customer getCustomer(String customerId) throws BusinessServiceException;
 	
 }

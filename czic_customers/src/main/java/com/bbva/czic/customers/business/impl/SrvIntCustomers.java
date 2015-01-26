@@ -1,6 +1,5 @@
 package com.bbva.czic.customers.business.impl;
 
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,7 +18,7 @@ import com.bbva.czic.customers.dao.mapper.ICustomerMapper;
 import com.bbva.czic.dto.net.AccMovementsResume;
 import com.bbva.czic.dto.net.CardCharge;
 import com.bbva.czic.dto.net.Customer;
-import com.bbva.czic.routine.commons.rm.utils.errors.EnumError;
+import com.bbva.czic.routine.commons.rm.utils.validator.DtoValidator;
 import com.bbva.jee.arq.spring.core.log.I18nLog;
 import com.bbva.jee.arq.spring.core.log.I18nLogFactory;
 import com.bbva.jee.arq.spring.core.servicing.gce.BusinessServiceException;
@@ -36,12 +35,11 @@ public class SrvIntCustomers implements ISrvIntCustomers {
 	@Resource(name = "customers-dao-impl")
 	private CustomersDAO customersDao;
 
-	@Resource(name="customerMapper")
+	@Resource(name = "customerMapper")
 	private ICustomerMapper customerMapper;
 
 	@Autowired
 	private BusinessServicesToolKit bussinesToolKit;
-
 
 	public void setCustomerMapper(ICustomerMapper customerMapper) {
 		this.customerMapper = customerMapper;
@@ -51,79 +49,82 @@ public class SrvIntCustomers implements ISrvIntCustomers {
 		this.customersDao = customersDao;
 	}
 
-	/***************************AccountMovement***************************************/
+	/*************************** AccountMovement ***************************************/
 	@Override
-	public List<AccMovementsResume> getlistAccountsMovementsResume(String customerId,
-			final DTOIntFilterCustomerResumes filter) throws BusinessServiceException {
+	public List<AccMovementsResume> getlistAccountsMovementsResume(
+			String customerId, final DTOIntFilterCustomerResumes filter)
+			throws BusinessServiceException {
 		log.info("Into getlistAccountsMovementsResume... ");
 		log.info("getlistAccountsMovementsResume params: " + filter);
 
-		try {
-			if(filter != null){
-				List<AccMovementsResume> listMovements = new ArrayList<AccMovementsResume>();
-				filter.setCustomerId(customerId);
-				List<DTOIntAccMovementsResume> dtoIntAccMovementsResumes = customersDao
-						.getlistAccountsMovementsResume(filter);
-				log.info("getlistAccountsMovementsResume dao response: " + dtoIntAccMovementsResumes);
+		List<AccMovementsResume> listMovements = new ArrayList<AccMovementsResume>();
+		filter.setCustomerId(customerId);
 
-				for (DTOIntAccMovementsResume item : dtoIntAccMovementsResumes) {
-					listMovements.add(customerMapper.map(item));
-				}
-				return listMovements;
-			}else{
-				throw new BusinessServiceException(EnumError.WRONG_PARAMETERS.getAlias());
+		try {
+			// 1. Validate DtoIntFilterAccount
+			DtoValidator.validate(filter);
+			// 2. Get response
+			List<DTOIntAccMovementsResume> dtoIntAccMovementsResumes = customersDao
+					.getlistAccountsMovementsResume(filter);
+			for (DTOIntAccMovementsResume item : dtoIntAccMovementsResumes) {
+				listMovements.add(customerMapper.map(item));
 			}
+			log.info("getlistAccountsMovementsResume dao response: "
+					+ dtoIntAccMovementsResumes);
+			// 3. Validate output
+			DtoValidator.validate(dtoIntAccMovementsResumes);
+			return listMovements;
 		} catch (BusinessServiceException bse) {
-			log.error("BusinessServiceException - Error during platform: " + bse);
+			log.error("BusinessServiceException - Error during platform: "
+					+ bse);
 			throw bse;
 		}
 
 	}
-	/***************************CardCharge***************************************/
+
+	/*************************** CardCharge ***************************************/
 	@Override
 	public List<CardCharge> getlistCreditCharges(String customerId,
-			final DTOIntFilterCustomerResumes filter) throws BusinessServiceException {
+			final DTOIntFilterCustomerResumes filter)
+			throws BusinessServiceException {
 		log.info("Into getlistCreditCharges... ");
 		log.info("getlistCreditCharges params: " + filter);
-
+		
+		List<CardCharge> listCardCharge = new ArrayList<CardCharge>();
+		filter.setCustomerId(customerId);
+		
 		try {
-			if(filter != null){
-				List<CardCharge> listCardCharge = new ArrayList<CardCharge>();
-				filter.setCustomerId(customerId);
-				List<DTOIntCardCharge> dtoIntCardCharges = customersDao
-						.getlistCreCardCharges(filter);
-
-				for (DTOIntCardCharge item : dtoIntCardCharges) {
-					listCardCharge.add(customerMapper.map(item 	));
-				}
-
-				return listCardCharge;
-			}else{
-				throw new BusinessServiceException(EnumError.WRONG_PARAMETERS.getAlias());
+			// 1. Validate DtoIntFilterAccount
+			DtoValidator.validate(filter);
+			// 2. Get response
+			List<DTOIntCardCharge> dtoIntCardCharges = customersDao.getlistCreCardCharges(filter);
+			for (DTOIntCardCharge item : dtoIntCardCharges) {
+				listCardCharge.add(customerMapper.map(item));
 			}
+			log.info(" DAO: getListCreditChargesResponse: " + dtoIntCardCharges);
+			// 3. Validate output
+			DtoValidator.validate(dtoIntCardCharges);
+			return listCardCharge;
 		} catch (BusinessServiceException bse) {
-			log.error("BusinessServiceException - Error during platform: " + bse);
+			log.error("BusinessServiceException - Error during platform: "
+					+ bse);
 			throw bse;
 		}
 
 	}
-	
-	/***************************Customer***************************************/
+
+	/*************************** Customer ***************************************/
 	@Override
 	public Customer getCustomer(String customerId)
 			throws BusinessServiceException {
 		log.info("SrvInt: Into getCustomer... ");
 		log.info("SrvInt: getCustomerParams(customerId): " + customerId);
-
-		DTOIntFilterCustomerResumes customer = new DTOIntFilterCustomerResumes();
-		customer.setCustomerId(customerId);
-		
-		DTOIntCustomer dtoIntCustomer = customersDao.getCustomer(customer);
-		
-		log.info("SrvInt: gettingIntoMapper: "+dtoIntCustomer);
+		// 1. Get response
+		DTOIntCustomer dtoIntCustomer = customersDao.getCustomer(customerId);
+		// 2. Validate output
+		DtoValidator.validate(dtoIntCustomer);
+		log.info("SrvInt: gettingIntoMapper: " + dtoIntCustomer);
 		return customerMapper.map(dtoIntCustomer);
 
 	}
 }
-     
-	

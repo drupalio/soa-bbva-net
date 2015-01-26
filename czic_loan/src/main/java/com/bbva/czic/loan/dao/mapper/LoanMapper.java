@@ -1,9 +1,7 @@
 package com.bbva.czic.loan.dao.mapper;
 
 import java.math.BigDecimal;
-import java.text.DecimalFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
+
 import java.util.*;
 
 
@@ -14,7 +12,7 @@ import com.bbva.czic.loan.business.dto.DTOIntRotaryQuotaMove;
 import com.bbva.czic.loan.dao.model.ozni.FormatoOZNCSNI0;
 import com.bbva.czic.loan.dao.model.oznj.FormatoOZNCSNJ0;
 import com.bbva.czic.loan.dao.model.oznk.FormatoOZNCSNK0;
-import com.bbva.czic.routine.commons.rm.utils.converter.UtilsConverter;
+
 import com.bbva.czic.routine.commons.rm.utils.errors.EnumError;
 import com.bbva.jee.arq.spring.core.log.I18nLog;
 import com.bbva.jee.arq.spring.core.log.I18nLogFactory;
@@ -70,7 +68,7 @@ public class LoanMapper {
 
 	/**
 	 *
-	 * @param value
+		 * @param value
 	 * @return
 	 */
 	private static Money setMoneyValue(final String value){
