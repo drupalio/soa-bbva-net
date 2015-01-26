@@ -59,27 +59,19 @@ public class SrvIntCustomers implements ISrvIntCustomers {
 
 		List<AccMovementsResume> listMovements = new ArrayList<AccMovementsResume>();
 		filter.setCustomerId(customerId);
-
-		try {
-			// 1. Validate DtoIntFilterAccount
-			DtoValidator.validate(filter);
-			// 2. Get response
-			List<DTOIntAccMovementsResume> dtoIntAccMovementsResumes = customersDao
-					.getlistAccountsMovementsResume(filter);
-			for (DTOIntAccMovementsResume item : dtoIntAccMovementsResumes) {
-				listMovements.add(customerMapper.map(item));
-			}
-			log.info("getlistAccountsMovementsResume dao response: "
-					+ dtoIntAccMovementsResumes);
-			// 3. Validate output
-			DtoValidator.validate(dtoIntAccMovementsResumes);
-			return listMovements;
-		} catch (BusinessServiceException bse) {
-			log.error("BusinessServiceException - Error during platform: "
-					+ bse);
-			throw bse;
+		// 1. Validate DtoIntFilterAccount
+		DtoValidator.validate(filter);
+		// 2. Get response
+		List<DTOIntAccMovementsResume> dtoIntAccMovementsResumes = customersDao
+				.getlistAccountsMovementsResume(filter);
+		for (DTOIntAccMovementsResume item : dtoIntAccMovementsResumes) {
+			listMovements.add(customerMapper.map(item));
 		}
-
+		log.info("getlistAccountsMovementsResume dao response: "
+				+ dtoIntAccMovementsResumes);
+		// 3. Validate output
+		DtoValidator.validate(dtoIntAccMovementsResumes);
+		return listMovements;
 	}
 
 	/*************************** CardCharge ***************************************/
