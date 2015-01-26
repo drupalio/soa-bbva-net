@@ -4,14 +4,14 @@ package com.bbva.czic.loan.business.impl;
 import com.bbva.czic.dto.net.Loan;
 import com.bbva.czic.dto.net.Movement;
 import com.bbva.czic.dto.net.RotaryQuotaMove;
+import com.bbva.czic.loan.business.dto.DTOIntFilterLoan;
 import com.bbva.czic.loan.business.dto.DTOIntMovement;
 import com.bbva.czic.loan.business.dto.DTOIntRotaryQuotaMove;
 import com.bbva.czic.loan.dao.mapper.LoanMapper;
 
 import com.bbva.czic.routine.commons.rm.utils.errors.EnumError;
-import com.bbva.czic.routine.commons.rm.utils.validator.impl.DateValidator;
-import org.springframework.beans.factory.annotation.Autowired;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.bbva.czic.loan.business.ISrvIntLoan;
@@ -44,6 +44,9 @@ public class SrvIntLoan implements ISrvIntLoan {
 	public Loan getRotaryQuota(final String idRotaryQuota) throws BusinessServiceException {
 		try {
 			log.info("SrvIntLoan.getRotaryQuota = " + idRotaryQuota);
+			if(idRotaryQuota.equals("null") || idRotaryQuota == null) {
+				throw new BusinessServiceException(EnumError.WRONG_PARAMETERS.getAlias());
+			}
 
 			final DTOIntLoan dtoIntLoan = loanDao.getRotaryQuota(idRotaryQuota);
 			Loan loan = LoanMapper.getLoan(dtoIntLoan);
@@ -58,14 +61,14 @@ public class SrvIntLoan implements ISrvIntLoan {
 	}
 
 	@Override
-	public List<Movement> listRotaryQuotaMovements(final String idLoan, final String paginationKey, final String pageSize, final Date fechaInicila, final Date fechaFinal) throws BusinessServiceException {
+	public List<Movement> listRotaryQuotaMovements(final DTOIntFilterLoan dtoIntFilterLoan) throws BusinessServiceException {
 
 		try {
 			List<Movement> movementList = new ArrayList<Movement>();
 
-			log.info("A query string (filter) has been sent Loan -----> : " + idLoan + ", " + paginationKey + ", " + pageSize + ", " + fechaInicila + ", " + fechaFinal);
+			log.info("A query string (filter) has been sent Loan -----> : " + dtoIntFilterLoan.getIdLoan() + ", " + dtoIntFilterLoan.getPaginationKey() + ", " + dtoIntFilterLoan.getPageSize() + ", " + dtoIntFilterLoan.getFechaInicial() + ", " + dtoIntFilterLoan.getFechaFinal());
 
-			final List<DTOIntMovement> intLoan = loanDao.listRotaryQuotaMovements(idLoan, paginationKey, pageSize, fechaInicila, fechaFinal);
+			final List<DTOIntMovement> intLoan = loanDao.listRotaryQuotaMovements(dtoIntFilterLoan);
 
 			for (DTOIntMovement item : intLoan) {
 				Movement movement = new Movement();
@@ -89,6 +92,10 @@ public class SrvIntLoan implements ISrvIntLoan {
 
 		try {
 			log.info("SrvIntLoan.getRotaryQuotaMovement = " + idMovement + ", " + idLoan);
+
+			if(idLoan.trim().equals("null") || idMovement.trim().equals("null")) {
+				throw new BusinessServiceException(EnumError.WRONG_PARAMETERS.getAlias());
+			}
 
 			final DTOIntRotaryQuotaMove dtoIntRotaryQuotaMove = loanDao.getRotaryQuotaMovement( Integer.parseInt(idMovement), idLoan);
 			log.info("SrvIntLoan.getRotaryQuotaMovement retorno exitoso inicio mapeo... ");

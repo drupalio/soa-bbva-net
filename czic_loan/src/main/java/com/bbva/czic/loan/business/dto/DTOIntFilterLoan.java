@@ -1,5 +1,6 @@
 package com.bbva.czic.loan.business.dto;
 
+import javax.validation.constraints.NotNull;
 import java.util.Date;
 
 
@@ -9,21 +10,34 @@ import java.util.Date;
  */
 public class DTOIntFilterLoan {
 
+	@NotNull
     private Date fechaInicial;
-    private Date fechaFianl;
+
+	@NotNull
+    private Date fechaFinal;
+
+	@NotNull
+    private String paginationKey;
+
+	@NotNull
+	private String pageSize;
+
+	@NotNull
     private String idLoan;
+
+	@NotNull
 	private String transactionDate;
 	/**
-	 * @return the fechaFianl
+	 * @return the fechaFinal
 	 */
-	public Date getFechaFianl() {
-		return fechaFianl;
+	public Date getFechaFinal() {
+		return fechaFinal;
 	}
 	/**
-	 * @param fechaFianl the fechaFianl to set
+	 * @param fechaFinal the fechaFinal to set
 	 */
-	public void setFechaFianl(Date fechaFianl) {
-		this.fechaFianl = fechaFianl;
+	public void setFechaFinal(Date fechaFinal) {
+		this.fechaFinal = fechaFinal;
 	}
 	/**
 	 * @return the idLoan
@@ -57,5 +71,21 @@ public class DTOIntFilterLoan {
 
 	public void setTransactionDate(String transactionDate) {
 		this.transactionDate = transactionDate;
+	}
+
+	public String getPaginationKey() {
+		return paginationKey;
+	}
+
+	public void setPaginationKey(String paginationKey) {
+		this.paginationKey = paginationKey;
+	}
+
+	public String getPageSize() {
+		return pageSize;
+	}
+
+	public void setPageSize(String pageSize) {
+		this.pageSize = pageSize;
 	}
 }

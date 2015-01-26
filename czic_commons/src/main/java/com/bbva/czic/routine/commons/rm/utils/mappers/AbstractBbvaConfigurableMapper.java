@@ -7,9 +7,9 @@ import org.apache.cxf.jaxrs.ext.search.SearchBean;
 import org.apache.cxf.jaxrs.ext.search.SearchCondition;
 import org.apache.cxf.jaxrs.ext.search.fiql.FiqlParser;
 
-import com.bbva.czic.routine.commons.rm.utils.FiqlUtils;
 import com.bbva.czic.routine.commons.rm.utils.converter.CalendarConverter;
 import com.bbva.czic.routine.commons.rm.utils.errors.EnumError;
+import com.bbva.czic.routine.commons.rm.utils.fiql.FiqlUtils;
 import com.bbva.czic.routine.commons.rm.utils.predicate.AbstractPredicate;
 import com.bbva.czic.routine.mapper.MapperFactory;
 import com.bbva.czic.routine.mapper.factory.MoneyFactory;

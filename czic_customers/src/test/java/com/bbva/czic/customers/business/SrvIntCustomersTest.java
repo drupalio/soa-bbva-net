@@ -220,7 +220,7 @@ public class SrvIntCustomersTest {
 		DTOIntCustomer dtoIntCustomer = mockDTOCustomer();
 		Customer mapCustomer = new Customer();
 		//Setup expectation
-		when(customersDao.getCustomer((DTOIntFilterCustomerResumes) anyObject())).thenReturn(dtoIntCustomer);
+		when(customersDao.getCustomer((String) anyObject())).thenReturn(dtoIntCustomer);
 		when(customerMapper.map((DTOIntCustomer)anyObject())).thenReturn(mapCustomer);
 		//SUT execution
 		final Customer answer = srv.getCustomer("1234567890");

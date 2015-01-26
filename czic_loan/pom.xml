@@ -18,9 +18,6 @@
 	
     <!-- INICIO Arquitectura Servicios -->
 
-
-    
-
     <dependency>
        <groupId>com.bbva.czic</groupId>
        <artifactId>czic_net</artifactId>

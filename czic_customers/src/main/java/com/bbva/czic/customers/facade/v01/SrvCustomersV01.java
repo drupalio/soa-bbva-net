@@ -13,17 +13,17 @@ import javax.ws.rs.core.HttpHeaders;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.UriInfo;
 
-import com.bbva.czic.customers.facade.v01.utils.converters.IFilterConverter;
-
 import org.apache.cxf.jaxrs.model.wadl.ElementClass;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.bbva.czic.customers.business.ISrvIntCustomers;
+import com.bbva.czic.customers.facade.v01.utils.converters.IFilterConverter;
 import com.bbva.czic.dto.net.AccMovementsResume;
 import com.bbva.czic.dto.net.CardCharge;
 import com.bbva.czic.dto.net.Customer;
 import com.bbva.czic.routine.commons.rm.utils.errors.EnumError;
+import com.bbva.czic.routine.commons.rm.utils.validator.impl.FiqlValidator;
 import com.bbva.jee.arq.spring.core.log.I18nLog;
 import com.bbva.jee.arq.spring.core.log.I18nLogFactory;
 import com.bbva.jee.arq.spring.core.servicing.annotations.SMC;
@@ -37,20 +37,20 @@ import com.wordnik.swagger.annotations.ApiParam;
 import com.wordnik.swagger.annotations.ApiResponse;
 import com.wordnik.swagger.annotations.ApiResponses;
 
-
-	
 @Path("/V01")
-@SN(registryID="SNCO1400003",logicalID="customers")
-@VN(vnn="V01")
-@Api(value="/customers/V01",description="SN Customer")
-@Produces({ MediaType.APPLICATION_JSON})
+@SN(registryID = "SNCO1400003", logicalID = "customers")
+@VN(vnn = "V01")
+@Api(value = "/customers/V01", description = "SN Customer")
+@Produces({ MediaType.APPLICATION_JSON })
 @Service
-public class SrvCustomersV01 implements ISrvCustomersV01, com.bbva.jee.arq.spring.core.servicing.utils.ContextAware {
+public class SrvCustomersV01 implements ISrvCustomersV01,
+		com.bbva.jee.arq.spring.core.servicing.utils.ContextAware {
 
-	private static I18nLog log = I18nLogFactory.getLogI18n(SrvCustomersV01.class,"META-INF/spring/i18n/log/mensajesLog");
+	private static I18nLog log = I18nLogFactory.getLogI18n(
+			SrvCustomersV01.class, "META-INF/spring/i18n/log/mensajesLog");
 
 	public HttpHeaders httpHeaders;
-	
+
 	@Autowired
 	BusinessServicesToolKit businessServicesToolKit;
 
@@ -75,79 +75,91 @@ public class SrvCustomersV01 implements ISrvCustomersV01, com.bbva.jee.arq.sprin
 	public void setFilterConverter(IFilterConverter filterConverter) {
 		this.filterConverter = filterConverter;
 	}
-	
-	@ApiOperation(value="Returns the relationship between consumption and / or expenses of the customer in different business scopes", notes="these are ordered items for all credit cards a client.",response=List.class)
+
+	@ApiOperation(value = "Returns the relationship between consumption and / or expenses of the customer in different business scopes", notes = "these are ordered items for all credit cards a client.", response = List.class)
 	@ApiResponses(value = {
-		@ApiResponse(code = -1, message = "aliasGCE1"),
-		@ApiResponse(code = -1, message = "aliasGCE2"),
-		@ApiResponse(code = 200, message = "Found Sucessfully", response=List.class),
-		@ApiResponse(code = 400, message = "Wrong parameters"),
-		@ApiResponse(code = 409, message = "Data not found"),
-		@ApiResponse(code = 500, message = "Technical Error")})
+			@ApiResponse(code = -1, message = "aliasGCE1"),
+			@ApiResponse(code = -1, message = "aliasGCE2"),
+			@ApiResponse(code = 200, message = "Found Sucessfully", response = List.class),
+			@ApiResponse(code = 400, message = "Wrong parameters"),
+			@ApiResponse(code = 409, message = "Data not found"),
+			@ApiResponse(code = 500, message = "Technical Error") })
 	@GET
 	@ElementClass(response = List.class)
 	@Path("/{customerId}/creditCard/cardCharges")
-	@SMC(registryID="SMCCO1400006",logicalID="getlistCreditCardsCharges")
+	@SMC(registryID = "SMCCO1400006", logicalID = "getlistCreditCardsCharges")
 	public List<CardCharge> listCreditCardsCharges(
 			@ApiParam(value = "Claim identifier param") @PathParam("customerId") String customerId,
 			@ApiParam(value = "filter param") @DefaultValue("null") @QueryParam("$filter") String filter) {
-		
-		log.info("Into listCreditCardsCharges...");
-		
-		if(customerId == null || customerId.trim().isEmpty()
-				|| filter == null || filter.isEmpty()){
-			throw new BusinessServiceException(EnumError.WRONG_PARAMETERS.getAlias());
-		}
 
-		return srvIntCustomers.getlistCreditCharges(customerId, filterConverter.toCardChargeFilter(filter));
+		log.info("Into listCreditCardsCharges...");
+
+		// 1. Validate parameter
+		if (customerId == null || customerId.trim().isEmpty()) {
+			throw new BusinessServiceException(
+					EnumError.WRONG_PARAMETERS.getAlias());
+		}
+		// 2. Validate filter FIQL
+		new FiqlValidator(filter).exist().hasGeAndLe("chargeDate").validate();
+		// 3. Invoke SrvIntCustomers and Mapping to canonical DTO
+		return srvIntCustomers.getlistCreditCharges(customerId,
+				filterConverter.toCardChargeFilter(filter));
 	}
-	
-	@ApiOperation(value="Returns the list of summaries of balance all customer accounts per month", notes="(income, expenses and balance)",response=List.class)
+
+	@ApiOperation(value = "Returns the list of summaries of balance all customer accounts per month", notes = "(income, expenses and balance)", response = List.class)
 	@ApiResponses(value = {
-		@ApiResponse(code = -1, message = "aliasGCE1"),
-		@ApiResponse(code = -1, message = "aliasGCE2"),
-		@ApiResponse(code = 200, message = "Found Sucessfully", response=List.class),
-		@ApiResponse(code = 400, message = "Wrong parameters"),
-		@ApiResponse(code = 409, message = "Data not found"),
-		@ApiResponse(code = 500, message = "Technical Error")})
+			@ApiResponse(code = -1, message = "aliasGCE1"),
+			@ApiResponse(code = -1, message = "aliasGCE2"),
+			@ApiResponse(code = 200, message = "Found Sucessfully", response = List.class),
+			@ApiResponse(code = 400, message = "Wrong parameters"),
+			@ApiResponse(code = 409, message = "Data not found"),
+			@ApiResponse(code = 500, message = "Technical Error") })
 	@GET
 	@ElementClass(response = List.class)
 	@Path("/{customerId}/accounts/movementsResume")
-	@SMC(registryID="SMCCO1400007",logicalID="getlistAccountsMovementsResume")
+	@SMC(registryID = "SMCCO1400007", logicalID = "getlistAccountsMovementsResume")
 	public List<AccMovementsResume> listAccountsMovementsResume(
 			@ApiParam(value = "Claim identifier param") @PathParam("customerId") String customerId,
 			@ApiParam(value = "filter param") @DefaultValue("null") @QueryParam("$filter") String filter) {
-		
+
 		log.info("Into listAccountsMovementsResume...");
 		
-		if(customerId == null || customerId.trim().isEmpty()
-				|| filter == null || filter.isEmpty()){
-			throw new BusinessServiceException(EnumError.WRONG_PARAMETERS.getAlias());
+		// 1. Validate parameter
+		if (customerId == null || customerId.trim().isEmpty()) {
+			throw new BusinessServiceException(
+					EnumError.WRONG_PARAMETERS.getAlias());
 		}
-
-		return srvIntCustomers.getlistAccountsMovementsResume(customerId, filterConverter.toAccountMovementFilter(filter));
+		// 2. Validate filter FIQL
+		new FiqlValidator(filter).exist().hasGeAndLe("month").validate();	
+		// 3. Invoke SrvIntCustomers and Mapping to canonical DTO
+		return srvIntCustomers.getlistAccountsMovementsResume(customerId,
+				filterConverter.toAccountMovementFilter(filter));
 	}
-	
-	@ApiOperation(value="Returns the customer information for showing in global position", notes="Customer Information",response=List.class)
+
+	@ApiOperation(value = "Returns the customer information for showing in global position", notes = "Customer Information", response = List.class)
 	@ApiResponses(value = {
-		@ApiResponse(code = -1, message = "aliasGCE1"),
-		@ApiResponse(code = -1, message = "aliasGCE2"),
-		@ApiResponse(code = 200, message = "Found Sucessfully", response=Customer.class),
-		@ApiResponse(code = 400, message = "Wrong parameters"),
-		@ApiResponse(code = 409, message = "Data not found"),
-		@ApiResponse(code = 500, message = "Technical Error")})
+			@ApiResponse(code = -1, message = "aliasGCE1"),
+			@ApiResponse(code = -1, message = "aliasGCE2"),
+			@ApiResponse(code = 200, message = "Found Sucessfully", response = Customer.class),
+			@ApiResponse(code = 400, message = "Wrong parameters"),
+			@ApiResponse(code = 409, message = "Data not found"),
+			@ApiResponse(code = 500, message = "Technical Error") })
 	@GET
 	@ElementClass(response = Customer.class)
 	@Path("/{customerId}")
-	@SMC(registryID="SMCCO1400023",logicalID="getCustomer")
+	@SMC(registryID = "SMCCO1400023", logicalID = "getCustomer")
 	public Customer getCustomer(
 			@ApiParam(value = "Claim identifier param") @PathParam("customerId") String customerId) {
-		
+
 		log.info("Into getCustomer...");
-		
-		if(customerId == null || customerId.trim().isEmpty()){
-			throw new BusinessServiceException(EnumError.WRONG_PARAMETERS.getAlias());
+
+		// 1. Validate parameter
+		if (customerId == null || customerId.trim().isEmpty()) {
+			throw new BusinessServiceException(
+					EnumError.WRONG_PARAMETERS.getAlias());
 		}
+
+		// 2. Invoke SrvIntCustomers and Mapping to canonical DTO
 		return srvIntCustomers.getCustomer(customerId);
 	}
 }

@@ -29,25 +29,25 @@ public class GetConditionsMapper
 
         // Todos los campos comentados son campos para uso futuro
         //dtoIntConditions.setAlias(outFormat.getTialias());
-        dtoIntConditions.setCategory(outFormat.getTipprod());
-        dtoIntConditions.setDescription(outFormat.getDesprod());
-        dtoIntConditions.setOpeningDate(outFormat.getFechape());
-        dtoIntConditions.setCommission(outFormat.getComprod());
+        dtoIntConditions.setCategory("01"/*outFormat.getTipprod()*/);
+        dtoIntConditions.setDescription("CUENTA CORRIENTE"/*outFormat.getDesprod()*/);
+        dtoIntConditions.setOpeningDate(new Date()/*outFormat.getFechape()*/);
+        dtoIntConditions.setCommission("9000"/*outFormat.getComprod()*/);
         //dtoIntConditions.setMobilizationConditions(outFormat.getConprod());
 
         DTOIntOffice dtoIntOffice = new DTOIntOffice();
-        dtoIntOffice.setName(outFormat.getNomofic());
-        dtoIntOffice.setPostalAddress(outFormat.getDirofic());
+        dtoIntOffice.setName("AVENIDA CHILE"/*outFormat.getNomofic()*/);
+        dtoIntOffice.setPostalAddress("CARRERA 9 72 35"/*outFormat.getDirofic()*/);
 
         DTOIntLocation dtoIntLocation = new DTOIntLocation();
 
         DTOIntCity dtoIntCity = new DTOIntCity();
-        dtoIntCity.setName(outFormat.getCiudofi());
+        dtoIntCity.setName("BOGOTA DC"/*outFormat.getCiudofi()*/);
 
         dtoIntLocation.setCity(dtoIntCity);
 
         DTOIntCountry dtoIntCountry = new DTOIntCountry();
-        dtoIntCountry.setName(outFormat.getPaisofi());
+        dtoIntCountry.setName("COLOMBIA"/*outFormat.getPaisofi()*/);
 
         dtoIntLocation.setCountry(dtoIntCountry);
 
