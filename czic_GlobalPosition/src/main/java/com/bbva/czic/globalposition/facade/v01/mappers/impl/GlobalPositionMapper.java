@@ -11,7 +11,6 @@ import com.bbva.czic.routine.mapper.metadata.TypeFactory;
 import com.bbva.jee.arq.spring.core.servicing.utils.Money;
 import org.springframework.stereotype.Component;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Component(value = "global-position-mapper")
@@ -88,5 +87,22 @@ public class GlobalPositionMapper extends AbstractBbvaConfigurableMapper impleme
         intProductFilter.setProductType(productType);
 
         return intProductFilter;
+    }
+
+    @Override
+    public Product map(DTOIntProduct intProduct) {
+        return map(intProduct);
+    }
+
+    @Override
+    public DTOIntProduct map(Product product) {
+        return map(product);
+    }
+
+    @Override
+    public DTOIntProduct getDTOInt(final String productId, final Product product) {
+        final DTOIntProduct intProduct = map(product);
+        intProduct.setId(productId);
+        return intProduct;
     }
 }

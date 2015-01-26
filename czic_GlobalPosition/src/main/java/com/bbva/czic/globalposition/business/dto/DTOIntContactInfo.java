@@ -4,8 +4,6 @@ package com.bbva.czic.globalposition.business.dto;
 import java.util.ArrayList;
 import java.util.List;
 
-
-
 public class DTOIntContactInfo {
 
     public final static long serialVersionUID = 1L;

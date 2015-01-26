@@ -160,6 +160,8 @@ public class SrvGlobalPositionV01 implements ISrvGlobalPositionV01,
 		productInt.setId(idProduct);
 		productInt.setOperable(infoProduct.getOperable());
 
+
+
 		srvIntGlobalPosition.updateProductOperability(productInt);
 		return Response.ok().build();
 	}
