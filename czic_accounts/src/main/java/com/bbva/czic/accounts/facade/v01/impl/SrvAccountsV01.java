@@ -14,7 +14,9 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
 
+import com.bbva.czic.accounts.business.dto.DTOIntFilterChecks;
 import com.bbva.czic.accounts.business.dto.DTOIntFilterMovResumes;
+import com.bbva.czic.accounts.facade.v01.utils.IListCheckFilterConverter;
 import org.apache.cxf.jaxrs.model.wadl.ElementClass;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -83,6 +85,9 @@ public class SrvAccountsV01 implements ISrvAccountsV01, com.bbva.jee.arq.spring.
 	@Resource(name = "accounts-filter-converter")
 	private IFilterConverter accFilterConverter;
 
+	@Resource(name = "listCheck-filter-converter")
+	private IListCheckFilterConverter listCheckFilterConverter;
+
 	@Override
 	@ApiOperation(value = "Operacion que retorna el resumen de la informacion de una cuenta", notes = "Tipo de Producto", response = AccountsDAO.class)
 	@ApiResponses(value = { @ApiResponse(code = -1, message = "aliasGCE1"),
@@ -141,7 +146,11 @@ public class SrvAccountsV01 implements ISrvAccountsV01, com.bbva.jee.arq.spring.
 			@ApiParam(value = "expands param") @DefaultValue("null") @QueryParam("$expands") String expands,
 			@ApiParam(value = "order by param") @DefaultValue("null") @QueryParam("$sort") String sort) {
 
-		return iAccountsMapper.map(srvIntAccounts.getAccMovementResume(idAccount, filter));
+		new FiqlValidator(filter).hasGe("month").validateIfExisit();
+
+		DTOIntFilterMovResumes dtoIntFilter = accFilterConverter.getDTOIntFilterMovRes(idAccount , filter);
+
+		return iAccountsMapper.map(srvIntAccounts.getAccMovementResume(dtoIntFilter));
 	}
 
 	/*
@@ -162,7 +171,14 @@ public class SrvAccountsV01 implements ISrvAccountsV01, com.bbva.jee.arq.spring.
 								 @ApiParam(value = "fields param") @DefaultValue("null") @QueryParam("paginationKey") Integer paginationKey,
 								 @ApiParam(value = "expands param") @DefaultValue("null") @QueryParam("pageSize") Integer pageSize) {
 
-		return iAccountsMapper.mapChecks(srvIntAccounts.listCheck(accountId, filter, paginationKey, pageSize));
+		// Validacion del filtro
+		new FiqlValidator(filter).exist()
+				.hasGeAndLeDate("check.issueDate").hasEq("check.status").validate();
+
+		// Mapeo del filtro a DTO
+		DTOIntFilterChecks dtoIntFilterChecks = iAccountsMapper.getDtoIntFilterChecks(accountId, filter, paginationKey, pageSize);
+
+		return iAccountsMapper.mapChecks(srvIntAccounts.listCheck(dtoIntFilterChecks));
 	}
 
 	@Override

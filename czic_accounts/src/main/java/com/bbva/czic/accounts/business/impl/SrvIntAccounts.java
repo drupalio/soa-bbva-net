@@ -30,9 +30,6 @@ public class SrvIntAccounts implements ISrvIntAccounts {
 	@Resource(name = "accounts-dao")
 	private AccountsDAO accountsDAO;
 
-	@Resource(name = "listCheck-filter-converter")
-	private IListCheckFilterConverter listCheckFilterConverter;
-
 	@Resource(name = "accounts-filter-converter")
 	private IFilterConverter accFilterConverter;
 
@@ -54,13 +51,16 @@ public class SrvIntAccounts implements ISrvIntAccounts {
 	}
 
 	@Override
-	public List<DTOIntAccMovementsResume> getAccMovementResume(String accountId, String filter) {
+	public List<DTOIntAccMovementsResume> getAccMovementResume(DTOIntFilterMovResumes filter) {
 		log.info(" getAccMovementResume ");
-		DTOIntFilterMovResumes dtoIntFilter = accFilterConverter.getDTOIntFilterMovRes(accountId, filter);
 
-		DtoValidator.validate(dtoIntFilter);
+		DtoValidator.validate(filter);
 
-		return accountsDAO.getAccountMovementResume(dtoIntFilter);
+		List<DTOIntAccMovementsResume> result = accountsDAO.getAccountMovementResume(filter);
+
+		DtoValidator.validate(result);
+
+		return result;
 	}
 
 	@Override
@@ -77,20 +77,16 @@ public class SrvIntAccounts implements ISrvIntAccounts {
 	}
 
 	@Override
-	public List<DTOIntCheck> listCheck(String accountId, String filter, Integer paginationKey, Integer pageSize) {
+	public List<DTOIntCheck> listCheck(DTOIntFilterChecks filter) {
 		log.info("Into SrvIntAccounts.listCheck...");
-		// Validacion del filtro
-		FiqlValidator fiqlValidator = (FiqlValidator)new FiqlValidator(filter).exist()
-				.hasGeAndLeDate("check.issueDate").hasEq("check.status").validate();
-
-		// Mapeo del filtro a DTO
-		DTOIntFilterChecks dtoIntFilterChecks = listCheckFilterConverter.getDTOIntFilter(accountId, filter,
-				paginationKey, pageSize);
-
 		// Validacion del dto de filtro
-		DtoValidator.validate(dtoIntFilterChecks);
+		DtoValidator.validate(filter);
 
-		return accountsDAO.getListCheck(dtoIntFilterChecks);
+		List<DTOIntCheck> result = accountsDAO.getListCheck(filter);
+
+		DtoValidator.validate(result);
+
+		return result;
 	}
 
 	@Override
