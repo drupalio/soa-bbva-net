@@ -75,8 +75,6 @@ public class SrvIntAccounts implements ISrvIntAccounts {
 		log.info("Into SrvIntAccounts.listCheck...");
 		// Validacion del dto de filtro
 		DtoValidator.validate(filter);
-		new DateValidator().hasDateFormat(filter.getStartDate())
-				.hasDateFormat(filter.getEndDate()).validate();
 
 		List<DTOIntCheck> result = accountsDAO.getListCheck(filter);
 

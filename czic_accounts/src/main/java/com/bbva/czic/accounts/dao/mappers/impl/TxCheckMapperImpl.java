@@ -12,6 +12,7 @@ import com.bbva.czic.accounts.dao.model.oznv.FormatoOZECNVS0;
 import com.bbva.czic.accounts.dao.model.oznx.FormatoOZECNXE0;
 import com.bbva.czic.accounts.dao.model.oznx.FormatoOZECNXS0;
 import com.bbva.czic.routine.commons.rm.utils.converter.StringMoneyConverter;
+import com.bbva.czic.routine.commons.rm.utils.mappers.AbstractBbvaTxConfigurableMapper;
 import com.bbva.czic.routine.commons.rm.utils.mappers.Mapper;
 import com.bbva.czic.routine.mapper.CustomMapper;
 import com.bbva.czic.routine.mapper.MapperFactory;
@@ -22,7 +23,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Mapper(value = "txCheckMapper")
-public class TxCheckMapperImpl extends ConfigurableMapper implements TxCheckMapper {
+public class TxCheckMapperImpl extends AbstractBbvaTxConfigurableMapper implements TxCheckMapper {
 
 	/**
 	 * 

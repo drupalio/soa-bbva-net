@@ -19,7 +19,8 @@ import java.util.Date;
 @RooJavaBean
 @RooToString
 @RooSerializable
-public class FormatoOZECNXE0 {
+public class
+		FormatoOZECNXE0 {
 
 	/**
 	 * <p>Campo <code>INDPAGI</code>, &iacute;ndice: <code>1</code>, tipo: <code>ENTERO</code>

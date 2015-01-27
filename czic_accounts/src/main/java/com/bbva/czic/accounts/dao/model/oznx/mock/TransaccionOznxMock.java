@@ -6,6 +6,7 @@ import com.bbva.czic.accounts.dao.model.oznx.PeticionTransaccionOznx;
 import com.bbva.czic.accounts.dao.model.oznx.RespuestaTransaccionOznx;
 import com.bbva.jee.arq.spring.core.host.ExcepcionTransaccion;
 import com.bbva.jee.arq.spring.core.host.InvocadorTransaccion;
+import com.bbva.jee.arq.spring.core.host.protocolo.ps9.aplicacion.CopySalida;
 import org.fluttercode.datafactory.impl.DataFactory;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
@@ -29,20 +30,20 @@ public class TransaccionOznxMock implements InvocadorTransaccion<PeticionTransac
         final List<FormatoOZECNXS0> salidas = new ArrayList<FormatoOZECNXS0>();
         final DataFactory dataFactory = new DataFactory();
 
-        for(int i = 0; i < 10; i++){
+        for(int i = 0; i < 10; i++) {
             FormatoOZECNXS0 salida = new FormatoOZECNXS0();
             salida.setEstcheq("HABILITADO");
-            salida.setFechemi(dataFactory.getDateBetween(dataFactory.getDate(2014,12,01),new Date()));
-            salida.setFechmod(dataFactory.getDateBetween(dataFactory.getDate(2014,12,01),new Date()));
-            salida.setIndpagi(dataFactory.getNumberBetween(1,10));
+            salida.setFechemi(dataFactory.getDateBetween(dataFactory.getDate(2014, 12, 01), new Date()));
+            salida.setFechmod(dataFactory.getDateBetween(dataFactory.getDate(2014, 12, 01), new Date()));
+            salida.setIndpagi(dataFactory.getNumberBetween(1, 10));
             salida.setNumcheq(dataFactory.getNumberText(9));
-            salida.setValcheq(new BigDecimal(dataFactory.getNumberBetween(100000,1000000)));
-            salida.setNumprod(((FormatoOZECNXE0)peticion.getCuerpo().getParte(FormatoOZECNXE0.class)).getNumprod());
+            salida.setValcheq(new BigDecimal(dataFactory.getNumberBetween(100000, 200000)));
+            salida.setNumprod(((FormatoOZECNXE0) peticion.getCuerpo().getParte(FormatoOZECNXE0.class)).getNumprod());
 
-            salidas.add(salida);
+            CopySalida copySalida = new CopySalida();
+            copySalida.setCopy(salida);
+            respuesta.getCuerpo().getPartes().add(copySalida);
         }
-
-        respuesta.getCuerpo().getPartes().add(salidas);
 
         return respuesta;
     }

@@ -165,7 +165,7 @@ public class SrvAccountsV01 implements ISrvAccountsV01, com.bbva.jee.arq.spring.
 
 		// Validacion del filtro
 		new FiqlValidator(filter).exist()
-				.hasGeAndLeDate("check.issueDate").hasEq("check.status").validate();
+				.hasGeAndLeDate("issueDate").hasEq("status").validate();
 
 		// Mapeo del filtro a DTO
 		DTOIntFilterChecks dtoIntFilterChecks = iAccountsMapper.getDtoIntFilterChecks(accountId, filter, paginationKey, pageSize);
