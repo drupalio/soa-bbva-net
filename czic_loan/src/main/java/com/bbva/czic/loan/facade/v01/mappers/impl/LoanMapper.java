@@ -8,12 +8,17 @@ import com.bbva.czic.dto.net.RotaryQuotaMove;
 import com.bbva.czic.loan.business.dto.DTOIntLoan;
 import com.bbva.czic.loan.business.dto.DTOIntMovement;
 import com.bbva.czic.loan.business.dto.DTOIntRotaryQuotaMove;
+import com.bbva.czic.loan.dao.model.oznj.FormatoOZNCENJ0;
+import com.bbva.czic.loan.dao.model.oznj.FormatoOZNCSNJ0;
 import com.bbva.czic.loan.facade.v01.mappers.ILoanMapper;
 import com.bbva.czic.routine.commons.rm.utils.mappers.AbstractBbvaConfigurableMapper;
 import com.bbva.czic.routine.commons.rm.utils.mappers.Mapper;
 import com.bbva.czic.routine.mapper.MapperFactory;
+import com.bbva.czic.routine.mapper.factory.MoneyFactory;
+import com.bbva.czic.routine.mapper.metadata.TypeFactory;
 import com.bbva.jee.arq.spring.core.log.I18nLog;
 import com.bbva.jee.arq.spring.core.log.I18nLogFactory;
+import com.bbva.jee.arq.spring.core.servicing.utils.Money;
 
 import java.util.List;
 
@@ -27,35 +32,26 @@ public class LoanMapper extends AbstractBbvaConfigurableMapper implements ILoanM
 	@Override
 	protected void configure(MapperFactory factory) {
 
-	/*	super.configure(factory);
+		super.configure(factory);
 
-		// Map DTOIntCheckbook <-> CheckBook
-		factory.classMap(DTOIntCheckbook.class, Checkbook.class).field("id", "id").field("firstCheck", "firstCheck")
-				.field("lastCheck", "lastCheck").field("totalCheck", "totalCheck").field("actualState", "actualState")
-				.field("deliveryDate", "deliveryDate").field("requestDate", "requestDate").byDefault().register();
+		factory.registerObjectFactory(new MoneyFactory(), TypeFactory.<Money>valueOf(Money.class));
 
-		factory.classMap(DTOIntBalance.class, Balance.class).field("total", "total")
-				.field("availableBalance", "availableBalance").byDefault().register();
+		// Map DTOIntLoan <-> Loan
+		factory.classMap(DTOIntLoan.class, Loan.class)
+				.field("id", "id").field("type", "type").field("name", "name")
+				.field("status", "status").field("payment.paymentDate", "payment.paymentDate")
+				.field("payment.dueDate", "payment.dueDate").field("payment.shortDate", "payment.shortDate").field("payment.fees", "payment.fees")
+				.field("payment.minimumPayment", "payment.minimumPayment").field("payment.numbersOfQuota", "payment.numbersOfQuota")
+				.field("debt.total","debt.total").field("debt.availableBalance", "debt.availableBalance").field("balance.total", "debt.availableBalance")
+				.byDefault().register();
 
-		// Map DTOIntAccount <-> FormatoOZECNVE0
-		factory.classMap(DTOIntAccount.class, Account.class).field("name", "name").field("idAccount", "id")
-				.field("balance", "balance").field("listaCheckBook", "checkbooks").byDefault().register();
-
-		// // Map DTOIntCheck <-> FormatoOZECNVE0
-		factory.classMap(DTOIntCheck.class, Check.class).field("id", "id").field("status", "status")
-				.field("issueDate", "issueDate").field("value", "value").byDefault().register();
-		//
-		// // Map DTOIntMonthlyBalances <-> MonthlyBalances
-		factory.classMap(DTOIntMonthlyBalances.class, MonthlyBalances.class).field("balance", "balance")
-				.field("month", "month").byDefault().register();
-
-		// // Map DTOIntAccMovementsResume <-> AccMovementsResume
-		factory.classMap(DTOIntAccMovementsResume.class, AccMovementsResume.class).field("month.mes", "month")
-				.field("balance", "balance").field("income", "income").field("outcome", "outcome").byDefault()
-				.register();
-*/
+		// Map DTOIntMovement <-> Movement
+		factory.classMap(DTOIntMovement.class, Movement.class)
+				.field("id", "id").field("concept", "concept").field("transactionDate", "transactionDate")
+				.field("operation.description", "operation.description").field("status", "status").field("value", "value")
+				.field("balance", "balance")
+				.byDefault().register();
 	}
-
 
 	@Override
 	public Loan map(DTOIntLoan dtoIntLoan) {

@@ -4,11 +4,9 @@ import com.bbva.czic.loan.business.dto.DTOIntFilterLoan;
 import com.bbva.czic.loan.business.dto.DTOIntLoan;
 import com.bbva.czic.loan.dao.mappers.TxLoanMapper;
 import com.bbva.czic.loan.dao.mappers.impl.ITxLoanMapper;
-import com.bbva.czic.loan.dao.model.oznj.FormatoOZNCENJ0;
-import com.bbva.czic.loan.dao.model.oznj.FormatoOZNCSNJ0;
-import com.bbva.czic.loan.dao.model.oznj.TransaccionOznj;
-import com.bbva.czic.loan.facade.v01.mappers.impl.ITxGetRotaryQuota;
-import com.bbva.czic.routine.commons.rm.utils.tx.impl.ListBbvaTransaction;
+import com.bbva.czic.loan.dao.model.oznj.*;
+
+
 import com.bbva.czic.routine.commons.rm.utils.tx.impl.SimpleBbvaTransaction;
 import com.bbva.jee.arq.spring.core.host.InvocadorTransaccion;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,10 +20,10 @@ import javax.annotation.Resource;
 @Component("tx-get-rotary-quota")
 public class TxGetRotaryQuota extends SimpleBbvaTransaction<DTOIntFilterLoan, FormatoOZNCENJ0, DTOIntLoan, FormatoOZNCSNJ0>{
 
-    @Autowired
-    private transient TransaccionOznj transaccionOznj;
+    @Resource(name = "transaccionOznj")
+    private InvocadorTransaccion<PeticionTransaccionOznj, RespuestaTransaccionOznj> transaccionOznj;
 
-    @Resource(name = "txAccountMapper")
+    @Resource(name = "tx-loan-mapper")
     private ITxLoanMapper iTxLoanMapper;
 
     @Override

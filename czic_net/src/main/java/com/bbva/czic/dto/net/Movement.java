@@ -24,8 +24,7 @@ import com.wordnik.swagger.annotations.ApiModelProperty;
 @XmlRootElement(name = "Movement", namespace = "urn:com:bbva:czic:dto:net")
 @XmlType(name = "Movement", namespace = "urn:com:bbva:czic:dto:net")
 @XmlAccessorType(XmlAccessType.FIELD)
-public class Movement
-    implements Serializable
+public class Movement  implements Serializable
 {
 
     public final static long serialVersionUID = 1L;

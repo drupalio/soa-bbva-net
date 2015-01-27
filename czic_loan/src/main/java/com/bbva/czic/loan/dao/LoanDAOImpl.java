@@ -2,18 +2,18 @@ package com.bbva.czic.loan.dao;
 
 
 import com.bbva.czic.loan.business.dto.*;
-import com.bbva.czic.loan.dao.model.ozni.*;
-import com.bbva.czic.loan.dao.model.oznk.*;
+
+import com.bbva.czic.loan.dao.model.oznj.PeticionTransaccionOznj;
+import com.bbva.czic.loan.dao.model.oznj.RespuestaTransaccionOznj;
+
 import com.bbva.czic.loan.dao.tx.TxGetRotaryQuota;
 import com.bbva.czic.loan.dao.tx.TxGetRotaryQuotaMovement;
 import com.bbva.czic.loan.dao.tx.TxListRotaryQuotaMovements;
-import com.bbva.czic.loan.facade.v01.utils.impl.LoanDAOMock;
-import com.bbva.czic.routine.commons.rm.utils.errors.EnumError;
-import com.bbva.jee.arq.spring.core.servicing.gce.BusinessServiceException;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import com.bbva.jee.arq.spring.core.host.InvocadorTransaccion;
 
-import org.springframework.stereotype.Component;
+
+import org.springframework.stereotype.Repository;
 
 import com.bbva.czic.loan.business.impl.SrvIntLoan;
 
@@ -24,7 +24,9 @@ import javax.annotation.Resource;
 
 import java.util.List;
 
-@Component(value = "loanDao")
+
+@Repository(value = "loanDao")
+//@Profile(value = "prod")
 public class LoanDAOImpl implements LoanDAO {
 	
 	private static I18nLog log = I18nLogFactory.getLogI18n(SrvIntLoan.class,
@@ -35,6 +37,7 @@ public class LoanDAOImpl implements LoanDAO {
 	 */
 	@Resource(name = "tx-get-rotary-quota")
 	private TxGetRotaryQuota txGetRotaryQuota;
+
 
 	/**
 	 * OZNI
@@ -50,6 +53,7 @@ public class LoanDAOImpl implements LoanDAO {
 
 
 	public DTOIntLoan getRotaryQuota(final DTOIntFilterLoan dtoIntFilterLoan){
+
 		return txGetRotaryQuota.invoke(dtoIntFilterLoan);
 	}
 

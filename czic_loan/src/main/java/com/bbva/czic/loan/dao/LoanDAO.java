@@ -6,6 +6,7 @@ import com.bbva.jee.arq.spring.core.servicing.gce.BusinessServiceException;
 
 import java.util.List;
 
+
 public interface LoanDAO {
 
 	List<DTOIntMovement> listRotaryQuotaMovements(final DTOIntFilterLoan dtoIntFilterLoan);

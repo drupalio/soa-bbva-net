@@ -11,7 +11,7 @@ import com.bbva.czic.accounts.dao.mappers.TxAccountMapper;
 import com.bbva.czic.accounts.dao.model.oznu.FormatoOZECNUE0;
 import com.bbva.czic.accounts.dao.model.oznu.FormatoOZECNUS0;
 import com.bbva.czic.accounts.dao.model.oznu.TransaccionOznu;
-import com.bbva.czic.routine.commons.rm.utils.tx.impl.ListBbvaTransaction;
+import com.bbva.czic.routine.commons.rm.utils.tx.impl.MultiBbvaTransaction;
 import com.bbva.jee.arq.spring.core.host.InvocadorTransaccion;
 
 /**
@@ -20,7 +20,7 @@ import com.bbva.jee.arq.spring.core.host.InvocadorTransaccion;
 
 @Component("tx-get-account-movement-resume")
 public class TxGetAccountMovementResume extends
-		ListBbvaTransaction<DTOIntFilterAccount, FormatoOZECNUE0, DTOIntAccMovementsResume, FormatoOZECNUS0> {
+		MultiBbvaTransaction<DTOIntFilterAccount, FormatoOZECNUE0, DTOIntAccMovementsResume, FormatoOZECNUS0> {
 
 	@Autowired
 	private transient TransaccionOznu transaccionOznu;

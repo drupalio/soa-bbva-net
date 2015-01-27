@@ -7,16 +7,16 @@ import com.bbva.czic.loan.dao.mappers.impl.ITxRotaryQuotaMovementMapper;
 import com.bbva.czic.loan.dao.model.oznk.FormatoOZNCENK0;
 import com.bbva.czic.loan.dao.model.oznk.FormatoOZNCSNK0;
 import com.bbva.czic.routine.mapper.impl.ConfigurableMapper;
+import org.springframework.stereotype.Component;
 
 /**
  * Created by Entelgy on 27/01/2015.
  */
+@Component(value = "tx-rotary-quota-movement-mapper")
 public class TxRotaryQuotaMovementMapperMapper extends ConfigurableMapper implements ITxRotaryQuotaMovementMapper {
     @Override
     public FormatoOZNCENK0 mapInOzni(DTOIntFilterLoan dtoIn) {
-
             return map(dtoIn, FormatoOZNCENK0.class);
-
     }
 
     @Override

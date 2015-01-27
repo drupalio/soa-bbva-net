@@ -28,7 +28,7 @@ public class TxGetRotaryQuotaMovement extends SimpleBbvaTransaction<DTOIntFilter
     @Autowired
     private transient TransaccionOznk transaccionOznk;
 
-    @Resource(name = "txAccountMapper")
+    @Resource(name = "tx-rotary-quota-movement-mapper")
     private TxRotaryQuotaMovementMapperMapper txRotaryQuotaMovementMapperMapper;
 
     @Override

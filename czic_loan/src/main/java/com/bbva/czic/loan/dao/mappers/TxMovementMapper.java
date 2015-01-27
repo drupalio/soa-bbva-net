@@ -6,10 +6,12 @@ import com.bbva.czic.loan.dao.mappers.impl.ITxMovementMapper;
 import com.bbva.czic.loan.dao.model.ozni.FormatoOZNCENI0;
 import com.bbva.czic.loan.dao.model.ozni.FormatoOZNCSNI0;
 import com.bbva.czic.routine.mapper.impl.ConfigurableMapper;
+import org.springframework.stereotype.Component;
 
 /**
  * Created by Entelgy on 26/01/2015.
  */
+@Component(value = "tx-movement-mapper")
 public class TxMovementMapper extends ConfigurableMapper implements ITxMovementMapper {
 
 

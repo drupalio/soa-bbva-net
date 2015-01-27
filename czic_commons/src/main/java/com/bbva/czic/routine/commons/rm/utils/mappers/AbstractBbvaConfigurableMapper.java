@@ -103,11 +103,19 @@ public abstract class AbstractBbvaConfigurableMapper extends ConfigurableMapper 
 
 		private String property;
 
+		/**
+		 * 
+		 * @param property
+		 * @param conditionType
+		 */
 		public PrimitivePredicate(final String property, final ConditionType conditionType) {
 			this.conditionType = conditionType;
 			this.property = property;
 		}
 
+		/**
+		 * 
+		 */
 		@Override
 		protected boolean eval(PrimitiveStatement primitive) {
 			return (primitive.getCondition().equals(this.conditionType) && primitive.getProperty()

@@ -25,8 +25,6 @@ import com.bbva.jee.arq.spring.core.servicing.utils.BusinessServicesToolKit;
 
 import javax.annotation.Resource;
 
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 @Service
@@ -44,16 +42,16 @@ public class SrvIntLoan implements ISrvIntLoan {
 	@Override
 	public DTOIntLoan getRotaryQuota(final DTOIntFilterLoan dtoIntFilterLoan) throws BusinessServiceException {
 
-		DtoValidator.validate(dtoIntFilterLoan);
+	//	DtoValidator.validate(dtoIntFilterLoan);
 		log.info(" getRotaryQuota ");
 		// Validar filtro
 
 		final DTOIntLoan result = loanDao.getRotaryQuota(dtoIntFilterLoan);
 
 		// Mapear del filtro al dto
-		DtoValidator.validate(result);
+	//	DtoValidator.validate(result);
 		// Validar el dto de filtrado
-		return null;
+		return result;
 	}
 
 	@Override
@@ -67,7 +65,7 @@ public class SrvIntLoan implements ISrvIntLoan {
 		// Mapear del filtro al dto
 		DtoValidator.validate(result);
 		// Validar el dto de filtrado
-		return null;
+		return result;
 	}
 	@Override
 	public DTOIntRotaryQuotaMove getRotaryQuotaMovement(final DTOIntFilterLoan dtoIntFilterLoan) throws BusinessServiceException {
@@ -80,6 +78,6 @@ public class SrvIntLoan implements ISrvIntLoan {
 		// Mapear del filtro al dto
 		DtoValidator.validate(result);
 		// Validar el dto de filtrado
-		return null;
+		return result;
 	}
 }
