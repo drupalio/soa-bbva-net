@@ -383,7 +383,7 @@
 					<excludes>
 						<exclude>**/*_Roo_*</exclude>
 					</excludes>
-					<skipTests>false</skipTests>
+					<skipTests>true</skipTests>
 				</configuration>
 			</plugin>
 			<plugin>
@@ -551,6 +551,7 @@
 						<excludes>
 							<exclude>**/*_Roo_*</exclude>
 						</excludes>
+						<skipTests>true</skipTests>
 					</configuration>
 				</plugin>
 				<plugin>

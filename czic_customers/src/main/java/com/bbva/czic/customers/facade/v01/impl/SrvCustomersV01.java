@@ -1,4 +1,4 @@
-package com.bbva.czic.customers.facade.v01;
+package com.bbva.czic.customers.facade.v01.impl;
 
 import java.util.List;
 
@@ -18,6 +18,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.bbva.czic.customers.business.ISrvIntCustomers;
+import com.bbva.czic.customers.facade.v01.ISrvCustomersV01;
 import com.bbva.czic.customers.facade.v01.utils.converters.IFilterConverter;
 import com.bbva.czic.dto.net.AccMovementsResume;
 import com.bbva.czic.dto.net.CardCharge;
@@ -43,11 +44,10 @@ import com.wordnik.swagger.annotations.ApiResponses;
 @Api(value = "/customers/V01", description = "SN Customer")
 @Produces({ MediaType.APPLICATION_JSON })
 @Service
-public class SrvCustomersV01 implements ISrvCustomersV01,
-		com.bbva.jee.arq.spring.core.servicing.utils.ContextAware {
+public class SrvCustomersV01 implements ISrvCustomersV01, com.bbva.jee.arq.spring.core.servicing.utils.ContextAware {
 
-	private static I18nLog log = I18nLogFactory.getLogI18n(
-			SrvCustomersV01.class, "META-INF/spring/i18n/log/mensajesLog");
+	private static I18nLog log = I18nLogFactory.getLogI18n(SrvCustomersV01.class,
+			"META-INF/spring/i18n/log/mensajesLog");
 
 	public HttpHeaders httpHeaders;
 
@@ -76,14 +76,13 @@ public class SrvCustomersV01 implements ISrvCustomersV01,
 		this.filterConverter = filterConverter;
 	}
 
+	@Override
 	@ApiOperation(value = "Returns the relationship between consumption and / or expenses of the customer in different business scopes", notes = "these are ordered items for all credit cards a client.", response = List.class)
-	@ApiResponses(value = {
-			@ApiResponse(code = -1, message = "aliasGCE1"),
+	@ApiResponses(value = { @ApiResponse(code = -1, message = "aliasGCE1"),
 			@ApiResponse(code = -1, message = "aliasGCE2"),
 			@ApiResponse(code = 200, message = "Found Sucessfully", response = List.class),
 			@ApiResponse(code = 400, message = "Wrong parameters"),
-			@ApiResponse(code = 409, message = "Data not found"),
-			@ApiResponse(code = 500, message = "Technical Error") })
+			@ApiResponse(code = 409, message = "Data not found"), @ApiResponse(code = 500, message = "Technical Error") })
 	@GET
 	@ElementClass(response = List.class)
 	@Path("/{customerId}/creditCard/cardCharges")
@@ -96,24 +95,21 @@ public class SrvCustomersV01 implements ISrvCustomersV01,
 
 		// 1. Validate parameter
 		if (customerId == null || customerId.trim().isEmpty()) {
-			throw new BusinessServiceException(
-					EnumError.WRONG_PARAMETERS.getAlias());
+			throw new BusinessServiceException(EnumError.WRONG_PARAMETERS.getAlias());
 		}
 		// 2. Validate filter FIQL
 		new FiqlValidator(filter).exist().hasGeAndLe("chargeDate").validate();
 		// 3. Invoke SrvIntCustomers and Mapping to canonical DTO
-		return srvIntCustomers.getlistCreditCharges(customerId,
-				filterConverter.toCardChargeFilter(filter));
+		return srvIntCustomers.getlistCreditCharges(customerId, filterConverter.toCardChargeFilter(filter));
 	}
 
+	@Override
 	@ApiOperation(value = "Returns the list of summaries of balance all customer accounts per month", notes = "(income, expenses and balance)", response = List.class)
-	@ApiResponses(value = {
-			@ApiResponse(code = -1, message = "aliasGCE1"),
+	@ApiResponses(value = { @ApiResponse(code = -1, message = "aliasGCE1"),
 			@ApiResponse(code = -1, message = "aliasGCE2"),
 			@ApiResponse(code = 200, message = "Found Sucessfully", response = List.class),
 			@ApiResponse(code = 400, message = "Wrong parameters"),
-			@ApiResponse(code = 409, message = "Data not found"),
-			@ApiResponse(code = 500, message = "Technical Error") })
+			@ApiResponse(code = 409, message = "Data not found"), @ApiResponse(code = 500, message = "Technical Error") })
 	@GET
 	@ElementClass(response = List.class)
 	@Path("/{customerId}/accounts/movementsResume")
@@ -123,43 +119,34 @@ public class SrvCustomersV01 implements ISrvCustomersV01,
 			@ApiParam(value = "filter param") @DefaultValue("null") @QueryParam("$filter") String filter) {
 
 		log.info("Into listAccountsMovementsResume...");
-		
+
 		// 1. Validate parameter
 		if (customerId == null || customerId.trim().isEmpty()) {
-			throw new BusinessServiceException(
-					EnumError.WRONG_PARAMETERS.getAlias());
+			throw new BusinessServiceException(EnumError.WRONG_PARAMETERS.getAlias());
 		}
 		// 2. Validate filter FIQL
-		new FiqlValidator(filter).exist().hasGeAndLe("month").validate();	
+		new FiqlValidator(filter).exist().hasGeAndLe("month").validate();
 		// 3. Invoke SrvIntCustomers and Mapping to canonical DTO
 		return srvIntCustomers.getlistAccountsMovementsResume(customerId,
 				filterConverter.toAccountMovementFilter(filter));
 	}
 
+	@Override
 	@ApiOperation(value = "Returns the customer information for showing in global position", notes = "Customer Information", response = List.class)
-	@ApiResponses(value = {
-			@ApiResponse(code = -1, message = "aliasGCE1"),
+	@ApiResponses(value = { @ApiResponse(code = -1, message = "aliasGCE1"),
 			@ApiResponse(code = -1, message = "aliasGCE2"),
 			@ApiResponse(code = 200, message = "Found Sucessfully", response = Customer.class),
 			@ApiResponse(code = 400, message = "Wrong parameters"),
-			@ApiResponse(code = 409, message = "Data not found"),
-			@ApiResponse(code = 500, message = "Technical Error") })
+			@ApiResponse(code = 409, message = "Data not found"), @ApiResponse(code = 500, message = "Technical Error") })
 	@GET
 	@ElementClass(response = Customer.class)
 	@Path("/{customerId}")
 	@SMC(registryID = "SMCCO1400023", logicalID = "getCustomer")
-	public Customer getCustomer(
-			@ApiParam(value = "Claim identifier param") @PathParam("customerId") String customerId) {
+	public Customer getCustomer(@ApiParam(value = "Claim identifier param") @PathParam("customerId") String customerId) {
 
 		log.info("Into getCustomer...");
 
-		// 1. Validate parameter
-		if (customerId == null || customerId.trim().isEmpty()) {
-			throw new BusinessServiceException(
-					EnumError.WRONG_PARAMETERS.getAlias());
-		}
-
-		// 2. Invoke SrvIntCustomers and Mapping to canonical DTO
+		// 1. Invoke SrvIntCustomers and Mapping to canonical DTO
 		return srvIntCustomers.getCustomer(customerId);
 	}
 }

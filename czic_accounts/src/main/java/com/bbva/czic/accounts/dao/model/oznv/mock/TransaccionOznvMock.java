@@ -1,6 +1,5 @@
 package com.bbva.czic.accounts.dao.model.oznv.mock;
 
-import com.bbva.czic.accounts.dao.model.oznv.FormatoOZECNVE0;
 import com.bbva.czic.accounts.dao.model.oznv.FormatoOZECNVS0;
 import com.bbva.czic.accounts.dao.model.oznv.PeticionTransaccionOznv;
 import com.bbva.czic.accounts.dao.model.oznv.RespuestaTransaccionOznv;
@@ -47,4 +46,5 @@ public class TransaccionOznvMock implements InvocadorTransaccion<PeticionTransac
     public void vaciarCache() {
 
     }
+
 }

@@ -13,17 +13,9 @@
 		http://bbva.com/arq-spring-servicing
 		http://bbva.com/arq-spring-servicing/servicing.xsd">
 			
+	<context:property-placeholder location="*.properties" />
 	<context:spring-configured/>
-	<context:annotation-config />	
-	<context:component-scan base-package="com.bbva.czic.routine.commons" />	
+	<context:annotation-config/>
 	<aop:aspectj-autoproxy/>
-	
-	<!-- Configuracion de test para rutinas -->
-	<!-- La ejecucion de test en un proyecto maven de rutinas recrea la situacion en la que una rutina es utilizada por
-	     un determinado servicio, que forma parte de una determinada aplicacion -->
-	<!-- Representa la aplicacion ficticia en la que se ejecuta la rutina -->
-	<servicing:test-metadata application-name="uuaa" local-configuration-filesystem-root="S:/lc" />
-	<!-- Representa el servicio ficticio que ejecuta la rutina -->
-	<servicing:module-metadata service-registry-id="SN000000000" service-logical-id="example"/>
 
 </beans>

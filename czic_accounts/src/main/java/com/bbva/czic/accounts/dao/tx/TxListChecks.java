@@ -4,7 +4,7 @@ import com.bbva.czic.accounts.business.dto.DTOIntCheck;
 import com.bbva.czic.accounts.business.dto.DTOIntFilterChecks;
 import com.bbva.czic.accounts.dao.mappers.TxCheckMapper;
 import com.bbva.czic.accounts.dao.model.oznx.*;
-import com.bbva.czic.routine.commons.rm.utils.tx.impl.ListBbvaTransaction;
+import com.bbva.czic.routine.commons.rm.utils.tx.impl.MultiBbvaTransaction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -19,10 +19,10 @@ import javax.annotation.Resource;
  */
 @Component("tx-list-Check-mapperc")
 public class TxListChecks extends
-		ListBbvaTransaction<DTOIntFilterChecks, FormatoOZECNXE0, DTOIntCheck, FormatoOZECNXS0> {
+		MultiBbvaTransaction<DTOIntFilterChecks, FormatoOZECNXE0, DTOIntCheck, FormatoOZECNXS0> {
 
-	@Autowired
-	private transient TransaccionOznx transaccionOznx;
+	@Resource(name = "transaccionOznx")
+	private transient InvocadorTransaccion<PeticionTransaccionOznx,RespuestaTransaccionOznx> transaccionOznx;
 
 	@Resource(name = "txCheckMapper")
 	private TxCheckMapper txCheckMapper;

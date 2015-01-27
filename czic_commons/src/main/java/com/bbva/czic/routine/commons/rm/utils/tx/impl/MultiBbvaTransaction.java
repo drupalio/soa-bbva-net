@@ -21,7 +21,7 @@ import com.bbva.jee.arq.spring.core.servicing.gce.BusinessServiceException;
  * @param <S>
  * @param <FS>
  */
-public abstract class ListBbvaTransaction<E, FE, S, FS> {
+public abstract class MultiBbvaTransaction<E, FE, S, FS> {
 
 	@Autowired
 	private ErrorMappingHelper errorMappingHelper;
