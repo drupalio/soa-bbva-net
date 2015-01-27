@@ -1,0 +1,40 @@
+[
+  '{{repeat(9)}}',
+  {
+    numprod: function(jgTags) { return "0013044300020000946" + jgTags.index(2);},
+  tipprod: '{{random("CC", "AH", "CT", "CD", "CE", "CR", "FA", "BD", "BF", "PA", "BP", "FN", "FC", "FE", "FZ", "AN", "FG", "MD", "FR", "FB", "FP", "HI", "CS", "CM", "MC", "CL", "TE", "TO", "LS", "ED", "AQ")}}',
+  saltota: function(jgTags) {
+  var saldoTotalInt = jgTags.integer(0, 10000000000);
+  var saldoTotal = saldoTotalInt.toString();
+  for (var i = saldoTotal.length; i < 19; i++) {
+  saldoTotal = "0" + saldoTotal;
+}
+
+  return saldoTotal;
+},
+  saldisp: function(jgTags) {
+  var saldoDispInt = jgTags.integer(0, 10000000000);
+  var saldoDisp = saldoDispInt.toString();
+
+  for (var i = saldoDisp.length; i < 19; i++) {
+  saldoDisp = "0" + saldoDisp;
+}
+
+  return saldoDisp;
+},
+  salcanj: function(jgTags) {
+  var saldoCanjeInt = jgTags.integer(0, 10000000000);
+  var saldoCanje = saldoCanjeInt.toString();
+
+  for (var i = saldoCanje.length; i < 19; i++) {
+  saldoCanje = "0" + saldoCanje;
+}
+
+  return saldoCanje;
+},
+  indvisi: '{{random("C", "V")}}',
+  indoper: '{{random("U", "B")}}',
+  alias: '{{firstName()}}',
+  finstat: '{{random("A", "P")}}'
+  }
+]

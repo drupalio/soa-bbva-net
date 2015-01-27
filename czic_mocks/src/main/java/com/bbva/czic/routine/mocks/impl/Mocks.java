@@ -1,6 +1,5 @@
-package com.bbva.jee.arq.spring.core.impl;
+package com.bbva.czic.routine.mocks.impl;
 
-import com.bbva.jee.arq.spring.core.IMocks;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 

@@ -4,16 +4,18 @@ package com.bbva.czic.globalposition.business.dto;
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotEmpty;
 
+import javax.validation.constraints.Digits;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 
 public class DTOIntProduct {
 
     public final static long serialVersionUID = 1L;
     @NotEmpty
-    @Length(min = 20, max = 20)
+    @Pattern(regexp = "^(\\d{20}|\\d{16})$")
     private String id;
     @NotEmpty
-    @Length(min = 2, max = 2)
+    @Pattern(regexp = "^[A-Z]{2}$")
     private String productType;
     @NotEmpty
     private String name;

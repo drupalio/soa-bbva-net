@@ -1,6 +1,5 @@
 package com.bbva.czic.routine.mocks;
 
-import com.bbva.jee.arq.spring.core.IMocks;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;

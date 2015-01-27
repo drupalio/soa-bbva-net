@@ -1,19 +1,15 @@
 package com.bbva.czic.dto.net;
 
-import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
+import com.wordnik.swagger.annotations.ApiModelProperty;
 
-import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
-
-import org.hibernate.validator.constraints.Length;
-import org.hibernate.validator.constraints.NotBlank;
-
-import com.wordnik.swagger.annotations.ApiModelProperty;
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 @XmlRootElement(name = "Product", namespace = "urn:com:bbva:czic:dto:net")
 @XmlType(name = "Product", namespace = "urn:com:bbva:czic:dto:net")
@@ -23,11 +19,11 @@ public class Product implements Serializable {
 	public final static long serialVersionUID = 1L;
 
 	@ApiModelProperty(value = "Identificador del producto", required = true)
-	@Length(min = 20, max = 20)
+	@Pattern(regexp = "^(\\d{20}|\\d{16})$")
 	private String id;
 
 	@ApiModelProperty(value = "", required = true)
-	//private EnumProductType type;
+	@Pattern(regexp = "^[A-Z]{2}$")
 	private String type;
 
 	@ApiModelProperty(value = "Nombre del producto", required = true)

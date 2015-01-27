@@ -1,4 +1,4 @@
-package com.bbva.jee.arq.spring.core;
+package com.bbva.czic.routine.mocks;
 
 public interface IMocks {
 
