@@ -118,7 +118,7 @@ public class SrvAccountsV01 implements ISrvAccountsV01, com.bbva.jee.arq.spring.
 		new FiqlValidator(filter).exist().hasGeAndLe("month").validate();
 
 		// 2. Mapping to DTOIntFilter
-		DTOIntFilterAccount dtoIntFilterAccount = iAccountsMapper.getDTOIntFilter(idAccount, filter);
+		final DTOIntFilterAccount dtoIntFilterAccount = iAccountsMapper.getDTOIntFilter(idAccount, filter);
 
 		// 3. Invoke SrvIntAccounts and Mapping to canonical DTO
 		return iAccountsMapper.mapL(srvIntAccounts.getAccountMonthlyBalance(dtoIntFilterAccount));
@@ -190,4 +190,5 @@ public class SrvAccountsV01 implements ISrvAccountsV01, com.bbva.jee.arq.spring.
 		intCheckbook.setNumeroCuenta(accountId);
 		return iAccountsMapper.mapCheckbook(srvIntAccounts.getCheckbooks(intCheckbook));
 	}
+
 }

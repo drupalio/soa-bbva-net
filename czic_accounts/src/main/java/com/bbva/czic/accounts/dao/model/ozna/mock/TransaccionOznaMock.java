@@ -9,6 +9,7 @@ import com.bbva.czic.accounts.dao.model.ozna.RespuestaTransaccionOzna;
 import com.bbva.czic.routine.commons.rm.utils.tx.Transaction;
 import com.bbva.jee.arq.spring.core.host.ExcepcionTransaccion;
 import com.bbva.jee.arq.spring.core.host.InvocadorTransaccion;
+import com.bbva.jee.arq.spring.core.host.protocolo.ps9.aplicacion.CopySalida;
 import com.bbva.jee.arq.spring.core.log.I18nLog;
 import com.bbva.jee.arq.spring.core.log.I18nLogFactory;
 
@@ -28,9 +29,16 @@ public class TransaccionOznaMock implements InvocadorTransaccion<PeticionTransac
 
 		final RespuestaTransaccionOzna respuesta = new RespuestaTransaccionOzna();
 		final FormatoOZNCSNA0 salida = new FormatoOZNCSNA0();
-
 		final DataFactory dataFactory = new DataFactory();
-		salida.setIdcheq0(dataFactory.getNumberText(20));
+
+		salida.setNomprod(dataFactory.getRandomText(50));
+		salida.setNumprod(dataFactory.getNumberText(6));
+		salida.setSaltota(dataFactory.getNumberText(6));
+		salida.setSdcanje(dataFactory.getNumberText(6));
+		salida.setSddispo(dataFactory.getNumberText(6));
+		salida.setTipprod("AH");
+
+		salida.setIdcheq0(dataFactory.getNumberText(10));
 		salida.setIdcheq1(dataFactory.getNumberText(20));
 		salida.setIdcheq2(dataFactory.getNumberText(20));
 		salida.setIdcheq3(dataFactory.getNumberText(20));
@@ -41,7 +49,10 @@ public class TransaccionOznaMock implements InvocadorTransaccion<PeticionTransac
 		salida.setIdcheq8(dataFactory.getNumberText(20));
 		salida.setIdcheq9(dataFactory.getNumberText(20));
 
-		respuesta.getCuerpo().getPartes().add(salida);
+		CopySalida copySalida = new CopySalida();
+		copySalida.setCopy(salida);
+
+		respuesta.getCuerpo().getPartes().add(copySalida);
 
 		return respuesta;
 	}

@@ -75,13 +75,14 @@ public class SrvIntAccounts implements ISrvIntAccounts {
 
 	@Override
 	public List<DTOIntCheck> listCheck(String accountId, String filter, Integer paginationKey, Integer pageSize) {
+
 		log.info("Into SrvIntAccounts.listCheck...");
+
 		// Validacion del filtro
-		FiqlValidator fiqlValidator = (FiqlValidator)new FiqlValidator(filter).exist()
-				.hasGeAndLeDate("check.issueDate").hasEq("check.status").validate();
+		new FiqlValidator(filter).exist().hasGeAndLeDate("check.issueDate").hasEq("check.status").validate();
 
 		// Mapeo del filtro a DTO
-		DTOIntFilterChecks dtoIntFilterChecks = listCheckFilterConverter.getDTOIntFilter(accountId, filter,
+		final DTOIntFilterChecks dtoIntFilterChecks = listCheckFilterConverter.getDTOIntFilter(accountId, filter,
 				paginationKey, pageSize);
 
 		// Validacion del dto de filtro
