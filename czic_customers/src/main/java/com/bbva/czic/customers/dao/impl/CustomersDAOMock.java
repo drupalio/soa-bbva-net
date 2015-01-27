@@ -1,4 +1,4 @@
-package com.bbva.czic.customers.dao;
+package com.bbva.czic.customers.dao.impl;
 
 import java.math.BigDecimal;
 

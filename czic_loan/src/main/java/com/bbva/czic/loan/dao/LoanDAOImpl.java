@@ -11,7 +11,6 @@ import com.bbva.czic.routine.commons.rm.utils.errors.EnumError;
 import com.bbva.jee.arq.spring.core.servicing.gce.BusinessServiceException;
 
 import org.springframework.beans.factory.annotation.Autowired;
-
 import org.springframework.stereotype.Repository;
 
 import com.bbva.czic.loan.business.dto.DTOIntLoan;
@@ -20,17 +19,18 @@ import com.bbva.czic.loan.dao.model.oznj.FormatoOZNCENJ0;
 import com.bbva.czic.loan.dao.model.oznj.FormatoOZNCSNJ0;
 import com.bbva.czic.loan.dao.model.oznj.PeticionTransaccionOznj;
 import com.bbva.czic.loan.dao.model.oznj.RespuestaTransaccionOznj;
-import com.bbva.czic.loan.dao.model.oznj.TransaccionOznj;
 import com.bbva.czic.loan.dao.mapper.LoanMapper;
+import com.bbva.jee.arq.spring.core.host.InvocadorTransaccion;
 import com.bbva.jee.arq.spring.core.host.protocolo.ps9.ErrorMappingHelper;
-
 import com.bbva.jee.arq.spring.core.log.I18nLog;
 import com.bbva.jee.arq.spring.core.log.I18nLogFactory;
+
 import org.springframework.util.CollectionUtils;
 
 import java.util.ArrayList;
-
 import java.util.List;
+
+import javax.annotation.Resource;
 
 @Repository(value = "loanDao")
 public class LoanDAOImpl implements LoanDAO {
@@ -41,8 +41,8 @@ public class LoanDAOImpl implements LoanDAO {
 	@Autowired
 	private ErrorMappingHelper errorMappingHelper;
 
-	@Autowired
-	private TransaccionOznj transaccionOznj;
+	@Resource(name = "transaccionOznj")
+	private InvocadorTransaccion<PeticionTransaccionOznj, RespuestaTransaccionOznj> transaccionOznj;
 
 	@Autowired
 	private TransaccionOzni transaccionOzni;

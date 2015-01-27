@@ -1,11 +1,12 @@
 package com.bbva.czic.accounts.dao.model.ozna;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import org.springframework.context.annotation.Profile;
 
+import com.bbva.czic.routine.commons.rm.utils.tx.Transaction;
 import com.bbva.jee.arq.spring.core.host.ExcepcionTransaccion;
-import com.bbva.jee.arq.spring.core.host.ServicioTransacciones;
 import com.bbva.jee.arq.spring.core.host.InvocadorTransaccion;
+import com.bbva.jee.arq.spring.core.host.ServicioTransacciones;
 
 /**
  * Invocador de la transacci&oacute;n <code>OZNA</code>
@@ -13,22 +14,26 @@ import com.bbva.jee.arq.spring.core.host.InvocadorTransaccion;
  * @see PeticionTransaccionOzna
  * @see RespuestaTransaccionOzna
  */
-@Component
-public class TransaccionOzna implements InvocadorTransaccion<PeticionTransaccionOzna,RespuestaTransaccionOzna> {
-	
+@Profile("prod")
+@Transaction(value = "transaccionOzna")
+public class TransaccionOzna implements InvocadorTransaccion<PeticionTransaccionOzna, RespuestaTransaccionOzna> {
+
 	@Autowired
 	private ServicioTransacciones servicioTransacciones;
-	
+
 	@Override
 	public RespuestaTransaccionOzna invocar(PeticionTransaccionOzna transaccion) throws ExcepcionTransaccion {
-		return servicioTransacciones.invocar(PeticionTransaccionOzna.class, RespuestaTransaccionOzna.class, transaccion);
+		return servicioTransacciones
+				.invocar(PeticionTransaccionOzna.class, RespuestaTransaccionOzna.class, transaccion);
 	}
-	
+
 	@Override
 	public RespuestaTransaccionOzna invocarCache(PeticionTransaccionOzna transaccion) throws ExcepcionTransaccion {
-		return servicioTransacciones.invocar(PeticionTransaccionOzna.class, RespuestaTransaccionOzna.class, transaccion);
+		return servicioTransacciones
+				.invocar(PeticionTransaccionOzna.class, RespuestaTransaccionOzna.class, transaccion);
 	}
-	
+
 	@Override
-	public void vaciarCache() {}	
+	public void vaciarCache() {
+	}
 }
