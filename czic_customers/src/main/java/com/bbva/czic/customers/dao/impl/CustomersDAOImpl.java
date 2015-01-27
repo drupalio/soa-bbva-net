@@ -30,6 +30,7 @@ import com.bbva.czic.customers.dao.model.oznq.FormatoOZECNQE0;
 import com.bbva.czic.customers.dao.model.oznq.FormatoOZECNQS0;
 import com.bbva.czic.customers.dao.model.oznq.PeticionTransaccionOznq;
 import com.bbva.czic.customers.dao.model.oznq.RespuestaTransaccionOznq;
+import com.bbva.czic.customers.dao.tx.TxGetCustomer;
 import com.bbva.czic.routine.commons.rm.utils.errors.EnumError;
 import com.bbva.jee.arq.spring.core.host.InvocadorTransaccion;
 import com.bbva.jee.arq.spring.core.host.protocolo.ps9.ErrorMappingHelper;
@@ -39,7 +40,8 @@ import com.bbva.jee.arq.spring.core.log.I18nLogFactory;
 import com.bbva.jee.arq.spring.core.servicing.gce.BusinessServiceException;
 import com.bbva.jee.arq.spring.core.servicing.utils.BusinessServicesToolKit;
 
-@Component(value = "customers-dao-impl")
+
+@Component(value = "customers-dao")
 public class CustomersDAOImpl implements CustomersDAO {
 
 	private static final String FILTERERROR = null;
@@ -48,16 +50,13 @@ public class CustomersDAOImpl implements CustomersDAO {
 	private ICustomerMapper customerMapper;
 
 	@Autowired
-	BusinessServicesToolKit bussinesToolKit;
-
-	@Autowired
 	private ErrorMappingHelper errorMappingHelper;
+	
+	@Resource(name = "tx-get-customer")
+	private TxGetCustomer txGetCustomer;
 
 	@Resource(name = "transaccionOznq")
 	private InvocadorTransaccion<PeticionTransaccionOznq, RespuestaTransaccionOznq> transaccionOznq;
-
-	@Resource(name = "transaccionOznb")
-	private InvocadorTransaccion<PeticionTransaccionOznb, RespuestaTransaccionOznb> transaccionOznb;
 
 	@Resource(name = "transaccionOznp")
 	private InvocadorTransaccion<PeticionTransaccionOznp, RespuestaTransaccionOznp> transaccionOznp;
@@ -153,8 +152,8 @@ public class CustomersDAOImpl implements CustomersDAO {
 
 			if (!outputCopies.isEmpty()) {
 				for (CopySalida outputCopy : outputCopies) {
-					// FormatoOZECNPS0 formatoSalida = outputCopy.getCopy(FormatoOZECNPS0.class);
-					FormatoOZECNPS0 formatoSalida = CustomersDAOMock.getListCreditCardCharges();
+					 FormatoOZECNPS0 formatoSalida = outputCopy.getCopy(FormatoOZECNPS0.class);
+					
 					dtoIntCardCharge = customerMapper.map(formatoSalida);
 					cardChargetDtoList.add(dtoIntCardCharge);
 				}
@@ -175,38 +174,38 @@ public class CustomersDAOImpl implements CustomersDAO {
 	public DTOIntCustomer getCustomer(String customerId) throws BusinessServiceException {
 		log.info("CustDAO: Into getCustomer...");
 		log.info("CustDAO: getCustomer params(customerId):" + customerId);
+//
+//		DTOIntCustomer dtoIntCustomer = new DTOIntCustomer();
+//
+//		FormatoOZNCENB0 formato = new FormatoOZNCENB0();
+//
+//		formato.setNumclie(customerId);
+//
+//		PeticionTransaccionOznb peticion = new PeticionTransaccionOznb();
+//
+//		peticion.getCuerpo().getPartes().add(formato);
+//		log.info("getCustomer formato entrada:" + peticion);
+//		RespuestaTransaccionOznb respuesta = transaccionOznb.invocar(peticion);
+//		log.info("getCustomer respuesta:" + respuesta);
+//
+//		BusinessServiceException exception = errorMappingHelper.toBusinessServiceException(respuesta);
+//		if (exception != null) {
+//			throw exception;
+//		}
+//
+//		CopySalida outputCopies = respuesta.getCuerpo().getParte(CopySalida.class);
+//
+//		if (outputCopies == null) {
+//			throw new BusinessServiceException(EnumError.NO_DATA.getAlias());
+//		}
+//
+//		// FormatoOZNCSNB0 formatoSalida = outputCopies.getCopy(FormatoOZNCSNB0.class);
+//		FormatoOZNCSNB0 formatoSalida = CustomersDAOMock.getCustomer();
+//
+//		log.info("DAO - Se mapea la respuesta para retornarla SMC : getCustomer SN Customer ");
+//		dtoIntCustomer = CustomerMapper.mapToOuter(formatoSalida);
 
-		DTOIntCustomer dtoIntCustomer = new DTOIntCustomer();
-
-		FormatoOZNCENB0 formato = new FormatoOZNCENB0();
-
-		formato.setNumclie(customerId);
-
-		PeticionTransaccionOznb peticion = new PeticionTransaccionOznb();
-
-		peticion.getCuerpo().getPartes().add(formato);
-		log.info("getCustomer formato entrada:" + peticion);
-		RespuestaTransaccionOznb respuesta = transaccionOznb.invocar(peticion);
-		log.info("getCustomer respuesta:" + respuesta);
-
-		BusinessServiceException exception = errorMappingHelper.toBusinessServiceException(respuesta);
-		if (exception != null) {
-			throw exception;
-		}
-
-		CopySalida outputCopies = respuesta.getCuerpo().getParte(CopySalida.class);
-
-		if (outputCopies == null) {
-			throw new BusinessServiceException(EnumError.NO_DATA.getAlias());
-		}
-
-		// FormatoOZNCSNB0 formatoSalida = outputCopies.getCopy(FormatoOZNCSNB0.class);
-		FormatoOZNCSNB0 formatoSalida = CustomersDAOMock.getCustomer();
-
-		log.info("DAO - Se mapea la respuesta para retornarla SMC : getCustomer SN Customer ");
-		dtoIntCustomer = CustomerMapper.mapToOuter(formatoSalida);
-
-		return dtoIntCustomer;
+		return txGetCustomer.invoke(customerId);
 	}
 
 }
