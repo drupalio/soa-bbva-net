@@ -27,6 +27,8 @@ public class DTOIntFilterLoan {
 
 	@NotNull
 	private String transactionDate;
+
+	private String idMovement;
 	/**
 	 * @return the fechaFinal
 	 */
@@ -87,5 +89,13 @@ public class DTOIntFilterLoan {
 
 	public void setPageSize(String pageSize) {
 		this.pageSize = pageSize;
+	}
+
+	public String getIdMovement() {
+		return idMovement;
+	}
+
+	public void setIdMovement(String idMovement) {
+		this.idMovement = idMovement;
 	}
 }

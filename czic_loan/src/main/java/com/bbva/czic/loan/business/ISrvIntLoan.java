@@ -4,6 +4,9 @@ import com.bbva.czic.dto.net.Loan;
 import com.bbva.czic.dto.net.Movement;
 import com.bbva.czic.dto.net.RotaryQuotaMove;
 import com.bbva.czic.loan.business.dto.DTOIntFilterLoan;
+import com.bbva.czic.loan.business.dto.DTOIntLoan;
+import com.bbva.czic.loan.business.dto.DTOIntMovement;
+import com.bbva.czic.loan.business.dto.DTOIntRotaryQuotaMove;
 import com.bbva.jee.arq.spring.core.servicing.gce.BusinessServiceException;
 
 import java.util.Date;
@@ -11,11 +14,11 @@ import java.util.List;
 
 public interface ISrvIntLoan {
 
-	Loan getRotaryQuota(String idRotaryQuota);
+	DTOIntLoan getRotaryQuota(final DTOIntFilterLoan dtoIntFilterLoan);
 
-	List<Movement> listRotaryQuotaMovements(DTOIntFilterLoan dtoIntFilterLoan);
+	List<DTOIntMovement> listRotaryQuotaMovements(final DTOIntFilterLoan dtoIntFilterLoan);
 
-	RotaryQuotaMove getRotaryQuotaMovement(String idMovement, String idLoan) throws BusinessServiceException;
+	DTOIntRotaryQuotaMove getRotaryQuotaMovement(final DTOIntFilterLoan dtoIntFilterLoan) throws BusinessServiceException;
 
 
 }

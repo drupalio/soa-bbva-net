@@ -1,199 +1,66 @@
 package com.bbva.czic.loan.dao;
 
 
-import com.bbva.czic.loan.business.dto.DTOIntFilterLoan;
-import com.bbva.czic.loan.business.dto.DTOIntMovement;
-import com.bbva.czic.loan.business.dto.DTOIntRotaryQuotaMove;
+import com.bbva.czic.loan.business.dto.*;
 import com.bbva.czic.loan.dao.model.ozni.*;
 import com.bbva.czic.loan.dao.model.oznk.*;
+import com.bbva.czic.loan.dao.tx.TxGetRotaryQuota;
+import com.bbva.czic.loan.dao.tx.TxGetRotaryQuotaMovement;
+import com.bbva.czic.loan.dao.tx.TxListRotaryQuotaMovements;
 import com.bbva.czic.loan.facade.v01.utils.impl.LoanDAOMock;
 import com.bbva.czic.routine.commons.rm.utils.errors.EnumError;
 import com.bbva.jee.arq.spring.core.servicing.gce.BusinessServiceException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
-import org.springframework.stereotype.Repository;
+import org.springframework.stereotype.Component;
 
-import com.bbva.czic.loan.business.dto.DTOIntLoan;
 import com.bbva.czic.loan.business.impl.SrvIntLoan;
-import com.bbva.czic.loan.dao.model.oznj.FormatoOZNCENJ0;
-import com.bbva.czic.loan.dao.model.oznj.FormatoOZNCSNJ0;
-import com.bbva.czic.loan.dao.model.oznj.PeticionTransaccionOznj;
-import com.bbva.czic.loan.dao.model.oznj.RespuestaTransaccionOznj;
-import com.bbva.czic.loan.dao.model.oznj.TransaccionOznj;
-import com.bbva.czic.loan.dao.mapper.LoanMapper;
-import com.bbva.jee.arq.spring.core.host.protocolo.ps9.ErrorMappingHelper;
 
 import com.bbva.jee.arq.spring.core.log.I18nLog;
 import com.bbva.jee.arq.spring.core.log.I18nLogFactory;
-import org.springframework.util.CollectionUtils;
 
-import java.util.ArrayList;
+import javax.annotation.Resource;
 
 import java.util.List;
 
-@Repository(value = "loanDao")
+@Component(value = "loanDao")
 public class LoanDAOImpl implements LoanDAO {
 	
 	private static I18nLog log = I18nLogFactory.getLogI18n(SrvIntLoan.class,
 			"META-INF/spring/i18n/log/mensajesLog");
 
-	@Autowired
-	private ErrorMappingHelper errorMappingHelper;
+	/**
+	 * OZNJ
+	 */
+	@Resource(name = "tx-get-rotary-quota")
+	private TxGetRotaryQuota txGetRotaryQuota;
 
-	@Autowired
-	private TransaccionOznj transaccionOznj;
+	/**
+	 * OZNI
+	 */
+	@Resource(name = "tx-list-rotary-quota-movements")
+	private TxListRotaryQuotaMovements txListRotaryQuotaMovements;
 
-	@Autowired
-	private TransaccionOzni transaccionOzni;
+	/**
+	 * OZNK
+	 */
+	@Resource(name = "tx-get-rotary-quota-movement")
+	private TxGetRotaryQuotaMovement txGetRotaryQuotaMovement;
 
-	@Autowired
-	private TransaccionOznk transaccionOznk;
 
-	@Override
-	public DTOIntLoan getRotaryQuota(final String idLoan)	throws BusinessServiceException {
-
-		 DTOIntLoan dTOIntLoan = new DTOIntLoan();
-
-		log.info("LoanDAOImpl.getRotaryQuota = " + idLoan);
-
-		try {
-
-			FormatoOZNCENJ0 formatoOZNCENJ0 = new FormatoOZNCENJ0();
-			formatoOZNCENJ0.setNomtarj(idLoan);
-
-			PeticionTransaccionOznj peticion = new PeticionTransaccionOznj();
-
-			peticion.getCuerpo().getPartes().add(formatoOZNCENJ0);
-			log.info("LoanDAOImpl.getRotaryQuota.invocar ");
-			RespuestaTransaccionOznj respuesta = transaccionOznj.invocar(peticion);
-
-			BusinessServiceException exception = errorMappingHelper.toBusinessServiceException(respuesta);
-
-			if (exception != null) {
-				log.info("LoanDAOImpl.getRotaryQuota transaccion Exception = " + exception.getMessage());
-				throw exception;
-			}
-			//final CopySalida outputCopy = respuesta.getCuerpo().getParte(CopySalida.class);
-			//if (outputCopy != null) {
-				final FormatoOZNCSNJ0 formatoSalida =  LoanDAOMock.getRotaryQuota(); //outputCopy.getCopy(FormatoOZNCSNJ0.class);
-				log.info("iniciando mapeo formatoSalida.... 1 of 2");
-
-				dTOIntLoan = LoanMapper.dtoIntLoanMapper(formatoSalida);
-
-			//}else {
-			//	throw new BusinessServiceException(EnumError.NO_DATA.getAlias());
-			//}
-			log.info("LoanDAOImpl.getRotaryQuota.respuesta --- fin");
-
-			return dTOIntLoan;
-		} catch (BusinessServiceException bse) {
-			log.error("BusinessServiceException > An error happened while calling transaction = " + bse.getMessage());
-			throw bse;
-		} catch (Exception e) {
-			log.error("Exception > An error happened while calling transaction = " + e.getMessage());
-			throw new BusinessServiceException(EnumError.TECHNICAL_ERROR.getAlias());
-		}
+	public DTOIntLoan getRotaryQuota(final DTOIntFilterLoan dtoIntFilterLoan){
+		return txGetRotaryQuota.invoke(dtoIntFilterLoan);
 	}
 
 	@Override
-	public List<DTOIntMovement> listRotaryQuotaMovements(final DTOIntFilterLoan dtoIntFilterLoan) throws BusinessServiceException {
-
-		log.info("ingreso LoanDAOImpl.listRotaryQuotaMovements");
-
-		List<DTOIntMovement> movementList = new ArrayList<DTOIntMovement>();
-
-		try {
-			FormatoOZNCENI0 formatoOZNCENI0 = new FormatoOZNCENI0();
-			formatoOZNCENI0.setFechini(dtoIntFilterLoan.getFechaInicial());
-			formatoOZNCENI0.setFechafi(dtoIntFilterLoan.getFechaFinal());
-			formatoOZNCENI0.setIndpag(dtoIntFilterLoan.getPaginationKey());
-			formatoOZNCENI0.setNotarje(dtoIntFilterLoan.getIdLoan());
-
-			PeticionTransaccionOzni peticion = new PeticionTransaccionOzni();
-
-			peticion.getCuerpo().getPartes().add(formatoOZNCENI0);
-			log.info("ingreso preInvocar LoanDAOImpl.listRotaryQuotaMovements");
-
-			RespuestaTransaccionOzni respuesta = transaccionOzni.invocar(peticion);
-
-			log.info("Fin preInvocar LoanDAOImpl.listRotaryQuotaMovements");
-			BusinessServiceException exception = errorMappingHelper.toBusinessServiceException(respuesta);
-
-			if (exception != null) {
-				log.info("fin preInvocar LoanDAOImpl.getRotaryQuotaMovement.Exception" + exception.getErrorMessage());
-				throw exception;
-			}
-
-			//final List<CopySalida> outputCopyList = respuesta.getCuerpo().getPartes(CopySalida.class);
-
-			final List<FormatoOZNCSNI0> outputCopyList = LoanDAOMock.listRotaryQuotaMovements();
-
-			if(CollectionUtils.isEmpty(outputCopyList)) {
-				throw new BusinessServiceException(EnumError.NO_DATA.getAlias());
-			}
-			log.info("LoanDAOImpl.listRotaryQuotaMovements.list = " + outputCopyList.size());
-
-			for (FormatoOZNCSNI0 item : outputCopyList) {
-				DTOIntMovement movement = new DTOIntMovement();
-
-		       	//FormatoOZNCSNI0 formatoSalida = item.getCopy(FormatoOZNCSNI0.class);
-			   	movement = LoanMapper.getDTOIntMovementByCopy(item);
-
-			  	movementList.add(movement);
-			}
-			return movementList;
-		} catch (BusinessServiceException bex) {
-			log.error("fin preInvocar LoanDAOImpl.getRotaryQuotaMovement.BusinesServiceException" + bex.getMessage());
-			throw bex;
-		} catch (Exception ex) {
-			log.error("fin preInvocar LoanDAOImpl.getRotaryQuotaMovement.Exception" + ex.getMessage());
-			throw new BusinessServiceException(EnumError.TECHNICAL_ERROR.getAlias());
-		}
+	public List<DTOIntMovement> listRotaryQuotaMovements(final DTOIntFilterLoan dtoIntFilterLoan) {
+		return txListRotaryQuotaMovements.invoke(dtoIntFilterLoan);
 	}
 
 
 	@Override
-	public DTOIntRotaryQuotaMove getRotaryQuotaMovement(final Integer idMovement, final String idLoan) throws BusinessServiceException {
-
-		DTOIntRotaryQuotaMove rotaryQuotaMove = new DTOIntRotaryQuotaMove();
-		FormatoOZNCENK0 formatoOZNCENK0 = new FormatoOZNCENK0();
-		try {
-			log.info("LoanDAOImpl.getRotaryQuotaMovement " + idMovement + ", " +idLoan);
-			formatoOZNCENK0.setNommovi(idMovement);
-			formatoOZNCENK0.setNomtarj(idLoan);
-
-			PeticionTransaccionOznk peticion = new PeticionTransaccionOznk();
-
-			peticion.getCuerpo().getPartes().add(formatoOZNCENK0);
-
-			RespuestaTransaccionOznk respuesta = transaccionOznk.invocar(peticion);
-
-			log.info("Finaliza peticion exitosa LoanDAOImpl.getRotaryQuotaMovement = " + respuesta.getCodigoRetorno());
-
-			BusinessServiceException exception = errorMappingHelper.toBusinessServiceException(respuesta);
-			if (exception != null){
-				log.info("LoanDAOImpl.getRotaryQuotaMovement = exception -> " + exception.getErrorMessage() );
-				throw exception;
-			}
-
-			//final CopySalida outputCopy = respuesta.getCuerpo().getParte(CopySalida.class);
-		//	if (outputCopy != null) {
-			//	final FormatoOZNCSNK0 formatoSalida =  outputCopy.getCopy(FormatoOZNCSNK0.class);
-				final FormatoOZNCSNK0 formatoSalida= LoanDAOMock.getRotaryQuotaMovement();
-				rotaryQuotaMove = LoanMapper.getDTOIntMovementByCopy(formatoSalida);
-		//	}else{
-		//		throw new BusinessServiceException(EnumError.NO_DATA.getAlias());
-		//	}
-			return rotaryQuotaMove;
-		}
-		catch(BusinessServiceException bex) {
-			log.info("LoanDAOImpl.getRotaryQuotaMovement.BusinessServiceException ->" + bex.getMessage());
-			throw bex;
-		}
-		catch (Exception e) {
-			log.info("LoanDAOImpl.getRotaryQuotaMovement.exception ->" + e.getMessage() );
-			throw new BusinessServiceException(EnumError.TECHNICAL_ERROR.getAlias());
-		}
+	public DTOIntRotaryQuotaMove getRotaryQuotaMovement(final DTOIntFilterLoan dtoIntFilterLoan){
+		return txGetRotaryQuotaMovement.invoke(dtoIntFilterLoan);
 	}
 }

@@ -7,10 +7,11 @@ import com.bbva.czic.dto.net.RotaryQuotaMove;
 import com.bbva.czic.loan.business.dto.DTOIntFilterLoan;
 import com.bbva.czic.loan.business.dto.DTOIntMovement;
 import com.bbva.czic.loan.business.dto.DTOIntRotaryQuotaMove;
-import com.bbva.czic.loan.dao.mapper.LoanMapper;
+
 
 import com.bbva.czic.routine.commons.rm.utils.errors.EnumError;
 
+import com.bbva.czic.routine.commons.rm.utils.validator.DtoValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -41,73 +42,44 @@ public class SrvIntLoan implements ISrvIntLoan {
 	private LoanDAO loanDao;
 
 	@Override
-	public Loan getRotaryQuota(final String idRotaryQuota) throws BusinessServiceException {
-		try {
-			log.info("SrvIntLoan.getRotaryQuota = " + idRotaryQuota);
-			if(idRotaryQuota.equals("null") || idRotaryQuota == null) {
-				throw new BusinessServiceException(EnumError.WRONG_PARAMETERS.getAlias());
-			}
+	public DTOIntLoan getRotaryQuota(final DTOIntFilterLoan dtoIntFilterLoan) throws BusinessServiceException {
 
-			final DTOIntLoan dtoIntLoan = loanDao.getRotaryQuota(idRotaryQuota);
-			Loan loan = LoanMapper.getLoan(dtoIntLoan);
-			return loan;
-		}catch(BusinessServiceException ex){
-			log.error("SrvIntLoan.getRotaryQuota = " + ex.getMessage());
-			throw ex;
-		} catch (Exception e) {
-			log.error("SrvIntLoan.getRotaryQuota.exception = " + e.getMessage());
-			throw new BusinessServiceException(EnumError.TECHNICAL_ERROR.getAlias());
-		}
+		DtoValidator.validate(dtoIntFilterLoan);
+		log.info(" getRotaryQuota ");
+		// Validar filtro
+
+		final DTOIntLoan result = loanDao.getRotaryQuota(dtoIntFilterLoan);
+
+		// Mapear del filtro al dto
+		DtoValidator.validate(result);
+		// Validar el dto de filtrado
+		return null;
 	}
 
 	@Override
-	public List<Movement> listRotaryQuotaMovements(final DTOIntFilterLoan dtoIntFilterLoan) throws BusinessServiceException {
+	public List<DTOIntMovement> listRotaryQuotaMovements(final DTOIntFilterLoan dtoIntFilterLoan) throws BusinessServiceException {
+		DtoValidator.validate(dtoIntFilterLoan);
+		log.info(" getRotaryQuota ");
+		// Validar filtro
 
-		try {
-			List<Movement> movementList = new ArrayList<Movement>();
+		final List<DTOIntMovement> result = loanDao.listRotaryQuotaMovements(dtoIntFilterLoan);
 
-			log.info("A query string (filter) has been sent Loan -----> : " + dtoIntFilterLoan.getIdLoan() + ", " + dtoIntFilterLoan.getPaginationKey() + ", " + dtoIntFilterLoan.getPageSize() + ", " + dtoIntFilterLoan.getFechaInicial() + ", " + dtoIntFilterLoan.getFechaFinal());
-
-			final List<DTOIntMovement> intLoan = loanDao.listRotaryQuotaMovements(dtoIntFilterLoan);
-
-			for (DTOIntMovement item : intLoan) {
-				Movement movement = new Movement();
-
-				movement = LoanMapper.getMovementByDTOIntMovement(item);
-
-				movementList.add(movement);
-			}
-			return movementList;
-		} catch (BusinessServiceException be) {
-			log.error("error en listRotaryQuotaMovements = " + be.getMessage());
-			throw be;
-		} catch (Exception e) {
-			log.error("error en listRotaryQuotaMovements = " + e.getMessage());
-			throw new BusinessServiceException(EnumError.TECHNICAL_ERROR.getAlias());
-		}
-
+		// Mapear del filtro al dto
+		DtoValidator.validate(result);
+		// Validar el dto de filtrado
+		return null;
 	}
 	@Override
-	public RotaryQuotaMove getRotaryQuotaMovement(final String idLoan, final String idMovement) throws BusinessServiceException {
+	public DTOIntRotaryQuotaMove getRotaryQuotaMovement(final DTOIntFilterLoan dtoIntFilterLoan) throws BusinessServiceException {
+		DtoValidator.validate(dtoIntFilterLoan);
+		log.info(" getRotaryQuota ");
+		// Validar filtro
 
-		try {
-			log.info("SrvIntLoan.getRotaryQuotaMovement = " + idMovement + ", " + idLoan);
+		final DTOIntRotaryQuotaMove result = loanDao.getRotaryQuotaMovement(dtoIntFilterLoan);
 
-			if(idLoan.trim().equals("null") || idMovement.trim().equals("null")) {
-				throw new BusinessServiceException(EnumError.WRONG_PARAMETERS.getAlias());
-			}
-
-			final DTOIntRotaryQuotaMove dtoIntRotaryQuotaMove = loanDao.getRotaryQuotaMovement( Integer.parseInt(idMovement), idLoan);
-			log.info("SrvIntLoan.getRotaryQuotaMovement retorno exitoso inicio mapeo... ");
-			RotaryQuotaMove movement = LoanMapper.getMovementByDTOIntMovement(dtoIntRotaryQuotaMove);
-			log.info("SrvIntLoan.getRotaryQuotaMovement mapeo OK... ");
-			return movement;
-		} catch (BusinessServiceException be) {
-			log.info("SrvIntLoan.getRotaryQuotaMovement.BusinessServiceException = " + be.getMessage());
-			throw be;
-		} catch (Exception e) {
-			log.info("SrvIntLoan.getRotaryQuotaMovement.exception = " + e.getMessage());
-			throw new BusinessServiceException(EnumError.TECHNICAL_ERROR.getAlias());
-		}
+		// Mapear del filtro al dto
+		DtoValidator.validate(result);
+		// Validar el dto de filtrado
+		return null;
 	}
 }
