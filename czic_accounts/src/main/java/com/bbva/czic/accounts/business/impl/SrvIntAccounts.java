@@ -5,15 +5,13 @@ import java.util.List;
 import javax.annotation.Resource;
 
 import com.bbva.czic.accounts.business.dto.*;
-import com.bbva.czic.accounts.facade.v01.utils.IFilterConverter;
+import com.bbva.czic.routine.commons.rm.utils.validator.impl.DateValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.bbva.czic.accounts.business.ISrvIntAccounts;
 import com.bbva.czic.accounts.dao.AccountsDAO;
-import com.bbva.czic.accounts.facade.v01.utils.IListCheckFilterConverter;
 import com.bbva.czic.routine.commons.rm.utils.validator.DtoValidator;
-import com.bbva.czic.routine.commons.rm.utils.validator.impl.FiqlValidator;
 import com.bbva.jee.arq.spring.core.log.I18nLog;
 import com.bbva.jee.arq.spring.core.log.I18nLogFactory;
 import com.bbva.jee.arq.spring.core.servicing.utils.BusinessServicesToolKit;
@@ -29,10 +27,6 @@ public class SrvIntAccounts implements ISrvIntAccounts {
 
 	@Resource(name = "accounts-dao")
 	private AccountsDAO accountsDAO;
-
-	@Resource(name = "accounts-filter-converter")
-	private IFilterConverter accFilterConverter;
-
 
 	@Override
 	public List<DTOIntMonthlyBalances> getAccountMonthlyBalance(DTOIntFilterAccount dtoIntFilterAccount) {
@@ -81,6 +75,8 @@ public class SrvIntAccounts implements ISrvIntAccounts {
 		log.info("Into SrvIntAccounts.listCheck...");
 		// Validacion del dto de filtro
 		DtoValidator.validate(filter);
+		new DateValidator().hasDateFormat(filter.getStartDate())
+				.hasDateFormat(filter.getEndDate()).validate();
 
 		List<DTOIntCheck> result = accountsDAO.getListCheck(filter);
 

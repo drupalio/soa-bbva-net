@@ -16,7 +16,6 @@ import javax.ws.rs.core.UriInfo;
 
 import com.bbva.czic.accounts.business.dto.DTOIntFilterChecks;
 import com.bbva.czic.accounts.business.dto.DTOIntFilterMovResumes;
-import com.bbva.czic.accounts.facade.v01.utils.IListCheckFilterConverter;
 import org.apache.cxf.jaxrs.model.wadl.ElementClass;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -27,7 +26,6 @@ import com.bbva.czic.accounts.business.dto.DTOIntFilterAccount;
 import com.bbva.czic.accounts.dao.AccountsDAO;
 import com.bbva.czic.accounts.facade.v01.ISrvAccountsV01;
 import com.bbva.czic.accounts.facade.v01.mappers.IAccountsMapper;
-import com.bbva.czic.accounts.facade.v01.utils.IFilterConverter;
 import com.bbva.czic.dto.net.AccMovementsResume;
 import com.bbva.czic.dto.net.Account;
 import com.bbva.czic.dto.net.Check;
@@ -81,12 +79,6 @@ public class SrvAccountsV01 implements ISrvAccountsV01, com.bbva.jee.arq.spring.
 
 	@Resource(name = "accounts-mapper")
 	private IAccountsMapper iAccountsMapper;
-
-	@Resource(name = "accounts-filter-converter")
-	private IFilterConverter accFilterConverter;
-
-	@Resource(name = "listCheck-filter-converter")
-	private IListCheckFilterConverter listCheckFilterConverter;
 
 	@Override
 	@ApiOperation(value = "Operacion que retorna el resumen de la informacion de una cuenta", notes = "Tipo de Producto", response = AccountsDAO.class)
@@ -148,7 +140,7 @@ public class SrvAccountsV01 implements ISrvAccountsV01, com.bbva.jee.arq.spring.
 
 		new FiqlValidator(filter).hasGe("month").validateIfExisit();
 
-		DTOIntFilterMovResumes dtoIntFilter = accFilterConverter.getDTOIntFilterMovRes(idAccount , filter);
+		DTOIntFilterMovResumes dtoIntFilter = iAccountsMapper.getDtoIntFilterMovResumes(idAccount, filter);
 
 		return iAccountsMapper.map(srvIntAccounts.getAccMovementResume(dtoIntFilter));
 	}

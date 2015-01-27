@@ -12,7 +12,6 @@ import com.bbva.czic.dto.net.Check;
 import com.bbva.czic.dto.net.Checkbook;
 import com.bbva.czic.dto.net.EnumCheckbookStatus;
 import com.bbva.czic.dto.net.MonthlyBalances;
-import com.bbva.czic.routine.commons.rm.utils.converter.DateConverter;
 import com.bbva.czic.routine.commons.rm.utils.fiql.FiqlType;
 import com.bbva.czic.routine.commons.rm.utils.mappers.AbstractBbvaConfigurableMapper;
 import com.bbva.czic.routine.commons.rm.utils.mappers.Mapper;
@@ -81,10 +80,18 @@ public class AccountsMapper extends AbstractBbvaConfigurableMapper implements IA
 		dtoFilter.setPaginationKey(paginationKey);
 		dtoFilter.setPageSize(paginationSize);
 
-		dtoFilter.setStartDate(DateConverter.convert(this.getGeValue(filter,"check.issueDate")));
-		dtoFilter.setStartDate(DateConverter.convert(this.getLeValue(filter,"check.issueDate")));
+		dtoFilter.setStartDate(this.getGeValue(filter, "check.issueDate"));
+		dtoFilter.setStartDate(this.getLeValue(filter, "check.issueDate"));
 		dtoFilter.setStatus(this.getEqValue(filter, "check.status"));
 
+		return dtoFilter;
+	}
+
+	@Override
+	public DTOIntFilterMovResumes getDtoIntFilterMovResumes(String idAccount, String filter) {
+		final DTOIntFilterMovResumes dtoFilter = new DTOIntFilterMovResumes();
+		dtoFilter.setAccountId(idAccount);
+		dtoFilter.setMonth(this.getGeValue(filter, FiqlType.month.name()));
 		return dtoFilter;
 	}
 
