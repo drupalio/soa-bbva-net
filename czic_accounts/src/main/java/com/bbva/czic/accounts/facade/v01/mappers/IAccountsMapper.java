@@ -2,12 +2,7 @@ package com.bbva.czic.accounts.facade.v01.mappers;
 
 import java.util.List;
 
-import com.bbva.czic.accounts.business.dto.DTOIntAccMovementsResume;
-import com.bbva.czic.accounts.business.dto.DTOIntAccount;
-import com.bbva.czic.accounts.business.dto.DTOIntCheck;
-import com.bbva.czic.accounts.business.dto.DTOIntCheckbook;
-import com.bbva.czic.accounts.business.dto.DTOIntFilterAccount;
-import com.bbva.czic.accounts.business.dto.DTOIntMonthlyBalances;
+import com.bbva.czic.accounts.business.dto.*;
 import com.bbva.czic.dto.net.AccMovementsResume;
 import com.bbva.czic.dto.net.Account;
 import com.bbva.czic.dto.net.Check;
@@ -33,4 +28,7 @@ public interface IAccountsMapper {
 
 	DTOIntFilterAccount getDTOIntFilter(String idAccount, String filter);
 
+	DTOIntFilterChecks getDtoIntFilterChecks(String idAccount, String filter, Integer paginationKey, Integer paginationSize);
+
+	DTOIntFilterMovResumes getDtoIntFilterMovResumes(String idAccount, String filter);
 }

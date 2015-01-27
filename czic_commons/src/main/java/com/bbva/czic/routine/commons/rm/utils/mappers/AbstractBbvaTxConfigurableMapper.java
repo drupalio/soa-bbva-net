@@ -1,6 +1,7 @@
 package com.bbva.czic.routine.commons.rm.utils.mappers;
 
-import com.bbva.czic.routine.commons.rm.utils.converter.CalendarConverter;
+import com.bbva.czic.routine.commons.rm.utils.converter.CalendarDateConverter;
+import com.bbva.czic.routine.commons.rm.utils.converter.DateCalendarConverter;
 import com.bbva.czic.routine.commons.rm.utils.converter.StringMoneyConverter;
 import com.bbva.czic.routine.mapper.MapperFactory;
 import com.bbva.czic.routine.mapper.impl.ConfigurableMapper;
@@ -16,12 +17,17 @@ public abstract class AbstractBbvaTxConfigurableMapper extends ConfigurableMappe
 	protected void configure(MapperFactory factory) {
 
 		// Add Converter
-		factory.getConverterFactory().registerConverter(new CalendarConverter());
+		factory.getConverterFactory().registerConverter(new CalendarDateConverter());
 
 		/**
 		 * Convert HOST FORMAT (+EEEEEEEEDD) to COP Money
 		 */
 		factory.getConverterFactory().registerConverter(new StringMoneyConverter());
+
+		/**
+		 * Convert HOST Date to Calendar DtoInt
+		 */
+		factory.getConverterFactory().registerConverter(new DateCalendarConverter());
 
 	}
 

@@ -126,6 +126,15 @@ public class FiqlValidator extends Validator {
 		return this;
 	}
 
+	public FiqlValidator hasGe(final String parameter){
+
+		final String regex = ".*" + parameter + "=ge=.*";
+		if (!this.filter.matches(regex)){
+			exceptions.add(new BusinessServiceException(EnumError.WRONG_PARAMETERS.getAlias()));
+		}
+		return this;
+	}
+
 	public FiqlValidator validateIfExisit() {
 
 		if (!StringUtils.isEmpty(this.filter)) {
