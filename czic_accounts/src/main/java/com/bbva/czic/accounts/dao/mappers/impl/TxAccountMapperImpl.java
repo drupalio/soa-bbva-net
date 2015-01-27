@@ -61,12 +61,12 @@ public class TxAccountMapperImpl extends ConfigurableMapper implements TxAccount
 
 		// Map FormatoOZECNVS0 <-> DTOIntMonthlyBalances (OZNV)
 		factory.classMap(DTOIntMonthlyBalances.class, FormatoOZECNVS0.class).field("balance", "salddis")
-				.field("month.mes", "mes").byDefault().register();
+				.field("month", "mes").byDefault().register();
 
 		// Map FormatoOZECNUS0 <-> DTOIntAccMovementsResume (OZNU)
-		factory.classMap(DTOIntAccMovementsResume.class, FormatoOZECNUS0.class).field("balance", "saldtot")
-				.field("income", "valdepo").field("outcome", "valcarg").field("month.mes", "mes").byDefault()
-				.register();
+	//	factory.classMap(DTOIntAccMovementsResume.class, FormatoOZECNUS0.class).field("balance", "saldtot")
+	//			.field("income", "valdepo").field("outcome", "valcarg").field("month.mes", "mes").byDefault()
+	//			.register();
 
 	}
 

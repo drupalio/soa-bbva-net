@@ -1,8 +1,8 @@
 package com.bbva.czic.executives.facade.v01;
 
-import com.bbva.czic.dto.net.Office;
 import com.bbva.czic.executives.business.dto.DTOIntExecutive;
 import com.bbva.czic.executives.dao.model.oznr.FormatoOZECNRS0;
+import com.bbva.czic.executives.facade.v01.mapper.impl.ExecutivesMapper;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
@@ -23,7 +23,7 @@ public class ExecutivesMapperTest {
         formato.setTelejec("7684421");
 
         DTOIntExecutive dtoIntExecutive = null;
-        dtoIntExecutive = ExecutivesMapper.mapToOuter(formato);
+//        dtoIntExecutive = ExecutivesMapper.mapToOuter(formato);
 
 
         assertEquals(formato.getEmailej(),dtoIntExecutive.getEmail());

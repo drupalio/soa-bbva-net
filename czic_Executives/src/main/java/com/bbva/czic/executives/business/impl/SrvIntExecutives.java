@@ -6,6 +6,7 @@ import com.bbva.czic.executives.business.dto.DTOIntExecutive;
 import com.bbva.czic.executives.business.dto.DTOIntExecutivesFilter;
 import com.bbva.czic.executives.dao.ExecutivesDAO;
 import com.bbva.czic.routine.commons.rm.utils.errors.EnumError;
+import com.bbva.czic.routine.commons.rm.utils.validator.DtoValidator;
 import com.bbva.jee.arq.spring.core.log.I18nLog;
 import com.bbva.jee.arq.spring.core.log.I18nLogFactory;
 import com.bbva.jee.arq.spring.core.servicing.gce.BusinessServiceException;
@@ -17,6 +18,7 @@ import org.apache.cxf.jaxrs.ext.search.fiql.FiqlParser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.Resource;
 import java.util.List;
 
 @Service
@@ -28,7 +30,7 @@ public class SrvIntExecutives implements ISrvIntExecutives {
 
 	@Autowired
 	BusinessServicesToolKit bussinesToolKit;
-	@Autowired
+	@Resource(name = "executives-dao")
 	private ExecutivesDAO executivesDAO;
 
 	/**
@@ -36,70 +38,18 @@ public class SrvIntExecutives implements ISrvIntExecutives {
 	 *
 	 * @author David Tafur
 	 * @param
-	 *            filter
+	 *            dtoIntExecutivesFilter
 	 */
-	public DTOIntExecutive getExecutive(String filter) {
-		log.info(" Inicio de servicio interno SMC : getExecutive SN Executives ");
+	public DTOIntExecutive getExecutive(DTOIntExecutivesFilter dtoIntExecutivesFilter) {
+		// 1. Validate DtoIntFilterAccount
+		DtoValidator.validate(dtoIntExecutivesFilter);
+		// 2. Get response
+		final DTOIntExecutive result = executivesDAO.getExecutive(dtoIntExecutivesFilter);
 
-		DTOIntExecutive initialResult = new DTOIntExecutive();
-		String thirdPartyId = "";
-		String thirdPartyType = "";
-		log.info(" Manejo del filter SMC : getExecutive SN Executives ");
-		if (filter != null && !filter.contentEquals("null")) {
-			log.info("A query string (filter) has been sended: " + filter);
-			SearchCondition<DTOIntExecutivesFilter> sc;
-			String property = null;
-			String condition = null;
-			String value = null;
+		// 3. Validate output
+		DtoValidator.validate(result);
 
-			try {
-				/*
-				 * Manejo de la cadena del filter para sacar los valores de las
-				 * propiedades
-				 */
-				sc = new FiqlParser<DTOIntExecutivesFilter>(DTOIntExecutivesFilter.class)
-						.parse(filter);
-
-				final List<PrimitiveStatement> splitDataFilter = bussinesToolKit
-						.getDataFromFilter(sc);
-				for (PrimitiveStatement st : splitDataFilter) {
-					property = st.getProperty();
-					condition = st.getCondition().toString();
-					value = st.getValue().toString();
-
-					if (property.equals("id")) {
-						thirdPartyId = value;
-					}
-
-					if (property.equals("type")) {
-						thirdPartyType = value;
-					}
-				}
-
-				if(thirdPartyId==null || thirdPartyId.trim().isEmpty() || thirdPartyType==null || thirdPartyType.trim().isEmpty()){
-					throw new BusinessServiceException(EnumError.FILTER_EMPTY.getAlias());
-				}
-
-				log.info(" Filter:thirdPartyId: "+thirdPartyId+" SMC : getExecutive SN Executives ");
-				log.info(" Filter:thirdPartyType: "+thirdPartyType+" SMC : getExecutive SN Executives ");
-
-				if (thirdPartyType.equals(EnumThirdPartyType.CUSTOMER.toString())) {
-
-					log.info(" Pasó las validaciones, se hace el llamado al DAO SMC : getExecutive SN Executives ");
-
-					initialResult = executivesDAO.getExecutive(thirdPartyId);
-				}
-
-			} catch (SearchParseException e) {
-				log.error("SearchParseException - The query string (filter) has failed: "
-						+ e);
-				throw new BusinessServiceException(EnumError.FILTER_EMPTY.getAlias());
-			}
-
-		}else {
-			throw new BusinessServiceException(EnumError.FILTER_EMPTY.getAlias());
-		}
-
-		return initialResult;
+		log.info(" getExecutive ");
+		return result;
 	}
 }
