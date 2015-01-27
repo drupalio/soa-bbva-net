@@ -7,7 +7,7 @@ import org.apache.cxf.jaxrs.ext.search.SearchBean;
 import org.apache.cxf.jaxrs.ext.search.SearchCondition;
 import org.apache.cxf.jaxrs.ext.search.fiql.FiqlParser;
 
-import com.bbva.czic.routine.commons.rm.utils.converter.CalendarConverter;
+import com.bbva.czic.routine.commons.rm.utils.converter.CalendarDateConverter;
 import com.bbva.czic.routine.commons.rm.utils.errors.EnumError;
 import com.bbva.czic.routine.commons.rm.utils.fiql.FiqlUtils;
 import com.bbva.czic.routine.commons.rm.utils.predicate.AbstractPredicate;
@@ -29,7 +29,7 @@ public abstract class AbstractBbvaConfigurableMapper extends ConfigurableMapper 
 	protected void configure(MapperFactory factory) {
 
 		// Add Converter
-		factory.getConverterFactory().registerConverter(new CalendarConverter());
+		factory.getConverterFactory().registerConverter(new CalendarDateConverter());
 
 		// Add Money Factory
 		factory.registerObjectFactory(new MoneyFactory(), TypeFactory.<Money> valueOf(Money.class));
