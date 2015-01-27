@@ -154,13 +154,7 @@ public class SrvCustomersV01 implements ISrvCustomersV01,
 
 		log.info("Into getCustomer...");
 
-		// 1. Validate parameter
-		if (customerId == null || customerId.trim().isEmpty()) {
-			throw new BusinessServiceException(
-					EnumError.WRONG_PARAMETERS.getAlias());
-		}
-
-		// 2. Invoke SrvIntCustomers and Mapping to canonical DTO
+		// 1. Invoke SrvIntCustomers and Mapping to canonical DTO
 		return srvIntCustomers.getCustomer(customerId);
 	}
 }
