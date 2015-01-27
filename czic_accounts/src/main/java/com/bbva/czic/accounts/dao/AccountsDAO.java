@@ -2,13 +2,7 @@ package com.bbva.czic.accounts.dao;
 
 import java.util.List;
 
-import com.bbva.czic.accounts.business.dto.DTOIntAccMovementsResume;
-import com.bbva.czic.accounts.business.dto.DTOIntAccount;
-import com.bbva.czic.accounts.business.dto.DTOIntCheck;
-import com.bbva.czic.accounts.business.dto.DTOIntCheckbook;
-import com.bbva.czic.accounts.business.dto.DTOIntFilterAccount;
-import com.bbva.czic.accounts.business.dto.DTOIntFilterChecks;
-import com.bbva.czic.accounts.business.dto.DTOIntMonthlyBalances;
+import com.bbva.czic.accounts.business.dto.*;
 
 /**
  * @author Entelgy
@@ -22,10 +16,10 @@ public interface AccountsDAO {
 	List<DTOIntMonthlyBalances> getAccountMonthlyBalance(final DTOIntFilterAccount dtoIntFilterAccount);
 
 	/**
-	 * @param dtoIntFilterAccount
+	 * @param 
 	 * @return
 	 */
-	List<DTOIntAccMovementsResume> getAccountMovementResume(final DTOIntFilterAccount dtoIntFilterAccount);
+	List<DTOIntAccMovementsResume> getAccountMovementResume(final DTOIntFilterMovResumes dtoIntFilter);
 
 	/**
 	 * @param dtoIntFilterAccount

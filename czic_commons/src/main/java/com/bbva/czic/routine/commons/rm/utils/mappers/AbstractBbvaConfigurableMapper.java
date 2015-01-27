@@ -1,5 +1,7 @@
 package com.bbva.czic.routine.commons.rm.utils.mappers;
 
+import com.bbva.czic.routine.commons.rm.utils.converter.GregorianCalendarConverter;
+import com.bbva.czic.routine.mapper.factory.CalendarFactory;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.cxf.jaxrs.ext.search.ConditionType;
 import org.apache.cxf.jaxrs.ext.search.PrimitiveStatement;
@@ -7,7 +9,7 @@ import org.apache.cxf.jaxrs.ext.search.SearchBean;
 import org.apache.cxf.jaxrs.ext.search.SearchCondition;
 import org.apache.cxf.jaxrs.ext.search.fiql.FiqlParser;
 
-import com.bbva.czic.routine.commons.rm.utils.converter.CalendarConverter;
+import com.bbva.czic.routine.commons.rm.utils.converter.CalendarDateConverter;
 import com.bbva.czic.routine.commons.rm.utils.errors.EnumError;
 import com.bbva.czic.routine.commons.rm.utils.fiql.FiqlUtils;
 import com.bbva.czic.routine.commons.rm.utils.predicate.AbstractPredicate;
@@ -20,6 +22,8 @@ import com.bbva.jee.arq.spring.core.log.I18nLogFactory;
 import com.bbva.jee.arq.spring.core.servicing.gce.BusinessServiceException;
 import com.bbva.jee.arq.spring.core.servicing.utils.Money;
 
+import java.util.Calendar;
+
 public abstract class AbstractBbvaConfigurableMapper extends ConfigurableMapper {
 
 	protected static I18nLog log = I18nLogFactory.getLogI18n(AbstractBbvaConfigurableMapper.class,
@@ -29,11 +33,16 @@ public abstract class AbstractBbvaConfigurableMapper extends ConfigurableMapper 
 	protected void configure(MapperFactory factory) {
 
 		// Add Converter
-		factory.getConverterFactory().registerConverter(new CalendarConverter());
+		factory.getConverterFactory().registerConverter(new CalendarDateConverter());
+
+        // Add Calendar Converter to GregorianCalendar
+		factory.getConverterFactory().registerConverter(new GregorianCalendarConverter());
 
 		// Add Money Factory
 		factory.registerObjectFactory(new MoneyFactory(), TypeFactory.<Money> valueOf(Money.class));
 
+		// Add Calendar Factory
+		factory.registerObjectFactory(new CalendarFactory(), TypeFactory.<Calendar> valueOf(Calendar.class));
 	}
 
 	/**
@@ -103,11 +112,19 @@ public abstract class AbstractBbvaConfigurableMapper extends ConfigurableMapper 
 
 		private String property;
 
+		/**
+		 * 
+		 * @param property
+		 * @param conditionType
+		 */
 		public PrimitivePredicate(final String property, final ConditionType conditionType) {
 			this.conditionType = conditionType;
 			this.property = property;
 		}
 
+		/**
+		 * 
+		 */
 		@Override
 		protected boolean eval(PrimitiveStatement primitive) {
 			return (primitive.getCondition().equals(this.conditionType) && primitive.getProperty()

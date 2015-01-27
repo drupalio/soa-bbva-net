@@ -2,6 +2,8 @@ package com.bbva.czic.accounts.business.dto;
 
 import java.util.Date;
 
+import javax.validation.constraints.Size;
+
 import com.sun.istack.NotNull;
 
 /**
@@ -10,6 +12,7 @@ import com.sun.istack.NotNull;
 public class DTOIntFilterAccount {
 
 	@NotNull
+	@Size(min = 20, max = 20)
 	private String accountId;
 
 	private String month;
@@ -79,6 +82,5 @@ public class DTOIntFilterAccount {
 
 	public void setStartDate(Date startDate) {
 		this.startDate = startDate;
-
 	}
 }

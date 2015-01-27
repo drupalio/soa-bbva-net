@@ -13,7 +13,6 @@ public class DTOIntFilterChecks {
     @NotNull
     private String accountId;
     @NotNull
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date startDate;
     private Date endDate;
     @NotNull

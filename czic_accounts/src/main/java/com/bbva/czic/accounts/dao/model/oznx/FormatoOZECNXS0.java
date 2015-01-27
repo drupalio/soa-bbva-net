@@ -27,7 +27,7 @@ public class FormatoOZECNXS0 implements IFormatNotApply {
 	 * <p>Campo <code>INDPAGI</code>, &iacute;ndice: <code>1</code>, tipo: <code>ENTERO</code>
 	 */
 	@Campo(indice = 1, nombre = "INDPAGI", tipo = TipoCampo.ENTERO, longitudMinima = 3, longitudMaxima = 3, signo = true)
-	private int[] indpagi;
+	private Integer indpagi;
 	
 	/**
 	 * <p>Campo <code>NUMPROD</code>, &iacute;ndice: <code>2</code>, tipo: <code>ALFANUMERICO</code>

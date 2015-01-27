@@ -61,6 +61,8 @@ public class DtoValidator {
 
 		if (validatorClazz == org.hibernate.validator.constraints.impl.NotNullValidator.class) {
 			throw new BusinessServiceException(EnumError.MANDATORY_PARAMETERES_MISSING.getAlias(), message);
+		} else {
+			throw new BusinessServiceException(EnumError.WRONG_PARAMETERS.getAlias(), message);
 		}
 
 	}

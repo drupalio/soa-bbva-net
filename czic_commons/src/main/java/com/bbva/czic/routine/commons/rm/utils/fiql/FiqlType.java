@@ -3,6 +3,8 @@ package com.bbva.czic.routine.commons.rm.utils.fiql;
 public enum FiqlType {
 
 	month,
-	productType;
+	id,
+	type,
+	productType
 
 }

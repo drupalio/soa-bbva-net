@@ -4,7 +4,7 @@ import com.bbva.czic.globalposition.business.dto.DTOIntProduct;
 import com.bbva.czic.globalposition.business.dto.DTOIntProductFilter;
 import com.bbva.czic.globalposition.dao.mappers.ITxGlobalPositionMapper;
 import com.bbva.czic.globalposition.dao.model.ozn1.*;
-import com.bbva.czic.routine.commons.rm.utils.tx.impl.ListBbvaTransaction;
+import com.bbva.czic.routine.commons.rm.utils.tx.impl.MultiBbvaTransaction;
 import com.bbva.jee.arq.spring.core.host.InvocadorTransaccion;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -15,7 +15,7 @@ import javax.annotation.Resource;
  * @author Entelgy Colombia.
  */
 @Component("tx-get-extract-global-balance")
-public class TxGetExtractGlobalBalance extends ListBbvaTransaction<DTOIntProductFilter, FormatoOZECN1E0, DTOIntProduct, FormatoOZECN1S1> {
+public class TxGetExtractGlobalBalance extends MultiBbvaTransaction<DTOIntProductFilter, FormatoOZECN1E0, DTOIntProduct, FormatoOZECN1S1> {
 
 	@Resource(name = "transaccionOzn1")
 	private transient InvocadorTransaccion<PeticionTransaccionOzn1,RespuestaTransaccionOzn1> transaccionOzn1;

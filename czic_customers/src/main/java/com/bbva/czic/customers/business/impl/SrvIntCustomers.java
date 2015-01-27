@@ -18,6 +18,7 @@ import com.bbva.czic.customers.dao.mapper.ICustomerMapper;
 import com.bbva.czic.dto.net.AccMovementsResume;
 import com.bbva.czic.dto.net.CardCharge;
 import com.bbva.czic.dto.net.Customer;
+import com.bbva.czic.routine.commons.rm.utils.errors.EnumError;
 import com.bbva.czic.routine.commons.rm.utils.validator.DtoValidator;
 import com.bbva.jee.arq.spring.core.log.I18nLog;
 import com.bbva.jee.arq.spring.core.log.I18nLogFactory;
@@ -32,7 +33,7 @@ public class SrvIntCustomers implements ISrvIntCustomers {
 	private static I18nLog log = I18nLogFactory.getLogI18n(
 			SrvIntCustomers.class, "META-INF/spring/i18n/log/mensajesLog");
 
-	@Resource(name = "customers-dao-impl")
+	@Resource(name = "customers-dao")
 	private CustomersDAO customersDao;
 
 	@Resource(name = "customerMapper")
@@ -59,27 +60,19 @@ public class SrvIntCustomers implements ISrvIntCustomers {
 
 		List<AccMovementsResume> listMovements = new ArrayList<AccMovementsResume>();
 		filter.setCustomerId(customerId);
-
-		try {
-			// 1. Validate DtoIntFilterAccount
-			DtoValidator.validate(filter);
-			// 2. Get response
-			List<DTOIntAccMovementsResume> dtoIntAccMovementsResumes = customersDao
-					.getlistAccountsMovementsResume(filter);
-			for (DTOIntAccMovementsResume item : dtoIntAccMovementsResumes) {
-				listMovements.add(customerMapper.map(item));
-			}
-			log.info("getlistAccountsMovementsResume dao response: "
-					+ dtoIntAccMovementsResumes);
-			// 3. Validate output
-			DtoValidator.validate(dtoIntAccMovementsResumes);
-			return listMovements;
-		} catch (BusinessServiceException bse) {
-			log.error("BusinessServiceException - Error during platform: "
-					+ bse);
-			throw bse;
+		// 1. Validate DtoIntFilterAccount
+		DtoValidator.validate(filter);
+		// 2. Get response
+		List<DTOIntAccMovementsResume> dtoIntAccMovementsResumes = customersDao
+				.getlistAccountsMovementsResume(filter);
+		for (DTOIntAccMovementsResume item : dtoIntAccMovementsResumes) {
+			listMovements.add(customerMapper.map(item));
 		}
-
+		log.info("getlistAccountsMovementsResume dao response: "
+				+ dtoIntAccMovementsResumes);
+		// 3. Validate output
+		DtoValidator.validate(dtoIntAccMovementsResumes);
+		return listMovements;
 	}
 
 	/*************************** CardCharge ***************************************/
@@ -89,15 +82,16 @@ public class SrvIntCustomers implements ISrvIntCustomers {
 			throws BusinessServiceException {
 		log.info("Into getlistCreditCharges... ");
 		log.info("getlistCreditCharges params: " + filter);
-		
+
 		List<CardCharge> listCardCharge = new ArrayList<CardCharge>();
 		filter.setCustomerId(customerId);
-		
+
 		try {
 			// 1. Validate DtoIntFilterAccount
 			DtoValidator.validate(filter);
 			// 2. Get response
-			List<DTOIntCardCharge> dtoIntCardCharges = customersDao.getlistCreCardCharges(filter);
+			List<DTOIntCardCharge> dtoIntCardCharges = customersDao
+					.getlistCreCardCharges(filter);
 			for (DTOIntCardCharge item : dtoIntCardCharges) {
 				listCardCharge.add(customerMapper.map(item));
 			}
@@ -119,9 +113,14 @@ public class SrvIntCustomers implements ISrvIntCustomers {
 			throws BusinessServiceException {
 		log.info("SrvInt: Into getCustomer... ");
 		log.info("SrvInt: getCustomerParams(customerId): " + customerId);
-		// 1. Get response
+		// 1. Validate parameter
+		if (customerId == null || customerId.trim().isEmpty()) {
+			throw new BusinessServiceException(
+					EnumError.WRONG_PARAMETERS.getAlias());
+		}
+		// 2. Get response
 		DTOIntCustomer dtoIntCustomer = customersDao.getCustomer(customerId);
-		// 2. Validate output
+		// 3. Validate output
 		DtoValidator.validate(dtoIntCustomer);
 		log.info("SrvInt: gettingIntoMapper: " + dtoIntCustomer);
 		return customerMapper.map(dtoIntCustomer);
