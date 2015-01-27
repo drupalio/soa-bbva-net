@@ -80,9 +80,9 @@ public class AccountsMapper extends AbstractBbvaConfigurableMapper implements IA
 		dtoFilter.setPaginationKey(paginationKey);
 		dtoFilter.setPageSize(paginationSize);
 
-		dtoFilter.setStartDate(this.getGeValue(filter, "check.issueDate"));
-		dtoFilter.setStartDate(this.getLeValue(filter, "check.issueDate"));
-		dtoFilter.setStatus(this.getEqValue(filter, "check.status"));
+		dtoFilter.setStartDate(this.getGeValue(filter, "issueDate"));
+		dtoFilter.setStartDate(this.getLeValue(filter, "issueDate"));
+		dtoFilter.setStatus(this.getEqValue(filter, "status"));
 
 		return dtoFilter;
 	}
