@@ -17,9 +17,7 @@ import com.bbva.jee.arq.spring.core.log.I18nLogFactory;
 
 @Profile(value = "dev")
 @Component(value = "transaccionOznj")
-public class TransaccionOznjMock
-		implements
-			InvocadorTransaccion<PeticionTransaccionOznj, RespuestaTransaccionOznj> {
+public class TransaccionOznjMock implements	InvocadorTransaccion<PeticionTransaccionOznj, RespuestaTransaccionOznj> {
 
 	private static I18nLog log = I18nLogFactory.getLogI18n(
 			TransaccionOznjMock.class, "META-INF/spring/i18n/log/mensajesLog");
@@ -37,9 +35,9 @@ public class TransaccionOznjMock
 		FormatoOZNCSNJ0 formatoSalida = new FormatoOZNCSNJ0();
 
 		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-		String fechaCa = "2017-08-12 00:00:00.0 CDT";
-		String fechaCo = "2015-12-10 00:00:00.0 CST";
-		String fechaLi = "2015-12-31 00:00:00.0 CST";
+		String fechaCa = "2017-08-12";
+		String fechaCo = "2015-12-10";
+		String fechaLi = "2015-12-31";
 
 		try {
 			formatoSalida.setFechaca(formatter.parse(fechaCa));
@@ -50,7 +48,7 @@ public class TransaccionOznjMock
 		}
 
 		formatoSalida.setNumcont("00130073005054466407");
-		formatoSalida.setCuotato("+00");
+		formatoSalida.setCuotato("00");
 		formatoSalida.setDesctar("CUPO ROTATIVO");
 		formatoSalida.setEstadot("Activa");
 		formatoSalida.setHonorar("+00000000000");

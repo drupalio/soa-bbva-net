@@ -17,35 +17,35 @@
     <dependencies>
 
         <!-- MODULOS -->
-        <dependency>
+        <!--dependency>
             <groupId>com.bbva.czic.globalposition</groupId>
             <artifactId>czic_GlobalPosition</artifactId>
             <version>1.0.0</version>
-        </dependency>
+        </dependency-->
 
-        <dependency>
+        <!--dependency>
             <groupId>com.bbva.czic.cards</groupId>
             <artifactId>czic_cards</artifactId>
             <version>1.0.0</version>
-        </dependency>
+        </dependency-->
 
-        <dependency>
+        <!--dependency>
                <groupId>com.bbva.czic.executives</groupId>
               <artifactId>czic_executives</artifactId>
               <version>1.0.0</version>
-       </dependency>
+       </dependency-->
 
-        <dependency>
+        <!--dependency>
             <groupId>com.bbva.czic.customers</groupId>
             <artifactId>czic_customers</artifactId>
             <version>1.0.0</version>
-        </dependency>
+        </dependency-->
 
-        <dependency>
+        <!--dependency>
             <groupId>com.bbva.czic.checkbooks</groupId>
             <artifactId>czic_checkbooks</artifactId>
             <version>1.0.0</version>
-        </dependency>
+        </dependency-->
 
         <dependency>
             <groupId>com.bbva.czic.loan</groupId>
@@ -54,17 +54,17 @@
         </dependency>
 		
 		
-		<dependency>
+		<!--dependency>
             <groupId>com.bbva.czic.products</groupId>
             <artifactId>czic_products</artifactId>
             <version>1.0.0</version>
-        </dependency>
+        </dependency-->
 
-        <dependency>
+        <!--dependency>
             <groupId>com.bbva.czic.accounts</groupId>
             <artifactId>czic_accounts</artifactId>
             <version>1.0.0</version>
-        </dependency>
+        </dependency-->
 
         <dependency>
             <groupId>com.bbva.czic.accounts</groupId>

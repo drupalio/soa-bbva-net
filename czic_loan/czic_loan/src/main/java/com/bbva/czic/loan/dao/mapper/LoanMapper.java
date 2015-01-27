@@ -1,19 +1,18 @@
 package com.bbva.czic.loan.dao.mapper;
 
 import java.math.BigDecimal;
-
-import java.util.*;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 
 
 import com.bbva.czic.dto.net.*;
 import com.bbva.czic.loan.business.dto.DTOIntLoan;
 import com.bbva.czic.loan.business.dto.DTOIntMovement;
-import com.bbva.czic.loan.business.dto.DTOIntRotaryQuotaMove;
 import com.bbva.czic.loan.dao.model.ozni.FormatoOZNCSNI0;
 import com.bbva.czic.loan.dao.model.oznj.FormatoOZNCSNJ0;
 import com.bbva.czic.loan.dao.model.oznk.FormatoOZNCSNK0;
-
-import com.bbva.czic.routine.commons.rm.utils.errors.EnumError;
 import com.bbva.jee.arq.spring.core.log.I18nLog;
 import com.bbva.jee.arq.spring.core.log.I18nLogFactory;
 import com.bbva.jee.arq.spring.core.servicing.gce.BusinessServiceException;
@@ -35,46 +34,57 @@ public class LoanMapper {
 		DTOIntLoan dTOIntLoan = new DTOIntLoan();
 		try {
 			log.info("inicio Mapper");
-
-			log.info("inicio Mapper datos----------------");
-			log.info("formatoSalida.getSaldoto = " + formatoSalida.getSaldoto() + ", formatoSalida.getPagomin = " + formatoSalida.getPagomin() + ", formatoSalida.getMntosol = " + formatoSalida.getMntosol() +
-					", formatoSalida.getSaldope = " + formatoSalida.getSaldope() + ", formatoSalida.getFechali = " + formatoSalida.getFechali() + ", formatoSalida.getFechali = " + formatoSalida.getFechali() +
-					", formatoSalida.getFechaco = " + formatoSalida.getFechaco() + ", formatoSalida.getHonorar = " + formatoSalida.getHonorar() + ", formatoSalida.getCuotato = " + formatoSalida.getCuotato() +
-					", formatoSalida.getEstadot = " + formatoSalida.getEstadot());
 			dTOIntLoan.setId(formatoSalida.getNumcont());
-			dTOIntLoan.setType(formatoSalida.getTipprod());
+			dTOIntLoan.setType(EnumProductType.RQ);
 			dTOIntLoan.setName(formatoSalida.getDesctar());
 
 			dTOIntLoan.setBalance(setBalance(formatoSalida.getSaldoto(), formatoSalida.getPagomin()));
 			dTOIntLoan.setDebt(setBalance(formatoSalida.getMntosol(), formatoSalida.getSaldope()));
-
+			
 			Calendar fechaPa = Calendar.getInstance();
 			fechaPa.setTime(formatoSalida.getFechali());
-
-			Calendar fechaVe = Calendar.getInstance();
-			fechaVe.setTime(formatoSalida.getFechali());
-
-			dTOIntLoan.setPayment(setPayment(fechaPa, fechaVe,formatoSalida.getFechaco(), formatoSalida.getHonorar(),
-					              setMoneyValue(formatoSalida.getPagomin()), Integer.parseInt(formatoSalida.getCuotato())));
 			
-			dTOIntLoan.setStatus(formatoSalida.getEstadot());
+			Calendar fechaVe = Calendar.getInstance();
+
+			fechaVe.setTime(formatoSalida.getFechali());
+			
+			
+			dTOIntLoan.setPayment(setPayment(fechaPa, fechaVe,formatoSalida.getFechaco(), formatoSalida.getHonorar(),
+					              null, Integer.parseInt(formatoSalida.getCuotato())));
+			
+			dTOIntLoan.setStatus(EnumLoanStatus.valueOf(formatoSalida.getEstadot()));
 			log.info("fin Mapper");
 		} catch (Exception e) {
 			log.error("An error happened while mapping");
-			throw new BusinessServiceException(EnumError.NO_DATA.getAlias());
+			throw new BusinessServiceException("An error happened while mapping" + e.getMessage());
 		}
 		return dTOIntLoan;
+	}
+	
+	/**
+	 * Metodo que genera un Money con un valor con currency: COP
+	 * @author Sebastian Gamba - Entelgy Col.
+	 * @since 8/01/2015
+	 * @param value
+	 * @return
+	 */
+	private static Money setMoneyValue(final BigDecimal value){
+		Money money = new Money();
+		money.setCurrency("COP");
+		money.setAmount(value);
+		
+		return money;
 	}
 
 	/**
 	 *
-		 * @param value
+	 * @param value
 	 * @return
 	 */
 	private static Money setMoneyValue(final String value){
 		Money money = new Money();
 		BigDecimal moneyDecimal = new BigDecimal(value.replaceAll(",", ""));
-		money.setCurrency(java.util.Currency.getInstance("COP").getCurrencyCode());
+		money.setCurrency("COP");
 		money.setAmount(moneyDecimal);
 
 		return money;
@@ -113,20 +123,16 @@ public class LoanMapper {
 	 * @return
 	 */
 	private static Payment setPayment(final Calendar dueDate, final Calendar paymentDate,
-			final Date shortDate, final String fees, final Money minimumPayment, final Integer numbersOfQuota){
+			final Date shortDate, final String fees, final BigDecimal minimumPayment, final Integer numbersOfQuota){
 		Payment payment = new Payment();
-		log.info("inicio mapeo setPayment.Payment");
+		
 		payment.setDueDate(dueDate);
 		payment.setFees(setMoneyValue(fees));
-		payment.setMinimumPayment(minimumPayment);
+		payment.setMinimumPayment(setMoneyValue(minimumPayment));
 		payment.setNumbersOfQuota(numbersOfQuota);
 		payment.setPaymentDate(paymentDate);
-
-		Calendar calendar = Calendar.getInstance();
-		calendar.setTime(shortDate);
-
-		payment.setShortDate(calendar);
-		log.info("fin mapeo setPayment.Payment");
+		payment.setShortDate(shortDate);
+		
 		return payment;
 	}
 
@@ -137,7 +143,6 @@ public class LoanMapper {
 	 */
 	public static Loan getLoan(final DTOIntLoan dtoIntLoan){
 		Loan loan = new Loan();
-		log.info("inicio mapeo getLoan.Loan");
 		loan.setType(dtoIntLoan.getType());
 		loan.setName(dtoIntLoan.getName());
 		loan.setBalance(dtoIntLoan.getBalance());
@@ -150,79 +155,61 @@ public class LoanMapper {
 		loan.setVisible(dtoIntLoan.getVisible());
 		loan.setOperable(dtoIntLoan.getOperable());
 		loan.setId(dtoIntLoan.getId());
-		log.info("fin mapeo getLoan.Loan");
 		return loan;
 	}
 
 
 	public static DTOIntMovement getDTOIntMovementByCopy(final FormatoOZNCSNI0 copy) {
 		DTOIntMovement dTOIntMovement = new DTOIntMovement();
-		Calendar calendar = Calendar.getInstance();
-
-		log.info("inicio mapeo getDTOIntMovementByCopy.DTOIntMovement");
-
-		calendar.setTime(copy.getFechaop());
-
 		dTOIntMovement.setId(copy.getNumeope());
-		dTOIntMovement.setTransactionDate(calendar);
+		dTOIntMovement.setTransactionDate(getFormat(copy.getFechaop()));
 		dTOIntMovement.setConcept(copy.getResto().toString());
-		dTOIntMovement.setValue(setMoneyValue((copy.getValorop())));
-		dTOIntMovement.setOperation(new Operation(copy.getTipope()));
-		log.info("fin mapeo getDTOIntMovementByCopy.DTOIntMovement");
+		dTOIntMovement.setValue(setMoneyValue( copy.getValorop()));
+		dTOIntMovement.getOperation().setDescription(copy.getTipope());
+
 		return dTOIntMovement;
 	}
 
-	public static DTOIntRotaryQuotaMove getDTOIntMovementByCopy(final FormatoOZNCSNK0 copy) {
-		DTOIntRotaryQuotaMove dtoIntRotaryQuotaMove = new DTOIntRotaryQuotaMove();
-		log.info("inicio mapeo getDTOIntMovementByCopy.DTOIntRotaryQuotaMove");
-
-        Calendar calendar = Calendar.getInstance();
-		calendar.setTime(copy.getFechaop());
-
-		dtoIntRotaryQuotaMove.setTransactionDate(calendar);
-		dtoIntRotaryQuotaMove.setConcept(copy.getResto());
-		dtoIntRotaryQuotaMove.setValue(setMoneyValue(copy.getImporte()));
-		dtoIntRotaryQuotaMove.setBalance(setMoneyValue((copy.getBalance())));
-		dtoIntRotaryQuotaMove.setOperation(new Operation(copy.getDescop()));
-		dtoIntRotaryQuotaMove.setStatus(copy.getEstado());
-
-		log.info("inicio mapeo getDTOIntMovementByCopy.DTOIntRotaryQuotaMove");
-		return dtoIntRotaryQuotaMove;
+	private static Date getFormat(final String fecha){
+		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+		Date retorno = null;
+		try {
+			retorno = sdf.parse(fecha);
+		} catch (ParseException e) {
+			return null;
+		}
+		return retorno;
 	}
 
-	public static RotaryQuotaMove getMovementByDTOIntMovement(final DTOIntRotaryQuotaMove dto) {
-		RotaryQuotaMove rotaryQuotaMove = new RotaryQuotaMove();
-        log.info("inicio mapeo getMovementByDTOIntMovement.RotaryQuotaMove");
-		rotaryQuotaMove.setId(dto.getId());
-		rotaryQuotaMove.setTransactionDate(dto.getTransactionDate());
-		rotaryQuotaMove.setConcept(dto.getConcept());
-		rotaryQuotaMove.setValue(dto.getValue());
-		rotaryQuotaMove.setBalance(dto.getBalance());
+	public static DTOIntMovement getDTOIntMovementByCopy(final FormatoOZNCSNK0 copy) {
+		DTOIntMovement dTOIntMovement = new DTOIntMovement();
 
-		rotaryQuotaMove.setOperation(new Operation(dto.getOperation().getDescription()));
-		rotaryQuotaMove.setStatus(dto.getStatus());
-		rotaryQuotaMove.setOperation(dto.getOperation());
-		log.info("fin mapeo getMovementByDTOIntMovement.RotaryQuotaMove");
-		return rotaryQuotaMove;
+		dTOIntMovement.setTransactionDate(getFormat(copy.getFechao()));
+		dTOIntMovement.setConcept(copy.getResto().toString());
+		dTOIntMovement.setValue(setMoneyValue(copy.getImporte()));
+		dTOIntMovement.setBalance(new Balance(setMoneyValue(copy.getBalance())));
+		dTOIntMovement.getOperation().setDescription(copy.getDescop());
+		dTOIntMovement.setStatus(EnumMovementStatus.valueOf(copy.getEstado()));
+		return dTOIntMovement;
 	}
 
 	public static Movement getMovementByDTOIntMovement(final DTOIntMovement dto) {
-		Movement Movement = new Movement();
-		log.info("inicio mapeo getMovementByDTOIntMovement.Movement");
-		Movement.setId(dto.getId());
-		Movement.setTransactionDate(dto.getTransactionDate());
-		Movement.setConcept(dto.getConcept());
-		Movement.setValue(dto.getValue());
-		Movement.setBalance(dto.getBalance());
-		Movement.setStatus(dto.getStatus());
-		Movement.setOperation(dto.getOperation());
-		log.info("fin mapeo getMovementByDTOIntMovement.Movement");
-		return Movement;
+		Movement movement = new Movement();
+
+		movement.setId(dto.getId());
+		movement.setBalance(dto.getBalance());
+		movement.setConcept(dto.getConcept());
+		movement.setOffice(dto.getOffice());
+		movement.setOperation(dto.getOperation());
+		movement.setOperationDate(dto.getOperationDate());
+		movement.setStatus(dto.getStatus());
+		movement.setValue(dto.getValue());
+		return movement;
 	}
 
 	public static Loan getLoanByDTOIntLoan(final DTOIntLoan dto) {
 		Loan loan = new Loan();
-		log.info("inicio mapeo getLoanByDTOIntLoan.Loan");
+
 		loan.setPayment(dto.getPayment());
 		loan.setDebt(dto.getDebt());
 		loan.setStatus(dto.getStatus());
@@ -233,7 +220,7 @@ public class LoanMapper {
 		loan.setId(dto.getId());
 		loan.setName(dto.getName());
 		loan.setOperable(dto.getOperable());
-		log.info("fin  mapeo getLoanByDTOIntLoan.Loan");
+
 		return loan;
 	}
 }

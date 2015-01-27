@@ -1,5 +1,7 @@
 package com.bbva.czic.routine.commons.rm.utils.mappers;
 
+import com.bbva.czic.routine.commons.rm.utils.converter.GregorianCalendarConverter;
+import com.bbva.czic.routine.mapper.factory.CalendarFactory;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.cxf.jaxrs.ext.search.ConditionType;
 import org.apache.cxf.jaxrs.ext.search.PrimitiveStatement;
@@ -20,6 +22,8 @@ import com.bbva.jee.arq.spring.core.log.I18nLogFactory;
 import com.bbva.jee.arq.spring.core.servicing.gce.BusinessServiceException;
 import com.bbva.jee.arq.spring.core.servicing.utils.Money;
 
+import java.util.Calendar;
+
 public abstract class AbstractBbvaConfigurableMapper extends ConfigurableMapper {
 
 	protected static I18nLog log = I18nLogFactory.getLogI18n(AbstractBbvaConfigurableMapper.class,
@@ -31,9 +35,14 @@ public abstract class AbstractBbvaConfigurableMapper extends ConfigurableMapper 
 		// Add Converter
 		factory.getConverterFactory().registerConverter(new CalendarDateConverter());
 
+        // Add Calendar Converter to GregorianCalendar
+		factory.getConverterFactory().registerConverter(new GregorianCalendarConverter());
+
 		// Add Money Factory
 		factory.registerObjectFactory(new MoneyFactory(), TypeFactory.<Money> valueOf(Money.class));
 
+		// Add Calendar Factory
+		factory.registerObjectFactory(new CalendarFactory(), TypeFactory.<Calendar> valueOf(Calendar.class));
 	}
 
 	/**

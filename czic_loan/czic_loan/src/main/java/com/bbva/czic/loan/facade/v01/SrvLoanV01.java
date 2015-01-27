@@ -1,13 +1,10 @@
 package com.bbva.czic.loan.facade.v01;
 
-import javax.annotation.Resource;
 import javax.ws.rs.*;
 import javax.ws.rs.core.HttpHeaders;
 import javax.ws.rs.core.MediaType;
 
 import javax.ws.rs.core.UriInfo;
-
-import com.bbva.czic.dto.net.RotaryQuotaMove;
 
 import org.apache.cxf.jaxrs.model.wadl.ElementClass;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -65,9 +62,6 @@ public class SrvLoanV01 implements ISrvLoanV01,
 	@Autowired
 	ISrvIntLoan isrvIntLoan;
 
-	@Resource(name = "loan-filter-converter")
-	LoanFilterConverter loanFilterConverter;
-
 	@ApiOperation(value = "Obtiene la informaci�n general del producto de fianciamiento", notes = "Obtiene la informaci�n general del producto de fianciamiento", response = Loan.class)
 	@ApiResponses(value = {
 			@ApiResponse(code = -1, message = "aliasGCE1"),
@@ -83,6 +77,7 @@ public class SrvLoanV01 implements ISrvLoanV01,
 		return  isrvIntLoan.getRotaryQuota(idLoan);
 	}
 
+	@SuppressWarnings("unchecked")
 	@ApiOperation(value = "Obtiene un resumen de movimientos realizados sobre el producto de financiamiento. �ste servicio es paginado", notes = "Obtiene un resumen de movimientos realizados sobre el producto de financiamiento. �ste servicio es paginado", response = List.class)
 	@ApiResponses(value = {
 			@ApiResponse(code = -1, message = "aliasGCE1"),
@@ -91,30 +86,30 @@ public class SrvLoanV01 implements ISrvLoanV01,
 			@ApiResponse(code = 500, message = "Technical Error") })
 	@GET
 	@ElementClass(response = List.class)
-	@Path("/rotaryQuota/{loanId}/movements")
+	@Path("/rotaryQuota/{loanId}/movements/{paginationKey}/{pageSize}")
 	@SMC(registryID = "SMC201400011", logicalID = "listRotaryQuotaMovements")
 	public List<Movement> listRotaryQuotaMovements(@ApiParam(value = "Loan identifier") @PathParam("loanId") String loanId,
-												   @ApiParam(value = "Loan pagination Key") @QueryParam("paginationKey")  String paginationKey,
-												   @ApiParam(value = "Loan page Size") @QueryParam("pageSize") String pageSize,
+												   @ApiParam(value = "Loan pagination Key") @PathParam("paginationKey")  String paginationKey,
+												   @ApiParam(value = "Loan page Size") @PathParam("pageSize") String pageSize,
 												   @ApiParam(value = "order by param") @DefaultValue("null") @QueryParam("$filter") String filter) {
-		DTOIntFilterLoan loanFilter = loanFilterConverter.getDTOIntFilter(loanId, paginationKey, pageSize, filter);
-		return isrvIntLoan.listRotaryQuotaMovements(loanFilter);
+		DTOIntFilterLoan loanFilter = new LoanFilterConverter().getDTOIntFilter(loanId, filter);
+		return isrvIntLoan.listRotaryQuotaMovements(loanFilter.getIdLoan(), paginationKey, pageSize, loanFilter.getFechaInicial(), loanFilter.getFechaFianl());
 	}
 
 
 
-	@ApiOperation(value = "Obtiene los detalles del movimiento seleccionado para el producto de financiamiento", notes = "Obtiene los detalles del movimiento seleccionado para el producto de financiamiento", response = RotaryQuotaMove.class)
+	@ApiOperation(value = "Obtiene los detalles del movimiento seleccionado para el producto de financiamiento", notes = "Obtiene los detalles del movimiento seleccionado para el producto de financiamiento", response = Movement.class)
 	@ApiResponses(value = { @ApiResponse(code = -1, message = "aliasGCE1"),
 			@ApiResponse(code = -1, message = "aliasGCE2"),
-			@ApiResponse(code = 200, message = "Found Sucessfully", response = RotaryQuotaMove.class),
+			@ApiResponse(code = 200, message = "Found Sucessfully", response = Movement.class),
 			@ApiResponse(code = 500, message = "Technical Error") })
 	@GET
-	@ElementClass(response = RotaryQuotaMove.class)
+	@ElementClass(response = Movement.class)
 	@Path("/rotaryQuota/{idLoan}/movement/{idMovement}")
 	@SMC(registryID = "SMC201400012", logicalID = "getRotaryQuotaMovement")
-	public RotaryQuotaMove getRotaryQuotaMovement(
+	public Movement getRotaryQuotaMovement(
 			@ApiParam(value = "Claimer identifier param") @PathParam("idLoan") String idLoan,
 			@ApiParam(value = "Claimer identifier param") @PathParam("idMovement") String idMovement) {
-		return isrvIntLoan.getRotaryQuotaMovement(idLoan, idMovement);
+		return isrvIntLoan.getRotaryQuotaMovement(idMovement, idLoan);
 	}
 }
