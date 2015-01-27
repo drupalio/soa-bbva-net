@@ -31,11 +31,7 @@ public class TxCheckMapperImpl extends AbstractBbvaTxConfigurableMapper implemen
 	@Override
 	protected void configure(MapperFactory factory) {
 
-		/**
-		 * Convert HOST FORMAT (+EEEEEEEEDD) to COP Money
-		 */
-		factory.getConverterFactory().registerConverter(new StringMoneyConverter());
-
+		super.configure(factory);
 		/**
 		 * MAPEO DE ENTRADAS
 		 */
