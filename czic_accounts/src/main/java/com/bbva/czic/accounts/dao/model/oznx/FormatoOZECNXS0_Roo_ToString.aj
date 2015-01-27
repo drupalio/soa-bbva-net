@@ -12,7 +12,7 @@ privileged aspect FormatoOZECNXS0_Roo_ToString {
         sb.append("Estcheq: ").append(getEstcheq()).append(", ");
         sb.append("Fechemi: ").append(getFechemi()).append(", ");
         sb.append("Fechmod: ").append(getFechmod()).append(", ");
-        sb.append("Indpagi: ").append(java.util.Arrays.toString(getIndpagi())).append(", ");
+        sb.append("Indpagi: ").append(getIndpagi()).append(", ");
         sb.append("Numcheq: ").append(getNumcheq()).append(", ");
         sb.append("Numprod: ").append(getNumprod()).append(", ");
         sb.append("Valcheq: ").append(getValcheq());
