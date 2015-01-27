@@ -35,9 +35,9 @@ public class TransaccionOznjMock implements	InvocadorTransaccion<PeticionTransac
 		FormatoOZNCSNJ0 formatoSalida = new FormatoOZNCSNJ0();
 
 		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-		String fechaCa = "2017-08-12 00:00:00.0 CDT";
-		String fechaCo = "2015-12-10 00:00:00.0 CST";
-		String fechaLi = "2015-12-31 00:00:00.0 CST";
+		String fechaCa = "2017-08-12";
+		String fechaCo = "2015-12-10";
+		String fechaLi = "2015-12-31";
 
 		try {
 			formatoSalida.setFechaca(formatter.parse(fechaCa));
