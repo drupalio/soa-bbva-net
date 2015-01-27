@@ -1,14 +1,25 @@
 package com.bbva.czic.executives.business.dto;
 
 import com.bbva.czic.dto.net.Office;
+import org.hibernate.validator.constraints.NotEmpty;
+
+import javax.validation.constraints.NotNull;
 
 public class DTOIntExecutive {
 
 	public final static long serialVersionUID = 1L;
+	@NotNull
+	@NotEmpty
 	private String executiveId;
+	@NotNull
+	@NotEmpty
 	private String name;
+	@NotNull
+	@NotEmpty
 	private String phone;
-	private Office office;
+	private DTOIntOffice office;
+	@NotNull
+	@NotEmpty
 	private String email;
 
 	public DTOIntExecutive() {
@@ -39,14 +50,6 @@ public class DTOIntExecutive {
 		this.phone = phone;
 	}
 
-	public Office getOffice() {
-		return office;
-	}
-
-	public void setOffice(Office office) {
-		this.office = office;
-	}
-
 	public String getEmail() {
 		return email;
 	}
@@ -55,4 +58,11 @@ public class DTOIntExecutive {
 		this.email = email;
 	}
 
+	public DTOIntOffice getOffice() {
+		return office;
+	}
+
+	public void setOffice(DTOIntOffice office) {
+		this.office = office;
+	}
 }

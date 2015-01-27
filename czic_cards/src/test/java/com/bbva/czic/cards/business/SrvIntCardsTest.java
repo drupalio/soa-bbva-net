@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import com.bbva.jee.arq.spring.core.servicing.test.MockInvocationContextTestExecutionListener;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -14,6 +15,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.TestExecutionListeners;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
@@ -29,8 +31,9 @@ import com.bbva.jee.arq.spring.core.servicing.test.BusinessServiceTestContextLoa
 		"classpath*:/META-INF/spring/applicationContext-*.xml",
 		"classpath:/META-INF/spring/business-service.xml",
 		"classpath:/META-INF/spring/business-service-test.xml" })
+@ActiveProfiles(profiles = "dev")
 @TestExecutionListeners(listeners = {
-// MockInvocationContextTestExecutionListener.class,
+MockInvocationContextTestExecutionListener.class,
 DependencyInjectionTestExecutionListener.class })
 public class SrvIntCardsTest {
 

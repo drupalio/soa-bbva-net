@@ -7,6 +7,7 @@ import static org.mockito.Mockito.when;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.bbva.jee.arq.spring.core.servicing.test.MockInvocationContextTestExecutionListener;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -28,7 +29,7 @@ import com.bbva.jee.arq.spring.core.servicing.test.BusinessServiceTestContextLoa
 @ContextConfiguration(loader = BusinessServiceTestContextLoader.class, locations = { "classpath*:/META-INF/spring/applicationContext-*.xml",
 		"classpath:/META-INF/spring/business-service.xml", "classpath:/META-INF/spring/business-service-test.xml" })
 @TestExecutionListeners(listeners = {
-// MockInvocationContextTestExecutionListener.class,
+MockInvocationContextTestExecutionListener.class,
 DependencyInjectionTestExecutionListener.class })
 public class SrvCardsV01Test {
 

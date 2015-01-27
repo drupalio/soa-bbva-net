@@ -2,20 +2,21 @@ package com.bbva.czic.executives.facade.v01;
 
 import com.bbva.czic.dto.net.Executive;
 import com.bbva.czic.executives.business.ISrvIntExecutives;
-import com.bbva.czic.executives.dao.GetExecutiveMapper;
-import com.bbva.czic.routine.commons.rm.utils.errors.EnumError;
+import com.bbva.czic.executives.business.dto.DTOIntExecutivesFilter;
+import com.bbva.czic.executives.facade.v01.mapper.IExecutivesMapper;
+import com.bbva.czic.routine.commons.rm.utils.validator.impl.FiqlValidator;
 import com.bbva.jee.arq.spring.core.log.I18nLog;
 import com.bbva.jee.arq.spring.core.log.I18nLogFactory;
 import com.bbva.jee.arq.spring.core.servicing.annotations.SMC;
 import com.bbva.jee.arq.spring.core.servicing.annotations.SN;
 import com.bbva.jee.arq.spring.core.servicing.annotations.VN;
-import com.bbva.jee.arq.spring.core.servicing.gce.BusinessServiceException;
 import com.bbva.jee.arq.spring.core.servicing.utils.BusinessServicesToolKit;
 import com.wordnik.swagger.annotations.*;
 import org.apache.cxf.jaxrs.model.wadl.ElementClass;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.Resource;
 import javax.ws.rs.*;
 import javax.ws.rs.core.HttpHeaders;
 import javax.ws.rs.core.MediaType;
@@ -35,13 +36,13 @@ public class SrvExecutivesV01 implements ISrvExecutivesV01,
 
 	public HttpHeaders httpHeaders;
 
+	@Resource(name = "executives-mapper")
+	private IExecutivesMapper iExecutivesMapper;
+
 	@Autowired
 	BusinessServicesToolKit businessToolKit;
 
 	public UriInfo uriInfo;
-
-	@Autowired
-	ISrvIntExecutives iSrvIntExecutives;
 
 	@Override
 	public void setUriInfo(UriInfo ui) {
@@ -71,8 +72,14 @@ public class SrvExecutivesV01 implements ISrvExecutivesV01,
 			@ApiParam(value = "expands param") @DefaultValue("null") @QueryParam("$expands") String expands,
 			@ApiParam(value = "order by param") @DefaultValue("null") @QueryParam("$sort") String sort) {
 
-		return GetExecutiveMapper.mapOuter(iSrvIntExecutives
-				.getExecutive(filter));
+		// 1. Validate filter FIQL
+		new FiqlValidator(filter).exist().hasEq("id").hasEq("type").validate();
+
+		// 2. Mapping to DTOIntFilter
+		DTOIntExecutivesFilter dtoIntExecutivesFilter = iExecutivesMapper.getDTOIntFilter(filter);
+
+		// 3. Invoke SrvIntAccounts and Mapping to canonical DTO
+		return iExecutivesMapper.map(srvIntExecutives.getExecutive(dtoIntExecutivesFilter));
 	}
 
 }
