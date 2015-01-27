@@ -1,13 +1,18 @@
 package com.bbva.czic.customers.dao.mapper.impl;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
 import com.bbva.czic.customers.business.dto.DTOIntCustomer;
 import com.bbva.czic.customers.dao.mapper.TxCustomerMapper;
 import com.bbva.czic.customers.dao.model.oznb.FormatoOZNCENB0;
 import com.bbva.czic.customers.dao.model.oznb.FormatoOZNCSNB0;
+import com.bbva.czic.customers.dao.model.oznb.TransaccionOznb;
 import com.bbva.czic.routine.commons.rm.utils.converter.StringMoneyConverter;
 import com.bbva.czic.routine.mapper.MapperFactory;
 import com.bbva.czic.routine.mapper.impl.ConfigurableMapper;
 
+@Component("txCustomerMapper")
 public class TxCustomerMapperImpl extends ConfigurableMapper implements TxCustomerMapper {
 
 	@Override
@@ -22,16 +27,14 @@ public class TxCustomerMapperImpl extends ConfigurableMapper implements TxCustom
 		 * MAPEO DE ENTRADAS
 		 */
 		// Map customerId <-> FormatoOZNCENB0 (OZNA)
-		factory.classMap(String.class, FormatoOZNCENB0.class).field("customerId", "numprod").byDefault()
-				.register();
+//		factory.classMap(String.class, FormatoOZNCENB0.class).field("customerId", "numprod").byDefault()
+//				.register();
 
 		/**
 		 * MAPEO DE SALIDAS
 		 */
 		// Map FormatoOZECNVS0 <-> DTOIntMonthlyBalances (OZNA)
-		factory.classMap(DTOIntCustomer.class, FormatoOZNCSNB0.class).field("name", "numclie").field("type", "tipprod")
-				.field("idAccount", "numprod").field("balance.total", "saltota")
-				.field("balance.availableBalance", "sddispo").field("balance.tradeBalance", "sdcanje").byDefault().register();
+		factory.classMap(DTOIntCustomer.class, FormatoOZNCSNB0.class).field("name", "numclie").byDefault().register();
 
 
 	}

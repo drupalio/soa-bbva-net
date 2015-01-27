@@ -21,8 +21,8 @@ import javax.annotation.Resource;
 public class TxListChecks extends
 		MultiBbvaTransaction<DTOIntFilterChecks, FormatoOZECNXE0, DTOIntCheck, FormatoOZECNXS0> {
 
-	@Autowired
-	private transient TransaccionOznx transaccionOznx;
+	@Resource(name = "transaccionOznx")
+	private transient InvocadorTransaccion<PeticionTransaccionOznx,RespuestaTransaccionOznx> transaccionOznx;
 
 	@Resource(name = "txCheckMapper")
 	private TxCheckMapper txCheckMapper;

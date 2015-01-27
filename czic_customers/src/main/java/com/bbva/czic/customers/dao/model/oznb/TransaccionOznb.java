@@ -16,21 +16,27 @@ import com.bbva.jee.arq.spring.core.host.InvocadorTransaccion;
  */
 @Profile(value = "prod")
 @Component(value = "transaccionOznb")
-public class TransaccionOznb implements InvocadorTransaccion<PeticionTransaccionOznb,RespuestaTransaccionOznb> {
-	
+public class TransaccionOznb implements
+		InvocadorTransaccion<PeticionTransaccionOznb, RespuestaTransaccionOznb> {
+
 	@Autowired
 	private ServicioTransacciones servicioTransacciones;
-	
+
 	@Override
-	public RespuestaTransaccionOznb invocar(PeticionTransaccionOznb transaccion) throws ExcepcionTransaccion {
-		return servicioTransacciones.invocar(PeticionTransaccionOznb.class, RespuestaTransaccionOznb.class, transaccion);
+	public RespuestaTransaccionOznb invocar(PeticionTransaccionOznb transaccion)
+			throws ExcepcionTransaccion {
+		return servicioTransacciones.invocar(PeticionTransaccionOznb.class,
+				RespuestaTransaccionOznb.class, transaccion);
 	}
-	
+
 	@Override
-	public RespuestaTransaccionOznb invocarCache(PeticionTransaccionOznb transaccion) throws ExcepcionTransaccion {
-		return servicioTransacciones.invocar(PeticionTransaccionOznb.class, RespuestaTransaccionOznb.class, transaccion);
+	public RespuestaTransaccionOznb invocarCache(
+			PeticionTransaccionOznb transaccion) throws ExcepcionTransaccion {
+		return servicioTransacciones.invocar(PeticionTransaccionOznb.class,
+				RespuestaTransaccionOznb.class, transaccion);
 	}
-	
+
 	@Override
-	public void vaciarCache() {}	
+	public void vaciarCache() {
+	}
 }

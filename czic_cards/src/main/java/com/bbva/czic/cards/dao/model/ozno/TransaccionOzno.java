@@ -16,21 +16,24 @@ import com.bbva.jee.arq.spring.core.host.ServicioTransacciones;
  */
 @Profile(value = "prod")
 @Component(value = "transaccionOzno")
-public class TransaccionOzno implements InvocadorTransaccion<PeticionTransaccionOzno, RespuestaTransaccionOzno> {
+public class TransaccionOzno implements
+		InvocadorTransaccion<PeticionTransaccionOzno, RespuestaTransaccionOzno> {
 
 	@Autowired
 	private ServicioTransacciones servicioTransacciones;
 
 	@Override
-	public RespuestaTransaccionOzno invocar(PeticionTransaccionOzno transaccion) throws ExcepcionTransaccion {
-		return servicioTransacciones
-				.invocar(PeticionTransaccionOzno.class, RespuestaTransaccionOzno.class, transaccion);
+	public RespuestaTransaccionOzno invocar(PeticionTransaccionOzno transaccion)
+			throws ExcepcionTransaccion {
+		return servicioTransacciones.invocar(PeticionTransaccionOzno.class,
+				RespuestaTransaccionOzno.class, transaccion);
 	}
 
 	@Override
-	public RespuestaTransaccionOzno invocarCache(PeticionTransaccionOzno transaccion) throws ExcepcionTransaccion {
-		return servicioTransacciones
-				.invocar(PeticionTransaccionOzno.class, RespuestaTransaccionOzno.class, transaccion);
+	public RespuestaTransaccionOzno invocarCache(
+			PeticionTransaccionOzno transaccion) throws ExcepcionTransaccion {
+		return servicioTransacciones.invocar(PeticionTransaccionOzno.class,
+				RespuestaTransaccionOzno.class, transaccion);
 	}
 
 	@Override

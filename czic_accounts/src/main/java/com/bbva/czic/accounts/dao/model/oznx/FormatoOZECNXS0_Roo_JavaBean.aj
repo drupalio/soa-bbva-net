@@ -9,11 +9,11 @@ import java.util.Date;
 
 privileged aspect FormatoOZECNXS0_Roo_JavaBean {
     
-    public int[] FormatoOZECNXS0.getIndpagi() {
+    public Integer FormatoOZECNXS0.getIndpagi() {
         return this.indpagi;
     }
     
-    public void FormatoOZECNXS0.setIndpagi(int[] indpagi) {
+    public void FormatoOZECNXS0.setIndpagi(Integer indpagi) {
         this.indpagi = indpagi;
     }
     

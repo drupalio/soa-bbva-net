@@ -2,11 +2,7 @@ package com.bbva.czic.accounts.dao.mappers.impl;
 
 import java.util.ArrayList;
 
-import com.bbva.czic.accounts.business.dto.DTOIntAccMovementsResume;
-import com.bbva.czic.accounts.business.dto.DTOIntAccount;
-import com.bbva.czic.accounts.business.dto.DTOIntCheckbook;
-import com.bbva.czic.accounts.business.dto.DTOIntFilterAccount;
-import com.bbva.czic.accounts.business.dto.DTOIntMonthlyBalances;
+import com.bbva.czic.accounts.business.dto.*;
 import com.bbva.czic.accounts.dao.mappers.TxAccountMapper;
 import com.bbva.czic.accounts.dao.model.ozna.FormatoOZNCENA0;
 import com.bbva.czic.accounts.dao.model.ozna.FormatoOZNCSNA0;
@@ -47,7 +43,8 @@ public class TxAccountMapperImpl extends ConfigurableMapper implements TxAccount
 				.field("endMonth", "mesfin").field("accountId", "numcta").byDefault().register();
 
 		// Map DTOIntFilter <-> FormatoOZECNUE0 (OZNU)
-		factory.classMap(DTOIntFilterAccount.class, FormatoOZECNUE0.class).field("startMonth", "intervm")
+		factory.classMap(DTOIntFilterMovResumes.class, FormatoOZECNUE0.class)
+				.field("month", "intervm")
 				.field("accountId", "numprod").byDefault().register();
 
 		/**
@@ -61,7 +58,7 @@ public class TxAccountMapperImpl extends ConfigurableMapper implements TxAccount
 
 		// Map FormatoOZECNVS0 <-> DTOIntMonthlyBalances (OZNV)
 		factory.classMap(DTOIntMonthlyBalances.class, FormatoOZECNVS0.class).field("balance", "salddis")
-				.field("month.mes", "mes").byDefault().register();
+				.field("month", "mes").byDefault().register();
 
 		// Map FormatoOZECNUS0 <-> DTOIntAccMovementsResume (OZNU)
 		factory.classMap(DTOIntAccMovementsResume.class, FormatoOZECNUS0.class).field("balance", "saldtot")
@@ -91,7 +88,7 @@ public class TxAccountMapperImpl extends ConfigurableMapper implements TxAccount
 	}
 
 	@Override
-	public FormatoOZECNUE0 mapInOznu(DTOIntFilterAccount dtoIn) {
+	public FormatoOZECNUE0 mapInOznu(DTOIntFilterMovResumes dtoIn) {
 		return map(dtoIn, FormatoOZECNUE0.class);
 	}
 

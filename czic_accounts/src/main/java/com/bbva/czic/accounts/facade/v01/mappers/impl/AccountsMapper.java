@@ -3,13 +3,7 @@ package com.bbva.czic.accounts.facade.v01.mappers.impl;
 import java.util.Calendar;
 import java.util.List;
 
-import com.bbva.czic.accounts.business.dto.DTOIntAccMovementsResume;
-import com.bbva.czic.accounts.business.dto.DTOIntAccount;
-import com.bbva.czic.accounts.business.dto.DTOIntBalance;
-import com.bbva.czic.accounts.business.dto.DTOIntCheck;
-import com.bbva.czic.accounts.business.dto.DTOIntCheckbook;
-import com.bbva.czic.accounts.business.dto.DTOIntFilterAccount;
-import com.bbva.czic.accounts.business.dto.DTOIntMonthlyBalances;
+import com.bbva.czic.accounts.business.dto.*;
 import com.bbva.czic.accounts.facade.v01.mappers.IAccountsMapper;
 import com.bbva.czic.dto.net.AccMovementsResume;
 import com.bbva.czic.dto.net.Account;
@@ -76,6 +70,29 @@ public class AccountsMapper extends AbstractBbvaConfigurableMapper implements IA
 
 		return dtoIntFilterAccount;
 
+	}
+
+	@Override
+	public DTOIntFilterChecks getDtoIntFilterChecks(String idAccount, String filter, Integer paginationKey, Integer paginationSize) {
+
+		final DTOIntFilterChecks dtoFilter = new DTOIntFilterChecks();
+		dtoFilter.setAccountId(idAccount);
+		dtoFilter.setPaginationKey(paginationKey);
+		dtoFilter.setPageSize(paginationSize);
+
+		dtoFilter.setStartDate(this.getGeValue(filter, "issueDate"));
+		dtoFilter.setStartDate(this.getLeValue(filter, "issueDate"));
+		dtoFilter.setStatus(this.getEqValue(filter, "status"));
+
+		return dtoFilter;
+	}
+
+	@Override
+	public DTOIntFilterMovResumes getDtoIntFilterMovResumes(String idAccount, String filter) {
+		final DTOIntFilterMovResumes dtoFilter = new DTOIntFilterMovResumes();
+		dtoFilter.setAccountId(idAccount);
+		dtoFilter.setMonth(this.getGeValue(filter, FiqlType.month.name()));
+		return dtoFilter;
 	}
 
 	/**

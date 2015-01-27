@@ -4,16 +4,10 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
+import com.bbva.czic.accounts.business.dto.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.bbva.czic.accounts.business.dto.DTOIntAccMovementsResume;
-import com.bbva.czic.accounts.business.dto.DTOIntAccount;
-import com.bbva.czic.accounts.business.dto.DTOIntCheck;
-import com.bbva.czic.accounts.business.dto.DTOIntCheckbook;
-import com.bbva.czic.accounts.business.dto.DTOIntFilterAccount;
-import com.bbva.czic.accounts.business.dto.DTOIntFilterChecks;
-import com.bbva.czic.accounts.business.dto.DTOIntMonthlyBalances;
 import com.bbva.czic.accounts.dao.AccountsDAO;
 import com.bbva.czic.accounts.dao.tx.TxGetAccount;
 import com.bbva.czic.accounts.dao.tx.TxGetAccountMonthlyBalance;
@@ -63,8 +57,8 @@ public class AccountsDAOImpl implements AccountsDAO {
 	}
 
 	@Override
-	public List<DTOIntAccMovementsResume> getAccountMovementResume(final DTOIntFilterAccount dtoIntFilterAccount) {
-		return txGetAccountMovementResume.invoke(dtoIntFilterAccount);
+	public List<DTOIntAccMovementsResume> getAccountMovementResume(final DTOIntFilterMovResumes dtoIntFilter) {
+		return txGetAccountMovementResume.invoke(dtoIntFilter);
 	}
 
 	@Override

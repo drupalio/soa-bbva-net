@@ -1,6 +1,5 @@
 package com.bbva.czic.customers.dao.model.oznb.mock;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
 
@@ -8,7 +7,6 @@ import com.bbva.czic.customers.dao.model.oznb.FormatoOZNCSNB0;
 import com.bbva.czic.customers.dao.model.oznb.PeticionTransaccionOznb;
 import com.bbva.czic.customers.dao.model.oznb.RespuestaTransaccionOznb;
 import com.bbva.jee.arq.spring.core.host.ExcepcionTransaccion;
-import com.bbva.jee.arq.spring.core.host.ServicioTransacciones;
 import com.bbva.jee.arq.spring.core.host.InvocadorTransaccion;
 import com.bbva.jee.arq.spring.core.host.protocolo.ps9.aplicacion.CopySalida;
 
@@ -21,9 +19,6 @@ import com.bbva.jee.arq.spring.core.host.protocolo.ps9.aplicacion.CopySalida;
 @Profile(value = "dev")
 @Component(value = "transaccionOznb")
 public class TransaccionOznbMock implements InvocadorTransaccion<PeticionTransaccionOznb,RespuestaTransaccionOznb> {
-	
-	@Autowired
-	private ServicioTransacciones servicioTransacciones;
 	
 	@Override
 	public RespuestaTransaccionOznb invocar(PeticionTransaccionOznb transaccion) throws ExcepcionTransaccion {

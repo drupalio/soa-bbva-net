@@ -33,7 +33,7 @@ public class SrvIntCustomers implements ISrvIntCustomers {
 	private static I18nLog log = I18nLogFactory.getLogI18n(
 			SrvIntCustomers.class, "META-INF/spring/i18n/log/mensajesLog");
 
-	@Resource(name = "customers-dao-impl")
+	@Resource(name = "customers-dao")
 	private CustomersDAO customersDao;
 
 	@Resource(name = "customerMapper")

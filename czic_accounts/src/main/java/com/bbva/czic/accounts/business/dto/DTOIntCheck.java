@@ -3,22 +3,20 @@ package com.bbva.czic.accounts.business.dto;
 import com.bbva.czic.dto.net.EnumCheckStatus;
 import com.bbva.jee.arq.spring.core.servicing.utils.Money;
 
+import javax.validation.constraints.NotNull;
 import java.util.*;
 
 public class DTOIntCheck extends DTOIntFilterAccount {
 
 	public final static long serialVersionUID = 1L;
 
+	@NotNull
 	private String id;
-
 	private Date issueDate;
-
+	@NotNull
 	private Money value;
-
 	private String status;
-
 	private Date modifiedDate;
-
 	private int paginationKey;
 
 	public DTOIntCheck() {

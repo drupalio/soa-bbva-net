@@ -50,7 +50,6 @@ public class TxCheckMapperImpl extends ConfigurableMapper implements TxCheckMapp
 		/**
 		 * MAPEO DE SALIDAS
 		 */
-		// Map FormatoOZECNVS0 <-> DTOIntMonthlyBalances (OZNA)
 		factory.classMap(DTOIntCheck.class, FormatoOZECNXS0.class)
 				.field("id", "numcheq")
 				.field("issueDate", "fechemi")

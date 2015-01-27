@@ -82,7 +82,7 @@ public class AccountsDAOMock implements AccountsDAO {
 		Mockito.when(getAccountMonthlyBalance(Mockito.any(DTOIntFilterAccount.class))).thenReturn(listDTOIntMonthlyBalances);
 
 		mock = Mockito.mock(AccountsDAOMock.class);
-		Mockito.when(getAccountMovementResume(Mockito.any(DTOIntFilterAccount.class))).thenReturn(listAccMovementsResume);
+		Mockito.when(getAccountMovementResume(Mockito.any(DTOIntFilterMovResumes.class))).thenReturn(listAccMovementsResume);
 
 	}
 
@@ -92,7 +92,7 @@ public class AccountsDAOMock implements AccountsDAO {
 	}
 
 	@Override
-	public List<DTOIntAccMovementsResume> getAccountMovementResume(DTOIntFilterAccount dtoIntFilterAccount) {
+	public List<DTOIntAccMovementsResume> getAccountMovementResume(DTOIntFilterMovResumes dtoIntFilter) {
 		return new ArrayList<DTOIntAccMovementsResume>();
 	}
 
