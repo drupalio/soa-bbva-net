@@ -1,5 +1,16 @@
 package com.bbva.czic.customers.facade.v01.utils.converters.impl;
 
+import java.util.Date;
+import java.util.List;
+
+import org.apache.cxf.jaxrs.ext.search.ConditionType;
+import org.apache.cxf.jaxrs.ext.search.PrimitiveStatement;
+import org.apache.cxf.jaxrs.ext.search.SearchCondition;
+import org.apache.cxf.jaxrs.ext.search.SearchParseException;
+import org.apache.cxf.jaxrs.ext.search.fiql.FiqlParser;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
 import com.bbva.czic.customers.business.dto.DTOIntAccMovementsResume;
 import com.bbva.czic.customers.business.dto.DTOIntCardCharge;
 import com.bbva.czic.customers.business.dto.DTOIntFilterCustomerResumes;
@@ -10,21 +21,12 @@ import com.bbva.jee.arq.spring.core.log.I18nLog;
 import com.bbva.jee.arq.spring.core.log.I18nLogFactory;
 import com.bbva.jee.arq.spring.core.servicing.gce.BusinessServiceException;
 import com.bbva.jee.arq.spring.core.servicing.utils.BusinessServicesToolKit;
-import org.apache.cxf.jaxrs.ext.search.ConditionType;
-import org.apache.cxf.jaxrs.ext.search.PrimitiveStatement;
-import org.apache.cxf.jaxrs.ext.search.SearchCondition;
-import org.apache.cxf.jaxrs.ext.search.SearchParseException;
-import org.apache.cxf.jaxrs.ext.search.fiql.FiqlParser;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
-
-import java.util.Date;
-import java.util.List;
 
 @Component(value = "customer-resumes-filter-converter")
 public class CustResumesFilterConverter implements IFilterConverter {
 
-	private static I18nLog log = I18nLogFactory.getLogI18n(CustResumesFilterConverter.class, "META-INF/spring/i18n/log/mensajesLog");
+	private static I18nLog log = I18nLogFactory.getLogI18n(CustResumesFilterConverter.class,
+			"META-INF/spring/i18n/log/mensajesLog");
 
 	@Autowired
 	BusinessServicesToolKit businessToolKit;
@@ -46,25 +48,24 @@ public class CustResumesFilterConverter implements IFilterConverter {
 
 			filterDto = new DTOIntFilterCustomerResumes();
 
-			for (PrimitiveStatement st: splitDataFilter) {
-				if(st.getCondition().equals(ConditionType.GREATER_OR_EQUALS)){
-					filterDto.setStartDate((Date) st.getValue());
-				}else if (st.getCondition().equals(ConditionType.LESS_OR_EQUALS)){
-					filterDto.setEndDate((Date) st.getValue());
+			for (PrimitiveStatement st : splitDataFilter) {
+				if (st.getCondition().equals(ConditionType.GREATER_OR_EQUALS)) {
+					filterDto.setStartDate((Date)st.getValue());
+				} else if (st.getCondition().equals(ConditionType.LESS_OR_EQUALS)) {
+					filterDto.setEndDate((Date)st.getValue());
 				}
 
 			}
 
-			if(filterDto.getEndDate() == null){
+			if (filterDto.getEndDate() == null) {
 				filterDto.setEndDate(new Date());
 			}
-			if(filterDto.getStartDate() == null){
+			if (filterDto.getStartDate() == null) {
 				throw new BusinessServiceException(EnumError.WRONG_PARAMETERS.getAlias());
 			}
 
-
-			DateValidator validator = (DateValidator) new DateValidator().noFuture(filterDto.getStartDate())
-					.noFuture(filterDto.getEndDate()).validDateRange(filterDto.getStartDate(),filterDto.getEndDate())
+			DateValidator validator = (DateValidator)new DateValidator().noFuture(filterDto.getStartDate())
+					.noFuture(filterDto.getEndDate()).validDateRange(filterDto.getStartDate(), filterDto.getEndDate())
 					.validate();
 		} catch (BusinessServiceException bse) {
 			log.error("BusinessServiceException - The query string (filter) has failed: " + bse);
@@ -89,24 +90,24 @@ public class CustResumesFilterConverter implements IFilterConverter {
 
 			filterDto = new DTOIntFilterCustomerResumes();
 
-			for (PrimitiveStatement st: splitDataFilter) {
-				if(st.getCondition().equals(ConditionType.GREATER_OR_EQUALS)){
-					filterDto.setStartDate((Date) st.getValue());
-				}else if (st.getCondition().equals(ConditionType.LESS_OR_EQUALS)){
-					filterDto.setEndDate((Date) st.getValue());
+			for (PrimitiveStatement st : splitDataFilter) {
+				if (st.getCondition().equals(ConditionType.GREATER_OR_EQUALS)) {
+					filterDto.setStartDate((Date)st.getValue());
+				} else if (st.getCondition().equals(ConditionType.LESS_OR_EQUALS)) {
+					filterDto.setEndDate((Date)st.getValue());
 				}
 
 			}
 
-			if(filterDto.getEndDate() == null){
+			if (filterDto.getEndDate() == null) {
 				filterDto.setEndDate(new Date());
 			}
-			if(filterDto.getStartDate() == null){
+			if (filterDto.getStartDate() == null) {
 				throw new BusinessServiceException(EnumError.WRONG_PARAMETERS.getAlias());
 			}
 
-			DateValidator validator = (DateValidator) new DateValidator().noFuture(filterDto.getStartDate())
-					.noFuture(filterDto.getEndDate()).validDateRange(filterDto.getStartDate(),filterDto.getEndDate())
+			DateValidator validator = (DateValidator)new DateValidator().noFuture(filterDto.getStartDate())
+					.noFuture(filterDto.getEndDate()).validDateRange(filterDto.getStartDate(), filterDto.getEndDate())
 					.validate();
 
 		} catch (BusinessServiceException bse) {
