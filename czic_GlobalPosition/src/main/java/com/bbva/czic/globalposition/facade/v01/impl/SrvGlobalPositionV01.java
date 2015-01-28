@@ -16,6 +16,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
 
+import com.bbva.czic.routine.commons.rm.utils.validator.impl.FiqlValidator;
 import org.apache.cxf.jaxrs.model.wadl.ElementClass;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -26,7 +27,7 @@ import com.bbva.czic.globalposition.business.ISrvIntGlobalPosition;
 import com.bbva.czic.globalposition.business.dto.DTOIntProduct;
 import com.bbva.czic.globalposition.business.dto.DTOIntProductFilter;
 import com.bbva.czic.globalposition.facade.v01.ISrvGlobalPositionV01;
-import com.bbva.czic.globalposition.facade.v01.mapper.IGlobalPositionMapper;
+import com.bbva.czic.globalposition.facade.v01.mappers.IGlobalPositionMapper;
 import com.bbva.czic.globalposition.facade.v01.utils.converters.IFilterConverter;
 import com.bbva.czic.routine.commons.rm.utils.errors.EnumError;
 import com.bbva.jee.arq.spring.core.log.I18nLog;
@@ -50,6 +51,7 @@ import com.wordnik.swagger.annotations.ApiResponses;
 public class SrvGlobalPositionV01 implements ISrvGlobalPositionV01,
 		com.bbva.jee.arq.spring.core.servicing.utils.ContextAware {
 
+	public static final String PRODUCT_TYPE = "productType";
 	private static I18nLog log = I18nLogFactory.getLogI18n(SrvGlobalPositionV01.class,
 			"META-INF/spring/i18n/log/mensajesLog");
 
@@ -90,17 +92,18 @@ public class SrvGlobalPositionV01 implements ISrvGlobalPositionV01,
 	@SMC(registryID = "SMCCO1400003", logicalID = "getExtractGlobalBalance")
 	public List<Product> getExtractGlobalBalance(
 			@ApiParam(value = "Customer identifier") @PathParam("customerId") String customerId,
-			@ApiParam(value = "filter param") @DefaultValue("null") @QueryParam("$filter") String filter) {
+			@ApiParam(value = "filter param") @QueryParam("$filter") String filter) {
 
 		log.info("SrvGlobalPositionV01.getExtractGlobalBalance : HOT SWAP");
 
-		final DTOIntProductFilter filterProduct = gpFilterConverter.getDTOIntFilter(customerId, filter);
-		List<DTOIntProduct> products = srvIntGlobalPosition.getExtractGlobalBalance(filterProduct);
+		// 1. Validate filter FIQL
+		new FiqlValidator(filter).hasEq(PRODUCT_TYPE).validateIfExisit();
 
-		log.info("SrvGlobalPositionV01#getExtractGlobalBalance");
-		if (CollectionUtils.isEmpty(products)) {
-			throw new BusinessServiceException(EnumError.NO_DATA.getAlias());
-		}
+		// 2. Mapping to DTOIntFilter
+		final DTOIntProductFilter filterProduct = globalPositionMapper.getDTOIntFilter(customerId, filter);
+
+		// 3. Invoke SrvIntAccounts and Mapping to canonical DTO
+		List<DTOIntProduct> products = srvIntGlobalPosition.getExtractGlobalBalance(filterProduct);
 
 		return globalPositionMapper.map(products);
 	}
@@ -156,6 +159,8 @@ public class SrvGlobalPositionV01 implements ISrvGlobalPositionV01,
 		}
 		productInt.setId(idProduct);
 		productInt.setOperable(infoProduct.getOperable());
+
+
 
 		srvIntGlobalPosition.updateProductOperability(productInt);
 		return Response.ok().build();

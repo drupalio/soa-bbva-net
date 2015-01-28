@@ -17,11 +17,11 @@
     <dependencies>
 
         <!-- MODULOS -->
-        <!--dependency>
+        <dependency>
             <groupId>com.bbva.czic.globalposition</groupId>
             <artifactId>czic_GlobalPosition</artifactId>
             <version>1.0.0</version>
-        </dependency-->
+        </dependency>
 
         <!--dependency>
             <groupId>com.bbva.czic.cards</groupId>
@@ -47,11 +47,11 @@
             <version>1.0.0</version>
         </dependency-->
 
-        <dependency>
+        <!--<dependency>
             <groupId>com.bbva.czic.loan</groupId>
             <artifactId>czic_loan</artifactId>
             <version>1.0.0</version>
-        </dependency>
+        </dependency>-->
 		
 		
 		<!--dependency>

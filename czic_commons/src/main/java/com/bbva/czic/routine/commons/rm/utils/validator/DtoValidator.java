@@ -1,5 +1,6 @@
 package com.bbva.czic.routine.commons.rm.utils.validator;
 
+import java.util.List;
 import java.util.Set;
 
 import javax.validation.ConstraintViolation;
@@ -11,6 +12,17 @@ import com.bbva.jee.arq.spring.core.servicing.gce.BusinessServiceException;
 public class DtoValidator {
 
 	/**
+	 *
+	 * @param dtoList
+	 */
+	public static <T> void validate(List<T> dtoList) {
+		for (T dto: dtoList) {
+			validate(dto);
+		}
+	}
+
+	/**
+	 *
 	 * @param dto
 	 */
 	public static <T> void validate(T dto) {
@@ -31,6 +43,7 @@ public class DtoValidator {
 	}
 
 	/**
+	 *
 	 * @param violationsSet
 	 * @return
 	 */
