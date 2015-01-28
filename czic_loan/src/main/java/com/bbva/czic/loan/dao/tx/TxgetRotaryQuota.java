@@ -26,16 +26,31 @@ public class TxGetRotaryQuota extends SimpleBbvaTransaction<DTOIntFilterLoan, Fo
     @Resource(name = "tx-loan-mapper")
     private ITxLoanMapper iTxLoanMapper;
 
+    /**
+     *
+     * @param dtoIn
+     * @return
+     */
     @Override
     protected FormatoOZNCENJ0 mapDtoInToRequestFormat(DTOIntFilterLoan dtoIn) {
         return iTxLoanMapper.mapInOznj(dtoIn);
     }
 
+    /**
+     *
+     * @param formatOutput
+     * @param dtoIn
+     * @return
+     */
     @Override
     protected DTOIntLoan mapResponseFormatToDtoOut(FormatoOZNCSNJ0 formatOutput, DTOIntFilterLoan dtoIn) {
         return iTxLoanMapper.mapOutOznj(formatOutput);
     }
 
+    /**
+     *
+     * @return
+     */
     @Override
     protected InvocadorTransaccion<?, ?> getTransaction() {
         return transaccionOznj;
