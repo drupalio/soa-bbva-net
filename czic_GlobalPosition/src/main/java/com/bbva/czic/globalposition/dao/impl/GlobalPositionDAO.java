@@ -36,7 +36,7 @@ public class GlobalPositionDAO implements IGlobalPositionDAO {
 
 		final List<DTOIntProduct> products;
 
-		if (filterProduct.getProductType() == null || filterProduct.getProductType().equals(EnumProductType.TC.name())) {
+		if (filterProduct.getProductType() == null || EnumProductType.TC.name().equals(filterProduct.getProductType())) {
 			products = txGetExtractGlobalBalance.invoke(filterProduct);
 		} else {
 			products = txGetExtractGlobalBalanceNoTC.invoke(filterProduct);

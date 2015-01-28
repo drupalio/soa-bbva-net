@@ -16,7 +16,7 @@ public class FiqlValidator extends Validator {
 	public FiqlValidator(String filter) {
 		this.originFilter = filter;
 		this.filter = (filter == null) ? StringUtils.EMPTY : filter;
-		this.filter = filter.replaceAll("[()]", StringUtils.EMPTY);
+		this.filter = this.filter.replaceAll("[()]", StringUtils.EMPTY);
 	}
 
 	public FiqlValidator exist() {
@@ -137,7 +137,7 @@ public class FiqlValidator extends Validator {
 
 	public FiqlValidator validateIfExisit() {
 
-		if (!StringUtils.isEmpty(this.filter)) {
+		if (!StringUtils.isEmpty(this.filter) && !"null".equals(this.filter)) {
 			throwFirstExceptionIfAny();
 		}
 

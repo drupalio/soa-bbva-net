@@ -30,6 +30,8 @@ public class TxGlobalPositionMapper extends AbstractBbvaTxConfigurableMapper imp
     @Override
     protected void configure(MapperFactory factory) {
 
+        super.configure(factory);
+
         factory.getConverterFactory().registerConverter(new StringOperabilityConverter());
         factory.getConverterFactory().registerConverter(new StringVisibilityConverter());
 

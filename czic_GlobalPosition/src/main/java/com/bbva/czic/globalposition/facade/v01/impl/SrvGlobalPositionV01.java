@@ -92,12 +92,12 @@ public class SrvGlobalPositionV01 implements ISrvGlobalPositionV01,
 	@SMC(registryID = "SMCCO1400003", logicalID = "getExtractGlobalBalance")
 	public List<Product> getExtractGlobalBalance(
 			@ApiParam(value = "Customer identifier") @PathParam("customerId") String customerId,
-			@ApiParam(value = "filter param") @DefaultValue("null") @QueryParam("$filter") String filter) {
+			@ApiParam(value = "filter param") @QueryParam("$filter") String filter) {
 
 		log.info("SrvGlobalPositionV01.getExtractGlobalBalance : HOT SWAP");
 
 		// 1. Validate filter FIQL
-		new FiqlValidator(filter).exist().hasEq(PRODUCT_TYPE).validate();
+		new FiqlValidator(filter).hasEq(PRODUCT_TYPE).validateIfExisit();
 
 		// 2. Mapping to DTOIntFilter
 		final DTOIntProductFilter filterProduct = globalPositionMapper.getDTOIntFilter(customerId, filter);

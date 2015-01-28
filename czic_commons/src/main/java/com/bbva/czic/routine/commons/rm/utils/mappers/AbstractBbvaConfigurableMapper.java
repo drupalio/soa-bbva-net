@@ -98,7 +98,7 @@ public abstract class AbstractBbvaConfigurableMapper extends ConfigurableMapper 
 
 			return primitiveStatement.getValue().toString();
 		} catch (Exception e) {
-			throw new BusinessServiceException(EnumError.WRONG_PARAMETERS.getAlias());
+			return null;
 		}
 
 	}
