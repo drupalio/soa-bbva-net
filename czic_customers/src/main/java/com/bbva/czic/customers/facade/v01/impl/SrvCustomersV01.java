@@ -13,6 +13,8 @@ import javax.ws.rs.core.HttpHeaders;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.UriInfo;
 
+import com.bbva.czic.customers.business.dto.DTOIntFilterCustomerResumes;
+import com.bbva.czic.customers.dao.mapper.ICustomerMapper;
 import org.apache.cxf.jaxrs.model.wadl.ElementClass;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -56,6 +58,9 @@ public class SrvCustomersV01 implements ISrvCustomersV01, com.bbva.jee.arq.sprin
 
 	@Resource(name = "customer-resumes-filter-converter")
 	IFilterConverter filterConverter;
+
+	@Resource(name = "customerMapper")
+	private ICustomerMapper customerMapper;
 
 	@Autowired
 	ISrvIntCustomers srvIntCustomers;
@@ -120,12 +125,12 @@ public class SrvCustomersV01 implements ISrvCustomersV01, com.bbva.jee.arq.sprin
 
 		log.info("Into listAccountsMovementsResume...");
 
-		// 1. Validate parameter
-		if (customerId == null || customerId.trim().isEmpty()) {
-			throw new BusinessServiceException(EnumError.WRONG_PARAMETERS.getAlias());
-		}
-		// 2. Validate filter FIQL
+		// 1. Validate filter FIQL
 		new FiqlValidator(filter).exist().hasGeAndLe("month").validate();
+
+		// 2. Mapping to DTOIntFilter
+		final DTOIntFilterCustomerResumes filterCustomerResumes = customerMapper.getDTOIntMovementResumesFilter(customerId, filter);
+
 		// 3. Invoke SrvIntCustomers and Mapping to canonical DTO
 		return srvIntCustomers.getlistAccountsMovementsResume(customerId,
 				filterConverter.toAccountMovementFilter(filter));

@@ -2,6 +2,7 @@ package com.bbva.czic.customers.dao.mapper;
 
 import com.bbva.czic.customers.business.dto.DTOIntAccMovementsResume;
 import com.bbva.czic.customers.business.dto.DTOIntCardCharge;
+import com.bbva.czic.customers.business.dto.DTOIntFilterCustomerResumes;
 import com.bbva.czic.customers.dao.model.oznp.FormatoOZECNPS0;
 import com.bbva.czic.customers.business.dto.DTOIntCustomer;
 import com.bbva.czic.customers.dao.model.oznq.FormatoOZECNQS0;
@@ -15,6 +16,8 @@ import com.bbva.czic.dto.net.Customer;
  * @since 10/01/2015
  */
 public interface ICustomerMapper {
+
+	DTOIntFilterCustomerResumes getDTOIntMovementResumesFilter(String customerId, String filter);
 
 	DTOIntCardCharge map(FormatoOZECNPS0 formatoSalida);
 

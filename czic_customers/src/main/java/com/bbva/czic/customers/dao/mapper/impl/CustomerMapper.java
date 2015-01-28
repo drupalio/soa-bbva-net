@@ -4,13 +4,14 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
+import com.bbva.czic.customers.business.dto.*;
 import com.bbva.czic.dto.net.*;
+import com.bbva.czic.routine.commons.rm.utils.fiql.FiqlType;
+import com.bbva.czic.routine.commons.rm.utils.mappers.AbstractBbvaConfigurableMapper;
+import com.bbva.czic.routine.mapper.MapperFactory;
+import com.bbva.czic.routine.mapper.converter.builtin.DateToStringConverter;
 import org.springframework.stereotype.Component;
 
-import com.bbva.czic.customers.business.dto.DTOIntAccMovementsResume;
-import com.bbva.czic.customers.business.dto.DTOIntCardCharge;
-import com.bbva.czic.customers.business.dto.DTOIntCustomer;
-import com.bbva.czic.customers.business.dto.DTOIntEnumMonth;
 import com.bbva.czic.customers.dao.mapper.ICustomerMapper;
 import com.bbva.czic.customers.dao.model.oznb.FormatoOZNCSNB0;
 import com.bbva.czic.customers.dao.model.oznp.FormatoOZECNPS0;
@@ -18,10 +19,26 @@ import com.bbva.czic.customers.dao.model.oznq.FormatoOZECNQS0;
 import com.bbva.czic.routine.commons.rm.utils.converter.UtilsConverter;
 
 @Component("customerMapper")
-public class CustomerMapper implements ICustomerMapper{
+public class CustomerMapper extends AbstractBbvaConfigurableMapper implements ICustomerMapper{
 
 	@Override
-	public DTOIntCardCharge map(FormatoOZECNPS0 formatoSalida) {
+	protected void configure(MapperFactory factory) {
+		super.configure(factory);
+	}
+
+	@Override
+	public DTOIntFilterCustomerResumes getDTOIntMovementResumesFilter(final String customerId, final String filter) {
+		final String startDate = this.getGeValue(filter, FiqlType.month.name());
+		final String endDate = this.getLeValue(filter, FiqlType.month.name());
+
+		final DTOIntFilterCustomerResumes intFilterCustomerResumes = new DTOIntFilterCustomerResumes();
+		intFilterCustomerResumes.setStartDate(new DateToStringConverter());
+
+		return intFilterCustomerResumes;
+	}
+
+	@Override
+	public DTOIntCardCharge map(final FormatoOZECNPS0 formatoSalida) {
 		DTOIntCardCharge dto = new DTOIntCardCharge();
 		dto.setAmount(UtilsConverter.getMoneyDTO(formatoSalida.getValcate()));
 		dto.setCategory(formatoSalida.getCategor());
@@ -30,7 +47,7 @@ public class CustomerMapper implements ICustomerMapper{
 
 
 	@Override
-	public AccMovementsResume map(DTOIntAccMovementsResume item) {
+	public AccMovementsResume map(final DTOIntAccMovementsResume item) {
 		AccMovementsResume resume = new AccMovementsResume();
 		resume.setBalance(item.getBalance());
 		resume.setIncome(item.getIncome());
@@ -43,7 +60,7 @@ public class CustomerMapper implements ICustomerMapper{
 
 
 	@Override
-	public DTOIntAccMovementsResume map(FormatoOZECNQS0 formatoSalida) {
+	public DTOIntAccMovementsResume map(final FormatoOZECNQS0 formatoSalida) {
 		DTOIntAccMovementsResume resume = new DTOIntAccMovementsResume();
 		resume.setBalance(UtilsConverter.getMoneyDTO(formatoSalida.getSaltota()));
 		resume.setOutcome(UtilsConverter.getMoneyDTO(formatoSalida.getValcarg()));

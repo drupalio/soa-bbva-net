@@ -12,7 +12,6 @@ public class DTOIntFilterCustomerResumes {
 
 	@NotNull
 	private String customerId;
-	@NotNull
 	private Date startDate;
 	private Date endDate;
 	
