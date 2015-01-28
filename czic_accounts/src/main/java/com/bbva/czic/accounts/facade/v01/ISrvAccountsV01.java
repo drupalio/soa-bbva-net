@@ -24,4 +24,6 @@ public interface ISrvAccountsV01{
 
 	Checkbook getCheckbook(String checkbookId, String accountId);
 
+	public Check getCheck(String accountId, String checkId);
+
 }

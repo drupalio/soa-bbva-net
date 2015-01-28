@@ -62,6 +62,11 @@ public class AccountsMapper extends AbstractBbvaConfigurableMapper implements IA
 				.field("balance", "balance").field("income", "income").field("outcome", "outcome").byDefault()
 				.register();
 
+		// Map DTOIntCheckbook <-> CheckBook
+		factory.classMap(DTOIntCheck.class, Check.class).field("id", "id").field("issueDate", "issueDate")
+				.field("value", "value").field("status", "status").field("modifiedDate", "modifiedDate").byDefault().register();
+
+
 	}
 
 	@Override
@@ -169,6 +174,12 @@ public class AccountsMapper extends AbstractBbvaConfigurableMapper implements IA
 	}
 
 	@Override
+	public Check map(DTOIntCheck intCheck) {
+		log.info("map- return:Check-parameter:dtoIntExecutive");
+		return map(intCheck, Check.class);
+	}
+
+	@Override
 	public Check mapCheck(DTOIntCheck intCheck) {
 		final Check check = new Check();
 
@@ -207,5 +218,17 @@ public class AccountsMapper extends AbstractBbvaConfigurableMapper implements IA
 		checkbook.setActualState(EnumCheckbookStatus.valueOf(intCheckbook.getActualState().toString()));
 
 		return checkbook;
+	}
+
+
+	@Override
+	public DTOIntCheckFilter getDTOIntFilterChecks(String checkId,String accountId) {
+
+		final DTOIntCheckFilter dtoIntCheckFilter = new DTOIntCheckFilter();
+		dtoIntCheckFilter.setCheckId(checkId);
+		dtoIntCheckFilter.setAccountId(accountId);
+
+		return dtoIntCheckFilter;
+
 	}
 }
