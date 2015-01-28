@@ -26,15 +26,16 @@ public class TxCustomerMapperImpl extends ConfigurableMapper implements TxCustom
 		/**
 		 * MAPEO DE ENTRADAS
 		 */
-		// Map customerId <-> FormatoOZNCENB0 (OZNA)
+		// Map customerId <-> FormatoOZNCENB0 (OZNB)
 //		factory.classMap(String.class, FormatoOZNCENB0.class).field("customerId", "numprod").byDefault()
 //				.register();
 
 		/**
 		 * MAPEO DE SALIDAS
 		 */
-		// Map FormatoOZECNVS0 <-> DTOIntMonthlyBalances (OZNA)
-		factory.classMap(DTOIntCustomer.class, FormatoOZNCSNB0.class).field("name", "numclie").byDefault().register();
+		// Map FormatoOZECNBS0 <-> DTOIntCustomer (OZNB)
+		factory.classMap(DTOIntCustomer.class, FormatoOZNCSNB0.class).field("id", "numclie").field("name", "nomclie")
+		.field("stratum", "estrato").field("residenceYears", "anosvda").field("homeMembers", "nropnas").field("lastConnectionTime", "ultconx").byDefault().register();
 
 
 	}

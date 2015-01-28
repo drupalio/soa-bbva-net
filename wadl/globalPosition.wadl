@@ -1,16 +1,9 @@
+This XML file does not appear to have any style information associated with it. The document tree is shown below.
 <application xmlns="http://wadl.dev.java.net/2009/02" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:prefix1="urn:com:bbva:czic:dto:net">
     <grammars>
-        <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="urn:com:bbva:jee:arq:spring:core:servicing:utils" attributeFormDefault="unqualified" elementFormDefault="unqualified" targetNamespace="urn:com:bbva:jee:arq:spring:core:servicing:utils">
-            <xs:element name="money" type="tns:money"/>
-            <xs:complexType name="money">
-                <xs:sequence>
-                    <xs:element minOccurs="0" name="amount" type="xs:decimal"/>
-                    <xs:element minOccurs="0" name="currency" type="xs:string"/>
-                </xs:sequence>
-            </xs:complexType>
-        </xs:schema>
         <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:ns1="urn:com:bbva:jee:arq:spring:core:servicing:utils" xmlns:tns="urn:com:bbva:czic:dto:net" attributeFormDefault="unqualified" elementFormDefault="unqualified" targetNamespace="urn:com:bbva:czic:dto:net">
             <xs:import namespace="urn:com:bbva:jee:arq:spring:core:servicing:utils"/>
+            <xs:element name="Activity" type="tns:Activity"/>
             <xs:element name="Balance" type="tns:Balance"/>
             <xs:element name="City" type="tns:City"/>
             <xs:element name="Conditions" type="tns:Conditions"/>
@@ -18,11 +11,9 @@
             <xs:element name="Contract" type="tns:Contract"/>
             <xs:element name="Country" type="tns:Country"/>
             <xs:element name="Email" type="tns:Email"/>
-            <xs:element name="EnumAccountState" type="tns:EnumAccountState"/>
             <xs:element name="EnumContactSourceType" type="tns:EnumContactSourceType"/>
-            <xs:element name="EnumFinancialStatusType" type="tns:EnumFinancialStatusType"/>
             <xs:element name="EnumPhoneNumberType" type="tns:EnumPhoneNumberType"/>
-            <xs:element name="EnumProductType" type="tns:EnumProductType"/>
+            <xs:element name="Function" type="tns:Function"/>
             <xs:element name="Location" type="tns:Location"/>
             <xs:element name="Movement" type="tns:Movement"/>
             <xs:element name="Office" type="tns:Office"/>
@@ -33,10 +24,10 @@
             <xs:complexType name="Product">
                 <xs:sequence>
                     <xs:element minOccurs="0" name="id" type="xs:string"/>
-                    <xs:element minOccurs="0" name="type" type="tns:EnumProductType"/>
+                    <xs:element minOccurs="0" name="type" type="xs:string"/>
                     <xs:element minOccurs="0" name="name" type="xs:string"/>
                     <xs:element minOccurs="0" name="alias" type="xs:string"/>
-                    <xs:element minOccurs="0" name="financialState" type="tns:EnumFinancialStatusType"/>
+                    <xs:element minOccurs="0" name="financialState" type="xs:string"/>
                     <xs:element minOccurs="0" name="visible" type="xs:boolean"/>
                     <xs:element minOccurs="0" name="operable" type="xs:boolean"/>
                     <xs:element minOccurs="0" name="balance" type="tns:Balance"/>
@@ -50,7 +41,6 @@
                 <xs:sequence>
                     <xs:element minOccurs="0" name="total" type="ns1:money"/>
                     <xs:element minOccurs="0" name="availableBalance" type="ns1:money"/>
-                    <xs:element minOccurs="0" name="tradeBalance" type="ns1:money"/>
                 </xs:sequence>
             </xs:complexType>
             <xs:complexType name="ContactInfo">
@@ -80,12 +70,14 @@
             </xs:complexType>
             <xs:complexType name="Conditions">
                 <xs:sequence>
+                    <xs:element minOccurs="0" name="alias" type="xs:string"/>
                     <xs:element minOccurs="0" name="category" type="xs:string"/>
                     <xs:element minOccurs="0" name="description" type="xs:string"/>
                     <xs:element minOccurs="0" name="openingDate" type="xs:dateTime"/>
                     <xs:element minOccurs="0" name="commission" type="xs:string"/>
                     <xs:element minOccurs="0" name="office" type="tns:Office"/>
                     <xs:element minOccurs="0" name="mobilizationConditions" type="xs:string"/>
+                    <xs:element maxOccurs="unbounded" minOccurs="0" name="activities" nillable="true" type="tns:Activity"/>
                 </xs:sequence>
             </xs:complexType>
             <xs:complexType name="Office">
@@ -99,6 +91,9 @@
             <xs:complexType name="Location">
                 <xs:sequence>
                     <xs:element minOccurs="0" name="city" type="tns:City"/>
+                    <xs:element minOccurs="0" name="country" type="tns:Country"/>
+                    <xs:element minOccurs="0" name="state" type="tns:State"/>
+                    <xs:element minOccurs="0" name="postalAddress" type="xs:string"/>
                     <xs:element minOccurs="0" name="category" type="xs:string"/>
                 </xs:sequence>
             </xs:complexType>
@@ -106,20 +101,35 @@
                 <xs:sequence>
                     <xs:element minOccurs="0" name="id" type="xs:string"/>
                     <xs:element minOccurs="0" name="name" type="xs:string"/>
-                    <xs:element minOccurs="0" name="state" type="tns:State"/>
-                </xs:sequence>
-            </xs:complexType>
-            <xs:complexType name="State">
-                <xs:sequence>
-                    <xs:element minOccurs="0" name="id" type="xs:string"/>
-                    <xs:element minOccurs="0" name="name" type="xs:string"/>
-                    <xs:element minOccurs="0" name="country" type="tns:Country"/>
                 </xs:sequence>
             </xs:complexType>
             <xs:complexType name="Country">
                 <xs:sequence>
                     <xs:element minOccurs="0" name="id" type="xs:string"/>
                     <xs:element minOccurs="0" name="name" type="xs:string"/>
+                    <xs:element maxOccurs="unbounded" minOccurs="0" name="states" nillable="true" type="tns:State"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="State">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="id" type="xs:string"/>
+                    <xs:element minOccurs="0" name="name" type="xs:string"/>
+                    <xs:element maxOccurs="unbounded" minOccurs="0" name="cities" nillable="true" type="tns:City"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="Activity">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="operationDate" type="xs:dateTime"/>
+                    <xs:element minOccurs="0" name="executionDate" type="xs:dateTime"/>
+                    <xs:element minOccurs="0" name="function" type="tns:Function"/>
+                    <xs:element minOccurs="0" name="amount" type="ns1:money"/>
+                    <xs:element minOccurs="0" name="reference" type="xs:string"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="Function">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="id" type="xs:string"/>
+                    <xs:element minOccurs="0" name="type" type="xs:string"/>
                 </xs:sequence>
             </xs:complexType>
             <xs:complexType name="Movement">
@@ -132,9 +142,10 @@
                     <xs:element minOccurs="0" name="destinationReference" type="xs:string"/>
                     <xs:element minOccurs="0" name="operation" type="tns:Operation"/>
                     <xs:element minOccurs="0" name="office" type="tns:Office"/>
-                    <xs:element minOccurs="0" name="status" type="tns:EnumAccountState"/>
+                    <xs:element minOccurs="0" name="status" type="xs:string"/>
                     <xs:element minOccurs="0" name="value" type="ns1:money"/>
                     <xs:element minOccurs="0" name="balance" type="ns1:money"/>
+                    <xs:element minOccurs="0" name="numberOfQuotas" type="xs:string"/>
                 </xs:sequence>
             </xs:complexType>
             <xs:complexType name="Operation">
@@ -148,24 +159,6 @@
                     <xs:element minOccurs="0" name="number" type="xs:string"/>
                 </xs:sequence>
             </xs:complexType>
-            <xs:simpleType name="EnumProductType">
-                <xs:restriction base="xs:string">
-                    <xs:enumeration value="PC"/>
-                    <xs:enumeration value="TC"/>
-                    <xs:enumeration value="LO"/>
-                    <xs:enumeration value="SI"/>
-                    <xs:enumeration value="ED"/>
-                    <xs:enumeration value="RQ"/>
-                    <xs:enumeration value="LI"/>
-                    <xs:enumeration value="AQ"/>
-                </xs:restriction>
-            </xs:simpleType>
-            <xs:simpleType name="EnumFinancialStatusType">
-                <xs:restriction base="xs:string">
-                    <xs:enumeration value="A"/>
-                    <xs:enumeration value="P"/>
-                </xs:restriction>
-            </xs:simpleType>
             <xs:simpleType name="EnumContactSourceType">
                 <xs:restriction base="xs:string">
                     <xs:enumeration value="MOBILE"/>
@@ -180,16 +173,19 @@
                     <xs:enumeration value="FAX"/>
                 </xs:restriction>
             </xs:simpleType>
-            <xs:simpleType name="EnumAccountState">
-                <xs:restriction base="xs:string">
-                    <xs:enumeration value="ACTIVE"/>
-                    <xs:enumeration value="INACTIVE"/>
-                </xs:restriction>
-            </xs:simpleType>
+        </xs:schema>
+        <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="urn:com:bbva:jee:arq:spring:core:servicing:utils" attributeFormDefault="unqualified" elementFormDefault="unqualified" targetNamespace="urn:com:bbva:jee:arq:spring:core:servicing:utils">
+            <xs:element name="money" type="tns:money"/>
+            <xs:complexType name="money">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="amount" type="xs:decimal"/>
+                    <xs:element minOccurs="0" name="currency" type="xs:string"/>
+                </xs:sequence>
+            </xs:complexType>
         </xs:schema>
     </grammars>
     <resources base="http://localhost:8080/czic/GlobalPosition">
-        <resource path="/V01" id="com.bbva.czic.globalposition.facade.v01.SrvGlobalPositionV01">
+        <resource path="/V01" id="com.bbva.czic.globalposition.facade.v01.impl.SrvGlobalPositionV01">
             <resource path="/customers/{customerId}/products">
                 <param name="customerId" style="template" type="xs:string"/>
                 <method name="GET" id="getExtractGlobalBalance">
@@ -201,9 +197,20 @@
                     </response>
                 </method>
             </resource>
-            <resource path="/{idProduct}">
+            <resource path="/{idProduct}/setProductOperability">
                 <param name="idProduct" style="template" type="xs:string"/>
-                <method name="PUT" id="update">
+                <method name="PUT" id="updateProductOperability">
+                    <request>
+                        <representation mediaType="application/json" element="prefix1:Product"/>
+                    </request>
+                    <response>
+                        <representation mediaType="application/json"/>
+                    </response>
+                </method>
+            </resource>
+            <resource path="/{idProduct}/setProductVisibility">
+                <param name="idProduct" style="template" type="xs:string"/>
+                <method name="PUT" id="updateProductVisibility">
                     <request>
                         <representation mediaType="application/json" element="prefix1:Product"/>
                     </request>

@@ -49,6 +49,7 @@ public class TransaccionOznaMock implements InvocadorTransaccion<PeticionTransac
 		salida.setIdcheq8(dataFactory.getNumberText(20));
 		salida.setIdcheq9(dataFactory.getNumberText(20));
 
+		// IMPORTANTE
 		CopySalida copySalida = new CopySalida();
 		copySalida.setCopy(salida);
 

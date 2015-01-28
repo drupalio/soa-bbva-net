@@ -24,7 +24,8 @@ privileged aspect FormatoOZNCSNB0_Roo_ToString {
         sb.append("Paisofi: ").append(getPaisofi()).append(", ");
         sb.append("Paisvia: ").append(getPaisvia()).append(", ");
         sb.append("Segment: ").append(getSegment()).append(", ");
-        sb.append("Tpovvda: ").append(getTpovvda());
+        sb.append("Tpovvda: ").append(getTpovvda()).append(", ");
+        sb.append("Ultconx: ").append(getUltconx());
         return sb.toString();
     }
     

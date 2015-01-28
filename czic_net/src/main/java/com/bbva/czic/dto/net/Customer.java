@@ -49,6 +49,8 @@ public class Customer implements Serializable {
 	private EnumDwelingType dwelingType;
 	@ApiModelProperty("Ubicacion de la oficina")
 	private Place officeLocation;
+	@ApiModelProperty("Fecha de último acceso")
+	private Calendar lastAccessDate;
 
 	public Customer() {
 		// default constructor
@@ -148,6 +150,14 @@ public class Customer implements Serializable {
 
 	public void setOfficeLocation(Place officeLocation) {
 		this.officeLocation = officeLocation;
+	}
+
+	public Calendar getLastAccessDate() {
+		return lastAccessDate;
+	}
+
+	public void setLastAccessDate(Calendar lastAccessDate) {
+		this.lastAccessDate = lastAccessDate;
 	}
 
 }

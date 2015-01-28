@@ -1,38 +1,43 @@
 package com.bbva.czic.accounts.dao.tx;
 
-import com.bbva.czic.accounts.business.dto.DTOIntCheckbook;
-import com.bbva.czic.accounts.dao.model.ozns.*;
-import com.bbva.czic.accounts.dao.model.ozns.FormatoOZECNSE0;
-import com.bbva.czic.accounts.dao.model.ozns.PeticionTransaccionOzns;
-import com.bbva.czic.accounts.dao.model.ozns.RespuestaTransaccionOzns;
-import com.bbva.czic.accounts.dao.model.ozns.TransaccionOzns;
-import com.bbva.czic.routine.commons.rm.utils.tx.ISimpleTransactionMapper;
-import com.bbva.czic.routine.commons.rm.utils.tx.impl.SimpleTransaction;
-import com.bbva.jee.arq.spring.core.host.InvocadorTransaccion;
-import org.springframework.beans.factory.annotation.Autowired;
+import javax.annotation.Resource;
+
 import org.springframework.stereotype.Component;
 
-import javax.annotation.Resource;
+import com.bbva.czic.accounts.business.dto.DTOIntCheckbook;
+import com.bbva.czic.accounts.dao.mappers.TxAccountMapper;
+import com.bbva.czic.accounts.dao.model.ozns.FormatoOZECNSE0;
+import com.bbva.czic.accounts.dao.model.ozns.FormatoOZECNSS0;
+import com.bbva.czic.accounts.dao.model.ozns.PeticionTransaccionOzns;
+import com.bbva.czic.accounts.dao.model.ozns.RespuestaTransaccionOzns;
+import com.bbva.czic.routine.commons.rm.utils.tx.impl.SimpleBbvaTransaction;
+import com.bbva.jee.arq.spring.core.host.InvocadorTransaccion;
 
 /**
  * @author Entelgy Colombia.
  */
 @Component(value = "tx-get-checkbook")
-public class TxGetCheckbook extends SimpleTransaction<PeticionTransaccionOzns, RespuestaTransaccionOzns> {
+public class TxGetCheckbook extends SimpleBbvaTransaction<DTOIntCheckbook, FormatoOZECNSE0, DTOIntCheckbook, FormatoOZECNSS0> {
 
-    @Autowired
-    private transient TransaccionOzns transaccionOzns;
+	@Resource(name="transaccionOzns")
+	private transient InvocadorTransaccion<PeticionTransaccionOzns, RespuestaTransaccionOzns> transaccionOzns;
+	
+	@Resource(name = "txAccountMapper")
+	private TxAccountMapper txAccountMapper;
+	
+	@Override
+	protected FormatoOZECNSE0 mapDtoInToRequestFormat(DTOIntCheckbook dtoIn) {
+		return txAccountMapper.mapInOzns(dtoIn);
+	}
 
-    @Resource(name = "tx-get-checkbooks-mapper")
-    private ISimpleTransactionMapper txGetCheckbookMapper;
+	@Override
+	protected DTOIntCheckbook mapResponseFormatToDtoOut(
+			FormatoOZECNSS0 formatOutput, DTOIntCheckbook dtoIn) {
+		return txAccountMapper.mapOutOzns(formatOutput);
+	}
 
-    @Override
-    protected InvocadorTransaccion<PeticionTransaccionOzns, RespuestaTransaccionOzns> getInvoker() {
-        return transaccionOzns;
-    }
-
-    @Override
-    protected ISimpleTransactionMapper<DTOIntCheckbook, FormatoOZECNSE0, DTOIntCheckbook, com.bbva.czic.accounts.dao.model.ozns.FormatoOZECNSS0> getMapper() {
-        return txGetCheckbookMapper;
-    }
+	@Override
+	protected InvocadorTransaccion<?, ?> getTransaction() {
+		return transaccionOzns;
+	}
 }

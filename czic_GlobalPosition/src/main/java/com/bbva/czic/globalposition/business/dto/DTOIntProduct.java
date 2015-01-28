@@ -4,17 +4,20 @@ package com.bbva.czic.globalposition.business.dto;
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotEmpty;
 
+import javax.validation.constraints.Digits;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 
 public class DTOIntProduct {
 
     public final static long serialVersionUID = 1L;
     @NotEmpty
-    @Length(min = 20, max = 20)
+    @Pattern(regexp = "^(\\d{20}|\\d{16})$")
     private String id;
     @NotEmpty
-    @Length(min = 2, max = 2)
+    @Pattern(regexp = "^[A-Z]{2}$")
     private String productType;
+    @NotEmpty
     private String name;
     private String alias;
     private String financialState;
@@ -22,10 +25,15 @@ public class DTOIntProduct {
     private Boolean visible;
     @NotNull
     private Boolean operable;
-    @NotNull
     private DTOIntBalance balance;
     private DTOIntContactInfo contactInfo;
     private DTOIntContract contract;
+
+    public DTOIntProduct() {
+        balance = new DTOIntBalance();
+        contactInfo = new DTOIntContactInfo();
+        contract = new DTOIntContract();
+    }
 
     public static long getSerialVersionUID() {
         return serialVersionUID;

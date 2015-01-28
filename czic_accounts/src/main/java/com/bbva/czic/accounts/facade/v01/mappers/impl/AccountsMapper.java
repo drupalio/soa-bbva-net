@@ -1,5 +1,8 @@
 package com.bbva.czic.accounts.facade.v01.mappers.impl;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.List;
 
@@ -12,18 +15,22 @@ import com.bbva.czic.dto.net.Check;
 import com.bbva.czic.dto.net.Checkbook;
 import com.bbva.czic.dto.net.EnumCheckbookStatus;
 import com.bbva.czic.dto.net.MonthlyBalances;
+import com.bbva.czic.routine.commons.rm.utils.errors.EnumError;
 import com.bbva.czic.routine.commons.rm.utils.fiql.FiqlType;
 import com.bbva.czic.routine.commons.rm.utils.mappers.AbstractBbvaConfigurableMapper;
 import com.bbva.czic.routine.commons.rm.utils.mappers.Mapper;
 import com.bbva.czic.routine.mapper.MapperFactory;
 import com.bbva.jee.arq.spring.core.log.I18nLog;
 import com.bbva.jee.arq.spring.core.log.I18nLogFactory;
+import com.bbva.jee.arq.spring.core.servicing.gce.BusinessServiceException;
 
 @Mapper(value = "accounts-mapper")
 public class AccountsMapper extends AbstractBbvaConfigurableMapper implements IAccountsMapper {
 
 	private static I18nLog log = I18nLogFactory
 			.getLogI18n(AccountsMapper.class, "META-INF/spring/i18n/log/mensajesLog");
+
+	final DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
 
 	@Override
 	protected void configure(MapperFactory factory) {
@@ -80,8 +87,12 @@ public class AccountsMapper extends AbstractBbvaConfigurableMapper implements IA
 		dtoFilter.setPaginationKey(paginationKey);
 		dtoFilter.setPageSize(paginationSize);
 
-		dtoFilter.setStartDate(this.getGeValue(filter, "issueDate"));
-		dtoFilter.setStartDate(this.getLeValue(filter, "issueDate"));
+		try {
+			dtoFilter.setStartDate(formatter.parse(this.getGeValue(filter, "issueDate")));
+			dtoFilter.setEndDate(formatter.parse(this.getLeValue(filter, "issueDate")));
+		} catch (ParseException e) {
+			throw new BusinessServiceException(EnumError.WRONG_PARAMETERS.getAlias());
+		}
 		dtoFilter.setStatus(this.getEqValue(filter, "status"));
 
 		return dtoFilter;
@@ -94,6 +105,17 @@ public class AccountsMapper extends AbstractBbvaConfigurableMapper implements IA
 		dtoFilter.setMonth(this.getGeValue(filter, FiqlType.month.name()));
 		return dtoFilter;
 	}
+	
+
+	@Override
+	public DTOIntCheckbook getDtoIntCheckbook(String idAccount,
+			String idCheckbook) {
+		final DTOIntCheckbook dtoIntCheckbook = new DTOIntCheckbook();
+		dtoIntCheckbook.setId(idCheckbook);
+		dtoIntCheckbook.setIdAccount(idAccount);
+		return dtoIntCheckbook;
+	}
+
 
 	/**
 	 * Metodo encargado de mapear un DTO interno de tipo DTOIntAccount a un DTO externo de tipo Account
@@ -186,5 +208,4 @@ public class AccountsMapper extends AbstractBbvaConfigurableMapper implements IA
 
 		return checkbook;
 	}
-
 }
