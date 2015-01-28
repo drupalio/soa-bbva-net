@@ -12,7 +12,7 @@ import com.bbva.czic.loan.dao.model.oznj.FormatoOZNCSNJ0;
 import com.bbva.czic.loan.dao.model.oznj.PeticionTransaccionOznj;
 import com.bbva.czic.loan.dao.model.oznj.RespuestaTransaccionOznj;
 import com.bbva.czic.routine.commons.rm.utils.tx.impl.SimpleBbvaTransaction;
-import com.bbva.jee.arq.spring.core.host.InvocadorTransaccion;
+import com.bbva.jee.arq.spring.core.host.InvocadorTransaccion; 
 
 /**
  * Created by Entelgy on 26/01/2015.

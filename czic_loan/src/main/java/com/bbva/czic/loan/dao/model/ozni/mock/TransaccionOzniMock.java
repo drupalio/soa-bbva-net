@@ -3,7 +3,6 @@ package com.bbva.czic.loan.dao.model.ozni.mock;
 import com.bbva.czic.loan.dao.model.ozni.FormatoOZNCSNI0;
 import com.bbva.czic.loan.dao.model.ozni.PeticionTransaccionOzni;
 import com.bbva.czic.loan.dao.model.ozni.RespuestaTransaccionOzni;
-import com.bbva.czic.loan.dao.model.oznj.FormatoOZNCSNJ0;
 import com.bbva.jee.arq.spring.core.host.ExcepcionTransaccion;
 import com.bbva.jee.arq.spring.core.host.InvocadorTransaccion;
 import com.bbva.jee.arq.spring.core.host.ServicioTransacciones;
