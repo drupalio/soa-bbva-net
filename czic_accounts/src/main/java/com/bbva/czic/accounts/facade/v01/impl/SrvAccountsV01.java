@@ -52,10 +52,11 @@ import com.wordnik.swagger.annotations.ApiResponses;
 @Api(value = "/accounts/V01", description = "SN accounts")
 @Produces({ MediaType.APPLICATION_JSON })
 @Service
-public class SrvAccountsV01 implements ISrvAccountsV01, com.bbva.jee.arq.spring.core.servicing.utils.ContextAware {
+public class SrvAccountsV01 implements ISrvAccountsV01,
+		com.bbva.jee.arq.spring.core.servicing.utils.ContextAware {
 
-	private static I18nLog log = I18nLogFactory
-			.getLogI18n(SrvAccountsV01.class, "META-INF/spring/i18n/log/mensajesLog");
+	private static I18nLog log = I18nLogFactory.getLogI18n(
+			SrvAccountsV01.class, "META-INF/spring/i18n/log/mensajesLog");
 
 	public HttpHeaders httpHeaders;
 
@@ -82,23 +83,27 @@ public class SrvAccountsV01 implements ISrvAccountsV01, com.bbva.jee.arq.spring.
 
 	@Override
 	@ApiOperation(value = "Operacion que retorna el resumen de la informacion de una cuenta", notes = "Tipo de Producto", response = AccountsDAO.class)
-	@ApiResponses(value = { @ApiResponse(code = -1, message = "aliasGCE1"),
+	@ApiResponses(value = {
+			@ApiResponse(code = -1, message = "aliasGCE1"),
 			@ApiResponse(code = -1, message = "aliasGCE2"),
 			@ApiResponse(code = 200, message = "Found Sucessfully", response = Response.class),
 			@ApiResponse(code = 500, message = "Technical Error") })
 	@GET
 	@Path("/{id}")
 	@SMC(registryID = "SMC201400334", logicalID = "getAccount")
-	public Account getAccount(@ApiParam(value = "identifier param") @PathParam("id") String idAccount) {
+	public Account getAccount(
+			@ApiParam(value = "identifier param") @PathParam("id") String idAccount) {
 
 		final DTOIntFilterAccount dtoIntFilterAccount = new DTOIntFilterAccount();
 		dtoIntFilterAccount.setAccountId(idAccount);
-		return iAccountsMapper.map(srvIntAccounts.getAccount(dtoIntFilterAccount));
+		return iAccountsMapper.map(srvIntAccounts
+				.getAccount(dtoIntFilterAccount));
 	}
 
 	@Override
 	@ApiOperation(value = "Operacion realizada", notes = "Information Operation", response = Response.class)
-	@ApiResponses(value = { @ApiResponse(code = -1, message = "aliasGCE1"),
+	@ApiResponses(value = {
+			@ApiResponse(code = -1, message = "aliasGCE1"),
 			@ApiResponse(code = -1, message = "aliasGCE2"),
 			@ApiResponse(code = 200, message = "Found Sucessfully", response = Response.class),
 			@ApiResponse(code = 500, message = "Technical Error") })
@@ -116,15 +121,18 @@ public class SrvAccountsV01 implements ISrvAccountsV01, com.bbva.jee.arq.spring.
 		new FiqlValidator(filter).exist().hasGeAndLe("month").validate();
 
 		// 2. Mapping to DTOIntFilter
-		final DTOIntFilterAccount dtoIntFilterAccount = iAccountsMapper.getDTOIntFilter(idAccount, filter);
+		final DTOIntFilterAccount dtoIntFilterAccount = iAccountsMapper
+				.getDTOIntFilter(idAccount, filter);
 
 		// Invoke SrvIntAccounts and Mapping to canonical DTO
-		return iAccountsMapper.mapL(srvIntAccounts.getAccountMonthlyBalance(dtoIntFilterAccount));
+		return iAccountsMapper.mapL(srvIntAccounts
+				.getAccountMonthlyBalance(dtoIntFilterAccount));
 	}
 
 	@Override
 	@ApiOperation(value = "Saldos Productos", notes = "Inforamtion Saldos de productos", response = Response.class)
-	@ApiResponses(value = { @ApiResponse(code = -1, message = "aliasGCE1"),
+	@ApiResponses(value = {
+			@ApiResponse(code = -1, message = "aliasGCE1"),
 			@ApiResponse(code = -1, message = "aliasGCE2"),
 			@ApiResponse(code = 200, message = "Found Sucessfully", response = Response.class),
 			@ApiResponse(code = 500, message = "Technical Error") })
@@ -140,9 +148,11 @@ public class SrvAccountsV01 implements ISrvAccountsV01, com.bbva.jee.arq.spring.
 
 		new FiqlValidator(filter).hasGe("month").validateIfExisit();
 
-		DTOIntFilterMovResumes dtoIntFilter = iAccountsMapper.getDtoIntFilterMovResumes(idAccount, filter);
+		DTOIntFilterMovResumes dtoIntFilter = iAccountsMapper
+				.getDtoIntFilterMovResumes(idAccount, filter);
 
-		return iAccountsMapper.map(srvIntAccounts.getAccMovementResume(dtoIntFilter));
+		return iAccountsMapper.map(srvIntAccounts
+				.getAccMovementResume(dtoIntFilter));
 	}
 
 	/*
@@ -151,31 +161,37 @@ public class SrvAccountsV01 implements ISrvAccountsV01, com.bbva.jee.arq.spring.
 
 	@Override
 	@ApiOperation(value = "Listado Cheques", notes = "Listado De Chequeras ", response = Response.class)
-	@ApiResponses(value = { @ApiResponse(code = -1, message = "aliasGCE1"),
+	@ApiResponses(value = {
+			@ApiResponse(code = -1, message = "aliasGCE1"),
 			@ApiResponse(code = -1, message = "aliasGCE2"),
 			@ApiResponse(code = 200, message = "Found Sucessfully", response = Response.class),
 			@ApiResponse(code = 500, message = "Technical Error") })
 	@GET
 	@Path("/{id}/listChecks")
 	@SMC(registryID = "SMC201400026", logicalID = "listCheck")
-	public List<Check> listCheck(@ApiParam(value = "identifier param") @PathParam("id") String accountId,
-								 @ApiParam(value = "filter param") @DefaultValue("null") @QueryParam("$filter") String filter,
-								 @ApiParam(value = "fields param") @DefaultValue("null") @QueryParam("paginationKey") Integer paginationKey,
-								 @ApiParam(value = "expands param") @DefaultValue("null") @QueryParam("pageSize") Integer pageSize) {
+	public List<Check> listCheck(
+			@ApiParam(value = "identifier param") @PathParam("id") String accountId,
+			@ApiParam(value = "filter param") @DefaultValue("null") @QueryParam("$filter") String filter,
+			@ApiParam(value = "fields param") @DefaultValue("null") @QueryParam("paginationKey") Integer paginationKey,
+			@ApiParam(value = "expands param") @DefaultValue("null") @QueryParam("pageSize") Integer pageSize) {
 
 		// Validacion del filtro
-		new FiqlValidator(filter).exist()
-				.hasGeAndLeDate("check.issueDate").hasEq("check.status").validate();
+		new FiqlValidator(filter).exist().hasGeAndLeDate("issueDate")
+				.hasEq("status").validate();
 
 		// Mapeo del filtro a DTO
-		DTOIntFilterChecks dtoIntFilterChecks = iAccountsMapper.getDtoIntFilterChecks(accountId, filter, paginationKey, pageSize);
+		DTOIntFilterChecks dtoIntFilterChecks = iAccountsMapper
+				.getDtoIntFilterChecks(accountId, filter, paginationKey,
+						pageSize);
 
-		return iAccountsMapper.mapChecks(srvIntAccounts.listCheck(dtoIntFilterChecks));
+		return iAccountsMapper.mapChecks(srvIntAccounts
+				.listCheck(dtoIntFilterChecks));
 	}
 
 	@Override
 	@ApiOperation(value = "Operation obtaining checkbooks related to a client's product.", notes = "----", response = Checkbook.class)
-	@ApiResponses(value = { @ApiResponse(code = -1, message = "aliasGCE1"),
+	@ApiResponses(value = {
+			@ApiResponse(code = -1, message = "aliasGCE1"),
 			@ApiResponse(code = -1, message = "aliasGCE2"),
 			@ApiResponse(code = 200, message = "Found Successfully", response = Checkbook.class),
 			@ApiResponse(code = 400, message = "Request Error"),
@@ -188,15 +204,21 @@ public class SrvAccountsV01 implements ISrvAccountsV01, com.bbva.jee.arq.spring.
 	public Checkbook getCheckbook(
 			@ApiParam(value = "Checkbooks identifier") @PathParam("checkbookId") String checkbookId,
 			@ApiParam(value = "Checkbooks identifier") @PathParam("accountId") String accountId) {
-
-		if (checkbookId == "checks" || checkbookId.equals("checks")) {
-			throw new BusinessServiceException(EnumError.WRONG_PARAMETERS.getAlias());
+		// 1. Validate parameter
+		if (checkbookId == null || checkbookId.trim().isEmpty()) {
+			throw new BusinessServiceException(
+					EnumError.WRONG_PARAMETERS.getAlias());
 		}
+		if (accountId == null || accountId.trim().isEmpty()) {
+			throw new BusinessServiceException(
+					EnumError.WRONG_PARAMETERS.getAlias());
+		}
+		// 2. Mapping to DTOIntFilter
+		final DTOIntCheckbook dtointCheckbook = iAccountsMapper.getDtoIntCheckbook(accountId, checkbookId);
 
-		final DTOIntCheckbook intCheckbook = new DTOIntCheckbook();
-		intCheckbook.setId(checkbookId);
-		intCheckbook.setNumeroCuenta(accountId);
-		return iAccountsMapper.mapCheckbook(srvIntAccounts.getCheckbooks(intCheckbook));
+		// 3. Invoke SrvIntCustomers and Mapping to canonical DTO
+		return iAccountsMapper.mapCheckbook(srvIntAccounts
+				.getCheckbooks(dtointCheckbook));
 	}
 
 }

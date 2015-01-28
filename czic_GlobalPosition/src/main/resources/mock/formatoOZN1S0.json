@@ -1,0 +1,101 @@
+[
+  {
+    "numprod": "00130443000200009462",
+    "tipprod": "BP",
+    "saltota": "0000000003465914181",
+    "saldisp": "0000000002999929760",
+    "salcanj": "0000000007735839822",
+    "indvisi": "V",
+    "indoper": "U",
+    "alias": "Ochoa",
+    "finstat": "P"
+  },
+  {
+    "numprod": "00130443000200009462",
+    "tipprod": "AQ",
+    "saltota": "0000000004094998029",
+    "saldisp": "0000000007912731059",
+    "salcanj": "0000000008038688719",
+    "indvisi": "C",
+    "indoper": "B",
+    "alias": "Coleman",
+    "finstat": "A"
+  },
+  {
+    "numprod": "00130443000200009463",
+    "tipprod": "CM",
+    "saltota": "0000000000226631283",
+    "saldisp": "0000000002671570403",
+    "salcanj": "0000000006543423045",
+    "indvisi": "V",
+    "indoper": "U",
+    "alias": "Kline",
+    "finstat": "P"
+  },
+  {
+    "numprod": "00130443000200009464",
+    "tipprod": "AQ",
+    "saltota": "0000000005645241735",
+    "saldisp": "0000000006438423374",
+    "salcanj": "0000000008510392353",
+    "indvisi": "C",
+    "indoper": "U",
+    "alias": "Lara",
+    "finstat": "A"
+  },
+  {
+    "numprod": "00130443000200009465",
+    "tipprod": "CS",
+    "saltota": "0000000003790677928",
+    "saldisp": "0000000007410450108",
+    "salcanj": "0000000001860949336",
+    "indvisi": "C",
+    "indoper": "B",
+    "alias": "Bette",
+    "finstat": "A"
+  },
+  {
+    "numprod": "00130443000200009466",
+    "tipprod": "BF",
+    "saltota": "0000000009233333208",
+    "saldisp": "0000000009836953914",
+    "salcanj": "0000000001947354572",
+    "indvisi": "V",
+    "indoper": "B",
+    "alias": "Cheryl",
+    "finstat": "A"
+  },
+  {
+    "numprod": "00130443000200009467",
+    "tipprod": "TE",
+    "saltota": "0000000000902006095",
+    "saldisp": "0000000003688767303",
+    "salcanj": "0000000003129592549",
+    "indvisi": "V",
+    "indoper": "U",
+    "alias": "Traci",
+    "finstat": "P"
+  },
+  {
+    "numprod": "00130443000200009468",
+    "tipprod": "FP",
+    "saltota": "0000000002491526080",
+    "saldisp": "0000000008214238966",
+    "salcanj": "0000000007150931335",
+    "indvisi": "C",
+    "indoper": "U",
+    "alias": "Riley",
+    "finstat": "P"
+  },
+  {
+    "numprod": "00130443000200009469",
+    "tipprod": "FB",
+    "saltota": "0000000007929351877",
+    "saldisp": "0000000002543118773",
+    "salcanj": "0000000000994176725",
+    "indvisi": "V",
+    "indoper": "B",
+    "alias": "Pace",
+    "finstat": "P"
+  }
+]

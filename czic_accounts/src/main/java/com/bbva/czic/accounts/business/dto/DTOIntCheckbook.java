@@ -2,6 +2,8 @@ package com.bbva.czic.accounts.business.dto;
 
 import java.util.Date;
 
+import javax.validation.constraints.NotNull;
+
 public class DTOIntCheckbook {
 
 	public final static long serialVersionUID = 1L;
@@ -20,7 +22,7 @@ public class DTOIntCheckbook {
 
 	private DTOIntEnumCheckbookStatus actualState;
 
-	private String numeroCuenta;
+	private String idAccount;
 
 	public DTOIntCheckbook() {
 		// default constructor
@@ -86,11 +88,11 @@ public class DTOIntCheckbook {
 		this.actualState = actualState;
 	}
 
-	public String getNumeroCuenta() {
-		return numeroCuenta;
+	public String getIdAccount() {
+		return idAccount;
 	}
 
-	public void setNumeroCuenta(String numeroCuenta) {
-		this.numeroCuenta = numeroCuenta;
+	public void setIdAccount(String idAccount) {
+		this.idAccount = idAccount;
 	}
 }

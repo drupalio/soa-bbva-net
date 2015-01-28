@@ -1,24 +1,34 @@
 package com.bbva.czic.accounts.dao.mappers.impl;
 
+import com.bbva.czic.accounts.business.dto.*;
 import java.util.ArrayList;
 
-import com.bbva.czic.accounts.business.dto.*;
+import com.bbva.czic.accounts.business.dto.DTOIntAccMovementsResume;
+import com.bbva.czic.accounts.business.dto.DTOIntAccount;
+import com.bbva.czic.accounts.business.dto.DTOIntCheckbook;
+import com.bbva.czic.accounts.business.dto.DTOIntFilterAccount;
+import com.bbva.czic.accounts.business.dto.DTOIntFilterMovResumes;
+import com.bbva.czic.accounts.business.dto.DTOIntMonthlyBalances;
 import com.bbva.czic.accounts.dao.mappers.TxAccountMapper;
 import com.bbva.czic.accounts.dao.model.ozna.FormatoOZNCENA0;
 import com.bbva.czic.accounts.dao.model.ozna.FormatoOZNCSNA0;
+import com.bbva.czic.accounts.dao.model.ozns.FormatoOZECNSE0;
+import com.bbva.czic.accounts.dao.model.ozns.FormatoOZECNSS0;
 import com.bbva.czic.accounts.dao.model.oznu.FormatoOZECNUE0;
 import com.bbva.czic.accounts.dao.model.oznu.FormatoOZECNUS0;
 import com.bbva.czic.accounts.dao.model.oznv.FormatoOZECNVE0;
 import com.bbva.czic.accounts.dao.model.oznv.FormatoOZECNVS0;
 import com.bbva.czic.routine.commons.rm.utils.converter.StringMoneyConverter;
+import com.bbva.czic.routine.commons.rm.utils.mappers.AbstractBbvaTxConfigurableMapper;
 import com.bbva.czic.routine.commons.rm.utils.mappers.Mapper;
 import com.bbva.czic.routine.mapper.CustomMapper;
 import com.bbva.czic.routine.mapper.MapperFactory;
 import com.bbva.czic.routine.mapper.MappingContext;
-import com.bbva.czic.routine.mapper.impl.ConfigurableMapper;
+
+import java.util.ArrayList;
 
 @Mapper(value = "txAccountMapper")
-public class TxAccountMapperImpl extends ConfigurableMapper implements TxAccountMapper {
+public class TxAccountMapperImpl extends AbstractBbvaTxConfigurableMapper implements TxAccountMapper {
 
 	/**
 	 * 
@@ -26,6 +36,7 @@ public class TxAccountMapperImpl extends ConfigurableMapper implements TxAccount
 	@Override
 	protected void configure(MapperFactory factory) {
 
+		super.configure(factory);
 		/**
 		 * Convert HOST FORMAT (+EEEEEEEEDD) to COP Money
 		 */
@@ -46,6 +57,10 @@ public class TxAccountMapperImpl extends ConfigurableMapper implements TxAccount
 		factory.classMap(DTOIntFilterMovResumes.class, FormatoOZECNUE0.class)
 				.field("month", "intervm")
 				.field("accountId", "numprod").byDefault().register();
+		
+		// Map DTOIntCheckbook <-> FormatoOZECNSE0 (OZNS)
+				factory.classMap(DTOIntCheckbook.class, FormatoOZECNSE0.class)
+						.field("idAccount", "numcuen").field("id", "numcheq").byDefault().register();
 
 		/**
 		 * MAPEO DE SALIDAS
@@ -57,8 +72,13 @@ public class TxAccountMapperImpl extends ConfigurableMapper implements TxAccount
 				.customize(new CheckBookListMapper()).register();
 
 		// Map FormatoOZECNVS0 <-> DTOIntMonthlyBalances (OZNV)
-		factory.classMap(DTOIntMonthlyBalances.class, FormatoOZECNVS0.class).field("balance", "salddis")
+		factory.classMap(DTOIntMonthlyBalances.class, FormatoOZECNVS0.class).field("balance.amount", "salddis")
 				.field("month", "mes").byDefault().register();
+		
+		// Map DTOIntCheckbook <-> FormatoOZECNSE0 (OZNS)
+		factory.classMap(DTOIntCheckbook.class, FormatoOZECNSS0.class)
+				.field("firstCheck", "primchq").field("lastCheck", "ultichq").field("totalCheck", "totachq").field("requestDate", "fecemis")
+				.field("deliveryDate", "fecentr").field("actualState", "estachq").byDefault().register();
 
 		// Map FormatoOZECNUS0 <-> DTOIntAccMovementsResume (OZNU)
 	//	factory.classMap(DTOIntAccMovementsResume.class, FormatoOZECNUS0.class).field("balance", "saldtot")
@@ -95,6 +115,16 @@ public class TxAccountMapperImpl extends ConfigurableMapper implements TxAccount
 	@Override
 	public DTOIntAccMovementsResume mapOutOznu(FormatoOZECNUS0 formatOutput) {
 		return map(formatOutput, DTOIntAccMovementsResume.class);
+	}
+	
+	@Override
+	public FormatoOZECNSE0 mapInOzns(DTOIntCheckbook dtoIn) {
+		return map(dtoIn, FormatoOZECNSE0.class);
+	}
+
+	@Override
+	public DTOIntCheckbook mapOutOzns(FormatoOZECNSS0 formatOutput) {
+		return map(formatOutput, DTOIntCheckbook.class);
 	}
 
 	/**

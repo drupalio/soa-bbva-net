@@ -4,9 +4,13 @@ import com.bbva.czic.globalposition.business.ISrvIntGlobalPosition;
 import com.bbva.czic.globalposition.business.dto.DTOIntProductFilter;
 import com.bbva.czic.globalposition.business.dto.DTOIntProduct;
 import com.bbva.czic.globalposition.dao.IGlobalPositionDAO;
+import com.bbva.czic.routine.commons.rm.utils.errors.EnumError;
+import com.bbva.czic.routine.commons.rm.utils.validator.DtoValidator;
 import com.bbva.jee.arq.spring.core.log.I18nLog;
 import com.bbva.jee.arq.spring.core.log.I18nLogFactory;
+import com.bbva.jee.arq.spring.core.servicing.gce.BusinessServiceException;
 import org.springframework.stereotype.Service;
+import org.springframework.util.CollectionUtils;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -22,18 +26,30 @@ public class SrvIntGlobalPosition implements ISrvIntGlobalPosition {
 
 	@Override
 	public List<DTOIntProduct> getExtractGlobalBalance(DTOIntProductFilter filterProduct) {
-		log.info(" getExtractGlobalBalance product ");
-		return  globalPositionDAO.getExtractGlobalBalance(filterProduct);
+		log.info("SrvIntGlobalPosition#getExtractGlobalBalance");
+
+		DtoValidator.validate(filterProduct);
+
+		List<DTOIntProduct> intProducts = globalPositionDAO.getExtractGlobalBalance(filterProduct);
+
+		//DtoValidator.validate(intProducts);
+
+		if (CollectionUtils.isEmpty(intProducts)) {
+			throw new BusinessServiceException(EnumError.NO_DATA.getAlias());
+		}
+		return intProducts;
 	}
 
 	@Override
-	public void updateProductVisibility(DTOIntProduct productInt) {
-		globalPositionDAO.updateProductVisibility(productInt);
+	public void updateProductVisibility(DTOIntProduct intProduct) {
+
+		globalPositionDAO.updateProductVisibility(intProduct);
 	}
 
 	@Override
-	public void updateProductOperability(DTOIntProduct productInt){
-		globalPositionDAO.updateProductOperability(productInt);
+	public void updateProductOperability(DTOIntProduct intProduct){
+		DtoValidator.validate(intProduct);
+		globalPositionDAO.updateProductOperability(intProduct);
 	}
 
 }

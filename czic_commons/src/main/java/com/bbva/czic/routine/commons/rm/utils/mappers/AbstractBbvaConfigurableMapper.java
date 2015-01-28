@@ -1,7 +1,7 @@
 package com.bbva.czic.routine.commons.rm.utils.mappers;
 
-import com.bbva.czic.routine.commons.rm.utils.converter.GregorianCalendarConverter;
-import com.bbva.czic.routine.mapper.factory.CalendarFactory;
+import java.util.Calendar;
+
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.cxf.jaxrs.ext.search.ConditionType;
 import org.apache.cxf.jaxrs.ext.search.PrimitiveStatement;
@@ -10,19 +10,17 @@ import org.apache.cxf.jaxrs.ext.search.SearchCondition;
 import org.apache.cxf.jaxrs.ext.search.fiql.FiqlParser;
 
 import com.bbva.czic.routine.commons.rm.utils.converter.CalendarDateConverter;
-import com.bbva.czic.routine.commons.rm.utils.errors.EnumError;
+import com.bbva.czic.routine.commons.rm.utils.converter.GregorianCalendarConverter;
 import com.bbva.czic.routine.commons.rm.utils.fiql.FiqlUtils;
 import com.bbva.czic.routine.commons.rm.utils.predicate.AbstractPredicate;
 import com.bbva.czic.routine.mapper.MapperFactory;
+import com.bbva.czic.routine.mapper.factory.CalendarFactory;
 import com.bbva.czic.routine.mapper.factory.MoneyFactory;
 import com.bbva.czic.routine.mapper.impl.ConfigurableMapper;
 import com.bbva.czic.routine.mapper.metadata.TypeFactory;
 import com.bbva.jee.arq.spring.core.log.I18nLog;
 import com.bbva.jee.arq.spring.core.log.I18nLogFactory;
-import com.bbva.jee.arq.spring.core.servicing.gce.BusinessServiceException;
 import com.bbva.jee.arq.spring.core.servicing.utils.Money;
-
-import java.util.Calendar;
 
 public abstract class AbstractBbvaConfigurableMapper extends ConfigurableMapper {
 
@@ -35,7 +33,7 @@ public abstract class AbstractBbvaConfigurableMapper extends ConfigurableMapper 
 		// Add Converter
 		factory.getConverterFactory().registerConverter(new CalendarDateConverter());
 
-        // Add Calendar Converter to GregorianCalendar
+		// Add Calendar Converter to GregorianCalendar
 		factory.getConverterFactory().registerConverter(new GregorianCalendarConverter());
 
 		// Add Money Factory
@@ -98,7 +96,7 @@ public abstract class AbstractBbvaConfigurableMapper extends ConfigurableMapper 
 
 			return primitiveStatement.getValue().toString();
 		} catch (Exception e) {
-			throw new BusinessServiceException(EnumError.WRONG_PARAMETERS.getAlias());
+			return null;
 		}
 
 	}
@@ -113,7 +111,6 @@ public abstract class AbstractBbvaConfigurableMapper extends ConfigurableMapper 
 		private String property;
 
 		/**
-		 * 
 		 * @param property
 		 * @param conditionType
 		 */

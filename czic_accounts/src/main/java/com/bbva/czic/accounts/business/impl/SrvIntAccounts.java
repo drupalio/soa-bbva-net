@@ -40,7 +40,7 @@ public class SrvIntAccounts implements ISrvIntAccounts {
 		// 3. Validate output
 		DtoValidator.validate(result);
 
-		log.info(" getExtractGlobalBalance product ");
+		log.info(" getAccountMonthlyBalance monthlyBalance ");
 		return result;
 	}
 
@@ -75,8 +75,6 @@ public class SrvIntAccounts implements ISrvIntAccounts {
 		log.info("Into SrvIntAccounts.listCheck...");
 		// Validacion del dto de filtro
 		DtoValidator.validate(filter);
-		new DateValidator().hasDateFormat(filter.getStartDate())
-				.hasDateFormat(filter.getEndDate()).validate();
 
 		List<DTOIntCheck> result = accountsDAO.getListCheck(filter);
 
@@ -86,9 +84,18 @@ public class SrvIntAccounts implements ISrvIntAccounts {
 	}
 
 	@Override
-	public DTOIntCheckbook getCheckbooks(DTOIntCheckbook intCheckbook) {
+	public DTOIntCheckbook getCheckbooks(DTOIntCheckbook dtoIntCheckbook) {
+		// 1. Validate DtoIntFilterAccount
+		DtoValidator.validate(dtoIntCheckbook);
 
-		return accountsDAO.getCheckbooks(intCheckbook);
+		// 2. Get response
+		final DTOIntCheckbook result = accountsDAO.getCheckbooks(dtoIntCheckbook);
+
+		// 3. Validate output
+		DtoValidator.validate(result);
+
+		log.info(" getCheckbooks checkbook ");
+		return result;
 	}
 
 }

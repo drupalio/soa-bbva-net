@@ -31,4 +31,6 @@ public interface IAccountsMapper {
 	DTOIntFilterChecks getDtoIntFilterChecks(String idAccount, String filter, Integer paginationKey, Integer paginationSize);
 
 	DTOIntFilterMovResumes getDtoIntFilterMovResumes(String idAccount, String filter);
+	
+	DTOIntCheckbook getDtoIntCheckbook(String idAccount, String idCheckbook);
 }

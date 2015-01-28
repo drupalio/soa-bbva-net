@@ -116,4 +116,10 @@ public class FormatoOZNCSNB0 {
 	@Campo(indice = 16, nombre = "PAISOFI", tipo = TipoCampo.ALFANUMERICO, longitudMinima = 4, longitudMaxima = 4)
 	private String paisofi;
 	
+	/**
+	 * <p>Campo <code>ULTCONX</code>, &iacute;ndice: <code>17</code>, tipo: <code>ALFANUMERICO</code>
+	 */
+	@Campo(indice = 17, nombre = "ULTCONX", tipo = TipoCampo.ALFANUMERICO, longitudMinima = 26, longitudMaxima = 26)
+	private String ultconx;
+	
 }

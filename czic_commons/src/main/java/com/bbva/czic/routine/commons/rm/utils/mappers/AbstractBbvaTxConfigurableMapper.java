@@ -1,5 +1,6 @@
 package com.bbva.czic.routine.commons.rm.utils.mappers;
 
+import com.bbva.czic.routine.commons.rm.utils.converter.BigDecimalMoneyConverter;
 import com.bbva.czic.routine.commons.rm.utils.converter.CalendarDateConverter;
 import com.bbva.czic.routine.commons.rm.utils.converter.DateCalendarConverter;
 import com.bbva.czic.routine.commons.rm.utils.converter.StringMoneyConverter;
@@ -28,6 +29,12 @@ public abstract class AbstractBbvaTxConfigurableMapper extends ConfigurableMappe
 		 * Convert HOST Date to Calendar DtoInt
 		 */
 		factory.getConverterFactory().registerConverter(new DateCalendarConverter());
+
+
+		/**
+		 * Convert HOST BigDecimal to Money
+		 */
+		factory.getConverterFactory().registerConverter(new BigDecimalMoneyConverter());
 
 	}
 

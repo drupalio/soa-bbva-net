@@ -174,37 +174,6 @@ public class CustomersDAOImpl implements CustomersDAO {
 	public DTOIntCustomer getCustomer(String customerId) throws BusinessServiceException {
 		log.info("CustDAO: Into getCustomer...");
 		log.info("CustDAO: getCustomer params(customerId):" + customerId);
-//
-//		DTOIntCustomer dtoIntCustomer = new DTOIntCustomer();
-//
-//		FormatoOZNCENB0 formato = new FormatoOZNCENB0();
-//
-//		formato.setNumclie(customerId);
-//
-//		PeticionTransaccionOznb peticion = new PeticionTransaccionOznb();
-//
-//		peticion.getCuerpo().getPartes().add(formato);
-//		log.info("getCustomer formato entrada:" + peticion);
-//		RespuestaTransaccionOznb respuesta = transaccionOznb.invocar(peticion);
-//		log.info("getCustomer respuesta:" + respuesta);
-//
-//		BusinessServiceException exception = errorMappingHelper.toBusinessServiceException(respuesta);
-//		if (exception != null) {
-//			throw exception;
-//		}
-//
-//		CopySalida outputCopies = respuesta.getCuerpo().getParte(CopySalida.class);
-//
-//		if (outputCopies == null) {
-//			throw new BusinessServiceException(EnumError.NO_DATA.getAlias());
-//		}
-//
-//		// FormatoOZNCSNB0 formatoSalida = outputCopies.getCopy(FormatoOZNCSNB0.class);
-//		FormatoOZNCSNB0 formatoSalida = CustomersDAOMock.getCustomer();
-//
-//		log.info("DAO - Se mapea la respuesta para retornarla SMC : getCustomer SN Customer ");
-//		dtoIntCustomer = CustomerMapper.mapToOuter(formatoSalida);
-
 		return txGetCustomer.invoke(customerId);
 	}
 
