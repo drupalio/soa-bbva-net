@@ -1,6 +1,5 @@
 package com.bbva.czic.accounts.dao.mappers.impl;
 
-import com.bbva.czic.accounts.business.dto.*;
 import java.util.ArrayList;
 
 import com.bbva.czic.accounts.business.dto.DTOIntAccMovementsResume;
@@ -24,8 +23,6 @@ import com.bbva.czic.routine.commons.rm.utils.mappers.Mapper;
 import com.bbva.czic.routine.mapper.CustomMapper;
 import com.bbva.czic.routine.mapper.MapperFactory;
 import com.bbva.czic.routine.mapper.MappingContext;
-
-import java.util.ArrayList;
 
 @Mapper(value = "txAccountMapper")
 public class TxAccountMapperImpl extends AbstractBbvaTxConfigurableMapper implements TxAccountMapper {
@@ -78,7 +75,7 @@ public class TxAccountMapperImpl extends AbstractBbvaTxConfigurableMapper implem
 		// Map DTOIntCheckbook <-> FormatoOZECNSE0 (OZNS)
 		factory.classMap(DTOIntCheckbook.class, FormatoOZECNSS0.class)
 				.field("firstCheck", "primchq").field("lastCheck", "ultichq").field("totalCheck", "totachq").field("requestDate", "fecemis")
-				.field("deliveryDate", "fecentr").field("actualState", "estachq").byDefault().register();
+				.field("deliveryDate", "fecentr").field("deliveryDate", "fecentr").field("actualState", "estachq").byDefault().register();
 
 		// Map FormatoOZECNUS0 <-> DTOIntAccMovementsResume (OZNU)
 	//	factory.classMap(DTOIntAccMovementsResume.class, FormatoOZECNUS0.class).field("balance", "saldtot")
