@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
+import com.bbva.czic.dto.net.*;
 import org.springframework.stereotype.Component;
 
 import com.bbva.czic.customers.business.dto.DTOIntAccMovementsResume;
@@ -14,17 +15,6 @@ import com.bbva.czic.customers.dao.mapper.ICustomerMapper;
 import com.bbva.czic.customers.dao.model.oznb.FormatoOZNCSNB0;
 import com.bbva.czic.customers.dao.model.oznp.FormatoOZECNPS0;
 import com.bbva.czic.customers.dao.model.oznq.FormatoOZECNQS0;
-import com.bbva.czic.dto.net.AccMovementsResume;
-import com.bbva.czic.dto.net.CardCharge;
-import com.bbva.czic.dto.net.ContactInfo;
-import com.bbva.czic.dto.net.Customer;
-import com.bbva.czic.dto.net.Email;
-import com.bbva.czic.dto.net.EnumContactSourceType;
-import com.bbva.czic.dto.net.EnumDwelingType;
-import com.bbva.czic.dto.net.EnumMonth;
-import com.bbva.czic.dto.net.EnumSegmentType;
-import com.bbva.czic.dto.net.PhoneNumber;
-import com.bbva.czic.dto.net.Place;
 import com.bbva.czic.routine.commons.rm.utils.converter.UtilsConverter;
 
 @Component("customerMapper")
@@ -67,7 +57,7 @@ public class CustomerMapper implements ICustomerMapper{
 	public CardCharge map(DTOIntCardCharge item) {
 		CardCharge cardCharge  = new CardCharge();
 		cardCharge.setAmount(item.getAmount());
-		cardCharge.setCategory(item.getCategory());
+		cardCharge.setCategory(EnumCardChargeCategory.valueOf(item.getCategory()));
 		return cardCharge;
 	}
 

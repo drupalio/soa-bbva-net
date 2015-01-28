@@ -203,7 +203,7 @@ public class SrvAccountsV01 implements ISrvAccountsV01,
 	@SMC(registryID = "SMCCO1400013", logicalID = "getCheckbooks")
 	public Checkbook getCheckbook(
 			@ApiParam(value = "Checkbooks identifier") @PathParam("checkbookId") String checkbookId,
-			@ApiParam(value = "Checkbooks identifier") @PathParam("accountId") String accountId) {
+			@ApiParam(value = "account identifier") @PathParam("accountId") String accountId) {
 		// 1. Validate parameter
 		if (checkbookId == null || checkbookId.trim().isEmpty()) {
 			throw new BusinessServiceException(
@@ -213,10 +213,10 @@ public class SrvAccountsV01 implements ISrvAccountsV01,
 			throw new BusinessServiceException(
 					EnumError.WRONG_PARAMETERS.getAlias());
 		}
-		// 2. Mapping to DTOIntFilter
+		// 2. Mapping to DTOIntCheckbook
 		final DTOIntCheckbook dtointCheckbook = iAccountsMapper.getDtoIntCheckbook(accountId, checkbookId);
 
-		// 3. Invoke SrvIntCustomers and Mapping to canonical DTO
+		// 3. Invoke SrvIntAccount and Mapping to canonical DTO
 		return iAccountsMapper.mapCheckbook(srvIntAccounts
 				.getCheckbooks(dtointCheckbook));
 	}

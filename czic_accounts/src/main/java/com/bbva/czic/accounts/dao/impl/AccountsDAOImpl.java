@@ -26,10 +26,6 @@ public class AccountsDAOImpl implements AccountsDAO {
 	@Autowired
 	private ErrorMappingHelper errorMappingHelper;
 
-	// @Autowired
-	// @Qualifier("tx-list-check")
-	// private IPaginatedTransaction txListCheck;
-
 	/**
 	 * OZNA
 	 */
