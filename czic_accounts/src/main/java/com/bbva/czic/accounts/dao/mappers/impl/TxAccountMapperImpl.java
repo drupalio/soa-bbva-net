@@ -81,9 +81,9 @@ public class TxAccountMapperImpl extends AbstractBbvaTxConfigurableMapper implem
 				.field("deliveryDate", "fecentr").field("actualState", "estachq").byDefault().register();
 
 		// Map FormatoOZECNUS0 <-> DTOIntAccMovementsResume (OZNU)
-	//	factory.classMap(DTOIntAccMovementsResume.class, FormatoOZECNUS0.class).field("balance", "saldtot")
-	//			.field("income", "valdepo").field("outcome", "valcarg").field("month.mes", "mes").byDefault()
-	//			.register();
+		factory.classMap(DTOIntAccMovementsResume.class, FormatoOZECNUS0.class).field("balance", "saldtot")
+				.field("income", "valdepo").field("outcome", "valcarg").field("mes", "mes").byDefault()
+				.register();
 
 	}
 
