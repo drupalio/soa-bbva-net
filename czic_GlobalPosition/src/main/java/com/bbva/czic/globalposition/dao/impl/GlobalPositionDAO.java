@@ -1,18 +1,20 @@
 package com.bbva.czic.globalposition.dao.impl;
 
-import com.bbva.czic.dto.net.EnumProductType;
-import com.bbva.czic.globalposition.business.dto.DTOIntProductFilter;
-import com.bbva.czic.globalposition.business.dto.DTOIntProduct;
-import com.bbva.czic.globalposition.dao.IGlobalPositionDAO;
-import com.bbva.czic.globalposition.dao.tx.TxGetExtractGlobalBalance;
-import com.bbva.czic.globalposition.dao.tx.TxGetExtractGlobalBalanceNoTC;
-import com.bbva.czic.routine.commons.rm.utils.tx.ISimpleTransaction;
+import java.util.List;
+
+import javax.annotation.Resource;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
 
-import javax.annotation.Resource;
-import java.util.List;
+import com.bbva.czic.dto.net.EnumProductType;
+import com.bbva.czic.globalposition.business.dto.DTOIntProduct;
+import com.bbva.czic.globalposition.business.dto.DTOIntProductFilter;
+import com.bbva.czic.globalposition.dao.IGlobalPositionDAO;
+import com.bbva.czic.globalposition.dao.tx.TxGetExtractGlobalBalance;
+import com.bbva.czic.globalposition.dao.tx.TxGetExtractGlobalBalanceNoTC;
+import com.bbva.czic.routine.commons.rm.utils.tx.ISimpleTransaction;
 
 @Repository(value = "global-position-dao")
 public class GlobalPositionDAO implements IGlobalPositionDAO {
