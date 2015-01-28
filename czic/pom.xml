@@ -24,11 +24,17 @@
 			<version>1.0.0</version>
 		</dependency>
 
-		<dependency> <groupId>com.bbva.czic.cards</groupId> <artifactId>czic_cards</artifactId>
-			<version>1.0.0</version> </dependency>
+		<dependency>
+			<groupId>com.bbva.czic.cards</groupId>
+			<artifactId>czic_cards</artifactId>
+			<version>1.0.0</version>
+		</dependency>
 
-		<dependency> <groupId>com.bbva.czic.executives</groupId> <artifactId>czic_executives</artifactId>
-			<version>1.0.0</version> </dependency>
+		<dependency>
+			<groupId>com.bbva.czic.executives</groupId>
+			<artifactId>czic_executives</artifactId>
+			<version>1.0.0</version>
+		</dependency>
 
 		<dependency>
 			<groupId>com.bbva.czic.customers</groupId>
@@ -36,18 +42,24 @@
 			<version>1.0.0</version>
 		</dependency>
 
-		<dependency> <groupId>com.bbva.czic.checkbooks</groupId> <artifactId>czic_checkbooks</artifactId>
-			<version>1.0.0</version> </dependency >
+		<dependency>
+			<groupId>com.bbva.czic.checkbooks</groupId>
+			<artifactId>czic_checkbooks</artifactId>
+			<version>1.0.0</version>
+		</dependency>
 
-		<dependency> <groupId>com.bbva.czic.loan</groupId> <artifactId>czic_loan</artifactId>
-			<version>1.0.0</version> </dependency>
+		<dependency>
+			<groupId>com.bbva.czic.loan</groupId>
+			<artifactId>czic_loan</artifactId>
+			<version>1.0.0</version>
+		</dependency>
 
 
-		<dependency> <groupId>com.bbva.czic.products</groupId> <artifactId>czic_products</artifactId>
-			<version>1.0.0</version> </dependency >
-
-		<dependency> <groupId>com.bbva.czic.accounts</groupId> <artifactId>czic_accounts</artifactId>
-			<version>1.0.0</version> </dependency >
+		<dependency>
+			<groupId>com.bbva.czic.products</groupId>
+			<artifactId>czic_products</artifactId>
+			<version>1.0.0</version>
+		</dependency>
 
 		<dependency>
 			<groupId>com.bbva.czic.accounts</groupId>
@@ -339,22 +351,6 @@
 			<artifactId>cxf-rt-rs-extension-search</artifactId>
 			<version>${cxf.version}</version>
 		</dependency>
-
-		 <dependency>
-		 <groupId>com.bbva.czic.cards</groupId>
-		 <artifactId>czic_cards</artifactId>
-		 <version>1.0.0</version>
-		 </dependency>
-		 <dependency>
-		 <groupId>com.bbva.czic.movements</groupId>
-		 <artifactId>czic_movements</artifactId>
-		 <version>1.0.0</version>
-		 </dependency>
-		 <dependency>
-		 <groupId>com.bbva.czic.movements</groupId>
-		 <artifactId>czic_movements</artifactId>
-		 <version>1.0.0</version>
-		 </dependency>
 	</dependencies>
 	<build>
 		<plugins>

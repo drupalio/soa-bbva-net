@@ -2,14 +2,10 @@ package com.bbva.czic.loan.dao.tx;
 
 import com.bbva.czic.loan.business.dto.DTOIntFilterLoan;
 import com.bbva.czic.loan.business.dto.DTOIntMovement;
-import com.bbva.czic.loan.dao.mappers.impl.ITxMovementMapper;
-import com.bbva.czic.loan.dao.model.ozni.FormatoOZNCENI0;
-import com.bbva.czic.loan.dao.model.ozni.FormatoOZNCSNI0;
-import com.bbva.czic.loan.dao.model.ozni.TransaccionOzni;
-
+import com.bbva.czic.loan.dao.mappers.impl.ITxLoanMapper;
+import com.bbva.czic.loan.dao.model.ozni.*;
 import com.bbva.czic.routine.commons.rm.utils.tx.impl.MultiBbvaTransaction;
 import com.bbva.jee.arq.spring.core.host.InvocadorTransaccion;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
@@ -20,20 +16,20 @@ import javax.annotation.Resource;
 @Component(value = "tx-list-rotary-quota-movements")
 public class TxListRotaryQuotaMovements extends MultiBbvaTransaction<DTOIntFilterLoan, FormatoOZNCENI0, DTOIntMovement, FormatoOZNCSNI0> {
 
-    @Autowired
-    private transient TransaccionOzni transaccionOzni;
+    @Resource(name = "transaccionOzni")
+    private InvocadorTransaccion<PeticionTransaccionOzni, RespuestaTransaccionOzni> transaccionOzni;
 
-    @Resource(name = "tx-movement-mapper")
-    private transient ITxMovementMapper iTxMovementMapper;
+    @Resource(name = "tx-loan-mapper")
+    private ITxLoanMapper iTxLoanMapper;
 
     @Override
     protected FormatoOZNCENI0 mapDtoInToRequestFormat(DTOIntFilterLoan dtoIn) {
-        return iTxMovementMapper.mapInOzni(dtoIn);
+        return iTxLoanMapper.mapInOzni(dtoIn);
     }
 
     @Override
     protected DTOIntMovement mapResponseFormatToDtoOut(FormatoOZNCSNI0 formatOutput, DTOIntFilterLoan dtoIn) {
-        return iTxMovementMapper.mapOutOzni(formatOutput);
+        return iTxLoanMapper.mapOutOzni(formatOutput);
     }
 
     @Override

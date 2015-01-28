@@ -23,7 +23,7 @@ public class CardCharge implements Serializable {
 
 	public final static long serialVersionUID = 1L;
 	@ApiModelProperty(value = "Aspecto comercial", required = true)
-	private String category;
+	private EnumCardChargeCategory category;
 	@XmlJavaTypeAdapter(MoneyAdapter.class)
 	@XmlElement(type = Money.class)
 	@ApiModelProperty("Valor del consumo total diferido a cada una de las categorias")
@@ -33,11 +33,11 @@ public class CardCharge implements Serializable {
 		// default constructor
 	}
 
-	public String getCategory() {
+	public EnumCardChargeCategory getCategory() {
 		return category;
 	}
 
-	public void setCategory(String category) {
+	public void setCategory(EnumCardChargeCategory category) {
 		this.category = category;
 	}
 

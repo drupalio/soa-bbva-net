@@ -2,10 +2,12 @@ package com.bbva.czic.products.facade.v01.mapper.impl;
 
 import com.bbva.czic.dto.net.*;
 import com.bbva.czic.products.business.dto.DTOIntConditions;
+import com.bbva.czic.products.business.dto.DTOIntProduct;
 import com.bbva.czic.products.facade.v01.mapper.IProductsMapper;
 import com.bbva.czic.routine.commons.rm.utils.converter.UtilsConverter;
 import com.bbva.czic.routine.commons.rm.utils.errors.EnumError;
 import com.bbva.jee.arq.spring.core.servicing.gce.BusinessServiceException;
+
 import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
@@ -79,6 +81,13 @@ public class ProductsMapper implements IProductsMapper{
 		}
 
 		return conditions;
+	}
+
+	@Override
+	public DTOIntProduct getDtoIntConditions(String productId) {
+		DTOIntProduct dtoIntProduct = new DTOIntProduct();
+		dtoIntProduct.setId(productId);
+		return dtoIntProduct;
 	}
 
 }
