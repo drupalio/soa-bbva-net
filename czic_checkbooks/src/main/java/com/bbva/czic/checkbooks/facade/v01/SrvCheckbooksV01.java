@@ -3,11 +3,13 @@ package com.bbva.czic.checkbooks.facade.v01;
 import com.bbva.czic.checkbooks.business.ISrvIntCheckbooks;
 import com.bbva.czic.checkbooks.business.dto.DTOIntCheck;
 
+import com.bbva.czic.checkbooks.business.dto.DTOIntCheckFilter;
 import com.bbva.czic.checkbooks.facade.v01.mappers.ICheckbookMapper;
 import com.bbva.czic.checkbooks.facade.v01.util.impl.CheckFilterComverter;
 import com.bbva.czic.dto.net.Check;
 
 import com.bbva.czic.routine.commons.rm.utils.errors.EnumError;
+import com.bbva.czic.routine.commons.rm.utils.validator.impl.FiqlValidator;
 import com.bbva.jee.arq.spring.core.log.I18nLog;
 import com.bbva.jee.arq.spring.core.log.I18nLogFactory;
 import com.bbva.jee.arq.spring.core.servicing.annotations.SMC;
@@ -78,6 +80,16 @@ public class SrvCheckbooksV01 implements ISrvCheckbooksV01, com.bbva.jee.arq.spr
 	public Check getCheck(
 			@ApiParam(value = "Claim identifier param") @PathParam("checkId") String checkId,
 			@ApiParam(value = "order by param") @DefaultValue("null") @QueryParam("$filter") String filter) {
+
+		// 1. Validate filter FIQL
+		new FiqlValidator(filter).exist().hasEq("id").hasEq("type").validate();
+
+		// 2. Mapping to DTOIntFilter
+	//	DTOIntCheckFilter dtoIntExecutivesFilter = iExecutivesMapper.getDTOIntFilter(filter);
+
+		// 3. Invoke SrvIntAccounts and Mapping to canonical DTO
+		//return iExecutivesMapper.map(srvIntExecutives.getExecutive(dtoIntExecutivesFilter));
+
 
 		DTOIntCheck intCheck = null;
 
