@@ -42,7 +42,23 @@ public class TransaccionOzniMock implements InvocadorTransaccion<PeticionTransac
 
 		CopySalida copySalida = new CopySalida();
 		copySalida.setCopy(formatoOZNCSNi0);
+
 		respuestaTransaccionOzni.getCuerpo().getPartes().add(copySalida);
+
+		FormatoOZNCSNI0 formatoOZNCSNi01 = new FormatoOZNCSNI0();
+
+		formatoOZNCSNi01.setFechaop(new Date());
+		formatoOZNCSNi01.setTipope("10");
+		formatoOZNCSNi01.setNumeope("000000012");
+		formatoOZNCSNi01.setBalance("10000");
+		formatoOZNCSNi01.setValorop("0");
+		formatoOZNCSNi01.setResto("GASTOS DE COBRANZA");
+
+		CopySalida copySalida1 = new CopySalida();
+		copySalida1.setCopy(formatoOZNCSNi01);
+
+
+		respuestaTransaccionOzni.getCuerpo().getPartes().add(copySalida1);
 
 		return respuestaTransaccionOzni;
 	}
