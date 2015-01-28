@@ -135,4 +135,12 @@ privileged aspect FormatoOZNCSNB0_Roo_JavaBean {
         this.paisofi = paisofi;
     }
     
+    public String FormatoOZNCSNB0.getUltconx() {
+        return this.ultconx;
+    }
+    
+    public void FormatoOZNCSNB0.setUltconx(String ultconx) {
+        this.ultconx = ultconx;
+    }
+    
 }

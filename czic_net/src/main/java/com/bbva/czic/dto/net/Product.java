@@ -55,6 +55,9 @@ public class Product implements Serializable {
 
 	@ApiModelProperty("")
 	private Contract contract;
+	
+	@ApiModelProperty("")
+	private List<Extract> extracts;
 
 	public Product() {
 		movement = new ArrayList<Movement>();
@@ -159,4 +162,14 @@ public class Product implements Serializable {
 	public void setContract(Contract contract) {
 		this.contract = contract;
 	}
+
+	public List<Extract> getExtracts() {
+		return extracts;
+	}
+
+	public void setExtracts(List<Extract> extracts) {
+		this.extracts = extracts;
+	}
+	
+	
 }

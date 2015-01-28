@@ -105,6 +105,17 @@ public class AccountsMapper extends AbstractBbvaConfigurableMapper implements IA
 		dtoFilter.setMonth(this.getGeValue(filter, FiqlType.month.name()));
 		return dtoFilter;
 	}
+	
+
+	@Override
+	public DTOIntCheckbook getDtoIntCheckbook(String idAccount,
+			String idCheckbook) {
+		final DTOIntCheckbook dtoIntCheckbook = new DTOIntCheckbook();
+		dtoIntCheckbook.setId(idCheckbook);
+		dtoIntCheckbook.setIdAccount(idAccount);
+		return dtoIntCheckbook;
+	}
+
 
 	/**
 	 * Metodo encargado de mapear un DTO interno de tipo DTOIntAccount a un DTO externo de tipo Account
@@ -197,5 +208,4 @@ public class AccountsMapper extends AbstractBbvaConfigurableMapper implements IA
 
 		return checkbook;
 	}
-
 }
