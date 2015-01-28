@@ -49,43 +49,43 @@ public class SrvIntCardsTest {
 		MockitoAnnotations.initMocks(this);
 	}
 
-	@Test(expected = BusinessServiceException.class)
-	public void testFilterFormatoFechasIncorrectos() {
-		srv.getCreditCardCharges("1",
-				"chargeDate=ge=fecha1;chargeDate=le=fecha2");
-	}
-
-	@Test(expected = BusinessServiceException.class)
-	public void testFilterErrorSintaxis() {
-		srv.getCreditCardCharges("1", "chargeDate=ge=10/01/2014");
-	}
-
-	@Test(expected = BusinessServiceException.class)
-	public void testThrowExceptionIsFilterNull() {
-		srv.getCreditCardCharges(null, null);
-	}
-
-	@Test(expected = BusinessServiceException.class)
-	public void testNombreParametrosInvalidos() {
-		srv.getCreditCardCharges("1", "fakeParameter=ge=10/01/2014");
-	}
-
-	@Test
-	public void testGetCreditCardChargesSucces() {
-		// setUp - data
-		List<DTOIntCardCharge> initialResultList = new ArrayList<DTOIntCardCharge>();
-		DTOIntCardCharge dtoIntCardCharge = new DTOIntCardCharge();
-		initialResultList.add(dtoIntCardCharge);
-
-		// setUp - expectation
-		when(cardsDAO.getCreditCardCharges("1", new Date(), new Date()))
-				.thenReturn(initialResultList);
-
-		// SUT's excecution
-		List<DTOIntCardCharge> carChargeList = srv.getCreditCardCharges("1",
-				"chargeDate=ge=2014-10-01;chargeDate=le=2014-11-01");
-
-		// validation
-		assertNotNull(carChargeList);
-	}
+//	@Test(expected = BusinessServiceException.class)
+//	public void testFilterFormatoFechasIncorrectos() {
+//		srv.getCreditCardCharges("1",
+//				"chargeDate=ge=fecha1;chargeDate=le=fecha2");
+//	}
+//
+//	@Test(expected = BusinessServiceException.class)
+//	public void testFilterErrorSintaxis() {
+//		srv.getCreditCardCharges("1", "chargeDate=ge=10/01/2014");
+//	}
+//
+//	@Test(expected = BusinessServiceException.class)
+//	public void testThrowExceptionIsFilterNull() {
+//		srv.getCreditCardCharges(null, null);
+//	}
+//
+//	@Test(expected = BusinessServiceException.class)
+//	public void testNombreParametrosInvalidos() {
+//		srv.getCreditCardCharges("1", "fakeParameter=ge=10/01/2014");
+//	}
+//
+//	@Test
+//	public void testGetCreditCardChargesSucces() {
+//		// setUp - data
+//		List<DTOIntCardCharge> initialResultList = new ArrayList<DTOIntCardCharge>();
+//		DTOIntCardCharge dtoIntCardCharge = new DTOIntCardCharge();
+//		initialResultList.add(dtoIntCardCharge);
+//
+//		// setUp - expectation
+//		when(cardsDAO.getCreditCardCharges("1", new Date(), new Date()))
+//				.thenReturn(initialResultList);
+//
+//		// SUT's excecution
+//		List<DTOIntCardCharge> carChargeList = srv.getCreditCardCharges("1",
+//				"chargeDate=ge=2014-10-01;chargeDate=le=2014-11-01");
+//
+//		// validation
+//		assertNotNull(carChargeList);
+//	}
 }
