@@ -2,6 +2,7 @@ package com.bbva.czic.cards.business;
 
 import com.bbva.czic.cards.business.dto.DTOIntCardCharge;
 import com.bbva.czic.dto.net.CardCharge;
+import com.bbva.czic.dto.net.EnumCardChargeCategory;
 
 public class CardsMapper {
 
@@ -16,7 +17,7 @@ public class CardsMapper {
 	public static CardCharge mapOuter(DTOIntCardCharge dtoIntCardCharge) {
 		CardCharge cardCharge = new CardCharge();
 		cardCharge.setAmount(dtoIntCardCharge.getAmount());
-		cardCharge.setCategory(dtoIntCardCharge.getCategory());
+		cardCharge.setCategory(EnumCardChargeCategory.valueOf(dtoIntCardCharge.getCategory()));
 		return cardCharge;
 	}
 

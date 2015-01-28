@@ -70,10 +70,15 @@ public class AccountsMapper extends AbstractBbvaConfigurableMapper implements
 				.byDefault().register();
 
 		// // Map DTOIntAccMovementsResume <-> AccMovementsResume
-		factory.classMap(DTOIntAccMovementsResume.class,
-				AccMovementsResume.class).field("month.mes", "month")
-				.field("balance", "balance").field("income", "income")
-				.field("outcome", "outcome").byDefault().register();
+
+		factory.classMap(DTOIntAccMovementsResume.class, AccMovementsResume.class).field("month", "month")
+				.field("balance", "balance").field("income", "income").field("outcome", "outcome").byDefault()
+				.register();
+
+		// Map DTOIntCheckbook <-> CheckBook
+		factory.classMap(DTOIntCheck.class, Check.class).field("id", "id").field("issueDate", "issueDate")
+				.field("value", "value").field("status", "status").field("modifiedDate", "modifiedDate").byDefault().register();
+
 
 	}
 
@@ -190,6 +195,12 @@ public class AccountsMapper extends AbstractBbvaConfigurableMapper implements
 	}
 
 	@Override
+	public Check map(DTOIntCheck intCheck) {
+		log.info("map- return:Check-parameter:dtoIntExecutive");
+		return map(intCheck, Check.class);
+	}
+
+	@Override
 	public Check mapCheck(DTOIntCheck intCheck) {
 		final Check check = new Check();
 
@@ -229,5 +240,17 @@ public class AccountsMapper extends AbstractBbvaConfigurableMapper implements
 			checkbook.setActualState(EnumCheckbookStatus.SOLICITADO);
 		}
 		return checkbook;
+	}
+
+
+	@Override
+	public DTOIntCheckFilter getDTOIntFilterChecks(String checkId,String accountId) {
+
+		final DTOIntCheckFilter dtoIntCheckFilter = new DTOIntCheckFilter();
+		dtoIntCheckFilter.setCheckId(checkId);
+		dtoIntCheckFilter.setAccountId(accountId);
+
+		return dtoIntCheckFilter;
+
 	}
 }

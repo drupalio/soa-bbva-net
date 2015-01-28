@@ -1,15 +1,39 @@
 package com.bbva.czic.cards.business.dto;
 
+import org.hibernate.validator.constraints.Length;
+
+import javax.validation.constraints.NotNull;
+
 public class DTOIntFilterCards {
 
-	private String chargeDate;
+	@NotNull
+	@Length(max = 20, min = 20)
+	private String productId;
+	@NotNull
+	private String startDate;
+	private String endDate;
 
-	public String getChargeDate() {
-		return chargeDate;
+	public String getProductId() {
+		return productId;
 	}
 
-	public void setChargeDate(String chargeDate) {
-		this.chargeDate = chargeDate;
+	public void setProductId(String productId) {
+		this.productId = productId;
 	}
 
+	public String getStartDate() {
+		return startDate;
+	}
+
+	public void setStartDate(String startDate) {
+		this.startDate = startDate;
+	}
+
+	public String getEndDate() {
+		return endDate;
+	}
+
+	public void setEndDate(String endDate) {
+		this.endDate = endDate;
+	}
 }

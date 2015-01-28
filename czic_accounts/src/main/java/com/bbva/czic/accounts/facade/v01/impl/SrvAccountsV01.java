@@ -14,15 +14,12 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
 
-import com.bbva.czic.accounts.business.dto.DTOIntFilterChecks;
-import com.bbva.czic.accounts.business.dto.DTOIntFilterMovResumes;
+import com.bbva.czic.accounts.business.dto.*;
 import org.apache.cxf.jaxrs.model.wadl.ElementClass;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.bbva.czic.accounts.business.ISrvIntAccounts;
-import com.bbva.czic.accounts.business.dto.DTOIntCheckbook;
-import com.bbva.czic.accounts.business.dto.DTOIntFilterAccount;
 import com.bbva.czic.accounts.dao.AccountsDAO;
 import com.bbva.czic.accounts.facade.v01.ISrvAccountsV01;
 import com.bbva.czic.accounts.facade.v01.mappers.IAccountsMapper;
@@ -217,5 +214,33 @@ public class SrvAccountsV01 implements ISrvAccountsV01,
 		return iAccountsMapper.mapCheckbooks(srvIntAccounts
 				.getCheckbooks(dtointCheckbook));
 	}
+
+	@Override
+	@ApiOperation(value = "Operation to get the details of a check associated with a checkbook for the account associated with a client.", notes = "--", response = Check.class)
+	@ApiResponses(value = {
+			@ApiResponse(code = -1, message = "aliasGCE1"),
+			@ApiResponse(code = -1, message = "aliasGCE2"),
+			@ApiResponse(code = 200, message = "Found Successfully", response = Check.class),
+			@ApiResponse(code = 400, message = "Request Error"),
+			@ApiResponse(code = 409, message = "Functional Error"),
+			@ApiResponse(code = 500, message = "Technical Error")
+	})
+	@GET
+	@ElementClass(response = Check.class)
+	@Path("/{accountId}/checks/{checkId}")
+	@SMC(registryID = "SMCCO1400020", logicalID = "getChecks")
+	public Check getCheck(	@ApiParam(value = "Claim identifier param") @PathParam("accountId") String accountId,
+							  @ApiParam(value = "Claim identifier param") @PathParam("checkId") String checkId) {
+
+		// 1. Validate filter FIQL
+		//	new FiqlValidator(filter).exist().hasGeAndLe("month").validate();
+
+		// 2. Mapping to DTOIntFilter
+		DTOIntCheckFilter dtoIntExecutivesFilter = iAccountsMapper.getDTOIntFilterChecks(checkId,accountId);
+
+		// 3. Invoke SrvIntAccounts and Mapping to canonical DTO
+		return iAccountsMapper.map(srvIntAccounts.getChecks(dtoIntExecutivesFilter));
+	}
+
 
 }

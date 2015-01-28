@@ -12,7 +12,7 @@ public class DTOIntProductFilter {
 	@Length(min = 8, max = 8)
 	private String idCustomer;
 
-	// @Length(min = 2, max = 2)
+	@Length(min = 2, max = 2)
 	private String productType;
 
 	public String getIdCustomer() {

@@ -8,7 +8,7 @@ public class DTOIntAccMovementsResume {
 	private Money income;
 	private Money outcome;
 	private Money balance;
-	private DTOIntEnumMonth month;
+	private String month;
 
 	public DTOIntAccMovementsResume() {
 		// default constructor
@@ -38,11 +38,11 @@ public class DTOIntAccMovementsResume {
 		this.balance = balance;
 	}
 
-	public DTOIntEnumMonth getMonth() {
+	public String getMonth() {
 		return month;
 	}
 
-	public void setMonth(DTOIntEnumMonth month) {
+	public void setMonth(String month) {
 		this.month = month;
 	}
 

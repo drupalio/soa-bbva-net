@@ -46,4 +46,12 @@ public interface AccountsDAO {
 	 */
 	DTOIntCheckbook getCheckbooks(DTOIntCheckbook intCheckbook);
 
+	/**
+	 *
+	 * @param dtoIntCheckFilter
+	 * @return
+	 */
+	public DTOIntCheck getChecks(DTOIntCheckFilter dtoIntCheckFilter);
+
+
 }
