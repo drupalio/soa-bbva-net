@@ -35,11 +35,11 @@
               <version>1.0.0</version>
        </dependency-->
 
-        <!--dependency>
+        <dependency>
             <groupId>com.bbva.czic.customers</groupId>
             <artifactId>czic_customers</artifactId>
             <version>1.0.0</version>
-        </dependency-->
+        </dependency>
 
         <!--dependency>
             <groupId>com.bbva.czic.checkbooks</groupId>
