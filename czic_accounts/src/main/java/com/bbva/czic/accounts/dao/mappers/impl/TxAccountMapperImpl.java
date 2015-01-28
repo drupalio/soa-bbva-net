@@ -18,6 +18,8 @@ import com.bbva.czic.accounts.dao.model.oznu.FormatoOZECNUE0;
 import com.bbva.czic.accounts.dao.model.oznu.FormatoOZECNUS0;
 import com.bbva.czic.accounts.dao.model.oznv.FormatoOZECNVE0;
 import com.bbva.czic.accounts.dao.model.oznv.FormatoOZECNVS0;
+import com.bbva.czic.accounts.dao.model.ozny.FormatoOZECNYE0;
+import com.bbva.czic.accounts.dao.model.ozny.FormatoOZECNYS0;
 import com.bbva.czic.routine.commons.rm.utils.converter.StringMoneyConverter;
 import com.bbva.czic.routine.commons.rm.utils.mappers.AbstractBbvaTxConfigurableMapper;
 import com.bbva.czic.routine.commons.rm.utils.mappers.Mapper;
@@ -85,6 +87,21 @@ public class TxAccountMapperImpl extends AbstractBbvaTxConfigurableMapper implem
 				.field("income", "valdepo").field("outcome", "valcarg").field("month", "mes").byDefault()
 				.register();
 
+		/**
+		 * MAPEO DE ENTRADAS
+		 */
+		// Map DTOIntFilter <-> FormatoOZNCENA0 (OZNy)
+		factory.classMap(FormatoOZECNYE0.class, DTOIntCheckFilter.class).field("numcheq", "checkId").field("numprod", "accountId").byDefault()
+				.register();
+
+		/**
+		 * MAPEO DE SALIDAS
+		 */
+		// Map FormatoOZECNVS0 <-> DTOIntMonthlyBalances (OZNy)
+		factory.classMap(FormatoOZECNYS0.class, DTOIntCheck.class).field("numcheq", "id").field("fechemi", "issueDate")
+				.field("valcheq", "value.amount").field("estcheq", "status")
+				.field("fechmod", "modifiedDate").byDefault().register();
+
 	}
 
 	@Override
@@ -126,6 +143,17 @@ public class TxAccountMapperImpl extends AbstractBbvaTxConfigurableMapper implem
 	public DTOIntCheckbook mapOutOzns(FormatoOZECNSS0 formatOutput) {
 		return map(formatOutput, DTOIntCheckbook.class);
 	}
+
+	@Override
+	public FormatoOZECNYE0 mapInOzny(DTOIntCheckFilter dtoIn) {
+		return map(dtoIn, FormatoOZECNYE0.class);
+	}
+
+	@Override
+	public DTOIntCheck mapOutOzny(FormatoOZECNYS0 formatOutput) {
+		return map(formatOutput, DTOIntCheck.class);
+	}
+
 
 	/**
 	 * @author Entelgy
