@@ -15,7 +15,6 @@ import com.bbva.czic.accounts.business.dto.DTOIntAccMovementsResume;
 import com.bbva.czic.accounts.business.dto.DTOIntAccount;
 import com.bbva.czic.accounts.business.dto.DTOIntBalance;
 import com.bbva.czic.accounts.business.dto.DTOIntCheckbook;
-import com.bbva.czic.accounts.business.dto.DTOIntEnumMonth;
 import com.bbva.czic.accounts.business.dto.DTOIntMonthlyBalances;
 import com.bbva.czic.accounts.facade.v01.mappers.impl.AccountsMapper;
 import com.bbva.czic.dto.net.AccMovementsResume;
@@ -75,9 +74,7 @@ public class AccountsMapperTest {
 		List<MonthlyBalances> listaMonthlyBalance = new ArrayList<MonthlyBalances>();
 
 		DTOIntMonthlyBalances dtoIntMonthlyBalances = new DTOIntMonthlyBalances();
-		DTOIntEnumMonth dtoIntEnumMonth = new DTOIntEnumMonth();
-		dtoIntEnumMonth.setMes("JANUARY");
-		//dtoIntMonthlyBalances.setMonth(dtoIntEnumMonth);
+		dtoIntMonthlyBalances.setMonth("JANUARY");
 		Money money = new Money();
 		money.setAmount(new BigDecimal("100"));
 		dtoIntMonthlyBalances.setBalance(money);
@@ -116,9 +113,7 @@ public class AccountsMapperTest {
 		dtoIntAccMovementsResume.setOutcome(outcome);
 		dtoIntAccMovementsResume.setBalance(balance);
 		dtoIntAccMovementsResume.setIncome(income);
-		DTOIntEnumMonth dtoIntEnumMonth = new DTOIntEnumMonth();
-		dtoIntEnumMonth.setMes("JANUARY");
-		dtoIntAccMovementsResume.setMonth(dtoIntEnumMonth);
+		dtoIntAccMovementsResume.setMonth("JANUARY");
 
 		listaDTOIntAccMovementsResume.add(dtoIntAccMovementsResume);
 		listaDTOIntAccMovementsResume.add(dtoIntAccMovementsResume);
@@ -133,8 +128,8 @@ public class AccountsMapperTest {
 				.getBalance().getAmount());
 		assertEquals(listaDTOIntAccMovementsResume.get(0).getIncome().getAmount(), dtoIntAccMovementsResume.getIncome()
 				.getAmount());
-		assertEquals(listaDTOIntAccMovementsResume.get(0).getMonth().getMes(), dtoIntAccMovementsResume.getMonth()
-				.getMes());
+		assertEquals(listaDTOIntAccMovementsResume.get(0).getMonth(), dtoIntAccMovementsResume.getMonth()
+ 				);
 	}
 
 	/**

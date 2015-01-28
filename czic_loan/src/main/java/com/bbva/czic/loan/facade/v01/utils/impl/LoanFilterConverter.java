@@ -112,10 +112,8 @@ public class LoanFilterConverter{
                 log.error("IllegalArgumentException - The product type is an invalid type - does not exist: " + e.getMessage());
                 throw new BusinessServiceException(EnumError.WRONG_PARAMETERS.getAlias(), filter, e.getMessage());
             }
-        }        
-
+        }
         return dtoIntFilterLoan;
-
     }
 
 }

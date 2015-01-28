@@ -58,7 +58,7 @@ public class AccountsMapper extends AbstractBbvaConfigurableMapper implements IA
 				.field("month", "month").byDefault().register();
 
 		// // Map DTOIntAccMovementsResume <-> AccMovementsResume
-		factory.classMap(DTOIntAccMovementsResume.class, AccMovementsResume.class).field("month.mes", "month")
+		factory.classMap(DTOIntAccMovementsResume.class, AccMovementsResume.class).field("month", "month")
 				.field("balance", "balance").field("income", "income").field("outcome", "outcome").byDefault()
 				.register();
 

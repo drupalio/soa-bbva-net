@@ -1,17 +1,10 @@
 package com.bbva.czic.loan.business.impl;
 
 
-import com.bbva.czic.dto.net.Loan;
-import com.bbva.czic.dto.net.Movement;
-import com.bbva.czic.dto.net.RotaryQuotaMove;
 import com.bbva.czic.loan.business.dto.DTOIntFilterLoan;
 import com.bbva.czic.loan.business.dto.DTOIntMovement;
 import com.bbva.czic.loan.business.dto.DTOIntRotaryQuotaMove;
 
-
-import com.bbva.czic.routine.commons.rm.utils.errors.EnumError;
-
-import com.bbva.czic.routine.commons.rm.utils.validator.DtoValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -39,6 +32,12 @@ public class SrvIntLoan implements ISrvIntLoan {
 	@Resource(name = "loanDao")
 	private LoanDAO loanDao;
 
+	/**
+	 *
+	 * @param dtoIntFilterLoan
+	 * @return
+	 * @throws BusinessServiceException
+	 */
 	@Override
 	public DTOIntLoan getRotaryQuota(final DTOIntFilterLoan dtoIntFilterLoan) throws BusinessServiceException {
 
@@ -54,29 +53,42 @@ public class SrvIntLoan implements ISrvIntLoan {
 		return result;
 	}
 
+	/**
+	 *
+	 * @param dtoIntFilterLoan
+	 * @return
+	 * @throws BusinessServiceException
+	 */
 	@Override
 	public List<DTOIntMovement> listRotaryQuotaMovements(final DTOIntFilterLoan dtoIntFilterLoan) throws BusinessServiceException {
-		DtoValidator.validate(dtoIntFilterLoan);
+		//DtoValidator.validate(dtoIntFilterLoan);
 		log.info(" getRotaryQuota ");
 		// Validar filtro
 
 		final List<DTOIntMovement> result = loanDao.listRotaryQuotaMovements(dtoIntFilterLoan);
 
 		// Mapear del filtro al dto
-		DtoValidator.validate(result);
+		//DtoValidator.validate(result);
 		// Validar el dto de filtrado
 		return result;
 	}
+
+	/**
+	 *
+	 * @param dtoIntFilterLoan
+	 * @return
+	 * @throws BusinessServiceException
+	 */
 	@Override
 	public DTOIntRotaryQuotaMove getRotaryQuotaMovement(final DTOIntFilterLoan dtoIntFilterLoan) throws BusinessServiceException {
-		DtoValidator.validate(dtoIntFilterLoan);
+	//	DtoValidator.validate(dtoIntFilterLoan);
 		log.info(" getRotaryQuota ");
 		// Validar filtro
 
 		final DTOIntRotaryQuotaMove result = loanDao.getRotaryQuotaMovement(dtoIntFilterLoan);
 
 		// Mapear del filtro al dto
-		DtoValidator.validate(result);
+	//	DtoValidator.validate(result);
 		// Validar el dto de filtrado
 		return result;
 	}

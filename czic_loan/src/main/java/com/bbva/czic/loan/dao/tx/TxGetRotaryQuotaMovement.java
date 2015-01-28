@@ -1,20 +1,10 @@
 package com.bbva.czic.loan.dao.tx;
 
 import com.bbva.czic.loan.business.dto.*;
-import com.bbva.czic.loan.dao.mappers.TxMovementMapper;
-import com.bbva.czic.loan.dao.mappers.TxRotaryQuotaMovementMapperMapper;
-import com.bbva.czic.loan.dao.model.ozni.FormatoOZNCENI0;
-import com.bbva.czic.loan.dao.model.ozni.FormatoOZNCSNI0;
-import com.bbva.czic.loan.dao.model.ozni.TransaccionOzni;
-import com.bbva.czic.loan.dao.model.oznj.FormatoOZNCENJ0;
-import com.bbva.czic.loan.dao.model.oznj.FormatoOZNCSNJ0;
-import com.bbva.czic.loan.dao.model.oznj.TransaccionOznj;
-import com.bbva.czic.loan.dao.model.oznk.FormatoOZNCENK0;
-import com.bbva.czic.loan.dao.model.oznk.FormatoOZNCSNK0;
-import com.bbva.czic.loan.dao.model.oznk.TransaccionOznk;
+import com.bbva.czic.loan.dao.mappers.impl.ITxLoanMapper;
+import com.bbva.czic.loan.dao.model.oznk.*;
 import com.bbva.czic.routine.commons.rm.utils.tx.impl.SimpleBbvaTransaction;
 import com.bbva.jee.arq.spring.core.host.InvocadorTransaccion;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
@@ -25,22 +15,37 @@ import javax.annotation.Resource;
 @Component(value = "tx-get-rotary-quota-movement")
 public class TxGetRotaryQuotaMovement extends SimpleBbvaTransaction<DTOIntFilterLoan, FormatoOZNCENK0, DTOIntRotaryQuotaMove, FormatoOZNCSNK0> {
 
-    @Autowired
-    private transient TransaccionOznk transaccionOznk;
+    @Resource(name = "transaccionOznk")
+    private InvocadorTransaccion<PeticionTransaccionOznk, RespuestaTransaccionOznk> transaccionOznk;
 
-    @Resource(name = "tx-rotary-quota-movement-mapper")
-    private TxRotaryQuotaMovementMapperMapper txRotaryQuotaMovementMapperMapper;
+    @Resource(name = "tx-loan-mapper")
+    private ITxLoanMapper iTxLoanMapper;
 
+    /**
+     *
+     * @param dtoIn
+     * @return
+     */
     @Override
     protected FormatoOZNCENK0 mapDtoInToRequestFormat(DTOIntFilterLoan dtoIn) {
-        return txRotaryQuotaMovementMapperMapper.mapInOzni(dtoIn);
+        return iTxLoanMapper.mapInOznk(dtoIn);
     }
 
+    /**
+     *
+     * @param formatOutput
+     * @param dtoIn
+     * @return
+     */
     @Override
     protected DTOIntRotaryQuotaMove mapResponseFormatToDtoOut(FormatoOZNCSNK0 formatOutput, DTOIntFilterLoan dtoIn) {
-        return txRotaryQuotaMovementMapperMapper.mapOutOzni(formatOutput);
+        return iTxLoanMapper.mapOutOznk(formatOutput);
     }
 
+    /**
+     *
+     * @return
+     */
     @Override
     protected InvocadorTransaccion<?, ?> getTransaction() {
         return transaccionOznk;

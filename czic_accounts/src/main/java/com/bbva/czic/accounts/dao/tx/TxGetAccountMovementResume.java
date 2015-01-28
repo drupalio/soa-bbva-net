@@ -3,15 +3,13 @@ package com.bbva.czic.accounts.dao.tx;
 import javax.annotation.Resource;
 
 import com.bbva.czic.accounts.business.dto.DTOIntFilterMovResumes;
+import com.bbva.czic.accounts.dao.model.oznu.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.bbva.czic.accounts.business.dto.DTOIntAccMovementsResume;
 import com.bbva.czic.accounts.business.dto.DTOIntFilterAccount;
 import com.bbva.czic.accounts.dao.mappers.TxAccountMapper;
-import com.bbva.czic.accounts.dao.model.oznu.FormatoOZECNUE0;
-import com.bbva.czic.accounts.dao.model.oznu.FormatoOZECNUS0;
-import com.bbva.czic.accounts.dao.model.oznu.TransaccionOznu;
 import com.bbva.czic.routine.commons.rm.utils.tx.impl.MultiBbvaTransaction;
 import com.bbva.jee.arq.spring.core.host.InvocadorTransaccion;
 
@@ -23,8 +21,8 @@ import com.bbva.jee.arq.spring.core.host.InvocadorTransaccion;
 public class TxGetAccountMovementResume extends
 		MultiBbvaTransaction<DTOIntFilterMovResumes, FormatoOZECNUE0, DTOIntAccMovementsResume, FormatoOZECNUS0> {
 
-	@Autowired
-	private transient TransaccionOznu transaccionOznu;
+	@Resource(name = "transaccionOznu")
+	private transient InvocadorTransaccion<PeticionTransaccionOznu,RespuestaTransaccionOznu> transaccionOznu;
 
 	@Resource(name = "txAccountMapper")
 	private TxAccountMapper txAccountMapper;
