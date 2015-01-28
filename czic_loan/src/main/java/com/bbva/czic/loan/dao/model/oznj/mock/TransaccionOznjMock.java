@@ -65,8 +65,7 @@ public class TransaccionOznjMock implements	InvocadorTransaccion<PeticionTransac
 		return respuesta;
 	}
 	@Override
-	public RespuestaTransaccionOznj invocarCache(
-			PeticionTransaccionOznj peticion) throws ExcepcionTransaccion {
+	public RespuestaTransaccionOznj invocarCache(PeticionTransaccionOznj peticion) throws ExcepcionTransaccion {
 		return null;
 	}
 

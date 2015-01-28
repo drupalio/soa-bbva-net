@@ -2,8 +2,14 @@ package com.bbva.czic.loan.dao.mappers.impl;
 
 import com.bbva.czic.loan.business.dto.DTOIntFilterLoan;
 import com.bbva.czic.loan.business.dto.DTOIntLoan;
+import com.bbva.czic.loan.business.dto.DTOIntMovement;
+import com.bbva.czic.loan.business.dto.DTOIntRotaryQuotaMove;
+import com.bbva.czic.loan.dao.model.ozni.FormatoOZNCENI0;
+import com.bbva.czic.loan.dao.model.ozni.FormatoOZNCSNI0;
 import com.bbva.czic.loan.dao.model.oznj.FormatoOZNCENJ0;
 import com.bbva.czic.loan.dao.model.oznj.FormatoOZNCSNJ0;
+import com.bbva.czic.loan.dao.model.oznk.FormatoOZNCENK0;
+import com.bbva.czic.loan.dao.model.oznk.FormatoOZNCSNK0;
 
 /**
  * Created by Entelgy on 26/01/2015.
@@ -21,5 +27,35 @@ public interface ITxLoanMapper {
      * @return
      */
     DTOIntLoan mapOutOznj(FormatoOZNCSNJ0 formatOutput);
+
+    /**
+     *
+     * @param dtoIn
+     * @return
+     */
+    FormatoOZNCENK0 mapInOznk(DTOIntFilterLoan dtoIn);
+
+    /**
+     *
+     * @param formatOutput
+     * @return
+     */
+    DTOIntRotaryQuotaMove mapOutOznk(FormatoOZNCSNK0 formatOutput);
+
+    /**
+     *
+     * @param dtoIn
+     * @return
+     */
+    FormatoOZNCENI0 mapInOzni(DTOIntFilterLoan dtoIn);
+
+    /**
+     *
+     * @param formatOutput
+     * @return
+     */
+    DTOIntMovement mapOutOzni(FormatoOZNCSNI0 formatOutput);
+
+
 
 }

@@ -56,27 +56,27 @@ public class SrvIntLoan implements ISrvIntLoan {
 
 	@Override
 	public List<DTOIntMovement> listRotaryQuotaMovements(final DTOIntFilterLoan dtoIntFilterLoan) throws BusinessServiceException {
-		DtoValidator.validate(dtoIntFilterLoan);
+		//DtoValidator.validate(dtoIntFilterLoan);
 		log.info(" getRotaryQuota ");
 		// Validar filtro
 
 		final List<DTOIntMovement> result = loanDao.listRotaryQuotaMovements(dtoIntFilterLoan);
 
 		// Mapear del filtro al dto
-		DtoValidator.validate(result);
+		//DtoValidator.validate(result);
 		// Validar el dto de filtrado
 		return result;
 	}
 	@Override
 	public DTOIntRotaryQuotaMove getRotaryQuotaMovement(final DTOIntFilterLoan dtoIntFilterLoan) throws BusinessServiceException {
-		DtoValidator.validate(dtoIntFilterLoan);
+	//	DtoValidator.validate(dtoIntFilterLoan);
 		log.info(" getRotaryQuota ");
 		// Validar filtro
 
 		final DTOIntRotaryQuotaMove result = loanDao.getRotaryQuotaMovement(dtoIntFilterLoan);
 
 		// Mapear del filtro al dto
-		DtoValidator.validate(result);
+	//	DtoValidator.validate(result);
 		// Validar el dto de filtrado
 		return result;
 	}

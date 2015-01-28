@@ -3,11 +3,17 @@ package com.bbva.czic.loan.dao.mappers;
 import com.bbva.czic.loan.business.dto.DTOIntFilterLoan;
 
 import com.bbva.czic.loan.business.dto.DTOIntLoan;
+import com.bbva.czic.loan.business.dto.DTOIntMovement;
+import com.bbva.czic.loan.business.dto.DTOIntRotaryQuotaMove;
 import com.bbva.czic.loan.dao.mappers.impl.ITxLoanMapper;
 
+import com.bbva.czic.loan.dao.model.ozni.FormatoOZNCENI0;
+import com.bbva.czic.loan.dao.model.ozni.FormatoOZNCSNI0;
 import com.bbva.czic.loan.dao.model.oznj.FormatoOZNCENJ0;
 
 import com.bbva.czic.loan.dao.model.oznj.FormatoOZNCSNJ0;
+import com.bbva.czic.loan.dao.model.oznk.FormatoOZNCENK0;
+import com.bbva.czic.loan.dao.model.oznk.FormatoOZNCSNK0;
 import com.bbva.czic.routine.commons.rm.utils.mappers.AbstractBbvaTxConfigurableMapper;
 import com.bbva.czic.routine.mapper.MapperFactory;
 import com.bbva.czic.routine.mapper.factory.MoneyFactory;
@@ -52,16 +58,88 @@ public class TxLoanMapper extends AbstractBbvaTxConfigurableMapper implements IT
 				.field("estadot", "status")
 				.byDefault().register();
 
+		// Map  FormatoOZNCSNK0 DTOIntRotaryQuotaMove
+		factory.classMap(FormatoOZNCSNK0.class, DTOIntRotaryQuotaMove.class)
+				.field("numemov","id")
+				.field("fechaop", "transactionDate")
+				.field("resto","concept")
+				.field("importe", "value")
+				.field("balance","balance")
+				.field("descop", "operation")
+						//.field("coutaf","")
+						//.field("coutat","")
+				.field("estado", "status")
+				.byDefault().register();
+
+		// Map  FormatoOZNCSNI0 DTOIntMovement
+		factory.classMap(FormatoOZNCSNI0.class, DTOIntMovement.class)
+				.field("numeope","id")
+				.field("fechaop", "transactionDate")
+				.field("resto","concept")
+				.field("valorop", "value")
+				.field("balance","balance")
+				.field("tipope", "operation")
+				.byDefault().register();
+
 	}
 
-
-		@Override
+	/**
+	 *
+	 * @param dtoIn
+	 * @return
+	 */
+	@Override
 	public FormatoOZNCENJ0 mapInOznj(DTOIntFilterLoan dtoIn) {
 		return map(dtoIn, FormatoOZNCENJ0.class);
 	}
 
+	/**
+	 *
+	 * @param formatOutput
+	 * @return
+	 */
 	@Override
 	public DTOIntLoan mapOutOznj(FormatoOZNCSNJ0 formatOutput) {
 		return map(formatOutput, DTOIntLoan.class);
+	}
+
+	/**
+	 *
+	 * @param dtoIn
+	 * @return
+	 */
+	@Override
+	public FormatoOZNCENK0 mapInOznk(DTOIntFilterLoan dtoIn) {
+		return map(dtoIn, FormatoOZNCENK0.class);
+	}
+
+	/**
+	 *
+	 * @param formatOutput
+	 * @return
+	 */
+	@Override
+	public DTOIntRotaryQuotaMove mapOutOznk(FormatoOZNCSNK0 formatOutput) {
+		return map(formatOutput, DTOIntRotaryQuotaMove.class);
+	}
+
+	/**
+	 *
+	 * @param dtoIn
+	 * @return
+	 */
+	@Override
+	public FormatoOZNCENI0 mapInOzni(DTOIntFilterLoan dtoIn) {
+		return map(dtoIn, FormatoOZNCENI0.class);
+	}
+
+	/**
+	 *
+	 * @param formatOutput
+	 * @return
+	 */
+	@Override
+	public DTOIntMovement mapOutOzni(FormatoOZNCSNI0 formatOutput) {
+		return map(formatOutput, DTOIntMovement.class);
 	}
 }
