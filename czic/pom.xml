@@ -503,10 +503,10 @@
 					</dependency>
 				</dependencies>
 			</plugin>
-			<plugin> <groupId>org.apache.maven.plugins</groupId> <artifactId>maven-site-plugin</artifactId>
+			<!--<plugin> <groupId>org.apache.maven.plugins</groupId> <artifactId>maven-site-plugin</artifactId>
 				<version>${maven-site-plugin.version}</version> <configuration> <reportPlugins/>
 				</configuration> <executions> <execution> <id>crearJar</id> <phase>compile</phase>
-				<goals> <goal>jar</goal> </goals> </execution> </executions> </plugin >
+				<goals> <goal>jar</goal> </goals> </execution> </executions> </plugin >-->
 		</plugins>
 		<!-- Versiones de plugins de Maven para Frontend Spring -->
 		<pluginManagement>
