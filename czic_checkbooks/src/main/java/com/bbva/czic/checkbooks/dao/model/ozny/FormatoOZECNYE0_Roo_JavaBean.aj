@@ -7,6 +7,14 @@ import java.lang.String;
 
 privileged aspect FormatoOZECNYE0_Roo_JavaBean {
     
+    public String FormatoOZECNYE0.getNumprod() {
+        return this.numprod;
+    }
+    
+    public void FormatoOZECNYE0.setNumprod(String numprod) {
+        this.numprod = numprod;
+    }
+    
     public String FormatoOZECNYE0.getNumcheq() {
         return this.numcheq;
     }

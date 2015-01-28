@@ -6,6 +6,6 @@ import com.bbva.czic.dto.net.Check;
 
 public interface ISrvCheckbooksV01 {
 
-	Check getCheck(String checkId, String filter);
+	Check getCheck(String checkId,String accountId);
 
 }
