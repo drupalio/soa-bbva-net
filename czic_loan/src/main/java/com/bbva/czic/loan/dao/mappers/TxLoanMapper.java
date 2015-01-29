@@ -34,7 +34,7 @@ public class TxLoanMapper extends AbstractBbvaTxConfigurableMapper implements IT
 
 		super.configure(factory);
 
-		/*/ Map  FormatoOZNCENJ0 DTOIntLoan
+		// Map  FormatoOZNCENJ0 DTOIntLoan
 		factory.classMap(FormatoOZNCENJ0.class, DTOIntLoan.class)
 				.field("nomtarj", "id").byDefault().register();
 
@@ -43,7 +43,7 @@ public class TxLoanMapper extends AbstractBbvaTxConfigurableMapper implements IT
 				.field("nomtarj", "idLoan")
 				.field("nommovi", "idMovement")
 				.byDefault().register();
-*/
+
 		// Map  FormatoOZNCSNJ0 DTOIntLoan
 		factory.classMap(FormatoOZNCSNJ0.class, DTOIntLoan.class)
 				.field("numcont", "id")

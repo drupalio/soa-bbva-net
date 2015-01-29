@@ -45,11 +45,9 @@ import java.util.List;
 @Api(value = "/loan/V01", description = "SN loan")
 @Produces({ MediaType.APPLICATION_JSON })
 @Service
-public class SrvLoanV01 implements ISrvLoanV01,
-		com.bbva.jee.arq.spring.core.servicing.utils.ContextAware {
+public class SrvLoanV01 implements ISrvLoanV01,	com.bbva.jee.arq.spring.core.servicing.utils.ContextAware {
 
-		private static I18nLog log = I18nLogFactory.getLogI18n(SrvLoanV01.class,
-			"META-INF/spring/i18n/log/mensajesLog");
+	private static I18nLog log = I18nLogFactory.getLogI18n(SrvLoanV01.class,"META-INF/spring/i18n/log/mensajesLog");
 
 	public HttpHeaders httpHeaders;
 
