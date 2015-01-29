@@ -206,6 +206,10 @@ public class SrvAccountsV01 implements ISrvAccountsV01,
 			throw new BusinessServiceException(
 					EnumError.WRONG_PARAMETERS.getAlias());
 		}
+		if (checkbookId == null || checkbookId.trim().isEmpty()) {
+			throw new BusinessServiceException(
+					EnumError.WRONG_PARAMETERS.getAlias());
+		}
 		// 2. Mapping to DTOIntCheckbook
 		final DTOIntCheckbook dtointCheckbook = iAccountsMapper
 				.getDtoIntCheckbook(accountId, checkbookId);
