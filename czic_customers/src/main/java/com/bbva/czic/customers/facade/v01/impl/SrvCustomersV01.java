@@ -13,7 +13,8 @@ import javax.ws.rs.core.HttpHeaders;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.UriInfo;
 
-import com.bbva.czic.customers.business.dto.DTOIntFilterCustomerResumes;
+import com.bbva.czic.customers.business.dto.DTOIntAccMovementsResume;
+import com.bbva.czic.customers.business.dto.DTOIntAccMovementsResumesFilter;
 import com.bbva.czic.customers.facade.v01.mappers.ICustomersMapper;
 import org.apache.cxf.jaxrs.model.wadl.ElementClass;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -118,7 +119,7 @@ public class SrvCustomersV01 implements ISrvCustomersV01, com.bbva.jee.arq.sprin
 	@GET
 	@ElementClass(response = List.class)
 	@Path("/{customerId}/accounts/movementsResume")
-	@SMC(registryID = "SMCCO1400007", logicalID = "getlistAccountsMovementsResume")
+	@SMC(registryID = "SMCCO1400007", logicalID = "getListAccountsMovementsResume")
 	public List<AccMovementsResume> listAccountsMovementsResume(
 			@ApiParam(value = "Claim identifier param") @PathParam("customerId") String customerId,
 			@ApiParam(value = "filter param") @QueryParam("$filter") String filter) {
@@ -129,11 +130,12 @@ public class SrvCustomersV01 implements ISrvCustomersV01, com.bbva.jee.arq.sprin
 		new FiqlValidator(filter).exist().hasGeAndLe("month").validate();
 
 		// 2. Mapping to DTOIntFilter
-		final DTOIntFilterCustomerResumes filterCustomerResumes = customerMapper.getDTOIntMovementResumesFilter(customerId, filter);
+		final DTOIntAccMovementsResumesFilter filterCustomerResumes = customerMapper.getDTOIntMovementResumesFilter(customerId, filter);
 
 		// 3. Invoke SrvIntCustomers and Mapping to canonical DTO
-		return srvIntCustomers.getlistAccountsMovementsResume(customerId,
-				filterConverter.toAccountMovementFilter(filter));
+		List<DTOIntAccMovementsResume> accMovementsResumes = srvIntCustomers.getListAccountsMovementsResume(filterCustomerResumes);
+
+		return customerMapper.map(accMovementsResumes);
 	}
 
 	@Override

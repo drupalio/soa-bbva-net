@@ -1,5 +1,10 @@
 package com.bbva.czic.customers.dao.mappers.impl;
 
+import com.bbva.czic.customers.business.dto.DTOIntAccMovementsResume;
+import com.bbva.czic.customers.business.dto.DTOIntAccMovementsResumesFilter;
+import com.bbva.czic.customers.dao.model.oznq.FormatoOZECNQE0;
+import com.bbva.czic.customers.dao.model.oznq.FormatoOZECNQS0;
+import com.bbva.czic.routine.commons.rm.utils.mappers.AbstractBbvaTxConfigurableMapper;
 import org.springframework.stereotype.Component;
 
 import com.bbva.czic.customers.business.dto.DTOIntCustomer;
@@ -11,10 +16,11 @@ import com.bbva.czic.routine.mapper.MapperFactory;
 import com.bbva.czic.routine.mapper.impl.ConfigurableMapper;
 
 @Component("txCustomerMapper")
-public class TxCustomerMapper extends ConfigurableMapper implements ITxCustomerMapper {
+public class TxCustomerMapper extends AbstractBbvaTxConfigurableMapper implements ITxCustomerMapper {
 
 	@Override
 	protected void configure(MapperFactory factory) {
+		super.configure(factory);
 
 		/**
 		 * Convert HOST FORMAT (+EEEEEEEEDD) to COP Money
@@ -24,18 +30,37 @@ public class TxCustomerMapper extends ConfigurableMapper implements ITxCustomerM
 		/**
 		 * MAPEO DE ENTRADAS
 		 */
-		// Map customerId <-> FormatoOZNCENB0 (OZNB)
+		// map customerId <-> FormatoOZNCENB0 (OZNB)
 //		factory.classMap(String.class, FormatoOZNCENB0.class).field("customerId", "numprod").byDefault()
 //				.register();
 
 		/**
 		 * MAPEO DE SALIDAS
 		 */
-		// Map FormatoOZECNBS0 <-> DTOIntCustomer (OZNB)
-		factory.classMap(DTOIntCustomer.class, FormatoOZNCSNB0.class).field("id", "numclie").field("name", "nomclie")
-		.field("stratum", "estrato").field("residenceYears", "anosvda").field("homeMembers", "nropnas").field("lastConnectionTime", "ultconx").byDefault().register();
+		// map FormatoOZECNBS0 <-> DTOIntCustomer (OZNB)
+		factory.classMap(DTOIntCustomer.class, FormatoOZNCSNB0.class)
+				.field("id", "numclie")
+				.field("name", "nomclie")
+				.field("stratum", "estrato")
+				.field("residenceYears", "anosvda")
+				.field("homeMembers", "nropnas")
+				.field("lastConnectionTime", "ultconx")
+				.byDefault().register();
 
+		// map DTOIntAccMovementsResumesFilter <-> FormatoOZECNQE0
+		factory.classMap(DTOIntAccMovementsResumesFilter.class, FormatoOZECNQE0.class)
+				.field("customerId", "idusuar")
+				.field("startDate", "fechain")
+				.field("endDate", "fechafi")
+				.byDefault().register();
 
+		// map FormatoOZECNQS0 <-> DTOIntAccMovementsResume
+		factory.classMap(FormatoOZECNQS0.class, DTOIntAccMovementsResume.class)
+				.field("valdepo", "income")
+				.field("valcarg", "outcome")
+				.field("saltota", "balance")
+				.field("mes", "month")
+				.byDefault().register();
 	}
 	
 	@Override
@@ -49,122 +74,12 @@ public class TxCustomerMapper extends ConfigurableMapper implements ITxCustomerM
 	}
 
 	@Override
-	protected void configure(MapperFactory factory) {
-		super.configure(factory);
+	public FormatoOZECNQE0 mapInOznq(DTOIntAccMovementsResumesFilter accMovementsResumesFilter) {
+		return map(accMovementsResumesFilter, FormatoOZECNQE0.class);
 	}
-
 
 	@Override
-	public DTOIntCardCharge map(final FormatoOZECNPS0 formatoSalida) {
-		DTOIntCardCharge dto = new DTOIntCardCharge();
-		dto.setAmount(UtilsConverter.getMoneyDTO(formatoSalida.getValcate()));
-		dto.setCategory(formatoSalida.getCategor());
-		return dto;
+	public DTOIntAccMovementsResume mapOutOznq(FormatoOZECNQS0 formatoSalida) {
+		return map(formatoSalida, DTOIntAccMovementsResume.class);
 	}
-
-
-	@Override
-	public AccMovementsResume map(final DTOIntAccMovementsResume item) {
-		AccMovementsResume resume = new AccMovementsResume();
-		resume.setBalance(item.getBalance());
-		resume.setIncome(item.getIncome());
-		Calendar cal = Calendar.getInstance();
-		cal.setTime(item.getMonth());
-		resume.setMonth(EnumMonth.getByCode("" + cal.get(Calendar.MONTH)));
-		resume.setOutcome(item.getOutcome());
-		return resume;
-	}
-
-
-	@Override
-	public DTOIntAccMovementsResume map(final FormatoOZECNQS0 formatoSalida) {
-		DTOIntAccMovementsResume resume = new DTOIntAccMovementsResume();
-		resume.setBalance(UtilsConverter.getMoneyDTO(formatoSalida.getSaltota()));
-		resume.setOutcome(UtilsConverter.getMoneyDTO(formatoSalida.getValcarg()));
-		resume.setIncome(UtilsConverter.getMoneyDTO(formatoSalida.getValdepo()));
-		resume.setMonth(DTOIntEnumMonth.getBycode(formatoSalida.getMes()));
-		return resume;
-	}
-
-
-	@Override
-	public CardCharge map(DTOIntCardCharge item) {
-		CardCharge cardCharge  = new CardCharge();
-		cardCharge.setAmount(item.getAmount());
-		cardCharge.setCategory(EnumCardChargeCategory.valueOf(item.getCategory()));
-		return cardCharge;
-	}
-
-
-	@Override
-	public Customer map(DTOIntCustomer item) {
-		Customer customer = new Customer();
-		customer.setId(item.getId());
-		customer.setName(item.getName());
-		customer.setUsername(item.getUsername());
-		customer.setDocument(item.getDocument());
-		customer.setContactInfo(item.getEmails());
-		customer.setDwelingType(item.getDwelingType());
-		customer.setHomeLocation(item.getHomeLocation());
-		customer.setHomeMembers(item.getHomeMembers());
-		customer.setName(item.getName());
-		customer.setOfficeLocation(item.getOfficeLocation());
-		customer.setResidenceYears(item.getResidenceYears());
-		customer.setStratum(item.getStratum());
-		return customer;
-	}
-
-
-	public static DTOIntCustomer mapToOuter(FormatoOZNCSNB0 formatoSalida) {
-		DTOIntCustomer customer = new DTOIntCustomer();
-
-//		Entidad contact info
-		ContactInfo contacto = new ContactInfo();
-		List<Email> emails = new ArrayList<Email>();
-		List<PhoneNumber> phones = new ArrayList<PhoneNumber>();
-		Email email = new Email();
-		email.setActive(true);
-		email.setAddress(formatoSalida.getCorreo());
-		email.setPrimary(true);
-		email.setSource(EnumContactSourceType.WEB);
-		emails.add(email);
-		contacto.setEmails(emails);
-		contacto.setPhoneNumbers(phones);
-
-//		Entidad place para ubicacion hogar
-		Place home = new Place();
-		home.setCityName(formatoSalida.getCiudvia());
-		home.setStateName(formatoSalida.getDepavia());
-		home.setCountryName(formatoSalida.getPaisvia());
-		home.setPostalAddress(formatoSalida.getDescvia());
-
-//		Entidad place para ubicacion oficina
-		Place office = new Place();
-		office.setCityName(formatoSalida.getCiudofi());
-		office.setStateName(formatoSalida.getDepaofi());
-		office.setCountryName(formatoSalida.getPaisofi());
-		office.setPostalAddress(formatoSalida.getDescofi());
-
-//		Entidad de retorno customer
-		customer.setId(formatoSalida.getNumclie());
-		customer.setName(formatoSalida.getNomclie());
-		try {
-			customer.setSegment(EnumSegmentType.valueOf(formatoSalida.getSegment()));
-		} catch (IllegalArgumentException e) {
-			customer.setSegment(EnumSegmentType.OTRO);
-		}
-		customer.setEmails(contacto);
-		customer.setHomeLocation(home);
-		customer.setStratum(Integer.parseInt(formatoSalida.getEstrato()));
-		customer.setResidenceYears(Integer.parseInt(formatoSalida.getAnosvda()));
-		customer.setHomeMembers(Integer.parseInt(formatoSalida.getNropnas()));
-		try {
-			customer.setDwelingType(EnumDwelingType.valueOf(formatoSalida.getTpovvda()));
-		} catch (IllegalArgumentException e) {
-			customer.setDwelingType(EnumDwelingType.VALIDAR);
-		}
-		customer.setOfficeLocation(office);
-		return customer;
-	}
-
 }

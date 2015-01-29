@@ -1,34 +1,18 @@
 package com.bbva.czic.customers.facade.v01.utils.converters;
 
-import com.bbva.czic.customers.business.dto.DTOIntCardCharge;
-import com.bbva.czic.customers.business.dto.DTOIntFilterCustomerResumes;
+import com.bbva.czic.customers.business.dto.DTOIntAccMovementsResumesFilter;
 import com.bbva.czic.customers.facade.v01.utils.converters.impl.CustResumesFilterConverter;
 import com.bbva.jee.arq.spring.core.servicing.gce.BusinessServiceException;
 import com.bbva.jee.arq.spring.core.servicing.test.BusinessServiceTestContextLoader;
-import com.bbva.jee.arq.spring.core.servicing.utils.BusinessServicesToolKit;
-import org.apache.cxf.jaxrs.ext.search.ConditionType;
-import org.apache.cxf.jaxrs.ext.search.PrimitiveStatement;
-import org.apache.cxf.jaxrs.ext.search.SearchCondition;
-import org.apache.cxf.jaxrs.ext.search.SearchParseException;
-import org.apache.cxf.jaxrs.ext.search.fiql.FiqlParser;
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.TestExecutionListeners;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.support.DependencyInjectionTestExecutionListener;
 
 import javax.annotation.Resource;
-import java.lang.reflect.Type;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.List;
-import static org.mockito.Mockito.*;
+
 import static org.junit.Assert.*;
 
 /**
@@ -53,7 +37,7 @@ public class CustResumesFilterConverterTest {
         //Setup expectation
 
         // SUT execution
-        DTOIntFilterCustomerResumes resumeFilter = converter.
+        DTOIntAccMovementsResumesFilter resumeFilter = converter.
                 toCardChargeFilter("(chargeDate=ge=2014-12-24;chargeDate=le=2015-01-10)");
 
         //Validation
@@ -67,7 +51,7 @@ public class CustResumesFilterConverterTest {
         //Setup expectation
 
         // SUT execution
-        DTOIntFilterCustomerResumes resumeFilter = converter.
+        DTOIntAccMovementsResumesFilter resumeFilter = converter.
                 toCardChargeFilter("(chargeDate=ge=2014/12/24;chargeDate=le=2015/01/10)");
     }
 
@@ -78,7 +62,7 @@ public class CustResumesFilterConverterTest {
         //Setup expectation
 
         // SUT execution
-        DTOIntFilterCustomerResumes resumeFilter = converter.
+        DTOIntAccMovementsResumesFilter resumeFilter = converter.
                 toCardChargeFilter("(chargeDate=le=2015-01-10)");
     }
 
@@ -89,7 +73,7 @@ public class CustResumesFilterConverterTest {
         //Setup expectation
 
         // SUT execution
-        DTOIntFilterCustomerResumes resumeFilter = converter.
+        DTOIntAccMovementsResumesFilter resumeFilter = converter.
                 toCardChargeFilter("(chargeDate=ge=2014-12-24)");
 
         //Validation

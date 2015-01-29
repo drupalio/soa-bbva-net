@@ -8,14 +8,14 @@ import java.util.Date;
  * @author Sebastian Gamba - Entelgy Col. 
  * @since 11/01/2015
  */
-public class DTOIntFilterCustomerResumes {
+public class DTOIntAccMovementsResumesFilter {
 
 	@NotNull
 	private String customerId;
 	private Date startDate;
 	private Date endDate;
 	
-	public DTOIntFilterCustomerResumes(){
+	public DTOIntAccMovementsResumesFilter(){
 	}
 	
 	public String getCustomerId() {

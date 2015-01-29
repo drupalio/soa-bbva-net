@@ -1,6 +1,6 @@
 package com.bbva.czic.customers.facade.v01.utils.converters;
 
-import com.bbva.czic.customers.business.dto.DTOIntFilterCustomerResumes;
+import com.bbva.czic.customers.business.dto.DTOIntAccMovementsResumesFilter;
 import com.bbva.jee.arq.spring.core.servicing.gce.BusinessServiceException;
 
 /**
@@ -17,7 +17,7 @@ public interface IFilterConverter {
 	 * @return
 	 * @throws Exception
 	 */
-	DTOIntFilterCustomerResumes toCardChargeFilter(String filter) throws BusinessServiceException;
+	DTOIntAccMovementsResumesFilter toCardChargeFilter(String filter) throws BusinessServiceException;
 
-	DTOIntFilterCustomerResumes toAccountMovementFilter(String filter) throws BusinessServiceException;
+	DTOIntAccMovementsResumesFilter toAccountMovementFilter(String filter) throws BusinessServiceException;
 }
