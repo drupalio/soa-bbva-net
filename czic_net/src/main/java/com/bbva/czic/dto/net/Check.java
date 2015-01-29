@@ -18,19 +18,15 @@ public class Check implements Serializable {
 	public final static long serialVersionUID = 1L;
 	@ApiModelProperty(value = "Identificador del cheque", required = true)
 	private String id;
-	@XmlSchemaType(name = "dateTime")
 	@ApiModelProperty(value = "description", required = true)
-	@Past
-	private Calendar issueDate;
+	private String issueDate;
 	@XmlElement(type = Money.class)
 	@ApiModelProperty(value = "Valor del cheque", required = true)
 	private Money value;
 	@ApiModelProperty(value = "Estado actual del cheque", required = true)
 	private String status;
-	@XmlSchemaType(name = "dateTime")
 	@ApiModelProperty(value = "Fecha de modificacion", required = true)
-	@Past
-	private Calendar modifiedDate;
+	private String modifiedDate;
 
 	public Check() {
 		// default constructor
@@ -42,14 +38,6 @@ public class Check implements Serializable {
 
 	public void setId(String id) {
 		this.id = id;
-	}
-
-	public Calendar getIssueDate() {
-		return issueDate;
-	}
-
-	public void setIssueDate(Calendar issueDate) {
-		this.issueDate = issueDate;
 	}
 
 	public Money getValue() {
@@ -68,11 +56,19 @@ public class Check implements Serializable {
 		this.status = status;
 	}
 
-	public Calendar getModifiedDate() {
+	public String getIssueDate() {
+		return issueDate;
+	}
+
+	public void setIssueDate(String issueDate) {
+		this.issueDate = issueDate;
+	}
+
+	public String getModifiedDate() {
 		return modifiedDate;
 	}
 
-	public void setModifiedDate(Calendar modifiedDate) {
+	public void setModifiedDate(String modifiedDate) {
 		this.modifiedDate = modifiedDate;
 	}
 }
