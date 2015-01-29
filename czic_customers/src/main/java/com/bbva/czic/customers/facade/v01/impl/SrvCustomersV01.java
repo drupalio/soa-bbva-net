@@ -3,12 +3,7 @@ package com.bbva.czic.customers.facade.v01.impl;
 import java.util.List;
 
 import javax.annotation.Resource;
-import javax.ws.rs.DefaultValue;
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
-import javax.ws.rs.Produces;
-import javax.ws.rs.QueryParam;
+import javax.ws.rs.*;
 import javax.ws.rs.core.HttpHeaders;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.UriInfo;
@@ -141,10 +136,29 @@ public class SrvCustomersV01 implements ISrvCustomersV01, com.bbva.jee.arq.sprin
 	@GET
 	@ElementClass(response = Customer.class)
 	@Path("/{customerId}")
-	@SMC(registryID = "SMCCO1400023", logicalID = "getCustomer")
+	@SMC(registryID = "SMCCO1500010", logicalID = "getCustomer")
 	public Customer getCustomer(@ApiParam(value = "Claim identifier param") @PathParam("customerId") String customerId) {
 
 		log.info("Into getCustomer...");
+
+		// 1. Invoke SrvIntCustomers and Mapping to canonical DTO
+		return srvIntCustomers.getCustomer(customerId);
+	}
+
+	@Override
+	@ApiOperation(value = "Validates customer information", notes = "Customer Information", response = List.class)
+	@ApiResponses(value = { @ApiResponse(code = -1, message = "aliasGCE1"),
+			@ApiResponse(code = -1, message = "aliasGCE2"),
+			@ApiResponse(code = 200, message = "Found Sucessfully", response = Customer.class),
+			@ApiResponse(code = 400, message = "Wrong parameters"),
+			@ApiResponse(code = 409, message = "Data not found"), @ApiResponse(code = 500, message = "Technical Error") })
+	@POST
+	@ElementClass(response = Customer.class)
+	@Path("/customerChannels/{channelId}/verifyCustomer")
+	@SMC(registryID = "SMCCO1400023", logicalID = "verifyCustomer")
+	public Customer verifyCustomer(@ApiParam(value = "Channel identifier param") @PathParam("channelId") String channelId) {
+
+		log.info("Into verifyCustomer...");
 
 		// 1. Invoke SrvIntCustomers and Mapping to canonical DTO
 		return srvIntCustomers.getCustomer(customerId);

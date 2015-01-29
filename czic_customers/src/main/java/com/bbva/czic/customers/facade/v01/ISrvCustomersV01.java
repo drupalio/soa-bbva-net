@@ -5,7 +5,17 @@ import java.util.List;
 import com.bbva.czic.dto.net.AccMovementsResume;
 import com.bbva.czic.dto.net.CardCharge;
 import com.bbva.czic.dto.net.Customer;
+import com.bbva.jee.arq.spring.core.servicing.annotations.SMC;
 import com.bbva.jee.arq.spring.core.servicing.gce.BusinessServiceException;
+import com.wordnik.swagger.annotations.ApiOperation;
+import com.wordnik.swagger.annotations.ApiParam;
+import com.wordnik.swagger.annotations.ApiResponse;
+import com.wordnik.swagger.annotations.ApiResponses;
+import org.apache.cxf.jaxrs.model.wadl.ElementClass;
+
+import javax.ws.rs.GET;
+import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 
 
 public interface ISrvCustomersV01 {
@@ -13,5 +23,7 @@ public interface ISrvCustomersV01 {
 
  	public List<AccMovementsResume> listAccountsMovementsResume( String customerId, String filter);
 
- 	public Customer getCustomer(String customerId);
+	Customer verifyCustomer(String channelId);
+
+	public Customer getCustomer(String customerId);
 }
