@@ -174,7 +174,7 @@ public class SrvAccountsV01 implements ISrvAccountsV01,
 
 		// Validacion del filtro
 		new FiqlValidator(filter).exist().hasGeAndLeDate("issueDate")
-				.hasEq("status").validate();
+				.hasEq("status").validateAny();
 
 		// Mapeo del filtro a DTO
 		DTOIntFilterChecks dtoIntFilterChecks = iAccountsMapper

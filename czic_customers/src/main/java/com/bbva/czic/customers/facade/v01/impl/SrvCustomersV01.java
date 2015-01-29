@@ -15,7 +15,7 @@ import javax.ws.rs.core.UriInfo;
 
 import com.bbva.czic.customers.business.dto.DTOIntAccMovementsResume;
 import com.bbva.czic.customers.business.dto.DTOIntAccMovementsResumesFilter;
-import com.bbva.czic.customers.facade.v01.mappers.ICustomersMapper;
+import com.bbva.czic.customers.facade.v01.mappers.ICustomerMapper;
 import org.apache.cxf.jaxrs.model.wadl.ElementClass;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -61,7 +61,7 @@ public class SrvCustomersV01 implements ISrvCustomersV01, com.bbva.jee.arq.sprin
 	IFilterConverter filterConverter;
 
 	@Resource(name = "customerMapper")
-	private ICustomersMapper customerMapper;
+	private ICustomerMapper customerMapper;
 
 	@Autowired
 	ISrvIntCustomers srvIntCustomers;

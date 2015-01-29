@@ -110,7 +110,7 @@ public class SrvProductsV01 implements ISrvProductsV01,
 	@Path("/{productId}/listExtracts")
 	@SMC(registryID = "Pending", logicalID = "listExtracts")
 	public List<Extract> listExtracts(
-			@ApiParam(value = "identifier param") @PathParam("id") String productId,
+			@ApiParam(value = "identifier param") @PathParam("productId") String productId,
 			@ApiParam(value = "filter param") @DefaultValue("null") @QueryParam("$filter") String filter,
 			@ApiParam(value = "fields param") @DefaultValue("null") @QueryParam("paginationKey") Integer paginationKey,
 			@ApiParam(value = "expands param") @DefaultValue("null") @QueryParam("pageSize") Integer pageSize) {

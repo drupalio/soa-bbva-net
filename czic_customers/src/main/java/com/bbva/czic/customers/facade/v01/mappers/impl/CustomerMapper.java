@@ -2,7 +2,7 @@ package com.bbva.czic.customers.facade.v01.mappers.impl;
 
 import com.bbva.czic.customers.business.dto.DTOIntAccMovementsResume;
 import com.bbva.czic.customers.business.dto.DTOIntAccMovementsResumesFilter;
-import com.bbva.czic.customers.facade.v01.mappers.ICustomersMapper;
+import com.bbva.czic.customers.facade.v01.mappers.ICustomerMapper;
 import com.bbva.czic.dto.net.AccMovementsResume;
 import com.bbva.czic.routine.commons.rm.utils.EDateFormat;
 import com.bbva.czic.routine.commons.rm.utils.errors.EnumError;
@@ -20,7 +20,7 @@ import java.util.List;
  * @author Entelgy Colombia.
  */
 @Component("customerMapper")
-public class CustomerMapper extends AbstractBbvaConfigurableMapper implements ICustomersMapper {
+public class CustomerMapper extends AbstractBbvaConfigurableMapper implements ICustomerMapper {
 
     @Override
     protected void configure(MapperFactory factory) {

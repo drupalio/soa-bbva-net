@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 
 import javax.annotation.Resource;
 
+import com.bbva.jee.arq.spring.core.servicing.test.MockInvocationContextTestExecutionListener;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -14,7 +15,6 @@ import org.springframework.test.context.support.DependencyInjectionTestExecution
 
 import com.bbva.czic.customers.business.SrvIntCustomersTest;
 import com.bbva.czic.customers.business.dto.DTOIntCustomer;
-import com.bbva.czic.customers.dao.mappers.impl.CustomerMapper;
 import com.bbva.czic.customers.dao.model.oznb.FormatoOZNCSNB0;
 import com.bbva.czic.customers.dao.model.oznp.FormatoOZECNPS0;
 import com.bbva.czic.dto.net.EnumSegmentType;
@@ -29,12 +29,12 @@ import com.bbva.jee.arq.spring.core.servicing.test.BusinessServiceTestContextLoa
 		"classpath:/META-INF/spring/business-service.xml",
 		"classpath:/META-INF/spring/business-service-test.xml" })
 @TestExecutionListeners(listeners = {
-// MockInvocationContextTestExecutionListener.class,
+MockInvocationContextTestExecutionListener.class,
 DependencyInjectionTestExecutionListener.class })
 public class CustomerMapperTest {
 
-	@Resource(name = "customerMapper")
-	private ICustomerMapper customerMapper;
+	@Resource(name = "txCustomerMapper")
+	private ITxCustomerMapper customerMapper;
 
 	public void testMapToDTOIntCardCharge() {
 		// SetUp
@@ -61,7 +61,7 @@ public class CustomerMapperTest {
 	
 	@Test
 	public void formatoOZNBSalidaADTOIntCustomerTest(){
-		DTOIntCustomer customer = CustomerMapper.mapToOuter(mockFormatoOZNBSalida());
+		DTOIntCustomer customer = customerMapper.mapOutOznb(mockFormatoOZNBSalida());
 		Assert.assertEquals(SrvIntCustomersTest.mockDTOCustomer().getDwelingType(),customer.getDwelingType());
 		Assert.assertEquals(SrvIntCustomersTest.mockDTOCustomer().getSegment(),customer.getSegment());
 	}

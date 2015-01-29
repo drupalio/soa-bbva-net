@@ -13,7 +13,6 @@ import com.bbva.czic.customers.business.dto.DTOIntCardCharge;
 import com.bbva.czic.customers.business.dto.DTOIntCustomer;
 import com.bbva.czic.customers.business.dto.DTOIntAccMovementsResumesFilter;
 import com.bbva.czic.customers.dao.CustomersDAO;
-import com.bbva.czic.customers.dao.mappers.ICustomerMapper;
 import com.bbva.czic.dto.net.CardCharge;
 import com.bbva.czic.dto.net.Customer;
 import com.bbva.czic.routine.commons.rm.utils.errors.EnumError;
@@ -85,7 +84,7 @@ public class SrvIntCustomers implements ISrvIntCustomers {
 			List<DTOIntCardCharge> dtoIntCardCharges = customersDao
 					.getlistCreCardCharges(filter);
 			for (DTOIntCardCharge item : dtoIntCardCharges) {
-				listCardCharge.add(customerMapper.map(item));
+				//listCardCharge.add(customerMapper.map(item));
 			}
 			log.info(" DAO: getListCreditChargesResponse: " + dtoIntCardCharges);
 			// 3. Validate output
@@ -120,7 +119,7 @@ public class SrvIntCustomers implements ISrvIntCustomers {
 		// 3. Validate output
 		DtoValidator.validate(dtoIntCustomer);
 		log.info("SrvInt: gettingIntoMapper: " + dtoIntCustomer);
-		return customerMapper.map(dtoIntCustomer);
+		return null; //customerMapper.map(dtoIntCustomer);
 
 	}
 }

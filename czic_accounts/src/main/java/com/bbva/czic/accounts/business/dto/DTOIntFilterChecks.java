@@ -12,14 +12,12 @@ public class DTOIntFilterChecks {
 
     @NotNull
     private String accountId;
-    @NotNull
     private Date startDate;
     private Date endDate;
     @NotNull
     private Integer paginationKey;
     @NotNull
     private Integer pageSize;
-    @NotNull
     private String status;
 
 

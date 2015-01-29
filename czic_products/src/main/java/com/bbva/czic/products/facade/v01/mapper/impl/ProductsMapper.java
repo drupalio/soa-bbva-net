@@ -30,11 +30,11 @@ public class ProductsMapper extends AbstractBbvaConfigurableMapper implements
 		super.configure(factory);
 
 		// Map DTOIntConditions <-> Conditions
-		factory.classMap(DTOIntConditions.class, Conditions.class)
-				.field("alias", "alias").field("category", "category")
-				.field("description", "description")
-				.field("openingDate", "openingDate")
-				.field("commission", "commission").byDefault().register();
+//		factory.classMap(DTOIntConditions.class, Conditions.class)
+//				.field("alias", "alias").field("category", "category")
+//				.field("description", "description")
+//				.field("openingDate", "openingDate")
+//				.field("commission", "commission").byDefault().register();
 
 	}
 

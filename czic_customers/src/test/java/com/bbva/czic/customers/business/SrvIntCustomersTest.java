@@ -31,7 +31,6 @@ import com.bbva.czic.customers.business.dto.DTOIntEnumMonth;
 import com.bbva.czic.customers.business.dto.DTOIntAccMovementsResumesFilter;
 import com.bbva.czic.customers.business.impl.SrvIntCustomers;
 import com.bbva.czic.customers.dao.CustomersDAO;
-import com.bbva.czic.customers.dao.mappers.ICustomerMapper;
 import com.bbva.czic.dto.net.AccMovementsResume;
 import com.bbva.czic.dto.net.CardCharge;
 import com.bbva.czic.dto.net.ContactInfo;
@@ -61,13 +60,9 @@ locations = {
 		DependencyInjectionTestExecutionListener.class
 		})
 public class SrvIntCustomersTest {
-	
-	
-	@Mock
-	CustomersDAO customersDao;
 
 	@Mock
-	ICustomerMapper customerMapper;
+	CustomersDAO customersDao;
 
 	@Autowired
 	@InjectMocks
@@ -85,7 +80,7 @@ public class SrvIntCustomersTest {
 		//Setup expectation
 
 		//SUT execution
-		final List<AccMovementsResume> answer = srv.getListAccountsMovementsResume(null);
+		final List<DTOIntAccMovementsResume> answer = srv.getListAccountsMovementsResume(null);
 		//validation
 	}
 
@@ -97,7 +92,7 @@ public class SrvIntCustomersTest {
 		//Setup expectation
 		when(customersDao.getlistAccountsMovementsResume(filter)).thenReturn(resumes);
 		//SUT execution
-		final List<AccMovementsResume> answer = srv.getListAccountsMovementsResume(filter);
+		final List<DTOIntAccMovementsResume> answer = srv.getListAccountsMovementsResume(filter);
 		//validation
 		assertNotNull(answer);
 		assertTrue(answer.size() > 0);
@@ -110,7 +105,7 @@ public class SrvIntCustomersTest {
 		//Setup expectation
 		when(customersDao.getlistAccountsMovementsResume(filter)).thenReturn(null);
 		//SUT execution
-		final List<AccMovementsResume> answer = srv.getListAccountsMovementsResume(filter);
+		final List<DTOIntAccMovementsResume> answer = srv.getListAccountsMovementsResume(filter);
 	}
 
 	//GetlistCreditCharges
@@ -215,7 +210,6 @@ public class SrvIntCustomersTest {
 		Customer mapCustomer = new Customer();
 		//Setup expectation
 		when(customersDao.getCustomer((String) anyObject())).thenReturn(dtoIntCustomer);
-		when(customerMapper.map((DTOIntCustomer)anyObject())).thenReturn(mapCustomer);
 		//SUT execution
 		final Customer answer = srv.getCustomer("1234567890");
 		//validation
