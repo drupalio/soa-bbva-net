@@ -44,7 +44,7 @@ public class SrvIntProducts implements ISrvIntProducts {
 
 	@Override
 	public DTOIntExtract listExtracts(DTOIntExtract dtoIntFilterExtract) {
-		// TODO Auto-generated method stub
+		
 		return null;
 	}
 
