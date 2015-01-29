@@ -1,10 +1,12 @@
 package com.bbva.czic.routine.commons.rm.utils.mappers;
 
+import com.bbva.czic.routine.commons.rm.utils.EDateFormat;
 import com.bbva.czic.routine.commons.rm.utils.converter.BigDecimalMoneyConverter;
 import com.bbva.czic.routine.commons.rm.utils.converter.CalendarDateConverter;
 import com.bbva.czic.routine.commons.rm.utils.converter.DateCalendarConverter;
 import com.bbva.czic.routine.commons.rm.utils.converter.StringMoneyConverter;
 import com.bbva.czic.routine.mapper.MapperFactory;
+import com.bbva.czic.routine.mapper.converter.builtin.DateToStringConverter;
 import com.bbva.czic.routine.mapper.impl.ConfigurableMapper;
 import com.bbva.jee.arq.spring.core.log.I18nLog;
 import com.bbva.jee.arq.spring.core.log.I18nLogFactory;
@@ -35,6 +37,11 @@ public abstract class AbstractBbvaTxConfigurableMapper extends ConfigurableMappe
 		 * Convert HOST BigDecimal to Money
 		 */
 		factory.getConverterFactory().registerConverter(new BigDecimalMoneyConverter());
+		/**
+		 * Convert HOST Date to String
+		 */
+		factory.getConverterFactory().registerConverter(
+				new DateToStringConverter(EDateFormat.ANIO_MES_DIA.getPattern()));
 
 	}
 

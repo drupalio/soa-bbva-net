@@ -3,6 +3,7 @@
 
 package com.bbva.czic.accounts.dao.model.oznx;
 
+import java.lang.Integer;
 import java.lang.String;
 import java.math.BigDecimal;
 import java.util.Date;

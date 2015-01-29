@@ -9,6 +9,8 @@ import com.bbva.czic.accounts.dao.model.oznu.FormatoOZECNUE0;
 import com.bbva.czic.accounts.dao.model.oznu.FormatoOZECNUS0;
 import com.bbva.czic.accounts.dao.model.oznv.FormatoOZECNVE0;
 import com.bbva.czic.accounts.dao.model.oznv.FormatoOZECNVS0;
+import com.bbva.czic.accounts.dao.model.ozny.FormatoOZECNYE0;
+import com.bbva.czic.accounts.dao.model.ozny.FormatoOZECNYS0;
 
 /**
  * @author Entelgy
@@ -47,7 +49,6 @@ public interface TxAccountMapper {
 
 	/**
 	 * @param formatOutput
-	 * @param dtoIn
 	 * @return
 	 */
 	DTOIntAccMovementsResume mapOutOznu(FormatoOZECNUS0 formatOutput);
@@ -55,5 +56,9 @@ public interface TxAccountMapper {
 	FormatoOZECNSE0 mapInOzns(DTOIntCheckbook dtoIn);
 
 	DTOIntCheckbook mapOutOzns(FormatoOZECNSS0 formatOutput);
+
+	public FormatoOZECNYE0 mapInOzny(DTOIntCheckFilter dtoIn);
+
+	public DTOIntCheck mapOutOzny(FormatoOZECNYS0 formatOutput);
 
 }

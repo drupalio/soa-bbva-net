@@ -19,9 +19,10 @@ public interface ISrvAccountsV01{
 
 	List<AccMovementsResume> getAccMovementResume(String idAccount, String filter, String fields, String expands,String sort);
 
-
 	List<Check> listCheck(String accountId, String filter, Integer paginationKey, Integer pageSize);
 
 	Checkbook getCheckbook(String checkbookId, String accountId);
+
+	public Check getCheck(String accountId, String checkId);
 
 }
