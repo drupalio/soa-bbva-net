@@ -13,7 +13,7 @@ import org.springframework.stereotype.Component;
 
 import com.bbva.czic.customers.business.dto.DTOIntAccMovementsResume;
 import com.bbva.czic.customers.business.dto.DTOIntCardCharge;
-import com.bbva.czic.customers.business.dto.DTOIntFilterCustomerResumes;
+import com.bbva.czic.customers.business.dto.DTOIntAccMovementsResumesFilter;
 import com.bbva.czic.customers.facade.v01.utils.converters.IFilterConverter;
 import com.bbva.czic.routine.commons.rm.utils.errors.EnumError;
 import com.bbva.czic.routine.commons.rm.utils.validator.impl.DateValidator;
@@ -36,8 +36,8 @@ public class CustResumesFilterConverter implements IFilterConverter {
 	}
 
 	@Override
-	public DTOIntFilterCustomerResumes toCardChargeFilter(String filter) throws BusinessServiceException {
-		DTOIntFilterCustomerResumes filterDto = null;
+	public DTOIntAccMovementsResumesFilter toCardChargeFilter(String filter) throws BusinessServiceException {
+		DTOIntAccMovementsResumesFilter filterDto = null;
 		try {
 
 			log.info("A query string (filter) has been sended: " + filter);
@@ -46,7 +46,7 @@ public class CustResumesFilterConverter implements IFilterConverter {
 			sc = new FiqlParser<DTOIntCardCharge>(DTOIntCardCharge.class).parse(filter);
 			final List<PrimitiveStatement> splitDataFilter = businessToolKit.getDataFromFilter(sc);
 
-			filterDto = new DTOIntFilterCustomerResumes();
+			filterDto = new DTOIntAccMovementsResumesFilter();
 
 			for (PrimitiveStatement st : splitDataFilter) {
 				if (st.getCondition().equals(ConditionType.GREATER_OR_EQUALS)) {
@@ -78,8 +78,8 @@ public class CustResumesFilterConverter implements IFilterConverter {
 	}
 
 	@Override
-	public DTOIntFilterCustomerResumes toAccountMovementFilter(String filter) throws BusinessServiceException {
-		DTOIntFilterCustomerResumes filterDto = null;
+	public DTOIntAccMovementsResumesFilter toAccountMovementFilter(String filter) throws BusinessServiceException {
+		DTOIntAccMovementsResumesFilter filterDto = null;
 		try {
 
 			log.info("A query string (filter) has been sended: " + filter);
@@ -88,7 +88,7 @@ public class CustResumesFilterConverter implements IFilterConverter {
 			sc = new FiqlParser<DTOIntAccMovementsResume>(DTOIntAccMovementsResume.class).parse(filter);
 			final List<PrimitiveStatement> splitDataFilter = businessToolKit.getDataFromFilter(sc);
 
-			filterDto = new DTOIntFilterCustomerResumes();
+			filterDto = new DTOIntAccMovementsResumesFilter();
 
 			for (PrimitiveStatement st : splitDataFilter) {
 				if (st.getCondition().equals(ConditionType.GREATER_OR_EQUALS)) {

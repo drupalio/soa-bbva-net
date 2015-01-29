@@ -1,5 +1,7 @@
 package com.bbva.czic.customers.business.dto;
 
+import org.hibernate.validator.constraints.Length;
+
 import javax.validation.constraints.NotNull;
 import java.util.Date;
 
@@ -8,15 +10,14 @@ import java.util.Date;
  * @author Sebastian Gamba - Entelgy Col. 
  * @since 11/01/2015
  */
-public class DTOIntFilterCustomerResumes {
+public class DTOIntAccMovementsResumesFilter {
 
 	@NotNull
 	private String customerId;
-	@NotNull
 	private Date startDate;
 	private Date endDate;
 	
-	public DTOIntFilterCustomerResumes(){
+	public DTOIntAccMovementsResumesFilter(){
 	}
 	
 	public String getCustomerId() {

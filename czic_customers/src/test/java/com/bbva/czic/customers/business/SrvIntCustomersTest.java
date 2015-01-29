@@ -10,7 +10,6 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.GregorianCalendar;
 import java.util.List;
 
 import org.junit.Before;
@@ -29,25 +28,19 @@ import com.bbva.czic.customers.business.dto.DTOIntAccMovementsResume;
 import com.bbva.czic.customers.business.dto.DTOIntCardCharge;
 import com.bbva.czic.customers.business.dto.DTOIntCustomer;
 import com.bbva.czic.customers.business.dto.DTOIntEnumMonth;
-import com.bbva.czic.customers.business.dto.DTOIntFilterCustomerResumes;
+import com.bbva.czic.customers.business.dto.DTOIntAccMovementsResumesFilter;
 import com.bbva.czic.customers.business.impl.SrvIntCustomers;
 import com.bbva.czic.customers.dao.CustomersDAO;
-import com.bbva.czic.customers.dao.mapper.ICustomerMapper;
 import com.bbva.czic.dto.net.AccMovementsResume;
 import com.bbva.czic.dto.net.CardCharge;
-import com.bbva.czic.dto.net.City;
 import com.bbva.czic.dto.net.ContactInfo;
-import com.bbva.czic.dto.net.Country;
 import com.bbva.czic.dto.net.Customer;
-import com.bbva.czic.dto.net.Document;
 import com.bbva.czic.dto.net.Email;
 import com.bbva.czic.dto.net.EnumContactSourceType;
-import com.bbva.czic.dto.net.EnumDocumentType;
 import com.bbva.czic.dto.net.EnumDwelingType;
 import com.bbva.czic.dto.net.EnumSegmentType;
 import com.bbva.czic.dto.net.PhoneNumber;
 import com.bbva.czic.dto.net.Place;
-import com.bbva.czic.dto.net.State;
 import com.bbva.czic.routine.commons.rm.utils.converter.UtilsConverter;
 import com.bbva.jee.arq.spring.core.servicing.gce.BusinessServiceException;
 import com.bbva.jee.arq.spring.core.servicing.test.BusinessServiceTestContextLoader;
@@ -67,13 +60,9 @@ locations = {
 		DependencyInjectionTestExecutionListener.class
 		})
 public class SrvIntCustomersTest {
-	
-	
-	@Mock
-	CustomersDAO customersDao;
 
 	@Mock
-	ICustomerMapper customerMapper;
+	CustomersDAO customersDao;
 
 	@Autowired
 	@InjectMocks
@@ -91,19 +80,19 @@ public class SrvIntCustomersTest {
 		//Setup expectation
 
 		//SUT execution
-		final List<AccMovementsResume> answer = srv.getlistAccountsMovementsResume("123",null);
+		final List<DTOIntAccMovementsResume> answer = srv.getListAccountsMovementsResume(null);
 		//validation
 	}
 
 	@Test
 	public void testGetlistAccountsMovementsResume() {
 		//Setup
-		final DTOIntFilterCustomerResumes filter = mockResumesFilter();
+		final DTOIntAccMovementsResumesFilter filter = mockResumesFilter();
 		final List<DTOIntAccMovementsResume> resumes = mockListAccMovementsResume();
 		//Setup expectation
 		when(customersDao.getlistAccountsMovementsResume(filter)).thenReturn(resumes);
 		//SUT execution
-		final List<AccMovementsResume> answer = srv.getlistAccountsMovementsResume("123",filter);
+		final List<DTOIntAccMovementsResume> answer = srv.getListAccountsMovementsResume(filter);
 		//validation
 		assertNotNull(answer);
 		assertTrue(answer.size() > 0);
@@ -112,11 +101,11 @@ public class SrvIntCustomersTest {
 	@Test(expected = Exception.class)
 	public void testGetlistAccountsMovementsResumeResultNull() {
 		//Setup
-		final DTOIntFilterCustomerResumes filter = mockResumesFilter();
+		final DTOIntAccMovementsResumesFilter filter = mockResumesFilter();
 		//Setup expectation
 		when(customersDao.getlistAccountsMovementsResume(filter)).thenReturn(null);
 		//SUT execution
-		final List<AccMovementsResume> answer = srv.getlistAccountsMovementsResume("123",filter);
+		final List<DTOIntAccMovementsResume> answer = srv.getListAccountsMovementsResume(filter);
 	}
 
 	//GetlistCreditCharges
@@ -135,7 +124,7 @@ public class SrvIntCustomersTest {
 	@Test
 	public void testGetlistCreditCharges() {
 		//Setup
-		final DTOIntFilterCustomerResumes filter = mockResumesFilter();
+		final DTOIntAccMovementsResumesFilter filter = mockResumesFilter();
 		final List<DTOIntCardCharge> charges = mockListCardCharge();
 		//Setup expectation
 		when(customersDao.getlistCreCardCharges(filter)).thenReturn(charges);
@@ -149,15 +138,15 @@ public class SrvIntCustomersTest {
 	@Test(expected = Exception.class)
 	public void testGetlistCreditChargesResultNull() {
 		//Setup
-		final DTOIntFilterCustomerResumes filter = mockResumesFilter();
+		final DTOIntAccMovementsResumesFilter filter = mockResumesFilter();
 		//Setup expectation
 		when(customersDao.getlistCreCardCharges(filter)).thenReturn(null);
 		//SUT execution
 		final List<CardCharge> answer = srv.getlistCreditCharges("123", filter);
 	}
 
-	private DTOIntFilterCustomerResumes mockResumesFilter(){
-		DTOIntFilterCustomerResumes filter = new DTOIntFilterCustomerResumes();
+	private DTOIntAccMovementsResumesFilter mockResumesFilter(){
+		DTOIntAccMovementsResumesFilter filter = new DTOIntAccMovementsResumesFilter();
 
 		filter.setEndDate(new Date());
 		Calendar cal = Calendar.getInstance();
@@ -215,13 +204,12 @@ public class SrvIntCustomersTest {
 	@Test
 	public void testGetCustomer() {
 		//Setup
-		DTOIntFilterCustomerResumes customer = new DTOIntFilterCustomerResumes();
+		DTOIntAccMovementsResumesFilter customer = new DTOIntAccMovementsResumesFilter();
 		customer.setCustomerId("1234567890");
 		DTOIntCustomer dtoIntCustomer = mockDTOCustomer();
 		Customer mapCustomer = new Customer();
 		//Setup expectation
 		when(customersDao.getCustomer((String) anyObject())).thenReturn(dtoIntCustomer);
-		when(customerMapper.map((DTOIntCustomer)anyObject())).thenReturn(mapCustomer);
 		//SUT execution
 		final Customer answer = srv.getCustomer("1234567890");
 		//validation
