@@ -9,8 +9,12 @@ import javax.ws.rs.core.UriInfo;
 
 import com.bbva.czic.dto.net.RotaryQuotaMove;
 
+import com.bbva.czic.loan.business.dto.DTOIntFilterRotaryMovement;
 import com.bbva.czic.loan.facade.v01.ISrvLoanV01;
 import com.bbva.czic.loan.facade.v01.mappers.ILoanMapper;
+import com.bbva.czic.routine.commons.rm.utils.errors.EnumError;
+import com.bbva.jee.arq.spring.core.servicing.gce.BusinessServiceException;
+import org.apache.commons.lang.StringUtils;
 import org.apache.cxf.jaxrs.model.wadl.ElementClass;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -85,9 +89,11 @@ public class SrvLoanV01 implements ISrvLoanV01,
 	@SMC(registryID = "SMC201400010", logicalID = "getRotaryQuota")
 	public Loan getRotaryQuota(
 			@ApiParam(value = "Claim identifier param") @PathParam("idLoan") String idLoan) {
-		final DTOIntFilterLoan dtoIntFilterLoan = new DTOIntFilterLoan();
-		dtoIntFilterLoan.setIdLoan(idLoan);
-		return  iLoanMapper.map(isrvIntLoan.getRotaryQuota(dtoIntFilterLoan));
+
+		if (idLoan == null || idLoan.trim().isEmpty()) {
+			throw new BusinessServiceException(EnumError.WRONG_PARAMETERS.getAlias());
+		}
+		return  iLoanMapper.map(isrvIntLoan.getRotaryQuota(idLoan));
 	}
 
 	@ApiOperation(value = "Obtiene un resumen de movimientos realizados sobre el producto de financiamiento. �ste servicio es paginado", notes = "Obtiene un resumen de movimientos realizados sobre el producto de financiamiento. �ste servicio es paginado", response = List.class)
@@ -123,9 +129,12 @@ public class SrvLoanV01 implements ISrvLoanV01,
 			@ApiParam(value = "Claimer identifier param") @PathParam("idLoan") String idLoan,
 			@ApiParam(value = "Claimer identifier param") @PathParam("idMovement") String idMovement) {
 
-		final DTOIntFilterLoan dtoIntFilterLoan = new DTOIntFilterLoan();
-		dtoIntFilterLoan.setIdLoan(idLoan);
-		dtoIntFilterLoan.setIdMovement(idMovement);
-		return iLoanMapper.map(isrvIntLoan.getRotaryQuotaMovement(dtoIntFilterLoan));
+		if (idLoan == null || idLoan.trim().isEmpty() || idMovement == null || idMovement.trim().isEmpty()) {
+			throw new BusinessServiceException(EnumError.WRONG_PARAMETERS.getAlias());
+		}
+
+		if(!StringUtils.isNumeric(idMovement))
+			throw new BusinessServiceException(EnumError.WRONG_PARAMETERS.getAlias());
+		return iLoanMapper.map(isrvIntLoan.getRotaryQuotaMovement(new DTOIntFilterRotaryMovement(idLoan, Integer.parseInt(idMovement))));
 	}
 }

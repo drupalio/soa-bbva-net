@@ -9,8 +9,6 @@ public class DTOIntLoan extends Product {
 
 	public final static long serialVersionUID = 1L;
 
-	private Balance balance;
-
 	private Balance debt;
 
 	private Payment payment;
@@ -19,16 +17,6 @@ public class DTOIntLoan extends Product {
 
 	public DTOIntLoan() {
 		// default constructor
-	}
-
-	@Override
-	public Balance getBalance() {
-		return balance;
-	}
-
-	@Override
-	public void setBalance(Balance balance) {
-		this.balance = balance;
 	}
 
 	public Payment getPayment() {

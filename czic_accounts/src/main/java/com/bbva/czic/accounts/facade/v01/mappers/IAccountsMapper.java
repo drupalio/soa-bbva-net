@@ -24,7 +24,7 @@ public interface IAccountsMapper {
 
 	Check mapCheck(DTOIntCheck intCheck);
 
-	Checkbook mapCheckbook(DTOIntCheckbook intCheckbook);
+	Checkbook mapCheckbooks(DTOIntCheckbook intCheckbook);
 
 	DTOIntFilterAccount getDTOIntFilter(String idAccount, String filter);
 

@@ -28,9 +28,9 @@ public class Checkbook implements Serializable {
 	@ApiModelProperty(value = "Numero identificativo del cheque", required = true)
 	private String id;
 	@ApiModelProperty(value = "Numero del primer cheque del intervalo de consulta", required = true)
-	private Integer firstCheck;
+	private String firstCheck;
 	@ApiModelProperty(" ultimo cheque de intervalo de consulta")
-	private Integer lastCheck;
+	private String lastCheck;
 	@ApiModelProperty(" numero de cheques totales de la chequera ")
 	private Integer totalCheck;
 	@XmlSchemaType(name = "dateTime")
@@ -58,22 +58,22 @@ public class Checkbook implements Serializable {
 		this.id = id;
 	}
 
-	public Integer getFirstCheck() {
+	public String getFirstCheck() {
 		return firstCheck;
 	}
 
-	public void setFirstCheck(Integer firstCheck) {
+	public void setFirstCheck(String firstCheck) {
 		this.firstCheck = firstCheck;
 	}
 
-	public Integer getLastCheck() {
+	public String getLastCheck() {
 		return lastCheck;
 	}
 
-	public void setLastCheck(Integer lastCheck) {
+	public void setLastCheck(String lastCheck) {
 		this.lastCheck = lastCheck;
 	}
-	
+
 	public Integer getTotalCheck() {
 		return totalCheck;
 	}

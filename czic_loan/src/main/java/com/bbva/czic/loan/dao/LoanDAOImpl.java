@@ -8,8 +8,6 @@ import com.bbva.czic.loan.dao.tx.TxGetRotaryQuotaMovement;
 import com.bbva.czic.loan.dao.tx.TxListRotaryQuotaMovements;
 import org.springframework.stereotype.Repository;
 
-import com.bbva.czic.loan.business.impl.SrvIntLoan;
-
 import com.bbva.jee.arq.spring.core.log.I18nLog;
 import com.bbva.jee.arq.spring.core.log.I18nLogFactory;
 
@@ -46,11 +44,11 @@ public class LoanDAOImpl implements LoanDAO {
 
 	/**
 	 *
-	 * @param dtoIntFilterLoan
+	 * @param idLoan
 	 * @return
 	 */
-	public DTOIntLoan getRotaryQuota(final DTOIntFilterLoan dtoIntFilterLoan){
-		return txGetRotaryQuota.invoke(dtoIntFilterLoan);
+	public DTOIntLoan getRotaryQuota(final String idLoan){
+		return txGetRotaryQuota.invoke(idLoan);
 	}
 
 	/**
@@ -65,11 +63,11 @@ public class LoanDAOImpl implements LoanDAO {
 
 	/**
 	 *
-	 * @param dtoIntFilterLoan
+	 * @param dtoIntFilterRotaryMovement
 	 * @return
 	 */
 	@Override
-	public DTOIntRotaryQuotaMove getRotaryQuotaMovement(final DTOIntFilterLoan dtoIntFilterLoan){
-		return txGetRotaryQuotaMovement.invoke(dtoIntFilterLoan);
+	public DTOIntRotaryQuotaMove getRotaryQuotaMovement(final DTOIntFilterRotaryMovement dtoIntFilterRotaryMovement){
+		return txGetRotaryQuotaMovement.invoke(dtoIntFilterRotaryMovement);
 	}
 }

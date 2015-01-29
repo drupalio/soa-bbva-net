@@ -29,6 +29,7 @@ public class DTOIntFilterLoan {
 	private String transactionDate;
 
 	private String idMovement;
+
 	/**
 	 * @return the fechaFinal
 	 */
