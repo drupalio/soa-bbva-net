@@ -32,7 +32,7 @@ public class TransaccionOznaMock implements InvocadorTransaccion<PeticionTransac
 		final DataFactory dataFactory = new DataFactory();
 
 		salida.setNomprod(dataFactory.getRandomText(50));
-		salida.setNumprod(dataFactory.getNumberText(6));
+		salida.setNumprod(dataFactory.getNumberText(20));
 		salida.setSaltota(dataFactory.getNumberText(6));
 		salida.setSdcanje(dataFactory.getNumberText(6));
 		salida.setSddispo(dataFactory.getNumberText(6));

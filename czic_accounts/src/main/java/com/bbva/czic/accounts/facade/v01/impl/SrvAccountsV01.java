@@ -93,8 +93,7 @@ public class SrvAccountsV01 implements ISrvAccountsV01,
 
 		final DTOIntFilterAccount dtoIntFilterAccount = new DTOIntFilterAccount();
 		dtoIntFilterAccount.setAccountId(idAccount);
-		return iAccountsMapper.map(srvIntAccounts
-				.getAccount(dtoIntFilterAccount));
+		return iAccountsMapper.map(srvIntAccounts.getAccount(dtoIntFilterAccount));
 	}
 
 	@Override
