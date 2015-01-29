@@ -1,5 +1,7 @@
 package com.bbva.czic.products.business.impl;
 
+import java.util.List;
+
 import javax.annotation.Resource;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,19 +35,30 @@ public class SrvIntProducts implements ISrvIntProducts {
 		DtoValidator.validate(dtoIntConditions);
 
 		// 2. Get response
-		final DTOIntConditions result = productsDAO.getConditions(dtoIntConditions);
+		final DTOIntConditions result = productsDAO
+				.getConditions(dtoIntConditions);
 
 		// 3. Validate output
 		DtoValidator.validate(result);
-		
+
 		log.info(" getConditions Conditions ");
 		return result;
 	}
 
 	@Override
-	public DTOIntExtract listExtracts(DTOIntExtract dtoIntFilterExtract) {
-		
-		return null;
+	public List<DTOIntExtract> listExtracts(DTOIntExtract dtoIntFilterExtract) {
+		// 1. Validate DtoIntFilterAccount
+		DtoValidator.validate(dtoIntFilterExtract);
+
+		// 2. Get response
+		final List<DTOIntExtract> result = productsDAO
+				.listExtracts(dtoIntFilterExtract);
+
+		// 3. Validate output
+		DtoValidator.validate(result);
+
+		log.info(" getConditions Conditions ");
+		return result;
 	}
 
 }

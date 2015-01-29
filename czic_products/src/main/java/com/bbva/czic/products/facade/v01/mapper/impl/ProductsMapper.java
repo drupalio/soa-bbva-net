@@ -120,7 +120,7 @@ public class ProductsMapper extends AbstractBbvaConfigurableMapper implements
 	}
 
 	@Override
-	public List<Extract> mapExtracts(DTOIntExtract listExtracts) {
+	public List<Extract> mapExtracts(List<DTOIntExtract> list) {
 		// TODO Auto-generated method stub
 		return null;
 	}
