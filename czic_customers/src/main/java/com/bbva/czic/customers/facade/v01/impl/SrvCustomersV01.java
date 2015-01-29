@@ -127,7 +127,7 @@ public class SrvCustomersV01 implements ISrvCustomersV01, com.bbva.jee.arq.sprin
 		log.info("Into listAccountsMovementsResume...");
 
 		// 1. Validate filter FIQL
-		new FiqlValidator(filter).exist().hasGeAndLe("month").validate();
+		new FiqlValidator(filter).hasGeAndLe("month").validateIfExist();
 
 		// 2. Mapping to DTOIntFilter
 		final DTOIntAccMovementsResumesFilter filterCustomerResumes = customerMapper.getDTOIntMovementResumesFilter(customerId, filter);
