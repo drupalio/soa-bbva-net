@@ -1,8 +1,6 @@
-package com.bbva.czic.customers.dao.mapper;
+package com.bbva.czic.customers.dao.mappers;
 
 import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.GregorianCalendar;
 
 import javax.annotation.Resource;
 
@@ -16,17 +14,10 @@ import org.springframework.test.context.support.DependencyInjectionTestExecution
 
 import com.bbva.czic.customers.business.SrvIntCustomersTest;
 import com.bbva.czic.customers.business.dto.DTOIntCustomer;
-import com.bbva.czic.customers.dao.mapper.impl.CustomerMapper;
+import com.bbva.czic.customers.dao.mappers.impl.CustomerMapper;
 import com.bbva.czic.customers.dao.model.oznb.FormatoOZNCSNB0;
 import com.bbva.czic.customers.dao.model.oznp.FormatoOZECNPS0;
-import com.bbva.czic.dto.net.ContactInfo;
-import com.bbva.czic.dto.net.Document;
-import com.bbva.czic.dto.net.Email;
-import com.bbva.czic.dto.net.EnumDocumentType;
-import com.bbva.czic.dto.net.EnumDwelingType;
 import com.bbva.czic.dto.net.EnumSegmentType;
-import com.bbva.czic.dto.net.PhoneNumber;
-import com.bbva.czic.dto.net.Place;
 import com.bbva.jee.arq.spring.core.servicing.test.BusinessServiceTestContextLoader;
 
 /**

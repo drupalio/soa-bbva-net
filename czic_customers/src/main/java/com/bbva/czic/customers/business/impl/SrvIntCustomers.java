@@ -14,7 +14,7 @@ import com.bbva.czic.customers.business.dto.DTOIntCardCharge;
 import com.bbva.czic.customers.business.dto.DTOIntCustomer;
 import com.bbva.czic.customers.business.dto.DTOIntFilterCustomerResumes;
 import com.bbva.czic.customers.dao.CustomersDAO;
-import com.bbva.czic.customers.dao.mapper.ICustomerMapper;
+import com.bbva.czic.customers.dao.mappers.ICustomerMapper;
 import com.bbva.czic.dto.net.AccMovementsResume;
 import com.bbva.czic.dto.net.CardCharge;
 import com.bbva.czic.dto.net.Customer;

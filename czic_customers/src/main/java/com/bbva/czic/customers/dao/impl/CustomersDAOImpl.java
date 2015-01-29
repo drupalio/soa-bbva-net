@@ -14,18 +14,11 @@ import com.bbva.czic.customers.business.dto.DTOIntCustomer;
 import com.bbva.czic.customers.business.dto.DTOIntFilterCustomerResumes;
 import com.bbva.czic.customers.business.impl.SrvIntCustomers;
 import com.bbva.czic.customers.dao.CustomersDAO;
-import com.bbva.czic.customers.dao.mapper.ICustomerMapper;
-import com.bbva.czic.customers.dao.mapper.impl.CustomerMapper;
-import com.bbva.czic.customers.dao.model.oznb.FormatoOZNCENB0;
-import com.bbva.czic.customers.dao.model.oznb.FormatoOZNCSNB0;
-import com.bbva.czic.customers.dao.model.oznb.PeticionTransaccionOznb;
-import com.bbva.czic.customers.dao.model.oznb.RespuestaTransaccionOznb;
-import com.bbva.czic.customers.dao.model.oznb.TransaccionOznb;
+import com.bbva.czic.customers.dao.mappers.ICustomerMapper;
 import com.bbva.czic.customers.dao.model.oznp.FormatoOZECNPE0;
 import com.bbva.czic.customers.dao.model.oznp.FormatoOZECNPS0;
 import com.bbva.czic.customers.dao.model.oznp.PeticionTransaccionOznp;
 import com.bbva.czic.customers.dao.model.oznp.RespuestaTransaccionOznp;
-import com.bbva.czic.customers.dao.model.oznp.TransaccionOznp;
 import com.bbva.czic.customers.dao.model.oznq.FormatoOZECNQE0;
 import com.bbva.czic.customers.dao.model.oznq.FormatoOZECNQS0;
 import com.bbva.czic.customers.dao.model.oznq.PeticionTransaccionOznq;
@@ -38,7 +31,6 @@ import com.bbva.jee.arq.spring.core.host.protocolo.ps9.aplicacion.CopySalida;
 import com.bbva.jee.arq.spring.core.log.I18nLog;
 import com.bbva.jee.arq.spring.core.log.I18nLogFactory;
 import com.bbva.jee.arq.spring.core.servicing.gce.BusinessServiceException;
-import com.bbva.jee.arq.spring.core.servicing.utils.BusinessServicesToolKit;
 
 
 @Component(value = "customers-dao")

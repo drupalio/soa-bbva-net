@@ -1,41 +1,58 @@
-package com.bbva.czic.customers.dao.mapper.impl;
+package com.bbva.czic.customers.dao.mappers.impl;
 
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.List;
-
-import com.bbva.czic.customers.business.dto.*;
-import com.bbva.czic.dto.net.*;
-import com.bbva.czic.routine.commons.rm.utils.fiql.FiqlType;
-import com.bbva.czic.routine.commons.rm.utils.mappers.AbstractBbvaConfigurableMapper;
-import com.bbva.czic.routine.mapper.MapperFactory;
-import com.bbva.czic.routine.mapper.converter.builtin.DateToStringConverter;
 import org.springframework.stereotype.Component;
 
-import com.bbva.czic.customers.dao.mapper.ICustomerMapper;
+import com.bbva.czic.customers.business.dto.DTOIntCustomer;
+import com.bbva.czic.customers.dao.mappers.ITxCustomerMapper;
+import com.bbva.czic.customers.dao.model.oznb.FormatoOZNCENB0;
 import com.bbva.czic.customers.dao.model.oznb.FormatoOZNCSNB0;
-import com.bbva.czic.customers.dao.model.oznp.FormatoOZECNPS0;
-import com.bbva.czic.customers.dao.model.oznq.FormatoOZECNQS0;
-import com.bbva.czic.routine.commons.rm.utils.converter.UtilsConverter;
+import com.bbva.czic.routine.commons.rm.utils.converter.StringMoneyConverter;
+import com.bbva.czic.routine.mapper.MapperFactory;
+import com.bbva.czic.routine.mapper.impl.ConfigurableMapper;
 
-@Component("customerMapper")
-public class CustomerMapper extends AbstractBbvaConfigurableMapper implements ICustomerMapper{
+@Component("txCustomerMapper")
+public class TxCustomerMapper extends ConfigurableMapper implements ITxCustomerMapper {
+
+	@Override
+	protected void configure(MapperFactory factory) {
+
+		/**
+		 * Convert HOST FORMAT (+EEEEEEEEDD) to COP Money
+		 */
+		factory.getConverterFactory().registerConverter(new StringMoneyConverter());
+
+		/**
+		 * MAPEO DE ENTRADAS
+		 */
+		// Map customerId <-> FormatoOZNCENB0 (OZNB)
+//		factory.classMap(String.class, FormatoOZNCENB0.class).field("customerId", "numprod").byDefault()
+//				.register();
+
+		/**
+		 * MAPEO DE SALIDAS
+		 */
+		// Map FormatoOZECNBS0 <-> DTOIntCustomer (OZNB)
+		factory.classMap(DTOIntCustomer.class, FormatoOZNCSNB0.class).field("id", "numclie").field("name", "nomclie")
+		.field("stratum", "estrato").field("residenceYears", "anosvda").field("homeMembers", "nropnas").field("lastConnectionTime", "ultconx").byDefault().register();
+
+
+	}
+	
+	@Override
+	public FormatoOZNCENB0 mapInOznb(String customerId) {
+		return map(customerId,FormatoOZNCENB0.class);
+	}
+
+	@Override
+	public DTOIntCustomer mapOutOznb(FormatoOZNCSNB0 formatOutput) {
+		return map(formatOutput,DTOIntCustomer.class);
+	}
 
 	@Override
 	protected void configure(MapperFactory factory) {
 		super.configure(factory);
 	}
 
-	@Override
-	public DTOIntFilterCustomerResumes getDTOIntMovementResumesFilter(final String customerId, final String filter) {
-		final String startDate = this.getGeValue(filter, FiqlType.month.name());
-		final String endDate = this.getLeValue(filter, FiqlType.month.name());
-
-		final DTOIntFilterCustomerResumes intFilterCustomerResumes = new DTOIntFilterCustomerResumes();
-		intFilterCustomerResumes.setStartDate(new DateToStringConverter());
-
-		return intFilterCustomerResumes;
-	}
 
 	@Override
 	public DTOIntCardCharge map(final FormatoOZECNPS0 formatoSalida) {
@@ -100,7 +117,7 @@ public class CustomerMapper extends AbstractBbvaConfigurableMapper implements IC
 
 	public static DTOIntCustomer mapToOuter(FormatoOZNCSNB0 formatoSalida) {
 		DTOIntCustomer customer = new DTOIntCustomer();
-		
+
 //		Entidad contact info
 		ContactInfo contacto = new ContactInfo();
 		List<Email> emails = new ArrayList<Email>();
@@ -113,21 +130,21 @@ public class CustomerMapper extends AbstractBbvaConfigurableMapper implements IC
 		emails.add(email);
 		contacto.setEmails(emails);
 		contacto.setPhoneNumbers(phones);
-		
+
 //		Entidad place para ubicacion hogar
 		Place home = new Place();
 		home.setCityName(formatoSalida.getCiudvia());
 		home.setStateName(formatoSalida.getDepavia());
 		home.setCountryName(formatoSalida.getPaisvia());
 		home.setPostalAddress(formatoSalida.getDescvia());
-		
+
 //		Entidad place para ubicacion oficina
 		Place office = new Place();
 		office.setCityName(formatoSalida.getCiudofi());
 		office.setStateName(formatoSalida.getDepaofi());
 		office.setCountryName(formatoSalida.getPaisofi());
 		office.setPostalAddress(formatoSalida.getDescofi());
-		
+
 //		Entidad de retorno customer
 		customer.setId(formatoSalida.getNumclie());
 		customer.setName(formatoSalida.getNomclie());
