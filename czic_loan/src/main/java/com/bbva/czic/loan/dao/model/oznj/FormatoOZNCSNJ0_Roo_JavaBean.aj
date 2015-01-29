@@ -40,6 +40,14 @@ privileged aspect FormatoOZNCSNJ0_Roo_JavaBean {
         this.saldoto = saldoto;
     }
     
+    public String FormatoOZNCSNJ0.getSaldodi() {
+        return this.saldodi;
+    }
+    
+    public void FormatoOZNCSNJ0.setSaldodi(String saldodi) {
+        this.saldodi = saldodi;
+    }
+    
     public String FormatoOZNCSNJ0.getPagomin() {
         return this.pagomin;
     }
