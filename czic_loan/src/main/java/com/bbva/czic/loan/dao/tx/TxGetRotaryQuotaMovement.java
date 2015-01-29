@@ -13,7 +13,7 @@ import javax.annotation.Resource;
  * Created by Entelgy on 26/01/2015.
  */
 @Component(value = "tx-get-rotary-quota-movement")
-public class TxGetRotaryQuotaMovement extends SimpleBbvaTransaction<DTOIntFilterLoan, FormatoOZNCENK0, DTOIntRotaryQuotaMove, FormatoOZNCSNK0> {
+public class TxGetRotaryQuotaMovement extends SimpleBbvaTransaction<DTOIntFilterRotaryMovement, FormatoOZNCENK0, DTOIntRotaryQuotaMove, FormatoOZNCSNK0> {
 
     @Resource(name = "transaccionOznk")
     private InvocadorTransaccion<PeticionTransaccionOznk, RespuestaTransaccionOznk> transaccionOznk;
@@ -27,18 +27,16 @@ public class TxGetRotaryQuotaMovement extends SimpleBbvaTransaction<DTOIntFilter
      * @return
      */
     @Override
-    protected FormatoOZNCENK0 mapDtoInToRequestFormat(DTOIntFilterLoan dtoIn) {
-        return iTxLoanMapper.mapInOznk(dtoIn);
+    protected FormatoOZNCENK0 mapDtoInToRequestFormat(DTOIntFilterRotaryMovement dtoIn) {
+        FormatoOZNCENK0 formatoOZNCSNK0 = new FormatoOZNCENK0();
+
+        formatoOZNCSNK0.setNomtarj(dtoIn.getIdLoan());
+        formatoOZNCSNK0.setNommovi(dtoIn.getIdMovement());
+        return formatoOZNCSNK0;
     }
 
-    /**
-     *
-     * @param formatOutput
-     * @param dtoIn
-     * @return
-     */
     @Override
-    protected DTOIntRotaryQuotaMove mapResponseFormatToDtoOut(FormatoOZNCSNK0 formatOutput, DTOIntFilterLoan dtoIn) {
+    protected DTOIntRotaryQuotaMove mapResponseFormatToDtoOut(FormatoOZNCSNK0 formatOutput, DTOIntFilterRotaryMovement dtoIn) {
         return iTxLoanMapper.mapOutOznk(formatOutput);
     }
 

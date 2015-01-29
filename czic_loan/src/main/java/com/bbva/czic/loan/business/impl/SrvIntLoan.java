@@ -1,15 +1,13 @@
 package com.bbva.czic.loan.business.impl;
 
 
-import com.bbva.czic.loan.business.dto.DTOIntFilterLoan;
-import com.bbva.czic.loan.business.dto.DTOIntMovement;
-import com.bbva.czic.loan.business.dto.DTOIntRotaryQuotaMove;
+import com.bbva.czic.loan.business.dto.*;
 
+import com.bbva.czic.routine.commons.rm.utils.validator.DtoValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.bbva.czic.loan.business.ISrvIntLoan;
-import com.bbva.czic.loan.business.dto.DTOIntLoan;
 import com.bbva.czic.loan.dao.LoanDAO;
 import com.bbva.jee.arq.spring.core.log.I18nLog;
 import com.bbva.jee.arq.spring.core.log.I18nLogFactory;
@@ -34,21 +32,18 @@ public class SrvIntLoan implements ISrvIntLoan {
 
 	/**
 	 *
-	 * @param dtoIntFilterLoan
+	 * @param idLoan
 	 * @return
 	 * @throws BusinessServiceException
 	 */
 	@Override
-	public DTOIntLoan getRotaryQuota(final DTOIntFilterLoan dtoIntFilterLoan) throws BusinessServiceException {
-
-	//	DtoValidator.validate(dtoIntFilterLoan);
+	public DTOIntLoan getRotaryQuota(final String idLoan) throws BusinessServiceException {
 		log.info(" getRotaryQuota ");
-		// Validar filtro
 
-		final DTOIntLoan result = loanDao.getRotaryQuota(dtoIntFilterLoan);
+		final DTOIntLoan result = loanDao.getRotaryQuota(idLoan);
 
 		// Mapear del filtro al dto
-	//	DtoValidator.validate(result);
+		//DtoValidator.validate(result);
 		// Validar el dto de filtrado
 		return result;
 	}
@@ -75,20 +70,19 @@ public class SrvIntLoan implements ISrvIntLoan {
 
 	/**
 	 *
-	 * @param dtoIntFilterLoan
+	 * @param dtoIntFilterRotaryMovement
 	 * @return
 	 * @throws BusinessServiceException
 	 */
 	@Override
-	public DTOIntRotaryQuotaMove getRotaryQuotaMovement(final DTOIntFilterLoan dtoIntFilterLoan) throws BusinessServiceException {
-	//	DtoValidator.validate(dtoIntFilterLoan);
-		log.info(" getRotaryQuota ");
-		// Validar filtro
+	public DTOIntRotaryQuotaMove getRotaryQuotaMovement(final DTOIntFilterRotaryMovement dtoIntFilterRotaryMovement) throws BusinessServiceException {
 
-		final DTOIntRotaryQuotaMove result = loanDao.getRotaryQuotaMovement(dtoIntFilterLoan);
+		log.info(" getRotaryQuota ");
+		DtoValidator.validate(dtoIntFilterRotaryMovement);
+		final DTOIntRotaryQuotaMove result = loanDao.getRotaryQuotaMovement(dtoIntFilterRotaryMovement);
 
 		// Mapear del filtro al dto
-	//	DtoValidator.validate(result);
+		//DtoValidator.validate(result);
 		// Validar el dto de filtrado
 		return result;
 	}
