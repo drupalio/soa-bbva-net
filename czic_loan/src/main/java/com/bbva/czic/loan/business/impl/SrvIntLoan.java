@@ -56,7 +56,8 @@ public class SrvIntLoan implements ISrvIntLoan {
 	 */
 	@Override
 	public List<DTOIntMovement> listRotaryQuotaMovements(final DTOIntFilterLoan dtoIntFilterLoan) throws BusinessServiceException {
-		//DtoValidator.validate(dtoIntFilterLoan);
+
+		DtoValidator.validate(dtoIntFilterLoan);
 		log.info(" getRotaryQuota ");
 		// Validar filtro
 

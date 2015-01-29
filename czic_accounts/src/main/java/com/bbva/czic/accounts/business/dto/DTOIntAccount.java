@@ -15,10 +15,13 @@ public class DTOIntAccount {
 	@Size(min = 20, max = 20)
 	private String idAccount;
 
+	@NotNull
 	private String type;
 
+	@NotNull
 	private String name;
 
+	@NotNull
 	private DTOIntBalance balance;
 
 	private List<DTOIntCheckbook> listaCheckBook;

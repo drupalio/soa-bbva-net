@@ -62,12 +62,12 @@ public class SrvIntAccounts implements ISrvIntAccounts {
 
 		DtoValidator.validate(dtoIntFilterAccount);
 		log.info(" getAccount ");
-		// Validar filtro
-
-		// Mapear del filtro al dto
 
 		// Validar el dto de filtrado
-		return accountsDAO.getAccount(dtoIntFilterAccount);
+		DTOIntAccount dtoIntAccount = accountsDAO.getAccount(dtoIntFilterAccount);
+
+		DtoValidator.validate(dtoIntAccount);
+		return dtoIntAccount;
 	}
 
 	@Override
