@@ -94,7 +94,7 @@ public class SrvCustomersV01 implements ISrvCustomersV01, com.bbva.jee.arq.sprin
 		log.info("Into listCreditCardsCharges...");
 
 		// 1. Validate parameter
-		if (customerId == null || customerId.trim().isEmpty()) {
+		if (customerId == "null" || customerId.trim().isEmpty()) {
 			throw new BusinessServiceException(EnumError.WRONG_PARAMETERS.getAlias());
 		}
 		// 2. Validate filter FIQL
@@ -116,16 +116,16 @@ public class SrvCustomersV01 implements ISrvCustomersV01, com.bbva.jee.arq.sprin
 	@SMC(registryID = "SMCCO1400007", logicalID = "getlistAccountsMovementsResume")
 	public List<AccMovementsResume> listAccountsMovementsResume(
 			@ApiParam(value = "Claim identifier param") @PathParam("customerId") String customerId,
-			@ApiParam(value = "filter param") @DefaultValue("null") @QueryParam("$filter") String filter) {
+			@ApiParam(value = "filter param") @QueryParam("$filter") String filter) {
 
 		log.info("Into listAccountsMovementsResume...");
 
 		// 1. Validate parameter
-		if (customerId == null || customerId.trim().isEmpty()) {
+		if (customerId.equals("null") || customerId.trim().isEmpty()) {
 			throw new BusinessServiceException(EnumError.WRONG_PARAMETERS.getAlias());
 		}
 		// 2. Validate filter FIQL
-		new FiqlValidator(filter).exist().hasGeAndLe("month").validate();
+		new FiqlValidator(filter).hasGeAndLe("month").validateIfExisit();
 		// 3. Invoke SrvIntCustomers and Mapping to canonical DTO
 		return srvIntCustomers.getlistAccountsMovementsResume(customerId,
 				filterConverter.toAccountMovementFilter(filter));
