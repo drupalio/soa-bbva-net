@@ -15,17 +15,21 @@ public class DTOIntRotaryQuotaMove {
 
     private String id;
 
-    private Operation operation;
-
     private String concept;
 
     private Calendar transactionDate;
+
+    private Operation operation;
 
     private String status;
 
     private Money value;
 
     private Balance balance;
+
+    private Integer numbersOfQuota;
+
+    private Integer remainingQuotas;
 
 
     public String getId() {
@@ -82,5 +86,21 @@ public class DTOIntRotaryQuotaMove {
 
     public void setBalance(Balance balance) {
         this.balance = balance;
+    }
+
+    public Integer getNumbersOfQuota() {
+        return numbersOfQuota;
+    }
+
+    public void setNumbersOfQuota(Integer numbersOfQuota) {
+        this.numbersOfQuota = numbersOfQuota;
+    }
+
+    public Integer getRemainingQuotas() {
+        return remainingQuotas;
+    }
+
+    public void setRemainingQuotas(Integer remainingQuotas) {
+        this.remainingQuotas = remainingQuotas;
     }
 }
