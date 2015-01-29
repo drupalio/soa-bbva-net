@@ -38,7 +38,6 @@ public class AccountsMapper extends AbstractBbvaConfigurableMapper implements IA
 	protected void configure(MapperFactory factory) {
 
 		super.configure(factory);
-		factory.getConverterFactory().registerConverter(new DateToStringConverter(edate));
 
 		// Map DTOIntCheckbook <-> CheckBook
 		factory.classMap(DTOIntCheckbook.class, Checkbook.class).field("id", "id").field("firstCheck", "firstCheck")
