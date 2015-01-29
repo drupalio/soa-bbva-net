@@ -4,6 +4,8 @@ import java.util.ArrayList;
 
 import com.bbva.czic.accounts.business.dto.DTOIntAccMovementsResume;
 import com.bbva.czic.accounts.business.dto.DTOIntAccount;
+import com.bbva.czic.accounts.business.dto.DTOIntCheck;
+import com.bbva.czic.accounts.business.dto.DTOIntCheckFilter;
 import com.bbva.czic.accounts.business.dto.DTOIntCheckbook;
 import com.bbva.czic.accounts.business.dto.DTOIntFilterAccount;
 import com.bbva.czic.accounts.business.dto.DTOIntFilterMovResumes;
