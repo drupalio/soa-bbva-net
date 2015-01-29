@@ -14,8 +14,8 @@ public class DTOIntAccMovementsResumesFilter {
 
 	@NotNull
 	private String customerId;
-	private Date startDate;
-	private Date endDate;
+	private String startDate;
+	private String endDate;
 	
 	public DTOIntAccMovementsResumesFilter(){
 	}
@@ -26,16 +26,20 @@ public class DTOIntAccMovementsResumesFilter {
 	public void setCustomerId(String customerId) {
 		this.customerId = customerId;
 	}
-	public Date getStartDate() {
+
+	public String getStartDate() {
 		return startDate;
 	}
-	public void setStartDate(Date startDate) {
+
+	public void setStartDate(String startDate) {
 		this.startDate = startDate;
 	}
-	public Date getEndDate() {
+
+	public String getEndDate() {
 		return endDate;
 	}
-	public void setEndDate(Date endDate) {
+
+	public void setEndDate(String endDate) {
 		this.endDate = endDate;
 	}
 
