@@ -24,10 +24,10 @@ public class TransaccionOznyMock implements InvocadorTransaccion<PeticionTransac
         RespuestaTransaccionOzny resultado = new RespuestaTransaccionOzny();
         FormatoOZECNYS0 formato = new FormatoOZECNYS0();
       formato.setValcheq(new BigDecimal("1000000"));
-        formato.setNumcheq("01020304050607");
+        formato.setNumcheq("002233");
         formato.setFechmod(new Date());
         formato.setFechemi(new Date());
-        formato.setEstcheq("Activa");
+        formato.setEstcheq("Solicitado");
 
         CopySalida copy = new CopySalida();
         copy.setCopy(formato);

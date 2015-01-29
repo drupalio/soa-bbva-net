@@ -15,11 +15,13 @@ import com.bbva.czic.dto.net.Check;
 import com.bbva.czic.dto.net.Checkbook;
 import com.bbva.czic.dto.net.EnumCheckbookStatus;
 import com.bbva.czic.dto.net.MonthlyBalances;
+import com.bbva.czic.routine.commons.rm.utils.converter.BigDecimalMoneyConverter;
 import com.bbva.czic.routine.commons.rm.utils.errors.EnumError;
 import com.bbva.czic.routine.commons.rm.utils.fiql.FiqlType;
 import com.bbva.czic.routine.commons.rm.utils.mappers.AbstractBbvaConfigurableMapper;
 import com.bbva.czic.routine.commons.rm.utils.mappers.Mapper;
 import com.bbva.czic.routine.mapper.MapperFactory;
+import com.bbva.czic.routine.mapper.converter.builtin.DateToStringConverter;
 import com.bbva.jee.arq.spring.core.log.I18nLog;
 import com.bbva.jee.arq.spring.core.log.I18nLogFactory;
 import com.bbva.jee.arq.spring.core.servicing.gce.BusinessServiceException;
@@ -36,6 +38,7 @@ public class AccountsMapper extends AbstractBbvaConfigurableMapper implements IA
 	protected void configure(MapperFactory factory) {
 
 		super.configure(factory);
+		factory.getConverterFactory().registerConverter(new DateToStringConverter(edate));
 
 		// Map DTOIntCheckbook <-> CheckBook
 		factory.classMap(DTOIntCheckbook.class, Checkbook.class).field("id", "id").field("firstCheck", "firstCheck")
@@ -177,25 +180,6 @@ public class AccountsMapper extends AbstractBbvaConfigurableMapper implements IA
 	public Check map(DTOIntCheck intCheck) {
 		log.info("map- return:Check-parameter:dtoIntExecutive");
 		return map(intCheck, Check.class);
-	}
-
-	@Override
-	public Check mapCheck(DTOIntCheck intCheck) {
-		final Check check = new Check();
-
-		check.setId(intCheck.getId());
-
-		final Calendar issueDate = Calendar.getInstance();
-		issueDate.setTime(intCheck.getIssueDate());
-		check.setIssueDate(issueDate);
-		check.setValue(intCheck.getValue());
-		check.setStatus(intCheck.getStatus());
-
-		final Calendar modifiedDate = Calendar.getInstance();
-		modifiedDate.setTime(intCheck.getModifiedDate());
-		check.setModifiedDate(modifiedDate);
-
-		return check;
 	}
 
 	@Override
