@@ -149,4 +149,28 @@ public class SrvCustomersV01 implements ISrvCustomersV01, com.bbva.jee.arq.sprin
 		// 1. Invoke SrvIntCustomers and Mapping to canonical DTO
 		return srvIntCustomers.getCustomer(customerId);
 	}
+
+	@Override
+	@ApiOperation(value = "Returns the customer information for showing in global position", notes = "Customer Information", response = Customer.class)
+	@ApiResponses(value = { @ApiResponse(code = -1, message = "aliasGCE1"),
+			@ApiResponse(code = -1, message = "aliasGCE2"),
+			@ApiResponse(code = 200, message = "Found Sucessfully", response = Customer.class),
+			@ApiResponse(code = 400, message = "Wrong parameters"),
+			@ApiResponse(code = 409, message = "Data not found"), @ApiResponse(code = 500, message = "Technical Error") })
+	@GET
+	@ElementClass(response = Customer.class)
+	@Path("/{customerId}/custommerChannels/{channelId}")
+	@SMC(registryID = "SMCCO1400023", logicalID = "getCustomer")
+	public Customer addChannel(@ApiParam(value = "Claim identifier param") @PathParam("customerId") String customerId,
+							   @ApiParam(value = "Claim channerlid param") @PathParam("channelId") String channelId) {
+
+		log.info("Into addChannel...");
+
+		if(customerId.trim().equals("null") || customerId.trim().isEmpty() || channelId.trim().equals("null") || channelId.trim().isEmpty()){
+			throw new BusinessServiceException(EnumError.WRONG_PARAMETERS.getAlias());
+		}
+
+		// 1. Invoke SrvIntCustomers and Mapping to canonical DTO
+		return srvIntCustomers.addChannel(customerId, channelId);
+	}
 }

@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
+import com.bbva.czic.dto.net.Customer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -175,6 +176,10 @@ public class CustomersDAOImpl implements CustomersDAO {
 		log.info("CustDAO: Into getCustomer...");
 		log.info("CustDAO: getCustomer params(customerId):" + customerId);
 		return txGetCustomer.invoke(customerId);
+	}
+
+	public DTOIntCustomer addChannel(final String customerId, final String channelId){
+		return null;
 	}
 
 }

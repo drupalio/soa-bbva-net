@@ -5,21 +5,29 @@ import java.util.Calendar;
 
 import com.bbva.czic.dto.net.*;
 import com.bbva.jee.arq.spring.core.servicing.utils.Money;
+import org.hibernate.validator.constraints.Length;
+
+import javax.validation.constraints.NotNull;
 
 public class DTOIntMovement {
 
+	@NotNull
 	private String id;
 
+	@NotNull
 	private String concept;
 
+	@NotNull
 	private Calendar transactionDate;
 
+	@NotNull
 	private Operation operation;
 
-	private String status;
 
+	@NotNull
 	private Money value;
 
+	@NotNull
 	private Money balance;
 
 	public String getId() {
@@ -58,16 +66,6 @@ public class DTOIntMovement {
 	public void setOperation(Operation operation) {
 		this.operation = operation;
 	}
-
-	public String getStatus() {
-		return status;
-	}
-
-
-	public void setStatus(String status) {
-		this.status = status;
-	}
-
 
 	public Money getValue() {
 		return value;
