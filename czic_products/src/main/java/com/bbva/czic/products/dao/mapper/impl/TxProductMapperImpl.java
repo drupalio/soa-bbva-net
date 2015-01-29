@@ -9,8 +9,11 @@ import com.bbva.czic.products.business.dto.DTOIntProduct;
 import com.bbva.czic.products.dao.mapper.TxProductMapper;
 import com.bbva.czic.products.dao.model.oznt.FormatoOZECNTE0;
 import com.bbva.czic.products.dao.model.oznt.FormatoOZECNTS0;
+import com.bbva.czic.routine.commons.rm.utils.mappers.AbstractBbvaTxConfigurableMapper;
+import com.bbva.czic.routine.commons.rm.utils.mappers.Mapper;
 
-public class TxProductMapperImpl implements TxProductMapper{
+@Mapper(value = "txProductMapper")
+public class TxProductMapperImpl extends AbstractBbvaTxConfigurableMapper  implements TxProductMapper{
 
 	
 	@Override
