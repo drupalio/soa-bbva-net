@@ -19,6 +19,7 @@ privileged aspect FormatoOZNCSNJ0_Roo_ToString {
         sb.append("Mntosol: ").append(getMntosol()).append(", ");
         sb.append("Numcont: ").append(getNumcont()).append(", ");
         sb.append("Pagomin: ").append(getPagomin()).append(", ");
+        sb.append("Saldodi: ").append(getSaldodi()).append(", ");
         sb.append("Saldope: ").append(getSaldope()).append(", ");
         sb.append("Saldoto: ").append(getSaldoto()).append(", ");
         sb.append("Tipprod: ").append(getTipprod());

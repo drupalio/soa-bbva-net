@@ -50,6 +50,7 @@ public class TxLoanMapper extends AbstractBbvaTxConfigurableMapper implements IT
 				.field("tipprod", "type")
 				.field("desctar", "name")
 				.field("saldoto", "balance.total")
+		           .field("saldodi", "balance.availableBalance")
 				.field("pagomin", "payment.minimumPayment")
 				.field("mntosol", "debt.total")
 				.field("saldope", "debt.availableBalance")

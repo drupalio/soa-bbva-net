@@ -88,7 +88,7 @@ public class SrvLoanV01 implements ISrvLoanV01,	com.bbva.jee.arq.spring.core.ser
 	public Loan getRotaryQuota(
 			@ApiParam(value = "Claim identifier param") @PathParam("idLoan") String idLoan) {
 
-		if (idLoan == null || idLoan.trim().isEmpty()) {
+		if (idLoan == null || idLoan.trim().isEmpty() || idLoan.trim().equalsIgnoreCase("null")) {
 			throw new BusinessServiceException(EnumError.WRONG_PARAMETERS.getAlias());
 		}
 		return  iLoanMapper.map(isrvIntLoan.getRotaryQuota(idLoan));
