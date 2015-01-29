@@ -13,6 +13,7 @@ public class DTOIntCheckFilter {
     private String month;
     @NotNull
     @NotEmpty
+    @Size(min = 9, max = 9)
     private String checkId;
     private String startDate;
     private String endDate;

@@ -54,5 +54,10 @@
 		<message lang="en">Accounts not found.</message>
 		<message lang="es">No existen datos para la búsqueda realizada.</message>
 	</error-definition>
+    <error-definition severity="ERROR" alias="filterEmpty" code="2" servicing:http-status="400">
+		<message>Empty filter</message>
+		<message lang="en">Empty filter</message>
+		<message lang="es">No existen un filtro</message>
+	</error-definition>
 
 </error-definitions>

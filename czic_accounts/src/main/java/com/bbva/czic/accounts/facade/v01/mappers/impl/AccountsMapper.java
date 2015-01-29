@@ -16,11 +16,14 @@ import com.bbva.czic.dto.net.Check;
 import com.bbva.czic.dto.net.Checkbook;
 import com.bbva.czic.dto.net.EnumCheckbookStatus;
 import com.bbva.czic.dto.net.MonthlyBalances;
+import com.bbva.czic.routine.commons.rm.utils.EDateFormat;
+import com.bbva.czic.routine.commons.rm.utils.converter.BigDecimalMoneyConverter;
 import com.bbva.czic.routine.commons.rm.utils.errors.EnumError;
 import com.bbva.czic.routine.commons.rm.utils.fiql.FiqlType;
 import com.bbva.czic.routine.commons.rm.utils.mappers.AbstractBbvaConfigurableMapper;
 import com.bbva.czic.routine.commons.rm.utils.mappers.Mapper;
 import com.bbva.czic.routine.mapper.MapperFactory;
+import com.bbva.czic.routine.mapper.converter.builtin.DateToStringConverter;
 import com.bbva.jee.arq.spring.core.log.I18nLog;
 import com.bbva.jee.arq.spring.core.log.I18nLogFactory;
 import com.bbva.jee.arq.spring.core.servicing.gce.BusinessServiceException;
@@ -38,6 +41,11 @@ public class AccountsMapper extends AbstractBbvaConfigurableMapper implements
 	protected void configure(MapperFactory factory) {
 
 		super.configure(factory);
+		/**
+		 * Convert HOST Date to String
+		 */
+		factory.getConverterFactory().registerConverter(
+				new DateToStringConverter(EDateFormat.DIA_MES_ANIO.getPattern()));
 
 		// Map DTOIntCheckbook <-> CheckBook
 		factory.classMap(DTOIntCheckbook.class, Checkbook.class)
@@ -107,10 +115,10 @@ public class AccountsMapper extends AbstractBbvaConfigurableMapper implements
 		dtoFilter.setPageSize(paginationSize);
 
 		try {
-			dtoFilter.setStartDate(formatter.parse(this.getGeValue(filter,
-					"issueDate")));
-			dtoFilter.setEndDate(formatter.parse(this.getLeValue(filter,
-					"issueDate")));
+
+			dtoFilter.setStartDate(this.getGeValue(filter, "issueDate") != null ? formatter.parse(this.getGeValue(filter, "issueDate")) : null);
+			dtoFilter.setEndDate(this.getLeValue(filter, "issueDate") != null ? formatter.parse(this.getLeValue(filter, "issueDate")): null);
+
 		} catch (ParseException e) {
 			throw new BusinessServiceException(
 					EnumError.WRONG_PARAMETERS.getAlias());
@@ -201,26 +209,8 @@ public class AccountsMapper extends AbstractBbvaConfigurableMapper implements
 	}
 
 	@Override
-	public Check mapCheck(DTOIntCheck intCheck) {
-		final Check check = new Check();
-
-		check.setId(intCheck.getId());
-
-		final Calendar issueDate = Calendar.getInstance();
-		issueDate.setTime(intCheck.getIssueDate());
-		check.setIssueDate(issueDate);
-		check.setValue(intCheck.getValue());
-		check.setStatus(intCheck.getStatus());
-
-		final Calendar modifiedDate = Calendar.getInstance();
-		modifiedDate.setTime(intCheck.getModifiedDate());
-		check.setModifiedDate(modifiedDate);
-
-		return check;
-	}
-
-	@Override
 	public Checkbook mapCheckbooks(DTOIntCheckbook intCheckbook) {
+
 		final Checkbook checkbook = new Checkbook();
 		checkbook.setId(intCheckbook.getId());
 		checkbook.setFirstCheck(intCheckbook.getFirstCheck() + "");
