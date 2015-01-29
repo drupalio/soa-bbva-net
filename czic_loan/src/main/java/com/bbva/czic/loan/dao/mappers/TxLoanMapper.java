@@ -46,7 +46,7 @@ public class TxLoanMapper extends AbstractBbvaTxConfigurableMapper implements IT
 
 		// Map  FormatoOZNCSNJ0 DTOIntLoan
 		factory.classMap(FormatoOZNCSNJ0.class, DTOIntLoan.class)
-				.field("numcont", "id")
+				.field("numcont", "id")    
 				.field("tipprod", "type")
 				.field("desctar", "name")
 				.field("saldoto", "balance.total")
