@@ -9,15 +9,16 @@ import com.bbva.czic.routine.mapper.metadata.Type;
 public class StringVisibilityConverter extends BidirectionalConverter<String, Boolean> {
 
 	private static final String VISIBLE = "C";
+	private static final String HIDDEN = "C";
 
 	@Override
 	public Boolean convertTo(String source, Type<Boolean> destinationType) {
-		return VISIBLE.equalsIgnoreCase(source);
+		return !VISIBLE.equalsIgnoreCase(source);
 	}
 
 	@Override
 	public String convertFrom(Boolean source, Type<String> destinationType) {
-		return (source) ? "C" : "V";
+		return (source) ? VISIBLE : HIDDEN;
 	}
 
 }

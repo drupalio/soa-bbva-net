@@ -351,6 +351,22 @@
 			<artifactId>cxf-rt-rs-extension-search</artifactId>
 			<version>${cxf.version}</version>
 		</dependency>
+
+		<!-- <dependency> -->
+		<!-- <groupId>com.bbva.czic.cards</groupId> -->
+		<!-- <artifactId>czic_cards</artifactId> -->
+		<!-- <version>1.0.0</version> -->
+		<!-- </dependency> -->
+		<!-- <dependency> -->
+		<!-- <groupId>com.bbva.czic.movements</groupId> -->
+		<!-- <artifactId>czic_movements</artifactId> -->
+		<!-- <version>1.0.0</version> -->
+		<!-- </dependency> -->
+		<!-- <dependency> -->
+		<!-- <groupId>com.bbva.czic.movements</groupId> -->
+		<!-- <artifactId>czic_movements</artifactId> -->
+		<!-- <version>1.0.0</version> -->
+		<!-- </dependency> -->
 	</dependencies>
 	<build>
 		<plugins>
@@ -499,10 +515,10 @@
 					</dependency>
 				</dependencies>
 			</plugin>
-			<!--<plugin> <groupId>org.apache.maven.plugins</groupId> <artifactId>maven-site-plugin</artifactId>
-				<version>${maven-site-plugin.version}</version> <configuration> <reportPlugins/>
-				</configuration> <executions> <execution> <id>crearJar</id> <phase>compile</phase>
-				<goals> <goal>jar</goal> </goals> </execution> </executions> </plugin >-->
+			<!--plugin> <groupId>org.apache.maven.plugins</groupId> <artifactId>maven-site-plugin</artifactId> 
+				<version>${maven-site-plugin.version}</version> <configuration> <reportPlugins/> 
+				</configuration> <executions> <execution> <id>crearJar</id> <phase>compile</phase> 
+				<goals> <goal>jar</goal> </goals> </execution> </executions> </plugin -->
 		</plugins>
 		<!-- Versiones de plugins de Maven para Frontend Spring -->
 		<pluginManagement>

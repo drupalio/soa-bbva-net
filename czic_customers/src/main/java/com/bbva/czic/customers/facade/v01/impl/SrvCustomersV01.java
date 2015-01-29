@@ -116,7 +116,7 @@ public class SrvCustomersV01 implements ISrvCustomersV01, com.bbva.jee.arq.sprin
 	@SMC(registryID = "SMCCO1400007", logicalID = "getlistAccountsMovementsResume")
 	public List<AccMovementsResume> listAccountsMovementsResume(
 			@ApiParam(value = "Claim identifier param") @PathParam("customerId") String customerId,
-			@ApiParam(value = "filter param") @DefaultValue("null") @QueryParam("$filter") String filter) {
+			@ApiParam(value = "filter param") @QueryParam("$filter") String filter) {
 
 		log.info("Into listAccountsMovementsResume...");
 

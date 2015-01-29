@@ -24,7 +24,7 @@ public class SrvCardsV01Mock {
         List<DTOIntCardCharge> listaDtoIntCardCharge = new ArrayList<DTOIntCardCharge>();
         List<CardCharge> listaDTOCardCharge = new ArrayList<CardCharge>();
 
-        listaDtoIntCardCharge = iSrvIntCards.getCreditCardCharges(id, filter);
+//        listaDtoIntCardCharge = iSrvIntCards.getCreditCardCharges(id, filter);
 
         for (DTOIntCardCharge dtoIntCardCharge : listaDtoIntCardCharge) {
             CardCharge cardCharge = new CardCharge();

@@ -29,11 +29,12 @@ public class TransaccionOznsMock implements InvocadorTransaccion<PeticionTransac
 		final DataFactory dataFactory = new DataFactory();
 		CopySalida copySalida = new CopySalida();
 		
-		salida.setEstachq(EnumCheckbookStatus.SOLICITADO.toString());
-		salida.setFecemis(dataFactory.getBirthDate());
-		salida.setFecentr(dataFactory.getBirthDate());
+		salida.setEstachq("H");
+		salida.setFecemis(dataFactory.getDate(2014, 12, 12));
+		salida.setFecentr(dataFactory.getDate(2014, 12, 12));
 		salida.setPrimchq(dataFactory.getNumberText(10));
 		salida.setUltichq(dataFactory.getNumberText(10));
+		salida.setTotachq(dataFactory.getNumberText(3));
 	
 		copySalida.setCopy(salida);
 		respuesta.getCuerpo().getPartes().add(copySalida);

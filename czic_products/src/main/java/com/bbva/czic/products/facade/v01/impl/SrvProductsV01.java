@@ -1,10 +1,14 @@
 package com.bbva.czic.products.facade.v01.impl;
 
+import java.util.List;
+
 import javax.annotation.Resource;
+import javax.ws.rs.DefaultValue;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.HttpHeaders;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
@@ -14,11 +18,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.bbva.czic.dto.net.Conditions;
+import com.bbva.czic.dto.net.Extract;
 import com.bbva.czic.products.business.ISrvIntProducts;
-import com.bbva.czic.products.business.dto.DTOIntProduct;
+import com.bbva.czic.products.business.dto.*;
 import com.bbva.czic.products.facade.v01.ISrvProductsV01;
 import com.bbva.czic.products.facade.v01.mapper.IProductsMapper;
 import com.bbva.czic.routine.commons.rm.utils.errors.EnumError;
+import com.bbva.czic.routine.commons.rm.utils.validator.impl.FiqlValidator;
 import com.bbva.jee.arq.spring.core.log.I18nLog;
 import com.bbva.jee.arq.spring.core.log.I18nLogFactory;
 import com.bbva.jee.arq.spring.core.servicing.annotations.SMC;
@@ -91,6 +97,40 @@ public class SrvProductsV01 implements ISrvProductsV01,
 
 		// 3. Invoke SrvIntCustomers and Mapping to canonical DTO
 		return productsMapper.map(srvIntProducts.getConditions(dtoIntProduct));
+	}
+
+	@Override
+	@ApiOperation(value = "Listado Extractos", notes = "Listado De Extractos ", response = Response.class)
+	@ApiResponses(value = {
+			@ApiResponse(code = -1, message = "aliasGCE1"),
+			@ApiResponse(code = -1, message = "aliasGCE2"),
+			@ApiResponse(code = 200, message = "Found Sucessfully", response = Response.class),
+			@ApiResponse(code = 500, message = "Technical Error") })
+	@GET
+	@Path("/{productId}/listExtracts")
+	@SMC(registryID = "Pending", logicalID = "listExtracts")
+	public List<Extract> listExtracts(
+			@ApiParam(value = "identifier param") @PathParam("id") String productId,
+			@ApiParam(value = "filter param") @DefaultValue("null") @QueryParam("$filter") String filter,
+			@ApiParam(value = "fields param") @DefaultValue("null") @QueryParam("paginationKey") Integer paginationKey,
+			@ApiParam(value = "expands param") @DefaultValue("null") @QueryParam("pageSize") Integer pageSize) {
+		// 1. Validate parameter
+		if (productId == null || productId.trim().isEmpty()) {
+			throw new BusinessServiceException(
+					EnumError.WRONG_PARAMETERS.getAlias());
+		}
+
+		// 2. Validate filter
+		new FiqlValidator(filter).exist().hasGeAndLe("month")
+				.hasGeAndLe("year").validate();
+
+		// Mapeo del filtro a DTO
+		DTOIntExtract dtoIntFilterExtract = productsMapper
+				.getDtoIntFilterExtract(productId, filter, paginationKey,
+						pageSize);
+		// 3. Invoke SrvIntCustomers and Mapping to canonical DTO
+		return productsMapper.mapExtracts(srvIntProducts
+				.listExtracts(dtoIntFilterExtract));
 	}
 
 }

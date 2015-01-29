@@ -32,4 +32,6 @@ public interface ISrvIntAccounts {
 
 	public DTOIntCheckbook getCheckbooks(DTOIntCheckbook intCheckbook);
 
+	public DTOIntCheck getChecks(DTOIntCheckFilter dtoIntCheckFilter);
+
 }

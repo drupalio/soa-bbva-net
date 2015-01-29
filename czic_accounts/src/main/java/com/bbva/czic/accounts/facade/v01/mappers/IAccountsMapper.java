@@ -24,7 +24,7 @@ public interface IAccountsMapper {
 
 	Check mapCheck(DTOIntCheck intCheck);
 
-	Checkbook mapCheckbook(DTOIntCheckbook intCheckbook);
+	Checkbook mapCheckbooks(DTOIntCheckbook intCheckbook);
 
 	DTOIntFilterAccount getDTOIntFilter(String idAccount, String filter);
 
@@ -33,4 +33,8 @@ public interface IAccountsMapper {
 	DTOIntFilterMovResumes getDtoIntFilterMovResumes(String idAccount, String filter);
 	
 	DTOIntCheckbook getDtoIntCheckbook(String idAccount, String idCheckbook);
+
+	public DTOIntCheckFilter getDTOIntFilterChecks(String checkId,String accountId);
+
+	public Check map(DTOIntCheck intCheck);
 }
