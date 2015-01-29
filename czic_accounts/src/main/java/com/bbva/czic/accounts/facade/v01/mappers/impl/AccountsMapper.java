@@ -16,6 +16,7 @@ import com.bbva.czic.dto.net.Check;
 import com.bbva.czic.dto.net.Checkbook;
 import com.bbva.czic.dto.net.EnumCheckbookStatus;
 import com.bbva.czic.dto.net.MonthlyBalances;
+import com.bbva.czic.routine.commons.rm.utils.EDateFormat;
 import com.bbva.czic.routine.commons.rm.utils.converter.BigDecimalMoneyConverter;
 import com.bbva.czic.routine.commons.rm.utils.errors.EnumError;
 import com.bbva.czic.routine.commons.rm.utils.fiql.FiqlType;
@@ -40,6 +41,11 @@ public class AccountsMapper extends AbstractBbvaConfigurableMapper implements
 	protected void configure(MapperFactory factory) {
 
 		super.configure(factory);
+		/**
+		 * Convert HOST Date to String
+		 */
+		factory.getConverterFactory().registerConverter(
+				new DateToStringConverter(EDateFormat.DIA_MES_ANIO.getPattern()));
 
 		// Map DTOIntCheckbook <-> CheckBook
 		factory.classMap(DTOIntCheckbook.class, Checkbook.class)
