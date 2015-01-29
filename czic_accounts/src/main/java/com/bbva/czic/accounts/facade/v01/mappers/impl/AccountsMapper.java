@@ -115,10 +115,10 @@ public class AccountsMapper extends AbstractBbvaConfigurableMapper implements
 		dtoFilter.setPageSize(paginationSize);
 
 		try {
-			dtoFilter.setStartDate(formatter.parse(this.getGeValue(filter,
-					"issueDate")));
-			dtoFilter.setEndDate(formatter.parse(this.getLeValue(filter,
-					"issueDate")));
+
+			dtoFilter.setStartDate(this.getGeValue(filter, "issueDate") != null ? formatter.parse(this.getGeValue(filter, "issueDate")) : null);
+			dtoFilter.setEndDate(this.getLeValue(filter, "issueDate") != null ? formatter.parse(this.getLeValue(filter, "issueDate")): null);
+
 		} catch (ParseException e) {
 			throw new BusinessServiceException(
 					EnumError.WRONG_PARAMETERS.getAlias());
