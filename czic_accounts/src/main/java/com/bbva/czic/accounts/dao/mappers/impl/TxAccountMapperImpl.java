@@ -1,10 +1,11 @@
 package com.bbva.czic.accounts.dao.mappers.impl;
 
-import com.bbva.czic.accounts.business.dto.*;
 import java.util.ArrayList;
 
 import com.bbva.czic.accounts.business.dto.DTOIntAccMovementsResume;
 import com.bbva.czic.accounts.business.dto.DTOIntAccount;
+import com.bbva.czic.accounts.business.dto.DTOIntCheck;
+import com.bbva.czic.accounts.business.dto.DTOIntCheckFilter;
 import com.bbva.czic.accounts.business.dto.DTOIntCheckbook;
 import com.bbva.czic.accounts.business.dto.DTOIntFilterAccount;
 import com.bbva.czic.accounts.business.dto.DTOIntFilterMovResumes;
@@ -18,14 +19,14 @@ import com.bbva.czic.accounts.dao.model.oznu.FormatoOZECNUE0;
 import com.bbva.czic.accounts.dao.model.oznu.FormatoOZECNUS0;
 import com.bbva.czic.accounts.dao.model.oznv.FormatoOZECNVE0;
 import com.bbva.czic.accounts.dao.model.oznv.FormatoOZECNVS0;
+import com.bbva.czic.accounts.dao.model.ozny.FormatoOZECNYE0;
+import com.bbva.czic.accounts.dao.model.ozny.FormatoOZECNYS0;
 import com.bbva.czic.routine.commons.rm.utils.converter.StringMoneyConverter;
 import com.bbva.czic.routine.commons.rm.utils.mappers.AbstractBbvaTxConfigurableMapper;
 import com.bbva.czic.routine.commons.rm.utils.mappers.Mapper;
 import com.bbva.czic.routine.mapper.CustomMapper;
 import com.bbva.czic.routine.mapper.MapperFactory;
 import com.bbva.czic.routine.mapper.MappingContext;
-
-import java.util.ArrayList;
 
 @Mapper(value = "txAccountMapper")
 public class TxAccountMapperImpl extends AbstractBbvaTxConfigurableMapper implements TxAccountMapper {
@@ -78,12 +79,27 @@ public class TxAccountMapperImpl extends AbstractBbvaTxConfigurableMapper implem
 		// Map DTOIntCheckbook <-> FormatoOZECNSE0 (OZNS)
 		factory.classMap(DTOIntCheckbook.class, FormatoOZECNSS0.class)
 				.field("firstCheck", "primchq").field("lastCheck", "ultichq").field("totalCheck", "totachq").field("requestDate", "fecemis")
-				.field("deliveryDate", "fecentr").field("actualState", "estachq").byDefault().register();
+				.field("deliveryDate", "fecentr").field("deliveryDate", "fecentr").field("actualState", "estachq").byDefault().register();
 
 		// Map FormatoOZECNUS0 <-> DTOIntAccMovementsResume (OZNU)
 		factory.classMap(DTOIntAccMovementsResume.class, FormatoOZECNUS0.class).field("balance", "saldtot")
 				.field("income", "valdepo").field("outcome", "valcarg").field("month", "mes").byDefault()
 				.register();
+
+		/**
+		 * MAPEO DE ENTRADAS
+		 */
+		// Map DTOIntFilter <-> FormatoOZNCENA0 (OZNy)
+		factory.classMap(FormatoOZECNYE0.class, DTOIntCheckFilter.class).field("numcheq", "checkId").field("numprod", "accountId").byDefault()
+				.register();
+
+		/**
+		 * MAPEO DE SALIDAS
+		 */
+		// Map FormatoOZECNVS0 <-> DTOIntMonthlyBalances (OZNy)
+		factory.classMap(FormatoOZECNYS0.class, DTOIntCheck.class).field("numcheq", "id").field("fechemi", "issueDate")
+				.field("valcheq", "value.amount").field("estcheq", "status")
+				.field("fechmod", "modifiedDate").byDefault().register();
 
 	}
 
@@ -126,6 +142,17 @@ public class TxAccountMapperImpl extends AbstractBbvaTxConfigurableMapper implem
 	public DTOIntCheckbook mapOutOzns(FormatoOZECNSS0 formatOutput) {
 		return map(formatOutput, DTOIntCheckbook.class);
 	}
+
+	@Override
+	public FormatoOZECNYE0 mapInOzny(DTOIntCheckFilter dtoIn) {
+		return map(dtoIn, FormatoOZECNYE0.class);
+	}
+
+	@Override
+	public DTOIntCheck mapOutOzny(FormatoOZECNYS0 formatOutput) {
+		return map(formatOutput, DTOIntCheck.class);
+	}
+
 
 	/**
 	 * @author Entelgy

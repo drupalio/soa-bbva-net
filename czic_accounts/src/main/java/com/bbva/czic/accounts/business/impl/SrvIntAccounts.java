@@ -98,4 +98,20 @@ public class SrvIntAccounts implements ISrvIntAccounts {
 		return result;
 	}
 
+	@Override
+	public DTOIntCheck getChecks(DTOIntCheckFilter dtoIntCheckFilter) {
+
+		// 1. Validate DtoIntFilterAccount
+		DtoValidator.validate(dtoIntCheckFilter);
+
+		// 2. Get response
+		final DTOIntCheck result = accountsDAO.getChecks(dtoIntCheckFilter);
+
+		// 3. Validate output
+		DtoValidator.validate(result);
+
+		log.info(" getAccountMonthlyBalance monthlyBalance ");
+		return result;
+	}
+
 }

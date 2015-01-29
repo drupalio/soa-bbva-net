@@ -25,15 +25,16 @@ import com.bbva.jee.arq.spring.core.log.I18nLogFactory;
 import com.bbva.jee.arq.spring.core.servicing.gce.BusinessServiceException;
 import com.bbva.jee.arq.spring.core.servicing.utils.BusinessServicesToolKit;
 
+import javax.annotation.Resource;
+
 @Service
 public class SrvIntCards implements ISrvIntCards {
 
 	private static I18nLog log = I18nLogFactory.getLogI18n(SrvIntCards.class,
 			"META-INF/spring/i18n/log/mensajesLog");
 
-	@Autowired
+	@Resource(name = "cards-dao")
 	CardsDAO cardsDAO;
-	private static final String FILTERERROR = "FilterError";
 
 	/**
 	 * Metodo encargado de traer el listado de los cargos para una tarjeta de
@@ -46,6 +47,10 @@ public class SrvIntCards implements ISrvIntCards {
 
 		DtoValidator.validate(filter);
 
-		return null;
+		List<DTOIntCardCharge> result = cardsDAO.getCreditCardCharges(filter);
+
+		DtoValidator.validate(result);
+
+		return result;
 	}
 }
