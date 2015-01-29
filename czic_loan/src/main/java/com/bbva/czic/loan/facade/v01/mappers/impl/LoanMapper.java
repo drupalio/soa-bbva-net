@@ -39,7 +39,7 @@ public class LoanMapper extends AbstractBbvaConfigurableMapper implements ILoanM
 		// Map DTOIntLoan <-> Loan
 		factory.classMap(DTOIntLoan.class, Loan.class)
 
-				.field("id", "id")
+				/*.field("id", "id")
 				.field("type", "type")
 				.field("name", "name")
 				.field("balance.total", "balance.total")
@@ -51,14 +51,14 @@ public class LoanMapper extends AbstractBbvaConfigurableMapper implements ILoanM
 				.field("payment.shortDate", "payment.shortDate")
 				.field("payment.fees", "payment.fees")
 				.field("payment.numbersOfQuota", "payment.numbersOfQuota")
-				.field("status", "status")
-			/*	.field("id", "id")
+				.field("status", "status")*/
+				.field("id", "id")
 				.field("type", "type")
 				.field("name", "name")
 				.field("status", "status")
 				.field("payment", "payment")
 				.field("debt", "debt")
-				.field("balance", "balance")*/
+				.field("balance", "balance")
 				.byDefault().register();
 
 		// Map DTOIntRotaryQuotaMove <-> RotaryQuotaMove

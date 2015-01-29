@@ -54,7 +54,7 @@ public class TransaccionOznjMock implements	InvocadorTransaccion<PeticionTransac
 		formatoSalida.setHonorar("+00000000000");
 		formatoSalida.setMntosol("+00700000000");
 		formatoSalida.setPagomin("+00576468208");
-		formatoSalida.setSaldope("+00000000000");
+		formatoSalida.setSaldope("+00000000099");
 		formatoSalida.setSaldoto("+00000000000");
 		formatoSalida.setTipprod("QI");
 

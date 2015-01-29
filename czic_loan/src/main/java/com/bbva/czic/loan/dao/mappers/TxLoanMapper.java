@@ -55,7 +55,7 @@ public class TxLoanMapper extends AbstractBbvaTxConfigurableMapper implements IT
 				.field("saldope", "debt.availableBalance")
 				.field("fechaca", "payment.dueDate")
 				.field("fechali", "payment.shortDate")
-				.field("fechaco", "payment.shortDate")
+				.field("fechaco", "payment.paymentDate")
 				.field("honorar", "payment.fees")
 				.field("cuotato", "payment.numbersOfQuota")
 				.field("estadot", "status")
