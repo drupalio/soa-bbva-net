@@ -35,6 +35,7 @@ public class LoanMapper extends AbstractBbvaConfigurableMapper implements ILoanM
 
 		super.configure(factory);
 
+
 		// Map DTOIntLoan <-> Loan
 		factory.classMap(DTOIntLoan.class, Loan.class)
 				.field("id", "id")

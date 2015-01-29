@@ -10,6 +10,7 @@ import com.bbva.czic.accounts.dao.model.ozns.FormatoOZECNSE0;
 import com.bbva.czic.accounts.dao.model.ozns.FormatoOZECNSS0;
 import com.bbva.czic.accounts.dao.model.ozns.PeticionTransaccionOzns;
 import com.bbva.czic.accounts.dao.model.ozns.RespuestaTransaccionOzns;
+import com.bbva.czic.routine.commons.rm.utils.tx.impl.MultiBbvaTransaction;
 import com.bbva.czic.routine.commons.rm.utils.tx.impl.SimpleBbvaTransaction;
 import com.bbva.jee.arq.spring.core.host.InvocadorTransaccion;
 

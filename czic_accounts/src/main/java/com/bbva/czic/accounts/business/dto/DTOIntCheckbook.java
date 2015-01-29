@@ -10,9 +10,9 @@ public class DTOIntCheckbook {
 
 	private String id;
 
-	private Integer firstCheck;
+	private String firstCheck;
 
-	private Integer lastCheck;
+	private String lastCheck;
 
 	private Integer totalCheck;
 
@@ -20,7 +20,7 @@ public class DTOIntCheckbook {
 
 	private Date deliveryDate;
 
-	private DTOIntEnumCheckbookStatus actualState;
+	private String actualState;
 
 	private String idAccount;
 
@@ -40,19 +40,19 @@ public class DTOIntCheckbook {
 		this.id = id;
 	}
 
-	public Integer getFirstCheck() {
+	public String getFirstCheck() {
 		return firstCheck;
 	}
 
-	public void setFirstCheck(Integer firstCheck) {
+	public void setFirstCheck(String firstCheck) {
 		this.firstCheck = firstCheck;
 	}
 
-	public Integer getLastCheck() {
+	public String getLastCheck() {
 		return lastCheck;
 	}
 
-	public void setLastCheck(Integer lastCheck) {
+	public void setLastCheck(String lastCheck) {
 		this.lastCheck = lastCheck;
 	}
 
@@ -80,11 +80,11 @@ public class DTOIntCheckbook {
 		this.deliveryDate = deliveryDate;
 	}
 
-	public DTOIntEnumCheckbookStatus getActualState() {
+	public String getActualState() {
 		return actualState;
 	}
 
-	public void setActualState(DTOIntEnumCheckbookStatus actualState) {
+	public void setActualState(String actualState) {
 		this.actualState = actualState;
 	}
 

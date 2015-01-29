@@ -3,6 +3,7 @@ package com.bbva.czic.accounts.facade.v01.mappers.impl;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
@@ -27,10 +28,11 @@ import com.bbva.jee.arq.spring.core.log.I18nLogFactory;
 import com.bbva.jee.arq.spring.core.servicing.gce.BusinessServiceException;
 
 @Mapper(value = "accounts-mapper")
-public class AccountsMapper extends AbstractBbvaConfigurableMapper implements IAccountsMapper {
+public class AccountsMapper extends AbstractBbvaConfigurableMapper implements
+		IAccountsMapper {
 
-	private static I18nLog log = I18nLogFactory
-			.getLogI18n(AccountsMapper.class, "META-INF/spring/i18n/log/mensajesLog");
+	private static I18nLog log = I18nLogFactory.getLogI18n(
+			AccountsMapper.class, "META-INF/spring/i18n/log/mensajesLog");
 
 	final DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
 
@@ -40,26 +42,37 @@ public class AccountsMapper extends AbstractBbvaConfigurableMapper implements IA
 		super.configure(factory);
 
 		// Map DTOIntCheckbook <-> CheckBook
-		factory.classMap(DTOIntCheckbook.class, Checkbook.class).field("id", "id").field("firstCheck", "firstCheck")
-				.field("lastCheck", "lastCheck").field("totalCheck", "totalCheck").field("actualState", "actualState")
-				.field("deliveryDate", "deliveryDate").field("requestDate", "requestDate").byDefault().register();
+		factory.classMap(DTOIntCheckbook.class, Checkbook.class)
+				.field("id", "id").field("firstCheck", "firstCheck")
+				.field("lastCheck", "lastCheck")
+				.field("totalCheck", "totalCheck")
+				.field("actualState", "actualState")
+				.field("deliveryDate", "deliveryDate")
+				.field("requestDate", "requestDate").byDefault().register();
 
-		factory.classMap(DTOIntBalance.class, Balance.class).field("total", "total")
-				.field("availableBalance", "availableBalance").byDefault().register();
+		factory.classMap(DTOIntBalance.class, Balance.class)
+				.field("total", "total")
+				.field("availableBalance", "availableBalance").byDefault()
+				.register();
 
 		// Map DTOIntAccount <-> FormatoOZECNVE0
-		factory.classMap(DTOIntAccount.class, Account.class).field("name", "name").field("idAccount", "id")
-				.field("balance", "balance").field("listaCheckBook", "checkbooks").byDefault().register();
+		factory.classMap(DTOIntAccount.class, Account.class)
+				.field("name", "name").field("idAccount", "id")
+				.field("balance", "balance")
+				.field("listaCheckBook", "checkbooks").byDefault().register();
 
 		// // Map DTOIntCheck <-> FormatoOZECNVE0
-		factory.classMap(DTOIntCheck.class, Check.class).field("id", "id").field("status", "status")
-				.field("issueDate", "issueDate").field("value", "value").byDefault().register();
+		factory.classMap(DTOIntCheck.class, Check.class).field("id", "id")
+				.field("status", "status").field("issueDate", "issueDate")
+				.field("value", "value").byDefault().register();
 		//
 		// // Map DTOIntMonthlyBalances <-> MonthlyBalances
-		factory.classMap(DTOIntMonthlyBalances.class, MonthlyBalances.class).field("balance", "balance")
-				.field("month", "month").byDefault().register();
+		factory.classMap(DTOIntMonthlyBalances.class, MonthlyBalances.class)
+				.field("balance", "balance").field("month", "month")
+				.byDefault().register();
 
 		// // Map DTOIntAccMovementsResume <-> AccMovementsResume
+
 		factory.classMap(DTOIntAccMovementsResume.class, AccMovementsResume.class).field("month", "month")
 				.field("balance", "balance").field("income", "income").field("outcome", "outcome").byDefault()
 				.register();
@@ -87,7 +100,8 @@ public class AccountsMapper extends AbstractBbvaConfigurableMapper implements IA
 	}
 
 	@Override
-	public DTOIntFilterChecks getDtoIntFilterChecks(String idAccount, String filter, Integer paginationKey, Integer paginationSize) {
+	public DTOIntFilterChecks getDtoIntFilterChecks(String idAccount,
+			String filter, Integer paginationKey, Integer paginationSize) {
 
 		final DTOIntFilterChecks dtoFilter = new DTOIntFilterChecks();
 		dtoFilter.setAccountId(idAccount);
@@ -95,10 +109,13 @@ public class AccountsMapper extends AbstractBbvaConfigurableMapper implements IA
 		dtoFilter.setPageSize(paginationSize);
 
 		try {
-			dtoFilter.setStartDate(formatter.parse(this.getGeValue(filter, "issueDate")));
-			dtoFilter.setEndDate(formatter.parse(this.getLeValue(filter, "issueDate")));
+			dtoFilter.setStartDate(formatter.parse(this.getGeValue(filter,
+					"issueDate")));
+			dtoFilter.setEndDate(formatter.parse(this.getLeValue(filter,
+					"issueDate")));
 		} catch (ParseException e) {
-			throw new BusinessServiceException(EnumError.WRONG_PARAMETERS.getAlias());
+			throw new BusinessServiceException(
+					EnumError.WRONG_PARAMETERS.getAlias());
 		}
 		dtoFilter.setStatus(this.getEqValue(filter, "status"));
 
@@ -106,13 +123,13 @@ public class AccountsMapper extends AbstractBbvaConfigurableMapper implements IA
 	}
 
 	@Override
-	public DTOIntFilterMovResumes getDtoIntFilterMovResumes(String idAccount, String filter) {
+	public DTOIntFilterMovResumes getDtoIntFilterMovResumes(String idAccount,
+			String filter) {
 		final DTOIntFilterMovResumes dtoFilter = new DTOIntFilterMovResumes();
 		dtoFilter.setAccountId(idAccount);
 		dtoFilter.setMonth(this.getGeValue(filter, FiqlType.month.name()));
 		return dtoFilter;
 	}
-	
 
 	@Override
 	public DTOIntCheckbook getDtoIntCheckbook(String idAccount,
@@ -123,9 +140,9 @@ public class AccountsMapper extends AbstractBbvaConfigurableMapper implements IA
 		return dtoIntCheckbook;
 	}
 
-
 	/**
-	 * Metodo encargado de mapear un DTO interno de tipo DTOIntAccount a un DTO externo de tipo Account
+	 * Metodo encargado de mapear un DTO interno de tipo DTOIntAccount a un DTO
+	 * externo de tipo Account
 	 *
 	 * @author David Tafur
 	 * @param dtoIntAccount
@@ -149,30 +166,34 @@ public class AccountsMapper extends AbstractBbvaConfigurableMapper implements IA
 	}
 
 	/**
-	 * Metodo encargado de mapear una lista de tipo DTOIntMonthlyBalances a una lista MonthlyBalances
+	 * Metodo encargado de mapear una lista de tipo DTOIntMonthlyBalances a una
+	 * lista MonthlyBalances
 	 *
 	 * @author David Tafur
 	 * @param listaDtoIntMonthlyBalances
 	 * @return
 	 */
 	@Override
-	public List<MonthlyBalances> mapL(List<DTOIntMonthlyBalances> listaDtoIntMonthlyBalances) {
+	public List<MonthlyBalances> mapL(
+			List<DTOIntMonthlyBalances> listaDtoIntMonthlyBalances) {
 		log.info("map- return: List<MonthlyBalances>-parameter:listaDtoIntMonthlyBalances");
 		return mapAsList(listaDtoIntMonthlyBalances, MonthlyBalances.class);
 	}
 
 	/**
-	 * Metodo encargado de mapear una lista de DTO internos de tipo DTOIntAccMovementsResume, a una lista de DTO de tipo
-	 * AccMovementsResume
+	 * Metodo encargado de mapear una lista de DTO internos de tipo
+	 * DTOIntAccMovementsResume, a una lista de DTO de tipo AccMovementsResume
 	 *
 	 * @author David Tafur
 	 * @param listaDTOIntAccMovementsResume
 	 * @return
 	 */
 	@Override
-	public List<AccMovementsResume> map(List<DTOIntAccMovementsResume> listaDTOIntAccMovementsResume) {
+	public List<AccMovementsResume> map(
+			List<DTOIntAccMovementsResume> listaDTOIntAccMovementsResume) {
 		log.info("map- return:List<AccMovementsResume>-parameter:listaDTOIntAccMovementsResume");
-		return mapAsList(listaDTOIntAccMovementsResume, AccMovementsResume.class);
+		return mapAsList(listaDTOIntAccMovementsResume,
+				AccMovementsResume.class);
 	}
 
 	@Override
@@ -182,11 +203,11 @@ public class AccountsMapper extends AbstractBbvaConfigurableMapper implements IA
 	}
 
 	@Override
-	public Checkbook mapCheckbook(DTOIntCheckbook intCheckbook) {
-		final Checkbook checkbook = new Checkbook();
+	public Checkbook mapCheckbooks(DTOIntCheckbook intCheckbook) {
 
+		final Checkbook checkbook = new Checkbook();
 		checkbook.setId(intCheckbook.getId());
-		checkbook.setFirstCheck(intCheckbook.getFirstCheck());
+		checkbook.setFirstCheck(intCheckbook.getFirstCheck() + "");
 		checkbook.setLastCheck(intCheckbook.getLastCheck());
 		checkbook.setTotalCheck(intCheckbook.getTotalCheck());
 
@@ -197,9 +218,11 @@ public class AccountsMapper extends AbstractBbvaConfigurableMapper implements IA
 		final Calendar deliveryDate = Calendar.getInstance();
 		deliveryDate.setTime(intCheckbook.getDeliveryDate());
 		checkbook.setDeliveryDate(deliveryDate);
-
-		checkbook.setActualState(EnumCheckbookStatus.valueOf(intCheckbook.getActualState().toString()));
-
+		if (intCheckbook.getActualState().equals("H")) {
+			checkbook.setActualState(EnumCheckbookStatus.HABILITADO);
+		} else if (intCheckbook.getActualState().equals("S")) {
+			checkbook.setActualState(EnumCheckbookStatus.SOLICITADO);
+		}
 		return checkbook;
 	}
 

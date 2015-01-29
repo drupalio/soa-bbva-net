@@ -11,8 +11,8 @@ public interface LoanDAO {
 
 	List<DTOIntMovement> listRotaryQuotaMovements(final DTOIntFilterLoan dtoIntFilterLoan);
 
-	DTOIntLoan getRotaryQuota(final DTOIntFilterLoan dtoIntFilterLoan);
+	DTOIntLoan getRotaryQuota(final String idLoan);
 
-	DTOIntRotaryQuotaMove getRotaryQuotaMovement(final DTOIntFilterLoan dtoIntFilterLoan);
+	DTOIntRotaryQuotaMove getRotaryQuotaMovement(final DTOIntFilterRotaryMovement dtoIntFilterRotaryMovement);
 
 }

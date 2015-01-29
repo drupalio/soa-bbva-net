@@ -1,10 +1,7 @@
 package com.bbva.czic.loan.dao.mappers;
 
-import com.bbva.czic.loan.business.dto.DTOIntFilterLoan;
+import com.bbva.czic.loan.business.dto.*;
 
-import com.bbva.czic.loan.business.dto.DTOIntLoan;
-import com.bbva.czic.loan.business.dto.DTOIntMovement;
-import com.bbva.czic.loan.business.dto.DTOIntRotaryQuotaMove;
 import com.bbva.czic.loan.dao.mappers.impl.ITxLoanMapper;
 
 import com.bbva.czic.loan.dao.model.ozni.FormatoOZNCENI0;
@@ -37,10 +34,16 @@ public class TxLoanMapper extends AbstractBbvaTxConfigurableMapper implements IT
 
 		super.configure(factory);
 
-		// Map  FormatoOZNCENJ0 DTOIntLoan
+		/*/ Map  FormatoOZNCENJ0 DTOIntLoan
 		factory.classMap(FormatoOZNCENJ0.class, DTOIntLoan.class)
 				.field("nomtarj", "id").byDefault().register();
 
+		// Map  FormatoOZNCENJ0 DTOIntLoan
+		factory.classMap(FormatoOZNCENK0.class, DTOIntFilterRotaryMovement.class)
+				.field("nomtarj", "idLoan")
+				.field("nommovi", "idMovement")
+				.byDefault().register();
+*/
 		// Map  FormatoOZNCSNJ0 DTOIntLoan
 		factory.classMap(FormatoOZNCSNJ0.class, DTOIntLoan.class)
 				.field("numcont", "id")
