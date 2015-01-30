@@ -22,7 +22,6 @@ public interface ICustomerMapper {
     List<CardCharge> mapCardCharges(List<DTOIntCardCharge> intCardCharges);
 
     DTOIntCardChargeFilter getCreditCardChargesFilter(String customerId, String filter);
-    List<AccMovementsResume> map(List<DTOIntAccMovementsResume> accMovementsResumes);
 
     DTOIntCustomerOperation map(CustomerOperation operation);
 }
