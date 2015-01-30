@@ -1,8 +1,23 @@
-package com.bbva.czic.executives.facade.v01;
+package com.bbva.czic.executives.facade.v01.impl;
+
+import javax.annotation.Resource;
+import javax.ws.rs.DefaultValue;
+import javax.ws.rs.GET;
+import javax.ws.rs.Path;
+import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
+import javax.ws.rs.core.HttpHeaders;
+import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.UriInfo;
+
+import org.apache.cxf.jaxrs.model.wadl.ElementClass;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.bbva.czic.dto.net.Executive;
 import com.bbva.czic.executives.business.ISrvIntExecutives;
 import com.bbva.czic.executives.business.dto.DTOIntExecutivesFilter;
+import com.bbva.czic.executives.facade.v01.ISrvExecutivesV01;
 import com.bbva.czic.executives.facade.v01.mapper.IExecutivesMapper;
 import com.bbva.czic.routine.commons.rm.utils.validator.impl.FiqlValidator;
 import com.bbva.jee.arq.spring.core.log.I18nLog;
@@ -11,16 +26,11 @@ import com.bbva.jee.arq.spring.core.servicing.annotations.SMC;
 import com.bbva.jee.arq.spring.core.servicing.annotations.SN;
 import com.bbva.jee.arq.spring.core.servicing.annotations.VN;
 import com.bbva.jee.arq.spring.core.servicing.utils.BusinessServicesToolKit;
-import com.wordnik.swagger.annotations.*;
-import org.apache.cxf.jaxrs.model.wadl.ElementClass;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
-import javax.annotation.Resource;
-import javax.ws.rs.*;
-import javax.ws.rs.core.HttpHeaders;
-import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.UriInfo;
+import com.wordnik.swagger.annotations.Api;
+import com.wordnik.swagger.annotations.ApiOperation;
+import com.wordnik.swagger.annotations.ApiParam;
+import com.wordnik.swagger.annotations.ApiResponse;
+import com.wordnik.swagger.annotations.ApiResponses;
 
 @Path("/V01")
 @SN(registryID = "SNCO1400005", logicalID = "executives")

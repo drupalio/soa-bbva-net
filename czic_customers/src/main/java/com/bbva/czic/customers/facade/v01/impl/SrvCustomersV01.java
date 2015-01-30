@@ -51,7 +51,7 @@ import com.wordnik.swagger.annotations.ApiResponse;
 import com.wordnik.swagger.annotations.ApiResponses;
 
 @Path("/V01")
-@SN(registryID = "SNCO1400003", logicalID = "customers")
+@SN(registryID = "SNCO1400012", logicalID = "customers")
 @VN(vnn = "V01")
 @Api(value = "/customers/V01", description = "SN Customer")
 @Produces({ MediaType.APPLICATION_JSON })
