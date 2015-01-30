@@ -44,7 +44,7 @@ import com.wordnik.swagger.annotations.ApiResponse;
 import com.wordnik.swagger.annotations.ApiResponses;
 
 @Path("/V01")
-@SN(registryID = "SN201400333", logicalID = "accounts")
+@SN(registryID = "SNCO1400010", logicalID = "accounts")
 @VN(vnn = "V01")
 @Api(value = "/accounts/V01", description = "SN accounts")
 @Produces({ MediaType.APPLICATION_JSON })
@@ -87,7 +87,7 @@ public class SrvAccountsV01 implements ISrvAccountsV01,
 			@ApiResponse(code = 500, message = "Technical Error") })
 	@GET
 	@Path("/{id}")
-	@SMC(registryID = "SMC201400334", logicalID = "getAccount")
+	@SMC(registryID = "SMCCO1400019", logicalID = "getAccount")
 	public Account getAccount(
 			@ApiParam(value = "identifier param") @PathParam("id") String idAccount) {
 
@@ -132,7 +132,7 @@ public class SrvAccountsV01 implements ISrvAccountsV01,
 			@ApiResponse(code = 500, message = "Technical Error") })
 	@GET
 	@Path("/{id}/movementsResumes")
-	@SMC(registryID = "SMC201400334", logicalID = "getAccMovementResume")
+	@SMC(registryID = "SMCCO1400021", logicalID = "getAccMovementResume")
 	public List<AccMovementsResume> getAccMovementResume(
 			@ApiParam(value = "identifier param") @PathParam("id") String idAccount,
 			@ApiParam(value = "filter param") @DefaultValue("null") @QueryParam("$filter") String filter) {
@@ -159,7 +159,7 @@ public class SrvAccountsV01 implements ISrvAccountsV01,
 			@ApiResponse(code = 500, message = "Technical Error") })
 	@GET
 	@Path("/{id}/listChecks")
-	@SMC(registryID = "SMC201400026", logicalID = "listCheck")
+	@SMC(registryID = "SMCCO1400026", logicalID = "listCheck")
 	public List<Check> listCheck(
 			@ApiParam(value = "identifier param") @PathParam("id") String accountId,
 			@ApiParam(value = "filter param") @QueryParam("$filter") String filter,
@@ -226,7 +226,7 @@ public class SrvAccountsV01 implements ISrvAccountsV01,
 	@GET
 	@ElementClass(response = Check.class)
 	@Path("/{accountId}/checks/{checkId}")
-	@SMC(registryID = "SMCCO1400020", logicalID = "getChecks")
+	@SMC(registryID = "SMCCO1400014", logicalID = "getChecks")
 	public Check getCheck(	@ApiParam(value = "Claim identifier param") @PathParam("accountId") String accountId,
 							  @ApiParam(value = "Claim identifier param") @PathParam("checkId") String checkId) {
 

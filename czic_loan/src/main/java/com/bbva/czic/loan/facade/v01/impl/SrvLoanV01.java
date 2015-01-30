@@ -40,7 +40,7 @@ import com.wordnik.swagger.annotations.ApiResponses;
 import java.util.List;
 
 @Path("/V01")
-@SN(registryID = "SN201400006", logicalID = "loan")
+@SN(registryID = "SNCO1400006", logicalID = "loan")
 @VN(vnn = "V01")
 @Api(value = "/loan/V01", description = "SN loan")
 @Produces({ MediaType.APPLICATION_JSON })
