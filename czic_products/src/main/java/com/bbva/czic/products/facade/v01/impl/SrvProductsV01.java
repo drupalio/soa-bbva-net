@@ -6,6 +6,7 @@ import com.bbva.czic.dto.net.Extract;
 import com.bbva.czic.dto.net.Movement;
 import com.bbva.czic.products.business.ISrvIntProducts;
 import com.bbva.czic.products.business.dto.DTOIntExtract;
+import com.bbva.czic.products.business.dto.DTOIntFilterExtract;
 import com.bbva.czic.products.business.dto.DTOIntFilterMovements;
 import com.bbva.czic.products.business.dto.DTOIntProduct;
 import com.bbva.czic.products.facade.v01.ISrvProductsV01;
@@ -104,7 +105,7 @@ public class SrvProductsV01 implements ISrvProductsV01,
 	@Path("/{productId}/listExtracts")
 	@SMC(registryID = "Pending", logicalID = "listExtracts")
 	public List<Extract> listExtracts(
-			@ApiParam(value = "identifier param") @PathParam("id") String productId,
+			@ApiParam(value = "identifier param") @PathParam("productId") String productId,
 			@ApiParam(value = "filter param") @DefaultValue("null") @QueryParam("$filter") String filter,
 			@ApiParam(value = "fields param") @DefaultValue("null") @QueryParam("paginationKey") Integer paginationKey,
 			@ApiParam(value = "expands param") @DefaultValue("null") @QueryParam("pageSize") Integer pageSize) {
@@ -119,7 +120,7 @@ public class SrvProductsV01 implements ISrvProductsV01,
 				.hasGeAndLe("year").validate();
 
 		// Mapeo del filtro a DTO
-		DTOIntExtract dtoIntFilterExtract = productsMapper
+		DTOIntFilterExtract dtoIntFilterExtract = productsMapper
 				.getDtoIntFilterExtract(productId, filter, paginationKey,
 						pageSize);
 		// 3. Invoke SrvIntCustomers and Mapping to canonical DTO

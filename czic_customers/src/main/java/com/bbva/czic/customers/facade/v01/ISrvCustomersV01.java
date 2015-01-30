@@ -9,9 +9,12 @@ import com.bbva.jee.arq.spring.core.servicing.gce.BusinessServiceException;
 
 
 public interface ISrvCustomersV01 {
-	public List<CardCharge> listCreditCardsCharges( String customerId, String filter);
 
- 	public List<AccMovementsResume> listAccountsMovementsResume( String customerId, String filter);
+	List<CardCharge> listCreditCardsCharges( String customerId, String filter);
 
- 	public Customer getCustomer(String customerId);
+ 	List<AccMovementsResume> listAccountsMovementsResume( String customerId, String filter);
+
+ 	Customer getCustomer(String customerId);
+
+	Customer addChannel(final String customerId, final String channelId);
 }

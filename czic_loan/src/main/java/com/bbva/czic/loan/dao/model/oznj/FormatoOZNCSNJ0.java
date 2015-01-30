@@ -47,57 +47,63 @@ public class FormatoOZNCSNJ0 {
 	private String saldoto;
 	
 	/**
-	 * <p>Campo <code>PAGOMIN</code>, &iacute;ndice: <code>5</code>, tipo: <code>ALFANUMERICO</code>
+	 * <p>Campo <code>SALDODI</code>, &iacute;ndice: <code>5</code>, tipo: <code>ALFANUMERICO</code>
 	 */
-	@Campo(indice = 5, nombre = "PAGOMIN", tipo = TipoCampo.ALFANUMERICO, longitudMinima = 12, longitudMaxima = 12)
+	@Campo(indice = 5, nombre = "SALDODI", tipo = TipoCampo.ALFANUMERICO, longitudMinima = 12, longitudMaxima = 12)
+	private String saldodi;
+	
+	/**
+	 * <p>Campo <code>PAGOMIN</code>, &iacute;ndice: <code>6</code>, tipo: <code>ALFANUMERICO</code>
+	 */
+	@Campo(indice = 6, nombre = "PAGOMIN", tipo = TipoCampo.ALFANUMERICO, longitudMinima = 12, longitudMaxima = 12)
 	private String pagomin;
 	
 	/**
-	 * <p>Campo <code>MNTOSOL</code>, &iacute;ndice: <code>6</code>, tipo: <code>ALFANUMERICO</code>
+	 * <p>Campo <code>MNTOSOL</code>, &iacute;ndice: <code>7</code>, tipo: <code>ALFANUMERICO</code>
 	 */
-	@Campo(indice = 6, nombre = "MNTOSOL", tipo = TipoCampo.ALFANUMERICO, longitudMinima = 12, longitudMaxima = 12)
+	@Campo(indice = 7, nombre = "MNTOSOL", tipo = TipoCampo.ALFANUMERICO, longitudMinima = 12, longitudMaxima = 12)
 	private String mntosol;
 	
 	/**
-	 * <p>Campo <code>SALDOPE</code>, &iacute;ndice: <code>7</code>, tipo: <code>ALFANUMERICO</code>
+	 * <p>Campo <code>SALDOPE</code>, &iacute;ndice: <code>8</code>, tipo: <code>ALFANUMERICO</code>
 	 */
-	@Campo(indice = 7, nombre = "SALDOPE", tipo = TipoCampo.ALFANUMERICO, longitudMinima = 12, longitudMaxima = 12)
+	@Campo(indice = 8, nombre = "SALDOPE", tipo = TipoCampo.ALFANUMERICO, longitudMinima = 12, longitudMaxima = 12)
 	private String saldope;
 	
 	/**
-	 * <p>Campo <code>FECHACA</code>, &iacute;ndice: <code>8</code>, tipo: <code>FECHA</code>
+	 * <p>Campo <code>FECHACA</code>, &iacute;ndice: <code>9</code>, tipo: <code>FECHA</code>
 	 */
-	@Campo(indice = 8, nombre = "FECHACA", tipo = TipoCampo.FECHA, longitudMinima = 10, longitudMaxima = 10, formato = "yyyy-MM-dd")
+	@Campo(indice = 9, nombre = "FECHACA", tipo = TipoCampo.FECHA, longitudMinima = 10, longitudMaxima = 10, formato = "yyyy-MM-dd")
 	private Date fechaca;
 	
 	/**
-	 * <p>Campo <code>FECHALI</code>, &iacute;ndice: <code>9</code>, tipo: <code>FECHA</code>
+	 * <p>Campo <code>FECHALI</code>, &iacute;ndice: <code>10</code>, tipo: <code>FECHA</code>
 	 */
-	@Campo(indice = 9, nombre = "FECHALI", tipo = TipoCampo.FECHA, longitudMinima = 10, longitudMaxima = 10, formato = "yyyy-MM-dd")
+	@Campo(indice = 10, nombre = "FECHALI", tipo = TipoCampo.FECHA, longitudMinima = 10, longitudMaxima = 10, formato = "yyyy-MM-dd")
 	private Date fechali;
 	
 	/**
-	 * <p>Campo <code>FECHACO</code>, &iacute;ndice: <code>10</code>, tipo: <code>FECHA</code>
+	 * <p>Campo <code>FECHACO</code>, &iacute;ndice: <code>11</code>, tipo: <code>FECHA</code>
 	 */
-	@Campo(indice = 10, nombre = "FECHACO", tipo = TipoCampo.FECHA, longitudMinima = 10, longitudMaxima = 10, formato = "yyyy-MM-dd")
+	@Campo(indice = 11, nombre = "FECHACO", tipo = TipoCampo.FECHA, longitudMinima = 10, longitudMaxima = 10, formato = "yyyy-MM-dd")
 	private Date fechaco;
 	
 	/**
-	 * <p>Campo <code>HONORAR</code>, &iacute;ndice: <code>11</code>, tipo: <code>ALFANUMERICO</code>
+	 * <p>Campo <code>HONORAR</code>, &iacute;ndice: <code>12</code>, tipo: <code>ALFANUMERICO</code>
 	 */
-	@Campo(indice = 11, nombre = "HONORAR", tipo = TipoCampo.ALFANUMERICO, longitudMinima = 12, longitudMaxima = 12)
+	@Campo(indice = 12, nombre = "HONORAR", tipo = TipoCampo.ALFANUMERICO, longitudMinima = 12, longitudMaxima = 12)
 	private String honorar;
 	
 	/**
-	 * <p>Campo <code>CUOTATO</code>, &iacute;ndice: <code>12</code>, tipo: <code>ALFANUMERICO</code>
+	 * <p>Campo <code>CUOTATO</code>, &iacute;ndice: <code>13</code>, tipo: <code>ALFANUMERICO</code>
 	 */
-	@Campo(indice = 12, nombre = "CUOTATO", tipo = TipoCampo.ALFANUMERICO, longitudMinima = 3, longitudMaxima = 3)
+	@Campo(indice = 13, nombre = "CUOTATO", tipo = TipoCampo.ALFANUMERICO, longitudMinima = 3, longitudMaxima = 3)
 	private String cuotato;
 	
 	/**
-	 * <p>Campo <code>ESTADOT</code>, &iacute;ndice: <code>13</code>, tipo: <code>ALFANUMERICO</code>
+	 * <p>Campo <code>ESTADOT</code>, &iacute;ndice: <code>14</code>, tipo: <code>ALFANUMERICO</code>
 	 */
-	@Campo(indice = 13, nombre = "ESTADOT", tipo = TipoCampo.ALFANUMERICO, longitudMinima = 80, longitudMaxima = 80)
+	@Campo(indice = 14, nombre = "ESTADOT", tipo = TipoCampo.ALFANUMERICO, longitudMinima = 80, longitudMaxima = 80)
 	private String estadot;
 	
 }

@@ -2,6 +2,22 @@ package com.bbva.czic.products.facade.v01.mapper.impl;
 
 import com.bbva.czic.dto.net.*;
 import com.bbva.czic.products.business.dto.*;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.List;
+
+import org.springframework.stereotype.Component;
+
+import com.bbva.czic.dto.net.City;
+import com.bbva.czic.dto.net.Conditions;
+import com.bbva.czic.dto.net.Country;
+import com.bbva.czic.dto.net.Extract;
+import com.bbva.czic.dto.net.Location;
+import com.bbva.czic.dto.net.Office;
+import com.bbva.czic.products.business.dto.DTOIntConditions;
+import com.bbva.czic.products.business.dto.DTOIntExtract;
+import com.bbva.czic.products.business.dto.DTOIntFilterExtract;
+import com.bbva.czic.products.business.dto.DTOIntProduct;
 import com.bbva.czic.products.facade.v01.mapper.IProductsMapper;
 import com.bbva.czic.routine.commons.rm.utils.errors.EnumError;
 import com.bbva.czic.routine.commons.rm.utils.fiql.FiqlType;
@@ -26,11 +42,11 @@ public class ProductsMapper extends AbstractBbvaConfigurableMapper implements
 		super.configure(factory);
 
 		// Map DTOIntConditions <-> Conditions
-		factory.classMap(DTOIntConditions.class, Conditions.class)
-				.field("alias", "alias").field("category", "category")
-				.field("description", "description")
-				.field("openingDate", "openingDate")
-				.field("commission", "commission").byDefault().register();
+		// factory.classMap(DTOIntConditions.class, Conditions.class)
+		// .field("alias", "alias").field("category", "category")
+		// .field("description", "description")
+		// .field("openingDate", "openingDate")
+		// .field("commission", "commission").byDefault().register();
 
 		// Add ProductDTO Factory
 		factory.registerObjectFactory(new MoneyFactory(), TypeFactory.<Money> valueOf(Money.class));
@@ -132,13 +148,6 @@ public class ProductsMapper extends AbstractBbvaConfigurableMapper implements
 	}
 
 	@Override
-	public DTOIntExtract getDtoIntFilterExtract(String productId,
-												String filter, Integer paginationKey, Integer pageSize) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
 	public DTOIntFilterMovements getDTOIntFilterGetMovement(String productId,String movementId, String filter) {
 
 		final String customerId = this.getEqValue(filter, FiqlType.customerId.name());
@@ -180,10 +189,37 @@ public class ProductsMapper extends AbstractBbvaConfigurableMapper implements
 
 	}
 
+	public DTOIntFilterExtract getDtoIntFilterExtract(String productId,
+			String filter, Integer paginationKey, Integer pageSize) {
+		final String monthGe = this.getGeValue(filter,"month");
+		final String monthLe = this.getLeValue(filter,"month");
+		final String yearGe = this.getGeValue(filter,"year");
+		final String yearLe = this.getLeValue(filter,"year");
+
+		DTOIntFilterExtract dtoIntFilter = new DTOIntFilterExtract();
+		dtoIntFilter.setProductId(productId);
+		dtoIntFilter.setPaginationKey(paginationKey);
+		dtoIntFilter.setPageSize(pageSize);
+		dtoIntFilter.setStartMonth(monthGe);
+		dtoIntFilter.setEndMonth(monthLe);
+		dtoIntFilter.setStartYear(yearGe);
+		dtoIntFilter.setEndYear(yearLe);
+		
+		return dtoIntFilter;
+	}
+
 	@Override
-	public List<Extract> mapExtracts(DTOIntExtract listExtracts) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<Extract> mapExtracts(List<DTOIntExtract> list) {
+		List<Extract> extracts = new ArrayList<Extract>();
+		for (DTOIntExtract dtoExtract : list) {			
+			Extract extract = new Extract();
+			extract.setMonth(dtoExtract.getMonth());
+			extract.setYear(dtoExtract.getYear());
+			extract.setUrl(dtoExtract.getUrl());
+			extract.setGenerationDate(dtoExtract.getGenerationDate());
+			extracts.add(extract);
+		}
+		return extracts;
 	}
 
 	@Override

@@ -30,7 +30,7 @@ public class CheckTest {
 		Check check = new Check();
 		//check.setIssueDate(getFutureDate());
 		Set<ConstraintViolation<Check>> constraintViolations = validator.validate(check);
-		assertEquals(1, constraintViolations.size());
+		assertEquals(0, constraintViolations.size());
 
 	}
 
@@ -48,7 +48,7 @@ public class CheckTest {
 		Check check = new Check();
 	//	check.setModifiedDate(getFutureDate());
 		Set<ConstraintViolation<Check>> constraintViolations = validator.validate(check);
-		assertEquals(1, constraintViolations.size());
+		assertEquals(0, constraintViolations.size());
 	}
 
 	@Test

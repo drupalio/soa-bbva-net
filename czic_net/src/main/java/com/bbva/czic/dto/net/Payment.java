@@ -36,11 +36,11 @@ public class Payment
     @XmlSchemaType(name = "dateTime")
     @ApiModelProperty("Fecha de corte del producto")
     private Calendar shortDate;
-    @XmlJavaTypeAdapter(MoneyAdapter.class)
+   // @XmlJavaTypeAdapter(MoneyAdapter.class)
     @XmlElement(type = Money.class)
     @ApiModelProperty("Honorarios del pago")
     private Money fees;
-    @XmlJavaTypeAdapter(MoneyAdapter.class)
+  //  @XmlJavaTypeAdapter(MoneyAdapter.class)
     @XmlElement(type = Money.class)
     @ApiModelProperty("Pago minimo")
     private Money minimumPayment;

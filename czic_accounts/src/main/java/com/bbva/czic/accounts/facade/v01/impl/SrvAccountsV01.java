@@ -93,8 +93,7 @@ public class SrvAccountsV01 implements ISrvAccountsV01,
 
 		final DTOIntFilterAccount dtoIntFilterAccount = new DTOIntFilterAccount();
 		dtoIntFilterAccount.setAccountId(idAccount);
-		return iAccountsMapper.map(srvIntAccounts
-				.getAccount(dtoIntFilterAccount));
+		return iAccountsMapper.map(srvIntAccounts.getAccount(dtoIntFilterAccount));
 	}
 
 	@Override
@@ -106,7 +105,7 @@ public class SrvAccountsV01 implements ISrvAccountsV01,
 			@ApiResponse(code = 500, message = "Technical Error") })
 	@GET
 	@Path("/{accountId}/monthlyBalances")
-	@SMC(registryID = "SMC201400334", logicalID = "getAccountMonthlyBalance")
+	@SMC(registryID = "SMCCO1400020", logicalID = "getAccountMonthlyBalance")
 	public List<MonthlyBalances> getAccountMonthlyBalance(
 			@ApiParam(value = "identifier param") @PathParam("accountId")String idAccount,
 			@ApiParam(value = "filter param") @DefaultValue("null") @QueryParam("$filter") String filter
@@ -169,7 +168,7 @@ public class SrvAccountsV01 implements ISrvAccountsV01,
 
 		// Validacion del filtro
 		new FiqlValidator(filter).exist().hasGeAndLeDate("issueDate")
-				.hasEq("status").validate();
+				.hasEq("status").validateAny();
 
 		// Mapeo del filtro a DTO
 		DTOIntFilterChecks dtoIntFilterChecks = iAccountsMapper
@@ -198,6 +197,10 @@ public class SrvAccountsV01 implements ISrvAccountsV01,
 			@ApiParam(value = "account identifier") @PathParam("accountId") String accountId) {
 		// 1. Validate parameter
 		if (accountId == null || accountId.trim().isEmpty()) {
+			throw new BusinessServiceException(
+					EnumError.WRONG_PARAMETERS.getAlias());
+		}
+		if (checkbookId == null || checkbookId.trim().isEmpty()) {
 			throw new BusinessServiceException(
 					EnumError.WRONG_PARAMETERS.getAlias());
 		}

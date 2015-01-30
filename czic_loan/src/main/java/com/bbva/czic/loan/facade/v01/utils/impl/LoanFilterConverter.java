@@ -13,6 +13,7 @@ import com.bbva.jee.arq.spring.core.log.I18nLogFactory;
 import com.bbva.jee.arq.spring.core.servicing.gce.BusinessServiceException;
 import com.bbva.jee.arq.spring.core.servicing.utils.BusinessServicesToolKit;
 
+import org.apache.commons.lang.StringUtils;
 import org.apache.cxf.jaxrs.ext.search.ConditionType;
 import org.apache.cxf.jaxrs.ext.search.PrimitiveStatement;
 import org.apache.cxf.jaxrs.ext.search.SearchCondition;
@@ -48,12 +49,13 @@ public class LoanFilterConverter{
         String fechaInicial = "";
         String fechaFinal = "";
 
+
+
         dtoIntFilterLoan.setIdLoan(loanId);
         dtoIntFilterLoan.setPaginationKey(pageSize);
         dtoIntFilterLoan.setPageSize(paginationKey);
 
         //Manejamos el filter
-        if (filter != null && !filter.contentEquals("null")) {
             log.info("A query string (filter) has been sended Loan ---> : " + filter);
             SearchCondition<DTOIntFilterLoan> sc;
             try {
@@ -112,7 +114,6 @@ public class LoanFilterConverter{
                 log.error("IllegalArgumentException - The product type is an invalid type - does not exist: " + e.getMessage());
                 throw new BusinessServiceException(EnumError.WRONG_PARAMETERS.getAlias(), filter, e.getMessage());
             }
-        }
         return dtoIntFilterLoan;
     }
 

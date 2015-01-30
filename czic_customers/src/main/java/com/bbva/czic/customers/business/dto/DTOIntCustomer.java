@@ -1,7 +1,7 @@
 
 package com.bbva.czic.customers.business.dto;
 
-import java.util.Calendar;
+import java.util.Date;
 
 import javax.validation.constraints.NotNull;
 
@@ -37,7 +37,7 @@ public class DTOIntCustomer {
 	private Integer homeMembers;
 	private EnumDwelingType dwelingType;
 	private Place officeLocation;
-	private Calendar lastConnectionTime;
+	private Date lastConnectionTime;
 
     public DTOIntCustomer() {
         //default constructor
@@ -139,11 +139,11 @@ public class DTOIntCustomer {
 		this.officeLocation = officeLocation;
 	}
 
-	public Calendar getLastConnectionTime() {
+	public Date getLastConnectionTime() {
 		return lastConnectionTime;
 	}
 
-	public void setLastConnectionTime(Calendar lastConnectionTime) {
+	public void setLastConnectionTime(Date lastConnectionTime) {
 		this.lastConnectionTime = lastConnectionTime;
 	}
 

@@ -45,11 +45,9 @@ import java.util.List;
 @Api(value = "/loan/V01", description = "SN loan")
 @Produces({ MediaType.APPLICATION_JSON })
 @Service
-public class SrvLoanV01 implements ISrvLoanV01,
-		com.bbva.jee.arq.spring.core.servicing.utils.ContextAware {
+public class SrvLoanV01 implements ISrvLoanV01,	com.bbva.jee.arq.spring.core.servicing.utils.ContextAware {
 
-		private static I18nLog log = I18nLogFactory.getLogI18n(SrvLoanV01.class,
-			"META-INF/spring/i18n/log/mensajesLog");
+	private static I18nLog log = I18nLogFactory.getLogI18n(SrvLoanV01.class,"META-INF/spring/i18n/log/mensajesLog");
 
 	public HttpHeaders httpHeaders;
 
@@ -86,11 +84,14 @@ public class SrvLoanV01 implements ISrvLoanV01,
 	@GET
 	@ElementClass(response = Loan.class)
 	@Path("/rotaryQuota/{idLoan}")
-	@SMC(registryID = "SMC201400010", logicalID = "getRotaryQuota")
+	@SMC(registryID = "SMCCO1400010", logicalID = "getRotaryQuota")
 	public Loan getRotaryQuota(
 			@ApiParam(value = "Claim identifier param") @PathParam("idLoan") String idLoan) {
 
-		if (idLoan == null || idLoan.trim().isEmpty()) {
+		if (idLoan == null
+				|| idLoan.trim().isEmpty()
+				|| idLoan.trim().equalsIgnoreCase("null")
+				|| !StringUtils.isNumeric(idLoan)) {
 			throw new BusinessServiceException(EnumError.WRONG_PARAMETERS.getAlias());
 		}
 		return  iLoanMapper.map(isrvIntLoan.getRotaryQuota(idLoan));
@@ -105,16 +106,15 @@ public class SrvLoanV01 implements ISrvLoanV01,
 	@GET
 	@ElementClass(response = List.class)
 	@Path("/rotaryQuota/{loanId}/movements")
-	@SMC(registryID = "SMC201400011", logicalID = "listRotaryQuotaMovements")
+	@SMC(registryID = "SMCCO1400011", logicalID = "listRotaryQuotaMovements")
 	public List<Movement> listRotaryQuotaMovements(@ApiParam(value = "Loan identifier") @PathParam("loanId") String loanId,
 												   @ApiParam(value = "Loan pagination Key") @QueryParam("paginationKey")  String paginationKey,
 												   @ApiParam(value = "Loan page Size") @QueryParam("pageSize") String pageSize,
 												   @ApiParam(value = "order by param") @DefaultValue("null") @QueryParam("$filter") String filter) {
+		
 		DTOIntFilterLoan dtoIntFilterLoan = loanFilterConverter.getDTOIntFilter(loanId, paginationKey, pageSize, filter);
 		return iLoanMapper.map(isrvIntLoan.listRotaryQuotaMovements(dtoIntFilterLoan));
 	}
-
-
 
 	@ApiOperation(value = "Obtiene los detalles del movimiento seleccionado para el producto de financiamiento", notes = "Obtiene los detalles del movimiento seleccionado para el producto de financiamiento", response = RotaryQuotaMove.class)
 	@ApiResponses(value = { @ApiResponse(code = -1, message = "aliasGCE1"),
@@ -124,17 +124,14 @@ public class SrvLoanV01 implements ISrvLoanV01,
 	@GET
 	@ElementClass(response = RotaryQuotaMove.class)
 	@Path("/rotaryQuota/{idLoan}/movement/{idMovement}")
-	@SMC(registryID = "SMC201400012", logicalID = "getRotaryQuotaMovement")
+	@SMC(registryID = "SMCCO1400012", logicalID = "getRotaryQuotaMovement")
 	public RotaryQuotaMove getRotaryQuotaMovement(
 			@ApiParam(value = "Claimer identifier param") @PathParam("idLoan") String idLoan,
 			@ApiParam(value = "Claimer identifier param") @PathParam("idMovement") String idMovement) {
 
-		if (idLoan == null || idLoan.trim().isEmpty() || idMovement == null || idMovement.trim().isEmpty()) {
+		if (!StringUtils.isNumeric(idLoan) || !StringUtils.isNumeric(idMovement)) {
 			throw new BusinessServiceException(EnumError.WRONG_PARAMETERS.getAlias());
 		}
-
-		if(!StringUtils.isNumeric(idMovement))
-			throw new BusinessServiceException(EnumError.WRONG_PARAMETERS.getAlias());
 		return iLoanMapper.map(isrvIntLoan.getRotaryQuotaMovement(new DTOIntFilterRotaryMovement(idLoan, Integer.parseInt(idMovement))));
 	}
 }

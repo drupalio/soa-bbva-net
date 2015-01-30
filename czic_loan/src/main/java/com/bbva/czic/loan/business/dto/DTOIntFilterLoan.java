@@ -25,7 +25,6 @@ public class DTOIntFilterLoan {
 	@NotNull
     private String idLoan;
 
-	@NotNull
 	private String transactionDate;
 
 	private String idMovement;

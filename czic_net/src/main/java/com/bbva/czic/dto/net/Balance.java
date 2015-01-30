@@ -22,11 +22,11 @@ import com.wordnik.swagger.annotations.ApiModelProperty;
 public class Balance implements Serializable {
 
 	public final static long serialVersionUID = 1L;
-	@XmlJavaTypeAdapter(MoneyAdapter.class)
+	//@XmlJavaTypeAdapter(MoneyAdapter.class)
 	@XmlElement(type = Money.class)
 	@ApiModelProperty("Saldo total del producto")
 	private Money total;
-	@XmlJavaTypeAdapter(MoneyAdapter.class)
+	//@XmlJavaTypeAdapter(MoneyAdapter.class)
 	@XmlElement(type = Money.class)
 	@ApiModelProperty("Saldo disponible del producto")
 	private Money availableBalance;

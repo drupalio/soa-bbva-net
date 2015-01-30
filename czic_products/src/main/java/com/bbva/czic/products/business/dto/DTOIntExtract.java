@@ -11,8 +11,8 @@ public class DTOIntExtract {
 	@NotNull
 	private String year;
 	@NotNull
-	String url;
-	private Calendar generationDate;
+	private String url;
+	private String generationDate;
 	
 	public String getMonth() {
 		return month;
@@ -32,11 +32,10 @@ public class DTOIntExtract {
 	public void setUrl(String url) {
 		this.url = url;
 	}
-	public Calendar getGenerationDate() {
+	public String getGenerationDate() {
 		return generationDate;
 	}
-	public void setGenerationDate(Calendar generationDate) {
+	public void setGenerationDate(String generationDate) {
 		this.generationDate = generationDate;
 	}
-
 }

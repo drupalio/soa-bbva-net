@@ -2,6 +2,7 @@ package com.bbva.czic.routine.commons.rm.utils.mappers;
 
 import java.util.Calendar;
 
+import com.bbva.czic.routine.commons.rm.utils.converter.BigDecimalMoneyConverter;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.cxf.jaxrs.ext.search.ConditionType;
 import org.apache.cxf.jaxrs.ext.search.PrimitiveStatement;
@@ -40,7 +41,11 @@ public abstract class AbstractBbvaConfigurableMapper extends ConfigurableMapper 
 		factory.registerObjectFactory(new MoneyFactory(), TypeFactory.<Money> valueOf(Money.class));
 
 		// Add Calendar Factory
-		factory.registerObjectFactory(new CalendarFactory(), TypeFactory.<Calendar> valueOf(Calendar.class));
+
+		/**
+		 * Convert HOST BigDecimal to Money
+		 */
+		factory.getConverterFactory().registerConverter(new BigDecimalMoneyConverter());
 	}
 
 	/**

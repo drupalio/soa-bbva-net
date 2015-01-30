@@ -11,13 +11,15 @@ import com.bbva.jee.arq.spring.core.servicing.gce.BusinessServiceException;
 
 public interface CustomersDAO {
 
-	public List<DTOIntAccMovementsResume> getlistAccountsMovementsResume(
+	List<DTOIntAccMovementsResume> getlistAccountsMovementsResume(
 			DTOIntFilterCustomerResumes filter) throws BusinessServiceException;
 
-	public List<DTOIntCardCharge> getlistCreCardCharges(
+	List<DTOIntCardCharge> getlistCreCardCharges(
 			DTOIntFilterCustomerResumes filter) throws BusinessServiceException;
 
-	public DTOIntCustomer getCustomer(String customerId)
+	DTOIntCustomer getCustomer(String customerId)
 			throws BusinessServiceException;
+
+	DTOIntCustomer addChannel(final String customerId, final String channelId);
 }
 

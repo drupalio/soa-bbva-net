@@ -1,5 +1,7 @@
 package com.bbva.czic.products.business.impl;
 
+import java.util.List;
+
 import javax.annotation.Resource;
 
 import com.bbva.czic.products.business.dto.*;
@@ -7,6 +9,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.bbva.czic.products.business.ISrvIntProducts;
+import com.bbva.czic.products.business.dto.DTOIntConditions;
+import com.bbva.czic.products.business.dto.DTOIntExtract;
+import com.bbva.czic.products.business.dto.DTOIntFilterExtract;
+import com.bbva.czic.products.business.dto.DTOIntProduct;
 import com.bbva.czic.products.dao.IProductsDAO;
 import com.bbva.czic.routine.commons.rm.utils.validator.DtoValidator;
 import com.bbva.jee.arq.spring.core.log.I18nLog;
@@ -33,19 +39,30 @@ public class SrvIntProducts implements ISrvIntProducts {
 		DtoValidator.validate(dtoIntConditions);
 
 		// 2. Get response
-		final DTOIntConditions result = productsDAO.getConditions(dtoIntConditions);
+		final DTOIntConditions result = productsDAO
+				.getConditions(dtoIntConditions);
 
 		// 3. Validate output
 		DtoValidator.validate(result);
-		
+
 		log.info(" getConditions Conditions ");
 		return result;
 	}
 
 	@Override
-	public DTOIntExtract listExtracts(DTOIntExtract dtoIntFilterExtract) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<DTOIntExtract> listExtracts(DTOIntFilterExtract dtoIntFilterExtract) {
+		// 1. Validate DtoIntFilterAccount
+		DtoValidator.validate(dtoIntFilterExtract);
+
+		// 2. Get response
+		final List<DTOIntExtract> result = productsDAO
+				.listExtracts(dtoIntFilterExtract);
+
+		// 3. Validate output
+		DtoValidator.validate(result);
+
+		log.info(" getConditions Conditions ");
+		return result;
 	}
 
 	@Override
@@ -54,13 +71,13 @@ public class SrvIntProducts implements ISrvIntProducts {
 		DtoValidator.validate(dtoIntMovementsFilter);
 
 		// 2. Get response
-		final DTOIntMovement result = productsDAO.getConditions(filter);
+	//	final DTOIntMovement result = productsDAO.getConditions(filter);
 
 		// 3. Validate output
-		DtoValidator.validate(result);
+	//	DtoValidator.validate(result);
 
 		log.info(" getConditions Conditions ");
-		return result;
+		return null;
 	}
 
 	@Override
@@ -69,13 +86,13 @@ public class SrvIntProducts implements ISrvIntProducts {
 		DtoValidator.validate(filter);
 
 		// 2. Get response
-		final List<DTOIntMovement> result = productsDAO.getConditions(filter);
+	//	final List<DTOIntMovement> result = productsDAO.getConditions(filter);
 
 		// 3. Validate output
-		DtoValidator.validate(result);
+	//	DtoValidator.validate(result);
 
 		log.info(" getConditions Conditions ");
-		return result;
+		return null;
 	}
 
 }
