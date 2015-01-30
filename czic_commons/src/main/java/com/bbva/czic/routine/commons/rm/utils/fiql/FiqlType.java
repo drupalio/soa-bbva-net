@@ -5,6 +5,9 @@ public enum FiqlType {
 	month,
 	id,
 	type,
-	productType
+	productType,
+	customerId,
+	value,
+	transactionDate
 
 }

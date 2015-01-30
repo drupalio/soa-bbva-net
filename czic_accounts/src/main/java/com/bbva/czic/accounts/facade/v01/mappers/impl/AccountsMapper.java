@@ -74,7 +74,7 @@ public class AccountsMapper extends AbstractBbvaConfigurableMapper implements
 		//
 		// // Map DTOIntMonthlyBalances <-> MonthlyBalances
 		factory.classMap(DTOIntMonthlyBalances.class, MonthlyBalances.class)
-				.field("balance", "balance").field("month", "month")
+				.field("balance", "balance.amount").field("month", "month")
 				.byDefault().register();
 
 		// // Map DTOIntAccMovementsResume <-> AccMovementsResume

@@ -1,26 +1,13 @@
 package com.bbva.czic.products.facade.v01.impl;
 
-import java.util.List;
-
-import javax.annotation.Resource;
-import javax.ws.rs.DefaultValue;
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
-import javax.ws.rs.Produces;
-import javax.ws.rs.QueryParam;
-import javax.ws.rs.core.HttpHeaders;
-import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
-import javax.ws.rs.core.UriInfo;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
+import com.bbva.czic.dto.net.AccMoveDetail;
 import com.bbva.czic.dto.net.Conditions;
 import com.bbva.czic.dto.net.Extract;
+import com.bbva.czic.dto.net.Movement;
 import com.bbva.czic.products.business.ISrvIntProducts;
-import com.bbva.czic.products.business.dto.*;
+import com.bbva.czic.products.business.dto.DTOIntExtract;
+import com.bbva.czic.products.business.dto.DTOIntFilterMovements;
+import com.bbva.czic.products.business.dto.DTOIntProduct;
 import com.bbva.czic.products.facade.v01.ISrvProductsV01;
 import com.bbva.czic.products.facade.v01.mapper.IProductsMapper;
 import com.bbva.czic.routine.commons.rm.utils.errors.EnumError;
@@ -32,11 +19,18 @@ import com.bbva.jee.arq.spring.core.servicing.annotations.SN;
 import com.bbva.jee.arq.spring.core.servicing.annotations.VN;
 import com.bbva.jee.arq.spring.core.servicing.gce.BusinessServiceException;
 import com.bbva.jee.arq.spring.core.servicing.utils.BusinessServicesToolKit;
-import com.wordnik.swagger.annotations.Api;
-import com.wordnik.swagger.annotations.ApiOperation;
-import com.wordnik.swagger.annotations.ApiParam;
-import com.wordnik.swagger.annotations.ApiResponse;
-import com.wordnik.swagger.annotations.ApiResponses;
+import com.wordnik.swagger.annotations.*;
+import org.apache.cxf.jaxrs.model.wadl.ElementClass;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import javax.annotation.Resource;
+import javax.ws.rs.*;
+import javax.ws.rs.core.HttpHeaders;
+import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
+import javax.ws.rs.core.UriInfo;
+import java.util.List;
 
 @Path("/V01")
 @SN(registryID = "SN201400011", logicalID = "products")
@@ -132,5 +126,84 @@ public class SrvProductsV01 implements ISrvProductsV01,
 		return productsMapper.mapExtracts(srvIntProducts
 				.listExtracts(dtoIntFilterExtract));
 	}
+
+
+
+	@Override
+	@ApiOperation(value="Consulta que trae la informaci�n detallada de un movimiento realizado sobre una cuenta", notes="Consulta de movimiento",response=Movement.class)
+	@ApiResponses(value = {
+			@ApiResponse(code = -1, message = "aliasGCE1"),
+			@ApiResponse(code = -1, message = "aliasGCE2"),
+			@ApiResponse(code = 200, message = "Found Sucessfully", response=Response.class),
+			@ApiResponse(code = 400, message = "Wrong parameters"),
+			@ApiResponse(code = 409, message = "Data not found"),
+			@ApiResponse(code = 500, message = "Technical Error")})
+	@GET
+	@Path("/{productId}/movements/{movementId}")
+	@Produces({MediaType.APPLICATION_JSON})
+	@ElementClass(response = AccMoveDetail.class)
+	@SMC(registryID="SMCCO1500001",logicalID="getMovement")
+	public Movement getMovement(@ApiParam(value = "identifier param") @PathParam("productId") String productId,
+								@ApiParam(value = "filter param") @PathParam("movementId") String movementId,
+								@ApiParam(value = "filter param") @DefaultValue("null") @QueryParam("$filter") String filter) {
+
+		// 1. Validate parameter
+		if (movementId == null || movementId.trim().isEmpty()||productId == null || productId.trim().isEmpty()) {
+			throw new BusinessServiceException(
+					EnumError.WRONG_PARAMETERS.getAlias());
+		}
+
+		// 2. Validate filter
+		new FiqlValidator(filter).exist().hasEq("customerId")
+				.hasEq("productType").validate();
+
+		// Mapeo del filtro a DTO
+		DTOIntFilterMovements dtoIntFilterMovements = productsMapper.getDTOIntFilterGetMovement(productId,movementId,filter);
+
+		// 3. Invoke SrvIntCustomers and Mapping to canonical DTO
+		return productsMapper.map(srvIntProducts
+				.getMovement(dtoIntFilterMovements));
+
+	}
+
+
+	@Override
+	@ApiOperation(value="Operacion que lista los movimientos asociados a un producto y tipo en particular segun los parametros de busqueda, en el caso de que no se envie nungun parametro retornara los movimientos asociados que esten almacenados en backend.", notes="Listado de movimientos",response=Movement.class)
+	@ApiResponses(value = {
+			@ApiResponse(code = -1, message = "aliasGCE1"),
+			@ApiResponse(code = -1, message = "aliasGCE2"),
+			@ApiResponse(code = 200, message = "Found Sucessfully", response=Response.class),
+			@ApiResponse(code = 400, message = "Wrong parameters"),
+			@ApiResponse(code = 409, message = "Data not found"),
+			@ApiResponse(code = 500, message = "Technical Error")})
+	@GET
+	@Path("/{productId}/movements")
+	@ElementClass(response = List.class)
+	@SMC(registryID="SMCCO1500002",logicalID="listMovements")
+	public List<Movement> listMovements(@ApiParam(value = "identifier param") @PathParam("productId") String productId,
+										@ApiParam(value = "filter param") @DefaultValue("null") @QueryParam("$filter") String filter,
+										@ApiParam(value = "pagination key") @DefaultValue("null") @QueryParam("paginationKey") Integer paginationKey,
+										@ApiParam(value = "pagination size") @DefaultValue("null") @QueryParam("pageSize") Integer pageSize) {
+
+		// 1. Validate parameter
+		if (productId == null || productId.trim().isEmpty()) {
+			throw new BusinessServiceException(
+					EnumError.WRONG_PARAMETERS.getAlias());
+		}
+
+		// 2. Validate filter
+		new FiqlValidator(filter).exist().hasEq("customerId").hasEq("productType").hasGeAndLe("transactionDate")
+				.hasGeAndLe("value").validate();
+
+		// Mapeo del filtro a DTO
+		DTOIntFilterMovements dtoIntFilterMovements = productsMapper
+				.getDTOIntFilterGetListMovements(productId, filter, paginationKey,
+						pageSize);
+		// 3. Invoke SrvIntCustomers and Mapping to canonical DTO
+		return productsMapper.mapMovements(srvIntProducts
+				.listMovements(dtoIntFilterMovements));
+	}
+
+
 
 }

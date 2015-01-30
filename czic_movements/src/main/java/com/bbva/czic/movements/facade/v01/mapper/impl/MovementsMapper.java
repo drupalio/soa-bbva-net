@@ -10,7 +10,6 @@ import com.bbva.czic.routine.mapper.factory.MoneyFactory;
 import com.bbva.czic.routine.mapper.impl.ConfigurableMapper;
 import com.bbva.czic.routine.mapper.metadata.TypeFactory;
 import com.bbva.jee.arq.spring.core.servicing.utils.Money;
-import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Component;
 
 import java.util.List;

@@ -1,24 +1,20 @@
 package com.bbva.czic.products.facade.v01.mapper.impl;
 
-import java.util.Calendar;
-import java.util.List;
-
-import org.springframework.stereotype.Component;
-
-import com.bbva.czic.dto.net.City;
-import com.bbva.czic.dto.net.Conditions;
-import com.bbva.czic.dto.net.Country;
-import com.bbva.czic.dto.net.Extract;
-import com.bbva.czic.dto.net.Location;
-import com.bbva.czic.dto.net.Office;
-import com.bbva.czic.products.business.dto.DTOIntConditions;
-import com.bbva.czic.products.business.dto.DTOIntExtract;
-import com.bbva.czic.products.business.dto.DTOIntProduct;
+import com.bbva.czic.dto.net.*;
+import com.bbva.czic.products.business.dto.*;
 import com.bbva.czic.products.facade.v01.mapper.IProductsMapper;
 import com.bbva.czic.routine.commons.rm.utils.errors.EnumError;
+import com.bbva.czic.routine.commons.rm.utils.fiql.FiqlType;
 import com.bbva.czic.routine.commons.rm.utils.mappers.AbstractBbvaConfigurableMapper;
 import com.bbva.czic.routine.mapper.MapperFactory;
+import com.bbva.czic.routine.mapper.factory.MoneyFactory;
+import com.bbva.czic.routine.mapper.metadata.TypeFactory;
 import com.bbva.jee.arq.spring.core.servicing.gce.BusinessServiceException;
+import com.bbva.jee.arq.spring.core.servicing.utils.Money;
+import org.springframework.stereotype.Component;
+
+import java.util.Calendar;
+import java.util.List;
 
 @Component(value = "products-mapper")
 public class ProductsMapper extends AbstractBbvaConfigurableMapper implements
@@ -35,6 +31,29 @@ public class ProductsMapper extends AbstractBbvaConfigurableMapper implements
 				.field("description", "description")
 				.field("openingDate", "openingDate")
 				.field("commission", "commission").byDefault().register();
+
+		// Add ProductDTO Factory
+		factory.registerObjectFactory(new MoneyFactory(), TypeFactory.<Money> valueOf(Money.class));
+
+		// Movement
+		factory.classMap(Movement.class, DTOIntMovement.class).field("id", "id").field("concept", "concept")
+				.field("transactionDate", "transactionDate").field("operationDate", "operationDate").field("office", "office")
+				.field("status", "status").field("value", "value").field("balance", "balance").byDefault().register();
+		// Office
+		factory.classMap(Office.class, DTOIntOffice.class).field("code", "code").field("name", "name").field("location", "dtoIntLocation").byDefault().register();
+
+		// Location
+		factory.classMap(Location.class, DTOIntLocation.class).field("city", "dtoIntCity").field("state", "dtoIntState").byDefault().register();
+
+		// City
+		factory.classMap(City.class, DTOIntCity.class).field("name", "name").byDefault().register();
+
+		// State
+		factory.classMap(State.class, DTOIntState.class).field("name", "name").byDefault().register();
+
+		// Money
+		factory.classMap(Money.class, Money.class).field("amount", "amount")
+				.field("currency", "currency").byDefault().register();
 
 	}
 
@@ -114,9 +133,51 @@ public class ProductsMapper extends AbstractBbvaConfigurableMapper implements
 
 	@Override
 	public DTOIntExtract getDtoIntFilterExtract(String productId,
-			String filter, Integer paginationKey, Integer pageSize) {
+												String filter, Integer paginationKey, Integer pageSize) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public DTOIntFilterMovements getDTOIntFilterGetMovement(String productId,String movementId, String filter) {
+
+		final String customerId = this.getEqValue(filter, FiqlType.customerId.name());
+		final String productType = this.getEqValue(filter, FiqlType.productType.name());
+
+		final DTOIntFilterMovements dtoIntFilterMovements = new DTOIntFilterMovements();
+		dtoIntFilterMovements.setCustomerId(customerId);
+		dtoIntFilterMovements.setProductType(productType);
+		dtoIntFilterMovements.setProductId(productId);
+		dtoIntFilterMovements.setMovementId(movementId);
+
+		return dtoIntFilterMovements;
+
+	}
+
+	@Override
+	public DTOIntFilterMovements getDTOIntFilterGetListMovements(String productId,String filter,Integer paginationKey,  Integer pageSize) {
+
+		final String transactionDateStart = this.getGeValue(filter, FiqlType.transactionDate.name());
+		final String transactionDateEnd = this.getLeValue(filter, FiqlType.transactionDate.name());
+		final String valueStart = this.getGeValue(filter, FiqlType.value.name());
+		final String valueEnd = this.getLeValue(filter, FiqlType.value.name());
+		final String customerId = this.getEqValue(filter, FiqlType.customerId.name());
+		final String productType = this.getEqValue(filter, FiqlType.productType.name());
+
+		final DTOIntFilterMovements dtoIntFilterMovements = new DTOIntFilterMovements();
+		dtoIntFilterMovements.setCustomerId(customerId);
+		dtoIntFilterMovements.setProductType(productType);
+		dtoIntFilterMovements.setProductId(productId);
+		dtoIntFilterMovements.setPageSize(pageSize);
+		dtoIntFilterMovements.setPaginationKey(paginationKey);
+		dtoIntFilterMovements.setTransactionDateStart(transactionDateStart);
+		dtoIntFilterMovements.setTransactionDateEnd(transactionDateEnd);
+		dtoIntFilterMovements.setValueStart(valueStart);
+		dtoIntFilterMovements.setValueEnd(valueEnd);
+
+		return dtoIntFilterMovements;
+
+
 	}
 
 	@Override
@@ -124,5 +185,17 @@ public class ProductsMapper extends AbstractBbvaConfigurableMapper implements
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+	@Override
+	public Movement map(DTOIntMovement dtoIntMovement) {
+		log.info("map- return:Account-parameter:dtoIntAccount");
+		return map(dtoIntMovement,Movement.class);
+	}
+
+	@Override
+	public List<Movement> mapMovements(List<DTOIntMovement> listaDTOIntMovements) {
+		return mapAsList(listaDTOIntMovements, Movement.class);
+	}
+
 
 }

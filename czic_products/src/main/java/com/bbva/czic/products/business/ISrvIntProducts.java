@@ -1,8 +1,8 @@
 package com.bbva.czic.products.business;
 
-import com.bbva.czic.products.business.dto.DTOIntConditions;
-import com.bbva.czic.products.business.dto.DTOIntExtract;
-import com.bbva.czic.products.business.dto.DTOIntProduct;
+import com.bbva.czic.products.business.dto.*;
+
+import java.util.List;
 
 
 public interface ISrvIntProducts {
@@ -10,5 +10,9 @@ public interface ISrvIntProducts {
 
 	public DTOIntExtract listExtracts(DTOIntExtract dtoIntFilterExtract);
 
+
+	public DTOIntMovement getMovement(DTOIntFilterMovements dtoIntMovementsFilter);
+
+	public List<DTOIntMovement> listMovements(DTOIntFilterMovements filter);
 
 }
