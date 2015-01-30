@@ -26,7 +26,7 @@ import com.bbva.jee.arq.spring.core.host.protocolo.ps9.aplicacion.CopySalida;
  * @see PeticionTransaccionOznp
  * @see RespuestaTransaccionOznp
  */
-@Component("TransaccionOznp")
+@Component("transaccionOznp")
 @Profile("dev")
 public class TransaccionOznpMock implements InvocadorTransaccion<PeticionTransaccionOznp,RespuestaTransaccionOznp> {
 	
