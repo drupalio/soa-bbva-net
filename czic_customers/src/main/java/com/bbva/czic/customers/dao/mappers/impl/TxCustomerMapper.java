@@ -9,6 +9,7 @@ import com.bbva.czic.customers.dao.model.oznb.FormatoOZNCSNB0;
 import com.bbva.czic.customers.dao.model.oznq.FormatoOZECNQE0;
 import com.bbva.czic.customers.dao.model.oznq.FormatoOZECNQS0;
 import com.bbva.czic.routine.commons.rm.utils.EDateFormat;
+import com.bbva.czic.routine.commons.rm.utils.converter.MonthEnumConverter;
 import com.bbva.czic.routine.commons.rm.utils.converter.StringMoneyConverter;
 import com.bbva.czic.routine.commons.rm.utils.mappers.AbstractBbvaTxConfigurableMapper;
 import com.bbva.czic.routine.mapper.MapperFactory;
@@ -25,7 +26,7 @@ public class TxCustomerMapper extends AbstractBbvaTxConfigurableMapper implement
 		super.configure(factory);
 
 		factory.getConverterFactory().registerConverter(new DateToStringConverter(EDateFormat.ANIO_MES_DIA.getPattern()));
-		factory.getConverterFactory().registerConverter(MONTH_CONVERTER, new DateToStringConverter(EDateFormat.MONTH.getPattern()));
+		factory.getConverterFactory().registerConverter(MONTH_CONVERTER, new MonthEnumConverter());
 
 		/**
 		 * Convert HOST FORMAT (+EEEEEEEEDD) to COP Money
