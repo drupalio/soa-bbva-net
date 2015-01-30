@@ -53,10 +53,10 @@ public class FormatoOZECNLS0 {
 	private String balance;
 	
 	/**
-	 * <p>Campo <code>RESTO</code>, &iacute;ndice: <code>6</code>, tipo: <code>ALFANUMERICO</code>
+	 * <p>Campo <code>CONCEPT</code>, &iacute;ndice: <code>6</code>, tipo: <code>ALFANUMERICO</code>
 	 */
-	@Campo(indice = 6, nombre = "RESTO", tipo = TipoCampo.ALFANUMERICO, longitudMinima = 20, longitudMaxima = 20)
-	private String resto;
+	@Campo(indice = 6, nombre = "CONCEPT", tipo = TipoCampo.ALFANUMERICO, longitudMinima = 20, longitudMaxima = 20)
+	private String concept;
 	
 	/**
 	 * <p>Campo <code>TIPOOPR</code>, &iacute;ndice: <code>7</code>, tipo: <code>ALFANUMERICO</code>
