@@ -5,13 +5,10 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
+import com.bbva.czic.customers.business.dto.*;
 import org.springframework.stereotype.Service;
 
 import com.bbva.czic.customers.business.ISrvIntCustomers;
-import com.bbva.czic.customers.business.dto.DTOIntAccMovementsResume;
-import com.bbva.czic.customers.business.dto.DTOIntCardCharge;
-import com.bbva.czic.customers.business.dto.DTOIntCustomer;
-import com.bbva.czic.customers.business.dto.DTOIntAccMovementsResumesFilter;
 import com.bbva.czic.customers.dao.CustomersDAO;
 import com.bbva.czic.dto.net.CardCharge;
 import com.bbva.czic.dto.net.Customer;
@@ -120,6 +117,14 @@ public class SrvIntCustomers implements ISrvIntCustomers {
 		DtoValidator.validate(dtoIntCustomer);
 		log.info("SrvInt: gettingIntoMapper: " + dtoIntCustomer);
 		return null; //customerMapper.map(dtoIntCustomer);
+
+	}
+
+	@Override
+	public void verifyCustomer(DTOIntCustomerOperation customerOperation) {
+
+		DtoValidator.validate(customerOperation);
+
 
 	}
 }

@@ -11,6 +11,7 @@ import javax.ws.rs.core.UriInfo;
 
 import com.bbva.czic.customers.business.dto.DTOIntAccMovementsResume;
 import com.bbva.czic.customers.business.dto.DTOIntAccMovementsResumesFilter;
+import com.bbva.czic.customers.business.dto.DTOIntCustomerOperation;
 import com.bbva.czic.customers.facade.v01.mappers.ICustomerMapper;
 import com.bbva.czic.dto.net.CustomerOperation;
 import org.apache.cxf.jaxrs.model.wadl.ElementClass;
@@ -162,7 +163,11 @@ public class SrvCustomersV01 implements ISrvCustomersV01, com.bbva.jee.arq.sprin
 
 		log.info("Into verifyCustomer...");
 
-		// 1. Invoke SrvIntCustomers and Mapping to canonical DTO
+		DTOIntCustomerOperation custOperation = customerMapper.map(operation);
+		custOperation.setChannelId(channelId);
+
+		srvIntCustomers.verifyCustomer(custOperation);
+
 		return Response.ok().build();
 	}
 }

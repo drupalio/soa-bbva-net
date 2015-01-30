@@ -2,8 +2,11 @@ package com.bbva.czic.customers.facade.v01.mappers.impl;
 
 import com.bbva.czic.customers.business.dto.DTOIntAccMovementsResume;
 import com.bbva.czic.customers.business.dto.DTOIntAccMovementsResumesFilter;
+import com.bbva.czic.customers.business.dto.DTOIntCustomerOperation;
 import com.bbva.czic.customers.facade.v01.mappers.ICustomerMapper;
 import com.bbva.czic.dto.net.AccMovementsResume;
+import com.bbva.czic.dto.net.CustomerOperation;
+import com.bbva.czic.routine.commons.rm.utils.converter.EmailStringConverter;
 import com.bbva.czic.routine.commons.rm.utils.fiql.FiqlType;
 import com.bbva.czic.routine.commons.rm.utils.mappers.AbstractBbvaConfigurableMapper;
 import com.bbva.czic.routine.mapper.MapperFactory;
@@ -21,12 +24,24 @@ public class CustomerMapper extends AbstractBbvaConfigurableMapper implements IC
     protected void configure(MapperFactory factory) {
         super.configure(factory);
 
+        factory.getConverterFactory().registerConverter(new EmailStringConverter());
+
         // map DTOIntFilterCustomerResumes <-> AccMovementsResume
         factory.classMap(DTOIntAccMovementsResume.class, AccMovementsResume.class)
                 .field("income", "income")
                 .field("outcome", "outcome")
                 .field("balance", "balance")
                 .field("month", "month")
+                .byDefault().register();
+
+        factory.classMap(CustomerOperation.class, DTOIntCustomerOperation.class)
+                .field("operation.code", "code")
+                .field("card.cardNumber", "cardNumber")
+                .field("card.nip", "cardNip")
+                .field("customer.id", "customerId")
+                .field("customer.document.number", "documentNumber")
+                .field("customer.document.type", "documentType")
+                .field("customer.contactInfo.emails", "emails")
                 .byDefault().register();
 
     }
@@ -49,6 +64,11 @@ public class CustomerMapper extends AbstractBbvaConfigurableMapper implements IC
     @Override
     public List<AccMovementsResume> map(List<DTOIntAccMovementsResume> accMovementsResumes) {
         return mapAsList(accMovementsResumes, AccMovementsResume.class);
+    }
+
+    @Override
+    public DTOIntCustomerOperation map(CustomerOperation operation) {
+        return map(operation, DTOIntCustomerOperation.class);
     }
 
 }

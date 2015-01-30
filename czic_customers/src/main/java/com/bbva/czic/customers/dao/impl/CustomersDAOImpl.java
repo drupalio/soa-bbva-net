@@ -1,9 +1,6 @@
 package com.bbva.czic.customers.dao.impl;
 
-import com.bbva.czic.customers.business.dto.DTOIntAccMovementsResume;
-import com.bbva.czic.customers.business.dto.DTOIntAccMovementsResumesFilter;
-import com.bbva.czic.customers.business.dto.DTOIntCardCharge;
-import com.bbva.czic.customers.business.dto.DTOIntCustomer;
+import com.bbva.czic.customers.business.dto.*;
 import com.bbva.czic.customers.business.impl.SrvIntCustomers;
 import com.bbva.czic.customers.dao.CustomersDAO;
 import com.bbva.czic.customers.dao.model.oznp.FormatoOZECNPE0;
@@ -12,6 +9,7 @@ import com.bbva.czic.customers.dao.model.oznp.PeticionTransaccionOznp;
 import com.bbva.czic.customers.dao.model.oznp.RespuestaTransaccionOznp;
 import com.bbva.czic.customers.dao.tx.TxGetCustomer;
 import com.bbva.czic.customers.dao.tx.TxListAccountMovementsResume;
+import com.bbva.czic.customers.dao.tx.TxVerifyCustomer;
 import com.bbva.czic.routine.commons.rm.utils.errors.EnumError;
 import com.bbva.jee.arq.spring.core.host.InvocadorTransaccion;
 import com.bbva.jee.arq.spring.core.host.protocolo.ps9.aplicacion.CopySalida;
@@ -35,6 +33,9 @@ public class CustomersDAOImpl implements CustomersDAO {
 
 	@Resource(name = "txListAccountMovementsResume")
 	private TxListAccountMovementsResume txListAccountMovementsResume;
+
+	@Resource(name = "tx-verify-customer")
+	private TxVerifyCustomer txVerifyCustomer;
 
 	@Resource(name = "transaccionOznp")
 	private InvocadorTransaccion<PeticionTransaccionOznp, RespuestaTransaccionOznp> transaccionOznp;
@@ -63,6 +64,13 @@ public class CustomersDAOImpl implements CustomersDAO {
 		log.info("CustDAO: Into getCustomer...");
 		log.info("CustDAO: getCustomer params(customerId):" + customerId);
 		return txGetCustomer.invoke(customerId);
+	}
+
+	@Override
+	public void verifyCustomer(DTOIntCustomerOperation customerOperation) {
+		log.info("CustDAO: Into verifyCustomer...");
+		log.info("CustDAO: verifyCustomer params(customerOperation):" + customerOperation);
+		txVerifyCustomer.invoke(customerOperation);
 	}
 
 }
