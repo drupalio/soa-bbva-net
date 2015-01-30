@@ -6,7 +6,7 @@ import org.springframework.stereotype.Component;
 
 import com.bbva.czic.products.business.dto.DTOIntExtract;
 import com.bbva.czic.products.business.dto.DTOIntFilterExtract;
-import com.bbva.czic.products.dao.mapper.TxExtractMapper;
+import com.bbva.czic.products.dao.mapper.TxProductsMapper;
 import com.bbva.czic.products.dao.model.ozn2.FormatoOZECN2E0;
 import com.bbva.czic.products.dao.model.ozn2.FormatoOZECN2S0;
 import com.bbva.czic.products.dao.model.ozn2.PeticionTransaccionOzn2;
@@ -22,18 +22,18 @@ public class TxListExtracts
 	@Resource(name = "transaccionOzn2")
 	private transient InvocadorTransaccion<PeticionTransaccionOzn2,RespuestaTransaccionOzn2> transaccionOzn2;
 
-	@Resource(name = "txExtractMapper")
-	private TxExtractMapper txExtractMapper;
+	@Resource(name = "txProductMapper")
+	private TxProductsMapper txProductsMapper;
 
 	@Override
 	protected FormatoOZECN2E0 mapDtoInToRequestFormat(DTOIntFilterExtract dtoIn) {
-		return txExtractMapper.mapInOznt(dtoIn);
+		return txProductsMapper.mapInOznt(dtoIn);
 	}
 
 	@Override
 	protected DTOIntExtract mapResponseFormatToDtoOut(
 			FormatoOZECN2S0 formatOutput, DTOIntFilterExtract dtoIn) {
-		return txExtractMapper.mapOutOznt(formatOutput);
+		return txProductsMapper.mapOutOznt(formatOutput);
 	}
 
 	@Override
