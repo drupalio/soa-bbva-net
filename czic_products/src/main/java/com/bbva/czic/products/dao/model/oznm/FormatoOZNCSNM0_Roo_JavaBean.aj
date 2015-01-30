@@ -15,14 +15,6 @@ privileged aspect FormatoOZNCSNM0_Roo_JavaBean {
         this.numecta = numecta;
     }
     
-    public String FormatoOZNCSNM0.getNomovim() {
-        return this.nomovim;
-    }
-    
-    public void FormatoOZNCSNM0.setNomovim(String nomovim) {
-        this.nomovim = nomovim;
-    }
-    
     public String FormatoOZNCSNM0.getFchoper() {
         return this.fchoper;
     }

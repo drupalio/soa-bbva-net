@@ -1,22 +1,52 @@
 package com.bbva.czic.products.dao.mapper.impl;
 
-import com.bbva.czic.products.business.dto.DTOIntCity;
-import com.bbva.czic.products.business.dto.DTOIntConditions;
-import com.bbva.czic.products.business.dto.DTOIntCountry;
-import com.bbva.czic.products.business.dto.DTOIntLocation;
-import com.bbva.czic.products.business.dto.DTOIntOffice;
-import com.bbva.czic.products.business.dto.DTOIntProduct;
+import com.bbva.czic.dto.net.Office;
+import com.bbva.czic.products.business.dto.*;
 import com.bbva.czic.products.dao.mapper.TxProductMapper;
+import com.bbva.czic.products.dao.model.oznm.FormatoOZNCENM0;
 import com.bbva.czic.products.dao.model.oznt.FormatoOZECNTE0;
 import com.bbva.czic.products.dao.model.oznt.FormatoOZECNTS0;
+import com.bbva.czic.routine.commons.rm.utils.converter.StringMoneyConverter;
 import com.bbva.czic.routine.commons.rm.utils.mappers.AbstractBbvaTxConfigurableMapper;
 import com.bbva.czic.routine.commons.rm.utils.mappers.Mapper;
+import com.bbva.czic.routine.mapper.MapperFactory;
 
-@Mapper(value = "txProductMapper")
+@Mapper(value = "tx-product-mapper")
 public class TxProductMapperImpl extends AbstractBbvaTxConfigurableMapper  implements TxProductMapper{
 
-	
-	@Override
+        /**
+         *
+         */
+        @Override
+        protected void configure(MapperFactory factory) {
+
+                /**
+                 * Convert HOST FORMAT (+EEEEEEEEDD) to COP Money
+                 */
+                factory.getConverterFactory().registerConverter(new StringMoneyConverter());
+
+                /**
+                 * MAPEO DE ENTRADAS
+                 */
+                // Map DTOIntFilter <-> FormatoOZNCENA0 (OZNL)
+            //    factory.classMap(DTOIntFilterMovements.class, FormatoOZNCENM0.class).field("id", "nocuent").field("movementId", "nummov")
+              //          .byDefault()
+                //        .register();
+
+                /**
+                 * MAPEO DE SALIDAS
+                 */
+                // Map FormatoOZECNVS0 <-> DTOIntMonthlyBalances (OZNA)
+         //       factory.classMap(DTOIntExecutive.class, FormatoOZECNRS0.class).field("executiveId", "idejecu").field("name", "nomejec")
+           //             .field("phone", "telejec").field("office.name", "ofiejec")
+             //           .field("email", "emailej").byDefault().register();
+
+
+        }
+
+
+
+        @Override
 	public FormatoOZECNTE0 mapInOznt(DTOIntProduct dtoIn) {
 		FormatoOZECNTE0 formatoEntrada = new FormatoOZECNTE0();
         formatoEntrada.setNumprod(dtoIn.getId());
