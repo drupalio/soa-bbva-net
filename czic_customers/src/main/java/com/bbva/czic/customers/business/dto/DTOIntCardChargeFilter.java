@@ -1,5 +1,6 @@
 package com.bbva.czic.customers.business.dto;
 
+import com.bbva.czic.routine.commons.rm.utils.validator.IsCustomerId;
 import org.hibernate.validator.constraints.NotEmpty;
 
 /**
@@ -7,6 +8,7 @@ import org.hibernate.validator.constraints.NotEmpty;
  */
 public class DTOIntCardChargeFilter {
     @NotEmpty
+    @IsCustomerId
     String customerId;
     String startDate;
     String endDate;

@@ -7,7 +7,7 @@ import java.util.List;
 import javax.annotation.Resource;
 
 import com.bbva.czic.customers.business.dto.*;
-import com.bbva.czic.customers.dao.tx.TxAddChannel;
+import com.bbva.czic.customers.dao.tx.*;
 import com.bbva.czic.dto.net.Customer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -16,9 +16,6 @@ import com.bbva.czic.customers.business.impl.SrvIntCustomers;
 import com.bbva.czic.customers.dao.CustomersDAO;
 import com.bbva.czic.customers.dao.model.oznp.PeticionTransaccionOznp;
 import com.bbva.czic.customers.dao.model.oznp.RespuestaTransaccionOznp;
-import com.bbva.czic.customers.dao.tx.TxGetCustomer;
-import com.bbva.czic.customers.dao.tx.TxListAccountMovementsResume;
-import com.bbva.czic.customers.dao.tx.TxVerifyCustomer;
 import com.bbva.czic.routine.commons.rm.utils.errors.EnumError;
 import com.bbva.jee.arq.spring.core.host.InvocadorTransaccion;
 import com.bbva.jee.arq.spring.core.log.I18nLog;
@@ -40,6 +37,10 @@ public class CustomersDAOImpl implements CustomersDAO {
 
 	@Resource(name = "txListAccountMovementsResume")
 	private TxListAccountMovementsResume txListAccountMovementsResume;
+
+	@Resource(name = "")
+	private TxListCardCharges txListCardCharges;
+
 	/**
 	 * OZNW
 	 */
@@ -48,9 +49,6 @@ public class CustomersDAOImpl implements CustomersDAO {
 
 	@Resource(name = "tx-verify-customer")
 	private TxVerifyCustomer txVerifyCustomer;
-
-	@Resource(name = "transaccionOznp")
-	private InvocadorTransaccion<PeticionTransaccionOznp, RespuestaTransaccionOznp> transaccionOznp;
 
 	private static I18nLog log = I18nLogFactory.getLogI18n(SrvIntCustomers.class, "META-INF/spring/i18n/log/mensajesLog");
 

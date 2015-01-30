@@ -1,11 +1,12 @@
 package com.bbva.czic.customers.dao.mappers.impl;
 
-import com.bbva.czic.customers.business.dto.DTOIntAccMovementsResume;
-import com.bbva.czic.customers.business.dto.DTOIntAccMovementsResumesFilter;
-import com.bbva.czic.customers.business.dto.DTOIntCustomer;
+import com.bbva.czic.customers.business.dto.*;
+import com.bbva.czic.customers.dao.converters.CardChargeCategoryConverter;
 import com.bbva.czic.customers.dao.mappers.ITxCustomerMapper;
 import com.bbva.czic.customers.dao.model.oznb.FormatoOZNCENB0;
 import com.bbva.czic.customers.dao.model.oznb.FormatoOZNCSNB0;
+import com.bbva.czic.customers.dao.model.oznp.FormatoOZECNPE0;
+import com.bbva.czic.customers.dao.model.oznp.FormatoOZECNPS0;
 import com.bbva.czic.customers.dao.model.oznq.FormatoOZECNQE0;
 import com.bbva.czic.customers.dao.model.oznq.FormatoOZECNQS0;
 import com.bbva.czic.dto.net.ContactInfo;
@@ -27,13 +28,16 @@ import java.util.List;
 public class TxCustomerMapper extends AbstractBbvaTxConfigurableMapper implements ITxCustomerMapper {
 
 	public static final String MONTH_CONVERTER = "monthConverter";
+	public static final String SIMPLE_DATE_CONVERTER = "simpleDateConverter";
+	public static final String CARD_CHARGE_CATEGORY_CONVERTER = "cardChargeCategoryConverter";
 
 	@Override
 	protected void configure(MapperFactory factory) {
 		super.configure(factory);
 
-		factory.getConverterFactory().registerConverter(new DateToStringConverter(EDateFormat.ANIO_MES_DIA.getPattern()));
+		factory.getConverterFactory().registerConverter(SIMPLE_DATE_CONVERTER, new DateToStringConverter(EDateFormat.ANIO_MES_DIA.getPattern()));
 		factory.getConverterFactory().registerConverter(MONTH_CONVERTER, new MonthEnumConverter());
+		factory.getConverterFactory().registerConverter(CARD_CHARGE_CATEGORY_CONVERTER, new CardChargeCategoryConverter());
 
 		/**
 		 * Convert HOST FORMAT (+EEEEEEEEDD) to COP Money
@@ -74,6 +78,19 @@ public class TxCustomerMapper extends AbstractBbvaTxConfigurableMapper implement
 				.field("saltota", "balance")
 				.fieldMap("mes", "month").converter(MONTH_CONVERTER).add()
 				.byDefault().register();
+
+		// map DTOIntCardChargeFilter <-> FormatoOZECNPE0
+		factory.classMap(DTOIntCardChargeFilter.class, FormatoOZECNPE0.class)
+				.field("customerId", "idusuar")
+				.fieldMap("startDate", "fechain").converter(SIMPLE_DATE_CONVERTER).add()
+				.fieldMap("endDate", "fechafi").converter(SIMPLE_DATE_CONVERTER).add()
+				.byDefault().register();
+
+		factory.classMap(FormatoOZECNPS0.class, DTOIntCardCharge.class)
+				.fieldMap("categor", "category").converter("cardChargeCategoryConverter").add()
+				.field("valcate", "amount")
+				.byDefault().register();
+
 	}
 	
 	@Override
@@ -107,5 +124,15 @@ public class TxCustomerMapper extends AbstractBbvaTxConfigurableMapper implement
 	@Override
 	public DTOIntAccMovementsResume mapOutOznq(FormatoOZECNQS0 formatoSalida) {
 		return map(formatoSalida, DTOIntAccMovementsResume.class);
+	}
+
+	@Override
+	public FormatoOZECNPE0 mapInOznp(DTOIntCardChargeFilter cardChargeFilter) {
+		return map(cardChargeFilter, FormatoOZECNPE0.class);
+	}
+
+	@Override
+	public DTOIntCardCharge mapOutOznp(FormatoOZECNPS0 formatoSalida) {
+		return map(formatoSalida, DTOIntCardCharge.class);
 	}
 }
