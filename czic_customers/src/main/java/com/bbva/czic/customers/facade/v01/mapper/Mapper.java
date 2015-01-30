@@ -1,24 +1,28 @@
 package com.bbva.czic.customers.facade.v01.mapper;
 
+import com.bbva.czic.customers.business.dto.*;
+import com.bbva.czic.customers.facade.v01.mapper.impl.IMapper;
+import com.bbva.czic.dto.net.*;
+import com.bbva.czic.routine.commons.rm.utils.mappers.AbstractBbvaConfigurableMapper;
+import com.bbva.czic.routine.mapper.MapperFactory;
 import org.springframework.beans.BeanUtils;
+import org.springframework.stereotype.Component;
 
-import com.bbva.czic.dto.net.CreditCard;
-import com.bbva.czic.dto.net.Product;
-import com.bbva.czic.dto.net.CardCharge;
-import com.bbva.czic.dto.net.AccMovementsResume;
-import com.bbva.czic.dto.net.User;
-import com.bbva.czic.dto.net.EnumCardChargeCategory;
-import com.bbva.czic.dto.net.EnumMonth;
-import com.bbva.czic.customers.business.dto.DTOIntCreditCard;
-import com.bbva.czic.customers.business.dto.DTOIntProduct;
-import com.bbva.czic.customers.business.dto.DTOIntCardCharge;
-import com.bbva.czic.customers.business.dto.DTOIntAccMovementsResume;
-import com.bbva.czic.customers.business.dto.DTOIntUser;
-import com.bbva.czic.customers.business.dto.DTOIntEnumCardChargeCategory;
-import com.bbva.czic.customers.business.dto.DTOIntEnumMonth;
+@Component(value = "account-mapper")
+public class Mapper  extends AbstractBbvaConfigurableMapper implements IMapper{
 
+	/**
+	 *
+	 * @param factory
+	 */
+	@Override
+	protected void configure(MapperFactory factory) {
 
-public class Mapper {
+		super.configure(factory);
+
+		//implementacion de mapeos
+
+	}
 
 		
  public static CreditCard creditCardMap(DTOIntCreditCard dtoIntCreditCard) { 
@@ -110,5 +114,9 @@ public class Mapper {
 	 return DTOIntEnumMonth.valueOf(enumMonth.name());
  }
 
+	@Override
+	public Customer map(DTOIntCustomer dtoIntCustomer) {
+		return map(dtoIntCustomer, Customer.class);
+	}
 }
 

@@ -73,7 +73,7 @@ public class TxAccountMapperImpl extends AbstractBbvaTxConfigurableMapper implem
 				.customize(new CheckBookListMapper()).register();
 
 		// Map FormatoOZECNVS0 <-> DTOIntMonthlyBalances (OZNV)
-		factory.classMap(DTOIntMonthlyBalances.class, FormatoOZECNVS0.class).field("balance.amount", "salddis")
+		factory.classMap(DTOIntMonthlyBalances.class, FormatoOZECNVS0.class).field("balance", "salddis")
 				.field("month", "mes").byDefault().register();
 		
 		// Map DTOIntCheckbook <-> FormatoOZECNSE0 (OZNS)

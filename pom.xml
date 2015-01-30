@@ -18,7 +18,6 @@
         <module>czic</module>
         <module>czic_commons</module>
         <module>czic_accounts</module>
-        <module>czic_movements</module>
         <module>czic_GlobalPosition</module>
         <module>czic_executives</module>
         <module>czic_customers</module>

@@ -15,9 +15,9 @@ public interface ISrvAccountsV01{
 
 	Account getAccount(String idAccount);
 
-	List<MonthlyBalances> getAccountMonthlyBalance( String idAccount, String filter, String fields, String expands,String sort);
+	List<MonthlyBalances> getAccountMonthlyBalance( String idAccount, String filter);
 
-	List<AccMovementsResume> getAccMovementResume(String idAccount, String filter, String fields, String expands,String sort);
+	List<AccMovementsResume> getAccMovementResume(String idAccount, String filter);
 
 	List<Check> listCheck(String accountId, String filter, Integer paginationKey, Integer pageSize);
 
