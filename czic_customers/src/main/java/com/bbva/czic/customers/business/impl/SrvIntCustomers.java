@@ -1,19 +1,14 @@
 package com.bbva.czic.customers.business.impl;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.Resource;
 
+import com.bbva.czic.customers.business.dto.*;
 import org.springframework.stereotype.Service;
 
 import com.bbva.czic.customers.business.ISrvIntCustomers;
-import com.bbva.czic.customers.business.dto.DTOIntAccMovementsResume;
-import com.bbva.czic.customers.business.dto.DTOIntCardCharge;
-import com.bbva.czic.customers.business.dto.DTOIntCustomer;
-import com.bbva.czic.customers.business.dto.DTOIntAccMovementsResumesFilter;
 import com.bbva.czic.customers.dao.CustomersDAO;
-import com.bbva.czic.dto.net.CardCharge;
 import com.bbva.czic.dto.net.Customer;
 import com.bbva.czic.routine.commons.rm.utils.errors.EnumError;
 import com.bbva.czic.routine.commons.rm.utils.validator.DtoValidator;
@@ -44,7 +39,8 @@ public class SrvIntCustomers implements ISrvIntCustomers {
 	 */
 	@Override
 	public List<DTOIntAccMovementsResume> getListAccountsMovementsResume(
-			final DTOIntAccMovementsResumesFilter accMovementResumeFilter) throws BusinessServiceException {
+			final DTOIntAccMovementsResumesFilter accMovementResumeFilter
+	) {
 		log.info("Into getListAccountsMovementsResume... ");
 		log.info("getListAccountsMovementsResume params: " + accMovementResumeFilter);
 
@@ -52,7 +48,7 @@ public class SrvIntCustomers implements ISrvIntCustomers {
 		DtoValidator.validate(accMovementResumeFilter);
 
 		// 2. Get response
-		final List<DTOIntAccMovementsResume> accMovementsResumes = customersDao.getlistAccountsMovementsResume(accMovementResumeFilter);
+		final List<DTOIntAccMovementsResume> accMovementsResumes = customersDao.listAccountsMovementsResume(accMovementResumeFilter);
 
 		// 3. Validate output
 		DtoValidator.validate(accMovementResumeFilter);
@@ -62,40 +58,24 @@ public class SrvIntCustomers implements ISrvIntCustomers {
 
 	/**
 	 *
-	 * @param customerId
-	 * @param filter
 	 * @return
 	 * @throws BusinessServiceException
 	 */
 	@Override
-	public List<CardCharge> getlistCreditCharges(String customerId,
-			final DTOIntAccMovementsResumesFilter filter)
-			throws BusinessServiceException {
-		log.info("Into getlistCreditCharges... ");
-		log.info("getlistCreditCharges params: " + filter);
+	public List<DTOIntCardCharge> listCreditCharges(final DTOIntCardChargeFilter cardChargeFilter) {
+		log.info("Into listCreditCharges... ");
+		log.info("listCreditCharges params: " + cardChargeFilter.toString());
 
-		List<CardCharge> listCardCharge = new ArrayList<CardCharge>();
-		filter.setCustomerId(customerId);
+		// 1. Validate DtoIntFilterAccount
+		DtoValidator.validate(cardChargeFilter);
 
-		try {
-			// 1. Validate DtoIntFilterAccount
-			DtoValidator.validate(filter);
-			// 2. Get response
-			List<DTOIntCardCharge> dtoIntCardCharges = customersDao
-					.getlistCreCardCharges(filter);
-			for (DTOIntCardCharge item : dtoIntCardCharges) {
-				//listCardCharge.add(customerMapper.map(item));
-			}
-			log.info(" DAO: getListCreditChargesResponse: " + dtoIntCardCharges);
-			// 3. Validate output
-			DtoValidator.validate(dtoIntCardCharges);
-			return listCardCharge;
-		} catch (BusinessServiceException bse) {
-			log.error("BusinessServiceException - Error during platform: "
-					+ bse);
-			throw bse;
-		}
+		// 2. Get response
+		final List<DTOIntCardCharge> intCardCharges = customersDao.listCreditCardCharges(cardChargeFilter);
 
+		// 3. Validate output
+		DtoValidator.validate(intCardCharges);
+
+		return intCardCharges;
 	}
 
 	/**
@@ -119,7 +99,7 @@ public class SrvIntCustomers implements ISrvIntCustomers {
 		// 3. Validate output
 		DtoValidator.validate(dtoIntCustomer);
 		log.info("SrvInt: gettingIntoMapper: " + dtoIntCustomer);
-		return null; //customerMapper.map(dtoIntCustomer);
+		return null; //customerMapper.mapAccMovementsResume(dtoIntCustomer);
 
 	}
 

@@ -36,14 +36,14 @@ public class TxCustomerMapper extends AbstractBbvaTxConfigurableMapper implement
 		/**
 		 * MAPEO DE ENTRADAS
 		 */
-		// map customerId <-> FormatoOZNCENB0 (OZNB)
+		// mapAccMovementsResume customerId <-> FormatoOZNCENB0 (OZNB)
 //		factory.classMap(String.class, FormatoOZNCENB0.class).field("customerId", "numprod").byDefault()
 //				.register();
 
 		/**
 		 * MAPEO DE SALIDAS
 		 */
-		// map FormatoOZECNBS0 <-> DTOIntCustomer (OZNB)
+		// mapAccMovementsResume FormatoOZECNBS0 <-> DTOIntCustomer (OZNB)
 		factory.classMap(DTOIntCustomer.class, FormatoOZNCSNB0.class)
 				.field("id", "numclie")
 				.field("name", "nomclie")
@@ -53,14 +53,14 @@ public class TxCustomerMapper extends AbstractBbvaTxConfigurableMapper implement
 				.field("lastConnectionTime", "ultconx")
 				.byDefault().register();
 
-		// map DTOIntAccMovementsResumesFilter <-> FormatoOZECNQE0
+		// mapAccMovementsResume DTOIntAccMovementsResumesFilter <-> FormatoOZECNQE0
 		factory.classMap(DTOIntAccMovementsResumesFilter.class, FormatoOZECNQE0.class)
 				.field("customerId", "idusuar")
 				.field("startDate", "fechain")
 				.field("endDate", "fechafi")
 				.byDefault().register();
 
-		// map FormatoOZECNQS0 <-> DTOIntAccMovementsResume
+		// mapAccMovementsResume FormatoOZECNQS0 <-> DTOIntAccMovementsResume
 		factory.classMap(FormatoOZECNQS0.class, DTOIntAccMovementsResume.class)
 				.field("valdepo", "income")
 				.field("valcarg", "outcome")
