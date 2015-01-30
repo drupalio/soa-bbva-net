@@ -162,9 +162,9 @@ public class SrvAccountsV01 implements ISrvAccountsV01,
 	@SMC(registryID = "SMC201400026", logicalID = "listCheck")
 	public List<Check> listCheck(
 			@ApiParam(value = "identifier param") @PathParam("id") String accountId,
-			@ApiParam(value = "filter param") @DefaultValue("null") @QueryParam("$filter") String filter,
-			@ApiParam(value = "fields param") @DefaultValue("null") @QueryParam("paginationKey") Integer paginationKey,
-			@ApiParam(value = "expands param") @DefaultValue("null") @QueryParam("pageSize") Integer pageSize) {
+			@ApiParam(value = "filter param") @QueryParam("$filter") String filter,
+			@ApiParam(value = "fields param") @QueryParam("paginationKey") Integer paginationKey,
+			@ApiParam(value = "expands param")@QueryParam("pageSize") Integer pageSize) {
 
 		// Validacion del filtro
 		new FiqlValidator(filter).exist().hasGeAndLeDate("issueDate")
