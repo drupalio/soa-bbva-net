@@ -10,12 +10,20 @@ import java.util.Date;
 
 privileged aspect FormatoOZECNLE0_Roo_JavaBean {
     
-    public String FormatoOZECNLE0.getNumcuen() {
-        return this.numcuen;
+    public String FormatoOZECNLE0.getNumprod() {
+        return this.numprod;
     }
     
-    public void FormatoOZECNLE0.setNumcuen(String numcuen) {
-        this.numcuen = numcuen;
+    public void FormatoOZECNLE0.setNumprod(String numprod) {
+        this.numprod = numprod;
+    }
+    
+    public String FormatoOZECNLE0.getUsuario() {
+        return this.usuario;
+    }
+    
+    public void FormatoOZECNLE0.setUsuario(String usuario) {
+        this.usuario = usuario;
     }
     
     public Integer FormatoOZECNLE0.getIndpagi() {

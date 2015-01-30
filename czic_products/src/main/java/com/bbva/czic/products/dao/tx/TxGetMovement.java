@@ -28,16 +28,16 @@ public class TxGetMovement extends SimpleBbvaTransaction<DTOIntFilterMovements,F
 
     @Override
     protected FormatoOZNCENM0 mapDtoInToRequestFormat(DTOIntFilterMovements dtoIn) {
-        return null;
+        return txProductMapper.mapInOznm(dtoIn);
     }
 
     @Override
     protected DTOIntMovement mapResponseFormatToDtoOut(FormatoOZNCSNM0 formatOutput, DTOIntFilterMovements dtoIn) {
-        return null;
+        return txProductMapper.mapOutOznm(formatOutput);
     }
 
     @Override
     protected InvocadorTransaccion<?, ?> getTransaction() {
-        return null;
+        return transaccionOznm;
     }
 }
