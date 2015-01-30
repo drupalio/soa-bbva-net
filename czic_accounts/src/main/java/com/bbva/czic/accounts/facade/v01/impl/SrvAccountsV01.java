@@ -104,14 +104,12 @@ public class SrvAccountsV01 implements ISrvAccountsV01,
 			@ApiResponse(code = 200, message = "Found Sucessfully", response = Response.class),
 			@ApiResponse(code = 500, message = "Technical Error") })
 	@GET
-	@Path("/{id}/monthlyBalances")
-	@SMC(registryID = "SMC201400334", logicalID = "getAccountMonthlyBalance")
+	@Path("/{accountId}/monthlyBalances")
+	@SMC(registryID = "SMCCO1400020", logicalID = "getAccountMonthlyBalance")
 	public List<MonthlyBalances> getAccountMonthlyBalance(
-			@ApiParam(value = "identifier param") @PathParam("id") String idAccount,
-			@ApiParam(value = "filter param") @DefaultValue("null") @QueryParam("$filter") String filter,
-			@ApiParam(value = "fields param") @DefaultValue("null") @QueryParam("$fields") String fields,
-			@ApiParam(value = "expands param") @DefaultValue("null") @QueryParam("$expands") String expands,
-			@ApiParam(value = "order by param") @DefaultValue("null") @QueryParam("$sort") String sort) {
+			@ApiParam(value = "identifier param") @PathParam("accountId")String idAccount,
+			@ApiParam(value = "filter param") @DefaultValue("null") @QueryParam("$filter") String filter
+			) {
 
 		// 1. Validate filter FIQL
 		new FiqlValidator(filter).exist().hasGeAndLe("month").validate();
@@ -137,10 +135,7 @@ public class SrvAccountsV01 implements ISrvAccountsV01,
 	@SMC(registryID = "SMC201400334", logicalID = "getAccMovementResume")
 	public List<AccMovementsResume> getAccMovementResume(
 			@ApiParam(value = "identifier param") @PathParam("id") String idAccount,
-			@ApiParam(value = "filter param") @DefaultValue("null") @QueryParam("$filter") String filter,
-			@ApiParam(value = "fields param") @DefaultValue("null") @QueryParam("$fields") String fields,
-			@ApiParam(value = "expands param") @DefaultValue("null") @QueryParam("$expands") String expands,
-			@ApiParam(value = "order by param") @DefaultValue("null") @QueryParam("$sort") String sort) {
+			@ApiParam(value = "filter param") @DefaultValue("null") @QueryParam("$filter") String filter) {
 
 		new FiqlValidator(filter).hasGe("month").validateIfExist();
 
@@ -201,11 +196,11 @@ public class SrvAccountsV01 implements ISrvAccountsV01,
 			@ApiParam(value = "Checkbooks identifier") @PathParam("checkbookId") String checkbookId,
 			@ApiParam(value = "account identifier") @PathParam("accountId") String accountId) {
 		// 1. Validate parameter
-		if (accountId == null || accountId.trim().isEmpty()) {
+		if (accountId.equals("null") || accountId == null || accountId.trim().isEmpty()) {
 			throw new BusinessServiceException(
 					EnumError.WRONG_PARAMETERS.getAlias());
 		}
-		if (checkbookId == null || checkbookId.trim().isEmpty()) {
+		if (checkbookId.equals("null") || checkbookId == null || checkbookId.trim().isEmpty()) {
 			throw new BusinessServiceException(
 					EnumError.WRONG_PARAMETERS.getAlias());
 		}

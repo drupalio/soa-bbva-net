@@ -1,9 +1,8 @@
 package com.bbva.czic.customers.dao;
 
 import com.bbva.czic.customers.business.dto.*;
-import java.util.List;
 
-import com.bbva.jee.arq.spring.core.servicing.gce.BusinessServiceException;
+import java.util.List;
 
 public interface CustomersDAO {
 
@@ -13,7 +12,7 @@ public interface CustomersDAO {
 
 	DTOIntCustomer getCustomer(String customerId);
 
-	DTOIntCustomer addChannel(final String customerId, final String channelId);
+	void addChannel(final DTOIntAddChannel dtoIntAddChannel);
 
 	void verifyCustomer(DTOIntCustomerOperation customerOperation);
 }

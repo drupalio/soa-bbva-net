@@ -17,7 +17,7 @@ public interface ISrvCustomersV01 {
 
  	Customer getCustomer(String customerId);
 
-	Customer addChannel(final String customerId, final String channelId);
-	
+	void addChannel(String customerId, String channelId);
+
 	Response verifyCustomer(String channelId, CustomerOperation operation);
 }

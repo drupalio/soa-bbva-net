@@ -2,6 +2,7 @@ package com.bbva.czic.customers.business;
 
 import java.util.List;
 
+import com.bbva.czic.customers.business.dto.DTOIntAddChannel;
 import com.bbva.czic.customers.business.dto.DTOIntAccMovementsResume;
 import com.bbva.czic.customers.business.dto.DTOIntAccMovementsResumesFilter;
 import com.bbva.czic.customers.business.dto.DTOIntCustomerOperation;
@@ -21,7 +22,7 @@ public interface ISrvIntCustomers {
 
 	Customer getCustomer(String customerId);
 
-	Customer addChannel(final String customerId, final String channelId);
-
+	void addChannel(final DTOIntAddChannel dtoIntAddChannel);
+	
 	void verifyCustomer(DTOIntCustomerOperation customerOperation);
 }

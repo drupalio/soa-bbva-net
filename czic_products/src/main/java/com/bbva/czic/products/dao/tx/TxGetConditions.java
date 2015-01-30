@@ -6,12 +6,11 @@ import org.springframework.stereotype.Component;
 
 import com.bbva.czic.products.business.dto.DTOIntConditions;
 import com.bbva.czic.products.business.dto.DTOIntProduct;
-import com.bbva.czic.products.dao.mapper.TxProductMapper;
+import com.bbva.czic.products.dao.mapper.TxProductsMapper;
 import com.bbva.czic.products.dao.model.oznt.FormatoOZECNTE0;
 import com.bbva.czic.products.dao.model.oznt.FormatoOZECNTS0;
 import com.bbva.czic.products.dao.model.oznt.PeticionTransaccionOznt;
 import com.bbva.czic.products.dao.model.oznt.RespuestaTransaccionOznt;
-import com.bbva.czic.routine.commons.rm.utils.tx.ISimpleTransactionMapper;
 import com.bbva.czic.routine.commons.rm.utils.tx.impl.SimpleBbvaTransaction;
 import com.bbva.jee.arq.spring.core.host.InvocadorTransaccion;
 
@@ -25,7 +24,7 @@ public class TxGetConditions extends SimpleBbvaTransaction<DTOIntProduct, Format
 	private transient InvocadorTransaccion<PeticionTransaccionOznt, RespuestaTransaccionOznt> transaccionOznt;
 	
 	@Resource(name = "txProductMapper")
-	private TxProductMapper txProductMapper;
+	private TxProductsMapper txProductMapper;
 
 	@Override
 	protected FormatoOZECNTE0 mapDtoInToRequestFormat(DTOIntProduct dtoIn) {

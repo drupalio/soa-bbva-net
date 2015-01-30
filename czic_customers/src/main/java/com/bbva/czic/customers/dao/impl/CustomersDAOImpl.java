@@ -1,6 +1,17 @@
 package com.bbva.czic.customers.dao.impl;
 
 import com.bbva.czic.customers.business.dto.*;
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.annotation.Resource;
+
+import com.bbva.czic.customers.business.dto.*;
+import com.bbva.czic.customers.dao.tx.TxAddChannel;
+import com.bbva.czic.dto.net.Customer;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
 import com.bbva.czic.customers.business.impl.SrvIntCustomers;
 import com.bbva.czic.customers.dao.CustomersDAO;
 import com.bbva.czic.customers.dao.model.oznp.PeticionTransaccionOznp;
@@ -29,6 +40,11 @@ public class CustomersDAOImpl implements CustomersDAO {
 
 	@Resource(name = "txListAccountMovementsResume")
 	private TxListAccountMovementsResume txListAccountMovementsResume;
+	/**
+	 * OZNW
+	 */
+	@Resource(name = "tx-add-channel")
+	private TxAddChannel txAddChannel;
 
 	@Resource(name = "tx-verify-customer")
 	private TxVerifyCustomer txVerifyCustomer;
@@ -67,9 +83,9 @@ public class CustomersDAOImpl implements CustomersDAO {
 		log.info("CustDAO: verifyCustomer params(customerOperation):" + customerOperation);
 		txVerifyCustomer.invoke(customerOperation);
 	}
-	
-	public DTOIntCustomer addChannel(final String customerId, final String channelId){
-		return null;
+
+	public void addChannel(final DTOIntAddChannel dtoIntAddChannel){
+		txAddChannel.invoke(dtoIntAddChannel);
 	}
 
 }

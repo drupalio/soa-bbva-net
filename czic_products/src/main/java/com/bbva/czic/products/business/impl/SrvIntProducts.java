@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
+import com.bbva.czic.products.business.dto.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,6 +18,8 @@ import com.bbva.czic.routine.commons.rm.utils.validator.DtoValidator;
 import com.bbva.jee.arq.spring.core.log.I18nLog;
 import com.bbva.jee.arq.spring.core.log.I18nLogFactory;
 import com.bbva.jee.arq.spring.core.servicing.utils.BusinessServicesToolKit;
+
+import java.util.List;
 
 @Service
 public class SrvIntProducts implements ISrvIntProducts {
@@ -60,6 +63,36 @@ public class SrvIntProducts implements ISrvIntProducts {
 
 		log.info(" getConditions Conditions ");
 		return result;
+	}
+
+	@Override
+	public DTOIntMovement getMovement(DTOIntFilterMovements dtoIntMovementsFilter) {
+		// 1. Validate DtoIntFilterAccount
+		DtoValidator.validate(dtoIntMovementsFilter);
+
+		// 2. Get response
+	//	final DTOIntMovement result = productsDAO.getConditions(filter);
+
+		// 3. Validate output
+	//	DtoValidator.validate(result);
+
+		log.info(" getConditions Conditions ");
+		return null;
+	}
+
+	@Override
+	public List<DTOIntMovement> listMovements(DTOIntFilterMovements filter) {
+		// 1. Validate DtoIntFilterAccount
+		DtoValidator.validate(filter);
+
+		// 2. Get response
+	//	final List<DTOIntMovement> result = productsDAO.getConditions(filter);
+
+		// 3. Validate output
+	//	DtoValidator.validate(result);
+
+		log.info(" getConditions Conditions ");
+		return null;
 	}
 
 }

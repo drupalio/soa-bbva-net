@@ -6,6 +6,9 @@ public enum FiqlType {
 	id,
 	type,
 	productType,
-	chargeDate;
+	chargeDate,
+	customerId,
+	value,
+	transactionDate
 
 }
