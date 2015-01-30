@@ -93,8 +93,7 @@ public class SrvAccountsV01 implements ISrvAccountsV01,
 
 		final DTOIntFilterAccount dtoIntFilterAccount = new DTOIntFilterAccount();
 		dtoIntFilterAccount.setAccountId(idAccount);
-		return iAccountsMapper.map(srvIntAccounts
-				.getAccount(dtoIntFilterAccount));
+		return iAccountsMapper.map(srvIntAccounts.getAccount(dtoIntFilterAccount));
 	}
 
 	@Override
@@ -203,6 +202,10 @@ public class SrvAccountsV01 implements ISrvAccountsV01,
 			@ApiParam(value = "account identifier") @PathParam("accountId") String accountId) {
 		// 1. Validate parameter
 		if (accountId == null || accountId.trim().isEmpty()) {
+			throw new BusinessServiceException(
+					EnumError.WRONG_PARAMETERS.getAlias());
+		}
+		if (checkbookId == null || checkbookId.trim().isEmpty()) {
 			throw new BusinessServiceException(
 					EnumError.WRONG_PARAMETERS.getAlias());
 		}

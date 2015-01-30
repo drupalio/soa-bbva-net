@@ -11,9 +11,9 @@ public interface IProductsMapper {
 
 	DTOIntProduct getDtoIntConditions(String productId);
 
-	DTOIntExtract getDtoIntFilterExtract(String productId, String filter,
+	DTOIntFilterExtract getDtoIntFilterExtract(String productId, String filter,
 			Integer paginationKey, Integer pageSize);
 
-	List<Extract> mapExtracts(DTOIntExtract listExtracts);
+	List<Extract> mapExtracts(List<DTOIntExtract> list);
 
 }

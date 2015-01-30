@@ -125,7 +125,7 @@ public class SrvProductsV01 implements ISrvProductsV01,
 				.hasGeAndLe("year").validate();
 
 		// Mapeo del filtro a DTO
-		DTOIntExtract dtoIntFilterExtract = productsMapper
+		DTOIntFilterExtract dtoIntFilterExtract = productsMapper
 				.getDtoIntFilterExtract(productId, filter, paginationKey,
 						pageSize);
 		// 3. Invoke SrvIntCustomers and Mapping to canonical DTO

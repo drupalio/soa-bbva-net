@@ -119,7 +119,7 @@ public class FormatoOZNCSNB0 {
 	/**
 	 * <p>Campo <code>ULTCONX</code>, &iacute;ndice: <code>17</code>, tipo: <code>ALFANUMERICO</code>
 	 */
-	@Campo(indice = 17, nombre = "ULTCONX", tipo = TipoCampo.ALFANUMERICO, longitudMinima = 26, longitudMaxima = 26)
+	@Campo(indice = 17, nombre = "ULTCONX", tipo = TipoCampo.ALFANUMERICO, longitudMinima = 43, longitudMaxima = 43)
 	private String ultconx;
 	
 }

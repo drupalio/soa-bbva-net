@@ -68,10 +68,10 @@ public class TxLoanMapper extends AbstractBbvaTxConfigurableMapper implements IT
 				.field("fechaop", "transactionDate")
 				.field("resto","concept")
 				.field("importe", "value")
-				.field("balance","balance")
+				.field("balance","balance.availableBalance")
 				.field("descop", "operation")
-						//.field("coutaf","")
-						//.field("coutat","")
+				.field("coutaf","remainingQuotas")
+				.field("coutat", "numbersOfQuota")
 				.field("estado", "status")
 				.byDefault().register();
 

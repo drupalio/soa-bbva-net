@@ -30,11 +30,11 @@ public class TransaccionOznkMock implements InvocadorTransaccion<PeticionTransac
 
 		formatoSalida.setDescop("Descripcion");
 		formatoSalida.setResto("12345");
-		formatoSalida.setNumemov("0000000");
+		formatoSalida.setNumemov("000000000");
 		formatoSalida.setImporte("+00000000000");
 		formatoSalida.setBalance("+00000000000");
-		//formatoSalida.setCoutaf("0000");
-		//formatoSalida.setCoutat("0000");
+		formatoSalida.setCoutaf("0000");
+		formatoSalida.setCoutat("0001");
 		formatoSalida.setEstado("Acti");
 		formatoSalida.setFechaop(new Date());
 

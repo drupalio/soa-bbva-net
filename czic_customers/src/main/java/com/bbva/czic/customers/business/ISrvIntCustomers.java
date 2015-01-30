@@ -17,5 +17,7 @@ List<CardCharge> getlistCreditCharges(String customerId, DTOIntAccMovementsResum
 		throws BusinessServiceException;
 
 Customer getCustomer(String customerId) throws BusinessServiceException;
+
+	Customer addChannel(final String customerId, final String channelId);
 	
 }

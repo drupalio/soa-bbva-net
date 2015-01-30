@@ -122,4 +122,11 @@ public class SrvIntCustomers implements ISrvIntCustomers {
 		return null; //customerMapper.map(dtoIntCustomer);
 
 	}
+
+	public Customer addChannel(final String customerId, final String channelId){
+		DTOIntCustomer dtoIntCustomer = customersDao.addChannel(customerId, channelId);
+	//	DtoValidator.validate(dtoIntCustomer);
+		log.info("SrvInt: addChannel: ");
+		return null;
+	}
 }

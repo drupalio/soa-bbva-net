@@ -20,6 +20,10 @@ public class RotaryQuotaMove {
 
 	private Balance balance;
 
+	private Integer numbersOfQuota;
+
+	private Integer remainingQuotas;
+
 
 	public RotaryQuotaMove() {
 		//default constructor
@@ -84,5 +88,20 @@ public class RotaryQuotaMove {
 	}
 
 
+	public Integer getNumbersOfQuota() {
+		return numbersOfQuota;
+	}
+
+	public void setNumbersOfQuota(Integer numbersOfQuota) {
+		this.numbersOfQuota = numbersOfQuota;
+	}
+
+	public Integer getRemainingQuotas() {
+		return remainingQuotas;
+	}
+
+	public void setRemainingQuotas(Integer remainingQuotas) {
+		this.remainingQuotas = remainingQuotas;
+	}
 }
 

@@ -24,22 +24,24 @@ public class Extract
     public final static long serialVersionUID = 1L;
     @ApiModelProperty("Mes del extracto")
     @NotNull
-    private EnumMonth month;
+    private String month;
     @ApiModelProperty("Año del extracto")
     @NotEmpty
     private String year;
     @ApiModelProperty("Fecha de generación del extracto")
-    private Calendar generationDate;
+    private String generationDate;
+    @ApiModelProperty("URL de ubicación del extracto")
+    private String url;
 
     public Extract() {
         //default constructor
     }
 
-	public EnumMonth getMonth() {
+	public String getMonth() {
 		return month;
 	}
 
-	public void setMonth(EnumMonth month) {
+	public void setMonth(String month) {
 		this.month = month;
 	}
 
@@ -51,13 +53,20 @@ public class Extract
 		this.year = year;
 	}
 
-	public Calendar getGenerationDate() {
+	public String getGenerationDate() {
 		return generationDate;
 	}
 
-	public void setGenerationDate(Calendar generationDate) {
+	public void setGenerationDate(String generationDate) {
 		this.generationDate = generationDate;
 	}
-    
-    
+
+	public String getUrl() {
+		return url;
+	}
+
+	public void setUrl(String url) {
+		this.url = url;
+	}
+
 }

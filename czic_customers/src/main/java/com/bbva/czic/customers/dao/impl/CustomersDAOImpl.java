@@ -1,5 +1,14 @@
 package com.bbva.czic.customers.dao.impl;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.annotation.Resource;
+
+import com.bbva.czic.dto.net.Customer;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
 import com.bbva.czic.customers.business.dto.DTOIntAccMovementsResume;
 import com.bbva.czic.customers.business.dto.DTOIntAccMovementsResumesFilter;
 import com.bbva.czic.customers.business.dto.DTOIntCardCharge;
@@ -63,6 +72,10 @@ public class CustomersDAOImpl implements CustomersDAO {
 		log.info("CustDAO: Into getCustomer...");
 		log.info("CustDAO: getCustomer params(customerId):" + customerId);
 		return txGetCustomer.invoke(customerId);
+	}
+
+	public DTOIntCustomer addChannel(final String customerId, final String channelId){
+		return null;
 	}
 
 }

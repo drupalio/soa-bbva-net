@@ -18,5 +18,7 @@ public interface CustomersDAO {
 
 	public DTOIntCustomer getCustomer(String customerId)
 			throws BusinessServiceException;
+
+	DTOIntCustomer addChannel(final String customerId, final String channelId);
 }
 
