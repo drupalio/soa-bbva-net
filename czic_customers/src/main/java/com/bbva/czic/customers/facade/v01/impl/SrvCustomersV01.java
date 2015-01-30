@@ -9,8 +9,6 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.UriInfo;
 
 import com.bbva.czic.customers.business.dto.DTOIntAddChannel;
-import com.bbva.czic.customers.facade.v01.mapper.Mapper;
-import com.bbva.czic.customers.facade.v01.mapper.impl.IMapper;
 import org.apache.cxf.jaxrs.model.wadl.ElementClass;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -57,9 +55,6 @@ public class SrvCustomersV01 implements ISrvCustomersV01, com.bbva.jee.arq.sprin
 
 	@Autowired
 	ISrvIntCustomers srvIntCustomers;
-
-	@Resource(name = "account-mapper")
-	private IMapper iMapper;
 
 	public UriInfo uriInfo;
 
