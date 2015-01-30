@@ -11,7 +11,9 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlSchemaType;
 import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
+import com.bbva.jee.arq.spring.core.servicing.utils.CalendarAdapter;
 import org.hibernate.validator.constraints.NotBlank;
 
 import com.wordnik.swagger.annotations.ApiModelProperty;
@@ -49,6 +51,7 @@ public class Customer implements Serializable {
 	private EnumDwelingType dwelingType;
 	@ApiModelProperty("Ubicacion de la oficina")
 	private Place officeLocation;
+	@XmlJavaTypeAdapter(CalendarAdapter.class)
 	@ApiModelProperty("Fecha de último acceso")
 	private Calendar lastAccessDate;
 
