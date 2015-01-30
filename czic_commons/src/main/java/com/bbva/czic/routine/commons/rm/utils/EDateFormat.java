@@ -8,7 +8,8 @@ import javax.swing.text.EditorKit;
 public enum EDateFormat {
 
     ANIO_MES_DIA("yyyy-MM-dd"),
-    DIA_MES_ANIO("dd/MM/yyyy");;
+    DIA_MES_ANIO("dd/MM/yyyy"),
+    MONTH("MM");
 
     private String pattern;
 

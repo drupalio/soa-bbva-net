@@ -19,6 +19,8 @@ public class DTOIntAddChannel {
     @Length(min = 4, max = 4)
     private String channelId;
 
+    public DTOIntAddChannel(){    }
+
     public DTOIntAddChannel(String customerId, String channelId){
         this.customerId = customerId;
         this.channelId = channelId;

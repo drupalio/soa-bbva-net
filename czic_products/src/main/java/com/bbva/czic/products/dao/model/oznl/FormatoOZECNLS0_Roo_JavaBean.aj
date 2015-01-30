@@ -49,12 +49,12 @@ privileged aspect FormatoOZECNLS0_Roo_JavaBean {
         this.balance = balance;
     }
     
-    public String FormatoOZECNLS0.getResto() {
-        return this.resto;
+    public String FormatoOZECNLS0.getConcept() {
+        return this.concept;
     }
     
-    public void FormatoOZECNLS0.setResto(String resto) {
-        this.resto = resto;
+    public void FormatoOZECNLS0.setConcept(String concept) {
+        this.concept = concept;
     }
     
     public String FormatoOZECNLS0.getTipoopr() {

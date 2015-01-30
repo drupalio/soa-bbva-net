@@ -1,6 +1,7 @@
 package com.bbva.czic.products.dao.model.oznl;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
 
 import com.bbva.jee.arq.spring.core.host.ExcepcionTransaccion;
@@ -13,7 +14,8 @@ import com.bbva.jee.arq.spring.core.host.InvocadorTransaccion;
  * @see PeticionTransaccionOznl
  * @see RespuestaTransaccionOznl
  */
-@Component
+@Component(value = "transaccionOznl")
+@Profile(value = "prod")
 public class TransaccionOznl implements InvocadorTransaccion<PeticionTransaccionOznl,RespuestaTransaccionOznl> {
 	
 	@Autowired

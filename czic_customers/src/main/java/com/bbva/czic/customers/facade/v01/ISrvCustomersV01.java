@@ -1,10 +1,13 @@
 package com.bbva.czic.customers.facade.v01;
 
-import java.util.List;
-
 import com.bbva.czic.dto.net.AccMovementsResume;
 import com.bbva.czic.dto.net.CardCharge;
 import com.bbva.czic.dto.net.Customer;
+import com.bbva.czic.dto.net.CustomerOperation;
+
+import javax.ws.rs.core.Response;
+import java.util.List;
+
 
 public interface ISrvCustomersV01 {
 
@@ -15,4 +18,6 @@ public interface ISrvCustomersV01 {
  	Customer getCustomer(String customerId);
 
 	void addChannel(String customerId, String channelId);
+
+	Response verifyCustomer(String channelId, CustomerOperation operation);
 }

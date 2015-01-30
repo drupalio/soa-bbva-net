@@ -3,6 +3,7 @@ package com.bbva.czic.dto.net;
 
 import java.io.Serializable;
 import java.util.Calendar;
+import java.util.Date;
 
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Past;
@@ -14,6 +15,7 @@ import javax.xml.bind.annotation.XmlSchemaType;
 import javax.xml.bind.annotation.XmlType;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
+import com.bbva.jee.arq.spring.core.servicing.utils.DateAdapter;
 import org.hibernate.validator.constraints.NotBlank;
 
 import com.bbva.jee.arq.spring.core.servicing.utils.CalendarAdapter;
@@ -33,12 +35,10 @@ public class Movement  implements Serializable
     @ApiModelProperty(value = "concepto de la operacion", required = true)
     private String concept;
     @XmlJavaTypeAdapter(CalendarAdapter.class)
-    @XmlSchemaType(name = "dateTime")
     @ApiModelProperty(value = " fecha de la transaccion", required = true)
     @Past
     private Calendar transactionDate;
     @XmlJavaTypeAdapter(CalendarAdapter.class)
-    @XmlSchemaType(name = "dateTime")
     @ApiModelProperty(value = " fecha y hora de la operacion", required = true)
     @Past
     private Calendar operationDate;
