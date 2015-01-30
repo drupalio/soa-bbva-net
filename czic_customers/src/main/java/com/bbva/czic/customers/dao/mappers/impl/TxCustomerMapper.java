@@ -8,6 +8,10 @@ import com.bbva.czic.customers.dao.model.oznb.FormatoOZNCENB0;
 import com.bbva.czic.customers.dao.model.oznb.FormatoOZNCSNB0;
 import com.bbva.czic.customers.dao.model.oznq.FormatoOZECNQE0;
 import com.bbva.czic.customers.dao.model.oznq.FormatoOZECNQS0;
+import com.bbva.czic.dto.net.ContactInfo;
+import com.bbva.czic.dto.net.Email;
+import com.bbva.czic.dto.net.EnumContactSourceType;
+import com.bbva.czic.dto.net.PhoneNumber;
 import com.bbva.czic.routine.commons.rm.utils.EDateFormat;
 import com.bbva.czic.routine.commons.rm.utils.converter.MonthEnumConverter;
 import com.bbva.czic.routine.commons.rm.utils.converter.StringMoneyConverter;
@@ -15,6 +19,9 @@ import com.bbva.czic.routine.commons.rm.utils.mappers.AbstractBbvaTxConfigurable
 import com.bbva.czic.routine.mapper.MapperFactory;
 import com.bbva.czic.routine.mapper.converter.builtin.DateToStringConverter;
 import org.springframework.stereotype.Component;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Component("txCustomerMapper")
 public class TxCustomerMapper extends AbstractBbvaTxConfigurableMapper implements ITxCustomerMapper {
@@ -36,31 +43,31 @@ public class TxCustomerMapper extends AbstractBbvaTxConfigurableMapper implement
 		/**
 		 * MAPEO DE ENTRADAS
 		 */
-		// mapAccMovementsResume customerId <-> FormatoOZNCENB0 (OZNB)
-//		factory.classMap(String.class, FormatoOZNCENB0.class).field("customerId", "numprod").byDefault()
-//				.register();
 
 		/**
 		 * MAPEO DE SALIDAS
 		 */
-		// mapAccMovementsResume FormatoOZECNBS0 <-> DTOIntCustomer (OZNB)
+		// map FormatoOZECNBS0 <-> DTOIntCustomer (OZNB)
 		factory.classMap(DTOIntCustomer.class, FormatoOZNCSNB0.class)
-				.field("id", "numclie")
-				.field("name", "nomclie")
-				.field("stratum", "estrato")
+				.field("id", "numclie").field("name", "nomclie")
+				.field("segment", "segment").field("stratum", "estrato")
+				.field("homeLocation.cityName", "ciudvia").field("homeLocation.stateName", "depavia")
+				.field("homeLocation.countryName", "paisvia").field("homeLocation.postalAddress", "descvia")
 				.field("residenceYears", "anosvda")
 				.field("homeMembers", "nropnas")
-				.field("lastConnectionTime", "ultconx")
-				.byDefault().register();
+				.field("dwelingType", "tpovvda")
+				.field("officeLocation.cityName", "ciudofi").field("officeLocation.stateName", "depaofi")
+				.field("officeLocation.countryName", "paisofi").field("officeLocation.postalAddress", "descofi")
+				.field("lastConnectionTime", "ultconx").byDefault().register();
 
-		// mapAccMovementsResume DTOIntAccMovementsResumesFilter <-> FormatoOZECNQE0
+		// map DTOIntAccMovementsResumesFilter <-> FormatoOZECNQE0
 		factory.classMap(DTOIntAccMovementsResumesFilter.class, FormatoOZECNQE0.class)
 				.field("customerId", "idusuar")
 				.field("startDate", "fechain")
 				.field("endDate", "fechafi")
 				.byDefault().register();
 
-		// mapAccMovementsResume FormatoOZECNQS0 <-> DTOIntAccMovementsResume
+		// map FormatoOZECNQS0 <-> DTOIntAccMovementsResume
 		factory.classMap(FormatoOZECNQS0.class, DTOIntAccMovementsResume.class)
 				.field("valdepo", "income")
 				.field("valcarg", "outcome")
@@ -71,12 +78,25 @@ public class TxCustomerMapper extends AbstractBbvaTxConfigurableMapper implement
 	
 	@Override
 	public FormatoOZNCENB0 mapInOznb(String customerId) {
-		return map(customerId,FormatoOZNCENB0.class);
+		return map(customerId, FormatoOZNCENB0.class);
 	}
 
 	@Override
 	public DTOIntCustomer mapOutOznb(FormatoOZNCSNB0 formatOutput) {
-		return map(formatOutput,DTOIntCustomer.class);
+		DTOIntCustomer dtoIntCustomer = map(formatOutput, DTOIntCustomer.class);
+		// Entidad contact info
+		ContactInfo contacto = new ContactInfo();
+		List<Email> emails = new ArrayList<Email>();
+		List<PhoneNumber> phones = new ArrayList<PhoneNumber>();
+		Email email = new Email();
+		email.setActive(true);
+		email.setAddress(formatOutput.getCorreo());
+		email.setPrimary(true);
+		email.setSource(EnumContactSourceType.WEB);
+		emails.add(email);
+		contacto.setEmails(emails);
+		contacto.setPhoneNumbers(phones);
+		return dtoIntCustomer;
 	}
 
 	@Override
