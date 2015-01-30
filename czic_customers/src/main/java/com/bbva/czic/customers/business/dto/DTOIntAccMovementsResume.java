@@ -4,15 +4,20 @@ package com.bbva.czic.customers.business.dto;
 
 
 import com.bbva.jee.arq.spring.core.servicing.utils.Money;
+import org.hibernate.validator.constraints.NotEmpty;
 
 import java.util.Date;
 
 public class DTOIntAccMovementsResume {
 
     public final static long serialVersionUID = 1L;
+    @NotEmpty
     private Money income;
+    @NotEmpty
     private Money outcome;
+    @NotEmpty
     private Money balance;
+    @NotEmpty
     private Date month;
 
     public DTOIntAccMovementsResume() {

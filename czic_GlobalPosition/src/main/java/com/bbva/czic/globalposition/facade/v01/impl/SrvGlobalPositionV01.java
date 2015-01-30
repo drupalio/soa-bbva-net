@@ -4,7 +4,6 @@ import java.util.List;
 
 import javax.annotation.Resource;
 import javax.ws.rs.Consumes;
-import javax.ws.rs.DefaultValue;
 import javax.ws.rs.GET;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
@@ -20,7 +19,6 @@ import com.bbva.czic.routine.commons.rm.utils.validator.impl.FiqlValidator;
 import org.apache.cxf.jaxrs.model.wadl.ElementClass;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.util.CollectionUtils;
 
 import com.bbva.czic.dto.net.Product;
 import com.bbva.czic.globalposition.business.ISrvIntGlobalPosition;
@@ -97,7 +95,7 @@ public class SrvGlobalPositionV01 implements ISrvGlobalPositionV01,
 		log.info("SrvGlobalPositionV01.getExtractGlobalBalance : HOT SWAP");
 
 		// 1. Validate filter FIQL
-		new FiqlValidator(filter).hasEq(PRODUCT_TYPE).validateIfExisit();
+		new FiqlValidator(filter).hasEq(PRODUCT_TYPE).validateIfExist();
 
 		// 2. Mapping to DTOIntFilter
 		final DTOIntProductFilter filterProduct = globalPositionMapper.getDTOIntFilter(customerId, filter);

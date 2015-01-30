@@ -148,7 +148,7 @@ public class FiqlValidator extends Validator {
 		return this;
 	}
 
-	public FiqlValidator validateIfExisit() {
+	public FiqlValidator validateIfExist() {
 
 		if (!StringUtils.isEmpty(this.filter) && !"null".equals(this.filter)) {
 			throwFirstExceptionIfAny();

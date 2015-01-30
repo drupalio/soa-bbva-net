@@ -7,11 +7,13 @@ import static org.mockito.Matchers.anyObject;
 import static org.mockito.Mockito.when;
 
 import java.math.BigDecimal;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
+import com.bbva.czic.routine.commons.rm.utils.EDateFormat;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -148,10 +150,10 @@ public class SrvIntCustomersTest {
 	private DTOIntAccMovementsResumesFilter mockResumesFilter(){
 		DTOIntAccMovementsResumesFilter filter = new DTOIntAccMovementsResumesFilter();
 
-		filter.setEndDate(new Date());
 		Calendar cal = Calendar.getInstance();
-		cal.set(2015,01,01);
-		filter.setStartDate(cal.getTime());
+		cal.add(Calendar.MONTH, -5);
+		filter.setStartDate(new SimpleDateFormat(EDateFormat.ANIO_MES_DIA.getPattern()).format(cal.getTime()));
+		filter.setEndDate(new SimpleDateFormat(EDateFormat.ANIO_MES_DIA.getPattern()).format(new Date()));
 
 		return  filter;
 	}

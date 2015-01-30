@@ -2,25 +2,31 @@ package com.bbva.czic.customers.dao.mappers.impl;
 
 import com.bbva.czic.customers.business.dto.DTOIntAccMovementsResume;
 import com.bbva.czic.customers.business.dto.DTOIntAccMovementsResumesFilter;
-import com.bbva.czic.customers.dao.model.oznq.FormatoOZECNQE0;
-import com.bbva.czic.customers.dao.model.oznq.FormatoOZECNQS0;
-import com.bbva.czic.routine.commons.rm.utils.mappers.AbstractBbvaTxConfigurableMapper;
-import org.springframework.stereotype.Component;
-
 import com.bbva.czic.customers.business.dto.DTOIntCustomer;
 import com.bbva.czic.customers.dao.mappers.ITxCustomerMapper;
 import com.bbva.czic.customers.dao.model.oznb.FormatoOZNCENB0;
 import com.bbva.czic.customers.dao.model.oznb.FormatoOZNCSNB0;
+import com.bbva.czic.customers.dao.model.oznq.FormatoOZECNQE0;
+import com.bbva.czic.customers.dao.model.oznq.FormatoOZECNQS0;
+import com.bbva.czic.routine.commons.rm.utils.EDateFormat;
+import com.bbva.czic.routine.commons.rm.utils.converter.MonthEnumConverter;
 import com.bbva.czic.routine.commons.rm.utils.converter.StringMoneyConverter;
+import com.bbva.czic.routine.commons.rm.utils.mappers.AbstractBbvaTxConfigurableMapper;
 import com.bbva.czic.routine.mapper.MapperFactory;
-import com.bbva.czic.routine.mapper.impl.ConfigurableMapper;
+import com.bbva.czic.routine.mapper.converter.builtin.DateToStringConverter;
+import org.springframework.stereotype.Component;
 
 @Component("txCustomerMapper")
 public class TxCustomerMapper extends AbstractBbvaTxConfigurableMapper implements ITxCustomerMapper {
 
+	public static final String MONTH_CONVERTER = "monthConverter";
+
 	@Override
 	protected void configure(MapperFactory factory) {
 		super.configure(factory);
+
+		factory.getConverterFactory().registerConverter(new DateToStringConverter(EDateFormat.ANIO_MES_DIA.getPattern()));
+		factory.getConverterFactory().registerConverter(MONTH_CONVERTER, new MonthEnumConverter());
 
 		/**
 		 * Convert HOST FORMAT (+EEEEEEEEDD) to COP Money
@@ -59,7 +65,7 @@ public class TxCustomerMapper extends AbstractBbvaTxConfigurableMapper implement
 				.field("valdepo", "income")
 				.field("valcarg", "outcome")
 				.field("saltota", "balance")
-				.field("mes", "month")
+				.fieldMap("mes", "month").converter(MONTH_CONVERTER).add()
 				.byDefault().register();
 	}
 	

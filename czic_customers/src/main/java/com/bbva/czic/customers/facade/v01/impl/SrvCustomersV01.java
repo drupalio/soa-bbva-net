@@ -19,7 +19,6 @@ import org.springframework.stereotype.Service;
 
 import com.bbva.czic.customers.business.ISrvIntCustomers;
 import com.bbva.czic.customers.facade.v01.ISrvCustomersV01;
-import com.bbva.czic.customers.facade.v01.utils.converters.IFilterConverter;
 import com.bbva.czic.dto.net.AccMovementsResume;
 import com.bbva.czic.dto.net.CardCharge;
 import com.bbva.czic.dto.net.Customer;
@@ -54,9 +53,6 @@ public class SrvCustomersV01 implements ISrvCustomersV01, com.bbva.jee.arq.sprin
 	@Autowired
 	BusinessServicesToolKit businessServicesToolKit;
 
-	@Resource(name = "customer-resumes-filter-converter")
-	IFilterConverter filterConverter;
-
 	@Resource(name = "customerMapper")
 	private ICustomerMapper customerMapper;
 
@@ -73,10 +69,6 @@ public class SrvCustomersV01 implements ISrvCustomersV01, com.bbva.jee.arq.sprin
 	@Override
 	public void setHttpHeaders(HttpHeaders httpHeaders) {
 		this.httpHeaders = httpHeaders;
-	}
-
-	public void setFilterConverter(IFilterConverter filterConverter) {
-		this.filterConverter = filterConverter;
 	}
 
 	@Override
@@ -103,7 +95,7 @@ public class SrvCustomersV01 implements ISrvCustomersV01, com.bbva.jee.arq.sprin
 		// 2. Validate filter FIQL
 		new FiqlValidator(filter).exist().hasGeAndLe("chargeDate").validate();
 		// 3. Invoke SrvIntCustomers and Mapping to canonical DTO
-		return srvIntCustomers.getlistCreditCharges(customerId, filterConverter.toCardChargeFilter(filter));
+		return null;//srvIntCustomers.getlistCreditCharges(customerId, filterConverter.toCardChargeFilter(filter));
 	}
 
 	@Override
@@ -124,7 +116,7 @@ public class SrvCustomersV01 implements ISrvCustomersV01, com.bbva.jee.arq.sprin
 		log.info("Into listAccountsMovementsResume...");
 
 		// 1. Validate filter FIQL
-		new FiqlValidator(filter).exist().hasGeAndLe("month").validate();
+		new FiqlValidator(filter).hasGeAndLe("month").validateIfExist();
 
 		// 2. Mapping to DTOIntFilter
 		final DTOIntAccMovementsResumesFilter filterCustomerResumes = customerMapper.getDTOIntMovementResumesFilter(customerId, filter);
