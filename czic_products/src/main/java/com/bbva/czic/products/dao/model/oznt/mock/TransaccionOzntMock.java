@@ -3,7 +3,6 @@ package com.bbva.czic.products.dao.model.oznt.mock;
 import org.fluttercode.datafactory.impl.DataFactory;
 import org.springframework.context.annotation.Profile;
 
-import com.bbva.czic.dto.net.EnumProductType;
 import com.bbva.czic.products.dao.model.oznt.FormatoOZECNTS0;
 import com.bbva.czic.products.dao.model.oznt.PeticionTransaccionOznt;
 import com.bbva.czic.products.dao.model.oznt.RespuestaTransaccionOznt;
@@ -22,6 +21,8 @@ import com.bbva.jee.arq.spring.core.host.protocolo.ps9.aplicacion.CopySalida;
 @Transaction(value = "transaccionOznt")
 public class TransaccionOzntMock implements InvocadorTransaccion<PeticionTransaccionOznt,RespuestaTransaccionOznt> {
 	
+	final String MOCK_PRODUCT_TYPE = "AQ";
+
 
 	@Override
 	public RespuestaTransaccionOznt invocar(PeticionTransaccionOznt transaccion) throws ExcepcionTransaccion {
@@ -30,7 +31,7 @@ public class TransaccionOzntMock implements InvocadorTransaccion<PeticionTransac
 		final DataFactory dataFactory = new DataFactory();
 		CopySalida copySalida = new CopySalida();
 		
-		salida.setTipprod(EnumProductType.AQ.toString());
+		salida.setTipprod(MOCK_PRODUCT_TYPE);
 		salida.setDesprod("Cuenta Ahorros");
 		salida.setTialias("Titular de la cuenta");
 		salida.setCategor("Plan clásico");

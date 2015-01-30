@@ -22,15 +22,15 @@ public class AccMovementsResume
 {
 
     public final static long serialVersionUID = 1L;
-    @XmlJavaTypeAdapter(MoneyAdapter.class)
+    //@XmlJavaTypeAdapter(MoneyAdapter.class)
     @XmlElement(type = Money.class)
     @ApiModelProperty("Ingresos a la cuenta")
     private Money income;
-    @XmlJavaTypeAdapter(MoneyAdapter.class)
+    //@XmlJavaTypeAdapter(MoneyAdapter.class)
     @XmlElement(type = Money.class)
     @ApiModelProperty("Egresos de la cuenta")
     private Money outcome;
-    @XmlJavaTypeAdapter(MoneyAdapter.class)
+    //@XmlJavaTypeAdapter(MoneyAdapter.class)
     @XmlElement(type = Money.class)
     @ApiModelProperty("Saldo de la cuenta")
     private Money balance;

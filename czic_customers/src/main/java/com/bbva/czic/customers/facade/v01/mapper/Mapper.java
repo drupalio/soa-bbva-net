@@ -1,26 +1,14 @@
 package com.bbva.czic.customers.facade.v01.mapper;
 
+import com.bbva.czic.customers.business.dto.*;
+import com.bbva.czic.dto.net.*;
 import org.springframework.beans.BeanUtils;
+import org.springframework.stereotype.Component;
 
-import com.bbva.czic.dto.net.CreditCard;
-import com.bbva.czic.dto.net.Product;
-import com.bbva.czic.dto.net.CardCharge;
-import com.bbva.czic.dto.net.AccMovementsResume;
-import com.bbva.czic.dto.net.User;
-import com.bbva.czic.dto.net.EnumCardChargeCategory;
-import com.bbva.czic.dto.net.EnumMonth;
-import com.bbva.czic.customers.business.dto.DTOIntCreditCard;
-import com.bbva.czic.customers.business.dto.DTOIntProduct;
-import com.bbva.czic.customers.business.dto.DTOIntCardCharge;
-import com.bbva.czic.customers.business.dto.DTOIntAccMovementsResume;
-import com.bbva.czic.customers.business.dto.DTOIntUser;
-import com.bbva.czic.customers.business.dto.DTOIntEnumCardChargeCategory;
-import com.bbva.czic.customers.business.dto.DTOIntEnumMonth;
+@Component(value = "account-mapper")
+public class Mapper{
 
 
-public class Mapper {
-
-		
  public static CreditCard creditCardMap(DTOIntCreditCard dtoIntCreditCard) { 
  		CreditCard creditCard = new CreditCard(); 
  		BeanUtils.copyProperties(dtoIntCreditCard, creditCard); 

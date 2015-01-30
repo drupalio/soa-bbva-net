@@ -4,7 +4,6 @@ import java.util.List;
 
 import javax.annotation.Resource;
 import javax.ws.rs.Consumes;
-import javax.ws.rs.DefaultValue;
 import javax.ws.rs.GET;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
@@ -20,7 +19,6 @@ import com.bbva.czic.routine.commons.rm.utils.validator.impl.FiqlValidator;
 import org.apache.cxf.jaxrs.model.wadl.ElementClass;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.util.CollectionUtils;
 
 import com.bbva.czic.dto.net.Product;
 import com.bbva.czic.globalposition.business.ISrvIntGlobalPosition;
@@ -28,7 +26,6 @@ import com.bbva.czic.globalposition.business.dto.DTOIntProduct;
 import com.bbva.czic.globalposition.business.dto.DTOIntProductFilter;
 import com.bbva.czic.globalposition.facade.v01.ISrvGlobalPositionV01;
 import com.bbva.czic.globalposition.facade.v01.mappers.IGlobalPositionMapper;
-import com.bbva.czic.globalposition.facade.v01.utils.converters.IFilterConverter;
 import com.bbva.czic.routine.commons.rm.utils.errors.EnumError;
 import com.bbva.jee.arq.spring.core.log.I18nLog;
 import com.bbva.jee.arq.spring.core.log.I18nLogFactory;
@@ -56,9 +53,6 @@ public class SrvGlobalPositionV01 implements ISrvGlobalPositionV01,
 			"META-INF/spring/i18n/log/mensajesLog");
 
 	public HttpHeaders httpHeaders;
-
-	@Resource(name = "global-position-filter-converter")
-	private IFilterConverter gpFilterConverter;
 
 	@Resource(name = "global-position-mapper")
 	private IGlobalPositionMapper globalPositionMapper;
@@ -97,7 +91,7 @@ public class SrvGlobalPositionV01 implements ISrvGlobalPositionV01,
 		log.info("SrvGlobalPositionV01.getExtractGlobalBalance : HOT SWAP");
 
 		// 1. Validate filter FIQL
-		new FiqlValidator(filter).hasEq(PRODUCT_TYPE).validateIfExisit();
+		new FiqlValidator(filter).hasEq(PRODUCT_TYPE).validateIfExist();
 
 		// 2. Mapping to DTOIntFilter
 		final DTOIntProductFilter filterProduct = globalPositionMapper.getDTOIntFilter(customerId, filter);

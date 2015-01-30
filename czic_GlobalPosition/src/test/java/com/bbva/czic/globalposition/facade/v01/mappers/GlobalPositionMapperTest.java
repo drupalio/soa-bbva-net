@@ -18,6 +18,8 @@ public class GlobalPositionMapperTest {
 
     GlobalPositionMapper mapper;
 
+    private String TEST_PRODUCT_TYPE = "AQ";
+
     @Before
     public void init() {
         mapper = new GlobalPositionMapper();
@@ -86,7 +88,7 @@ public class GlobalPositionMapperTest {
         final DTOIntProduct intProduct = new DTOIntProduct();
 
         intProduct.setId("0000886940");
-        intProduct.setProductType(EnumProductType.AQ.name());
+        intProduct.setProductType(TEST_PRODUCT_TYPE);
         intProduct.setBalance(getIntBalance());
         intProduct.setAlias("Mi cuenta");
         intProduct.setName("Broda");

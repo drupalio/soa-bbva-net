@@ -248,10 +248,10 @@
   },
   {
     "numprod": "00130443000200009418",
-    "tipprod": "FP",
+    "tipprod": "LS",
     "saltota": "0000000000005513961",
     "saldisp": "0000000000000764067",
-    "indvisi": "C",
+    "indvisi": "M",
     "indoper": "U",
     "alias": "Lilia",
     "nomprod": "Kelli",
@@ -339,7 +339,7 @@
   },
   {
     "numprod": "00130443000200009425",
-    "tipprod": "FP",
+    "tipprod": "LS",
     "saltota": "0000000000005201640",
     "saldisp": "0000000000000602952",
     "indvisi": "C",
