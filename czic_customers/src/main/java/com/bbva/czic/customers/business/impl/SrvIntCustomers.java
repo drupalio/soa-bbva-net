@@ -109,4 +109,12 @@ public class SrvIntCustomers implements ISrvIntCustomers {
 		log.info("SrvInt: addChannel: ");
 		return null;
 	}
+
+	@Override
+	public void verifyCustomer(DTOIntCustomerOperation customerOperation) {
+
+		DtoValidator.validate(customerOperation);
+
+
+	}
 }

@@ -7,6 +7,8 @@ import com.bbva.czic.customers.dao.model.oznp.PeticionTransaccionOznp;
 import com.bbva.czic.customers.dao.model.oznp.RespuestaTransaccionOznp;
 import com.bbva.czic.customers.dao.tx.TxGetCustomer;
 import com.bbva.czic.customers.dao.tx.TxListAccountMovementsResume;
+import com.bbva.czic.customers.dao.tx.TxVerifyCustomer;
+import com.bbva.czic.routine.commons.rm.utils.errors.EnumError;
 import com.bbva.jee.arq.spring.core.host.InvocadorTransaccion;
 import com.bbva.jee.arq.spring.core.log.I18nLog;
 import com.bbva.jee.arq.spring.core.log.I18nLogFactory;
@@ -28,6 +30,9 @@ public class CustomersDAOImpl implements CustomersDAO {
 	@Resource(name = "txListAccountMovementsResume")
 	private TxListAccountMovementsResume txListAccountMovementsResume;
 
+	@Resource(name = "tx-verify-customer")
+	private TxVerifyCustomer txVerifyCustomer;
+
 	@Resource(name = "transaccionOznp")
 	private InvocadorTransaccion<PeticionTransaccionOznp, RespuestaTransaccionOznp> transaccionOznp;
 
@@ -42,13 +47,6 @@ public class CustomersDAOImpl implements CustomersDAO {
 	}
 
 	@Override
-	public DTOIntCustomer getCustomer(String customerId) {
-		log.info("CustDAO: Into getCustomer...");
-		log.info("CustDAO: getCustomer params(customerId):" + customerId);
-		return txGetCustomer.invoke(customerId);
-	}
-
-	@Override
 	public List<DTOIntCardCharge> listCreditCardCharges(DTOIntCardChargeFilter cardChargeFilter) {
 
 		log.info("Into getListAccountsMovementsResume...");
@@ -56,6 +54,20 @@ public class CustomersDAOImpl implements CustomersDAO {
 		return null;
 	}
 
+	@Override
+	public DTOIntCustomer getCustomer(String customerId) throws BusinessServiceException {
+		log.info("CustDAO: Into getCustomer...");
+		log.info("CustDAO: getCustomer params(customerId):" + customerId);
+		return txGetCustomer.invoke(customerId);
+	}
+
+	@Override
+	public void verifyCustomer(DTOIntCustomerOperation customerOperation) {
+		log.info("CustDAO: Into verifyCustomer...");
+		log.info("CustDAO: verifyCustomer params(customerOperation):" + customerOperation);
+		txVerifyCustomer.invoke(customerOperation);
+	}
+	
 	public DTOIntCustomer addChannel(final String customerId, final String channelId){
 		return null;
 	}

@@ -4,8 +4,10 @@ import com.bbva.czic.customers.business.dto.DTOIntAccMovementsResume;
 import com.bbva.czic.customers.business.dto.DTOIntAccMovementsResumesFilter;
 import com.bbva.czic.customers.business.dto.DTOIntCardCharge;
 import com.bbva.czic.customers.business.dto.DTOIntCardChargeFilter;
+import com.bbva.czic.customers.business.dto.DTOIntCustomerOperation;
 import com.bbva.czic.dto.net.AccMovementsResume;
 import com.bbva.czic.dto.net.CardCharge;
+import com.bbva.czic.dto.net.CustomerOperation;
 
 import java.util.List;
 
@@ -20,4 +22,7 @@ public interface ICustomerMapper {
     List<CardCharge> mapCardCharges(List<DTOIntCardCharge> intCardCharges);
 
     DTOIntCardChargeFilter getCreditCardChargesFilter(String customerId, String filter);
+    List<AccMovementsResume> map(List<DTOIntAccMovementsResume> accMovementsResumes);
+
+    DTOIntCustomerOperation map(CustomerOperation operation);
 }
