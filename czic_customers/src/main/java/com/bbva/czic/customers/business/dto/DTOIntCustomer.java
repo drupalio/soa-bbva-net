@@ -27,7 +27,7 @@ public class DTOIntCustomer {
 	@NotBlank
 	private String name;
 	@NotNull
-	private EnumSegmentType segment;
+	private String segment;
 	@NotNull
 	private ContactInfo emails= new ContactInfo();
 	@NotNull
@@ -35,7 +35,7 @@ public class DTOIntCustomer {
 	private Integer stratum;
 	private Integer residenceYears;
 	private Integer homeMembers;
-	private EnumDwelingType dwelingType;
+	private String dwelingType;
 	private Place officeLocation;
 	private Date lastConnectionTime;
 
@@ -75,11 +75,11 @@ public class DTOIntCustomer {
 		this.name = name;
 	}
 
-	public EnumSegmentType getSegment() {
+	public String getSegment() {
 		return segment;
 	}
 
-	public void setSegment(EnumSegmentType segment) {
+	public void setSegment(String segment) {
 		this.segment = segment;
 	}
 
@@ -123,11 +123,11 @@ public class DTOIntCustomer {
 		this.homeMembers = homeMembers;
 	}
 
-	public EnumDwelingType getDwelingType() {
+	public String getDwelingType() {
 		return dwelingType;
 	}
 
-	public void setDwelingType(EnumDwelingType dwelingType) {
+	public void setDwelingType(String dwelingType) {
 		this.dwelingType = dwelingType;
 	}
 

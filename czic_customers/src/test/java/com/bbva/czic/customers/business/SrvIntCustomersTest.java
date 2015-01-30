@@ -244,7 +244,7 @@ public class SrvIntCustomersTest {
 		
 		customer.setId("1");
 //		customer.setDocument(documento);
-		customer.setSegment(EnumSegmentType.PERSONA);
+		customer.setSegment(EnumSegmentType.PERSONA.toString());
 		customer.setName("Cliente de prueba");
 		customer.setEmails(contacto);
 		customer.setHomeLocation(homeLocation);
@@ -252,7 +252,7 @@ public class SrvIntCustomersTest {
 		customer.setStratum(4);
 		customer.setResidenceYears(1);
 		customer.setHomeMembers(1);
-		customer.setDwelingType(EnumDwelingType.VALIDAR);
+		customer.setDwelingType(EnumDwelingType.VALIDAR.toString());
 		return customer;
 	}
 }
