@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import com.bbva.czic.products.business.ISrvIntProducts;
 import com.bbva.czic.products.business.dto.DTOIntConditions;
 import com.bbva.czic.products.business.dto.DTOIntExtract;
+import com.bbva.czic.products.business.dto.DTOIntFilterExtract;
 import com.bbva.czic.products.business.dto.DTOIntProduct;
 import com.bbva.czic.products.dao.IProductsDAO;
 import com.bbva.czic.routine.commons.rm.utils.validator.DtoValidator;
@@ -46,7 +47,7 @@ public class SrvIntProducts implements ISrvIntProducts {
 	}
 
 	@Override
-	public List<DTOIntExtract> listExtracts(DTOIntExtract dtoIntFilterExtract) {
+	public List<DTOIntExtract> listExtracts(DTOIntFilterExtract dtoIntFilterExtract) {
 		// 1. Validate DtoIntFilterAccount
 		DtoValidator.validate(dtoIntFilterExtract);
 
