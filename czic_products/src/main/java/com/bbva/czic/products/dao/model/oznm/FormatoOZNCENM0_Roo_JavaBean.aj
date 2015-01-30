@@ -15,12 +15,28 @@ privileged aspect FormatoOZNCENM0_Roo_JavaBean {
         this.nocuent = nocuent;
     }
     
+    public String FormatoOZNCENM0.getTiprod() {
+        return this.tiprod;
+    }
+    
+    public void FormatoOZNCENM0.setTiprod(String tiprod) {
+        this.tiprod = tiprod;
+    }
+    
     public String FormatoOZNCENM0.getNummov() {
         return this.nummov;
     }
     
     public void FormatoOZNCENM0.setNummov(String nummov) {
         this.nummov = nummov;
+    }
+    
+    public String FormatoOZNCENM0.getNumcli() {
+        return this.numcli;
+    }
+    
+    public void FormatoOZNCENM0.setNumcli(String numcli) {
+        this.numcli = numcli;
     }
     
 }

@@ -24,45 +24,51 @@ import com.bbva.jee.arq.spring.core.host.TipoCampo;
 public class FormatoOZECNLE0 {
 
 	/**
-	 * <p>Campo <code>NUMCUEN</code>, &iacute;ndice: <code>1</code>, tipo: <code>ALFANUMERICO</code>
+	 * <p>Campo <code>NUMPROD</code>, &iacute;ndice: <code>1</code>, tipo: <code>ALFANUMERICO</code>
 	 */
-	@Campo(indice = 1, nombre = "NUMCUEN", tipo = TipoCampo.ALFANUMERICO, longitudMinima = 20, longitudMaxima = 20)
-	private String numcuen;
+	@Campo(indice = 1, nombre = "NUMPROD", tipo = TipoCampo.ALFANUMERICO, longitudMinima = 20, longitudMaxima = 20)
+	private String numprod;
 	
 	/**
-	 * <p>Campo <code>INDPAGI</code>, &iacute;ndice: <code>2</code>, tipo: <code>ENTERO</code>
+	 * <p>Campo <code>USUARIO</code>, &iacute;ndice: <code>2</code>, tipo: <code>ALFANUMERICO</code>
 	 */
-	@Campo(indice = 2, nombre = "INDPAGI", tipo = TipoCampo.ENTERO, longitudMinima = 9, longitudMaxima = 9)
+	@Campo(indice = 2, nombre = "USUARIO", tipo = TipoCampo.ALFANUMERICO, longitudMinima = 8, longitudMaxima = 8)
+	private String usuario;
+	
+	/**
+	 * <p>Campo <code>INDPAGI</code>, &iacute;ndice: <code>3</code>, tipo: <code>ENTERO</code>
+	 */
+	@Campo(indice = 3, nombre = "INDPAGI", tipo = TipoCampo.ENTERO, longitudMinima = 9, longitudMaxima = 9)
 	private Integer indpagi;
 	
 	/**
-	 * <p>Campo <code>TAMPAGI</code>, &iacute;ndice: <code>3</code>, tipo: <code>ENTERO</code>
+	 * <p>Campo <code>TAMPAGI</code>, &iacute;ndice: <code>4</code>, tipo: <code>ENTERO</code>
 	 */
-	@Campo(indice = 3, nombre = "TAMPAGI", tipo = TipoCampo.ENTERO, longitudMinima = 3, longitudMaxima = 3)
+	@Campo(indice = 4, nombre = "TAMPAGI", tipo = TipoCampo.ENTERO, longitudMinima = 3, longitudMaxima = 3)
 	private Integer tampagi;
 	
 	/**
-	 * <p>Campo <code>FECINI</code>, &iacute;ndice: <code>4</code>, tipo: <code>FECHA</code>
+	 * <p>Campo <code>FECINI</code>, &iacute;ndice: <code>5</code>, tipo: <code>FECHA</code>
 	 */
-	@Campo(indice = 4, nombre = "FECINI", tipo = TipoCampo.FECHA, longitudMinima = 10, longitudMaxima = 10, formato = "yyyy-MM-dd")
+	@Campo(indice = 5, nombre = "FECINI", tipo = TipoCampo.FECHA, longitudMinima = 10, longitudMaxima = 10, formato = "yyyy-MM-dd")
 	private Date fecini;
 	
 	/**
-	 * <p>Campo <code>FECFIN</code>, &iacute;ndice: <code>5</code>, tipo: <code>FECHA</code>
+	 * <p>Campo <code>FECFIN</code>, &iacute;ndice: <code>6</code>, tipo: <code>FECHA</code>
 	 */
-	@Campo(indice = 5, nombre = "FECFIN", tipo = TipoCampo.FECHA, longitudMinima = 10, longitudMaxima = 10, formato = "yyyy-MM-dd")
+	@Campo(indice = 6, nombre = "FECFIN", tipo = TipoCampo.FECHA, longitudMinima = 10, longitudMaxima = 10, formato = "yyyy-MM-dd")
 	private Date fecfin;
 	
 	/**
-	 * <p>Campo <code>SALINC</code>, &iacute;ndice: <code>6</code>, tipo: <code>DECIMAL</code>
+	 * <p>Campo <code>SALINC</code>, &iacute;ndice: <code>7</code>, tipo: <code>DECIMAL</code>
 	 */
-	@Campo(indice = 6, nombre = "SALINC", tipo = TipoCampo.DECIMAL, longitudMinima = 15, longitudMaxima = 15, signo = true, decimales = 2)
+	@Campo(indice = 7, nombre = "SALINC", tipo = TipoCampo.DECIMAL, longitudMinima = 17, longitudMaxima = 17, signo = true, decimales = 2)
 	private BigDecimal salinc;
 	
 	/**
-	 * <p>Campo <code>SALFIN</code>, &iacute;ndice: <code>7</code>, tipo: <code>DECIMAL</code>
+	 * <p>Campo <code>SALFIN</code>, &iacute;ndice: <code>8</code>, tipo: <code>DECIMAL</code>
 	 */
-	@Campo(indice = 7, nombre = "SALFIN", tipo = TipoCampo.DECIMAL, longitudMinima = 15, longitudMaxima = 15, signo = true, decimales = 2)
+	@Campo(indice = 8, nombre = "SALFIN", tipo = TipoCampo.DECIMAL, longitudMinima = 17, longitudMaxima = 17, signo = true, decimales = 2)
 	private BigDecimal salfin;
 	
 }

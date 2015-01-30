@@ -27,9 +27,21 @@ public class FormatoOZNCENM0 {
 	private String nocuent;
 	
 	/**
-	 * <p>Campo <code>NUMMOV</code>, &iacute;ndice: <code>2</code>, tipo: <code>ALFANUMERICO</code>
+	 * <p>Campo <code>TIPROD</code>, &iacute;ndice: <code>2</code>, tipo: <code>ALFANUMERICO</code>
 	 */
-	@Campo(indice = 2, nombre = "NUMMOV", tipo = TipoCampo.ALFANUMERICO, longitudMinima = 9, longitudMaxima = 9)
+	@Campo(indice = 2, nombre = "TIPROD", tipo = TipoCampo.ALFANUMERICO, longitudMinima = 2, longitudMaxima = 2)
+	private String tiprod;
+	
+	/**
+	 * <p>Campo <code>NUMMOV</code>, &iacute;ndice: <code>3</code>, tipo: <code>ALFANUMERICO</code>
+	 */
+	@Campo(indice = 3, nombre = "NUMMOV", tipo = TipoCampo.ALFANUMERICO, longitudMinima = 9, longitudMaxima = 9)
 	private String nummov;
+	
+	/**
+	 * <p>Campo <code>NUMCLI</code>, &iacute;ndice: <code>4</code>, tipo: <code>ALFANUMERICO</code>
+	 */
+	@Campo(indice = 4, nombre = "NUMCLI", tipo = TipoCampo.ALFANUMERICO, longitudMinima = 8, longitudMaxima = 8)
+	private String numcli;
 	
 }
