@@ -12,6 +12,7 @@ import com.bbva.czic.dto.net.CustomerOperation;
 import com.bbva.czic.routine.commons.rm.utils.errors.EnumError;
 import com.bbva.czic.routine.commons.rm.utils.fiql.FiqlType;
 import com.bbva.czic.routine.commons.rm.utils.validator.impl.FiqlValidator;
+import com.bbva.czic.routine.commons.rm.utils.validator.impl.StringValidator;
 import com.bbva.jee.arq.spring.core.log.I18nLog;
 import com.bbva.jee.arq.spring.core.log.I18nLogFactory;
 import com.bbva.jee.arq.spring.core.servicing.annotations.SMC;
@@ -114,6 +115,7 @@ public class SrvCustomersV01 implements ISrvCustomersV01, com.bbva.jee.arq.sprin
 
 		// 1. Validate filter FIQL
 		new FiqlValidator(filter).hasGeAndLe("month").validateIfExist();
+		new StringValidator().notIsNull(customerId).validate();
 
 		// 2. Mapping to DTOIntFilter
 		final DTOIntAccMovementsResumesFilter filterCustomerResumes = customerMapper.getDTOIntMovementResumesFilter(customerId, filter);
