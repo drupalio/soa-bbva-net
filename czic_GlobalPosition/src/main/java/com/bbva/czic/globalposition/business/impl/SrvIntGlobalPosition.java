@@ -3,6 +3,8 @@ package com.bbva.czic.globalposition.business.impl;
 import com.bbva.czic.globalposition.business.ISrvIntGlobalPosition;
 import com.bbva.czic.globalposition.business.dto.DTOIntProductFilter;
 import com.bbva.czic.globalposition.business.dto.DTOIntProduct;
+import com.bbva.czic.globalposition.business.dto.DTOIntProductOperability;
+import com.bbva.czic.globalposition.business.dto.DTOIntProductVisibility;
 import com.bbva.czic.globalposition.dao.IGlobalPositionDAO;
 import com.bbva.czic.routine.commons.rm.utils.errors.EnumError;
 import com.bbva.czic.routine.commons.rm.utils.validator.DtoValidator;
@@ -41,13 +43,13 @@ public class SrvIntGlobalPosition implements ISrvIntGlobalPosition {
 	}
 
 	@Override
-	public void updateProductVisibility(DTOIntProduct intProduct) {
+	public void updateProductVisibility(DTOIntProductVisibility intProduct) {
 
 		globalPositionDAO.updateProductVisibility(intProduct);
 	}
 
 	@Override
-	public void updateProductOperability(DTOIntProduct intProduct){
+	public void updateProductOperability(DTOIntProductOperability intProduct){
 		DtoValidator.validate(intProduct);
 		globalPositionDAO.updateProductOperability(intProduct);
 	}

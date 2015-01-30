@@ -5,19 +5,19 @@ package com.bbva.czic.globalposition.business.dto;
  */
 public class DTOIntProductVisibility {
 
-    private String productId;
+    private String id;
 
     private Boolean visible;
 
-    public String getProductId() {
-        return productId;
+    public String getId() {
+        return id;
     }
 
-    public void setProductId(String productId) {
-        this.productId = productId;
+    public void setId(String id) {
+        this.id = id;
     }
 
-    public Boolean getVisible() {
+    public Boolean isVisible() {
         return visible;
     }
 

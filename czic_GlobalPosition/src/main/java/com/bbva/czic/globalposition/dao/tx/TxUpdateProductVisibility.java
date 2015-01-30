@@ -1,6 +1,7 @@
 package com.bbva.czic.globalposition.dao.tx;
 
 import com.bbva.czic.globalposition.business.dto.DTOIntProduct;
+import com.bbva.czic.globalposition.business.dto.DTOIntProductVisibility;
 import com.bbva.czic.globalposition.dao.model.ozn0.FormatoOZNCEOM0;
 import com.bbva.czic.globalposition.dao.model.ozn0.PeticionTransaccionOzn0;
 import com.bbva.czic.globalposition.dao.model.ozn0.RespuestaTransaccionOzn0;
@@ -24,7 +25,7 @@ public class TxUpdateProductVisibility extends SimpleTransaction<PeticionTransac
 
     @Autowired
     @Qualifier("tx-update-product-visibility-mapper")
-    private ISimpleTransactionMapper<DTOIntProduct, FormatoOZNCEOM0, DTOIntProduct, IFormatNotApply> txUpdateProductVisibilityMapper;
+    private ISimpleTransactionMapper<DTOIntProductVisibility, FormatoOZNCEOM0, DTOIntProduct, IFormatNotApply> txUpdateProductVisibilityMapper;
 
     @Override
     protected InvocadorTransaccion<PeticionTransaccionOzn0, RespuestaTransaccionOzn0> getInvoker() {
@@ -32,7 +33,7 @@ public class TxUpdateProductVisibility extends SimpleTransaction<PeticionTransac
     }
 
     @Override
-    protected ISimpleTransactionMapper<DTOIntProduct, FormatoOZNCEOM0, DTOIntProduct, IFormatNotApply> getMapper() {
+    protected ISimpleTransactionMapper<DTOIntProductVisibility, FormatoOZNCEOM0, DTOIntProduct, IFormatNotApply> getMapper() {
         return txUpdateProductVisibilityMapper;
     }
 }

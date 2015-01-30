@@ -2,6 +2,7 @@ package com.bbva.czic.customers.business.dto;
 
 import com.bbva.czic.routine.commons.rm.utils.validator.IsCustomerId;
 import org.hibernate.validator.constraints.Length;
+import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.validation.constraints.NotNull;
 import java.util.Date;
@@ -13,7 +14,7 @@ import java.util.Date;
  */
 public class DTOIntAccMovementsResumesFilter {
 
-	@NotNull
+	@NotEmpty
 	@IsCustomerId
 	private String customerId;
 	private String startDate;
