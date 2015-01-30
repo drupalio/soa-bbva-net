@@ -5,14 +5,11 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
+import com.bbva.czic.customers.business.dto.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.bbva.czic.customers.business.ISrvIntCustomers;
-import com.bbva.czic.customers.business.dto.DTOIntAccMovementsResume;
-import com.bbva.czic.customers.business.dto.DTOIntCardCharge;
-import com.bbva.czic.customers.business.dto.DTOIntCustomer;
-import com.bbva.czic.customers.business.dto.DTOIntFilterCustomerResumes;
 import com.bbva.czic.customers.dao.CustomersDAO;
 import com.bbva.czic.customers.dao.mapper.ICustomerMapper;
 import com.bbva.czic.dto.net.AccMovementsResume;
@@ -127,10 +124,12 @@ public class SrvIntCustomers implements ISrvIntCustomers {
 
 	}
 
-	public Customer addChannel(final String customerId, final String channelId){
-		DTOIntCustomer dtoIntCustomer = customersDao.addChannel(customerId, channelId);
-	//	DtoValidator.validate(dtoIntCustomer);
+	public void addChannel(final DTOIntAddChannel dtoIntAddChannel){
+
+		DtoValidator.validate(dtoIntAddChannel);
+
+		customersDao.addChannel(dtoIntAddChannel);
 		log.info("SrvInt: addChannel: ");
-		return null;
+
 	}
 }

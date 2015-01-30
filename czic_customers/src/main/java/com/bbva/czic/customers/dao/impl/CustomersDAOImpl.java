@@ -5,14 +5,12 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
+import com.bbva.czic.customers.business.dto.*;
+import com.bbva.czic.customers.dao.tx.TxAddChannel;
 import com.bbva.czic.dto.net.Customer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.bbva.czic.customers.business.dto.DTOIntAccMovementsResume;
-import com.bbva.czic.customers.business.dto.DTOIntCardCharge;
-import com.bbva.czic.customers.business.dto.DTOIntCustomer;
-import com.bbva.czic.customers.business.dto.DTOIntFilterCustomerResumes;
 import com.bbva.czic.customers.business.impl.SrvIntCustomers;
 import com.bbva.czic.customers.dao.CustomersDAO;
 import com.bbva.czic.customers.dao.mapper.ICustomerMapper;
@@ -55,6 +53,12 @@ public class CustomersDAOImpl implements CustomersDAO {
 	
 	@Resource(name = "tx-get-customer")
 	private TxGetCustomer txGetCustomer;
+
+	/**
+	 * OZNW
+	 */
+	@Resource(name = "tx-add-channel")
+	private TxAddChannel txAddChannel;
 
 	@Resource(name = "transaccionOznq")
 	private InvocadorTransaccion<PeticionTransaccionOznq, RespuestaTransaccionOznq> transaccionOznq;
@@ -178,8 +182,8 @@ public class CustomersDAOImpl implements CustomersDAO {
 		return txGetCustomer.invoke(customerId);
 	}
 
-	public DTOIntCustomer addChannel(final String customerId, final String channelId){
-		return null;
+	public void addChannel(final DTOIntAddChannel dtoIntAddChannel){
+		txAddChannel.invoke(dtoIntAddChannel);
 	}
 
 }

@@ -2,6 +2,8 @@ package com.bbva.czic.customers.business;
 
 import java.util.List;
 
+import com.bbva.czic.customers.business.dto.DTOIntAddChannel;
+import com.bbva.czic.customers.business.dto.DTOIntCustomer;
 import com.bbva.czic.customers.business.dto.DTOIntFilterCustomerResumes;
 import com.bbva.czic.dto.net.AccMovementsResume;
 import com.bbva.czic.dto.net.CardCharge;
@@ -19,6 +21,6 @@ List<CardCharge> getlistCreditCharges(String customerId, DTOIntFilterCustomerRes
 
 Customer getCustomer(String customerId) throws BusinessServiceException;
 
-	Customer addChannel(final String customerId, final String channelId);
+	void addChannel(final DTOIntAddChannel dtoIntAddChannel);
 	
 }
