@@ -6,11 +6,13 @@ import javax.annotation.Resource;
 import javax.ws.rs.*;
 import javax.ws.rs.core.HttpHeaders;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
 
 import com.bbva.czic.customers.business.dto.DTOIntAccMovementsResume;
 import com.bbva.czic.customers.business.dto.DTOIntAccMovementsResumesFilter;
 import com.bbva.czic.customers.facade.v01.mappers.ICustomerMapper;
+import com.bbva.czic.dto.net.CustomerOperation;
 import org.apache.cxf.jaxrs.model.wadl.ElementClass;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -160,14 +162,15 @@ public class SrvCustomersV01 implements ISrvCustomersV01, com.bbva.jee.arq.sprin
 			@ApiResponse(code = 400, message = "Wrong parameters"),
 			@ApiResponse(code = 409, message = "Data not found"), @ApiResponse(code = 500, message = "Technical Error") })
 	@POST
-	@ElementClass(response = Customer.class)
 	@Path("/customerChannels/{channelId}/verifyCustomer")
+	@Consumes({ MediaType.APPLICATION_JSON })
 	@SMC(registryID = "SMCCO1400023", logicalID = "verifyCustomer")
-	public Customer verifyCustomer(@ApiParam(value = "Channel identifier param") @PathParam("channelId") String channelId) {
+	public Response verifyCustomer(@ApiParam(value = "Channel identifier param") @PathParam("channelId") String channelId,
+								   @ApiParam(value = "Customer's validation information") CustomerOperation operation) {
 
 		log.info("Into verifyCustomer...");
 
 		// 1. Invoke SrvIntCustomers and Mapping to canonical DTO
-		return srvIntCustomers.getCustomer(customerId);
+		return Response.ok().build();
 	}
 }

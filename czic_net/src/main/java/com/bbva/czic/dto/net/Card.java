@@ -19,6 +19,7 @@ public class Card extends Product implements Serializable {
 	public final static long serialVersionUID = 1L;
 	@ApiModelProperty("Numero de la tarjeta")
 	private String cardNumber;
+	private String nip;
 
 	public Card() {
 		// default constructor
@@ -32,4 +33,11 @@ public class Card extends Product implements Serializable {
 		this.cardNumber = cardNumber;
 	}
 
+	public String getNip() {
+		return nip;
+	}
+
+	public void setNip(String nip) {
+		this.nip = nip;
+	}
 }
