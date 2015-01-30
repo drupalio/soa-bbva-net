@@ -18,8 +18,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.bbva.czic.customers.business.ISrvIntCustomers;
+import com.bbva.czic.customers.business.dto.DTOIntAccMovementsResume;
+import com.bbva.czic.customers.business.dto.DTOIntAccMovementsResumesFilter;
 import com.bbva.czic.customers.facade.v01.ISrvCustomersV01;
-import com.bbva.czic.customers.facade.v01.utils.converters.IFilterConverter;
+import com.bbva.czic.customers.facade.v01.mappers.ICustomerMapper;
 import com.bbva.czic.dto.net.AccMovementsResume;
 import com.bbva.czic.dto.net.CardCharge;
 import com.bbva.czic.dto.net.Customer;
@@ -54,8 +56,8 @@ public class SrvCustomersV01 implements ISrvCustomersV01, com.bbva.jee.arq.sprin
 	@Autowired
 	BusinessServicesToolKit businessServicesToolKit;
 
-	@Resource(name = "customer-resumes-filter-converter")
-	IFilterConverter filterConverter;
+	@Resource(name = "customerMapper")
+	private ICustomerMapper customerMapper;
 
 	@Autowired
 	ISrvIntCustomers srvIntCustomers;
@@ -70,10 +72,6 @@ public class SrvCustomersV01 implements ISrvCustomersV01, com.bbva.jee.arq.sprin
 	@Override
 	public void setHttpHeaders(HttpHeaders httpHeaders) {
 		this.httpHeaders = httpHeaders;
-	}
-
-	public void setFilterConverter(IFilterConverter filterConverter) {
-		this.filterConverter = filterConverter;
 	}
 
 	@Override
@@ -100,7 +98,7 @@ public class SrvCustomersV01 implements ISrvCustomersV01, com.bbva.jee.arq.sprin
 		// 2. Validate filter FIQL
 		new FiqlValidator(filter).exist().hasGeAndLe("chargeDate").validate();
 		// 3. Invoke SrvIntCustomers and Mapping to canonical DTO
-		return srvIntCustomers.getlistCreditCharges(customerId, filterConverter.toCardChargeFilter(filter));
+		return null;// srvIntCustomers.getlistCreditCharges(customerId, filterConverter.toCardChargeFilter(filter));
 	}
 
 	@Override
@@ -113,22 +111,25 @@ public class SrvCustomersV01 implements ISrvCustomersV01, com.bbva.jee.arq.sprin
 	@GET
 	@ElementClass(response = List.class)
 	@Path("/{customerId}/accounts/movementsResume")
-	@SMC(registryID = "SMCCO1400007", logicalID = "getlistAccountsMovementsResume")
+	@SMC(registryID = "SMCCO1400007", logicalID = "getListAccountsMovementsResume")
 	public List<AccMovementsResume> listAccountsMovementsResume(
 			@ApiParam(value = "Claim identifier param") @PathParam("customerId") String customerId,
 			@ApiParam(value = "filter param") @QueryParam("$filter") String filter) {
 
 		log.info("Into listAccountsMovementsResume...");
 
-		// 1. Validate parameter
-		if (customerId.equals("null") || customerId.trim().isEmpty()) {
-			throw new BusinessServiceException(EnumError.WRONG_PARAMETERS.getAlias());
-		}
-		// 2. Validate filter FIQL
-		new FiqlValidator(filter).hasGeAndLe("month").validateIfExisit();
+		// 1. Validate filter FIQL
+		new FiqlValidator(filter).hasGeAndLe("month").validateIfExist();
+
+		// 2. Mapping to DTOIntFilter
+		final DTOIntAccMovementsResumesFilter filterCustomerResumes = customerMapper.getDTOIntMovementResumesFilter(
+				customerId, filter);
+
 		// 3. Invoke SrvIntCustomers and Mapping to canonical DTO
-		return srvIntCustomers.getlistAccountsMovementsResume(customerId,
-				filterConverter.toAccountMovementFilter(filter));
+		List<DTOIntAccMovementsResume> accMovementsResumes = srvIntCustomers
+				.getListAccountsMovementsResume(filterCustomerResumes);
+
+		return customerMapper.map(accMovementsResumes);
 	}
 
 	@Override

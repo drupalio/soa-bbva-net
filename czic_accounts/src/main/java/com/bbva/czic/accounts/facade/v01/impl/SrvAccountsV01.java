@@ -143,7 +143,7 @@ public class SrvAccountsV01 implements ISrvAccountsV01,
 			@ApiParam(value = "expands param") @DefaultValue("null") @QueryParam("$expands") String expands,
 			@ApiParam(value = "order by param") @DefaultValue("null") @QueryParam("$sort") String sort) {
 
-		new FiqlValidator(filter).hasGe("month").validateIfExisit();
+		new FiqlValidator(filter).hasGe("month").validateIfExist();
 
 		DTOIntFilterMovResumes dtoIntFilter = iAccountsMapper
 				.getDtoIntFilterMovResumes(idAccount, filter);
@@ -174,7 +174,7 @@ public class SrvAccountsV01 implements ISrvAccountsV01,
 
 		// Validacion del filtro
 		new FiqlValidator(filter).exist().hasGeAndLeDate("issueDate")
-				.hasEq("status").validate();
+				.hasEq("status").validateAny();
 
 		// Mapeo del filtro a DTO
 		DTOIntFilterChecks dtoIntFilterChecks = iAccountsMapper

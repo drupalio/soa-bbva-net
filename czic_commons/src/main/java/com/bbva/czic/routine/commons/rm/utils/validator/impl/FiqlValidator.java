@@ -11,21 +11,25 @@ public class FiqlValidator extends Validator {
 
 	private String originFilter;
 
+	private Integer validateCount;
+
 	private static final String DATE_REGEX = "((19|20)\\d\\d)-(0?[1-9]|1[012])-(0?[1-9]|[12][0-9]|3[01])";
 
 	public FiqlValidator(String filter) {
 		this.originFilter = filter;
 		this.filter = (filter == null) ? StringUtils.EMPTY : filter;
 		this.filter = this.filter.replaceAll("[()]", StringUtils.EMPTY);
+		this.validateCount = 0;
 	}
 
 	public FiqlValidator exist() {
 
 		if (originFilter == null) {
 			exceptions.add(new BusinessServiceException(EnumError.INEXISTENT_FILTER.getAlias()));
-		} else if (originFilter.isEmpty()) {
+		} else if (filter.isEmpty()) {
 			exceptions.add(new BusinessServiceException(EnumError.FILTER_EMPTY.getAlias()));
 		}
+		validateCount++;
 		return this;
 	}
 
@@ -35,6 +39,7 @@ public class FiqlValidator extends Validator {
 		if (!this.filter.matches(regex)) {
 			exceptions.add(new BusinessServiceException(EnumError.WRONG_PARAMETERS.getAlias()));
 		}
+		validateCount++;
 		return this;
 	}
 
@@ -44,6 +49,7 @@ public class FiqlValidator extends Validator {
 		if (!this.filter.matches(regex)) {
 			exceptions.add(new BusinessServiceException(EnumError.WRONG_PARAMETERS.getAlias()));
 		}
+		validateCount++;
 		return this;
 	}
 
@@ -53,6 +59,7 @@ public class FiqlValidator extends Validator {
 		if (!this.filter.matches(regex)) {
 			exceptions.add(new BusinessServiceException(EnumError.WRONG_PARAMETERS.getAlias()));
 		}
+		validateCount++;
 		return this;
 	}
 
@@ -63,7 +70,7 @@ public class FiqlValidator extends Validator {
 		if (!this.filter.matches(regex)) {
 			exceptions.add(new BusinessServiceException(EnumError.WRONG_PARAMETERS.getAlias()));
 		}
-
+		validateCount++;
 		return this;
 	}
 
@@ -74,6 +81,7 @@ public class FiqlValidator extends Validator {
 		if (!this.filter.matches(regex)) {
 			exceptions.add(new BusinessServiceException(EnumError.WRONG_PARAMETERS.getAlias()));
 		}
+		validateCount++;
 		return this;
 	}
 
@@ -84,6 +92,7 @@ public class FiqlValidator extends Validator {
 		if (!this.filter.matches(regex)) {
 			exceptions.add(new BusinessServiceException(EnumError.WRONG_PARAMETERS.getAlias()));
 		}
+		validateCount++;
 		return this;
 	}
 
@@ -94,6 +103,7 @@ public class FiqlValidator extends Validator {
 		if (!this.filter.matches(regex)) {
 			exceptions.add(new BusinessServiceException(EnumError.WRONG_PARAMETERS.getAlias()));
 		}
+		validateCount++;
 		return this;
 	}
 
@@ -104,6 +114,7 @@ public class FiqlValidator extends Validator {
 		if (!this.filter.matches(regex)) {
 			exceptions.add(new BusinessServiceException(EnumError.WRONG_PARAMETERS.getAlias()));
 		}
+		validateCount++;
 		return this;
 	}
 
@@ -114,6 +125,7 @@ public class FiqlValidator extends Validator {
 		if (!this.filter.matches(regex)) {
 			exceptions.add(new BusinessServiceException(EnumError.WRONG_PARAMETERS.getAlias()));
 		}
+		validateCount++;
 		return this;
 	}
 
@@ -122,7 +134,7 @@ public class FiqlValidator extends Validator {
 		if (this.filter.matches(regex)) {
 			exceptions.add(new BusinessServiceException(EnumError.WRONG_PARAMETERS.getAlias()));
 		}
-
+		validateCount++;
 		return this;
 	}
 
@@ -132,15 +144,22 @@ public class FiqlValidator extends Validator {
 		if (!this.filter.matches(regex)){
 			exceptions.add(new BusinessServiceException(EnumError.WRONG_PARAMETERS.getAlias()));
 		}
+		validateCount++;
 		return this;
 	}
 
-	public FiqlValidator validateIfExisit() {
+	public FiqlValidator validateIfExist() {
 
 		if (!StringUtils.isEmpty(this.filter) && !"null".equals(this.filter)) {
 			throwFirstExceptionIfAny();
 		}
+		return this;
+	}
 
+	public FiqlValidator validateAny(){
+		if (validateCount.equals(exceptions.size())) {
+			throwFirstExceptionIfAny();
+		}
 		return this;
 	}
 }

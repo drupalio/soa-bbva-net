@@ -7,7 +7,7 @@ import javax.validation.constraints.NotNull;
 public class DTOIntFilterCards {
 
 	@NotNull
-	@Length(max = 20, min = 20)
+	@Length(max = 16, min = 16)
 	private String productId;
 	@NotNull
 	private String startDate;
