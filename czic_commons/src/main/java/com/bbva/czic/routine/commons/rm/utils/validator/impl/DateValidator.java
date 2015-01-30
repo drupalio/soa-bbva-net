@@ -39,9 +39,10 @@ public class DateValidator extends Validator {
 		return this;
 	}
 
-	public DateValidator validDateRange(String startDate, String endDate){
+	public DateValidator validDateRange(String startDate, String endDate, EDateFormat pattern){
 		try {
-			if (formatter.parse(startDate).after(formatter.parse(endDate))) {
+			DateFormat format = new SimpleDateFormat(pattern.getPattern());
+			if (format.parse(startDate).after(format.parse(endDate))) {
 				exceptions.add(new BusinessServiceException(EnumError.DATE_INTERVAL_OUT_OF_RANGE.getAlias()));
 			}
 		} catch (ParseException e) {
