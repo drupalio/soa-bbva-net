@@ -26,6 +26,8 @@ import com.bbva.jee.arq.spring.core.log.I18nLogFactory;
 @Mapper(value = "txGlobalPositionMapper")
 public class TxGlobalPositionMapper extends AbstractBbvaTxConfigurableMapper implements ITxGlobalPositionMapper {
 
+	public static final String OPERABILITY_CONVERTER = "operabilityConverter";
+	public static final String VISIBILITY_CONVERTER = "visibilityConverter";
 	private static I18nLog log = I18nLogFactory.getLogI18n(TxGlobalPositionMapper.class,
 			"META-INF/spring/i18n/log/mensajesLog");
 
@@ -35,8 +37,8 @@ public class TxGlobalPositionMapper extends AbstractBbvaTxConfigurableMapper imp
 		super.configure(factory);
 
 		// Custom Converters
-		factory.getConverterFactory().registerConverter("operabilityConverter", new StringOperabilityConverter());
-		factory.getConverterFactory().registerConverter("visibilityConverter", new StringVisibilityConverter());
+		factory.getConverterFactory().registerConverter(OPERABILITY_CONVERTER, new StringOperabilityConverter());
+		factory.getConverterFactory().registerConverter(VISIBILITY_CONVERTER, new StringVisibilityConverter());
 
 		/*
 		 * DTOIntProductFilter <-> FormatoOZECN1E0
@@ -49,8 +51,8 @@ public class TxGlobalPositionMapper extends AbstractBbvaTxConfigurableMapper imp
 		 */
 		factory.classMap(DTOIntProduct.class, FormatoOZECN1S0.class).field("id", "numprod")
 				.field("productType", "tipprod").field("balance.total", "saltota").fieldMap("operable", "indoper")
-				.converter("operabilityConverter").add().fieldMap("visible", "indvisi")
-				.converter("visibilityConverter").add().field("balance.availableBalance", "saldisp")
+				.converter(OPERABILITY_CONVERTER).add().fieldMap("visible", "indvisi")
+				.converter(VISIBILITY_CONVERTER).add().field("balance.availableBalance", "saldisp")
 				.field("balance.tradeBalance", "salcanj").field("alias", "alias").field("financialState", "finstat")
 				.byDefault().register();
 
@@ -58,11 +60,16 @@ public class TxGlobalPositionMapper extends AbstractBbvaTxConfigurableMapper imp
 		 * DTOIntProduct <-> FormatoOZECN1S1
 		 */
 		factory.classMap(DTOIntProduct.class, FormatoOZECN1S1.class).field("id", "numprod")
-				.field("productType", "tipprod").field("balance.total", "saltota")
-				.field("balance.availableBalance", "saldisp").fieldMap("operable", "indoper")
-				.converter("operabilityConverter").add().fieldMap("visible", "indvisi")
-				.converter("visibilityConverter").add().field("alias", "alias").field("name", "nomprod")
-				.field("financialState", "finstat").field("contract.number", "numcont").byDefault().register();
+				.field("productType", "tipprod")
+				.field("balance.total", "saltota")
+				.field("balance.availableBalance", "saldisp")
+				.fieldMap("operable", "indoper").converter(OPERABILITY_CONVERTER).add()
+				.fieldMap("visible", "indvisi").converter(VISIBILITY_CONVERTER).add()
+				.field("alias", "alias")
+				.field("name", "nomprod")
+				.field("financialState", "finstat")
+				.field("contract.number", "numcont")
+				.byDefault().register();
 
 	}
 

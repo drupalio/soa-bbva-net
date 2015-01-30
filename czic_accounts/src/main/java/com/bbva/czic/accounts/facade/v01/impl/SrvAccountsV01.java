@@ -137,7 +137,7 @@ public class SrvAccountsV01 implements ISrvAccountsV01,
 			@ApiParam(value = "identifier param") @PathParam("id") String idAccount,
 			@ApiParam(value = "filter param") @DefaultValue("null") @QueryParam("$filter") String filter) {
 
-		new FiqlValidator(filter).hasGe("month").validateIfExisit();
+		new FiqlValidator(filter).hasGe("month").validateIfExist();
 
 		DTOIntFilterMovResumes dtoIntFilter = iAccountsMapper
 				.getDtoIntFilterMovResumes(idAccount, filter);
