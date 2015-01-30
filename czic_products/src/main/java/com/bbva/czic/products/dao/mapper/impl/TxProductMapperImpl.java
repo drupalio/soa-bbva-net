@@ -2,8 +2,14 @@ package com.bbva.czic.products.dao.mapper.impl;
 
 import com.bbva.czic.dto.net.Office;
 import com.bbva.czic.products.business.dto.*;
-import com.bbva.czic.products.dao.mapper.TxProductMapper;
 import com.bbva.czic.products.dao.model.oznm.FormatoOZNCENM0;
+import com.bbva.czic.products.business.dto.DTOIntConditions;
+import com.bbva.czic.products.business.dto.DTOIntExtract;
+import com.bbva.czic.products.business.dto.DTOIntFilterExtract;
+import com.bbva.czic.products.business.dto.DTOIntProduct;
+import com.bbva.czic.products.dao.mapper.TxProductsMapper;
+import com.bbva.czic.products.dao.model.ozn2.FormatoOZECN2E0;
+import com.bbva.czic.products.dao.model.ozn2.FormatoOZECN2S0;
 import com.bbva.czic.products.dao.model.oznt.FormatoOZECNTE0;
 import com.bbva.czic.products.dao.model.oznt.FormatoOZECNTS0;
 import com.bbva.czic.routine.commons.rm.utils.converter.StringMoneyConverter;
@@ -11,99 +17,75 @@ import com.bbva.czic.routine.commons.rm.utils.mappers.AbstractBbvaTxConfigurable
 import com.bbva.czic.routine.commons.rm.utils.mappers.Mapper;
 import com.bbva.czic.routine.mapper.MapperFactory;
 
-@Mapper(value = "tx-product-mapper")
-public class TxProductMapperImpl extends AbstractBbvaTxConfigurableMapper  implements TxProductMapper{
 
-        /**
-         *
-         */
-        @Override
-        protected void configure(MapperFactory factory) {
+@Mapper(value = "txProductMapper")
+public class TxProductMapperImpl extends AbstractBbvaTxConfigurableMapper  implements TxProductsMapper{
 
-                /**
-                 * Convert HOST FORMAT (+EEEEEEEEDD) to COP Money
-                 */
-                factory.getConverterFactory().registerConverter(new StringMoneyConverter());
+	@Override
+	protected void configure(MapperFactory factory) {
+		super.configure(factory);
+		
+		/**
+		 * MAPEO DE ENTRADAS
+		 */
+		// Map DTOIntFilter <-> FormatoOZNCENT0 (OZNT)
+		factory.classMap(DTOIntProduct.class, FormatoOZECNTE0.class).field("id", "numprod").byDefault()
+				.register();
+		
+		/**
+		 * MAPEO DE SALIDAS
+		 */
+		// Map FormatoOZECNTS0 <-> DTOIntConditions (OZNT)
+		factory.classMap(DTOIntConditions.class, FormatoOZECNTS0.class).field("alias", "tialias").field("category", "categor")
+				.field("description", "desprod").field("openingDate", "fechape")
+				.field("commission", "comprod").field("mobilizationConditions", "conprod")
+				.field("office.name", "nomofic").field("office.postalAddress", "dirofic")
+				.field("office.location.city.name", "ciudofi").field("office.location.country.name", "paisofi")
+				.byDefault()
+				.register();
+	}
 
-                /**
-                 * MAPEO DE ENTRADAS
-                 */
-                // Map DTOIntFilter <-> FormatoOZNCENA0 (OZNL)
-            //    factory.classMap(DTOIntFilterMovements.class, FormatoOZNCENM0.class).field("id", "nocuent").field("movementId", "nummov")
-              //          .byDefault()
-                //        .register();
-
-                /**
-                 * MAPEO DE SALIDAS
-                 */
-                // Map FormatoOZECNVS0 <-> DTOIntMonthlyBalances (OZNA)
-         //       factory.classMap(DTOIntExecutive.class, FormatoOZECNRS0.class).field("executiveId", "idejecu").field("name", "nomejec")
-           //             .field("phone", "telejec").field("office.name", "ofiejec")
-             //           .field("email", "emailej").byDefault().register();
-
-
-        }
-
-
-
-        @Override
+	@Override
 	public FormatoOZECNTE0 mapInOznt(DTOIntProduct dtoIn) {
-		FormatoOZECNTE0 formatoEntrada = new FormatoOZECNTE0();
-        formatoEntrada.setNumprod(dtoIn.getId());
-        return formatoEntrada;
+        return map(dtoIn,FormatoOZECNTE0.class);
 	}
 
 	@Override
 	public DTOIntConditions mapOutOznt(FormatoOZECNTS0 formatOutput) {
-		DTOIntConditions dtoIntConditions = new DTOIntConditions();
+		DTOIntConditions dtoIntConditions = map(formatOutput,DTOIntConditions.class);
 
-        // Todos los campos comentados son campos para uso futuro
-        dtoIntConditions.setAlias(formatOutput.getTialias());
-        dtoIntConditions.setCategory(formatOutput.getTipprod());
-        dtoIntConditions.setDescription(formatOutput.getDesprod());
-        dtoIntConditions.setOpeningDate(formatOutput.getFechape());
-        dtoIntConditions.setCommission(formatOutput.getComprod());
-        //dtoIntConditions.setMobilizationConditions(formatOutput.getConprod());
+//        Uso posterior para la funcionalidad de lista de actividades
+        
+        /*DTOIntActivity dtoIntActivity = new DTOIntActivity();
+        dtoIntActivity.setOperationDate(formatOutput.getFecoper().toString());
+        dtoIntActivity.setExecutionDate(formatOutput.getFecejec().toString());
 
-        DTOIntOffice dtoIntOffice = new DTOIntOffice();
-        dtoIntOffice.setName(formatOutput.getNomofic());
-        dtoIntOffice.setPostalAddress(formatOutput.getDirofic());
+        DTOIntFunction dtoIntFunction = new DTOIntFunction();
+        dtoIntFunction.setId(formatOutput.getTipfunc());
 
-        DTOIntLocation dtoIntLocation = new DTOIntLocation();
+        DTOIntEnumFunctionType dtoIntEnumFunctionType = new DTOIntEnumFunctionType();
+        dtoIntEnumFunctionType.setEnumValue(formatOutput.getCategor());
 
-        DTOIntCity dtoIntCity = new DTOIntCity();
-        dtoIntCity.setName(formatOutput.getCiudofi());
+        dtoIntFunction.setType(dtoIntEnumFunctionType);
 
-        dtoIntLocation.setCity(dtoIntCity);
+        dtoIntActivity.setFunction(dtoIntFunction);
+        dtoIntActivity.setAmount(formatOutput.getCantdad());
+        dtoIntActivity.setReference(formatOutput.getReffunc());
 
-        DTOIntCountry dtoIntCountry = new DTOIntCountry();
-        dtoIntCountry.setName(formatOutput.getPaisofi());
-
-        dtoIntLocation.setCountry(dtoIntCountry);
-
-        dtoIntOffice.setLocation(dtoIntLocation);
-
-        dtoIntConditions.setOffice(dtoIntOffice);
-
-        //DTOIntActivity dtoIntActivity = new DTOIntActivity();
-        //dtoIntActivity.setOperationDate(formatOutput.getFecoper().toString());
-        //dtoIntActivity.setExecutionDate(formatOutput.getFecejec().toString());
-
-        //DTOIntFunction dtoIntFunction = new DTOIntFunction();
-        //dtoIntFunction.setId(formatOutput.getTipfunc());
-
-        //DTOIntEnumFunctionType dtoIntEnumFunctionType = new DTOIntEnumFunctionType();
-        //dtoIntEnumFunctionType.setEnumValue(formatOutput.getCategor());
-
-        //dtoIntFunction.setType(dtoIntEnumFunctionType);
-
-        //dtoIntActivity.setFunction(dtoIntFunction);
-        //dtoIntActivity.setAmount(formatOutput.getCantdad());
-        //dtoIntActivity.setReference(formatOutput.getReffunc());
-
-        //dtoIntConditions.setActivities(dtoIntActivity);
-
+        dtoIntConditions.setActivities(dtoIntActivity);*/
         return dtoIntConditions;
+	}
+	
+	@Override
+	public FormatoOZECN2E0 mapInOznt(DTOIntFilterExtract dtoIn) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public DTOIntExtract mapOutOznt(FormatoOZECN2S0 formatOutput) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

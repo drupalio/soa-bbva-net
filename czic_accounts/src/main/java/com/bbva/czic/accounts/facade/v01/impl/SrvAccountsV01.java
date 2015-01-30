@@ -196,11 +196,11 @@ public class SrvAccountsV01 implements ISrvAccountsV01,
 			@ApiParam(value = "Checkbooks identifier") @PathParam("checkbookId") String checkbookId,
 			@ApiParam(value = "account identifier") @PathParam("accountId") String accountId) {
 		// 1. Validate parameter
-		if (accountId == null || accountId.trim().isEmpty()) {
+		if (accountId.equals("null") || accountId == null || accountId.trim().isEmpty()) {
 			throw new BusinessServiceException(
 					EnumError.WRONG_PARAMETERS.getAlias());
 		}
-		if (checkbookId == null || checkbookId.trim().isEmpty()) {
+		if (checkbookId.equals("null") || checkbookId == null || checkbookId.trim().isEmpty()) {
 			throw new BusinessServiceException(
 					EnumError.WRONG_PARAMETERS.getAlias());
 		}

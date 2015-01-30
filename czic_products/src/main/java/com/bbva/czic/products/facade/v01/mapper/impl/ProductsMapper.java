@@ -56,10 +56,10 @@ public class ProductsMapper extends AbstractBbvaConfigurableMapper implements
 				.field("transactionDate", "transactionDate").field("operationDate", "operationDate").field("office", "office")
 				.field("status", "status").field("value", "value").field("balance", "balance").byDefault().register();
 		// Office
-		factory.classMap(Office.class, DTOIntOffice.class).field("code", "code").field("name", "name").field("location", "dtoIntLocation").byDefault().register();
+		factory.classMap(Office.class, DTOIntOffice.class).field("name", "name").field("location", "location").byDefault().register();
 
 		// Location
-		factory.classMap(Location.class, DTOIntLocation.class).field("city", "dtoIntCity").field("state", "dtoIntState").byDefault().register();
+		factory.classMap(Location.class, DTOIntLocation.class).field("city", "city").field("state", "dtoIntState").byDefault().register();
 
 		// City
 		factory.classMap(City.class, DTOIntCity.class).field("name", "name").byDefault().register();
