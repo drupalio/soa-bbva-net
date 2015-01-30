@@ -23,7 +23,7 @@ public class ElectronicDepositValue
 {
 
     public final static long serialVersionUID = 1L;
-    @XmlJavaTypeAdapter(MoneyAdapter.class)
+    //@XmlJavaTypeAdapter(MoneyAdapter.class)
     @XmlElement(type = Money.class)
     @ApiModelProperty(value = "saldo total que se dispone para el usuario", required = true)
     private Money overallInvestment;

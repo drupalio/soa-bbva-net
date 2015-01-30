@@ -1,7 +1,10 @@
 package com.bbva.czic.globalposition.business.dto;
 
+import com.bbva.czic.routine.commons.rm.utils.validator.IsCustomerId;
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotEmpty;
+
+import javax.validation.constraints.Pattern;
 
 /**
  * @author Entelgy Colombia.
@@ -9,7 +12,7 @@ import org.hibernate.validator.constraints.NotEmpty;
 public class DTOIntProductFilter {
 
 	@NotEmpty
-	@Length(min = 8, max = 8)
+	@IsCustomerId
 	private String idCustomer;
 
 	@Length(min = 2, max = 2)

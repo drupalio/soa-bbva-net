@@ -93,8 +93,7 @@ public class SrvAccountsV01 implements ISrvAccountsV01,
 
 		final DTOIntFilterAccount dtoIntFilterAccount = new DTOIntFilterAccount();
 		dtoIntFilterAccount.setAccountId(idAccount);
-		return iAccountsMapper.map(srvIntAccounts
-				.getAccount(dtoIntFilterAccount));
+		return iAccountsMapper.map(srvIntAccounts.getAccount(dtoIntFilterAccount));
 	}
 
 	@Override
@@ -105,14 +104,12 @@ public class SrvAccountsV01 implements ISrvAccountsV01,
 			@ApiResponse(code = 200, message = "Found Sucessfully", response = Response.class),
 			@ApiResponse(code = 500, message = "Technical Error") })
 	@GET
-	@Path("/{id}/monthlyBalances")
-	@SMC(registryID = "SMC201400334", logicalID = "getAccountMonthlyBalance")
+	@Path("/{accountId}/monthlyBalances")
+	@SMC(registryID = "SMCCO1400020", logicalID = "getAccountMonthlyBalance")
 	public List<MonthlyBalances> getAccountMonthlyBalance(
-			@ApiParam(value = "identifier param") @PathParam("id") String idAccount,
-			@ApiParam(value = "filter param") @DefaultValue("null") @QueryParam("$filter") String filter,
-			@ApiParam(value = "fields param") @DefaultValue("null") @QueryParam("$fields") String fields,
-			@ApiParam(value = "expands param") @DefaultValue("null") @QueryParam("$expands") String expands,
-			@ApiParam(value = "order by param") @DefaultValue("null") @QueryParam("$sort") String sort) {
+			@ApiParam(value = "identifier param") @PathParam("accountId")String idAccount,
+			@ApiParam(value = "filter param") @DefaultValue("null") @QueryParam("$filter") String filter
+			) {
 
 		// 1. Validate filter FIQL
 		new FiqlValidator(filter).exist().hasGeAndLe("month").validate();
@@ -138,10 +135,7 @@ public class SrvAccountsV01 implements ISrvAccountsV01,
 	@SMC(registryID = "SMC201400334", logicalID = "getAccMovementResume")
 	public List<AccMovementsResume> getAccMovementResume(
 			@ApiParam(value = "identifier param") @PathParam("id") String idAccount,
-			@ApiParam(value = "filter param") @DefaultValue("null") @QueryParam("$filter") String filter,
-			@ApiParam(value = "fields param") @DefaultValue("null") @QueryParam("$fields") String fields,
-			@ApiParam(value = "expands param") @DefaultValue("null") @QueryParam("$expands") String expands,
-			@ApiParam(value = "order by param") @DefaultValue("null") @QueryParam("$sort") String sort) {
+			@ApiParam(value = "filter param") @DefaultValue("null") @QueryParam("$filter") String filter) {
 
 		new FiqlValidator(filter).hasGe("month").validateIfExist();
 
@@ -168,9 +162,9 @@ public class SrvAccountsV01 implements ISrvAccountsV01,
 	@SMC(registryID = "SMC201400026", logicalID = "listCheck")
 	public List<Check> listCheck(
 			@ApiParam(value = "identifier param") @PathParam("id") String accountId,
-			@ApiParam(value = "filter param") @DefaultValue("null") @QueryParam("$filter") String filter,
-			@ApiParam(value = "fields param") @DefaultValue("null") @QueryParam("paginationKey") Integer paginationKey,
-			@ApiParam(value = "expands param") @DefaultValue("null") @QueryParam("pageSize") Integer pageSize) {
+			@ApiParam(value = "filter param") @QueryParam("$filter") String filter,
+			@ApiParam(value = "fields param") @QueryParam("paginationKey") Integer paginationKey,
+			@ApiParam(value = "expands param")@QueryParam("pageSize") Integer pageSize) {
 
 		// Validacion del filtro
 		new FiqlValidator(filter).exist().hasGeAndLeDate("issueDate")
@@ -202,7 +196,11 @@ public class SrvAccountsV01 implements ISrvAccountsV01,
 			@ApiParam(value = "Checkbooks identifier") @PathParam("checkbookId") String checkbookId,
 			@ApiParam(value = "account identifier") @PathParam("accountId") String accountId) {
 		// 1. Validate parameter
-		if (accountId == null || accountId.trim().isEmpty()) {
+		if (accountId.equals("null") || accountId == null || accountId.trim().isEmpty()) {
+			throw new BusinessServiceException(
+					EnumError.WRONG_PARAMETERS.getAlias());
+		}
+		if (checkbookId.equals("null") || checkbookId == null || checkbookId.trim().isEmpty()) {
 			throw new BusinessServiceException(
 					EnumError.WRONG_PARAMETERS.getAlias());
 		}

@@ -12,7 +12,9 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlSchemaType;
 import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
+import com.bbva.jee.arq.spring.core.servicing.utils.CalendarAdapter;
 import org.hibernate.validator.constraints.NotBlank;
 
 import com.wordnik.swagger.annotations.ApiModelProperty;
@@ -20,9 +22,7 @@ import com.wordnik.swagger.annotations.ApiModelProperty;
 @XmlRootElement(name = "User", namespace = "urn:com:bbva:czic:dto:net")
 @XmlType(name = "User", namespace = "urn:com:bbva:czic:dto:net")
 @XmlAccessorType(XmlAccessType.FIELD)
-public class User
-    implements Serializable
-{
+public class User implements Serializable {
 
     public final static long serialVersionUID = 1L;
     @ApiModelProperty(value = "Identificador del usuario", required = true)
@@ -33,7 +33,8 @@ public class User
     private ContactInfo contactInfo;
     @ApiModelProperty("Entidad con toda la informaci\u00f3n del ejecutivo de ventas")
     private Executive salesExecutive;
-    @XmlSchemaType(name = "dateTime")
+    @XmlJavaTypeAdapter(CalendarAdapter.class)
+    //@XmlSchemaType(name = "dateTime")
     @ApiModelProperty("Fecha de la \u00faltima vez que accedi\u00f3 el usuario al portal")
     @Past
     private Calendar lastAccessDate;

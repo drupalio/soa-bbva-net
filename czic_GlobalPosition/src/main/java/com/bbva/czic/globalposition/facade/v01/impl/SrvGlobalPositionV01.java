@@ -26,7 +26,6 @@ import com.bbva.czic.globalposition.business.dto.DTOIntProduct;
 import com.bbva.czic.globalposition.business.dto.DTOIntProductFilter;
 import com.bbva.czic.globalposition.facade.v01.ISrvGlobalPositionV01;
 import com.bbva.czic.globalposition.facade.v01.mappers.IGlobalPositionMapper;
-import com.bbva.czic.globalposition.facade.v01.utils.converters.IFilterConverter;
 import com.bbva.czic.routine.commons.rm.utils.errors.EnumError;
 import com.bbva.jee.arq.spring.core.log.I18nLog;
 import com.bbva.jee.arq.spring.core.log.I18nLogFactory;
@@ -54,9 +53,6 @@ public class SrvGlobalPositionV01 implements ISrvGlobalPositionV01,
 			"META-INF/spring/i18n/log/mensajesLog");
 
 	public HttpHeaders httpHeaders;
-
-	@Resource(name = "global-position-filter-converter")
-	private IFilterConverter gpFilterConverter;
 
 	@Resource(name = "global-position-mapper")
 	private IGlobalPositionMapper globalPositionMapper;

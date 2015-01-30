@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
 
-import com.bbva.czic.dto.net.EnumProductType;
 import com.bbva.czic.globalposition.business.dto.DTOIntProduct;
 import com.bbva.czic.globalposition.business.dto.DTOIntProductFilter;
 import com.bbva.czic.globalposition.dao.IGlobalPositionDAO;
@@ -33,12 +32,14 @@ public class GlobalPositionDAO implements IGlobalPositionDAO {
 	@Qualifier("tx-update-product-operability")
 	private ISimpleTransaction txUpdateProductOperability;
 
+	private final String CREDIT_CARD_TYPE = "TC";
+
 	@Override
 	public List<DTOIntProduct> getExtractGlobalBalance(final DTOIntProductFilter filterProduct) {
 
 		final List<DTOIntProduct> products;
 
-		if (filterProduct.getProductType() == null || EnumProductType.TC.name().equals(filterProduct.getProductType())) {
+		if (filterProduct.getProductType() == null || CREDIT_CARD_TYPE.equals(filterProduct.getProductType())) {
 			products = txGetExtractGlobalBalance.invoke(filterProduct);
 		} else {
 			products = txGetExtractGlobalBalanceNoTC.invoke(filterProduct);

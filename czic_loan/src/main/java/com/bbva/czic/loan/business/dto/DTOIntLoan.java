@@ -1,26 +1,36 @@
 package com.bbva.czic.loan.business.dto;
 
 import com.bbva.czic.dto.net.Balance;
-import com.bbva.czic.dto.net.EnumLoanStatus;
 import com.bbva.czic.dto.net.Payment;
-import com.bbva.czic.dto.net.Product;
+import org.hibernate.validator.constraints.Length;
+
+import javax.validation.constraints.NotNull;
 
 public class DTOIntLoan  {
 
 	public final static long serialVersionUID = 1L;
 
+	@NotNull
+	@Length(min = 20, max = 20)
 	private String id;
 
+	@NotNull
+	@Length(min = 2, max = 2)
 	private String type;
 
+	@NotNull
 	private String name;
 
+	@NotNull
 	private Balance balance;
 
+	@NotNull
 	private Balance debt;
 
+	@NotNull
 	private Payment payment;
 
+	@NotNull
 	private String status;
 
 	public DTOIntLoan() {

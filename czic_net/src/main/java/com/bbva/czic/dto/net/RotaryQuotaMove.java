@@ -1,8 +1,17 @@
 package com.bbva.czic.dto.net;
 
+import com.bbva.jee.arq.spring.core.servicing.utils.CalendarAdapter;
 import com.bbva.jee.arq.spring.core.servicing.utils.Money;
+import com.wordnik.swagger.annotations.ApiModelProperty;
+
+import javax.validation.constraints.Past;
+import javax.xml.bind.annotation.*;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import java.util.Calendar;
 
+@XmlRootElement(name = "RotaryQuotaMove", namespace = "urn:com:bbva:czic:dto:net")
+@XmlType(name = "RotaryQuotaMove", namespace = "urn:com:bbva:czic:dto:net")
+@XmlAccessorType(XmlAccessType.FIELD)
 public class RotaryQuotaMove {
 	public final static long serialVersionUID = 1L;
 
@@ -12,13 +21,22 @@ public class RotaryQuotaMove {
 
 	private String concept;
 
+	@XmlJavaTypeAdapter(CalendarAdapter.class)
+	@ApiModelProperty(value = " fecha de la transaccion", required = true)
+	@Past
 	private Calendar transactionDate;
 
 	private String status;
 
+	@XmlElement(type = Money.class)
+	@ApiModelProperty("Valor del movimiento.")
 	private Money value;
 
 	private Balance balance;
+
+	private Integer numbersOfQuota;
+
+	private Integer remainingQuotas;
 
 
 	public RotaryQuotaMove() {
@@ -84,5 +102,20 @@ public class RotaryQuotaMove {
 	}
 
 
+	public Integer getNumbersOfQuota() {
+		return numbersOfQuota;
+	}
+
+	public void setNumbersOfQuota(Integer numbersOfQuota) {
+		this.numbersOfQuota = numbersOfQuota;
+	}
+
+	public Integer getRemainingQuotas() {
+		return remainingQuotas;
+	}
+
+	public void setRemainingQuotas(Integer remainingQuotas) {
+		this.remainingQuotas = remainingQuotas;
+	}
 }
 

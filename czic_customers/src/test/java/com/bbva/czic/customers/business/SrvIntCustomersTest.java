@@ -1,53 +1,28 @@
 package com.bbva.czic.customers.business;
 
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertTrue;
-import static org.mockito.Matchers.anyObject;
-import static org.mockito.Mockito.when;
-
-import java.math.BigDecimal;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.List;
-
-import com.bbva.czic.routine.commons.rm.utils.EDateFormat;
-import org.junit.Before;
+import com.bbva.czic.customers.business.dto.DTOIntAccMovementsResumesFilter;
+import com.bbva.czic.customers.business.dto.DTOIntCustomer;
+import com.bbva.czic.customers.business.impl.SrvIntCustomers;
+import com.bbva.czic.customers.dao.CustomersDAO;
+import com.bbva.czic.dto.net.*;
+import com.bbva.jee.arq.spring.core.servicing.test.BusinessServiceTestContextLoader;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.TestExecutionListeners;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.support.DependencyInjectionTestExecutionListener;
 
-import com.bbva.czic.customers.business.dto.DTOIntAccMovementsResume;
-import com.bbva.czic.customers.business.dto.DTOIntCardCharge;
-import com.bbva.czic.customers.business.dto.DTOIntCustomer;
-import com.bbva.czic.customers.business.dto.DTOIntEnumMonth;
-import com.bbva.czic.customers.business.dto.DTOIntAccMovementsResumesFilter;
-import com.bbva.czic.customers.business.impl.SrvIntCustomers;
-import com.bbva.czic.customers.dao.CustomersDAO;
-import com.bbva.czic.dto.net.AccMovementsResume;
-import com.bbva.czic.dto.net.CardCharge;
-import com.bbva.czic.dto.net.ContactInfo;
-import com.bbva.czic.dto.net.Customer;
-import com.bbva.czic.dto.net.Email;
-import com.bbva.czic.dto.net.EnumContactSourceType;
-import com.bbva.czic.dto.net.EnumDwelingType;
-import com.bbva.czic.dto.net.EnumSegmentType;
-import com.bbva.czic.dto.net.PhoneNumber;
-import com.bbva.czic.dto.net.Place;
-import com.bbva.czic.routine.commons.rm.utils.converter.UtilsConverter;
-import com.bbva.jee.arq.spring.core.servicing.gce.BusinessServiceException;
-import com.bbva.jee.arq.spring.core.servicing.test.BusinessServiceTestContextLoader;
+import java.util.ArrayList;
+import java.util.List;
 
-
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
+import static org.mockito.Matchers.anyObject;
+import static org.mockito.Mockito.when;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(loader = BusinessServiceTestContextLoader.class, 
@@ -69,7 +44,7 @@ public class SrvIntCustomersTest {
 	@Autowired
 	@InjectMocks
 	SrvIntCustomers srv;
-
+/*
 	@Before
 	public void init() {
 		MockitoAnnotations.initMocks(this);
@@ -92,7 +67,7 @@ public class SrvIntCustomersTest {
 		final DTOIntAccMovementsResumesFilter filter = mockResumesFilter();
 		final List<DTOIntAccMovementsResume> resumes = mockListAccMovementsResume();
 		//Setup expectation
-		when(customersDao.getlistAccountsMovementsResume(filter)).thenReturn(resumes);
+		when(customersDao.listAccountsMovementsResume(filter)).thenReturn(resumes);
 		//SUT execution
 		final List<DTOIntAccMovementsResume> answer = srv.getListAccountsMovementsResume(filter);
 		//validation
@@ -105,7 +80,7 @@ public class SrvIntCustomersTest {
 		//Setup
 		final DTOIntAccMovementsResumesFilter filter = mockResumesFilter();
 		//Setup expectation
-		when(customersDao.getlistAccountsMovementsResume(filter)).thenReturn(null);
+		when(customersDao.listAccountsMovementsResume(filter)).thenReturn(null);
 		//SUT execution
 		final List<DTOIntAccMovementsResume> answer = srv.getListAccountsMovementsResume(filter);
 	}
@@ -119,7 +94,7 @@ public class SrvIntCustomersTest {
 		//Setup expectation
 
 		//SUT execution
-		final List<CardCharge> answer = srv.getlistCreditCharges("123",null);
+		final List<CardCharge> answer = srv.listCreditCharges("123", null);
 		//validation
 	}
 
@@ -129,9 +104,9 @@ public class SrvIntCustomersTest {
 		final DTOIntAccMovementsResumesFilter filter = mockResumesFilter();
 		final List<DTOIntCardCharge> charges = mockListCardCharge();
 		//Setup expectation
-		when(customersDao.getlistCreCardCharges(filter)).thenReturn(charges);
+		when(customersDao.listCreditCardCharges(filter)).thenReturn(charges);
 		//SUT execution
-		final List<CardCharge> answer = srv.getlistCreditCharges("123", filter);
+		final List<CardCharge> answer = srv.listCreditCharges("123", filter);
 		//validation
 		assertNotNull(answer);
 		assertTrue(answer.size() > 0);
@@ -142,9 +117,9 @@ public class SrvIntCustomersTest {
 		//Setup
 		final DTOIntAccMovementsResumesFilter filter = mockResumesFilter();
 		//Setup expectation
-		when(customersDao.getlistCreCardCharges(filter)).thenReturn(null);
+		when(customersDao.listCreditCardCharges(filter)).thenReturn(null);
 		//SUT execution
-		final List<CardCharge> answer = srv.getlistCreditCharges("123", filter);
+		final List<CardCharge> answer = srv.listCreditCharges("123", filter);
 	}
 
 	private DTOIntAccMovementsResumesFilter mockResumesFilter(){
@@ -188,7 +163,7 @@ public class SrvIntCustomersTest {
 
 		return list;
 	}
-	
+	*/
 //	GetCustomer
 	
 	@Test
@@ -244,7 +219,7 @@ public class SrvIntCustomersTest {
 		
 		customer.setId("1");
 //		customer.setDocument(documento);
-		customer.setSegment(EnumSegmentType.PERSONA);
+		customer.setSegment(EnumSegmentType.PERSONA.toString());
 		customer.setName("Cliente de prueba");
 		customer.setEmails(contacto);
 		customer.setHomeLocation(homeLocation);
@@ -252,7 +227,7 @@ public class SrvIntCustomersTest {
 		customer.setStratum(4);
 		customer.setResidenceYears(1);
 		customer.setHomeMembers(1);
-		customer.setDwelingType(EnumDwelingType.VALIDAR);
+		customer.setDwelingType(EnumDwelingType.VALIDAR.toString());
 		return customer;
 	}
 }

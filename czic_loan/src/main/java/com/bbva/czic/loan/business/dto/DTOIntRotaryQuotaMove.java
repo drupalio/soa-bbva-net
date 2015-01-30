@@ -4,7 +4,9 @@ import com.bbva.czic.dto.net.Balance;
 import com.bbva.czic.dto.net.Movement;
 import com.bbva.czic.dto.net.Operation;
 import com.bbva.jee.arq.spring.core.servicing.utils.Money;
+import org.hibernate.validator.constraints.Length;
 
+import javax.validation.constraints.NotNull;
 import java.util.Calendar;
 
 
@@ -13,20 +15,34 @@ import java.util.Calendar;
  */
 public class DTOIntRotaryQuotaMove {
 
+
+    @NotNull
+    @Length(min = 9, max = 9)
     private String id;
 
-    private Operation operation;
-
+    @NotNull
     private String concept;
 
+    @NotNull
     private Calendar transactionDate;
 
+    @NotNull
+    private Operation operation;
+
+    @NotNull
     private String status;
 
+    @NotNull
     private Money value;
 
+    @NotNull
     private Balance balance;
 
+    @NotNull
+    private Integer numbersOfQuota;
+
+    @NotNull
+    private Integer remainingQuotas;
 
     public String getId() {
         return id;
@@ -82,5 +98,21 @@ public class DTOIntRotaryQuotaMove {
 
     public void setBalance(Balance balance) {
         this.balance = balance;
+    }
+
+    public Integer getNumbersOfQuota() {
+        return numbersOfQuota;
+    }
+
+    public void setNumbersOfQuota(Integer numbersOfQuota) {
+        this.numbersOfQuota = numbersOfQuota;
+    }
+
+    public Integer getRemainingQuotas() {
+        return remainingQuotas;
+    }
+
+    public void setRemainingQuotas(Integer remainingQuotas) {
+        this.remainingQuotas = remainingQuotas;
     }
 }

@@ -5,6 +5,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import com.bbva.czic.routine.commons.rm.utils.EDateFormat;
 import com.bbva.czic.routine.commons.rm.utils.errors.EnumError;
 import com.bbva.jee.arq.spring.core.servicing.gce.BusinessServiceException;
 
@@ -13,7 +14,7 @@ import com.bbva.jee.arq.spring.core.servicing.gce.BusinessServiceException;
  */
 public class DateValidator extends Validator {
 
-	final DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+	final DateFormat formatter = new SimpleDateFormat(EDateFormat.ANIO_MES_DIA.getPattern());
 
 	public DateValidator noFuture(Date date) {
 		if (date.after(new Date())) {
@@ -38,4 +39,15 @@ public class DateValidator extends Validator {
 		return this;
 	}
 
+	public DateValidator validDateRange(String startDate, String endDate, EDateFormat pattern){
+		try {
+			DateFormat format = new SimpleDateFormat(pattern.getPattern());
+			if (format.parse(startDate).after(format.parse(endDate))) {
+				exceptions.add(new BusinessServiceException(EnumError.DATE_INTERVAL_OUT_OF_RANGE.getAlias()));
+			}
+		} catch (ParseException e) {
+			exceptions.add(new BusinessServiceException(EnumError.WRONG_PARAMETERS.getAlias()));
+		}
+		return this;
+	}
 }

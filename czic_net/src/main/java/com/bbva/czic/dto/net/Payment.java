@@ -15,6 +15,7 @@ import javax.xml.bind.annotation.XmlSchemaType;
 import javax.xml.bind.annotation.XmlType;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
+import com.bbva.jee.arq.spring.core.servicing.utils.CalendarAdapter;
 import com.bbva.jee.arq.spring.core.servicing.utils.Money;
 import com.bbva.jee.arq.spring.core.servicing.utils.MoneyAdapter;
 import com.wordnik.swagger.annotations.ApiModelProperty;
@@ -27,20 +28,23 @@ public class Payment
 {
 
     public final static long serialVersionUID = 1L;
-    @XmlSchemaType(name = "dateTime")
+    @XmlJavaTypeAdapter(CalendarAdapter.class)
+    //@XmlSchemaType(name = "dateTime")
     @ApiModelProperty("Fecha de vencimiento del pago")
     private Calendar dueDate;
-    @XmlSchemaType(name = "dateTime")
+    @XmlJavaTypeAdapter(CalendarAdapter.class)
+    //@XmlSchemaType(name = "dateTime")
     @ApiModelProperty("Fecha de pago")
     private Calendar paymentDate;
-    @XmlSchemaType(name = "dateTime")
+    @XmlJavaTypeAdapter(CalendarAdapter.class)
+    //@XmlSchemaType(name = "dateTime")
     @ApiModelProperty("Fecha de corte del producto")
     private Calendar shortDate;
-    @XmlJavaTypeAdapter(MoneyAdapter.class)
+   // @XmlJavaTypeAdapter(MoneyAdapter.class)
     @XmlElement(type = Money.class)
     @ApiModelProperty("Honorarios del pago")
     private Money fees;
-    @XmlJavaTypeAdapter(MoneyAdapter.class)
+  //  @XmlJavaTypeAdapter(MoneyAdapter.class)
     @XmlElement(type = Money.class)
     @ApiModelProperty("Pago minimo")
     private Money minimumPayment;

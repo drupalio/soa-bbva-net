@@ -1,11 +1,9 @@
 package com.bbva.czic.customers.dao.mappers;
 
-import com.bbva.czic.customers.business.dto.DTOIntAccMovementsResume;
-import com.bbva.czic.customers.business.dto.DTOIntAccMovementsResumesFilter;
-import com.bbva.czic.customers.business.dto.DTOIntCardCharge;
-import com.bbva.czic.customers.business.dto.DTOIntCustomer;
+import com.bbva.czic.customers.business.dto.*;
 import com.bbva.czic.customers.dao.model.oznb.FormatoOZNCENB0;
 import com.bbva.czic.customers.dao.model.oznb.FormatoOZNCSNB0;
+import com.bbva.czic.customers.dao.model.oznp.FormatoOZECNPE0;
 import com.bbva.czic.customers.dao.model.oznp.FormatoOZECNPS0;
 import com.bbva.czic.customers.dao.model.oznq.FormatoOZECNQE0;
 import com.bbva.czic.customers.dao.model.oznq.FormatoOZECNQS0;
@@ -38,4 +36,7 @@ public interface ITxCustomerMapper {
 
 	DTOIntAccMovementsResume mapOutOznq(FormatoOZECNQS0 formatoSalida);
 
+	FormatoOZECNPE0 mapInOznp(DTOIntCardChargeFilter cardChargeFilter);
+
+	DTOIntCardCharge mapOutOznp(FormatoOZECNPS0 formatoSalida);
 }

@@ -3,14 +3,17 @@ package com.bbva.czic.customers.facade.v01.impl;
 import java.util.List;
 
 import javax.annotation.Resource;
-import javax.ws.rs.DefaultValue;
+import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
+import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.HttpHeaders;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
 
 import org.apache.cxf.jaxrs.model.wadl.ElementClass;
@@ -20,12 +23,18 @@ import org.springframework.stereotype.Service;
 import com.bbva.czic.customers.business.ISrvIntCustomers;
 import com.bbva.czic.customers.business.dto.DTOIntAccMovementsResume;
 import com.bbva.czic.customers.business.dto.DTOIntAccMovementsResumesFilter;
+import com.bbva.czic.customers.business.dto.DTOIntAddChannel;
+import com.bbva.czic.customers.business.dto.DTOIntCardCharge;
+import com.bbva.czic.customers.business.dto.DTOIntCardChargeFilter;
+import com.bbva.czic.customers.business.dto.DTOIntCustomerOperation;
 import com.bbva.czic.customers.facade.v01.ISrvCustomersV01;
 import com.bbva.czic.customers.facade.v01.mappers.ICustomerMapper;
 import com.bbva.czic.dto.net.AccMovementsResume;
 import com.bbva.czic.dto.net.CardCharge;
 import com.bbva.czic.dto.net.Customer;
+import com.bbva.czic.dto.net.CustomerOperation;
 import com.bbva.czic.routine.commons.rm.utils.errors.EnumError;
+import com.bbva.czic.routine.commons.rm.utils.fiql.FiqlType;
 import com.bbva.czic.routine.commons.rm.utils.validator.impl.FiqlValidator;
 import com.bbva.jee.arq.spring.core.log.I18nLog;
 import com.bbva.jee.arq.spring.core.log.I18nLogFactory;
@@ -84,21 +93,24 @@ public class SrvCustomersV01 implements ISrvCustomersV01, com.bbva.jee.arq.sprin
 	@GET
 	@ElementClass(response = List.class)
 	@Path("/{customerId}/creditCard/cardCharges")
-	@SMC(registryID = "SMCCO1400006", logicalID = "getlistCreditCardsCharges")
+	@SMC(registryID = "SMCCO1400024", logicalID = "getlistCreditCardsCharges")
 	public List<CardCharge> listCreditCardsCharges(
 			@ApiParam(value = "Claim identifier param") @PathParam("customerId") String customerId,
-			@ApiParam(value = "filter param") @DefaultValue("null") @QueryParam("$filter") String filter) {
+			@ApiParam(value = "filter param") @QueryParam("$filter") String filter) {
 
 		log.info("Into listCreditCardsCharges...");
 
-		// 1. Validate parameter
-		if (customerId == "null" || customerId.trim().isEmpty()) {
-			throw new BusinessServiceException(EnumError.WRONG_PARAMETERS.getAlias());
-		}
-		// 2. Validate filter FIQL
-		new FiqlValidator(filter).exist().hasGeAndLe("chargeDate").validate();
+		// 1. Validate filter FIQL
+		new FiqlValidator(filter).hasGeAndLe(FiqlType.chargeDate.name()).validateIfExist();
+
+		// 2. Mapping to DTOIntFilter
+		final DTOIntCardChargeFilter cardChargeFilter = customerMapper.getCreditCardChargesFilter(customerId, filter);
+
 		// 3. Invoke SrvIntCustomers and Mapping to canonical DTO
-		return null;// srvIntCustomers.getlistCreditCharges(customerId, filterConverter.toCardChargeFilter(filter));
+		List<DTOIntCardCharge> intCardCharges = srvIntCustomers.listCreditCharges(cardChargeFilter);
+
+		return customerMapper.mapCardCharges(intCardCharges);
+
 	}
 
 	@Override
@@ -111,7 +123,7 @@ public class SrvCustomersV01 implements ISrvCustomersV01, com.bbva.jee.arq.sprin
 	@GET
 	@ElementClass(response = List.class)
 	@Path("/{customerId}/accounts/movementsResume")
-	@SMC(registryID = "SMCCO1400007", logicalID = "getListAccountsMovementsResume")
+	@SMC(registryID = "SMCCO1400025", logicalID = "getListAccountsMovementsResume")
 	public List<AccMovementsResume> listAccountsMovementsResume(
 			@ApiParam(value = "Claim identifier param") @PathParam("customerId") String customerId,
 			@ApiParam(value = "filter param") @QueryParam("$filter") String filter) {
@@ -129,7 +141,7 @@ public class SrvCustomersV01 implements ISrvCustomersV01, com.bbva.jee.arq.sprin
 		List<DTOIntAccMovementsResume> accMovementsResumes = srvIntCustomers
 				.getListAccountsMovementsResume(filterCustomerResumes);
 
-		return customerMapper.map(accMovementsResumes);
+		return customerMapper.mapAccMovementsResume(accMovementsResumes);
 	}
 
 	@Override
@@ -149,5 +161,52 @@ public class SrvCustomersV01 implements ISrvCustomersV01, com.bbva.jee.arq.sprin
 
 		// 1. Invoke SrvIntCustomers and Mapping to canonical DTO
 		return srvIntCustomers.getCustomer(customerId);
+	}
+
+	@Override
+	@ApiOperation(value = "Validates customer information", notes = "Customer Information", response = List.class)
+	@ApiResponses(value = { @ApiResponse(code = -1, message = "aliasGCE1"),
+			@ApiResponse(code = -1, message = "aliasGCE2"),
+			@ApiResponse(code = 200, message = "Found Sucessfully", response = Customer.class),
+			@ApiResponse(code = 400, message = "Wrong parameters"),
+			@ApiResponse(code = 409, message = "Data not found"), @ApiResponse(code = 500, message = "Technical Error") })
+	@POST
+	@Path("/customerChannels/{channelId}/verifyCustomer")
+	@Consumes({ MediaType.APPLICATION_JSON })
+	@SMC(registryID = "SMCCO1500010", logicalID = "verifyCustomer")
+	public Response verifyCustomer(
+			@ApiParam(value = "Channel identifier param") @PathParam("channelId") String channelId,
+			@ApiParam(value = "Customer's validation information") CustomerOperation operation) {
+
+		log.info("Into verifyCustomer...");
+
+		DTOIntCustomerOperation custOperation = customerMapper.map(operation);
+		custOperation.setChannelId(channelId);
+
+		srvIntCustomers.verifyCustomer(custOperation);
+
+		return Response.ok().build();
+	}
+
+	@Override
+	@ApiOperation(value = "Returns the customer information for showing in global position", notes = "Customer Information")
+	@ApiResponses(value = { @ApiResponse(code = -1, message = "aliasGCE1"),
+			@ApiResponse(code = -1, message = "aliasGCE2"), @ApiResponse(code = 200, message = "Found Sucessfully"),
+			@ApiResponse(code = 400, message = "Wrong parameters"),
+			@ApiResponse(code = 409, message = "Data not found"), @ApiResponse(code = 500, message = "Technical Error") })
+	@PUT
+	@Path("/{customerId}/custommerChannels/{channelId}")
+	@SMC(registryID = "SMCCO1500009", logicalID = "addChannel")
+	public void addChannel(@ApiParam(value = "Claim identifier param") @PathParam("customerId") String customerId,
+			@ApiParam(value = "Claim channerlid param") @PathParam("channelId") String channelId) {
+
+		log.info("Into addChannel...");
+
+		if (customerId.trim().equals("null") || customerId.trim().isEmpty() || channelId.trim().equals("null")
+				|| channelId.trim().isEmpty()) {
+			throw new BusinessServiceException(EnumError.WRONG_PARAMETERS.getAlias());
+		}
+
+		srvIntCustomers.addChannel(new DTOIntAddChannel(customerId, channelId));
 	}
 }

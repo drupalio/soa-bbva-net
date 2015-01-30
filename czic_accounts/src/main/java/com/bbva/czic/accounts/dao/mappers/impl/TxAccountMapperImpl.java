@@ -73,7 +73,7 @@ public class TxAccountMapperImpl extends AbstractBbvaTxConfigurableMapper implem
 				.customize(new CheckBookListMapper()).register();
 
 		// Map FormatoOZECNVS0 <-> DTOIntMonthlyBalances (OZNV)
-		factory.classMap(DTOIntMonthlyBalances.class, FormatoOZECNVS0.class).field("balance.amount", "salddis")
+		factory.classMap(DTOIntMonthlyBalances.class, FormatoOZECNVS0.class).field("balance", "salddis")
 				.field("month", "mes").byDefault().register();
 		
 		// Map DTOIntCheckbook <-> FormatoOZECNSE0 (OZNS)
@@ -82,9 +82,12 @@ public class TxAccountMapperImpl extends AbstractBbvaTxConfigurableMapper implem
 				.field("deliveryDate", "fecentr").field("deliveryDate", "fecentr").field("actualState", "estachq").byDefault().register();
 
 		// Map FormatoOZECNUS0 <-> DTOIntAccMovementsResume (OZNU)
-		factory.classMap(DTOIntAccMovementsResume.class, FormatoOZECNUS0.class).field("balance", "saldtot")
-				.field("income", "valdepo").field("outcome", "valcarg").field("month", "mes").byDefault()
-				.register();
+		factory.classMap(DTOIntAccMovementsResume.class, FormatoOZECNUS0.class)
+				.field("balance", "saldtot")
+				.field("income", "valdepo")
+				.field("outcome", "valcarg")
+				.field("month", "mes")
+				.byDefault().register();
 
 		/**
 		 * MAPEO DE ENTRADAS
