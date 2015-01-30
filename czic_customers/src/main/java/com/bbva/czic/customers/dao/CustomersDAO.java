@@ -1,22 +1,19 @@
 package com.bbva.czic.customers.dao;
 
-import java.util.List;
-
 import com.bbva.czic.customers.business.dto.*;
-import com.bbva.czic.dto.net.Customer;
-import com.bbva.jee.arq.spring.core.servicing.gce.BusinessServiceException;
+
+import java.util.List;
 
 public interface CustomersDAO {
 
-	List<DTOIntAccMovementsResume> getlistAccountsMovementsResume(
-			DTOIntFilterCustomerResumes filter) throws BusinessServiceException;
+	List<DTOIntAccMovementsResume> listAccountsMovementsResume(DTOIntAccMovementsResumesFilter filter);
 
-	List<DTOIntCardCharge> getlistCreCardCharges(
-			DTOIntFilterCustomerResumes filter) throws BusinessServiceException;
+	List<DTOIntCardCharge> listCreditCardCharges(DTOIntCardChargeFilter cardChargeFilter);
 
-	DTOIntCustomer getCustomer(String customerId)
-			throws BusinessServiceException;
+	DTOIntCustomer getCustomer(String customerId);
 
 	void addChannel(final DTOIntAddChannel dtoIntAddChannel);
+
+	void verifyCustomer(DTOIntCustomerOperation customerOperation);
 }
 

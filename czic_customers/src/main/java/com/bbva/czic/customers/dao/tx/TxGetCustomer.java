@@ -2,16 +2,14 @@ package com.bbva.czic.customers.dao.tx;
 
 import javax.annotation.Resource;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.bbva.czic.customers.business.dto.DTOIntCustomer;
-import com.bbva.czic.customers.dao.mapper.TxCustomerMapper;
+import com.bbva.czic.customers.dao.mappers.ITxCustomerMapper;
 import com.bbva.czic.customers.dao.model.oznb.FormatoOZNCENB0;
 import com.bbva.czic.customers.dao.model.oznb.FormatoOZNCSNB0;
 import com.bbva.czic.customers.dao.model.oznb.PeticionTransaccionOznb;
 import com.bbva.czic.customers.dao.model.oznb.RespuestaTransaccionOznb;
-import com.bbva.czic.customers.dao.model.oznb.TransaccionOznb;
 import com.bbva.czic.routine.commons.rm.utils.tx.impl.SimpleBbvaTransaction;
 import com.bbva.jee.arq.spring.core.host.InvocadorTransaccion;
 
@@ -27,7 +25,7 @@ public class TxGetCustomer extends
 //	private TransaccionOznb transaccionOznb;
 
 	@Resource(name = "txCustomerMapper")
-	private TxCustomerMapper txCustomerMapper;
+	private ITxCustomerMapper txCustomerMapper;
 
 	@Override
 	protected FormatoOZNCENB0 mapDtoInToRequestFormat(String customerId) {

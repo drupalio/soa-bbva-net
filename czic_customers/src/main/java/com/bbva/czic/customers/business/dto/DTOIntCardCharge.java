@@ -2,16 +2,17 @@
 package com.bbva.czic.customers.business.dto;
 
 import com.bbva.jee.arq.spring.core.servicing.utils.Money;
+import org.hibernate.validator.constraints.NotEmpty;
 
-import java.util.Date;
-
+import javax.validation.constraints.NotNull;
 
 public class DTOIntCardCharge {
 
     public final static long serialVersionUID = 1L;
+    @NotEmpty
     private String category;
+    @NotNull
     private Money amount;
-    private Date chargeDate;
 
     public DTOIntCardCharge() {
         //default constructor
@@ -33,20 +34,11 @@ public class DTOIntCardCharge {
         this.amount = amount;
     }
 
-    public Date getChargeDate() {
-        return chargeDate;
-    }
-
-    public void setChargeDate(Date chargeDate) {
-        this.chargeDate = chargeDate;
-    }
-
     @Override
     public String toString() {
         return "DTOIntCardCharge{" +
                 "category=" + category +
                 ", amount=" + amount +
-                ", chargeDate=" + chargeDate +
                 '}';
     }
 }
