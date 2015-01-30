@@ -34,7 +34,7 @@ import javax.ws.rs.core.UriInfo;
 import java.util.List;
 
 @Path("/V01")
-@SN(registryID = "SN201400011", logicalID = "products")
+@SN(registryID = "SNCO1400011", logicalID = "products")
 @VN(vnn = "V01")
 @Api(value = "/products/V01", description = "Products REST service.")
 @Produces({ MediaType.APPLICATION_JSON })
@@ -103,7 +103,7 @@ public class SrvProductsV01 implements ISrvProductsV01,
 			@ApiResponse(code = 500, message = "Technical Error") })
 	@GET
 	@Path("/{productId}/listExtracts")
-	@SMC(registryID = "Pending", logicalID = "listExtracts")
+	@SMC(registryID = "SMCCO1500011", logicalID = "listExtracts")
 	public List<Extract> listExtracts(
 			@ApiParam(value = "identifier param") @PathParam("productId") String productId,
 			@ApiParam(value = "filter param") @DefaultValue("null") @QueryParam("$filter") String filter,
