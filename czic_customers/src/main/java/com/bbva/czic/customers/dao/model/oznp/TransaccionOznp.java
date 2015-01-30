@@ -14,7 +14,7 @@ import com.bbva.jee.arq.spring.core.host.InvocadorTransaccion;
  * @see PeticionTransaccionOznp
  * @see RespuestaTransaccionOznp
  */
-@Component("TransaccionOznp")
+@Component("transaccionOznp")
 @Profile("prod")
 public class TransaccionOznp implements InvocadorTransaccion<PeticionTransaccionOznp,RespuestaTransaccionOznp> {
 	
