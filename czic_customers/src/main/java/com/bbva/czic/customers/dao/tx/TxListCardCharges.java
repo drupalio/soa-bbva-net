@@ -7,7 +7,7 @@ import com.bbva.czic.customers.dao.model.oznp.FormatoOZECNPE0;
 import com.bbva.czic.customers.dao.model.oznp.FormatoOZECNPS0;
 import com.bbva.czic.customers.dao.model.oznp.PeticionTransaccionOznp;
 import com.bbva.czic.customers.dao.model.oznp.RespuestaTransaccionOznp;
-import com.bbva.czic.routine.commons.rm.utils.tx.impl.SimpleBbvaTransaction;
+import com.bbva.czic.routine.commons.rm.utils.tx.impl.MultiBbvaTransaction;
 import com.bbva.jee.arq.spring.core.host.InvocadorTransaccion;
 import org.springframework.stereotype.Component;
 
@@ -17,7 +17,7 @@ import javax.annotation.Resource;
  * @author Entelgy Colombia.
  */
 @Component("txListCardCharges")
-public class TxListCardCharges extends SimpleBbvaTransaction<DTOIntCardChargeFilter, FormatoOZECNPE0, DTOIntCardCharge, FormatoOZECNPS0> {
+public class TxListCardCharges extends MultiBbvaTransaction<DTOIntCardChargeFilter, FormatoOZECNPE0, DTOIntCardCharge, FormatoOZECNPS0> {
 
     @Resource(name = "transaccionOznp")
     private InvocadorTransaccion<PeticionTransaccionOznp, RespuestaTransaccionOznp> transaccionOznp;

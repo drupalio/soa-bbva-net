@@ -12,10 +12,11 @@ privileged aspect FormatoOZECNLE0_Roo_ToString {
         sb.append("Fecfin: ").append(getFecfin()).append(", ");
         sb.append("Fecini: ").append(getFecini()).append(", ");
         sb.append("Indpagi: ").append(getIndpagi()).append(", ");
-        sb.append("Numcuen: ").append(getNumcuen()).append(", ");
+        sb.append("Numprod: ").append(getNumprod()).append(", ");
         sb.append("Salfin: ").append(getSalfin()).append(", ");
         sb.append("Salinc: ").append(getSalinc()).append(", ");
-        sb.append("Tampagi: ").append(getTampagi());
+        sb.append("Tampagi: ").append(getTampagi()).append(", ");
+        sb.append("Usuario: ").append(getUsuario());
         return sb.toString();
     }
     

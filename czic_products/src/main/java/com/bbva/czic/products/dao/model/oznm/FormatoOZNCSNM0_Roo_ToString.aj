@@ -14,7 +14,6 @@ privileged aspect FormatoOZNCSNM0_Roo_ToString {
         sb.append("Descodi: ").append(getDescodi()).append(", ");
         sb.append("Fchoper: ").append(getFchoper()).append(", ");
         sb.append("Fchvalr: ").append(getFchvalr()).append(", ");
-        sb.append("Nomovim: ").append(getNomovim()).append(", ");
         sb.append("Numecta: ").append(getNumecta()).append(", ");
         sb.append("Plaza: ").append(getPlaza()).append(", ");
         sb.append("Resto: ").append(getResto()).append(", ");

@@ -28,16 +28,16 @@ public class TxListMovements extends MultiBbvaTransaction<DTOIntFilterMovements,
 
     @Override
     protected FormatoOZECNLE0 mapDtoInToRequestFormat(DTOIntFilterMovements dtoIn) {
-        return null;
+        return txProductMapper.mapInOznl(dtoIn);
     }
 
     @Override
     protected DTOIntMovement mapResponseFormatToDtoOut(FormatoOZECNLS0 formatOutput, DTOIntFilterMovements dtoIn) {
-        return null;
+        return txProductMapper.mapOutOznl(formatOutput);
     }
 
     @Override
     protected InvocadorTransaccion<?, ?> getTransaction() {
-        return null;
+        return transaccionOznl;
     }
 }

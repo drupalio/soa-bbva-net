@@ -38,7 +38,7 @@ public class CustomersDAOImpl implements CustomersDAO {
 	@Resource(name = "txListAccountMovementsResume")
 	private TxListAccountMovementsResume txListAccountMovementsResume;
 
-	@Resource(name = "")
+	@Resource(name = "txListCardCharges")
 	private TxListCardCharges txListCardCharges;
 
 	/**
@@ -62,10 +62,9 @@ public class CustomersDAOImpl implements CustomersDAO {
 
 	@Override
 	public List<DTOIntCardCharge> listCreditCardCharges(DTOIntCardChargeFilter cardChargeFilter) {
-
 		log.info("Into getListAccountsMovementsResume...");
 		log.info("getListAccountsMovementsResume params:" + cardChargeFilter);
-		return null;
+		return txListCardCharges.invoke(cardChargeFilter);
 	}
 
 	@Override
