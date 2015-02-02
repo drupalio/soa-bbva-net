@@ -15,6 +15,8 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
 
+import com.bbva.czic.globalposition.business.dto.DTOIntProductOperability;
+import com.bbva.czic.globalposition.business.dto.DTOIntProductVisibility;
 import com.bbva.czic.routine.commons.rm.utils.validator.impl.FiqlValidator;
 import org.apache.cxf.jaxrs.model.wadl.ElementClass;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -116,17 +118,17 @@ public class SrvGlobalPositionV01 implements ISrvGlobalPositionV01,
 			@ApiParam(value = "Product identifier") @PathParam("idProduct") String idProduct,
 			@ApiParam(value = "Product information") Product infoProduct) {
 
-		final DTOIntProduct productInt = new DTOIntProduct();
+		final DTOIntProductVisibility productVisibility = new DTOIntProductVisibility();
 		infoProduct.setId(idProduct);
 
 		if (idProduct == null || infoProduct.getVisible() == null) {
 			throw new BusinessServiceException(EnumError.WRONG_PARAMETERS.getAlias());
 		}
 
-		productInt.setId(idProduct);
-		productInt.setVisible(infoProduct.getVisible());
+		productVisibility.setId(idProduct);
+		productVisibility.setVisible(infoProduct.getVisible());
 
-		srvIntGlobalPosition.updateProductVisibility(productInt);
+		srvIntGlobalPosition.updateProductVisibility(productVisibility);
 
 		return Response.ok().build();
 	}
@@ -145,18 +147,16 @@ public class SrvGlobalPositionV01 implements ISrvGlobalPositionV01,
 			@ApiParam(value = "Product identifier") @PathParam("idProduct") String idProduct,
 			@ApiParam(value = "Product information") Product infoProduct) {
 
-		final DTOIntProduct productInt = new DTOIntProduct();
+		final DTOIntProductOperability productOperability = new DTOIntProductOperability();
 		infoProduct.setId(idProduct);
 
 		if (idProduct == null || infoProduct.getOperable() == null) {
 			throw new BusinessServiceException(EnumError.WRONG_PARAMETERS.getAlias());
 		}
-		productInt.setId(idProduct);
-		productInt.setOperable(infoProduct.getOperable());
+		productOperability.setId(idProduct);
+		productOperability.setOperable(infoProduct.getOperable());
 
-
-
-		srvIntGlobalPosition.updateProductOperability(productInt);
+		srvIntGlobalPosition.updateProductOperability(productOperability);
 		return Response.ok().build();
 	}
 }

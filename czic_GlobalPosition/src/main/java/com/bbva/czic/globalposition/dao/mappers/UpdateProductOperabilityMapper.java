@@ -1,6 +1,7 @@
 package com.bbva.czic.globalposition.dao.mappers;
 
 import com.bbva.czic.globalposition.business.dto.DTOIntProduct;
+import com.bbva.czic.globalposition.business.dto.DTOIntProductOperability;
 import com.bbva.czic.globalposition.dao.enums.EnumOperability;
 import com.bbva.czic.globalposition.dao.model.oznh.FormatoOZNCEOMH;
 import com.bbva.czic.routine.commons.rm.utils.tx.IFormatNotApply;
@@ -11,10 +12,10 @@ import org.springframework.stereotype.Component;
  * Created by Julio Cesar on 07-01-2015.
  */
 @Component("tx-update-product-operability-mapper")
-public class UpdateProductOperabilityMapper implements ISimpleTransactionMapper<DTOIntProduct, FormatoOZNCEOMH, DTOIntProduct, IFormatNotApply> {
+public class UpdateProductOperabilityMapper implements ISimpleTransactionMapper<DTOIntProductOperability, FormatoOZNCEOMH, DTOIntProduct, IFormatNotApply> {
 
     @Override
-    public FormatoOZNCEOMH mapToInner(DTOIntProduct dtoIn) {
+    public FormatoOZNCEOMH mapToInner(DTOIntProductOperability dtoIn) {
         final FormatoOZNCEOMH formatoEntrada = new FormatoOZNCEOMH();
 
         formatoEntrada.setNumcta(dtoIn.getId());
@@ -25,7 +26,7 @@ public class UpdateProductOperabilityMapper implements ISimpleTransactionMapper<
     }
 
     @Override
-    public DTOIntProduct mapToOuter(IFormatNotApply outFormat, DTOIntProduct dtoIn) {
+    public DTOIntProduct mapToOuter(IFormatNotApply outFormat, DTOIntProductOperability dtoIn) {
         return null;
     }
 }

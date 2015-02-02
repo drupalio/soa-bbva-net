@@ -4,6 +4,8 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
+import com.bbva.czic.globalposition.business.dto.DTOIntProductOperability;
+import com.bbva.czic.globalposition.business.dto.DTOIntProductVisibility;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
@@ -48,13 +50,13 @@ public class GlobalPositionDAO implements IGlobalPositionDAO {
 	}
 
 	@Override
-	public void updateProductVisibility(final DTOIntProduct product) {
-		txUpdateProductVisibility.invoke(product);
+	public void updateProductVisibility(final DTOIntProductVisibility productVisibility) {
+		txUpdateProductVisibility.invoke(productVisibility);
 	}
 
 	@Override
-	public void updateProductOperability(final DTOIntProduct product) {
-		txUpdateProductOperability.invoke(product);
+	public void updateProductOperability(final DTOIntProductOperability productOperability) {
+		txUpdateProductOperability.invoke(productOperability);
 	}
 
 }
