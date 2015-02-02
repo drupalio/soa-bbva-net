@@ -3,12 +3,14 @@ package com.bbva.czic.customers.business.dto;
 import com.bbva.czic.routine.commons.rm.utils.validator.IsCustomerId;
 import org.hibernate.validator.constraints.NotEmpty;
 
+import javax.validation.constraints.Pattern;
+
 /**
  * @author Entelgy Colombia.
  */
 public class DTOIntCardChargeFilter {
     @NotEmpty
-    @IsCustomerId
+    @Pattern(regexp = "^\\d{8}$")
     String customerId;
     String startDate;
     String endDate;
