@@ -68,7 +68,7 @@ public class TxProductMapperImpl extends AbstractBbvaTxConfigurableMapper  imple
 				.register();
 		// Map FormatoOZECNTS0 <-> DTOIntConditions (OZNM)
 		factory.classMap(FormatoOZNCSNM0.class, DTOIntMovement.class)
-				.field("numecta", "productId")
+				.field("numecta", "id")
 				.field("fchoper", "transactionDate")
 				.field("resto", "concept")
 				.field("valor", "value")

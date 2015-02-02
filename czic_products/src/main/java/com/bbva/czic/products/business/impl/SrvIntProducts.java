@@ -71,13 +71,13 @@ public class SrvIntProducts implements ISrvIntProducts {
 		DtoValidator.validate(dtoIntMovementsFilter);
 
 		// 2. Get response
-	//	final DTOIntMovement result = productsDAO.getConditions(filter);
+		final DTOIntMovement result = productsDAO.getMovement(dtoIntMovementsFilter);
 
 		// 3. Validate output
-	//	DtoValidator.validate(result);
+		DtoValidator.validate(result);
 
 		log.info(" getConditions Conditions ");
-		return null;
+		return result;
 	}
 
 	@Override
@@ -86,13 +86,13 @@ public class SrvIntProducts implements ISrvIntProducts {
 		DtoValidator.validate(filter);
 
 		// 2. Get response
-	//	final List<DTOIntMovement> result = productsDAO.getConditions(filter);
+		final List<DTOIntMovement> result = productsDAO.listMovements(filter);
 
 		// 3. Validate output
-	//	DtoValidator.validate(result);
+		DtoValidator.validate(result);
 
 		log.info(" getConditions Conditions ");
-		return null;
+		return result;
 	}
 
 }
