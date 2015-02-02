@@ -180,7 +180,8 @@ public class TxProductMapperImpl extends AbstractBbvaTxConfigurableMapper  imple
 			month = 1;
 		}
 		parser = parser + tailGenerate;
-		return formato;
+		formato.setLongtra(parser.length());
+		return processPlot(formato,parser);
 	}
 
 
@@ -188,6 +189,11 @@ public class TxProductMapperImpl extends AbstractBbvaTxConfigurableMapper  imple
 		FormatoOZECN2E0 formato = new FormatoOZECN2E0();
 		String parser = headGet + dtoIn.getProductId() + tailGet;
 		formato.setLongtra(parser.length());
+		return processPlot(formato,parser);
+	}
+
+
+	private FormatoOZECN2E0 processPlot(FormatoOZECN2E0 formato,String parser) {
 		for (int i = 0; i < parser.length(); i++) {
 			switch (i) {
 			case 0:

@@ -1,6 +1,7 @@
 package com.bbva.czic.customers.facade.v01.mappers.impl;
 
 import com.bbva.czic.customers.business.dto.*;
+import com.bbva.czic.customers.dao.converters.CardChargeCategoryConverter;
 import com.bbva.czic.customers.facade.v01.mappers.ICustomerMapper;
 import com.bbva.czic.dto.net.AccMovementsResume;
 import com.bbva.czic.dto.net.CardCharge;
@@ -19,11 +20,13 @@ import java.util.List;
 @Component("customerMapper")
 public class CustomerMapper extends AbstractBbvaConfigurableMapper implements ICustomerMapper {
 
+    public static final String CARD_CHARGE_CATEGORY_CONVERTER = "cardChargeCategoryConverter";
+
     @Override
     protected void configure(MapperFactory factory) {
         super.configure(factory);
 
-        
+        factory.getConverterFactory().registerConverter(CARD_CHARGE_CATEGORY_CONVERTER, new CardChargeCategoryConverter());
         factory.getConverterFactory().registerConverter(new EmailStringConverter());
 
         // mapAccMovementsResume DTOIntFilterCustomerResumes <-> AccMovementsResume
@@ -44,6 +47,10 @@ public class CustomerMapper extends AbstractBbvaConfigurableMapper implements IC
                 .field("customer.contactInfo.emails", "emails")
                 .byDefault().register();
 
+        factory.classMap(CardCharge.class, DTOIntCardCharge.class)
+                .fieldMap("category", "category").converter("cardChargeCategoryConverter").add()
+                .field("amount", "amount")
+                .byDefault().register();
     }
 
     @Override
@@ -68,7 +75,7 @@ public class CustomerMapper extends AbstractBbvaConfigurableMapper implements IC
 
     @Override
     public List<CardCharge> mapCardCharges(List<DTOIntCardCharge> intCardCharges) {
-        return null;
+        return mapAsList(intCardCharges, CardCharge.class);
     }
 
     @Override
