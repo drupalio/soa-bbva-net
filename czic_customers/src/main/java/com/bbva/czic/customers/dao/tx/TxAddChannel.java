@@ -31,7 +31,7 @@ public class TxAddChannel  extends SimpleBbvaTransaction<DTOIntAddChannel, Forma
 
     @Override
     protected DTOIntAddChannel mapResponseFormatToDtoOut(IFormatNotApply formatOutput, DTOIntAddChannel dtoIn) {
-        return new DTOIntAddChannel();
+        return null;
     }
 
     @Override

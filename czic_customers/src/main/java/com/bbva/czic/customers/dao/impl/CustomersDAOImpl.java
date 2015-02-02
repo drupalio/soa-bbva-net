@@ -1,30 +1,18 @@
 package com.bbva.czic.customers.dao.impl;
 
 import com.bbva.czic.customers.business.dto.*;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.Resource;
 
-import com.bbva.czic.customers.business.dto.*;
 import com.bbva.czic.customers.dao.tx.*;
-import com.bbva.czic.dto.net.Customer;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.bbva.czic.customers.business.impl.SrvIntCustomers;
 import com.bbva.czic.customers.dao.CustomersDAO;
-import com.bbva.czic.customers.dao.model.oznp.PeticionTransaccionOznp;
-import com.bbva.czic.customers.dao.model.oznp.RespuestaTransaccionOznp;
-import com.bbva.czic.routine.commons.rm.utils.errors.EnumError;
-import com.bbva.jee.arq.spring.core.host.InvocadorTransaccion;
 import com.bbva.jee.arq.spring.core.log.I18nLog;
 import com.bbva.jee.arq.spring.core.log.I18nLogFactory;
 import com.bbva.jee.arq.spring.core.servicing.gce.BusinessServiceException;
-import org.springframework.stereotype.Component;
-
-import javax.annotation.Resource;
-import java.util.List;
 
 
 @Component(value = "customers-dao")
@@ -82,6 +70,7 @@ public class CustomersDAOImpl implements CustomersDAO {
 	}
 
 	public void addChannel(final DTOIntAddChannel dtoIntAddChannel){
+		log.info("CustDAO: Into addChannel...");
 		txAddChannel.invoke(dtoIntAddChannel);
 	}
 
