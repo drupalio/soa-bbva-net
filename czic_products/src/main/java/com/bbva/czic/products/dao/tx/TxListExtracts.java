@@ -27,13 +27,13 @@ public class TxListExtracts
 
 	@Override
 	protected FormatoOZECN2E0 mapDtoInToRequestFormat(DTOIntFilterExtract dtoIn) {
-		return txProductsMapper.mapInOznt(dtoIn);
+		return txProductsMapper.mapInOzn2(dtoIn);
 	}
 
 	@Override
 	protected DTOIntExtract mapResponseFormatToDtoOut(
 			FormatoOZECN2S0 formatOutput, DTOIntFilterExtract dtoIn) {
-		return txProductsMapper.mapOutOznt(formatOutput);
+		return txProductsMapper.mapOutOzn2(formatOutput);
 	}
 
 	@Override
