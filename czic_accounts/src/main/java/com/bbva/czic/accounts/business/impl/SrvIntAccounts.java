@@ -58,13 +58,13 @@ public class SrvIntAccounts implements ISrvIntAccounts {
 	}
 
 	@Override
-	public DTOIntAccount getAccount(DTOIntFilterAccount dtoIntFilterAccount) {
+	public DTOIntAccount getAccount(final DTOIntFilterAccount dtoIntFilterAccount) {
 
 		DtoValidator.validate(dtoIntFilterAccount);
 		log.info(" getAccount ");
 
 		// Validar el dto de filtrado
-		DTOIntAccount dtoIntAccount = accountsDAO.getAccount(dtoIntFilterAccount);
+		final DTOIntAccount dtoIntAccount = accountsDAO.getAccount(dtoIntFilterAccount);
 
 		DtoValidator.validate(dtoIntAccount);
 		return dtoIntAccount;
