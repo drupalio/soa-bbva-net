@@ -146,49 +146,91 @@ public class TxProductMapperImpl extends AbstractBbvaTxConfigurableMapper  imple
 	}
 
 	@Override
-	public FormatoOZECN2E0 mapInOznt(DTOIntFilterExtract dtoIn) {
-		FormatoOZECN2E0 formato = new FormatoOZECN2E0();
-		//Se inicializa el string parseable con la cabecera
-		String parser = headList;
-		String cadena = null;
-		StringTokenizer aux1=new StringTokenizer(cadena,"|");
-		while(aux1.hasMoreElements())
-		{
-			String aux2=aux1.nextToken();
-			StringTokenizer aux3=new StringTokenizer(aux2,"$");
-			parser=parser+"<ExtractoSolicitadoVO>";
-			while(aux3.hasMoreElements())
-			{
-				String r=aux3.nextToken();
-				parser=parser+"<stringRefPro>"+dtoIn.getProductId()+"</stringRefPro>";
-				parser=parser+"<stringAnio>"+dtoIn.getEndYear()+"</stringAnio>";
-				 r=aux3.nextToken();
-				parser=parser+"<stringMes>"+dtoIn.getEndMonth()+"</stringMes>";
-				r=aux3.nextToken();
-				if(r.length()>1)
-				{
-					parser=parser+"<stringCodigoExt>"+r+"</stringCodigoExt>";
-					r=aux3.nextToken();
-					r=aux3.nextToken();
-				}
-				else
-				{
-					parser=parser+"<stringCodigoExt></stringCodigoExt>";
-					r=aux3.nextToken();
-				}
-					
-			}
-			parser=parser+"</ExtractoSolicitadoVO>";
-			
-	
+	public FormatoOZECN2E0 mapInOzn2(DTOIntFilterExtract dtoIn) {
+		if(dtoIn.getEndMonth()==null || dtoIn.getEndYear()==null){
+			return mapInOzn2ListExtracts(dtoIn);
 		}
-		parser=parser+tailList;
-		return formato;
+		return mapInOzn2getExtracts(dtoIn);
 	}
 
 	@Override
-	public DTOIntExtract mapOutOznt(FormatoOZECN2S0 formatOutput) {
-		// TODO Auto-generated method stub
+	public DTOIntExtract mapOutOzn2(FormatoOZECN2S0 formatOutput) {
 		return null;
 	}
+	
+
+	private FormatoOZECN2E0 mapInOzn2getExtracts(DTOIntFilterExtract dtoIn) {
+		FormatoOZECN2E0 formato = new FormatoOZECN2E0();
+		// Se inicializa el string parseable con la cabecera
+		String parser = headGenerate;
+		// Se obtiene el mes inicial
+		int month = Integer.parseInt(dtoIn.getStartMonth());
+		// Se realiza un ciclo para parsear todos los extractos presentes en dichos meses
+		for (int i = Integer.parseInt(dtoIn.getStartYear()); i <= Integer
+				.parseInt(dtoIn.getEndYear()); i++) {
+			while (month <= 12) {
+				parser = parser
+						+ REQUEST_EXTRACT.replace("$",""
+							+ IDPRODUCT.replace("$",dtoIn.getProductId())
+							+ YEAR.replace("$", i + "")
+							+ MONTH.replace("$", month + "")
+							+ EXTERNAL_CODE.replace("$",""));
+				month++;
+			}
+			month = 1;
+		}
+		parser = parser + tailGenerate;
+		formato.setLongtra(parser.length());
+		return processPlot(formato,parser);
+	}
+
+
+	private FormatoOZECN2E0 mapInOzn2ListExtracts(DTOIntFilterExtract dtoIn) {
+		FormatoOZECN2E0 formato = new FormatoOZECN2E0();
+		String parser = headGet + dtoIn.getProductId() + tailGet;
+		formato.setLongtra(parser.length());
+		return processPlot(formato,parser);
+	}
+
+
+	private FormatoOZECN2E0 processPlot(FormatoOZECN2E0 formato,String parser) {
+		for (int i = 0; i < parser.length(); i++) {
+			switch (i) {
+			case 0:
+				formato.setSubtrm0(parser.substring(0, PLOT_LENGTH));
+				break;
+			case 101:
+				formato.setSubtrm1(parser.substring(0, PLOT_LENGTH));
+				break;
+			case 201:
+				formato.setSubtrm2(parser.substring(0, PLOT_LENGTH));
+				break;
+			case 301:
+				formato.setSubtrm3(parser.substring(0, PLOT_LENGTH));
+				break;
+			case 401:
+				formato.setSubtrm4(parser.substring(0, PLOT_LENGTH));
+				break;
+			case 501:
+				formato.setSubtrm5(parser.substring(0, PLOT_LENGTH));
+				break;
+			case 601:
+				formato.setSubtrm6(parser.substring(0, PLOT_LENGTH));
+				break;
+			case 701:
+				formato.setSubtrm7(parser.substring(0, PLOT_LENGTH));
+				break;
+			case 801:
+				formato.setSubtrm8(parser.substring(0, PLOT_LENGTH));
+				break;
+			case 901:
+				formato.setSubtrm9(parser.substring(0, PLOT_LENGTH));
+				break;
+			}
+			parser = parser.substring(PLOT_LENGTH + 1);
+			i += PLOT_LENGTH;
+		}
+		return formato;
+	}
+
 }

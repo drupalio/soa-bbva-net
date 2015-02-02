@@ -202,16 +202,13 @@ public class SrvCustomersV01 implements ISrvCustomersV01, com.bbva.jee.arq.sprin
 	@PUT
 	@Path("/{customerId}/custommerChannels/{channelId}")
 	@SMC(registryID = "SMCCO1500009", logicalID = "addChannel")
-	public void addChannel(@ApiParam(value = "Claim identifier param") @PathParam("customerId") String customerId,
-			@ApiParam(value = "Claim channerlid param") @PathParam("channelId") String channelId) {
+
+	public Response addChannel(@ApiParam(value = "Claim identifier param") @PathParam("customerId") String customerId,
+							   @ApiParam(value = "Claim channerlid param") @PathParam("channelId") String channelId) {
 
 		log.info("Into addChannel...");
-
-		if (customerId.trim().equals("null") || customerId.trim().isEmpty() || channelId.trim().equals("null")
-				|| channelId.trim().isEmpty()) {
-			throw new BusinessServiceException(EnumError.WRONG_PARAMETERS.getAlias());
-		}
-
 		srvIntCustomers.addChannel(new DTOIntAddChannel(customerId, channelId));
+
+		return Response.ok().build();
 	}
 }

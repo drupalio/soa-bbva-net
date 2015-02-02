@@ -12,21 +12,33 @@ import com.bbva.czic.products.dao.model.oznt.FormatoOZECNTS0;
 
 public interface TxProductsMapper {
 
-	public static final String headGet = "";
+	public static final int PLOT_LENGTH=100;
 	
-	public static final String tailGet = "";
+	public static final String headGet = "<indraExtXStreamParser><operation>4</operation><getExtractosDisponiblesXNoContratoXStreamParser><extRefpro>";
+	
+	public static final String tailGet = "</extRefpro></getExtractosDisponiblesXNoContratoXStreamParser></indraExtXStreamParser>";
 
-	public static final String headList = "<indraExtXStreamParser><operation>5</operation><solicitarExtractosXCodigoXStreamParser><stringOrigen>1</stringOrigen><listaExtSolVO>";
+	public static final String headGenerate = "<indraExtXStreamParser><operation>5</operation><solicitarExtractosXCodigoXStreamParser><stringOrigen>1</stringOrigen><listaExtSolVO>";
 
-	public static final String tailList = "</listaExtSolVO></solicitarExtractosXCodigoXStreamParser></indraExtXStreamParser>";
+	public static final String tailGenerate = "</listaExtSolVO></solicitarExtractosXCodigoXStreamParser></indraExtXStreamParser>";
 
+	public static final String IDPRODUCT="<stringRefPro>$</stringRefPro>";
+	
+	public static final String MONTH="<stringMes>$</stringMes>";
+	
+	public static final String YEAR="<stringAnio>$</stringAnio>";
+	
+	public static final String EXTERNAL_CODE="<stringCodigoExt>$</stringCodigoExt>";
+	
+	public static final String REQUEST_EXTRACT="<ExtractoSolicitadoVO>$</ExtractoSolicitadoVO>";
+	
 	public FormatoOZECNTE0 mapInOznt(DTOIntProduct dtoIn);
 
 	public DTOIntConditions mapOutOznt(FormatoOZECNTS0 formatOutput);
 
-	public FormatoOZECN2E0 mapInOznt(DTOIntFilterExtract dtoIn);
+	public FormatoOZECN2E0 mapInOzn2(DTOIntFilterExtract dtoIn);
 
-	public DTOIntExtract mapOutOznt(FormatoOZECN2S0 formatOutput);
+	public DTOIntExtract mapOutOzn2(FormatoOZECN2S0 formatOutput);
 
 	public FormatoOZNCENM0 mapInOznm(DTOIntFilterMovements dtoIn) ;
 

@@ -13,25 +13,25 @@ public interface ISrvIntAccounts {
 	 * @param dtoIntFilterAccount
 	 * @return
 	 */
-	public List<DTOIntMonthlyBalances> getAccountMonthlyBalance(DTOIntFilterAccount dtoIntFilterAccount);
+	List<DTOIntMonthlyBalances> getAccountMonthlyBalance(DTOIntFilterAccount dtoIntFilterAccount);
 
 
-	public List<DTOIntAccMovementsResume> getAccMovementResume(DTOIntFilterMovResumes filter);
+	List<DTOIntAccMovementsResume> getAccMovementResume(DTOIntFilterMovResumes filter);
 
 	/**
 	 * @param dtoIntFilterAccount
 	 * @return
 	 */
-	public DTOIntAccount getAccount(DTOIntFilterAccount dtoIntFilterAccount);
+	DTOIntAccount getAccount(DTOIntFilterAccount dtoIntFilterAccount);
 
 	/**
 	 * Created by Entelgy on 12/01/2015. Metodo incluido manualmente para completar el total de los SMC - listCheck
 	 */
-	public List<DTOIntCheck> listCheck(DTOIntFilterChecks filter);
+	List<DTOIntCheck> listCheck(DTOIntFilterChecks filter);
 
 
-	public DTOIntCheckbook getCheckbooks(DTOIntCheckbook intCheckbook);
+	DTOIntCheckbook getCheckbooks(DTOIntCheckbook intCheckbook);
 
-	public DTOIntCheck getChecks(DTOIntCheckFilter dtoIntCheckFilter);
+	DTOIntCheck getChecks(DTOIntCheckFilter dtoIntCheckFilter);
 
 }
