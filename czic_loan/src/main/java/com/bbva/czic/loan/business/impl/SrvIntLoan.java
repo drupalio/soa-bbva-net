@@ -3,7 +3,10 @@ package com.bbva.czic.loan.business.impl;
 
 import com.bbva.czic.loan.business.dto.*;
 
+import com.bbva.czic.routine.commons.rm.utils.errors.EnumError;
 import com.bbva.czic.routine.commons.rm.utils.validator.DtoValidator;
+import com.bbva.czic.routine.commons.rm.utils.validator.impl.StringValidator;
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -39,6 +42,10 @@ public class SrvIntLoan implements ISrvIntLoan {
 	@Override
 	public DTOIntLoan getRotaryQuota(final String idLoan) throws BusinessServiceException {
 		log.info(" getRotaryQuota ");
+
+		new StringValidator().notIsNull(idLoan)
+				.isNumericText(idLoan)
+				.validate();
 
 		final DTOIntLoan result = loanDao.getRotaryQuota(idLoan);
 

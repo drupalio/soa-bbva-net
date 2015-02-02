@@ -223,7 +223,7 @@ public class ProductsMapper extends AbstractBbvaConfigurableMapper implements
 	}
 
 	@Override
-	public Movement map(DTOIntMovement dtoIntMovement) {
+	public Movement mapMovement(DTOIntMovement dtoIntMovement) {
 		log.info("map- return:Account-parameter:dtoIntAccount");
 		return map(dtoIntMovement,Movement.class);
 	}
