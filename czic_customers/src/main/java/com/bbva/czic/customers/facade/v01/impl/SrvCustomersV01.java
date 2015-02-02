@@ -202,8 +202,9 @@ public class SrvCustomersV01 implements ISrvCustomersV01, com.bbva.jee.arq.sprin
 	@PUT
 	@Path("/{customerId}/custommerChannels/{channelId}")
 	@SMC(registryID = "SMCCO1500009", logicalID = "addChannel")
-	public void addChannel(@ApiParam(value = "Claim identifier param") @PathParam("customerId") String customerId,
-			@ApiParam(value = "Claim channerlid param") @PathParam("channelId") String channelId) {
+
+	public Response addChannel(@ApiParam(value = "Claim identifier param") @PathParam("customerId") String customerId,
+							   @ApiParam(value = "Claim channerlid param") @PathParam("channelId") String channelId) {
 
 		log.info("Into addChannel...");
 
@@ -213,5 +214,7 @@ public class SrvCustomersV01 implements ISrvCustomersV01, com.bbva.jee.arq.sprin
 		}
 
 		srvIntCustomers.addChannel(new DTOIntAddChannel(customerId, channelId));
+
+		return Response.ok().build();
 	}
 }
