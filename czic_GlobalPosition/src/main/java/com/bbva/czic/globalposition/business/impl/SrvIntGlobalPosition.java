@@ -44,7 +44,7 @@ public class SrvIntGlobalPosition implements ISrvIntGlobalPosition {
 
 	@Override
 	public void updateProductVisibility(DTOIntProductVisibility intProduct) {
-
+		DtoValidator.validate(intProduct);
 		globalPositionDAO.updateProductVisibility(intProduct);
 	}
 

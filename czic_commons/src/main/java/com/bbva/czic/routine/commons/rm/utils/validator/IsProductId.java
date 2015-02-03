@@ -13,6 +13,6 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
  */
 @Target({ METHOD, FIELD, ANNOTATION_TYPE, CONSTRUCTOR, PARAMETER })
 @Retention(RUNTIME)
-@Pattern(regexp = "^\\d{8}$")
-public @interface IsCustomerId {
+@Pattern(regexp = "^\\d{20}$")
+public @interface IsProductId {
 }

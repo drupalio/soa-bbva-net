@@ -5,6 +5,7 @@ import java.util.List;
 import javax.annotation.Resource;
 
 import com.bbva.czic.customers.business.dto.*;
+import com.bbva.czic.routine.commons.rm.utils.validator.impl.StringValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -107,6 +108,11 @@ public class SrvIntCustomers implements ISrvIntCustomers {
 	public void addChannel(final DTOIntAddChannel dtoIntAddChannel){
 
 		DtoValidator.validate(dtoIntAddChannel);
+
+		new StringValidator()
+				.notIsNull(dtoIntAddChannel.getCustomerId())
+				.notIsNull(dtoIntAddChannel.getChannelId())
+				.validate();
 
 		customersDao.addChannel(dtoIntAddChannel);
 		log.info("SrvInt: addChannel: ");

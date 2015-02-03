@@ -64,12 +64,12 @@ public class TransaccionOznpMock implements InvocadorTransaccion<PeticionTransac
 		List<CopySalida> copies = new ArrayList<CopySalida>();
 
 		List<FormatoOZECNPS0> formatoOZECNPS0s = new ObjectMapper().readValue(this.getClass().getClassLoader()
-				.getResourceAsStream("mock/formatoOznp.json"), new TypeReference<List<FormatoOZECNPS0>>() {
+				.getResourceAsStream("mocks/formatoOznp.json"), new TypeReference<List<FormatoOZECNPS0>>() {
 		});
 
 		for (FormatoOZECNPS0 formatoOZECNPS0 : formatoOZECNPS0s) {
 			CopySalida copy = new CopySalida();
-			copy.setCopy(formatoOZECNPS0s);
+			copy.setCopy(formatoOZECNPS0);
 			copies.add(copy);
 		}
 

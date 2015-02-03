@@ -162,8 +162,10 @@ public class SrvProductsV01 implements ISrvProductsV01,
 		DTOIntFilterMovements dtoIntFilterMovements = productsMapper.getDTOIntFilterGetMovement(productId,movementId,filter);
 
 		// 3. Invoke SrvIntCustomers and Mapping to canonical DTO
-		return productsMapper.map(srvIntProducts
+		Movement move = new Movement();
+		move = productsMapper.mapMovement(srvIntProducts
 				.getMovement(dtoIntFilterMovements));
+		return move ;
 
 	}
 

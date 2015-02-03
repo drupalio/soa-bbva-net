@@ -22,7 +22,7 @@ public interface IProductsMapper {
 
 	public DTOIntFilterMovements getDTOIntFilterGetMovement(String productId,String movementId, String filter);
 
-	public Movement map(DTOIntMovement dtoIntMovement);
+	public Movement mapMovement(DTOIntMovement dtoIntMovement);
 
 	public List<Movement> mapMovements(List<DTOIntMovement> listaDTOIntMovements);
 
