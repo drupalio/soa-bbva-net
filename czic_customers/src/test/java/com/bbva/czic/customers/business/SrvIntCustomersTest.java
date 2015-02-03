@@ -163,7 +163,7 @@ public class SrvIntCustomersTest {
 
 		return list;
 	}
-	*/
+
 //	GetCustomer
 	
 	@Test
@@ -230,6 +230,8 @@ public class SrvIntCustomersTest {
 		customer.setDwelingType(EnumDwelingType.VALIDAR.toString());
 		return customer;
 	}
+
+	*/
 }
 
 
