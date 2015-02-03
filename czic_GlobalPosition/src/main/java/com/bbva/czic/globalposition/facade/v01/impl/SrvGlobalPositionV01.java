@@ -18,6 +18,7 @@ import javax.ws.rs.core.UriInfo;
 import com.bbva.czic.globalposition.business.dto.DTOIntProductOperability;
 import com.bbva.czic.globalposition.business.dto.DTOIntProductVisibility;
 import com.bbva.czic.routine.commons.rm.utils.validator.impl.FiqlValidator;
+import com.bbva.czic.routine.commons.rm.utils.validator.impl.StringValidator;
 import org.apache.cxf.jaxrs.model.wadl.ElementClass;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -120,10 +121,7 @@ public class SrvGlobalPositionV01 implements ISrvGlobalPositionV01,
 
 		final DTOIntProductVisibility productVisibility = new DTOIntProductVisibility();
 		infoProduct.setId(idProduct);
-
-		if (idProduct == null || infoProduct.getVisible() == null) {
-			throw new BusinessServiceException(EnumError.WRONG_PARAMETERS.getAlias());
-		}
+		new StringValidator().notIsNull(idProduct).validate();
 
 		productVisibility.setId(idProduct);
 		productVisibility.setVisible(infoProduct.getVisible());
@@ -149,10 +147,8 @@ public class SrvGlobalPositionV01 implements ISrvGlobalPositionV01,
 
 		final DTOIntProductOperability productOperability = new DTOIntProductOperability();
 		infoProduct.setId(idProduct);
+		new StringValidator().notIsNull(idProduct).validate();
 
-		if (idProduct == null || infoProduct.getOperable() == null) {
-			throw new BusinessServiceException(EnumError.WRONG_PARAMETERS.getAlias());
-		}
 		productOperability.setId(idProduct);
 		productOperability.setOperable(infoProduct.getOperable());
 

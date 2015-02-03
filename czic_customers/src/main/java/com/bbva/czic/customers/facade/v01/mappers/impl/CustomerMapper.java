@@ -2,9 +2,11 @@ package com.bbva.czic.customers.facade.v01.mappers.impl;
 
 import com.bbva.czic.customers.business.dto.*;
 import com.bbva.czic.customers.dao.converters.CardChargeCategoryConverter;
+import com.bbva.czic.customers.facade.v01.impl.DTOIntCustomerFilter;
 import com.bbva.czic.customers.facade.v01.mappers.ICustomerMapper;
 import com.bbva.czic.dto.net.AccMovementsResume;
 import com.bbva.czic.dto.net.CardCharge;
+import com.bbva.czic.dto.net.Customer;
 import com.bbva.czic.dto.net.CustomerOperation;
 import com.bbva.czic.routine.commons.rm.utils.converter.EmailStringConverter;
 import com.bbva.czic.routine.commons.rm.utils.fiql.FiqlType;
@@ -23,7 +25,7 @@ public class CustomerMapper extends AbstractBbvaConfigurableMapper implements IC
     public static final String CARD_CHARGE_CATEGORY_CONVERTER = "cardChargeCategoryConverter";
 
     @Override
-    protected void configure(MapperFactory factory) {
+    protected void configure(final MapperFactory factory) {
         super.configure(factory);
 
         factory.getConverterFactory().registerConverter(CARD_CHARGE_CATEGORY_CONVERTER, new CardChargeCategoryConverter());
@@ -74,12 +76,12 @@ public class CustomerMapper extends AbstractBbvaConfigurableMapper implements IC
     }
 
     @Override
-    public List<CardCharge> mapCardCharges(List<DTOIntCardCharge> intCardCharges) {
+    public List<CardCharge> mapCardCharges(final List<DTOIntCardCharge> intCardCharges) {
         return mapAsList(intCardCharges, CardCharge.class);
     }
 
     @Override
-    public DTOIntCardChargeFilter getCreditCardChargesFilter(String customerId, String filter) {
+    public DTOIntCardChargeFilter getCreditCardChargesFilter(final String customerId, final String filter) {
         final String startDate = this.getGeValue(filter, FiqlType.chargeDate.name());
         final String endDate = this.getLeValue(filter, FiqlType.chargeDate.name());
 
@@ -93,8 +95,21 @@ public class CustomerMapper extends AbstractBbvaConfigurableMapper implements IC
     }
 
     @Override
-    public DTOIntCustomerOperation map(CustomerOperation operation) {
+    public DTOIntCustomerOperation map(final CustomerOperation operation) {
         return map(operation, DTOIntCustomerOperation.class);
+    }
+
+    @Override
+    public Customer mapCustomer(final DTOIntCustomer intCustomer) {
+        return map(intCustomer, Customer.class);
+    }
+
+    @Override
+    public DTOIntCustomerFilter mapDTOIntCustomerFilter(final String customerId) {
+        final DTOIntCustomerFilter customerFilter = new DTOIntCustomerFilter();
+        customerFilter.setId(customerId);
+
+        return customerFilter;
     }
 
 }

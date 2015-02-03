@@ -1,9 +1,13 @@
 package com.bbva.czic.customers.dao.mappers;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.annotation.Resource;
 
+import com.bbva.czic.customers.dao.mappers.impl.TxCustomerMapper;
+import com.bbva.czic.dto.net.*;
 import com.bbva.jee.arq.spring.core.servicing.test.MockInvocationContextTestExecutionListener;
 import org.junit.Assert;
 import org.junit.Test;
@@ -17,24 +21,15 @@ import com.bbva.czic.customers.business.SrvIntCustomersTest;
 import com.bbva.czic.customers.business.dto.DTOIntCustomer;
 import com.bbva.czic.customers.dao.model.oznb.FormatoOZNCSNB0;
 import com.bbva.czic.customers.dao.model.oznp.FormatoOZECNPS0;
-import com.bbva.czic.dto.net.EnumSegmentType;
 import com.bbva.jee.arq.spring.core.servicing.test.BusinessServiceTestContextLoader;
 
 /**
  * Created by Entelgy on 15/01/2015.
  */
-@RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(loader = BusinessServiceTestContextLoader.class, locations = {
-		"classpath*:/META-INF/spring/applicationContext-*.xml",
-		"classpath:/META-INF/spring/business-service.xml",
-		"classpath:/META-INF/spring/business-service-test.xml" })
-@TestExecutionListeners(listeners = {
-MockInvocationContextTestExecutionListener.class,
-DependencyInjectionTestExecutionListener.class })
+
 public class CustomerMapperTest {
 
-	@Resource(name = "txCustomerMapper")
-	private ITxCustomerMapper customerMapper;
+	private TxCustomerMapper customerMapper;
 
 	public void testMapToDTOIntCardCharge() {
 		// SetUp
@@ -61,9 +56,10 @@ public class CustomerMapperTest {
 	
 	@Test
 	public void formatoOZNBSalidaADTOIntCustomerTest(){
+		customerMapper = new TxCustomerMapper();
 		DTOIntCustomer customer = customerMapper.mapOutOznb(mockFormatoOZNBSalida());
-		Assert.assertEquals(SrvIntCustomersTest.mockDTOCustomer().getDwelingType(),customer.getDwelingType());
-		Assert.assertEquals(SrvIntCustomersTest.mockDTOCustomer().getSegment(),customer.getSegment());
+		Assert.assertEquals(mockDTOCustomer().getDwelingType(),customer.getDwelingType());
+		Assert.assertEquals(mockDTOCustomer().getSegment(),customer.getSegment());
 	}
 
 	private FormatoOZNCSNB0 mockFormatoOZNBSalida() {
@@ -85,5 +81,43 @@ public class CustomerMapperTest {
 		formatoS.setDescofi("BBVA");
 		formatoS.setNropnas("1");
 		return formatoS;
+	}
+
+	private static DTOIntCustomer mockDTOCustomer() {
+		DTOIntCustomer customer = new DTOIntCustomer();
+
+//		Document documento = new Document();
+//		documento.setNumber("1234567890");
+//		documento.setType(EnumDocumentType.CEDULACIUDADANIA);
+
+		ContactInfo contacto = new ContactInfo();
+		List<Email> emails = new ArrayList<Email>();
+		Email email = new Email();
+		email.setActive(true);
+		email.setAddress("prueba@bbva.com");
+		email.setPrimary(true);
+		email.setSource(EnumContactSourceType.WEB);
+		emails.add(email);
+		contacto.setEmails(emails);
+		contacto.setPhoneNumbers(new ArrayList<PhoneNumber>());
+
+		Place homeLocation= new Place();
+		homeLocation.setCityName("city");
+		homeLocation.setCountryName("Country");
+		homeLocation.setStateName("State");
+		homeLocation.setPostalAddress("BBVA");
+
+		customer.setId("1");
+//		customer.setDocument(documento);
+		customer.setSegment(EnumSegmentType.PERSONA.toString());
+		customer.setName("Cliente de prueba");
+		customer.setEmails(contacto);
+		customer.setHomeLocation(homeLocation);
+		customer.setOfficeLocation(homeLocation);
+		customer.setStratum(4);
+		customer.setResidenceYears(1);
+		customer.setHomeMembers(1);
+		customer.setDwelingType(EnumDwelingType.VALIDAR.toString());
+		return customer;
 	}
 }

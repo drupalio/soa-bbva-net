@@ -13,7 +13,7 @@ public class DTOIntFilterMovResumes {
     @NotNull
     @Length(max = 20, min = 20)
     private String accountId;
-    @NotNull
+
     @Length(max = 2)
     @Pattern(regexp = "^(0[1-9]|1[0-2])$")
     private String month;
