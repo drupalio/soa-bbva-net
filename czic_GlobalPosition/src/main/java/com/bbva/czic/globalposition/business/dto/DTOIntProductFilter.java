@@ -12,7 +12,7 @@ import javax.validation.constraints.Pattern;
 public class DTOIntProductFilter {
 
 	@NotEmpty
-	@IsCustomerId
+	@Pattern(regexp = "^\\d{8}$")
 	private String idCustomer;
 
 	@Length(min = 2, max = 2)

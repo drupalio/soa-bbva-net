@@ -12,7 +12,7 @@ import javax.validation.constraints.Pattern;
 public class DTOIntProductVisibility {
 
     @NotEmpty
-    @Pattern(regexp = "^(\\d{20}|\\d{16})$")
+    @Pattern(regexp = "^([0-9]{20}|[0-9]{16})$")
     private String id;
 
     @NotNull
