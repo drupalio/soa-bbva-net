@@ -2,6 +2,7 @@ package com.bbva.czic.customers.dao.tx;
 
 import javax.annotation.Resource;
 
+import com.bbva.czic.customers.facade.v01.impl.DTOIntCustomerFilter;
 import org.springframework.stereotype.Component;
 
 import com.bbva.czic.customers.business.dto.DTOIntCustomer;
@@ -16,7 +17,7 @@ import com.bbva.jee.arq.spring.core.host.InvocadorTransaccion;
 
 @Component("tx-get-customer")
 public class TxGetCustomer extends
-		SimpleBbvaTransaction<String, FormatoOZNCENB0, DTOIntCustomer, FormatoOZNCSNB0> {
+		SimpleBbvaTransaction<DTOIntCustomerFilter, FormatoOZNCENB0, DTOIntCustomer, FormatoOZNCSNB0> {
 
 	@Resource(name="transaccionOznb")
 	private transient InvocadorTransaccion<PeticionTransaccionOznb, RespuestaTransaccionOznb> transaccionOznb;
@@ -28,14 +29,12 @@ public class TxGetCustomer extends
 	private ITxCustomerMapper txCustomerMapper;
 
 	@Override
-	protected FormatoOZNCENB0 mapDtoInToRequestFormat(String customerId) {
-		FormatoOZNCENB0 formato = new FormatoOZNCENB0();
-		formato.setNumclie(customerId);
-		return formato;
+	protected FormatoOZNCENB0 mapDtoInToRequestFormat(DTOIntCustomerFilter customer) {
+		return txCustomerMapper.mapInOznb(customer);
 	}
 
 	@Override
-	protected DTOIntCustomer mapResponseFormatToDtoOut(FormatoOZNCSNB0 outFormat, String customerId) {
+	protected DTOIntCustomer mapResponseFormatToDtoOut(FormatoOZNCSNB0 outFormat, DTOIntCustomerFilter customer) {
 		return txCustomerMapper.mapOutOznb(outFormat);
 	}
 

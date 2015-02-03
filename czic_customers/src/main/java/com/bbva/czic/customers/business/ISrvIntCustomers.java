@@ -2,12 +2,8 @@ package com.bbva.czic.customers.business;
 
 import java.util.List;
 
-import com.bbva.czic.customers.business.dto.DTOIntAddChannel;
-import com.bbva.czic.customers.business.dto.DTOIntAccMovementsResume;
-import com.bbva.czic.customers.business.dto.DTOIntAccMovementsResumesFilter;
-import com.bbva.czic.customers.business.dto.DTOIntCustomerOperation;
-import com.bbva.czic.customers.business.dto.DTOIntCardCharge;
-import com.bbva.czic.customers.business.dto.DTOIntCardChargeFilter;
+import com.bbva.czic.customers.business.dto.*;
+import com.bbva.czic.customers.facade.v01.impl.DTOIntCustomerFilter;
 import com.bbva.czic.dto.net.Customer;
 import com.bbva.jee.arq.spring.core.servicing.gce.BusinessServiceException;
 
@@ -20,7 +16,7 @@ public interface ISrvIntCustomers {
 
 	List<DTOIntCardCharge> listCreditCharges(DTOIntCardChargeFilter cardChargeFilter);
 
-	Customer getCustomer(String customerId);
+	DTOIntCustomer getCustomer(DTOIntCustomerFilter customerFilter);
 
 	void addChannel(final DTOIntAddChannel dtoIntAddChannel);
 	

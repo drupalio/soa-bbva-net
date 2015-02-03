@@ -5,13 +5,12 @@ import java.util.List;
 import javax.annotation.Resource;
 
 import com.bbva.czic.customers.business.dto.*;
+import com.bbva.czic.customers.facade.v01.impl.DTOIntCustomerFilter;
 import com.bbva.czic.routine.commons.rm.utils.validator.impl.StringValidator;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.bbva.czic.customers.business.ISrvIntCustomers;
 import com.bbva.czic.customers.dao.CustomersDAO;
-import com.bbva.czic.dto.net.Customer;
 import com.bbva.czic.routine.commons.rm.utils.errors.EnumError;
 import com.bbva.czic.routine.commons.rm.utils.validator.DtoValidator;
 import com.bbva.jee.arq.spring.core.log.I18nLog;
@@ -82,26 +81,24 @@ public class SrvIntCustomers implements ISrvIntCustomers {
 
 	/**
 	 *
-	 * @param customerId
+	 * @param customerFilter
 	 * @return
 	 * @throws BusinessServiceException
 	 */
 	@Override
-	public Customer getCustomer(String customerId)
+	public DTOIntCustomer getCustomer(DTOIntCustomerFilter customerFilter)
 			throws BusinessServiceException {
 		log.info("SrvInt: Into getCustomer... ");
-		log.info("SrvInt: getCustomerParams(customerId): " + customerId);
-		// 1. Validate parameter
-		if (customerId == null || customerId.trim().isEmpty()) {
-			throw new BusinessServiceException(
-					EnumError.WRONG_PARAMETERS.getAlias());
-		}
+		log.info("SrvInt: getCustomerParams(customerId): " + customerFilter);
+
+		// 1. Validate incoming object.
+		DtoValidator.validate(customerFilter);
 		// 2. Get response
-		DTOIntCustomer dtoIntCustomer = customersDao.getCustomer(customerId);
+		DTOIntCustomer dtoIntCustomer = customersDao.getCustomer(customerFilter);
 		// 3. Validate output
 		DtoValidator.validate(dtoIntCustomer);
 		log.info("SrvInt: gettingIntoMapper: " + dtoIntCustomer);
-		return null; //customerMapper.mapAccMovementsResume(dtoIntCustomer);
+		return dtoIntCustomer;
 
 	}
 

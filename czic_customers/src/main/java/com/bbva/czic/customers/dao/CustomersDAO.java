@@ -1,6 +1,7 @@
 package com.bbva.czic.customers.dao;
 
 import com.bbva.czic.customers.business.dto.*;
+import com.bbva.czic.customers.facade.v01.impl.DTOIntCustomerFilter;
 
 import java.util.List;
 
@@ -10,7 +11,7 @@ public interface CustomersDAO {
 
 	List<DTOIntCardCharge> listCreditCardCharges(DTOIntCardChargeFilter cardChargeFilter);
 
-	DTOIntCustomer getCustomer(String customerId);
+	DTOIntCustomer getCustomer(DTOIntCustomerFilter customerFilter);
 
 	void addChannel(final DTOIntAddChannel dtoIntAddChannel);
 
