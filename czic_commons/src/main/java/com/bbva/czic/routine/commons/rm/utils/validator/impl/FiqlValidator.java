@@ -43,6 +43,16 @@ public class FiqlValidator extends Validator {
 		return this;
 	}
 
+	public FiqlValidator hasGeOrLe(final String parameter) {
+
+		final String regex = ".*"+ parameter + "=ge=.*," + parameter + "=le=.*";
+		if (!this.filter.matches(regex)) {
+			exceptions.add(new BusinessServiceException(EnumError.WRONG_PARAMETERS.getAlias()));
+		}
+		validateCount++;
+		return this;
+	}
+
 	public FiqlValidator hasGeAndLe(final String parameter, String regexValue) {
 
 		final String regex = ".*" + parameter + "=ge=" + regexValue + ";" + parameter + "=le=" + regexValue + ".*";
