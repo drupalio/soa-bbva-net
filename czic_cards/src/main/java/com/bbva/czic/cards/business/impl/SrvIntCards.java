@@ -10,6 +10,7 @@ import com.bbva.czic.routine.commons.rm.utils.EDateFormat;
 import com.bbva.czic.routine.commons.rm.utils.errors.EnumError;
 import com.bbva.czic.routine.commons.rm.utils.validator.DtoValidator;
 import com.bbva.czic.routine.commons.rm.utils.validator.impl.DateValidator;
+import com.bbva.czic.routine.commons.rm.utils.validator.impl.StringValidator;
 import org.apache.cxf.jaxrs.ext.search.ConditionType;
 import org.apache.cxf.jaxrs.ext.search.PrimitiveStatement;
 import org.apache.cxf.jaxrs.ext.search.SearchCondition;
@@ -48,6 +49,7 @@ public class SrvIntCards implements ISrvIntCards {
 		log.info(" Inicio de servicio interno SMC : getCreditCardCharges SN Cards ");
 
 		DtoValidator.validate(filter);
+		new StringValidator().isNumericText(filter.getProductId()).validate();
 		new DateValidator().validDateRange(filter.getStartDate(), filter.getEndDate(), EDateFormat.ANIO_MES_DIA).validate();
 
 		List<DTOIntCardCharge> result = cardsDAO.getCreditCardCharges(filter);
