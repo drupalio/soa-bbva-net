@@ -21,9 +21,6 @@ public class TxGetCustomer extends
 
 	@Resource(name="transaccionOznb")
 	private transient InvocadorTransaccion<PeticionTransaccionOznb, RespuestaTransaccionOznb> transaccionOznb;
-//	
-//	@Resource(name="transaccionOznb")
-//	private TransaccionOznb transaccionOznb;
 
 	@Resource(name = "txCustomerMapper")
 	private ITxCustomerMapper txCustomerMapper;
