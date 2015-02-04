@@ -22,7 +22,7 @@ public class TransaccionOznvMock implements InvocadorTransaccion<PeticionTransac
 
         RespuestaTransaccionOznv resultado = new RespuestaTransaccionOznv();
 
-        for(int i=0;i>31;i++){
+        for(int i=0;i<31;i++){
             FormatoOZECNVS0 formatoSalida1 = new FormatoOZECNVS0();
             formatoSalida1.setSalddis(new BigDecimal("1000"));
             if(i<10){
