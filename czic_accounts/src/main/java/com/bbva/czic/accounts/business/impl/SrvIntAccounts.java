@@ -22,6 +22,8 @@ public class SrvIntAccounts implements ISrvIntAccounts {
 	private static I18nLog log = I18nLogFactory
 			.getLogI18n(SrvIntAccounts.class, "META-INF/spring/i18n/log/mensajesLog");
 
+	private String ACCOUNT_MOV_RESUME_DEFAULT = "12";
+
 	@Autowired
 	private BusinessServicesToolKit bussinesToolKit;
 
@@ -48,6 +50,9 @@ public class SrvIntAccounts implements ISrvIntAccounts {
 	public List<DTOIntAccMovementsResume> getAccMovementResume(DTOIntFilterMovResumes filter) {
 		log.info(" getAccMovementResume ");
 
+		if(filter.getMonth() == null){
+			filter.setMonth(ACCOUNT_MOV_RESUME_DEFAULT);
+		}
 		DtoValidator.validate(filter);
 
 		List<DTOIntAccMovementsResume> result = accountsDAO.getAccountMovementResume(filter);

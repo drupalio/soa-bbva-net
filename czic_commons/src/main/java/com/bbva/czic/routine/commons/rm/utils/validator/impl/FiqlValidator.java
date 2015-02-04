@@ -138,6 +138,7 @@ public class FiqlValidator extends Validator {
 		return this;
 	}
 
+
 	public FiqlValidator hasGe(final String parameter){
 
 		final String regex = ".*" + parameter + "=ge=.*";
