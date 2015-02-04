@@ -6,6 +6,7 @@ import javax.annotation.Resource;
 
 import com.bbva.czic.accounts.business.dto.*;
 import com.bbva.czic.routine.commons.rm.utils.validator.impl.DateValidator;
+import com.bbva.czic.routine.commons.rm.utils.validator.impl.StringValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -35,6 +36,7 @@ public class SrvIntAccounts implements ISrvIntAccounts {
 
 		// 1. Validate DtoIntFilterAccount
 		DtoValidator.validate(dtoIntFilterAccount);
+		new StringValidator().isNumericText(dtoIntFilterAccount.getAccountId());
 
 		// 2. Get response
 		final List<DTOIntMonthlyBalances> result = accountsDAO.getAccountMonthlyBalance(dtoIntFilterAccount);
@@ -54,6 +56,7 @@ public class SrvIntAccounts implements ISrvIntAccounts {
 			filter.setMonth(ACCOUNT_MOV_RESUME_DEFAULT);
 		}
 		DtoValidator.validate(filter);
+		new StringValidator().isNumericText(filter.getAccountId());
 
 		List<DTOIntAccMovementsResume> result = accountsDAO.getAccountMovementResume(filter);
 
@@ -80,6 +83,7 @@ public class SrvIntAccounts implements ISrvIntAccounts {
 		log.info("Into SrvIntAccounts.listCheck...");
 		// Validacion del dto de filtro
 		DtoValidator.validate(filter);
+		new StringValidator().isNumericText(filter.getAccountId());
 
 		List<DTOIntCheck> result = accountsDAO.getListCheck(filter);
 
