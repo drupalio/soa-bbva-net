@@ -77,7 +77,7 @@ public class SrvProductsV01 implements ISrvProductsV01,
 	@GET
 	@Path("/{productId}/conditions")
 	@Produces({ MediaType.APPLICATION_JSON })
-	@SMC(registryID = "SMC201400022", logicalID = "getConditions")
+	@SMC(registryID = "SMCCO1400022", logicalID = "getConditions")
 	public Conditions getConditions(
 			@ApiParam(value = "Product identifier") @PathParam("productId") String productId) {
 		// 1. Validate parameter

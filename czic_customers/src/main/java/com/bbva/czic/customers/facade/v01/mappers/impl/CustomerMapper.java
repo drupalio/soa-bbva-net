@@ -53,6 +53,10 @@ public class CustomerMapper extends AbstractBbvaConfigurableMapper implements IC
                 .fieldMap("category", "category").converter("cardChargeCategoryConverter").add()
                 .field("amount", "amount")
                 .byDefault().register();
+
+        factory.classMap(Customer.class, DTOIntCustomer.class)
+
+                .byDefault().register();
     }
 
     @Override
