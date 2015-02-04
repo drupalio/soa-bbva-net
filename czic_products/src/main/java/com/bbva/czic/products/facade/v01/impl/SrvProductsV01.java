@@ -195,8 +195,8 @@ public class SrvProductsV01 implements ISrvProductsV01,
 		}
 
 		// 2. Validate filter
-		new FiqlValidator(filter).exist().hasEq("customerId").hasEq("productType").hasGeAndLe("transactionDate")
-				.hasGeOrLe("value").validate();
+		new FiqlValidator(filter).hasEq("customerId").hasEq("productType").hasGeAndLe("transactionDate")
+				.hasGeOrLe("value").validateIfExist();
 
 		// Mapeo del filtro a DTO
 		DTOIntFilterMovements dtoIntFilterMovements = productsMapper
