@@ -57,7 +57,7 @@ public class LoanMapper extends AbstractBbvaConfigurableMapper implements ILoanM
 				.field("operation", "operation")
 				.field("status", "status")
 				.field("value", "value")
-				.field("balance.availableBalance", "balance.availableBalance")
+				.field("balance", "balance")
 				.field("numbersOfQuota", "numbersOfQuota")
 				.field("remainingQuotas", "remainingQuotas")
 				.byDefault().register();
