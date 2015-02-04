@@ -48,15 +48,6 @@ public class LoanMapper extends AbstractBbvaConfigurableMapper implements ILoanM
 				.field("balance", "balance")
 				.byDefault().register();
 
-		// Map DTOIntRotaryQuotaMove <-> RotaryQuotaMove
-		factory.classMap(DTOIntRotaryQuotaMove.class, RotaryQuotaMove.class)
-				.field("id", "id")
-				.field("concept", "concept")
-				.field("transactionDate", "transactionDate")
-				.field("operation", "operation")
-				.field("value", "value")
-				.field("balance", "balance")
-				.byDefault().register();
 
 		// Map DTOIntMovement <-> RotaryQuotaMove
 		factory.classMap(DTOIntRotaryQuotaMove.class, RotaryQuotaMove.class)
