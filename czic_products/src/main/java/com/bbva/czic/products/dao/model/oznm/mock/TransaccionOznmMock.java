@@ -32,6 +32,7 @@ public class TransaccionOznmMock implements InvocadorTransaccion<PeticionTransac
         formato.setResto("1000");
         formato.setSaldo("2000");
         formato.setTipo("A");
+        formato.setValor("3000");
 
         CopySalida copy = new CopySalida();
         copy.setCopy(formato);
