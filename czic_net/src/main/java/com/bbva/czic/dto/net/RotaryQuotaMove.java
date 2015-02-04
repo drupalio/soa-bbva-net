@@ -7,12 +7,13 @@ import com.wordnik.swagger.annotations.ApiModelProperty;
 import javax.validation.constraints.Past;
 import javax.xml.bind.annotation.*;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+import java.io.Serializable;
 import java.util.Calendar;
 
 @XmlRootElement(name = "RotaryQuotaMove", namespace = "urn:com:bbva:czic:dto:net")
 @XmlType(name = "RotaryQuotaMove", namespace = "urn:com:bbva:czic:dto:net")
 @XmlAccessorType(XmlAccessType.FIELD)
-public class RotaryQuotaMove {
+public class RotaryQuotaMove implements Serializable {
 	public final static long serialVersionUID = 1L;
 
 	private String id;
