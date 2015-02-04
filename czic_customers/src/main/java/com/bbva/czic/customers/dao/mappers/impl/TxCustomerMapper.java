@@ -9,6 +9,7 @@ import com.bbva.czic.customers.dao.model.oznp.FormatoOZECNPE0;
 import com.bbva.czic.customers.dao.model.oznp.FormatoOZECNPS0;
 import com.bbva.czic.customers.dao.model.oznq.FormatoOZECNQE0;
 import com.bbva.czic.customers.dao.model.oznq.FormatoOZECNQS0;
+import com.bbva.czic.customers.facade.v01.impl.DTOIntCustomerFilter;
 import com.bbva.czic.dto.net.ContactInfo;
 import com.bbva.czic.dto.net.Email;
 import com.bbva.czic.dto.net.EnumContactSourceType;
@@ -44,13 +45,10 @@ public class TxCustomerMapper extends AbstractBbvaTxConfigurableMapper implement
 		 */
 		factory.getConverterFactory().registerConverter(new StringMoneyConverter());
 
-		/**
-		 * MAPEO DE ENTRADAS
-		 */
+		factory.classMap(DTOIntCustomerFilter.class, FormatoOZNCENB0.class)
+				.field("id", "numclie")
+				.byDefault().register();
 
-		/**
-		 * MAPEO DE SALIDAS
-		 */
 		// map FormatoOZECNBS0 <-> DTOIntCustomer (OZNB)
 		factory.classMap(DTOIntCustomer.class, FormatoOZNCSNB0.class)
 				.field("id", "numclie").field("name", "nomclie")
@@ -62,7 +60,8 @@ public class TxCustomerMapper extends AbstractBbvaTxConfigurableMapper implement
 				.field("dwelingType", "tpovvda")
 				.field("officeLocation.cityName", "ciudofi").field("officeLocation.stateName", "depaofi")
 				.field("officeLocation.countryName", "paisofi").field("officeLocation.postalAddress", "descofi")
-				.field("lastConnectionTime", "ultconx").byDefault().register();
+				.field("lastConnectionTime", "ultconx")
+				.byDefault().register();
 
 		// map DTOIntAccMovementsResumesFilter <-> FormatoOZECNQE0
 		factory.classMap(DTOIntAccMovementsResumesFilter.class, FormatoOZECNQE0.class)
@@ -94,8 +93,8 @@ public class TxCustomerMapper extends AbstractBbvaTxConfigurableMapper implement
 	}
 	
 	@Override
-	public FormatoOZNCENB0 mapInOznb(String customerId) {
-		return map(customerId, FormatoOZNCENB0.class);
+	public FormatoOZNCENB0 mapInOznb(DTOIntCustomerFilter customerFilter) {
+		return map(customerFilter, FormatoOZNCENB0.class);
 	}
 
 	@Override

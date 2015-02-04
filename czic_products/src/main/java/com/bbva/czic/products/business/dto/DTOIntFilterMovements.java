@@ -1,14 +1,24 @@
 package com.bbva.czic.products.business.dto;
 
 import com.bbva.czic.routine.commons.rm.utils.fiql.FiqlType;
+import org.hibernate.validator.constraints.NotEmpty;
+
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 /**
  * Created by Entelgy on 29/01/2015.
  */
 public class DTOIntFilterMovements {
     private String productType;
+    @NotNull
+    @NotEmpty
+    @Size(min=8,max=8)
     private String customerId;
     private String movementId;
+    @NotNull
+    @NotEmpty
+    @Size(min=20,max=20)
     private String productId;
     private Integer paginationKey;
     private Integer pageSize;

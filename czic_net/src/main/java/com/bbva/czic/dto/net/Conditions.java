@@ -10,7 +10,9 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlSchemaType;
 import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
+import com.bbva.jee.arq.spring.core.servicing.utils.CalendarAdapter;
 import org.hibernate.validator.constraints.NotBlank;
 
 import com.wordnik.swagger.annotations.ApiModelProperty;
@@ -27,7 +29,7 @@ public class Conditions implements Serializable {
 	private String category;
 	@ApiModelProperty("Descripcion del tipo de producto")
 	private String description;
-	@XmlSchemaType(name = "dateTime")
+	@XmlJavaTypeAdapter(CalendarAdapter.class)
 	@ApiModelProperty(value = " Fecha en la que se realizo la apertura del producto", required = true)
 	private Calendar openingDate;
 	@ApiModelProperty(value = "Tipo de comision que aplica para el producto", required = true)

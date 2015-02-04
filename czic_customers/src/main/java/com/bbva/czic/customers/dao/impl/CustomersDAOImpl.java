@@ -6,6 +6,7 @@ import java.util.List;
 import javax.annotation.Resource;
 
 import com.bbva.czic.customers.dao.tx.*;
+import com.bbva.czic.customers.facade.v01.impl.DTOIntCustomerFilter;
 import org.springframework.stereotype.Component;
 
 import com.bbva.czic.customers.business.impl.SrvIntCustomers;
@@ -56,10 +57,10 @@ public class CustomersDAOImpl implements CustomersDAO {
 	}
 
 	@Override
-	public DTOIntCustomer getCustomer(String customerId) throws BusinessServiceException {
+	public DTOIntCustomer getCustomer(DTOIntCustomerFilter customerFilter) throws BusinessServiceException {
 		log.info("CustDAO: Into getCustomer...");
-		log.info("CustDAO: getCustomer params(customerId):" + customerId);
-		return txGetCustomer.invoke(customerId);
+		log.info("CustDAO: getCustomer params(customerId):" + customerFilter);
+		return txGetCustomer.invoke(customerFilter);
 	}
 
 	@Override

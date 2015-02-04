@@ -7,6 +7,7 @@ import com.bbva.czic.customers.dao.model.oznp.FormatoOZECNPE0;
 import com.bbva.czic.customers.dao.model.oznp.FormatoOZECNPS0;
 import com.bbva.czic.customers.dao.model.oznq.FormatoOZECNQE0;
 import com.bbva.czic.customers.dao.model.oznq.FormatoOZECNQS0;
+import com.bbva.czic.customers.facade.v01.impl.DTOIntCustomerFilter;
 import com.bbva.czic.dto.net.AccMovementsResume;
 import com.bbva.czic.dto.net.CardCharge;
 import com.bbva.czic.dto.net.Customer;
@@ -23,7 +24,7 @@ public interface ITxCustomerMapper {
 	 * @param customerId
 	 * @return
 	 */
-	FormatoOZNCENB0 mapInOznb(String customerId);
+	FormatoOZNCENB0 mapInOznb(DTOIntCustomerFilter customerFilter);
 	
 	/***
 	 * 

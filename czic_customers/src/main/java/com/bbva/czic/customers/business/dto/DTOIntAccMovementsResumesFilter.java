@@ -1,7 +1,9 @@
 package com.bbva.czic.customers.business.dto;
 
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 
+import org.hibernate.annotations.Parameter;
 import org.hibernate.validator.constraints.Length;
 
 /**
@@ -13,8 +15,7 @@ import org.hibernate.validator.constraints.Length;
 public class DTOIntAccMovementsResumesFilter {
 
 	@NotNull
-	// @IsCustomerId
-	@Length(min = 8, max = 8)
+	@Pattern(regexp = "[0-9]{8}")
 	private String customerId;
 
 	private String startDate;

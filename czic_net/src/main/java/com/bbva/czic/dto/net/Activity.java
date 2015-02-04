@@ -9,7 +9,9 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlSchemaType;
 import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
+import com.bbva.jee.arq.spring.core.servicing.utils.CalendarAdapter;
 import org.hibernate.validator.constraints.NotBlank;
 
 import com.bbva.jee.arq.spring.core.servicing.utils.Money;
@@ -21,11 +23,11 @@ import com.wordnik.swagger.annotations.ApiModelProperty;
 public class Activity implements Serializable {
 
 	public final static long serialVersionUID = 1L;
-	@XmlSchemaType(name = "dateTime")
+	@XmlJavaTypeAdapter(CalendarAdapter.class)
 	@ApiModelProperty(value = "Fecha en que la operación se ejecutó", required = true)
 	@Past
 	private Calendar operationDate;
-	@XmlSchemaType(name = "dateTime")
+	@XmlJavaTypeAdapter(CalendarAdapter.class)
 	@ApiModelProperty("Fecha en que la operación se efectuó en el banco")
 	@Past
 	private Calendar executionDate;

@@ -161,11 +161,11 @@ public class SrvCustomersV01 implements ISrvCustomersV01, com.bbva.jee.arq.sprin
 	@Path("/{customerId}")
 	@SMC(registryID = "SMCCO1400023", logicalID = "getCustomer")
 	public Customer getCustomer(@ApiParam(value = "Claim identifier param") @PathParam("customerId") String customerId) {
-
 		log.info("Into getCustomer...");
 
+		final DTOIntCustomerFilter customerFilter = customerMapper.mapDTOIntCustomerFilter(customerId);
 		// 1. Invoke SrvIntCustomers and Mapping to canonical DTO
-		return srvIntCustomers.getCustomer(customerId);
+		return customerMapper.mapCustomer(srvIntCustomers.getCustomer(customerFilter));
 	}
 
 	@Override

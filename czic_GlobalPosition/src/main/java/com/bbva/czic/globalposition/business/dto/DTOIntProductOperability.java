@@ -13,7 +13,7 @@ public class DTOIntProductOperability {
 
     @NotEmpty
     //@IsProductId
-    @Pattern(regexp = "^(\\d{20}|\\d{16})$")
+    @Pattern(regexp = "^([0-9]{20}|[0-9]{16})$")
     private String id;
 
     @NotNull

@@ -6,15 +6,22 @@ import java.util.Date;
 
 import com.bbva.jee.arq.spring.core.servicing.utils.Money;
 
+import javax.validation.constraints.NotNull;
+
 public class DTOIntMovement {
 
     public final static long serialVersionUID = 1L;
     private String id;
+    @NotNull
     private Date transactionDate;
     private Date operationDate;
+    @NotNull
     private String concept;
+    @NotNull
     private Money value;
+    @NotNull
     private Money balance;
+    @NotNull
     private DTOIntOperation operation;
     private DTOIntOffice office;
     private DTOIntEnumAccountState status;
