@@ -179,7 +179,7 @@ public class TxProductMapperImpl extends AbstractBbvaTxConfigurableMapper  imple
 							+ IDPRODUCT.replace("$",dtoIn.getProductId())
 							+ YEAR.replace("$", i + "")
 							+ MONTH.replace("$", month + "")
-							+ EXTERNAL_CODE.replace("$",dtoIn.get));
+							+ EXTERNAL_CODE.replace("$",dtoIn.getEndMonth()));
 				month++;
 			}
 			month = 1;

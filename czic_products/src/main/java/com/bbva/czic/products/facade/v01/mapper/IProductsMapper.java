@@ -16,7 +16,7 @@ public interface IProductsMapper {
 //	DTOIntExtract getDtoIntFilterExtract(String productId, String filter,
 //										 Integer paginationKey, Integer pageSize);
 	DTOIntFilterExtract getDtoIntFilterExtract(String productId, String filter,
-			Integer paginationKey, Integer pageSize);
+			String extractId, Integer paginationKey, Integer pageSize);
 
 	List<Extract> mapExtracts(List<DTOIntExtract> list);
 
