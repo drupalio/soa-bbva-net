@@ -8,7 +8,7 @@ public interface IProductsDAO {
 
 	DTOIntConditions getConditions(DTOIntProduct productId);
 
-	List<DTOIntExtract> listExtracts(DTOIntFilterExtract dtoIntFilterExtract);
+	DTOIntExtractOutput listExtracts(DTOIntFilterExtract dtoIntFilterExtract);
 
 	public DTOIntMovement getMovement(DTOIntFilterMovements dtoIntFilterMovements);
 	public List<DTOIntMovement> listMovements(DTOIntFilterMovements dtoIntFilterMovements) ;
