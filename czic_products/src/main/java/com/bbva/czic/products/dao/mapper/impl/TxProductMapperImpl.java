@@ -112,8 +112,6 @@ public class TxProductMapperImpl extends AbstractBbvaTxConfigurableMapper  imple
 		return map(formatOutput, DTOIntMovement.class);
 	}
 
-
-
 	@Override
 	public FormatoOZECNTE0 mapInOznt(DTOIntProduct dtoIn) {
 		return map(dtoIn,FormatoOZECNTE0.class);
@@ -155,9 +153,11 @@ public class TxProductMapperImpl extends AbstractBbvaTxConfigurableMapper  imple
 
 	@Override
 	public DTOIntExtract mapOutOzn2(FormatoOZECN2S0 formatOutput) {
-		return null;
+		if(ProcessPlot(formatOutput)){
+			return mapOutOzn2getExtracts(formatOutput);
+		}
+		return mapOutOzn2ListExtracts(formatOutput);
 	}
-	
 
 	private FormatoOZECN2E0 mapInOzn2getExtracts(DTOIntFilterExtract dtoIn) {
 		FormatoOZECN2E0 formato = new FormatoOZECN2E0();
@@ -184,14 +184,12 @@ public class TxProductMapperImpl extends AbstractBbvaTxConfigurableMapper  imple
 		return processPlot(formato,parser);
 	}
 
-
 	private FormatoOZECN2E0 mapInOzn2ListExtracts(DTOIntFilterExtract dtoIn) {
 		FormatoOZECN2E0 formato = new FormatoOZECN2E0();
 		String parser = headGet + dtoIn.getProductId() + tailGet;
 		formato.setLongtra(parser.length());
 		return processPlot(formato,parser);
 	}
-
 
 	private FormatoOZECN2E0 processPlot(FormatoOZECN2E0 formato,String parser) {
 		for (int i = 0; i < parser.length(); i++) {
@@ -232,5 +230,37 @@ public class TxProductMapperImpl extends AbstractBbvaTxConfigurableMapper  imple
 		}
 		return formato;
 	}
+
+	private boolean ProcessPlot(FormatoOZECN2S0 formatOutput) {
+		return formatOutput.getSaltr01().contains(WORD)
+				|| formatOutput.getSaltr02().contains(WORD)
+				|| formatOutput.getSaltr03().contains(WORD)
+				|| formatOutput.getSaltr04().contains(WORD)
+				|| formatOutput.getSaltr05().contains(WORD)
+				|| formatOutput.getSaltr06().contains(WORD)
+				|| formatOutput.getSaltr07().contains(WORD)
+				|| formatOutput.getSaltr08().contains(WORD)
+				|| formatOutput.getSaltr09().contains(WORD)
+				|| formatOutput.getSaltr10().contains(WORD)
+				|| formatOutput.getSaltr11().contains(WORD)
+				|| formatOutput.getSaltr12().contains(WORD)
+				|| formatOutput.getSaltr13().contains(WORD)
+				|| formatOutput.getSaltr14().contains(WORD)
+				|| formatOutput.getSaltr15().contains(WORD)
+				|| formatOutput.getSaltr16().contains(WORD)
+				|| formatOutput.getSaltr17().contains(WORD)
+				|| formatOutput.getSaltr18().contains(WORD);
+	}
+
+	private DTOIntExtract mapOutOzn2ListExtracts(FormatoOZECN2S0 formatOutput) {
+		DTOIntExtract dtoIntExtract = new DTOIntExtract();
+		return dtoIntExtract;
+	}
+
+	private DTOIntExtract mapOutOzn2getExtracts(FormatoOZECN2S0 formatOutput) {
+		DTOIntExtract dtoIntExtract = new DTOIntExtract();
+		return dtoIntExtract;
+	}
+
 
 }
