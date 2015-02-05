@@ -1,7 +1,5 @@
 package com.bbva.czic.products.facade.v01.mapper.impl;
 
-import com.bbva.czic.dto.net.*;
-import com.bbva.czic.products.business.dto.*;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -13,11 +11,19 @@ import com.bbva.czic.dto.net.Conditions;
 import com.bbva.czic.dto.net.Country;
 import com.bbva.czic.dto.net.Extract;
 import com.bbva.czic.dto.net.Location;
+import com.bbva.czic.dto.net.Movement;
 import com.bbva.czic.dto.net.Office;
+import com.bbva.czic.dto.net.State;
+import com.bbva.czic.products.business.dto.DTOIntCity;
 import com.bbva.czic.products.business.dto.DTOIntConditions;
 import com.bbva.czic.products.business.dto.DTOIntExtract;
 import com.bbva.czic.products.business.dto.DTOIntFilterExtract;
+import com.bbva.czic.products.business.dto.DTOIntFilterMovements;
+import com.bbva.czic.products.business.dto.DTOIntLocation;
+import com.bbva.czic.products.business.dto.DTOIntMovement;
+import com.bbva.czic.products.business.dto.DTOIntOffice;
 import com.bbva.czic.products.business.dto.DTOIntProduct;
+import com.bbva.czic.products.business.dto.DTOIntState;
 import com.bbva.czic.products.facade.v01.mapper.IProductsMapper;
 import com.bbva.czic.routine.commons.rm.utils.errors.EnumError;
 import com.bbva.czic.routine.commons.rm.utils.fiql.FiqlType;
@@ -27,10 +33,6 @@ import com.bbva.czic.routine.mapper.factory.MoneyFactory;
 import com.bbva.czic.routine.mapper.metadata.TypeFactory;
 import com.bbva.jee.arq.spring.core.servicing.gce.BusinessServiceException;
 import com.bbva.jee.arq.spring.core.servicing.utils.Money;
-import org.springframework.stereotype.Component;
-
-import java.util.Calendar;
-import java.util.List;
 
 @Component(value = "products-mapper")
 public class ProductsMapper extends AbstractBbvaConfigurableMapper implements
@@ -189,7 +191,7 @@ public class ProductsMapper extends AbstractBbvaConfigurableMapper implements
 
 	}
 
-	public DTOIntFilterExtract getDtoIntFilterExtract(String productId,
+	public DTOIntFilterExtract getDtoIntFilterExtract(String productId, String extractId,
 			String filter, Integer paginationKey, Integer pageSize) {
 		final String monthGe = this.getGeValue(filter,"month");
 		final String monthLe = this.getLeValue(filter,"month");
@@ -197,6 +199,7 @@ public class ProductsMapper extends AbstractBbvaConfigurableMapper implements
 		final String yearLe = this.getLeValue(filter,"year");
 
 		DTOIntFilterExtract dtoIntFilter = new DTOIntFilterExtract();
+		dtoIntFilter.setExtractId(extractId);
 		dtoIntFilter.setProductId(productId);
 		dtoIntFilter.setPaginationKey(paginationKey);
 		dtoIntFilter.setPageSize(pageSize);

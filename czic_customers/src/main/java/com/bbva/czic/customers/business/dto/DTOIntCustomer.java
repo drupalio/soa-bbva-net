@@ -29,7 +29,7 @@ public class DTOIntCustomer {
 	private Integer homeMembers;
 	private String dwelingType;
 	private Place officeLocation;
-	private Date lastAccessDate;
+	private String lastAccessDate;
 
     public DTOIntCustomer() {
         //default constructor
@@ -131,11 +131,11 @@ public class DTOIntCustomer {
 		this.officeLocation = officeLocation;
 	}
 
-	public Date getLastConnectionTime() {
+	public String getLastConnectionTime() {
 		return lastAccessDate;
 	}
 
-	public void setLastConnectionTime(Date lastConnectionTime) {
+	public void setLastConnectionTime(String lastConnectionTime) {
 		this.lastAccessDate = lastConnectionTime;
 	}
 

@@ -53,7 +53,7 @@ public class Customer implements Serializable {
 	private Place officeLocation;
 	@XmlJavaTypeAdapter(CalendarAdapter.class)
 	@ApiModelProperty("Fecha de último acceso")
-	private Calendar lastAccessDate;
+	private String lastAccessDate;
 
 	public Customer() {
 		// default constructor
@@ -155,11 +155,11 @@ public class Customer implements Serializable {
 		this.officeLocation = officeLocation;
 	}
 
-	public Calendar getLastAccessDate() {
+	public String getLastAccessDate() {
 		return lastAccessDate;
 	}
 
-	public void setLastAccessDate(Calendar lastAccessDate) {
+	public void setLastAccessDate(String lastAccessDate) {
 		this.lastAccessDate = lastAccessDate;
 	}
 
