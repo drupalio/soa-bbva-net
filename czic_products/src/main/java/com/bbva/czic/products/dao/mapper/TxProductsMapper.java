@@ -32,6 +32,8 @@ public interface TxProductsMapper {
 	
 	public static final String REQUEST_EXTRACT="<ExtractoSolicitadoVO>$</ExtractoSolicitadoVO>";
 	
+	public static final String WORD="http";
+	
 	public FormatoOZECNTE0 mapInOznt(DTOIntProduct dtoIn);
 
 	public DTOIntConditions mapOutOznt(FormatoOZECNTS0 formatOutput);

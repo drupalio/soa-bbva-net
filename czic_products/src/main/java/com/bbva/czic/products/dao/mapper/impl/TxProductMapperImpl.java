@@ -1,6 +1,8 @@
 package com.bbva.czic.products.dao.mapper.impl;
 
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.StringTokenizer;
 
 import com.bbva.czic.products.business.dto.DTOIntConditions;
@@ -20,7 +22,9 @@ import com.bbva.czic.products.dao.model.oznt.FormatoOZECNTE0;
 import com.bbva.czic.products.dao.model.oznt.FormatoOZECNTS0;
 import com.bbva.czic.routine.commons.rm.utils.mappers.AbstractBbvaTxConfigurableMapper;
 import com.bbva.czic.routine.commons.rm.utils.mappers.Mapper;
+import com.bbva.czic.routine.mapper.CustomMapper;
 import com.bbva.czic.routine.mapper.MapperFactory;
+import com.bbva.czic.routine.mapper.MappingContext;
 
 
 @Mapper(value = "txProductMapper")
@@ -89,6 +93,7 @@ public class TxProductMapperImpl extends AbstractBbvaTxConfigurableMapper  imple
 				.field("tipoopr", "productType")
 				.byDefault()
 				.register();
+		// Map FormatoOZECNTS0 <-> DTOIntConditions (OZN2)
 	}
 
 
@@ -111,8 +116,6 @@ public class TxProductMapperImpl extends AbstractBbvaTxConfigurableMapper  imple
 	public DTOIntMovement mapOutOznl(FormatoOZECNLS0 formatOutput) {
 		return map(formatOutput, DTOIntMovement.class);
 	}
-
-
 
 	@Override
 	public FormatoOZECNTE0 mapInOznt(DTOIntProduct dtoIn) {
@@ -155,9 +158,11 @@ public class TxProductMapperImpl extends AbstractBbvaTxConfigurableMapper  imple
 
 	@Override
 	public DTOIntExtract mapOutOzn2(FormatoOZECN2S0 formatOutput) {
-		return null;
+		if(evaluatePlot(formatOutput)){
+			return mapOutOzn2getExtracts(formatOutput);
+		}
+		return mapOutOzn2ListExtracts(formatOutput);
 	}
-	
 
 	private FormatoOZECN2E0 mapInOzn2getExtracts(DTOIntFilterExtract dtoIn) {
 		FormatoOZECN2E0 formato = new FormatoOZECN2E0();
@@ -174,7 +179,7 @@ public class TxProductMapperImpl extends AbstractBbvaTxConfigurableMapper  imple
 							+ IDPRODUCT.replace("$",dtoIn.getProductId())
 							+ YEAR.replace("$", i + "")
 							+ MONTH.replace("$", month + "")
-							+ EXTERNAL_CODE.replace("$",""));
+							+ EXTERNAL_CODE.replace("$",dtoIn.get));
 				month++;
 			}
 			month = 1;
@@ -184,7 +189,6 @@ public class TxProductMapperImpl extends AbstractBbvaTxConfigurableMapper  imple
 		return processPlot(formato,parser);
 	}
 
-
 	private FormatoOZECN2E0 mapInOzn2ListExtracts(DTOIntFilterExtract dtoIn) {
 		FormatoOZECN2E0 formato = new FormatoOZECN2E0();
 		String parser = headGet + dtoIn.getProductId() + tailGet;
@@ -192,6 +196,21 @@ public class TxProductMapperImpl extends AbstractBbvaTxConfigurableMapper  imple
 		return processPlot(formato,parser);
 	}
 
+	private DTOIntExtract mapOutOzn2ListExtracts(FormatoOZECN2S0 formatOutput) {
+		DTOIntExtract dtoIntExtract = new DTOIntExtract();
+		return dtoIntExtract;
+	}
+
+	private DTOIntExtract mapOutOzn2getExtracts(FormatoOZECN2S0 formatOutput) {
+		DTOIntExtract dtoIntExtract = new DTOIntExtract();
+		return dtoIntExtract;
+	}
+	
+	public static class ExtractListMapper extends CustomMapper<List<DTOIntExtract>,FormatoOZECN2S0> {
+		public void mapBtoA(FormatoOZECN2S0 b, List<DTOIntExtract> a, MappingContext context) {
+//			a=processOutputPlot(b);
+		};
+	}
 
 	private FormatoOZECN2E0 processPlot(FormatoOZECN2E0 formato,String parser) {
 		for (int i = 0; i < parser.length(); i++) {
@@ -233,4 +252,25 @@ public class TxProductMapperImpl extends AbstractBbvaTxConfigurableMapper  imple
 		return formato;
 	}
 
+	private boolean evaluatePlot(FormatoOZECN2S0 formatOutput) {
+		return formatOutput.getSaltr01().contains(WORD)
+				|| formatOutput.getSaltr02().contains(WORD)
+				|| formatOutput.getSaltr03().contains(WORD)
+				|| formatOutput.getSaltr04().contains(WORD)
+				|| formatOutput.getSaltr05().contains(WORD)
+				|| formatOutput.getSaltr06().contains(WORD)
+				|| formatOutput.getSaltr07().contains(WORD)
+				|| formatOutput.getSaltr08().contains(WORD)
+				|| formatOutput.getSaltr09().contains(WORD)
+				|| formatOutput.getSaltr10().contains(WORD)
+				|| formatOutput.getSaltr11().contains(WORD)
+				|| formatOutput.getSaltr12().contains(WORD)
+				|| formatOutput.getSaltr13().contains(WORD)
+				|| formatOutput.getSaltr14().contains(WORD)
+				|| formatOutput.getSaltr15().contains(WORD)
+				|| formatOutput.getSaltr16().contains(WORD)
+				|| formatOutput.getSaltr17().contains(WORD)
+				|| formatOutput.getSaltr18().contains(WORD);
+	}
+	
 }

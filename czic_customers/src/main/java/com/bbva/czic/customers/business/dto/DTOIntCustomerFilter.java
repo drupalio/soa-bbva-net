@@ -1,4 +1,4 @@
-package com.bbva.czic.customers.facade.v01.impl;
+package com.bbva.czic.customers.business.dto;
 
 import javax.validation.constraints.Pattern;
 
