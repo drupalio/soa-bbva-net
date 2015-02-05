@@ -1,10 +1,12 @@
 package com.bbva.czic.products.business.impl;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.annotation.Resource;
 
 import com.bbva.czic.products.business.dto.*;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,6 +17,7 @@ import com.bbva.czic.products.business.dto.DTOIntFilterExtract;
 import com.bbva.czic.products.business.dto.DTOIntProduct;
 import com.bbva.czic.products.dao.IProductsDAO;
 import com.bbva.czic.routine.commons.rm.utils.validator.DtoValidator;
+import com.bbva.czic.routine.commons.rm.utils.validator.impl.DateValidator;
 import com.bbva.jee.arq.spring.core.log.I18nLog;
 import com.bbva.jee.arq.spring.core.log.I18nLogFactory;
 import com.bbva.jee.arq.spring.core.servicing.utils.BusinessServicesToolKit;
@@ -53,6 +56,33 @@ public class SrvIntProducts implements ISrvIntProducts {
 	public List<DTOIntExtract> listExtracts(DTOIntFilterExtract dtoIntFilterExtract) {
 		// 1. Validate DtoIntFilterAccount
 		DtoValidator.validate(dtoIntFilterExtract);
+		
+		if (dtoIntFilterExtract.getExtractId() != null) {
+			@SuppressWarnings("deprecation")
+			DateValidator validator = (DateValidator) new DateValidator()
+					.noFuture(
+							new Date(dtoIntFilterExtract.getEndYear() + "-"
+									+ dtoIntFilterExtract.getEndMonth() + "-01"))
+					.equals(new Date(dtoIntFilterExtract.getStartYear() + "-"
+							+ dtoIntFilterExtract.getStartMonth() + "-01"),
+							new Date(dtoIntFilterExtract.getEndYear() + "-"
+									+ dtoIntFilterExtract.getEndMonth() + "-01"))
+					.validate();
+		} else {
+			@SuppressWarnings("deprecation")
+			DateValidator validator = (DateValidator) new DateValidator()
+					.noFuture(
+							new Date(dtoIntFilterExtract.getStartYear() + "-"
+									+ dtoIntFilterExtract.getStartMonth()
+									+ "-01"))
+					.validDateRange(
+							new Date(dtoIntFilterExtract.getStartYear() + "-"
+									+ dtoIntFilterExtract.getStartMonth()
+									+ "-01"),
+							new Date(dtoIntFilterExtract.getEndYear() + "-"
+									+ dtoIntFilterExtract.getEndMonth() + "-01"))
+					.validate();
+		}
 
 		// 2. Get response
 		final List<DTOIntExtract> result = productsDAO

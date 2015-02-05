@@ -50,4 +50,11 @@ public class DateValidator extends Validator {
 		}
 		return this;
 	}
+	
+	public DateValidator equals(Date from, Date to) {
+		if (!from.toString().equals(to.toString())) {
+			exceptions.add(new BusinessServiceException(EnumError.DATE_INTERVAL_OUT_OF_RANGE.getAlias()));
+		}
+		return this;
+	}
 }

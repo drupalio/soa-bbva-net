@@ -1,9 +1,7 @@
 package com.bbva.czic.products.dao.mapper.impl;
 
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.StringTokenizer;
 
 import com.bbva.czic.products.business.dto.DTOIntConditions;
 import com.bbva.czic.products.business.dto.DTOIntExtract;
@@ -150,7 +148,7 @@ public class TxProductMapperImpl extends AbstractBbvaTxConfigurableMapper  imple
 
 	@Override
 	public FormatoOZECN2E0 mapInOzn2(DTOIntFilterExtract dtoIn) {
-		if(dtoIn.getEndMonth()==null || dtoIn.getEndYear()==null){
+		if(dtoIn.getExtractId()==null){
 			return mapInOzn2ListExtracts(dtoIn);
 		}
 		return mapInOzn2getExtracts(dtoIn);
@@ -166,27 +164,15 @@ public class TxProductMapperImpl extends AbstractBbvaTxConfigurableMapper  imple
 
 	private FormatoOZECN2E0 mapInOzn2getExtracts(DTOIntFilterExtract dtoIn) {
 		FormatoOZECN2E0 formato = new FormatoOZECN2E0();
-		// Se inicializa el string parseable con la cabecera
-		String parser = headGenerate;
-		// Se obtiene el mes inicial
-		int month = Integer.parseInt(dtoIn.getStartMonth());
-		// Se realiza un ciclo para parsear todos los extractos presentes en dichos meses
-		for (int i = Integer.parseInt(dtoIn.getStartYear()); i <= Integer
-				.parseInt(dtoIn.getEndYear()); i++) {
-			while (month <= 12) {
-				parser = parser
-						+ REQUEST_EXTRACT.replace("$",""
-							+ IDPRODUCT.replace("$",dtoIn.getProductId())
-							+ YEAR.replace("$", i + "")
-							+ MONTH.replace("$", month + "")
-							+ EXTERNAL_CODE.replace("$",dtoIn.get));
-				month++;
-			}
-			month = 1;
-		}
-		parser = parser + tailGenerate;
+		String parser = headGenerate
+				+ REQUEST_EXTRACT.replace("$",""
+					+ IDPRODUCT.replace("$", dtoIn.getProductId())
+					+ YEAR.replace("$", dtoIn.getEndYear())
+					+ MONTH.replace("$", dtoIn.getEndMonth())
+					+ EXTERNAL_CODE.replace("$",dtoIn.getExtractId())) 
+				+ tailGenerate;
 		formato.setLongtra(parser.length());
-		return processPlot(formato,parser);
+		return processPlot(formato, parser);
 	}
 
 	private FormatoOZECN2E0 mapInOzn2ListExtracts(DTOIntFilterExtract dtoIn) {
