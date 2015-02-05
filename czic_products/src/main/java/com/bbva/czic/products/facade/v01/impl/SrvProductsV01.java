@@ -1,11 +1,28 @@
 package com.bbva.czic.products.facade.v01.impl;
 
+import java.util.List;
+
+import javax.annotation.Resource;
+import javax.ws.rs.DefaultValue;
+import javax.ws.rs.GET;
+import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
+import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
+import javax.ws.rs.core.HttpHeaders;
+import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
+import javax.ws.rs.core.UriInfo;
+
+import org.apache.cxf.jaxrs.model.wadl.ElementClass;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import com.bbva.czic.dto.net.AccMoveDetail;
 import com.bbva.czic.dto.net.Conditions;
 import com.bbva.czic.dto.net.Extract;
 import com.bbva.czic.dto.net.Movement;
 import com.bbva.czic.products.business.ISrvIntProducts;
-import com.bbva.czic.products.business.dto.DTOIntExtract;
 import com.bbva.czic.products.business.dto.DTOIntFilterExtract;
 import com.bbva.czic.products.business.dto.DTOIntFilterMovements;
 import com.bbva.czic.products.business.dto.DTOIntProduct;
@@ -20,18 +37,11 @@ import com.bbva.jee.arq.spring.core.servicing.annotations.SN;
 import com.bbva.jee.arq.spring.core.servicing.annotations.VN;
 import com.bbva.jee.arq.spring.core.servicing.gce.BusinessServiceException;
 import com.bbva.jee.arq.spring.core.servicing.utils.BusinessServicesToolKit;
-import com.wordnik.swagger.annotations.*;
-import org.apache.cxf.jaxrs.model.wadl.ElementClass;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
-import javax.annotation.Resource;
-import javax.ws.rs.*;
-import javax.ws.rs.core.HttpHeaders;
-import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
-import javax.ws.rs.core.UriInfo;
-import java.util.List;
+import com.wordnik.swagger.annotations.Api;
+import com.wordnik.swagger.annotations.ApiOperation;
+import com.wordnik.swagger.annotations.ApiParam;
+import com.wordnik.swagger.annotations.ApiResponse;
+import com.wordnik.swagger.annotations.ApiResponses;
 
 @Path("/V01")
 @SN(registryID = "SNCO1400011", logicalID = "products")
@@ -102,26 +112,22 @@ public class SrvProductsV01 implements ISrvProductsV01,
 			@ApiResponse(code = 200, message = "Found Sucessfully", response = Response.class),
 			@ApiResponse(code = 500, message = "Technical Error") })
 	@GET
-	@Path("/{productId}/listExtracts")
+	@Path("/{productId}/extracts/{extractId}")
 	@SMC(registryID = "SMCCO1500011", logicalID = "listExtracts")
 	public List<Extract> listExtracts(
 			@ApiParam(value = "identifier param") @PathParam("productId") String productId,
-			@ApiParam(value = "filter param") @DefaultValue("null") @QueryParam("$filter") String filter,
-			@ApiParam(value = "fields param") @DefaultValue("null") @QueryParam("paginationKey") Integer paginationKey,
-			@ApiParam(value = "expands param") @DefaultValue("null") @QueryParam("pageSize") Integer pageSize) {
-		// 1. Validate parameter
-		if (productId == null || productId.trim().isEmpty()) {
-			throw new BusinessServiceException(
-					EnumError.WRONG_PARAMETERS.getAlias());
-		}
+			@ApiParam(value = "identifier param") @PathParam("extractId") String extractId,
+			@ApiParam(value = "filter param") @QueryParam("$filter") String filter,
+			@ApiParam(value = "fields param") @QueryParam("paginationKey") Integer paginationKey,
+			@ApiParam(value = "expands param") @QueryParam("pageSize") Integer pageSize) {
 
-		// 2. Validate filter
+		// 1. Validate filter
 		new FiqlValidator(filter).exist().hasGeAndLe("month")
 				.hasGeAndLe("year").validate();
 
-		// Mapeo del filtro a DTO
+		// 2. Mapping filter -> DTO
 		DTOIntFilterExtract dtoIntFilterExtract = productsMapper
-				.getDtoIntFilterExtract(productId, filter, paginationKey,
+				.getDtoIntFilterExtract(productId,extractId, filter, paginationKey,
 						pageSize);
 		// 3. Invoke SrvIntCustomers and Mapping to canonical DTO
 		return productsMapper.mapExtracts(srvIntProducts

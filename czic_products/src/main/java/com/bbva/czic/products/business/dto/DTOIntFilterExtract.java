@@ -6,6 +6,7 @@ public class DTOIntFilterExtract {
 
 	@NotNull
 	private String productId;
+	private String extractId;
 	private String startMonth;
 	private String endMonth;
 	private String startYear;
@@ -69,6 +70,14 @@ public class DTOIntFilterExtract {
 
 	public void setPageSize(Integer pageSize) {
 		this.pageSize = pageSize;
+	}
+
+	public String getExtractId() {
+		return extractId;
+	}
+
+	public void setExtractId(String extractId) {
+		this.extractId = extractId;
 	}
 
 }

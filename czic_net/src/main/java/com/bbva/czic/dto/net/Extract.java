@@ -2,7 +2,6 @@
 package com.bbva.czic.dto.net;
 
 import java.io.Serializable;
-import java.util.Calendar;
 
 import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlAccessType;
