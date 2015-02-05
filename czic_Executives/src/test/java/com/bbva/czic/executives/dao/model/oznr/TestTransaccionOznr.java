@@ -1,8 +1,12 @@
 package com.bbva.czic.executives.dao.model.oznr;
 
+import com.bbva.czic.routine.commons.rm.utils.test.SpringContextBbvaTest;
+import com.bbva.jee.arq.spring.core.host.ServicioTransacciones;
 import org.apache.commons.logging.Log;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.TestExecutionListeners;
@@ -21,23 +25,20 @@ import com.bbva.jee.arq.spring.core.servicing.test.MockInvocationContextTestExec
  * 
  * @author Arquitectura Spring BBVA
  */
-@RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(
-	loader = BusinessServiceTestContextLoader.class, 
-	locations = {
-        "classpath*:/META-INF/spring/applicationContext-*.xml", 
-        "classpath:/META-INF/spring/business-service.xml",
-        "classpath:/META-INF/spring/business-service-test.xml"
-    }
-)
-@TestExecutionListeners(listeners = { MockInvocationContextTestExecutionListener.class, DependencyInjectionTestExecutionListener.class })
-public class TestTransaccionOznr {
+public class TestTransaccionOznr extends SpringContextBbvaTest {
 	
 	private static final Log LOG = I18nLogFactory.getLog(TestTransaccionOznr.class);
-		
-	@Autowired
+
 	private TransaccionOznr transaccion;
-	
+	private ServicioTransacciones servicioTransacciones;
+
+	@Before
+	public void init(){
+		transaccion = new TransaccionOznr();
+		servicioTransacciones = Mockito.mock(ServicioTransacciones.class);
+		transaccion.setServicioTransacciones(servicioTransacciones);
+	}
+
 	@Test
 	public void test() throws ExcepcionTransaccion {
 		
