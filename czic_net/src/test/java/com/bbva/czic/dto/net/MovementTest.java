@@ -28,7 +28,7 @@ public class MovementTest {
 	@Test
 	public void testValidationFailsIfMovementOperationDateIsInFuture() {
 		Movement movement = new Movement();
-		movement.setOperationDate(getFutureDate());
+		movement.setOperationDate(toString());
 		Set<ConstraintViolation<Movement>> constraintViolations = validator.validate(movement);
 		assertEquals(1, constraintViolations.size());
 	}
@@ -36,7 +36,7 @@ public class MovementTest {
 	@Test
 	public void testValidationFailsIfMovementTransactionDateIsInFuture() {
 		Movement movement = new Movement();
-		movement.setTransactionDate(getFutureDate());
+		movement.setTransactionDate(toString());
 		Set<ConstraintViolation<Movement>> constraintViolations = validator.validate(movement);
 		assertEquals(1, constraintViolations.size());
 	}

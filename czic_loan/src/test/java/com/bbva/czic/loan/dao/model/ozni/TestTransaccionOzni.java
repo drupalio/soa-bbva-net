@@ -22,11 +22,18 @@ import com.bbva.jee.arq.spring.core.servicing.test.MockInvocationContextTestExec
  * @author Arquitectura Spring BBVA
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(loader = BusinessServiceTestContextLoader.class, locations = {
-		"classpath*:/META-INF/spring/applicationContext-*.xml", "classpath:/META-INF/spring/business-service.xml",
-		"classpath:/META-INF/spring/business-service-test.xml" })
-@TestExecutionListeners(listeners = { MockInvocationContextTestExecutionListener.class,
-		DependencyInjectionTestExecutionListener.class })
+@ContextConfiguration(
+		loader = BusinessServiceTestContextLoader.class,
+		locations = {
+			"classpath*:/META-INF/spring/applicationContext-*.xml",
+			"classpath:/META-INF/spring/business-service.xml",
+			"classpath:/META-INF/spring/business-service-test.xml"
+		}
+)
+@TestExecutionListeners(listeners = {
+		MockInvocationContextTestExecutionListener.class,
+		DependencyInjectionTestExecutionListener.class
+})
 public class TestTransaccionOzni {
 
 	private static final Log LOG = I18nLogFactory.getLog(TestTransaccionOzni.class);

@@ -28,18 +28,18 @@ public class Payment
 {
 
     public final static long serialVersionUID = 1L;
-    @XmlJavaTypeAdapter(CalendarAdapter.class)
+   // @XmlJavaTypeAdapter(CalendarAdapter.class)
     //@XmlSchemaType(name = "dateTime")
     @ApiModelProperty("Fecha de vencimiento del pago")
-    private Calendar dueDate;
-    @XmlJavaTypeAdapter(CalendarAdapter.class)
+    private String dueDate;
+    //@XmlJavaTypeAdapter(CalendarAdapter.class)
     //@XmlSchemaType(name = "dateTime")
     @ApiModelProperty("Fecha de pago")
-    private Calendar paymentDate;
-    @XmlJavaTypeAdapter(CalendarAdapter.class)
+    private String paymentDate;
+    //@XmlJavaTypeAdapter(CalendarAdapter.class)
     //@XmlSchemaType(name = "dateTime")
     @ApiModelProperty("Fecha de corte del producto")
-    private Calendar shortDate;
+    private String shortDate;
    // @XmlJavaTypeAdapter(MoneyAdapter.class)
     @XmlElement(type = Money.class)
     @ApiModelProperty("Honorarios del pago")
@@ -56,27 +56,27 @@ public class Payment
         //default constructor
     }
 
-    public Calendar getDueDate() {
+    public String getDueDate() {
         return dueDate;
     }
 
-    public void setDueDate(Calendar dueDate) {
+    public void setDueDate(String dueDate) {
         this.dueDate = dueDate;
     }
 
-    public Calendar getPaymentDate() {
+    public String getPaymentDate() {
         return paymentDate;
     }
 
-    public void setPaymentDate(Calendar paymentDate) {
+    public void setPaymentDate(String paymentDate) {
         this.paymentDate = paymentDate;
     }
 
-    public Calendar getShortDate() {
+    public String getShortDate() {
         return shortDate;
     }
 
-    public void setShortDate(Calendar shortDate) {
+    public void setShortDate(String shortDate) {
         this.shortDate = shortDate;
     }
 

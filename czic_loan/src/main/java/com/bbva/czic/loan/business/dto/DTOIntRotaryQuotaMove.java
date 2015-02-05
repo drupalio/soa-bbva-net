@@ -24,7 +24,7 @@ public class DTOIntRotaryQuotaMove {
     private String concept;
 
     @NotNull
-    private Calendar transactionDate;
+    private String transactionDate;
 
     @NotNull
     private Operation operation;
@@ -68,11 +68,11 @@ public class DTOIntRotaryQuotaMove {
         this.concept = concept;
     }
 
-    public Calendar getTransactionDate() {
+    public String getTransactionDate() {
         return transactionDate;
     }
 
-    public void setTransactionDate(Calendar transactionDate) {
+    public void setTransactionDate(String transactionDate) {
         this.transactionDate = transactionDate;
     }
 

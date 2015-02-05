@@ -22,10 +22,10 @@ public class RotaryQuotaMove implements Serializable {
 
 	private String concept;
 
-	@XmlJavaTypeAdapter(CalendarAdapter.class)
+	//@XmlJavaTypeAdapter(CalendarAdapter.class)
 	@ApiModelProperty(value = " fecha de la transaccion", required = true)
-	@Past
-	private Calendar transactionDate;
+	//@Past
+	private String transactionDate;
 
 	private String status;
 
@@ -60,11 +60,11 @@ public class RotaryQuotaMove implements Serializable {
 		this.concept = concept;
 	}
 
-	public Calendar getTransactionDate() {
+	public String getTransactionDate() {
 		return transactionDate;
 	}
 
-	public void setTransactionDate(Calendar transactionDate) {
+	public void setTransactionDate(String transactionDate) {
 		this.transactionDate = transactionDate;
 	}
 
