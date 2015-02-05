@@ -1,7 +1,7 @@
 package com.bbva.czic.customers.facade.v01.mappers;
 
 import com.bbva.czic.customers.business.dto.*;
-import com.bbva.czic.customers.facade.v01.impl.DTOIntCustomerFilter;
+import com.bbva.czic.customers.business.dto.DTOIntCustomerFilter;
 import com.bbva.czic.dto.net.AccMovementsResume;
 import com.bbva.czic.dto.net.CardCharge;
 import com.bbva.czic.dto.net.Customer;

@@ -2,7 +2,7 @@ package com.bbva.czic.customers.dao.tx;
 
 import javax.annotation.Resource;
 
-import com.bbva.czic.customers.facade.v01.impl.DTOIntCustomerFilter;
+import com.bbva.czic.customers.business.dto.DTOIntCustomerFilter;
 import org.springframework.stereotype.Component;
 
 import com.bbva.czic.customers.business.dto.DTOIntCustomer;

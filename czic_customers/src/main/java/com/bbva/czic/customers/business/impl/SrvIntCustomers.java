@@ -5,13 +5,12 @@ import java.util.List;
 import javax.annotation.Resource;
 
 import com.bbva.czic.customers.business.dto.*;
-import com.bbva.czic.customers.facade.v01.impl.DTOIntCustomerFilter;
+import com.bbva.czic.customers.business.dto.DTOIntCustomerFilter;
 import com.bbva.czic.routine.commons.rm.utils.validator.impl.StringValidator;
 import org.springframework.stereotype.Service;
 
 import com.bbva.czic.customers.business.ISrvIntCustomers;
 import com.bbva.czic.customers.dao.CustomersDAO;
-import com.bbva.czic.routine.commons.rm.utils.errors.EnumError;
 import com.bbva.czic.routine.commons.rm.utils.validator.DtoValidator;
 import com.bbva.jee.arq.spring.core.log.I18nLog;
 import com.bbva.jee.arq.spring.core.log.I18nLogFactory;

@@ -4,18 +4,7 @@
         "remoteType": "RESTFUL"
     },
     "dtos": {
-        "EnumCardChargeCategory": {
-            "#metadata": {
-                "dtoPackage": "com.bbva.czic.dto.net.enumCardChargeCategory"
-            },
-            "enumValue": "String"
-        },
-        "EnumMonth": {
-            "#metadata": {
-                "dtoPackage": "com.bbva.czic.dto.net.enumMonth"
-            },
-            "enumValue": "String"
-        },
+
         "CardCharge": {
             "#metadata": {
                 "dtoPackage": "com.bbva.czic.dto.net.cardCharge"
@@ -84,9 +73,7 @@
                 "required" : true
             }
         },
-
-         "CardCharge": {
-            
+        "CardCharge": {
             "category": {
                 "type": "dto.EnumCardChargeCategory",
                 "description": "Aspecto comercial",
@@ -96,13 +83,13 @@
                 "type": "arq.MONEY",
                 "description": "Valor del consumo total diferido a cada una de las categorias"
             }
-        }     
-    },
-	   "sn": {
-            "targetDto": "customer",
-            "logicalId": "customers",
-            "registryId": "SN201400333",
-            "version": "V01",
-            "description": "SN Customer"
         }
+    },
+    "sn": {
+        "targetDto": "customer",
+        "logicalId": "customers",
+        "registryId": "SN201400333",
+        "version": "V01",
+        "description": "SN Customer"
+    }
 }

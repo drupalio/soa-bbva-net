@@ -6,7 +6,7 @@ import java.util.List;
 import javax.annotation.Resource;
 
 import com.bbva.czic.customers.dao.tx.*;
-import com.bbva.czic.customers.facade.v01.impl.DTOIntCustomerFilter;
+import com.bbva.czic.customers.business.dto.DTOIntCustomerFilter;
 import org.springframework.stereotype.Component;
 
 import com.bbva.czic.customers.business.impl.SrvIntCustomers;
