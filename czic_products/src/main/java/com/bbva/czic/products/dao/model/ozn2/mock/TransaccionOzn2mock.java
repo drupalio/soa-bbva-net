@@ -38,44 +38,76 @@ public class TransaccionOzn2mock implements
 		return respuesta;
 	}
 
-	private FormatoOZECN2S0 processPlot(String trama) {
-		FormatoOZECN2S0 formatoSalida = new FormatoOZECN2S0();
-		formatoSalida.setSaltr01(trama.substring(0, PLOT_SECTION));
-		trama = trama.substring(PLOT_SECTION );
-		formatoSalida.setSaltr02(trama.substring(0, PLOT_SECTION));
-		trama = trama.substring(PLOT_SECTION );
-		formatoSalida.setSaltr03(trama.substring(0, PLOT_SECTION));
-		trama = trama.substring(PLOT_SECTION );
-		formatoSalida.setSaltr04(trama.substring(0, PLOT_SECTION));
-		trama = trama.substring(PLOT_SECTION );
-		formatoSalida.setSaltr05(trama.substring(0, PLOT_SECTION));
-		trama = trama.substring(PLOT_SECTION );
-		formatoSalida.setSaltr06(trama.substring(0, PLOT_SECTION));
-		trama = trama.substring(PLOT_SECTION );
-		formatoSalida.setSaltr07(trama.substring(0, PLOT_SECTION));
-		trama = trama.substring(PLOT_SECTION );
-		formatoSalida.setSaltr08(trama.substring(0, PLOT_SECTION));
-		trama = trama.substring(PLOT_SECTION );
-		formatoSalida.setSaltr09(trama.substring(0, PLOT_SECTION));
-		trama = trama.substring(PLOT_SECTION );
-		formatoSalida.setSaltr10(trama.substring(0, PLOT_SECTION));
-		trama = trama.substring(PLOT_SECTION );
-		formatoSalida.setSaltr11(trama.substring(0, PLOT_SECTION));
-		trama = trama.substring(PLOT_SECTION );
-		formatoSalida.setSaltr12(trama.substring(0, PLOT_SECTION));
-		trama = trama.substring(PLOT_SECTION );
-		formatoSalida.setSaltr13(trama.substring(0, PLOT_SECTION));
-		trama = trama.substring(PLOT_SECTION );
-		formatoSalida.setSaltr14(trama.substring(0, PLOT_SECTION));
-		trama = trama.substring(PLOT_SECTION );
-		formatoSalida.setSaltr15(trama.substring(0, PLOT_SECTION));
-		trama = trama.substring(PLOT_SECTION );
-		formatoSalida.setSaltr16(trama.substring(0, PLOT_SECTION));
-		trama = trama.substring(PLOT_SECTION );
-		formatoSalida.setSaltr17(trama.substring(0, PLOT_SECTION));
-		trama = trama.substring(PLOT_SECTION );
-		formatoSalida.setSaltr18(trama.substring(0));
-		return formatoSalida;
+	private FormatoOZECN2S0 processPlot(String parser) {
+		FormatoOZECN2S0 formato = new FormatoOZECN2S0();
+		int iterator = parser.length();
+		for (int i = 0; i < iterator; i++) {
+			if(PLOT_SECTION>parser.length()){
+				PLOT_SECTION=parser.length();
+			}
+			switch (i) {
+			case 0:
+				formato.setSaltr01(parser.substring(0, PLOT_SECTION));
+				break;
+			case 100:
+				formato.setSaltr02(parser.substring(0, PLOT_SECTION));
+				break;
+			case 200:
+				formato.setSaltr03(parser.substring(0, PLOT_SECTION));
+				break;
+			case 300:
+				formato.setSaltr04(parser.substring(0, PLOT_SECTION));
+				break;
+			case 400:
+				formato.setSaltr05(parser.substring(0, PLOT_SECTION));
+				break;
+			case 500:
+				formato.setSaltr06(parser.substring(0, PLOT_SECTION));
+				break;
+			case 600:
+				formato.setSaltr07(parser.substring(0, PLOT_SECTION));
+				break;
+			case 700:
+				formato.setSaltr08(parser.substring(0, PLOT_SECTION));
+				break;
+			case 800:
+				formato.setSaltr09(parser.substring(0, PLOT_SECTION));
+				break;
+			case 900:
+				formato.setSaltr10(parser.substring(0, PLOT_SECTION));
+				break;
+			case 1000:
+				formato.setSaltr11(parser.substring(0, PLOT_SECTION));
+				break;
+			case 1100:
+				formato.setSaltr12(parser.substring(0, PLOT_SECTION));
+				break;
+			case 1200:
+				formato.setSaltr13(parser.substring(0, PLOT_SECTION));
+				break;
+			case 1300:
+				formato.setSaltr14(parser.substring(0, PLOT_SECTION));
+				break;
+			case 1400:
+				formato.setSaltr15(parser.substring(0, PLOT_SECTION));
+				break;
+			case 1500:
+				formato.setSaltr16(parser.substring(0, PLOT_SECTION));
+				break;
+			case 1600:
+				formato.setSaltr17(parser.substring(0, PLOT_SECTION));
+				break;
+			case 1700:
+				formato.setSaltr18(parser.substring(0, PLOT_SECTION));
+				break;
+			case 1800:
+				formato.setSaltr01(parser.substring(0, PLOT_SECTION));
+				break;
+			}
+			parser = parser.substring(PLOT_SECTION);
+			i += PLOT_SECTION;
+		}
+		return formato;
 	}
 
 	@Override
