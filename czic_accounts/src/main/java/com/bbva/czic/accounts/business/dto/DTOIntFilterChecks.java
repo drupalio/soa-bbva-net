@@ -1,5 +1,6 @@
 package com.bbva.czic.accounts.business.dto;
 
+import org.hibernate.validator.constraints.Length;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.validation.constraints.NotNull;
@@ -11,6 +12,7 @@ import java.util.Date;
 public class DTOIntFilterChecks {
 
     @NotNull
+    @Length(max = 20, min = 20)
     private String accountId;
     private Date startDate;
     private Date endDate;

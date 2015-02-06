@@ -220,6 +220,7 @@ public class ProductsMapper extends AbstractBbvaConfigurableMapper implements
 			extract.setYear(dtoExtract.getYear());
 			extract.setUrl(dtoExtract.getUrl());
 			extract.setGenerationDate(dtoExtract.getGenerationDate());
+			extract.setExternalCode(dtoExtract.getExtCode());
 			extracts.add(extract);
 		}
 		return extracts;
