@@ -1,11 +1,16 @@
 package com.bbva.czic.products.facade.v01.mapper;
 
+import java.util.List;
+
 import com.bbva.czic.dto.net.Conditions;
 import com.bbva.czic.dto.net.Extract;
 import com.bbva.czic.dto.net.Movement;
-import com.bbva.czic.products.business.dto.*;
-
-import java.util.List;
+import com.bbva.czic.products.business.dto.DTOIntConditions;
+import com.bbva.czic.products.business.dto.DTOIntExtract;
+import com.bbva.czic.products.business.dto.DTOIntFilterExtract;
+import com.bbva.czic.products.business.dto.DTOIntFilterMovements;
+import com.bbva.czic.products.business.dto.DTOIntMovement;
+import com.bbva.czic.products.business.dto.DTOIntProduct;
 
 public interface IProductsMapper {
 

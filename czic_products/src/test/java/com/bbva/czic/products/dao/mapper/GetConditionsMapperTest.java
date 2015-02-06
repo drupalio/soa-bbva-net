@@ -1,16 +1,16 @@
 package com.bbva.czic.products.dao.mapper;
 
+import static org.junit.Assert.assertEquals;
+
+import java.util.Date;
+
+import org.junit.Test;
+
 import com.bbva.czic.dto.net.Conditions;
 import com.bbva.czic.products.business.dto.DTOIntActivity;
 import com.bbva.czic.products.business.dto.DTOIntConditions;
 import com.bbva.czic.products.business.dto.DTOIntOffice;
 import com.bbva.czic.products.facade.v01.mapper.impl.ProductsMapper;
-import org.junit.Test;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
-
-import java.util.Date;
 
 /**
  * Created by Entelgy on 14/01/2015.

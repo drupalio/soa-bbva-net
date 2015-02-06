@@ -3,7 +3,6 @@
 
 package com.bbva.czic.products.dao.model.oznm;
 
-import java.lang.String;
 
 privileged aspect FormatoOZNCENM0_Roo_ToString {
     

@@ -21,6 +21,8 @@ public class Extract
 {
 
     public final static long serialVersionUID = 1L;
+    @ApiModelProperty("Codigo externo de identificacion de extracto")
+    private String externalCode;
     @ApiModelProperty("Mes del extracto")
     @NotNull
     private String month;
@@ -66,6 +68,14 @@ public class Extract
 
 	public void setUrl(String url) {
 		this.url = url;
+	}
+
+	public String getExternalCode() {
+		return externalCode;
+	}
+
+	public void setExternalCode(String externalCode) {
+		this.externalCode = externalCode;
 	}
 
 }
