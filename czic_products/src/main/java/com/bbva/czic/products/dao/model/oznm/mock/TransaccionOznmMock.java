@@ -1,14 +1,14 @@
 package com.bbva.czic.products.dao.model.oznm.mock;
 
-import com.bbva.czic.products.dao.model.oznl.RespuestaTransaccionOznl;
+import org.springframework.context.annotation.Profile;
+import org.springframework.stereotype.Component;
+
 import com.bbva.czic.products.dao.model.oznm.FormatoOZNCSNM0;
 import com.bbva.czic.products.dao.model.oznm.PeticionTransaccionOznm;
 import com.bbva.czic.products.dao.model.oznm.RespuestaTransaccionOznm;
 import com.bbva.jee.arq.spring.core.host.ExcepcionTransaccion;
 import com.bbva.jee.arq.spring.core.host.InvocadorTransaccion;
 import com.bbva.jee.arq.spring.core.host.protocolo.ps9.aplicacion.CopySalida;
-import org.springframework.context.annotation.Profile;
-import org.springframework.stereotype.Component;
 
 /**
  * Created by Entelgy on 30/01/2015.

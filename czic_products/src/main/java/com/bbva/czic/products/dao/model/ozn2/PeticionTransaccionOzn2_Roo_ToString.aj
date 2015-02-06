@@ -3,7 +3,6 @@
 
 package com.bbva.czic.products.dao.model.ozn2;
 
-import java.lang.String;
 
 privileged aspect PeticionTransaccionOzn2_Roo_ToString {
     

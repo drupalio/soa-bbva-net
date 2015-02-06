@@ -9,6 +9,7 @@ public enum EDateFormat {
 
     ANIO_MES_DIA("yyyy-MM-dd"),
     DIA_MES_ANIO("dd/MM/yyyy"),
+    MES_ANIO("MMyyyy"),
     MONTH("MM");
 
     private String pattern;

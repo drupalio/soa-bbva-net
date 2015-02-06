@@ -5,24 +5,24 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
-import com.bbva.czic.products.business.dto.*;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.bbva.czic.products.business.ISrvIntProducts;
 import com.bbva.czic.products.business.dto.DTOIntConditions;
 import com.bbva.czic.products.business.dto.DTOIntExtract;
+import com.bbva.czic.products.business.dto.DTOIntExtractOutput;
 import com.bbva.czic.products.business.dto.DTOIntFilterExtract;
+import com.bbva.czic.products.business.dto.DTOIntFilterMovements;
+import com.bbva.czic.products.business.dto.DTOIntMovement;
 import com.bbva.czic.products.business.dto.DTOIntProduct;
 import com.bbva.czic.products.dao.IProductsDAO;
+import com.bbva.czic.routine.commons.rm.utils.EDateFormat;
 import com.bbva.czic.routine.commons.rm.utils.validator.DtoValidator;
 import com.bbva.czic.routine.commons.rm.utils.validator.impl.DateValidator;
 import com.bbva.jee.arq.spring.core.log.I18nLog;
 import com.bbva.jee.arq.spring.core.log.I18nLogFactory;
 import com.bbva.jee.arq.spring.core.servicing.utils.BusinessServicesToolKit;
-
-import java.util.List;
 
 @Service
 public class SrvIntProducts implements ISrvIntProducts {
@@ -58,29 +58,18 @@ public class SrvIntProducts implements ISrvIntProducts {
 		DtoValidator.validate(dtoIntFilterExtract);
 		
 		if (dtoIntFilterExtract.getExtractId() != null) {
-			@SuppressWarnings("deprecation")
 			DateValidator validator = (DateValidator) new DateValidator()
-					.noFuture(
-							new Date(dtoIntFilterExtract.getEndYear() + "-"
-									+ dtoIntFilterExtract.getEndMonth() + "-01"))
-					.equals(new Date(dtoIntFilterExtract.getStartYear() + "-"
-							+ dtoIntFilterExtract.getStartMonth() + "-01"),
-							new Date(dtoIntFilterExtract.getEndYear() + "-"
-									+ dtoIntFilterExtract.getEndMonth() + "-01"))
+					.noFuture(dtoIntFilterExtract.getStartMonth()+dtoIntFilterExtract.getStartYear(),
+							EDateFormat.MES_ANIO)
+					.equals(dtoIntFilterExtract.getStartMonth() + dtoIntFilterExtract.getStartYear(),
+							dtoIntFilterExtract.getEndMonth() + dtoIntFilterExtract.getEndYear())
 					.validate();
 		} else {
-			@SuppressWarnings("deprecation")
 			DateValidator validator = (DateValidator) new DateValidator()
-					.noFuture(
-							new Date(dtoIntFilterExtract.getStartYear() + "-"
-									+ dtoIntFilterExtract.getStartMonth()
-									+ "-01"))
-					.validDateRange(
-							new Date(dtoIntFilterExtract.getStartYear() + "-"
-									+ dtoIntFilterExtract.getStartMonth()
-									+ "-01"),
-							new Date(dtoIntFilterExtract.getEndYear() + "-"
-									+ dtoIntFilterExtract.getEndMonth() + "-01"))
+					.noFuture(dtoIntFilterExtract.getStartMonth()+dtoIntFilterExtract.getStartYear(),
+							EDateFormat.MES_ANIO)
+					.validDateRange(dtoIntFilterExtract.getStartMonth()+dtoIntFilterExtract.getStartYear(),
+							dtoIntFilterExtract.getEndMonth()+dtoIntFilterExtract.getEndYear(),EDateFormat.MES_ANIO)
 					.validate();
 		}
 

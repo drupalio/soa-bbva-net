@@ -3,10 +3,9 @@ package com.bbva.czic.products.business.dto;
 
 import java.util.Date;
 
+import javax.validation.constraints.NotNull;
 
 import com.bbva.jee.arq.spring.core.servicing.utils.Money;
-
-import javax.validation.constraints.NotNull;
 
 public class DTOIntMovement {
 
