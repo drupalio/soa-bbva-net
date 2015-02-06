@@ -2,10 +2,7 @@ package com.bbva.czic.products.dao.mapper.impl;
 
 
 import java.util.ArrayList;
-<<<<<<< HEAD
-import java.util.List;
-=======
->>>>>>> 548d798f15ddf97c4dfd2dddf6f9f2b9ccc54c5b
+
 import java.util.StringTokenizer;
 
 import com.bbva.czic.products.business.dto.DTOIntConditions;
