@@ -27,9 +27,6 @@ public class SrvIntLoan implements ISrvIntLoan {
 	private static I18nLog log = I18nLogFactory.getLogI18n(SrvIntLoan.class,
 			"META-INF/spring/i18n/log/mensajesLog");
 
-	@Autowired
-	BusinessServicesToolKit businessToolKit;
-
 	@Resource(name = "loanDao")
 	private LoanDAO loanDao;
 
@@ -71,7 +68,7 @@ public class SrvIntLoan implements ISrvIntLoan {
 		final List<DTOIntMovement> result = loanDao.listRotaryQuotaMovements(dtoIntFilterLoan);
 
 		// Mapear del filtro al dto
-		DtoValidator.validate(result);
+	    DtoValidator.validate(result);
 		// Validar el dto de filtrado
 		return result;
 	}
