@@ -1,5 +1,7 @@
 package com.bbva.czic.accounts.business.dto;
 
+import org.hibernate.validator.constraints.Length;
+
 import java.util.Date;
 
 import javax.validation.constraints.NotNull;
@@ -8,6 +10,8 @@ public class DTOIntCheckbook {
 
 	public final static long serialVersionUID = 1L;
 
+	@NotNull
+	@Length(min = 20, max = 20)
 	private String id;
 
 	private String firstCheck;
@@ -22,6 +26,8 @@ public class DTOIntCheckbook {
 
 	private String actualState;
 
+	@NotNull
+	@Length(min = 20, max = 20)
 	private String idAccount;
 
 	public DTOIntCheckbook() {

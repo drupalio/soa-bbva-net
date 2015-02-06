@@ -84,6 +84,9 @@ public class SrvIntAccounts implements ISrvIntAccounts {
 		// Validacion del dto de filtro
 		DtoValidator.validate(filter);
 		new StringValidator().isNumericText(filter.getAccountId());
+		if(filter.getStartDate() != null && filter.getEndDate() != null){
+			new DateValidator().validDateRange(filter.getStartDate(), filter.getEndDate()).validate();
+		}
 
 		List<DTOIntCheck> result = accountsDAO.getListCheck(filter);
 
@@ -96,6 +99,10 @@ public class SrvIntAccounts implements ISrvIntAccounts {
 	public DTOIntCheckbook getCheckbooks(DTOIntCheckbook dtoIntCheckbook) {
 		// 1. Validate DtoIntFilterAccount
 		DtoValidator.validate(dtoIntCheckbook);
+		new StringValidator().isNumericText(dtoIntCheckbook.getIdAccount())
+				.isNumericText(dtoIntCheckbook.getId())
+				.notIsNull(dtoIntCheckbook.getId())
+				.notIsNull(dtoIntCheckbook.getIdAccount()).validate();
 
 		// 2. Get response
 		final DTOIntCheckbook result = accountsDAO.getCheckbooks(dtoIntCheckbook);
