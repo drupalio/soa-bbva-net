@@ -8,7 +8,10 @@ public class DTOIntExtract {
 	private String month;
 	@NotNull
 	private String year;
+	//Supuesto identificador del extracto
 	private String extCode;
+	//Codigo auxiliar desconocido
+	private String auxCode;
 	@NotNull
 	private String url;
 	private String generationDate;
@@ -52,4 +55,13 @@ public class DTOIntExtract {
 	public void setGenerationDate(String generationDate) {
 		this.generationDate = generationDate;
 	}
+
+	public String getAuxCode() {
+		return auxCode;
+	}
+
+	public void setAuxCode(String auxCode) {
+		this.auxCode = auxCode;
+	}
+	
 }

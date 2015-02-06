@@ -40,7 +40,7 @@ public interface TxProductsMapper {
 
 	public FormatoOZECN2E0 mapInOzn2(DTOIntFilterExtract dtoIn);
 
-	public DTOIntExtract mapOutOzn2(FormatoOZECN2S0 formatOutput);
+	public DTOIntExtractOutput mapOutOzn2(FormatoOZECN2S0 formatOutput);
 
 	public FormatoOZNCENM0 mapInOznm(DTOIntFilterMovements dtoIn) ;
 
