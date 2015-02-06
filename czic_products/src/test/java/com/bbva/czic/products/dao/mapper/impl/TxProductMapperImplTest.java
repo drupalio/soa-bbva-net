@@ -15,7 +15,7 @@ import com.bbva.czic.products.facade.v01.mapper.impl.ProductsMapper;
 /**
  * Created by Entelgy on 14/01/2015.
  */
-public class GetConditionsMapperTest {
+public class TxProductMapperImplTest {
 
     ProductsMapper productsMapper;
 

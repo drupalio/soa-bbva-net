@@ -1,4 +1,4 @@
-package com.bbva.czic.executives.business;
+package com.bbva.czic.executives.business.impl;
 import static org.junit.Assert.assertNotNull;
 import static org.mockito.Mockito.when;
 
@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import com.bbva.czic.executives.business.ISrvIntExecutives;
 import com.bbva.czic.executives.business.dto.DTOIntExecutive;
 import com.bbva.czic.executives.dao.ExecutivesDAO;
 import org.junit.Before;
