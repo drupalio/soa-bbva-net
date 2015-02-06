@@ -11,10 +11,6 @@ public class DTOIntFilterExtract {
 	private String endMonth;
 	private String startYear;
 	private String endYear;
-	@NotNull
-	private Integer paginationKey;
-	@NotNull
-	private Integer pageSize;
 
 	public String getProductId() {
 		return productId;
@@ -54,22 +50,6 @@ public class DTOIntFilterExtract {
 
 	public void setEndYear(String endYear) {
 		this.endYear = endYear;
-	}
-
-	public Integer getPaginationKey() {
-		return paginationKey;
-	}
-
-	public void setPaginationKey(Integer paginationKey) {
-		this.paginationKey = paginationKey;
-	}
-
-	public Integer getPageSize() {
-		return pageSize;
-	}
-
-	public void setPageSize(Integer pageSize) {
-		this.pageSize = pageSize;
 	}
 
 	public String getExtractId() {

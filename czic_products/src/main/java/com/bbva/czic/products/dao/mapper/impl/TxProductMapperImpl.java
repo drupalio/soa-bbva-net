@@ -243,17 +243,24 @@ public class TxProductMapperImpl extends AbstractBbvaTxConfigurableMapper implem
 		
 		@Override
 		public void mapBtoA(FormatoOZECN2S0 b, DTOIntExtractOutput a,MappingContext context) {
-			String plot = b.getSaltr01() + b.getSaltr02() + b.getSaltr03()
-					+ b.getSaltr04() + b.getSaltr05() + b.getSaltr06()
-					+ b.getSaltr07() + b.getSaltr08() + b.getSaltr09()
-					+ b.getSaltr10() + b.getSaltr11() + b.getSaltr12()
-					+ b.getSaltr13() + b.getSaltr14() + b.getSaltr15()
-					+ b.getSaltr16() + b.getSaltr17() + b.getSaltr18();
+			String plot = dnull(b.getSaltr01()) + dnull(b.getSaltr02()) + dnull(b.getSaltr03())
+					+ dnull(b.getSaltr04()) + dnull(b.getSaltr05()) + dnull(b.getSaltr06())
+					+ dnull(b.getSaltr07()) + dnull(b.getSaltr08()) + dnull(b.getSaltr09())
+					+ dnull(b.getSaltr10()) + dnull(b.getSaltr11()) + dnull(b.getSaltr12())
+					+ dnull(b.getSaltr13()) + dnull(b.getSaltr14()) + dnull(b.getSaltr15())
+					+ dnull(b.getSaltr16()) + dnull(b.getSaltr17()) + dnull(b.getSaltr18());
 			if (evaluatePlot(b)) {
 				mapGetExtracts(a, plot);
 			} else {
 				mapListExtracts(a, plot);
 			}
+		}
+
+		private String dnull(String string) {
+			if(string==null){
+				return "";
+			}
+			return string;
 		}
 
 		private void mapListExtracts(DTOIntExtractOutput a, String plot) {
@@ -281,14 +288,16 @@ public class TxProductMapperImpl extends AbstractBbvaTxConfigurableMapper implem
 		private void mapGetExtracts(DTOIntExtractOutput a, String plot) {
 			a.setExtracts(new ArrayList<DTOIntExtract>());
 			StringTokenizer listExtracts = new StringTokenizer(plot, "|");
-			StringTokenizer extract = new StringTokenizer(plot, ";");
 			listExtracts.nextToken();
 			while (listExtracts.hasMoreElements()) {
-				DTOIntExtract aux = new DTOIntExtract();
-				aux.setExtCode(extract.nextToken());
-				aux.setUrl(extract.nextToken());
-				listExtracts.nextToken();
-				a.getExtracts().add(aux);
+				String extractInfo = listExtracts.nextToken();
+				StringTokenizer extract = new StringTokenizer(extractInfo, ";");
+				while (extract.hasMoreElements()) {
+					DTOIntExtract aux = new DTOIntExtract();
+					aux.setExtCode(extract.nextToken());
+					aux.setUrl(extract.nextToken());
+					a.getExtracts().add(aux);
+				}
 			}
 		};
 	}
