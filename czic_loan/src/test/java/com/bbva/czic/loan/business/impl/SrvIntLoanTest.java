@@ -1,17 +1,13 @@
 package com.bbva.czic.loan.business.impl;
 
-import com.bbva.czic.dto.net.Loan;
-import com.bbva.czic.dto.net.Movement;
-import com.bbva.czic.loan.business.ISrvIntLoan;
-import com.bbva.czic.loan.business.dto.DTOIntFilterLoan;
-import com.bbva.czic.loan.business.dto.DTOIntLoan;
-import com.bbva.czic.loan.business.dto.DTOIntMovement;
-import com.bbva.czic.loan.business.dto.DTOIntRotaryQuotaMove;
-import com.bbva.czic.loan.facade.v01.impl.SrvLoanV01;
-import com.bbva.czic.loan.facade.v01.mappers.ILoanMapper;
-import com.bbva.czic.routine.commons.rm.utils.errors.EnumError;
+import com.bbva.czic.dto.net.Balance;
+import com.bbva.czic.dto.net.Operation;
+import com.bbva.czic.dto.net.Payment;
+import com.bbva.czic.loan.business.dto.*;
+import com.bbva.czic.loan.dao.LoanDAO;
 import com.bbva.czic.routine.commons.rm.utils.test.SpringContextBbvaTest;
-import com.bbva.jee.arq.spring.core.servicing.gce.BusinessServiceException;
+import com.bbva.czic.routine.commons.rm.utils.validator.DtoValidator;
+import com.bbva.jee.arq.spring.core.servicing.utils.Money;
 import junit.framework.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -20,79 +16,114 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import static org.mockito.Matchers.any;
+import static org.mockito.Matchers.anyString;
 import static org.mockito.Mockito.when;
 
 public class SrvIntLoanTest extends SpringContextBbvaTest {
 
 	@Mock
-	private ILoanMapper iLoanMapper;
+	private LoanDAO loanDAO;
 
-	@Mock ISrvIntLoan iSrvIntLoan;
+	@Mock
+	private DtoValidator dtoValidator;
 
 	@InjectMocks
-	private SrvLoanV01 srvLoanV01;
+	private SrvIntLoan srvIntLoan;
 
 	@Before
 	public void init(){
-		srvLoanV01 = new SrvLoanV01();
+		srvIntLoan = new SrvIntLoan();
 		MockitoAnnotations.initMocks(this);
 	}
 
 	@Test
-	public void getRotaryQuotaTestOK(){
+	public void getRotaryQuotaIntTest(){
 
 		DTOIntLoan dtoIntLoan = new DTOIntLoan();
-		dtoIntLoan.setId("1234");
+		dtoIntLoan.setId("20684968230915840285");
+		dtoIntLoan.setType("QA");
+		dtoIntLoan.setName("Credito");
+		dtoIntLoan.setBalance(new Balance());
+		dtoIntLoan.setDebt(new Balance());
+		dtoIntLoan.setPayment(new Payment());
+		dtoIntLoan.setStatus("ok");
 
-		when(iSrvIntLoan.getRotaryQuota("123")).thenReturn(dtoIntLoan);
+		when(loanDAO.getRotaryQuota(anyString())).thenReturn(dtoIntLoan);
 
-		final Loan loan = srvLoanV01.getRotaryQuota("123");
+		DTOIntLoan loan = srvIntLoan.getRotaryQuota("123");
 
-		Assert.assertNull(loan);
+		Assert.assertNotNull(loan);
 	}
 
 	@Test
-	public void listRotaryQuotaMovementsTestOK(){
+	public void listRotaryQuotaMovementsIntTest(){
 
-		List<DTOIntMovement> dtoIntMovement = new ArrayList<DTOIntMovement>();
-		DTOIntMovement movement = new DTOIntMovement();
+		List<DTOIntMovement> dtoIntMovementList = new ArrayList<DTOIntMovement>();
 
-		movement.setId("1234");
-		dtoIntMovement.add(movement);
+		DTOIntMovement dtoIntMovement = new DTOIntMovement();
+		dtoIntMovement.setId("123");
+		dtoIntMovement.setConcept("Pago");
+		dtoIntMovement.setBalance(new Money());
+		dtoIntMovement.setValue(new Money());
+		dtoIntMovement.setOperation(new Operation());
+		dtoIntMovement.setTransactionDate("2013-05-12");
 
-		when(iSrvIntLoan.listRotaryQuotaMovements(any(DTOIntFilterLoan.class))).thenReturn(dtoIntMovement);
 
-		final List<Movement> movementList = srvLoanV01.listRotaryQuotaMovements("123","3","10","filter");
+		dtoIntMovementList.add(dtoIntMovement);
 
-		Assert.assertNull(movementList);
+		DTOIntFilterLoan dtoIntFilterLoan = new DTOIntFilterLoan();
+		dtoIntFilterLoan.setIdLoan("123");
+		dtoIntFilterLoan.setPageSize("5");
+		dtoIntFilterLoan.setPaginationKey("3");
+		dtoIntFilterLoan.setFechaFinal(new Date(20140112));
+		dtoIntFilterLoan.setFechaInicial(new Date(20140115));
+
+		when(loanDAO.listRotaryQuotaMovements(any(DTOIntFilterLoan.class))).thenReturn(dtoIntMovementList);
+
+		List<DTOIntMovement> result = srvIntLoan.listRotaryQuotaMovements(dtoIntFilterLoan);
+
+		Assert.assertNotNull(result);
 	}
 
-	@Test(expected = BusinessServiceException.class)
-	public void getRotaryQuotaMapperException() {
+	@Test
+	public void getRotaryQuotaMovementIntTest(){
 
-	    BusinessServiceException bsn = getBsnExeptionByAlias(EnumError.NO_DATA.getAlias());
+		DTOIntRotaryQuotaMove dtoIntRotaryQuotaMove = new DTOIntRotaryQuotaMove();
+		dtoIntRotaryQuotaMove.setId("123456789");
+		dtoIntRotaryQuotaMove.setConcept("Pago");
+		dtoIntRotaryQuotaMove.setTransactionDate("2014-04-13");
+		dtoIntRotaryQuotaMove.setOperation(new Operation());
+		dtoIntRotaryQuotaMove.setStatus("Ok");
+		dtoIntRotaryQuotaMove.setValue(new Money());
+		dtoIntRotaryQuotaMove.setBalance(new Balance());
+		dtoIntRotaryQuotaMove.setNumbersOfQuota(new Integer(12));
+		dtoIntRotaryQuotaMove.setRemainingQuotas(new Integer(12));
 
-    	when(iLoanMapper.map(any(DTOIntLoan.class))).thenThrow(bsn);
+		DTOIntFilterRotaryMovement dtoIntFilterRotaryMovement = new DTOIntFilterRotaryMovement();
+		dtoIntFilterRotaryMovement.setIdLoan("20684968230915840285");
+		dtoIntFilterRotaryMovement.setIdMovement(456734);
 
-		srvLoanV01.getRotaryQuota("1234");
+		when(loanDAO.getRotaryQuotaMovement(any(DTOIntFilterRotaryMovement.class))).thenReturn(dtoIntRotaryQuotaMove);
+
+		DTOIntRotaryQuotaMove result = srvIntLoan.getRotaryQuotaMovement(dtoIntFilterRotaryMovement);
+
+		Assert.assertNotNull(result);
 	}
 
-	@Test(expected = BusinessServiceException.class)
-	public void listRotaryQuotaMovementsMapperException() {
+	/*@Test(expected = BusinessServiceException.class)
+	public void getRotaryQuotaIntTestThrows(){
 
 		BusinessServiceException bsn = getBsnExeptionByAlias(EnumError.NO_DATA.getAlias());
 
-		when(iLoanMapper.map(any(DTOIntRotaryQuotaMove.class))).thenThrow(bsn);
-
-		srvLoanV01.getRotaryQuotaMovement("1234", "56789");
+		when(srvIntLoan.getRotaryQuota("123")).thenThrow(bsn);
+		srvIntLoan.getRotaryQuota("1234");
 	}
 
 	private BusinessServiceException getBsnExeptionByAlias(String alias){
 		return new BusinessServiceException(alias);
-	}
-	
-
+	}*/
 }
