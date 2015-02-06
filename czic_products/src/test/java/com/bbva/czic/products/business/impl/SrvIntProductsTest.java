@@ -5,6 +5,8 @@ import com.bbva.czic.products.business.ISrvIntProducts;
 import com.bbva.czic.products.business.dto.DTOIntConditions;
 import com.bbva.czic.products.business.dto.DTOIntProduct;
 import com.bbva.czic.products.dao.IProductsDAO;
+import com.bbva.czic.routine.commons.rm.utils.errors.EnumError;
+import com.bbva.jee.arq.spring.core.servicing.gce.BusinessServiceException;
 import com.bbva.jee.arq.spring.core.servicing.test.BusinessServiceTestContextLoader;
 import com.bbva.jee.arq.spring.core.servicing.test.MockInvocationContextTestExecutionListener;
 import org.junit.Before;
@@ -20,12 +22,10 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.support.DependencyInjectionTestExecutionListener;
 
 import static org.junit.Assert.assertNotNull;
+import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.when;
 
 
-@RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(loader = BusinessServiceTestContextLoader.class, locations = {"classpath*:/META-INF/spring/applicationContext-*.xml", "classpath:/META-INF/spring/business-service.xml", "classpath:/META-INF/spring/business-service-test.xml"})
-@TestExecutionListeners(listeners = {MockInvocationContextTestExecutionListener.class, DependencyInjectionTestExecutionListener.class})
 public class SrvIntProductsTest {
 
 	@Mock
@@ -34,11 +34,6 @@ public class SrvIntProductsTest {
 	@InjectMocks
 	@Autowired
 	ISrvIntProducts srv;
-
-	@Before
-	public void init() {
-		MockitoAnnotations.initMocks(this);
-	}
 
 	@Test()
 	public void testGetConditionsSucces() {
@@ -51,6 +46,13 @@ public class SrvIntProductsTest {
 		initialResult= srv.getConditions(dtoIntProduct);
 
 		assertNotNull(initialResult);
+	}
+
+
+
+
+	private BusinessServiceException getBsnExeptionByAlias(String alias){
+		return new BusinessServiceException(alias);
 	}
 
 

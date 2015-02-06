@@ -1,4 +1,4 @@
-package com.bbva.czic.executives.dao;
+package com.bbva.czic.executives.dao.mapper.impl;
 
 import com.bbva.czic.dto.net.Executive;
 import com.bbva.czic.dto.net.Office;

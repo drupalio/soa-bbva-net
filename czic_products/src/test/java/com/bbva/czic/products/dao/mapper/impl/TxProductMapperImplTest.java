@@ -15,7 +15,7 @@ import java.util.Date;
 /**
  * Created by Entelgy on 14/01/2015.
  */
-public class GetConditionsMapperTest {
+public class TxProductMapperImplTest {
 
     ProductsMapper productsMapper;
 

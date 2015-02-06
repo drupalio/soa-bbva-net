@@ -1,4 +1,4 @@
-package com.bbva.czic.executives.facade.v01;
+package com.bbva.czic.executives.facade.v01.mapper.impl;
 
 import com.bbva.czic.executives.business.dto.DTOIntExecutive;
 import com.bbva.czic.executives.dao.model.oznr.FormatoOZECNRS0;
