@@ -51,9 +51,21 @@ public class DateValidator extends Validator {
 		return this;
 	}
 	
-	public DateValidator equals(Date from, Date to) {
-		if (!from.toString().equals(to.toString())) {
+	public DateValidator equals(String from, String to) {
+		if (!from.equals(to)) {
 			exceptions.add(new BusinessServiceException(EnumError.DATE_INTERVAL_OUT_OF_RANGE.getAlias()));
+		}
+		return this;
+	}
+
+	public DateValidator noFuture(String date, EDateFormat pattern) {
+		try {
+			DateFormat format = new SimpleDateFormat(pattern.getPattern());
+			if (format.parse(date).after(new Date())) {
+				exceptions.add(new BusinessServiceException(EnumError.DATE_INTERVAL_OUT_OF_RANGE.getAlias()));
+			}
+		} catch (ParseException e) {
+			exceptions.add(new BusinessServiceException(EnumError.WRONG_PARAMETERS.getAlias()));
 		}
 		return this;
 	}

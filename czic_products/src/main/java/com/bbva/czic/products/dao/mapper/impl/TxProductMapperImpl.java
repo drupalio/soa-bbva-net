@@ -40,7 +40,8 @@ public class TxProductMapperImpl extends AbstractBbvaTxConfigurableMapper implem
 		// Map DTOIntFilter <-> FormatoOZNCENT0 (OZNT)
 		factory.classMap(DTOIntProduct.class, FormatoOZECNTE0.class).field("id", "numprod").byDefault()
 				.register();
-// Map DTOIntFilter <-> FormatoOZNCENM0 (OZNM)
+		
+		// Map DTOIntFilter <-> FormatoOZNCENM0 (OZNM)
 		factory.classMap(DTOIntFilterMovements.class, FormatoOZNCENM0.class)
 				.field("productId", "nocuent").byDefault()
 				.field("productType", "tiprod")
@@ -94,8 +95,8 @@ public class TxProductMapperImpl extends AbstractBbvaTxConfigurableMapper implem
 				.byDefault()
 				.register();
 		// Map FormatoOZECN2S0 <-> DTOIntExtractOutput (OZN2)
-		factory.classMap(DTOIntExtractOutput.class,FormatoOZECN2S0.class).byDefault()
-				.customize(new ExtractListMapper()).register();
+		factory.classMap(DTOIntExtractOutput.class,FormatoOZECN2S0.class)
+				.customize(new ExtractListMapper()).byDefault().register();
 	}
 
 
@@ -160,10 +161,7 @@ public class TxProductMapperImpl extends AbstractBbvaTxConfigurableMapper implem
 
 	@Override
 	public DTOIntExtractOutput mapOutOzn2(FormatoOZECN2S0 formatOutput) {
-		if(evaluatePlot(formatOutput)){
-			return mapOutOzn2getExtracts(formatOutput);
-		}
-		return mapOutOzn2ListExtracts(formatOutput);
+		return map(formatOutput,DTOIntExtractOutput.class);
 	}
 
 	private FormatoOZECN2E0 mapInOzn2getExtracts(DTOIntFilterExtract dtoIn) {
@@ -185,52 +183,56 @@ public class TxProductMapperImpl extends AbstractBbvaTxConfigurableMapper implem
 		formato.setLongtra(parser.length());
 		return processPlot(formato,parser);
 	}
-
-	private DTOIntExtractOutput mapOutOzn2ListExtracts(FormatoOZECN2S0 formatOutput) {
-		DTOIntExtractOutput dtoIntExtract = new DTOIntExtractOutput();
-		return dtoIntExtract;
-	}
-
-	private DTOIntExtractOutput mapOutOzn2getExtracts(FormatoOZECN2S0 formatOutput) {
-		DTOIntExtractOutput dtoIntExtract = new DTOIntExtractOutput();
-		return dtoIntExtract;
-	}
 	
 	public static class ExtractListMapper extends CustomMapper<DTOIntExtractOutput,FormatoOZECN2S0> {
 		@Override
-		public void mapBtoA(FormatoOZECN2S0 b, DTOIntExtractOutput a, MappingContext context) {
-			DTOIntExtractOutput dtoIntOut = new DTOIntExtractOutput();
-			dtoIntOut.setExtracts(new ArrayList<DTOIntExtract>());
-			String plot = b.getSaltr01() + b.getSaltr02() + 
-					b.getSaltr03() + 
-					b.getSaltr04() + 
-					b.getSaltr05() + 
-					b.getSaltr06() + 
-					b.getSaltr07() + 
-					b.getSaltr08() + 
-					b.getSaltr09() + 
-					b.getSaltr10() +
-					b.getSaltr11() + 
-					b.getSaltr12() + 
-					b.getSaltr13() + 
-					b.getSaltr14() + 
-					b.getSaltr15() + 
-					b.getSaltr16() + 
-					b.getSaltr17() + 
-					b.getSaltr18();
-			StringTokenizer listExtracts = new StringTokenizer(plot,"|");
-			StringTokenizer extract = new StringTokenizer(plot,";");
+		public void mapBtoA(FormatoOZECN2S0 b, DTOIntExtractOutput a,MappingContext context) {
+			String plot = b.getSaltr01() + b.getSaltr02() + b.getSaltr03()
+					+ b.getSaltr04() + b.getSaltr05() + b.getSaltr06()
+					+ b.getSaltr07() + b.getSaltr08() + b.getSaltr09()
+					+ b.getSaltr10() + b.getSaltr11() + b.getSaltr12()
+					+ b.getSaltr13() + b.getSaltr14() + b.getSaltr15()
+					+ b.getSaltr16() + b.getSaltr17() + b.getSaltr18();
+			if (evaluatePlot(b)) {
+				mapGetExtracts(a, plot);
+			} else {
+				mapListExtracts(a, plot);
+			}
+		}
+
+		private void mapListExtracts(DTOIntExtractOutput a, String plot) {
+			a.setExtracts(new ArrayList<DTOIntExtract>());
+			StringTokenizer listExtracts = new StringTokenizer(plot, "|");
 			listExtracts.nextToken();
-			while(listExtracts.hasMoreElements()){
+			while (listExtracts.hasMoreElements()) {
+				String extractInfo = listExtracts.nextToken();
+				StringTokenizer extract = new StringTokenizer(extractInfo, ";");
+				while(extract.hasMoreElements()){
+					DTOIntExtract aux = new DTOIntExtract();
+					aux.setExtCode(extract.nextToken());
+					aux.setAuxCode(extract.nextToken());
+					extract.nextToken();
+					extract.nextToken();
+					aux.setYear(extract.nextToken());
+					aux.setMonth(extract.nextToken());
+					extract.nextToken();
+					extract.nextToken();
+					a.getExtracts().add(aux);
+				}
+			}
+		}
+
+		private void mapGetExtracts(DTOIntExtractOutput a, String plot) {
+			a.setExtracts(new ArrayList<DTOIntExtract>());
+			StringTokenizer listExtracts = new StringTokenizer(plot, "|");
+			StringTokenizer extract = new StringTokenizer(plot, ";");
+			listExtracts.nextToken();
+			while (listExtracts.hasMoreElements()) {
 				DTOIntExtract aux = new DTOIntExtract();
 				aux.setExtCode(extract.nextToken());
-				aux.setAuxCode(extract.nextToken());
-				extract.nextToken();
-				extract.nextToken();
-				aux.setYear(extract.nextToken());
-				aux.setMonth(extract.nextToken());
-				extract.nextToken();
-				extract.nextToken();
+				aux.setUrl(extract.nextToken());
+				listExtracts.nextToken();
+				a.getExtracts().add(aux);
 			}
 		};
 	}
@@ -275,7 +277,7 @@ public class TxProductMapperImpl extends AbstractBbvaTxConfigurableMapper implem
 		return formato;
 	}
 
-	private boolean evaluatePlot(FormatoOZECN2S0 formatOutput) {
+	private static boolean evaluatePlot(FormatoOZECN2S0 formatOutput) {
 		return formatOutput.getSaltr01().contains(WORD)
 				|| formatOutput.getSaltr02().contains(WORD)
 				|| formatOutput.getSaltr03().contains(WORD)

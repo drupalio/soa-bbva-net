@@ -4,15 +4,20 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
-import com.bbva.czic.products.business.dto.*;
-import com.bbva.czic.products.dao.tx.TxGetMovement;
-import com.bbva.czic.products.dao.tx.TxListMovements;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.bbva.czic.products.business.dto.DTOIntConditions;
+import com.bbva.czic.products.business.dto.DTOIntExtractOutput;
+import com.bbva.czic.products.business.dto.DTOIntFilterExtract;
+import com.bbva.czic.products.business.dto.DTOIntFilterMovements;
+import com.bbva.czic.products.business.dto.DTOIntMovement;
+import com.bbva.czic.products.business.dto.DTOIntProduct;
 import com.bbva.czic.products.dao.IProductsDAO;
 import com.bbva.czic.products.dao.tx.TxGetConditions;
+import com.bbva.czic.products.dao.tx.TxGetMovement;
 import com.bbva.czic.products.dao.tx.TxListExtracts;
+import com.bbva.czic.products.dao.tx.TxListMovements;
 import com.bbva.jee.arq.spring.core.host.protocolo.ps9.ErrorMappingHelper;
 
 @Component(value = "products-dao")
