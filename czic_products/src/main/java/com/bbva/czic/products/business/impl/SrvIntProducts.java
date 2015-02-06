@@ -85,14 +85,14 @@ public class SrvIntProducts implements ISrvIntProducts {
 		}
 
 		// 2. Get response
-		final List<DTOIntExtract> result = productsDAO
+		final DTOIntExtractOutput result = productsDAO
 				.listExtracts(dtoIntFilterExtract);
 
 		// 3. Validate output
 		DtoValidator.validate(result);
 
 		log.info(" getConditions Conditions ");
-		return result;
+		return result.getExtracts();
 	}
 
 	@Override
