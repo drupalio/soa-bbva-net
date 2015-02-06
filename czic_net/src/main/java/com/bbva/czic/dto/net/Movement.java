@@ -34,14 +34,14 @@ public class Movement  implements Serializable
     private String id;
     @ApiModelProperty(value = "concepto de la operacion", required = true)
     private String concept;
-    //@XmlJavaTypeAdapter(CalendarAdapter.class)
+    @XmlJavaTypeAdapter(CalendarAdapter.class)
     @ApiModelProperty(value = " fecha de la transaccion", required = true)
     @Past
-    private String transactionDate;
-    //@XmlJavaTypeAdapter(CalendarAdapter.class)
+    private Calendar transactionDate;
+    @XmlJavaTypeAdapter(CalendarAdapter.class)
     @ApiModelProperty(value = " fecha y hora de la operacion", required = true)
     @Past
-    private String operationDate;
+    private Calendar operationDate;
     @ApiModelProperty("Cuenta origen del movimiento")
     private String sourceReference;
     @ApiModelProperty("Cuenta destino del movimiento")
@@ -83,19 +83,19 @@ public class Movement  implements Serializable
         this.concept = concept;
     }
 
-    public String getTransactionDate() {
+    public Calendar getTransactionDate() {
         return transactionDate;
     }
 
-    public void setTransactionDate(String transactionDate) {
+    public void setTransactionDate(Calendar transactionDate) {
         this.transactionDate = transactionDate;
     }
 
-    public String getOperationDate() {
+    public Calendar getOperationDate() {
         return operationDate;
     }
 
-    public void setOperationDate(String operationDate) {
+    public void setOperationDate(Calendar operationDate) {
         this.operationDate = operationDate;
     }
 
