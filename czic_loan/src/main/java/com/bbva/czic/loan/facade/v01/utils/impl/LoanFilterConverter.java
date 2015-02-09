@@ -42,7 +42,7 @@ public class LoanFilterConverter{
      * @param filter
      * @return
      */
-    public DTOIntFilterLoan getDTOIntFilter(String loanId, String paginationKey, String pageSize, String filter) {
+    public DTOIntFilterLoan getDTOIntFilter(String loanId, Integer paginationKey, Integer pageSize, String filter) {
 
         //Variables
         final DTOIntFilterLoan dtoIntFilterLoan = new DTOIntFilterLoan();

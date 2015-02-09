@@ -8,6 +8,7 @@ import com.bbva.czic.executives.business.dto.DTOIntExecutivesFilter;
 import com.bbva.czic.executives.business.dto.DTOIntOffice;
 import com.bbva.czic.executives.facade.v01.mapper.IExecutivesMapper;
 import com.bbva.czic.routine.commons.rm.utils.errors.EnumError;
+import com.bbva.czic.routine.commons.rm.utils.test.SpringContextBbvaTest;
 import com.bbva.jee.arq.spring.core.servicing.gce.BusinessServiceException;
 import org.junit.Before;
 import org.junit.Test;
@@ -23,7 +24,7 @@ import static org.mockito.Mockito.when;
 /**
  * Created by Entelgy on 06/02/2015.
  */
-public class SrvExecutivesV01Test {
+public class SrvExecutivesV01Test  extends SpringContextBbvaTest {
 
     @Mock
     private ISrvIntExecutives srvIntExecutives;
@@ -86,10 +87,9 @@ public class SrvExecutivesV01Test {
         srv.getExecutive(filter,null,null,null);
     }
 
-
-
     private BusinessServiceException getBsnExeptionByAlias(String alias){
-        return new BusinessServiceException(alias);
+        BusinessServiceException bse =  new BusinessServiceException(alias);
+        return bse;
     }
 
 }

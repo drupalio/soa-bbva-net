@@ -27,11 +27,10 @@ public class TxExecutiveMapperImplTest {
     @Before
     public void init() {
         txExecutiveMapperImpl = new TxExecutiveMapperImpl();
-        MockitoAnnotations.initMocks(this);
     }
 
     @Test
-    public void testMapInOznr(DTOIntExecutivesFilter dtoIn) {
+    public void testMapInOznr() {
 
         DTOIntExecutivesFilter dtoIntExecutivesFilter = new DTOIntExecutivesFilter();
         dtoIntExecutivesFilter.setType("A");
@@ -58,7 +57,7 @@ public class TxExecutiveMapperImplTest {
         assertEquals(formatOutput.getNomejec(),dtoIntExecutive.getName());
         assertEquals(formatOutput.getTelejec(),dtoIntExecutive.getPhone());
         assertEquals(formatOutput.getEmailej(),dtoIntExecutive.getEmail());
-        assertEquals(formatOutput.getOfiejec(),dtoIntExecutive.getOffice());
+        assertEquals(formatOutput.getOfiejec(),dtoIntExecutive.getOffice().getName());
         assertEquals(formatOutput.getIdejecu(),dtoIntExecutive.getExecutiveId());
     }
 
