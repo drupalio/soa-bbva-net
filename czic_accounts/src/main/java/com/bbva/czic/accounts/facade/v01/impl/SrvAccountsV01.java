@@ -221,9 +221,6 @@ public class SrvAccountsV01 implements ISrvAccountsV01,
 	public Check getCheck(	@ApiParam(value = "Claim identifier param") @PathParam("accountId") String accountId,
 							  @ApiParam(value = "Claim identifier param") @PathParam("checkId") String checkId) {
 
-		// 1. Validate filter FIQL
-		//	new FiqlValidator(filter).exist().hasGeAndLe("month").validate();
-
 		// 2. Mapping to DTOIntFilter
 		DTOIntCheckFilter dtoIntExecutivesFilter = iAccountsMapper.getDTOIntFilterChecks(checkId,accountId);
 
