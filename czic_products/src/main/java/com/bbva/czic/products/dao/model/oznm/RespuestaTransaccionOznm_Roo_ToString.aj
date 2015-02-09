@@ -3,7 +3,6 @@
 
 package com.bbva.czic.products.dao.model.oznm;
 
-import java.lang.String;
 
 privileged aspect RespuestaTransaccionOznm_Roo_ToString {
     

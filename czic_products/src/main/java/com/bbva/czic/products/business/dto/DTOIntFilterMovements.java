@@ -1,10 +1,9 @@
 package com.bbva.czic.products.business.dto;
 
-import com.bbva.czic.routine.commons.rm.utils.fiql.FiqlType;
-import org.hibernate.validator.constraints.NotEmpty;
-
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+
+import org.hibernate.validator.constraints.NotEmpty;
 
 /**
  * Created by Entelgy on 29/01/2015.

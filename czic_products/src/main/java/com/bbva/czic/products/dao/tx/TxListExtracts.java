@@ -4,7 +4,6 @@ import javax.annotation.Resource;
 
 import org.springframework.stereotype.Component;
 
-import com.bbva.czic.products.business.dto.DTOIntExtract;
 import com.bbva.czic.products.business.dto.DTOIntExtractOutput;
 import com.bbva.czic.products.business.dto.DTOIntFilterExtract;
 import com.bbva.czic.products.dao.mapper.TxProductsMapper;

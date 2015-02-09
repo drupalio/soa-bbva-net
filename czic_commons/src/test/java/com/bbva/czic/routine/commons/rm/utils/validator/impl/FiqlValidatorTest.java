@@ -2,6 +2,9 @@ package com.bbva.czic.routine.commons.rm.utils.validator.impl;
 
 import org.junit.Test;
 
+import static org.hamcrest.core.Is.is;
+import static org.junit.Assert.assertThat;
+
 public class FiqlValidatorTest {
 
 	@Test
@@ -12,6 +15,25 @@ public class FiqlValidatorTest {
 		fiqlValidator.hasGeAndLe("chargeDate").hasEq("hola").validate();
 		fiqlValidator.hasGeAndLeDate("date").hasGeAndLe("chargeDate", "\\d\\d").hasEq("hola", "\\w.*").validate();
 
+	}
+
+	@Test
+	public void testExceptionListEmptyIfNoValidationIsExecuted() {
+		// Setup data
+		final FiqlValidator fiqlValidator = new FiqlValidator(null);
+
+		//Validation
+		assertThat(false, is(fiqlValidator.hasException()));
+	}
+
+	@Test
+	public void testHasExceptionIfMandatoryFilterIsNull() {
+		final String filter = null;
+		FiqlValidator fiqlValidator = new FiqlValidator(filter);
+
+		fiqlValidator.exist();
+
+		assertThat(true, is(fiqlValidator.hasException()));
 	}
 
 }

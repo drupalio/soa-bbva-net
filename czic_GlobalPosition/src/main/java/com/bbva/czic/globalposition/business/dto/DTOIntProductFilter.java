@@ -15,7 +15,7 @@ public class DTOIntProductFilter {
 	@Pattern(regexp = "^\\d{8}$")
 	private String idCustomer;
 
-	@Length(min = 2, max = 2)
+	@Pattern(regexp = "^[A-Z]{2}$")
 	private String productType;
 
 	public String getIdCustomer() {

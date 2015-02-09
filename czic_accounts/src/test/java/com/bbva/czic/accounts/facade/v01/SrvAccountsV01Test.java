@@ -1,12 +1,10 @@
 package com.bbva.czic.accounts.facade.v01;
 
 import com.bbva.czic.accounts.business.ISrvIntAccounts;
-import com.bbva.czic.accounts.business.dto.DTOIntAccount;
-import com.bbva.czic.accounts.business.dto.DTOIntFilterAccount;
-import com.bbva.czic.accounts.business.dto.DTOIntMonthlyBalances;
+import com.bbva.czic.accounts.business.dto.*;
 import com.bbva.czic.accounts.facade.v01.impl.SrvAccountsV01;
 import com.bbva.czic.accounts.facade.v01.mappers.IAccountsMapper;
-import com.bbva.czic.dto.net.Account;
+import com.bbva.czic.dto.net.*;
 import com.bbva.czic.routine.commons.rm.utils.errors.EnumError;
 import com.bbva.czic.routine.commons.rm.utils.test.SpringContextBbvaTest;
 import com.bbva.jee.arq.spring.core.servicing.gce.BusinessServiceException;
@@ -16,12 +14,11 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.Assert.assertNotNull;
-import static org.mockito.Matchers.any;
-import static org.mockito.Matchers.anyList;
-import static org.mockito.Matchers.anyObject;
+import static org.mockito.Matchers.*;
 import static org.mockito.Mockito.when;
 
 /**
@@ -44,26 +41,27 @@ public class SrvAccountsV01Test extends SpringContextBbvaTest {
         MockitoAnnotations.initMocks(this);
     }
 
+    // ------------------ getAccount ------------------
 
     @Test(expected = BusinessServiceException.class)
     public void testGetAccountSrvIntException(){
-        BusinessServiceException bsn = getBsnExeptionByAlias(EnumError.NO_DATA.getAlias());
+        final BusinessServiceException bsn = getBsnExeptionByAlias(EnumError.NO_DATA.getAlias());
         when(srvIntAccounts.getAccount(any(DTOIntFilterAccount.class))).thenThrow(bsn);
         srv.getAccount("123456");
     }
 
     @Test(expected = BusinessServiceException.class)
     public void testGetAccountMapperException(){
-        BusinessServiceException bsn = getBsnExeptionByAlias(EnumError.NO_DATA.getAlias());
+        final BusinessServiceException bsn = getBsnExeptionByAlias(EnumError.NO_DATA.getAlias());
         when(iAccountsMapper.map(any(DTOIntAccount.class))).thenThrow(bsn);
         srv.getAccount("123456");
     }
 
     @Test
     public void testGetAccount(){
-        DTOIntAccount acc = new DTOIntAccount();
+        final DTOIntAccount acc = new DTOIntAccount();
         acc.setIdAccount("123456");
-        Account account = new Account();
+        final Account account = new Account();
         account.setId("123");
 
         when(srvIntAccounts.getAccount(any(DTOIntFilterAccount.class))).thenReturn(acc);
@@ -74,22 +72,24 @@ public class SrvAccountsV01Test extends SpringContextBbvaTest {
         assertNotNull(a);
     }
 
+    // ------------------- getAccountMonthlyBalance -------------------
+
     @Test(expected = BusinessServiceException.class)
-    public void getAccountMonthlyBalanceNoFilter(){
+    public void testGetAccountMonthlyBalanceNoFilter(){
         final String filter = "";
         srv.getAccountMonthlyBalance("123456", filter);
     }
 
     @Test(expected = BusinessServiceException.class)
-    public void getAccountMonthlyBalanceBadFilter(){
+    public void testGetAccountMonthlyBalanceBadFilter(){
         final String filter = "(date==2015-01-10)";
         srv.getAccountMonthlyBalance("123456", filter);
     }
 
     @Test(expected = BusinessServiceException.class)
-    public void getAccountMonthlyBalanceSrvIntException(){
+    public void testGetAccountMonthlyBalanceSrvIntException(){
         final String filter = "(month=ge=122014;month=le=012015)";
-        BusinessServiceException bsn = getBsnExeptionByAlias(EnumError.NO_DATA.getAlias());
+        final BusinessServiceException bsn = getBsnExeptionByAlias(EnumError.NO_DATA.getAlias());
 
         when(srvIntAccounts.getAccountMonthlyBalance(any(DTOIntFilterAccount.class))).thenThrow(bsn);
 
@@ -97,13 +97,153 @@ public class SrvAccountsV01Test extends SpringContextBbvaTest {
     }
 
     @Test(expected = BusinessServiceException.class)
-    public void getAccountMonthlyBalanceMapperException(){
+    public void testGetAccountMonthlyBalanceMapperException(){
         final String filter = "(month=ge=122014;month=le=012015)";
-        BusinessServiceException bsn = getBsnExeptionByAlias(EnumError.NO_DATA.getAlias());
+        final BusinessServiceException bsn = getBsnExeptionByAlias(EnumError.NO_DATA.getAlias());
 
         when(iAccountsMapper.mapL(anyList())).thenThrow(bsn);
 
         srv.getAccountMonthlyBalance("123456", filter);
+    }
+
+    @Test
+    public void testGetAccountMonthlyBalance(){
+        final String filter = "(month=ge=122014;month=le=012015)";
+        final List<DTOIntMonthlyBalances> balances = new ArrayList<DTOIntMonthlyBalances>();
+        final List<MonthlyBalances> balancesList = new ArrayList<MonthlyBalances>();
+
+        when(srvIntAccounts.getAccountMonthlyBalance(any(DTOIntFilterAccount.class))).thenReturn(balances);
+        when(iAccountsMapper.mapL(anyList())).thenReturn(balancesList);
+
+        final List<MonthlyBalances> monthlyBalanceses = srv.getAccountMonthlyBalance("123456", filter);
+        assertNotNull(monthlyBalanceses);
+    }
+
+    // ------------------- getAccMovementResume -------------------
+
+    @Test(expected = BusinessServiceException.class)
+    public void testGetAccMovementResumeBadFilter(){
+        final String filter = "(date==2015-01-10)";
+        srv.getAccMovementResume("123456", filter);
+    }
+
+    @Test(expected = BusinessServiceException.class)
+    public void testGetAccMovementResumeSrvIntException(){
+        final String filter = "(month=ge=12)";
+        final BusinessServiceException bsn = getBsnExeptionByAlias(EnumError.NO_DATA.getAlias());
+
+        when(srvIntAccounts.getAccMovementResume(any(DTOIntFilterMovResumes.class))).thenThrow(bsn);
+
+        srv.getAccMovementResume("123456", filter);
+    }
+
+    @Test(expected = BusinessServiceException.class)
+    public void testGetAccMovementResumeMapperException(){
+        final String filter = "(month=ge=12)";
+        final BusinessServiceException bsn = getBsnExeptionByAlias(EnumError.NO_DATA.getAlias());
+
+        when(iAccountsMapper.map(anyListOf(DTOIntAccMovementsResume.class))).thenThrow(bsn);
+
+        srv.getAccMovementResume("123456", filter);
+    }
+
+    @Test
+    public void testGetAccMovementResume(){
+        final String filter = "(month=ge=122014;month=le=012015)";
+        final List<DTOIntAccMovementsResume> resumes = new ArrayList<DTOIntAccMovementsResume>();
+        final List<AccMovementsResume> resumesList = new ArrayList<AccMovementsResume>();
+
+        when(srvIntAccounts.getAccMovementResume(any(DTOIntFilterMovResumes.class))).thenReturn(resumes);
+        when(iAccountsMapper.map(anyList())).thenReturn(resumesList);
+
+        final List<AccMovementsResume> accMovementsResume = srv.getAccMovementResume("123456", filter);
+        assertNotNull(accMovementsResume);
+    }
+
+    // ------------------- listCheck -------------------
+
+    @Test(expected = BusinessServiceException.class)
+    public void testListCheckNoFilter(){
+        final String filter = "";
+        srv.listCheck("12345600", filter, 1, 10);
+    }
+
+    @Test(expected = BusinessServiceException.class)
+    public void testListCheckSrvIntException(){
+        final String filter = "((issueDate=ge=2014-12-01;issueDate=le=2015-01-10),status==1)";
+        final BusinessServiceException bsn = getBsnExeptionByAlias(EnumError.NO_DATA.getAlias());
+
+        when(srvIntAccounts.listCheck(any(DTOIntFilterChecks.class))).thenThrow(bsn);
+
+        srv.listCheck("123456", filter, 1, 10);
+    }
+
+    @Test(expected = BusinessServiceException.class)
+    public void testListCheckMapperException(){
+        final String filter = "((issueDate=ge=2014-12-01;issueDate=le=2015-01-10),status==1)";
+        final BusinessServiceException bsn = getBsnExeptionByAlias(EnumError.NO_DATA.getAlias());
+
+        when(iAccountsMapper.mapChecks(anyListOf(DTOIntCheck.class))).thenThrow(bsn);
+
+        srv.listCheck("123456", filter, 1, 10);
+    }
+
+    @Test
+    public void testListCheck(){
+        final String filter = "((issueDate=ge=2014-12-01;issueDate=le=2015-01-10),status==1)";
+        final DTOIntFilterChecks checkFilter = new DTOIntFilterChecks();
+        final List<DTOIntCheck> resumes = new ArrayList<DTOIntCheck>();
+        final List<Check> resumesList = new ArrayList<Check>();
+
+        when(iAccountsMapper.getDtoIntFilterChecks(anyString(), anyString(), anyInt(), anyInt())).thenReturn(checkFilter);
+        when(srvIntAccounts.listCheck(any(DTOIntFilterChecks.class))).thenReturn(resumes);
+        when(iAccountsMapper.mapChecks(anyList())).thenReturn(resumesList);
+
+        final List<Check> checks = srv.listCheck("123456", filter, 1, 10);
+        assertNotNull(checks);
+    }
+
+    // ------------------- getCheckbook -------------------
+
+    @Test(expected = BusinessServiceException.class)
+    public void testGetCheckbookMappingRequestException(){
+        final BusinessServiceException bsn = getBsnExeptionByAlias(EnumError.NO_DATA.getAlias());
+
+        when(iAccountsMapper
+                .getDtoIntCheckbook(anyString(), anyString())).thenThrow(bsn);
+
+        srv.getCheckbook("123456","987654");
+    }
+
+    @Test(expected = BusinessServiceException.class)
+    public void testGetCheckbookSrvIntException(){
+        final BusinessServiceException bsn = getBsnExeptionByAlias(EnumError.NO_DATA.getAlias());
+
+        when(srvIntAccounts.getCheckbooks(any(DTOIntCheckbook.class))).thenThrow(bsn);
+
+        srv.getCheckbook("123456","987654");
+    }
+
+    @Test(expected = BusinessServiceException.class)
+    public void testGetCheckbookMapperException(){
+        final BusinessServiceException bsn = getBsnExeptionByAlias(EnumError.NO_DATA.getAlias());
+
+        when(iAccountsMapper.mapCheckbooks(any(DTOIntCheckbook.class))).thenThrow(bsn);
+
+        srv.getCheckbook("123456", "987654");
+    }
+
+    @Test
+    public void testGetCheckbook(){
+        final DTOIntCheckbook checkbook = new DTOIntCheckbook();
+        final Checkbook answer = new Checkbook();
+
+        when(iAccountsMapper.getDtoIntCheckbook(anyString(), anyString())).thenReturn(checkbook);
+        when(srvIntAccounts.getCheckbooks(any(DTOIntCheckbook.class))).thenReturn(checkbook);
+        when(iAccountsMapper.mapCheckbooks(any(DTOIntCheckbook.class))).thenReturn(answer);
+
+       Checkbook books = srv.getCheckbook("123456", "987654");
+        assertNotNull(books);
     }
 
     private BusinessServiceException getBsnExeptionByAlias(String alias){

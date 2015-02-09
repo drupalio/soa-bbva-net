@@ -4,7 +4,6 @@
 package com.bbva.czic.products.dao.model.oznl;
 
 import com.bbva.jee.arq.spring.core.host.CuerpoMultiparte;
-import java.lang.String;
 
 privileged aspect RespuestaTransaccionOznl_Roo_JavaBean {
     
