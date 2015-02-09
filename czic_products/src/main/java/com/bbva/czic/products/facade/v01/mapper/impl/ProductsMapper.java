@@ -192,7 +192,7 @@ public class ProductsMapper extends AbstractBbvaConfigurableMapper implements
 	}
 
 	public DTOIntFilterExtract getDtoIntFilterExtract(String productId, String extractId,
-			String filter, Integer paginationKey, Integer pageSize) {
+			String filter) {
 		final String monthGe = this.getGeValue(filter,"month");
 		final String monthLe = this.getLeValue(filter,"month");
 		final String yearGe = this.getGeValue(filter,"year");
@@ -201,8 +201,6 @@ public class ProductsMapper extends AbstractBbvaConfigurableMapper implements
 		DTOIntFilterExtract dtoIntFilter = new DTOIntFilterExtract();
 		dtoIntFilter.setExtractId(extractId);
 		dtoIntFilter.setProductId(productId);
-		dtoIntFilter.setPaginationKey(paginationKey);
-		dtoIntFilter.setPageSize(pageSize);
 		dtoIntFilter.setStartMonth(monthGe);
 		dtoIntFilter.setEndMonth(monthLe);
 		dtoIntFilter.setStartYear(yearGe);
