@@ -1,7 +1,6 @@
 package com.bbva.czic.loan.dao.model;
 
 import com.bbva.czic.loan.business.dto.*;
-import com.bbva.czic.loan.dao.LoanDAO;
 import com.bbva.czic.loan.dao.LoanDAOImpl;
 import com.bbva.czic.loan.dao.tx.TxGetRotaryQuota;
 import com.bbva.czic.loan.dao.tx.TxGetRotaryQuotaMovement;
@@ -14,8 +13,6 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
-
-import javax.annotation.Resource;
 
 import java.util.ArrayList;
 import java.util.List;

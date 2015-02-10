@@ -5,14 +5,18 @@ import com.bbva.czic.dto.net.Operation;
 import com.bbva.czic.dto.net.Payment;
 import com.bbva.czic.loan.business.dto.*;
 import com.bbva.czic.loan.dao.LoanDAO;
+import com.bbva.czic.routine.commons.rm.utils.errors.EnumError;
 import com.bbva.czic.routine.commons.rm.utils.test.SpringContextBbvaTest;
 import com.bbva.czic.routine.commons.rm.utils.validator.DtoValidator;
+import com.bbva.jee.arq.spring.core.host.ServicioTransacciones;
+import com.bbva.jee.arq.spring.core.servicing.gce.BusinessServiceException;
 import com.bbva.jee.arq.spring.core.servicing.utils.Money;
 import junit.framework.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 
 import java.util.ArrayList;
@@ -37,11 +41,12 @@ public class SrvIntLoanTest extends SpringContextBbvaTest {
 	@Before
 	public void init(){
 		srvIntLoan = new SrvIntLoan();
+		loanDAO = Mockito.mock(LoanDAO.class);
 		MockitoAnnotations.initMocks(this);
 	}
 
 	@Test
-	public void getRotaryQuotaIntTest(){
+	public void callGetRotaryQuotaWithAllParametersOkTest(){
 
 		DTOIntLoan dtoIntLoan = new DTOIntLoan();
 		dtoIntLoan.setId("20684968230915840285");
@@ -59,8 +64,18 @@ public class SrvIntLoanTest extends SpringContextBbvaTest {
 		Assert.assertNotNull(loan);
 	}
 
+	@Test(expected = BusinessServiceException.class)
+	public void callGetRotaryQuotaWithParametersWrongThrowsTest(){
+
+		BusinessServiceException bsn = getBsnExeptionByAlias(EnumError.NO_DATA.getAlias());
+
+		when(loanDAO.getRotaryQuota(anyString())).thenThrow(bsn);
+
+		srvIntLoan.getRotaryQuota("123");
+	}
+
 	@Test
-	public void listRotaryQuotaMovementsIntTest(){
+	public void callListRotaryQuotaMovementsWithAllParametresOkTest(){
 
 		List<DTOIntMovement> dtoIntMovementList = new ArrayList<DTOIntMovement>();
 
@@ -71,7 +86,6 @@ public class SrvIntLoanTest extends SpringContextBbvaTest {
 		dtoIntMovement.setValue(new Money());
 		dtoIntMovement.setOperation(new Operation());
 		dtoIntMovement.setTransactionDate("2013-05-12");
-
 
 		dtoIntMovementList.add(dtoIntMovement);
 
@@ -89,8 +103,20 @@ public class SrvIntLoanTest extends SpringContextBbvaTest {
 		Assert.assertNotNull(result);
 	}
 
+	@Test(expected = BusinessServiceException.class)
+	public void callListRotaryQuotaMovementsWithParametresWrongThrowsTest(){
+
+		DTOIntFilterLoan dtoIntFilterLoan = new DTOIntFilterLoan();
+
+		BusinessServiceException bsn = getBsnExeptionByAlias(EnumError.NO_DATA.getAlias());
+
+		when(loanDAO.listRotaryQuotaMovements(any(DTOIntFilterLoan.class))).thenThrow(bsn);
+
+		srvIntLoan.listRotaryQuotaMovements(dtoIntFilterLoan);
+	}
+
 	@Test
-	public void getRotaryQuotaMovementIntTest(){
+	public void callGetRotaryQuotaMovementWithAllParametersOkTest(){
 
 		DTOIntRotaryQuotaMove dtoIntRotaryQuotaMove = new DTOIntRotaryQuotaMove();
 		dtoIntRotaryQuotaMove.setId("123456789");
@@ -114,16 +140,19 @@ public class SrvIntLoanTest extends SpringContextBbvaTest {
 		Assert.assertNotNull(result);
 	}
 
-	/*@Test(expected = BusinessServiceException.class)
-	public void getRotaryQuotaIntTestThrows(){
+	@Test(expected = BusinessServiceException.class)
+	public void callGetRotaryQuotaMovementWithParametresWrongThrowsTest(){
 
-		BusinessServiceException bsn = getBsnExeptionByAlias(EnumError.NO_DATA.getAlias());
+		DTOIntFilterRotaryMovement dtoIntFilterRotaryMovement = new DTOIntFilterRotaryMovement();
 
-		when(srvIntLoan.getRotaryQuota("123")).thenThrow(bsn);
-		srvIntLoan.getRotaryQuota("1234");
+		BusinessServiceException bse = getBsnExeptionByAlias(EnumError.NO_DATA.getAlias());
+
+		when(loanDAO.getRotaryQuotaMovement(any(DTOIntFilterRotaryMovement.class))).thenThrow(bse);
+
+		srvIntLoan.getRotaryQuotaMovement(dtoIntFilterRotaryMovement);
 	}
 
 	private BusinessServiceException getBsnExeptionByAlias(String alias){
 		return new BusinessServiceException(alias);
-	}*/
+	}
 }

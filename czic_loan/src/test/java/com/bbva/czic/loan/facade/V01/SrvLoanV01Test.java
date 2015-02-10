@@ -49,24 +49,38 @@ public class SrvLoanV01Test extends SpringContextBbvaTest {
     }
 
     @Test
-    public void getRotaryQuotaTest(){
-
-        final DTOIntLoan dtoIntLoan = new DTOIntLoan();
-        dtoIntLoan.setId("1234");
+    public void verifyMappingDTOIntLoanToLoanTest(){
 
         final Loan loan = new Loan();
         loan.setId("1123556");
 
-        when(iSrvIntLoan.getRotaryQuota("123")).thenReturn(dtoIntLoan);
         when(iLoanMapper.map(any(DTOIntLoan.class))).thenReturn(loan);
 
-        final Loan l = srvLoanV01.getRotaryQuota("123");
+        final Loan result = srvLoanV01.getRotaryQuota("123");
 
-        Assert.assertNotNull(l);
+        Assert.assertNotNull(result);
     }
 
     @Test
-    public void listRotaryQuotaMovementsTest(){
+    public void callGetRotaryQuotaWithAllParametersOkTest(){
+
+        final Loan loan = new Loan();
+        loan.setId("1123556");
+
+        final DTOIntLoan dtoIntLoan = new DTOIntLoan();
+        dtoIntLoan.setId("1234");
+
+        when(iSrvIntLoan.getRotaryQuota("123")).thenReturn(dtoIntLoan);
+        when(iLoanMapper.map(any(DTOIntLoan.class))).thenReturn(loan);
+
+        final Loan result = srvLoanV01.getRotaryQuota("123");
+
+        Assert.assertNotNull(result);
+    }
+
+
+    @Test
+    public void callListRotaryQuotaMovementsWithParametersAllOkTest(){
 
         final List<DTOIntMovement> dtoIntMovementList = new ArrayList<DTOIntMovement>();
         final List<Movement> movementList = new ArrayList<Movement>();
@@ -93,7 +107,21 @@ public class SrvLoanV01Test extends SpringContextBbvaTest {
     }
 
     @Test
-    public void getRotaryQuotaMovementTest(){
+    public void verifyMappingDTOIntRotaryQuotaMoveToRotaryQuotaMoveTest(){
+
+        final List<Movement> movementList = new ArrayList<Movement>();
+
+        String filter = "(transactionDate=ge=2014-01-12;transactionDate=le=02015-01-10)";
+
+        when(iLoanMapper.map(anyList())).thenReturn(movementList);
+
+        final List<Movement> m = srvLoanV01.listRotaryQuotaMovements("00816641", 5, 4, filter);
+
+        Assert.assertNotNull(m);
+    }
+
+    @Test
+    public void callGetRotaryQuotaMovementWithParametersAllOkTest(){
 
         final DTOIntRotaryQuotaMove dtoIntRotaryQuotaMove = new DTOIntRotaryQuotaMove();
         dtoIntRotaryQuotaMove.setId("1234");
@@ -104,14 +132,13 @@ public class SrvLoanV01Test extends SpringContextBbvaTest {
         when(iSrvIntLoan.getRotaryQuotaMovement(any(DTOIntFilterRotaryMovement.class))).thenReturn(dtoIntRotaryQuotaMove);
         when(iLoanMapper.map(any(DTOIntRotaryQuotaMove.class))).thenReturn(rotaryQuotaMove);
 
-        final RotaryQuotaMove r = srvLoanV01.getRotaryQuotaMovement("1234", "4567");
+        final RotaryQuotaMove result = srvLoanV01.getRotaryQuotaMovement("1234", "4567");
 
-        Assert.assertNotNull(r);
-
+        Assert.assertNotNull(result);
     }
 
     @Test(expected = BusinessServiceException.class)
-    public void getRotaryQuotaMapperException() {
+    public void converterDTOIntLoanToLoanMapperException() {
 
         BusinessServiceException bsn = getBsnExeptionByAlias(EnumError.NO_DATA.getAlias());
 
@@ -121,7 +148,7 @@ public class SrvLoanV01Test extends SpringContextBbvaTest {
     }
 
     @Test(expected = BusinessServiceException.class)
-    public void listRotaryQuotaMovementsMapperException() {
+    public void mapperDTOIntMovementToMovementListException() {
 
         BusinessServiceException bsn = getBsnExeptionByAlias(EnumError.NO_DATA.getAlias());
 
@@ -133,7 +160,19 @@ public class SrvLoanV01Test extends SpringContextBbvaTest {
     }
 
     @Test(expected = BusinessServiceException.class)
-    public void getRotaryQuotaMovementException(){
+    public void filterWrongException() {
+
+        BusinessServiceException bsn = getBsnExeptionByAlias(EnumError.NO_DATA.getAlias());
+
+        String filter = "(transactionDate=ge=2014-01-12";
+
+        when(iSrvIntLoan.listRotaryQuotaMovements(any(DTOIntFilterLoan.class))).thenThrow(bsn);
+
+        srvLoanV01.listRotaryQuotaMovements("00816641", 5, 4, filter);
+    }
+
+    @Test(expected = BusinessServiceException.class)
+    public void converterDTOIntRotaryQuotaMoveToRotaryQuotaMoveMapperException(){
 
         BusinessServiceException bsn = getBsnExeptionByAlias(EnumError.NO_DATA.getAlias());
 
