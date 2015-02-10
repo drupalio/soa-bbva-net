@@ -7,16 +7,16 @@ package com.bbva.czic.products.business.dto;
 public class DTOIntEnumProductType {
 
     public final static long serialVersionUID = 1L;
-    private String AC;
-    private String CA;
-    private String LO;
-    private String SI;
+    private static String AC;
+    private static String CA;
+    private static String LO;
+    private static String SI;
 
     public DTOIntEnumProductType() {
         //default constructor
     }
 
-    public String getAC() {
+    public static String getAC() {
         return AC;
     }
 
@@ -24,7 +24,7 @@ public class DTOIntEnumProductType {
         this.AC = AC;
     }
 
-    public String getCA() {
+    public static String getCA() {
         return CA;
     }
 
@@ -32,7 +32,7 @@ public class DTOIntEnumProductType {
         this.CA = CA;
     }
 
-    public String getLO() {
+    public static String getLO() {
         return LO;
     }
 
@@ -40,7 +40,7 @@ public class DTOIntEnumProductType {
         this.LO = LO;
     }
 
-    public String getSI() {
+    public static String getSI() {
         return SI;
     }
 

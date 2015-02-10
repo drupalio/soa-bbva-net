@@ -140,7 +140,7 @@ public class SrvProductsV01Test extends SpringContextBbvaTest{
 
 //    ------------------ Utils ------------------
     
-	private BusinessServiceException getBsnExeptionByAlias(String alias) {
+	public static BusinessServiceException getBsnExeptionByAlias(String alias) {
 		return new BusinessServiceException(alias);
 	}
 
