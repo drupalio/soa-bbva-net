@@ -6,15 +6,6 @@ import static org.junit.Assert.assertNotNull;
 import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.when;
 
-
-
-
-
-
-
-
-
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -32,13 +23,14 @@ import com.bbva.czic.products.business.dto.DTOIntExtractOutput;
 import com.bbva.czic.products.business.dto.DTOIntFilterExtract;
 import com.bbva.czic.products.business.dto.DTOIntProduct;
 import com.bbva.czic.products.dao.IProductsDAO;
-import com.bbva.czic.products.facade.v01.impl.SrvProductsV01;
 import com.bbva.czic.products.facade.v01.impl.SrvProductsV01Test;
+import com.bbva.czic.routine.commons.rm.utils.errors.EnumError;
+import com.bbva.czic.routine.commons.rm.utils.test.SpringContextBbvaTest;
 import com.bbva.jee.arq.spring.core.servicing.gce.BusinessServiceException;
 
 
 
-public class SrvIntProductsTest {
+public class SrvIntProductsTest extends SpringContextBbvaTest {
 	
 	final static DataFactory dataF = new DataFactory();
 	
@@ -81,6 +73,18 @@ public class SrvIntProductsTest {
 		DTOIntConditions initialResult= srv.getConditions(dtoIntProduct);
 	}
 	
+	@Test(expected = BusinessServiceException.class)
+	public void testGetConditionsDaoException() {
+
+		// setUp - expectation
+		final DTOIntProduct dtoIntProduct = mockDTOIntProductEntity();
+		BusinessServiceException bsn=new BusinessServiceException(EnumError.TECHNICAL_ERROR.getAlias());
+		when(productsDAO.getConditions(any(DTOIntProduct.class))).thenThrow(bsn);
+
+		// Test
+		srv.getConditions(dtoIntProduct);
+	}
+	
 	@Test(expected = IllegalArgumentException.class)
 	public void testGetConditionsNullOutputDto() {
 		
@@ -120,6 +124,18 @@ public class SrvIntProductsTest {
 		assertNotNull(initialResult);
 	}
 
+	@Test(expected = BusinessServiceException.class)
+	public void testListExtractDaoException() {
+		// setUp - expectation
+		DTOIntFilterExtract dtoIntFilterExtract = mockDTOIntFilterExtractEntity();
+		BusinessServiceException bsn = new BusinessServiceException(
+				EnumError.TECHNICAL_ERROR.getAlias());
+		when(productsDAO.listExtracts(any(DTOIntFilterExtract.class))).thenThrow(bsn);
+
+		// Test
+		srv.listExtracts(dtoIntFilterExtract);
+	}
+	
 	@Test(expected = IllegalArgumentException.class)
 	public void testListExtractsNullInputDto() {
 
