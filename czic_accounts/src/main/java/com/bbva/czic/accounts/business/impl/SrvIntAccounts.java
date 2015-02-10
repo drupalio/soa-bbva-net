@@ -56,7 +56,7 @@ public class SrvIntAccounts implements ISrvIntAccounts {
 			filter.setMonth(ACCOUNT_MOV_RESUME_DEFAULT);
 		}
 		DtoValidator.validate(filter);
-		new StringValidator().isNumericText(filter.getAccountId());
+		new StringValidator().isNumericText(filter.getAccountId()).validate();
 
 		List<DTOIntAccMovementsResume> result = accountsDAO.getAccountMovementResume(filter);
 
@@ -83,7 +83,7 @@ public class SrvIntAccounts implements ISrvIntAccounts {
 		log.info("Into SrvIntAccounts.listCheck...");
 		// Validacion del dto de filtro
 		DtoValidator.validate(filter);
-		new StringValidator().isNumericText(filter.getAccountId());
+		new StringValidator().isNumericText(filter.getAccountId()).validate();
 		if(filter.getStartDate() != null && filter.getEndDate() != null){
 			new DateValidator().validDateRange(filter.getStartDate(), filter.getEndDate()).validate();
 		}
@@ -100,9 +100,7 @@ public class SrvIntAccounts implements ISrvIntAccounts {
 		// 1. Validate DtoIntFilterAccount
 		DtoValidator.validate(dtoIntCheckbook);
 		new StringValidator().isNumericText(dtoIntCheckbook.getIdAccount())
-				.isNumericText(dtoIntCheckbook.getId())
-				.notIsNull(dtoIntCheckbook.getId())
-				.notIsNull(dtoIntCheckbook.getIdAccount()).validate();
+				.isNumericText(dtoIntCheckbook.getId()).validate();
 
 		// 2. Get response
 		final DTOIntCheckbook result = accountsDAO.getCheckbooks(dtoIntCheckbook);
@@ -119,6 +117,8 @@ public class SrvIntAccounts implements ISrvIntAccounts {
 
 		// 1. Validate DtoIntFilterAccount
 		DtoValidator.validate(dtoIntCheckFilter);
+		new StringValidator().isNumericText(dtoIntCheckFilter.getAccountId())
+				.isNumericText(dtoIntCheckFilter.getCheckId()).validate();
 
 		// 2. Get response
 		final DTOIntCheck result = accountsDAO.getChecks(dtoIntCheckFilter);

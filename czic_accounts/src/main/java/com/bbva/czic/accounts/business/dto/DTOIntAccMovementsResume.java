@@ -2,12 +2,16 @@ package com.bbva.czic.accounts.business.dto;
 
 import com.bbva.jee.arq.spring.core.servicing.utils.Money;
 
+import javax.validation.constraints.NotNull;
+
 public class DTOIntAccMovementsResume {
 
 	public final static long serialVersionUID = 1L;
 	private Money income;
 	private Money outcome;
+	@NotNull
 	private Money balance;
+	@NotNull
 	private String month;
 
 	public DTOIntAccMovementsResume() {
