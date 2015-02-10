@@ -1,7 +1,9 @@
 package com.bbva.czic.accounts.business.dto;
 
 import com.bbva.jee.arq.spring.core.servicing.utils.Money;
-import com.sun.istack.NotNull;
+
+import javax.validation.constraints.NotNull;
+
 
 public class DTOIntMonthlyBalances {
 

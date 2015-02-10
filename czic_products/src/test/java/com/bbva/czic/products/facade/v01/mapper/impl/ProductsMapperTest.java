@@ -13,8 +13,10 @@ import org.junit.Before;
 import org.junit.Test;
 import org.mockito.MockitoAnnotations;
 
+import com.bbva.czic.dto.net.Conditions;
 import com.bbva.czic.dto.net.Extract;
 import com.bbva.czic.dto.net.Movement;
+import com.bbva.czic.products.business.dto.DTOIntConditions;
 import com.bbva.czic.products.business.dto.DTOIntEnumAccountState;
 import com.bbva.czic.products.business.dto.DTOIntEnumProductType;
 import com.bbva.czic.products.business.dto.DTOIntExtract;
@@ -72,12 +74,14 @@ public class ProductsMapperTest {
 	
 	@Test
 	public void mapOutGetConditionsTest(){
-//		DTOIntConditions dtoCond = SrvProductsV01Test.mockDTOIntConditionsEntity();
-//		Conditions conditions = productsMapper.map(dtoCond);
-//		assertEquals(conditions.getOpeningDate(), conditions.getOpeningDate());
-//		assertEquals(conditions.getCategory(),dtoCond.getCategory());
-//		assertEquals(conditions.getDescription(),dtoCond.getDescription());
-//		assertEquals(conditions.getCommission(), dtoCond.getCommission());
+		DTOIntConditions dtoCond = SrvProductsV01Test.mockDTOIntConditionsEntity();
+		Conditions conditions = productsMapper.map(dtoCond);
+		assertEquals(conditions.getAlias(), conditions.getAlias());
+		assertEquals(conditions.getOpeningDate(), conditions.getOpeningDate());
+		assertEquals(conditions.getCategory(),dtoCond.getCategory());
+		assertEquals(conditions.getDescription(),dtoCond.getDescription());
+		assertEquals(conditions.getCommission(), dtoCond.getCommission());
+		assertEquals(conditions.getActivities(), conditions.getActivities());
 	}
 	
 	@Test

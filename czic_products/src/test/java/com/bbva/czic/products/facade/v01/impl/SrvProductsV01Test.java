@@ -22,6 +22,7 @@ import com.bbva.czic.dto.net.Extract;
 import com.bbva.czic.dto.net.Movement;
 import com.bbva.czic.dto.net.Office;
 import com.bbva.czic.products.business.ISrvIntProducts;
+import com.bbva.czic.products.business.dto.DTOIntActivity;
 import com.bbva.czic.products.business.dto.DTOIntConditions;
 import com.bbva.czic.products.business.dto.DTOIntExtract;
 import com.bbva.czic.products.business.dto.DTOIntFilterExtract;
@@ -139,7 +140,7 @@ public class SrvProductsV01Test extends SpringContextBbvaTest{
 
 //    ------------------ Utils ------------------
     
-	private BusinessServiceException getBsnExeptionByAlias(String alias) {
+	public static BusinessServiceException getBsnExeptionByAlias(String alias) {
 		return new BusinessServiceException(alias);
 	}
 
@@ -156,6 +157,7 @@ public class SrvProductsV01Test extends SpringContextBbvaTest{
 
 	public static DTOIntConditions mockDTOIntConditionsEntity() {
 		DTOIntConditions condition = new DTOIntConditions();
+		condition.setAlias("");
 		condition.setOpeningDate(new Date());
 		condition.setCategory("");
 		condition.setDescription("");
