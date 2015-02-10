@@ -34,18 +34,20 @@ public class GlobalPositionDAO implements IGlobalPositionDAO {
 	@Qualifier("tx-update-product-operability")
 	private ISimpleTransaction txUpdateProductOperability;
 
-	private final String CREDIT_CARD_TYPE = "TC";
+	// private final String CREDIT_CARD_TYPE = "TC";
 
 	@Override
 	public List<DTOIntProduct> getExtractGlobalBalance(final DTOIntProductFilter filterProduct) {
 
 		final List<DTOIntProduct> products;
 
+		/*
 		if (filterProduct.getProductType() == null || CREDIT_CARD_TYPE.equals(filterProduct.getProductType())) {
-			products = txGetExtractGlobalBalance.invoke(filterProduct);
-		} else {
 			products = txGetExtractGlobalBalanceNoTC.invoke(filterProduct);
-		}
+		} else {
+		*/
+		products = txGetExtractGlobalBalance.invoke(filterProduct);
+		//}
 		return products;
 	}
 
