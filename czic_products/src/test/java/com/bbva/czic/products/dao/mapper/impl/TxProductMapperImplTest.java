@@ -44,7 +44,6 @@ public class TxProductMapperImplTest {
         dtoIntConditions.setCommission("1111");
         dtoIntConditions.setOffice(new DTOIntOffice());
         dtoIntConditions.setMobilizationConditions("1111");
-        dtoIntConditions.setActivities(new DTOIntActivity());
 
         conditions= productsMapper.map(dtoIntConditions);
 
@@ -54,7 +53,6 @@ public class TxProductMapperImplTest {
         assertEquals(dtoIntConditions.getCommission(),conditions.getCommission());
         assertEquals(dtoIntConditions.getOffice(),conditions.getOffice());
         assertEquals(dtoIntConditions.getMobilizationConditions(),conditions.getMobilizationConditions());
-        assertEquals(dtoIntConditions.getActivities(),conditions.getActivities());
 
     }
 
