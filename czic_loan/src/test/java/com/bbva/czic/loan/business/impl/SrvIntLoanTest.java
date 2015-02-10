@@ -3,12 +3,13 @@ package com.bbva.czic.loan.business.impl;
 import com.bbva.czic.dto.net.Balance;
 import com.bbva.czic.dto.net.Operation;
 import com.bbva.czic.dto.net.Payment;
+import com.bbva.czic.loan.business.ISrvIntLoan;
 import com.bbva.czic.loan.business.dto.*;
-import com.bbva.czic.loan.dao.LoanDAO;
+import com.bbva.czic.loan.dao.LoanDAOImpl;
+import com.bbva.czic.loan.dao.impl.LoanDAO;
 import com.bbva.czic.routine.commons.rm.utils.errors.EnumError;
 import com.bbva.czic.routine.commons.rm.utils.test.SpringContextBbvaTest;
 import com.bbva.czic.routine.commons.rm.utils.validator.DtoValidator;
-import com.bbva.jee.arq.spring.core.host.ServicioTransacciones;
 import com.bbva.jee.arq.spring.core.servicing.gce.BusinessServiceException;
 import com.bbva.jee.arq.spring.core.servicing.utils.Money;
 import junit.framework.Assert;
@@ -32,16 +33,12 @@ public class SrvIntLoanTest extends SpringContextBbvaTest {
 	@Mock
 	private LoanDAO loanDAO;
 
-	@Mock
-	private DtoValidator dtoValidator;
-
 	@InjectMocks
-	private SrvIntLoan srvIntLoan;
+	private ISrvIntLoan srvIntLoan;
 
 	@Before
 	public void init(){
 		srvIntLoan = new SrvIntLoan();
-		loanDAO = Mockito.mock(LoanDAO.class);
 		MockitoAnnotations.initMocks(this);
 	}
 

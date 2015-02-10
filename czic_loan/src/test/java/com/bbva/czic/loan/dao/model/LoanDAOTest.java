@@ -69,12 +69,13 @@ public class LoanDAOTest extends SpringContextBbvaTest {
 
     @Test
     public void listRotaryQuotaMovementsDaoTest(){
+
         List<DTOIntMovement> dtoIntMovementList = new ArrayList<DTOIntMovement>();
         DTOIntFilterLoan dtoIntFilterLoan = new DTOIntFilterLoan();
 
         when(txListRotaryQuotaMovements.invoke(any(DTOIntFilterLoan.class))).thenReturn(dtoIntMovementList);
 
-        List<DTOIntMovement> result =loanDAOImpl.listRotaryQuotaMovements(dtoIntFilterLoan);
+        List<DTOIntMovement> result = loanDAOImpl.listRotaryQuotaMovements(dtoIntFilterLoan);
 
         Mockito.verify(txListRotaryQuotaMovements).invoke(any(DTOIntFilterLoan.class));
 

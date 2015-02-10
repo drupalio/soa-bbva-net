@@ -3,20 +3,14 @@ package com.bbva.czic.loan.business.impl;
 
 import com.bbva.czic.loan.business.dto.*;
 
-import com.bbva.czic.routine.commons.rm.utils.errors.EnumError;
+import com.bbva.czic.loan.dao.impl.LoanDAO;
 import com.bbva.czic.routine.commons.rm.utils.validator.DtoValidator;
 import com.bbva.czic.routine.commons.rm.utils.validator.impl.StringValidator;
-import org.apache.commons.lang.StringUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import com.bbva.czic.loan.business.ISrvIntLoan;
-import com.bbva.czic.loan.dao.LoanDAO;
 import com.bbva.jee.arq.spring.core.log.I18nLog;
 import com.bbva.jee.arq.spring.core.log.I18nLogFactory;
 import com.bbva.jee.arq.spring.core.servicing.gce.BusinessServiceException;
-import com.bbva.jee.arq.spring.core.servicing.utils.BusinessServicesToolKit;
-
 import javax.annotation.Resource;
 
 import java.util.List;
@@ -46,9 +40,8 @@ public class SrvIntLoan implements ISrvIntLoan {
 
 		final DTOIntLoan result = loanDao.getRotaryQuota(idLoan);
 
-		// Mapear del filtro al dto
 		DtoValidator.validate(result);
-		// Validar el dto de filtrado
+
 		return result;
 	}
 
@@ -63,13 +56,10 @@ public class SrvIntLoan implements ISrvIntLoan {
 
 		DtoValidator.validate(dtoIntFilterLoan);
 		log.info(" getRotaryQuota ");
-		// Validar filtro
 
 		final List<DTOIntMovement> result = loanDao.listRotaryQuotaMovements(dtoIntFilterLoan);
 
-		// Mapear del filtro al dto
 	    DtoValidator.validate(result);
-		// Validar el dto de filtrado
 		return result;
 	}
 
@@ -86,9 +76,8 @@ public class SrvIntLoan implements ISrvIntLoan {
 		DtoValidator.validate(dtoIntFilterRotaryMovement);
 		final DTOIntRotaryQuotaMove result = loanDao.getRotaryQuotaMovement(dtoIntFilterRotaryMovement);
 
-		// Mapear del filtro al dto
 		DtoValidator.validate(result);
-		// Validar el dto de filtrado
+
 		return result;
 	}
 }

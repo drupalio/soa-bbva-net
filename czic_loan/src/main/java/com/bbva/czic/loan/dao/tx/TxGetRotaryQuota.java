@@ -1,7 +1,6 @@
 package com.bbva.czic.loan.dao.tx;
 import javax.annotation.Resource;
 import org.springframework.stereotype.Component;
-import com.bbva.czic.loan.business.dto.DTOIntFilterLoan;
 import com.bbva.czic.loan.business.dto.DTOIntLoan;
 import com.bbva.czic.loan.dao.mappers.impl.ITxLoanMapper;
 import com.bbva.czic.loan.dao.model.oznj.FormatoOZNCENJ0;
