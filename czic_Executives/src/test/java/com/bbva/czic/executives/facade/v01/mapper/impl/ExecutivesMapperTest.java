@@ -1,9 +1,16 @@
 package com.bbva.czic.executives.facade.v01.mapper.impl;
 
+import com.bbva.czic.dto.net.Executive;
 import com.bbva.czic.executives.business.dto.DTOIntExecutive;
+import com.bbva.czic.executives.business.dto.DTOIntOffice;
 import com.bbva.czic.executives.dao.model.oznr.FormatoOZECNRS0;
+import com.bbva.czic.executives.facade.v01.impl.SrvExecutivesV01;
+import com.bbva.czic.executives.facade.v01.mapper.IExecutivesMapper;
 import com.bbva.czic.executives.facade.v01.mapper.impl.ExecutivesMapper;
+import org.junit.Before;
 import org.junit.Test;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
 
 import static org.junit.Assert.assertEquals;
 
@@ -12,23 +19,38 @@ import static org.junit.Assert.assertEquals;
  */
 public class ExecutivesMapperTest {
 
+    private ExecutivesMapper executivesMapper;
+
+    @Before
+    public void init() {
+        executivesMapper = new ExecutivesMapper();
+        MockitoAnnotations.initMocks(this);
+    }
+
     @Test()
-    public void mapToOuter() {
+    public void testMapExecutive() {
+        DTOIntExecutive dtoIntExecutive = new DTOIntExecutive();
+        dtoIntExecutive.setEmail("prueba@hotmail.com");
+        dtoIntExecutive.setName("Nombre prueba");
+        dtoIntExecutive.setExecutiveId("010203");
+        dtoIntExecutive.setPhone("98765432");
+        DTOIntOffice dtoIntOffice = new DTOIntOffice();
+        dtoIntOffice.setName("Oficina");
+        dtoIntOffice.setCode("01020020");
+        dtoIntOffice.setPostalAddress("Calle falsa 1 2 3");
+        dtoIntExecutive.setOffice(dtoIntOffice);
 
-        FormatoOZECNRS0 formato = new FormatoOZECNRS0();
-        formato.setEmailej("pruebaemail@hotmail.com");
-        formato.setIdejecu("id");
-        formato.setNomejec("nombreEjectuvio");
-        formato.setOfiejec("oficinaEjecutivo");
-        formato.setTelejec("7684421");
+        Executive executive = new Executive();
+        executive = executivesMapper.map(dtoIntExecutive);
 
-        DTOIntExecutive dtoIntExecutive = null;
-//        dtoIntExecutive = ExecutivesMapper.mapToOuter(formato);
+        assertEquals(dtoIntExecutive.getName(),executive.getName());
+        assertEquals(dtoIntExecutive.getEmail(),executive.getEmail());
+        assertEquals(dtoIntExecutive.getExecutiveId(),executive.getId());
+        assertEquals(dtoIntExecutive.getPhone(),executive.getPhone());
+        assertEquals(dtoIntExecutive.getOffice().getName(),executive.getOffice().getName());
+        assertEquals(dtoIntExecutive.getOffice().getCode(),executive.getOffice().getCode());
+        assertEquals(dtoIntExecutive.getOffice().getPostalAddress(),executive.getOffice().getPostalAddress());
 
 
-        assertEquals(formato.getEmailej(),dtoIntExecutive.getEmail());
-        assertEquals(formato.getNomejec(),dtoIntExecutive.getName());
-        assertEquals(formato.getTelejec(),dtoIntExecutive.getPhone());
-        assertEquals(formato.getOfiejec(),dtoIntExecutive.getOffice().getName());
     }
 }
