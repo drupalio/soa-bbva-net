@@ -9,5 +9,26 @@ import javax.xml.bind.annotation.XmlType;
 @XmlType(name = "EnumCheckbookStatus", namespace = "urn:com:bbva:czic:dto:net")
 @XmlAccessorType(XmlAccessType.FIELD)
 public enum EnumCheckbookStatus {
-    HABILITADO, SOLICITADO
+    HABILITADO ("H"), SOLICITADO("S");
+
+    private String code;
+
+    private EnumCheckbookStatus(String code){
+        this.code = code;
+    }
+
+    public String getCode() {
+        return code;
+    }
+
+    public static EnumCheckbookStatus getByCode(String code){
+        if(code != null) {
+            for (EnumCheckbookStatus val : EnumCheckbookStatus.values()){
+                if (val.getCode().equals(code)){
+                    return val;
+                }
+            }
+        }
+        return null;
+    }
 }

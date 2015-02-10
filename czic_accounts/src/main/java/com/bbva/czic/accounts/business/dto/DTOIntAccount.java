@@ -3,9 +3,9 @@ package com.bbva.czic.accounts.business.dto;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-import com.sun.istack.NotNull;
 
 public class DTOIntAccount {
 

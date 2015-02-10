@@ -217,18 +217,20 @@ public class AccountsMapper extends AbstractBbvaConfigurableMapper implements
 		checkbook.setLastCheck(intCheckbook.getLastCheck());
 		checkbook.setTotalCheck(intCheckbook.getTotalCheck());
 
-		final Calendar requestDate = Calendar.getInstance();
-		requestDate.setTime(intCheckbook.getRequestDate());
-		checkbook.setRequestDate(requestDate);
-
-		final Calendar deliveryDate = Calendar.getInstance();
-		deliveryDate.setTime(intCheckbook.getDeliveryDate());
-		checkbook.setDeliveryDate(deliveryDate);
-		if (intCheckbook.getActualState().equals("H")) {
-			checkbook.setActualState(EnumCheckbookStatus.HABILITADO);
-		} else if (intCheckbook.getActualState().equals("S")) {
-			checkbook.setActualState(EnumCheckbookStatus.SOLICITADO);
+		if(intCheckbook.getRequestDate() != null) {
+			final Calendar requestDate = Calendar.getInstance();
+			requestDate.setTime(intCheckbook.getRequestDate());
+			checkbook.setRequestDate(requestDate);
 		}
+
+		if(intCheckbook.getDeliveryDate() != null) {
+			final Calendar deliveryDate = Calendar.getInstance();
+			deliveryDate.setTime(intCheckbook.getDeliveryDate());
+			checkbook.setDeliveryDate(deliveryDate);
+		}
+
+		checkbook.setActualState(EnumCheckbookStatus.getByCode(intCheckbook.getActualState()));
+
 		return checkbook;
 	}
 

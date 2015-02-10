@@ -15,7 +15,6 @@ public class DTOIntConditions {
     private String commission;
     private DTOIntOffice office;
     private String mobilizationConditions;
-    private DTOIntActivity activities;
 
     public DTOIntConditions() {
         //default constructor
@@ -75,14 +74,6 @@ public class DTOIntConditions {
 
     public void setMobilizationConditions(String mobilizationConditions) {
         this.mobilizationConditions = mobilizationConditions;
-    }
-
-    public DTOIntActivity getActivities() {
-        return activities;
-    }
-
-    public void setActivities(DTOIntActivity activities) {
-        this.activities = activities;
     }
 
 }
