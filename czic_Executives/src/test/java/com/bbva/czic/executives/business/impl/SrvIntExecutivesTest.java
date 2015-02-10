@@ -23,14 +23,6 @@ import org.springframework.test.context.support.DependencyInjectionTestExecution
 import com.bbva.jee.arq.spring.core.servicing.gce.BusinessServiceException;
 import com.bbva.jee.arq.spring.core.servicing.test.BusinessServiceTestContextLoader;
 
-@RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(loader = BusinessServiceTestContextLoader.class, locations = {
-		"classpath*:/META-INF/spring/applicationContext-*.xml",
-		"classpath:/META-INF/spring/business-service.xml",
-		"classpath:/META-INF/spring/business-service-test.xml" })
-@TestExecutionListeners(listeners = {
-// MockInvocationContextTestExecutionListener.class,
-		DependencyInjectionTestExecutionListener.class })
 public class SrvIntExecutivesTest {
 
 	@Mock
