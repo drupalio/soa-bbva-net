@@ -8,30 +8,41 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.bbva.czic.accounts.business.dto.*;
+import com.bbva.czic.accounts.facade.v01.mappers.IAccountsMapper;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.bbva.czic.accounts.business.dto.DTOIntAccMovementsResume;
-import com.bbva.czic.accounts.business.dto.DTOIntAccount;
-import com.bbva.czic.accounts.business.dto.DTOIntBalance;
-import com.bbva.czic.accounts.business.dto.DTOIntCheckbook;
-import com.bbva.czic.accounts.business.dto.DTOIntMonthlyBalances;
 import com.bbva.czic.accounts.facade.v01.mappers.impl.AccountsMapper;
 import com.bbva.czic.dto.net.AccMovementsResume;
 import com.bbva.czic.dto.net.Account;
 import com.bbva.czic.dto.net.MonthlyBalances;
 import com.bbva.jee.arq.spring.core.servicing.utils.Money;
 
+import static org.junit.Assert.assertNotNull;
+import static org.mockito.Matchers.*;
+import static org.mockito.Mockito.when;
+
 /**
  * Created by Entelgy on 13/01/2015.
  */
 public class AccountsMapperTest {
 
-	AccountsMapper accountsMapper;
+	IAccountsMapper accountsMapper;
 
 	@Before
 	public void init() {
 		accountsMapper = new AccountsMapper();
+	}
+
+
+	@Test
+	public void testGetDTOIntFilter(){
+		final String testFilter = "(month=ge=112014;month=le=022015)";
+
+		final DTOIntFilterAccount dtoFilter =  accountsMapper.getDTOIntFilter(anyString(), testFilter);
+
+		assertNotNull( dtoFilter);
 	}
 
 	/**

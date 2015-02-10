@@ -56,7 +56,7 @@ public class ProductsMapper extends AbstractBbvaConfigurableMapper implements
 		// Movement
 		factory.classMap(Movement.class, DTOIntMovement.class).field("id", "id").field("concept", "concept")
 				.field("transactionDate", "transactionDate").field("operationDate", "operationDate").field("office", "office")
-				.field("status", "status").field("value", "value").field("balance", "balance").byDefault().register();
+				.field("status", "status.enumValue").field("value", "value").field("balance", "balance").byDefault().register();
 		// Office
 		factory.classMap(Office.class, DTOIntOffice.class).field("name", "name").field("location", "location").byDefault().register();
 
@@ -192,7 +192,7 @@ public class ProductsMapper extends AbstractBbvaConfigurableMapper implements
 	}
 
 	public DTOIntFilterExtract getDtoIntFilterExtract(String productId, String extractId,
-			String filter, Integer paginationKey, Integer pageSize) {
+			String filter) {
 		final String monthGe = this.getGeValue(filter,"month");
 		final String monthLe = this.getLeValue(filter,"month");
 		final String yearGe = this.getGeValue(filter,"year");
@@ -201,8 +201,6 @@ public class ProductsMapper extends AbstractBbvaConfigurableMapper implements
 		DTOIntFilterExtract dtoIntFilter = new DTOIntFilterExtract();
 		dtoIntFilter.setExtractId(extractId);
 		dtoIntFilter.setProductId(productId);
-		dtoIntFilter.setPaginationKey(paginationKey);
-		dtoIntFilter.setPageSize(pageSize);
 		dtoIntFilter.setStartMonth(monthGe);
 		dtoIntFilter.setEndMonth(monthLe);
 		dtoIntFilter.setStartYear(yearGe);

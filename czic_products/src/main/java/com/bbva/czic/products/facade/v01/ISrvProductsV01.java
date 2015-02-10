@@ -11,7 +11,7 @@ public interface ISrvProductsV01 {
 
     public Conditions getConditions(String productId);
     
-    public List<Extract> listExtracts(String productId, String extractId, String filter, Integer paginationKey, Integer pageSize);
+    public List<Extract> listExtracts(String productId, String extractId, String filter);
 
     public Movement getMovement(String productId,String idMovement, String filter);
 

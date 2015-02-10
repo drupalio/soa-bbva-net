@@ -246,6 +246,49 @@ public class SrvAccountsV01Test extends SpringContextBbvaTest {
         assertNotNull(books);
     }
 
+    // ------------------- getCheck -------------------
+
+    @Test(expected = BusinessServiceException.class)
+    public void testGetCheckMappingRequestException(){
+        final BusinessServiceException bsn = getBsnExeptionByAlias(EnumError.NO_DATA.getAlias());
+
+        when(iAccountsMapper.getDTOIntFilterChecks(anyString(), anyString())).thenThrow(bsn);
+
+        srv.getCheck("123456","987654");
+    }
+
+    @Test(expected = BusinessServiceException.class)
+    public void testGetCheckSrvIntException(){
+        final BusinessServiceException bsn = getBsnExeptionByAlias(EnumError.NO_DATA.getAlias());
+
+        when(srvIntAccounts.getChecks(any(DTOIntCheckFilter.class))).thenThrow(bsn);
+
+        srv.getCheck("123456","987654");
+    }
+
+    @Test(expected = BusinessServiceException.class)
+    public void testGetCheckMapperException(){
+        final BusinessServiceException bsn = getBsnExeptionByAlias(EnumError.NO_DATA.getAlias());
+
+        when(iAccountsMapper.map(any(DTOIntCheck.class))).thenThrow(bsn);
+
+        srv.getCheck("123456", "987654");
+    }
+
+    @Test
+    public void testGetCheck(){
+        final DTOIntCheckFilter filter = new DTOIntCheckFilter();
+        final DTOIntCheck Check = new DTOIntCheck();
+        final Check answer = new Check();
+
+        when(iAccountsMapper.getDTOIntFilterChecks(anyString(), anyString())).thenReturn(filter);
+        when(srvIntAccounts.getChecks(any(DTOIntCheckFilter.class))).thenReturn(Check);
+        when(iAccountsMapper.map(any(DTOIntCheck.class))).thenReturn(answer);
+
+       Check books = srv.getCheck("123456", "987654");
+        assertNotNull(books);
+    }
+
     private BusinessServiceException getBsnExeptionByAlias(String alias){
         return new BusinessServiceException(alias);
     }

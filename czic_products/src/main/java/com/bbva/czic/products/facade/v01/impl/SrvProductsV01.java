@@ -117,9 +117,7 @@ public class SrvProductsV01 implements ISrvProductsV01,
 	public List<Extract> listExtracts(
 			@ApiParam(value = "identifier param") @PathParam("productId") String productId,
 			@ApiParam(value = "identifier param") @PathParam("extractId") String extractId,
-			@ApiParam(value = "filter param") @QueryParam("$filter") String filter,
-			@ApiParam(value = "fields param") @QueryParam("paginationKey") Integer paginationKey,
-			@ApiParam(value = "expands param") @QueryParam("pageSize") Integer pageSize) {
+			@ApiParam(value = "filter param") @QueryParam("$filter") String filter) {
 
 		// 1. Validate filter
 		new FiqlValidator(filter).exist().hasGeAndLe("month")
@@ -127,8 +125,7 @@ public class SrvProductsV01 implements ISrvProductsV01,
 
 		// 2. Mapping filter -> DTO
 		DTOIntFilterExtract dtoIntFilterExtract = productsMapper
-				.getDtoIntFilterExtract(productId,extractId, filter, paginationKey,
-						pageSize);
+				.getDtoIntFilterExtract(productId,extractId, filter);
 		// 3. Invoke SrvIntCustomers and Mapping to canonical DTO
 		return productsMapper.mapExtracts(srvIntProducts
 				.listExtracts(dtoIntFilterExtract));
