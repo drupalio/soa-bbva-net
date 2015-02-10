@@ -36,7 +36,7 @@ public class SrvIntAccounts implements ISrvIntAccounts {
 
 		// 1. Validate DtoIntFilterAccount
 		DtoValidator.validate(dtoIntFilterAccount);
-		new StringValidator().isNumericText(dtoIntFilterAccount.getAccountId());
+		new StringValidator().isNumericText(dtoIntFilterAccount.getAccountId()).validate();
 
 		// 2. Get response
 		final List<DTOIntMonthlyBalances> result = accountsDAO.getAccountMonthlyBalance(dtoIntFilterAccount);
