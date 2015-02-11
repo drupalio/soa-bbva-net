@@ -63,7 +63,7 @@ public class ProductsMapper extends AbstractBbvaConfigurableMapper implements
 				.field("id", "id").field("concept", "concept")
 				.field("transactionDate", "transactionDate")
 				.field("operationDate", "operationDate")
-				.field("office", "office").field("status", "status.enumValue")
+				.field("office", "office").field("status", "status")
 				.field("value", "value").field("balance", "balance")
 				.byDefault().register();
 		// Office

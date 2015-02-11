@@ -101,10 +101,10 @@ public class ProductsMapperTest {
         dtoIntMovement.setOperation(dtoIntOperation);
         dtoIntMovement.setOperationDate(new Date());
         dtoIntMovement.setProductId("00000012345523");
-        dtoIntMovement.setProductType(new DTOIntEnumProductType());
+        dtoIntMovement.setProductType("TR");
         DTOIntEnumAccountState dtoIntEnumAccountState = new DTOIntEnumAccountState();
         dtoIntEnumAccountState.setEnumValue("AC");
-        dtoIntMovement.setStatus(dtoIntEnumAccountState);
+        dtoIntMovement.setStatus("Activo");
         Money value = new Money();
         value.setAmount(new BigDecimal("2000"));
         dtoIntMovement.setValue(value);
@@ -120,7 +120,7 @@ public class ProductsMapperTest {
         assertEquals( dtoIntMovement.getOffice().getPostalAddress(),movement.getOffice().getPostalAddress());
         assertEquals(dtoIntMovement.getOperation().getCode(),movement.getOperation().getCode());
         assertEquals( dtoIntMovement.getOperationDate(),movement.getOperationDate().getTime());
-        assertEquals(dtoIntMovement.getStatus().getEnumValue(),movement.getStatus());
+        assertEquals(dtoIntMovement.getStatus(),movement.getStatus());
         assertEquals(dtoIntMovement.getValue().getAmount(),movement.getValue().getAmount());
         assertEquals(dtoIntMovement.getTransactionDate(),movement.getTransactionDate().getTime());
     }
@@ -146,10 +146,10 @@ public class ProductsMapperTest {
         dtoIntMovement.setOperation(dtoIntOperation);
         dtoIntMovement.setOperationDate(new Date());
         dtoIntMovement.setProductId("00000012345523");
-        dtoIntMovement.setProductType(new DTOIntEnumProductType());
+        dtoIntMovement.setProductType("TR");
         DTOIntEnumAccountState dtoIntEnumAccountState = new DTOIntEnumAccountState();
         dtoIntEnumAccountState.setEnumValue("AC");
-        dtoIntMovement.setStatus(dtoIntEnumAccountState);
+        dtoIntMovement.setStatus("Activo");
         Money value = new Money();
         value.setAmount(new BigDecimal("2000"));
         dtoIntMovement.setValue(value);
@@ -172,7 +172,7 @@ public class ProductsMapperTest {
         assertEquals( dtoIntMovement.getOffice().getPostalAddress(),listMovement.get(1).getOffice().getPostalAddress());
         assertEquals(dtoIntMovement.getOperation().getCode(),listMovement.get(1).getOperation().getCode());
         assertEquals( dtoIntMovement.getOperationDate(),listMovement.get(1).getOperationDate().getTime());
-        assertEquals(dtoIntMovement.getStatus().getEnumValue(),listMovement.get(1).getStatus());
+        assertEquals(dtoIntMovement.getStatus(),listMovement.get(1).getStatus());
         assertEquals(dtoIntMovement.getValue().getAmount(),listMovement.get(1).getValue().getAmount());
         assertEquals(dtoIntMovement.getTransactionDate(),listMovement.get(1).getTransactionDate().getTime());
 
