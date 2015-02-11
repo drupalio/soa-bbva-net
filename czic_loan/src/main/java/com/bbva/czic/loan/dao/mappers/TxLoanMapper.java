@@ -21,7 +21,6 @@ import com.bbva.jee.arq.spring.core.log.I18nLogFactory;
 import com.bbva.jee.arq.spring.core.servicing.utils.Money;
 import org.springframework.stereotype.Component;
 
-
 @Component(value = "tx-loan-mapper")
 public class TxLoanMapper extends AbstractBbvaTxConfigurableMapper implements ITxLoanMapper {
 

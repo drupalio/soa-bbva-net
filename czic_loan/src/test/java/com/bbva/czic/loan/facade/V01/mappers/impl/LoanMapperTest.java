@@ -24,7 +24,6 @@ import static org.mockito.Matchers.anyList;
 import static org.mockito.Matchers.anyString;
 import static org.mockito.Mockito.when;
 
-@Mapper(value = "loan-mapper")
 public class LoanMapperTest {
 
 	@Mock

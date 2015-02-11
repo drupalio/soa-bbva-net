@@ -18,7 +18,7 @@ public class DTOIntMovement {
 	private String concept;
 
 	@NotNull
-	private String transactionDate;
+	private Calendar transactionDate;
 
 	@NotNull
 	private Operation operation;
@@ -49,12 +49,12 @@ public class DTOIntMovement {
 		this.concept = concept;
 	}
 
-	public String getTransactionDate() {
+	public Calendar getTransactionDate() {
 		return transactionDate;
 	}
 
 
-	public void setTransactionDate(String transactionDate) {
+	public void setTransactionDate(Calendar transactionDate) {
 		this.transactionDate = transactionDate;
 	}
 
