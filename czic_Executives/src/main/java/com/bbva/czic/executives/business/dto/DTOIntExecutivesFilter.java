@@ -3,6 +3,7 @@ package com.bbva.czic.executives.business.dto;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 /**
  * Created by Entelgy on 10/01/2015.
@@ -10,10 +11,10 @@ import javax.validation.constraints.NotNull;
 public class DTOIntExecutivesFilter {
 
     @NotNull
-    @NotEmpty
+    @Size(min=1)
     private String id;
     @NotNull
-    @NotEmpty
+    @Size(min=1)
     private String type;
 
     public String getType() {

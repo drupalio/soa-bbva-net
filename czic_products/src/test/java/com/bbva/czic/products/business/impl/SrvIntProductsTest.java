@@ -2,13 +2,20 @@ package com.bbva.czic.products.business.impl;
 
 
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.when;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.Currency;
+import java.util.Date;
 import java.util.List;
 
+import com.bbva.czic.products.business.dto.*;
+import com.bbva.jee.arq.spring.core.servicing.utils.Money;
 import org.fluttercode.datafactory.impl.DataFactory;
 import org.junit.Before;
 import org.junit.Test;
@@ -17,11 +24,6 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
 import com.bbva.czic.products.business.ISrvIntProducts;
-import com.bbva.czic.products.business.dto.DTOIntConditions;
-import com.bbva.czic.products.business.dto.DTOIntExtract;
-import com.bbva.czic.products.business.dto.DTOIntExtractOutput;
-import com.bbva.czic.products.business.dto.DTOIntFilterExtract;
-import com.bbva.czic.products.business.dto.DTOIntProduct;
 import com.bbva.czic.products.dao.IProductsDAO;
 import com.bbva.czic.products.facade.v01.impl.SrvProductsV01Test;
 import com.bbva.czic.routine.commons.rm.utils.errors.EnumError;
@@ -33,6 +35,7 @@ import com.bbva.jee.arq.spring.core.servicing.gce.BusinessServiceException;
 public class SrvIntProductsTest extends SpringContextBbvaTest {
 	
 	final static DataFactory dataF = new DataFactory();
+	private BusinessServiceException bsn = null;
 	
 	@Mock
 	IProductsDAO productsDAO;
@@ -44,6 +47,7 @@ public class SrvIntProductsTest extends SpringContextBbvaTest {
 	public void init(){
 		srv = new SrvIntProducts();
         MockitoAnnotations.initMocks(this);
+		bsn = new BusinessServiceException(EnumError.TECHNICAL_ERROR.getAlias());
 	}
 
 //  ------------------ getConditions ------------------	
@@ -205,5 +209,153 @@ public class SrvIntProductsTest extends SpringContextBbvaTest {
 		return filter;
 	}
 
+	//------------getMovement-----------------
+
+	@Test(expected = BusinessServiceException.class)
+	public void testGetMovementInvalidFilter(){
+		final DTOIntFilterMovements dtoIntFilterMovements = new DTOIntFilterMovements();
+		dtoIntFilterMovements.setCustomerId("123");
+		srv.getMovement(dtoIntFilterMovements);
+	}
+
+	@Test(expected = BusinessServiceException.class)
+	public void testGetMovementInvalidAccountId(){
+		final DTOIntFilterMovements dtoIntFilterMovements = new DTOIntFilterMovements();
+		dtoIntFilterMovements.setProductId("123456789HH234567890");
+
+		srv.getMovement(dtoIntFilterMovements);
+	}
+
+	@Test(expected = BusinessServiceException.class)
+	public void testGetMovementDaoException(){
+		final DTOIntFilterMovements filterMovements = new DTOIntFilterMovements();
+		filterMovements.setProductId("12345678901234567890");
+
+		when(productsDAO.getMovement(any(DTOIntFilterMovements.class)))
+				.thenThrow(bsn);
+
+		srv.getMovement(filterMovements);
+	}
+
+	@Test(expected = BusinessServiceException.class)
+	public void testGetMovementOutputException(){
+		final DTOIntFilterMovements filterMovement = new DTOIntFilterMovements();
+		filterMovement.setProductId("12345678901234567890");
+
+		DTOIntMovement dtoIntMovement = new DTOIntMovement();
+		dtoIntMovement.setProductId("01020304050607080900");
+
+
+		when(productsDAO.getMovement(any(DTOIntFilterMovements.class)))
+				.thenReturn(dtoIntMovement);
+
+		srv.getMovement(filterMovement);
+	}
+
+	@Test
+	public void testGetMovement(){
+		final DTOIntFilterMovements filterMovement = new DTOIntFilterMovements();
+		filterMovement.setProductId("01020304050607080900");
+		filterMovement.setCustomerId("12345678");
+		filterMovement.setMovementId("0102030400");
+		filterMovement.setPageSize(10);
+		filterMovement.setPaginationKey(1);
+
+
+		DTOIntMovement dtoIntMovement = new DTOIntMovement();
+		dtoIntMovement.setProductId("01020304050607080900");
+		dtoIntMovement.setTransactionDate(new Date());
+		dtoIntMovement.setBalance(new Money());
+		dtoIntMovement.setValue(new Money());
+		dtoIntMovement.setConcept("Concepto");
+		dtoIntMovement.setId("123456");
+		dtoIntMovement.setOperation(new DTOIntOperation());
+		dtoIntMovement.setOperationDate(new Date());
+		dtoIntMovement.setOffice(new DTOIntOffice());
+
+
+		when(productsDAO.getMovement(any(DTOIntFilterMovements.class)))
+				.thenReturn(dtoIntMovement);
+
+		final DTOIntMovement result = srv.getMovement(filterMovement);
+
+		assertNotNull(result);
+	}
+
+	// -----------------listMovements---------------------
+
+	@Test(expected = BusinessServiceException.class)
+	public void testListMovementsInvalidFilter(){
+		final DTOIntFilterMovements dtoIntFilterMovements = new DTOIntFilterMovements();
+		dtoIntFilterMovements.setCustomerId("123");
+		srv.listMovements(dtoIntFilterMovements);
+	}
+
+	@Test(expected = BusinessServiceException.class)
+	public void testListMovementsInvalidAccountId(){
+		final DTOIntFilterMovements dtoIntFilterMovements = new DTOIntFilterMovements();
+		dtoIntFilterMovements.setProductId("123456789HH234567890");
+
+		srv.listMovements(dtoIntFilterMovements);
+	}
+
+	@Test(expected = BusinessServiceException.class)
+	public void testListMovementsDaoException(){
+		final DTOIntFilterMovements filterMovements = new DTOIntFilterMovements();
+		filterMovements.setProductId("12345678901234567890");
+
+		when(productsDAO.listMovements(any(DTOIntFilterMovements.class)))
+				.thenThrow(bsn);
+
+		srv.listMovements(filterMovements);
+	}
+
+	@Test(expected = BusinessServiceException.class)
+	public void testListMovementsOutputException(){
+		final DTOIntFilterMovements filterMovement = new DTOIntFilterMovements();
+		filterMovement.setProductId("12345678901234567890");
+
+		List<DTOIntMovement> listaDTOIntMovement = new ArrayList<DTOIntMovement>();
+		DTOIntMovement dtoIntMovement = new DTOIntMovement();
+		dtoIntMovement.setProductId("01020304050607080900");
+		listaDTOIntMovement.add(dtoIntMovement);
+
+
+		when(productsDAO.listMovements(any(DTOIntFilterMovements.class)))
+				.thenReturn(listaDTOIntMovement);
+
+		srv.listMovements(filterMovement);
+	}
+
+	@Test
+	public void testListMovements(){
+		final DTOIntFilterMovements filterMovement = new DTOIntFilterMovements();
+		filterMovement.setProductId("01020304050607080900");
+		filterMovement.setCustomerId("12345678");
+		filterMovement.setMovementId("0102030400");
+		filterMovement.setPageSize(10);
+		filterMovement.setPaginationKey(1);
+
+		List<DTOIntMovement> listaDTOIntMovement = new ArrayList<DTOIntMovement>();
+		DTOIntMovement dtoIntMovement = new DTOIntMovement();
+		dtoIntMovement.setProductId("01020304050607080900");
+		dtoIntMovement.setTransactionDate(new Date());
+		dtoIntMovement.setBalance(new Money());
+		dtoIntMovement.setValue(new Money());
+		dtoIntMovement.setConcept("Concepto");
+		dtoIntMovement.setId("123456");
+		dtoIntMovement.setOperation(new DTOIntOperation());
+		dtoIntMovement.setOperationDate(new Date());
+		dtoIntMovement.setOffice(new DTOIntOffice());
+		listaDTOIntMovement.add(dtoIntMovement);
+
+		when(productsDAO.listMovements(any(DTOIntFilterMovements.class)))
+				.thenReturn(listaDTOIntMovement);
+
+		final List<DTOIntMovement> result = srv.listMovements(filterMovement);
+
+		assertNotNull(result);
+		assertTrue(result.size()>0);
+	}
 }
 

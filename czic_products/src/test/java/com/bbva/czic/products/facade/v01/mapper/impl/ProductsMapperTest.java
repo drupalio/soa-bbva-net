@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import com.bbva.czic.products.business.dto.*;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.MockitoAnnotations;
@@ -16,15 +17,6 @@ import org.mockito.MockitoAnnotations;
 import com.bbva.czic.dto.net.Conditions;
 import com.bbva.czic.dto.net.Extract;
 import com.bbva.czic.dto.net.Movement;
-import com.bbva.czic.products.business.dto.DTOIntConditions;
-import com.bbva.czic.products.business.dto.DTOIntEnumAccountState;
-import com.bbva.czic.products.business.dto.DTOIntEnumProductType;
-import com.bbva.czic.products.business.dto.DTOIntExtract;
-import com.bbva.czic.products.business.dto.DTOIntFilterExtract;
-import com.bbva.czic.products.business.dto.DTOIntMovement;
-import com.bbva.czic.products.business.dto.DTOIntOffice;
-import com.bbva.czic.products.business.dto.DTOIntOperation;
-import com.bbva.czic.products.business.dto.DTOIntProduct;
 import com.bbva.czic.products.facade.v01.impl.SrvProductsV01Test;
 import com.bbva.jee.arq.spring.core.servicing.utils.Money;
 
@@ -184,6 +176,34 @@ public class ProductsMapperTest {
         assertEquals(dtoIntMovement.getValue().getAmount(),listMovement.get(1).getValue().getAmount());
         assertEquals(dtoIntMovement.getTransactionDate(),listMovement.get(1).getTransactionDate().getTime());
 
+    }
+
+
+    @Test()
+    public void getDTOIntFilterGetListMovements() {
+
+        DTOIntFilterMovements dtoIntFilterMovements = new DTOIntFilterMovements();
+        dtoIntFilterMovements=productsMapper.getDTOIntFilterGetListMovements("01020304050607080900","customerId==0102030405;productType==AH",1,10);
+
+
+        assertEquals("01020304050607080900",dtoIntFilterMovements.getProductId());
+        assertEquals("0102030405",dtoIntFilterMovements.getCustomerId());
+        assertEquals("AH",dtoIntFilterMovements.getProductType());
+        assertEquals(new Integer(1),dtoIntFilterMovements.getPaginationKey());
+        assertEquals(new Integer(10),dtoIntFilterMovements.getPageSize());
+    }
+
+
+    @Test()
+    public void getDTOIntFilterGetMovement() {
+
+        DTOIntFilterMovements dtoIntFilterMovements = new DTOIntFilterMovements();
+        dtoIntFilterMovements=productsMapper.getDTOIntFilterGetMovement("01020304050607080900", "012345678", "customerId==0102030405;productType==AH");
+
+        assertEquals("01020304050607080900",dtoIntFilterMovements.getProductId());
+        assertEquals("012345678",dtoIntFilterMovements.getMovementId());
+        assertEquals("0102030405",dtoIntFilterMovements.getCustomerId());
+        assertEquals("AH",dtoIntFilterMovements.getProductType());
     }
 
 }
