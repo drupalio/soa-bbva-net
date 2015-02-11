@@ -53,8 +53,14 @@ public class LoanFilterConverter{
         dtoIntFilterLoan.setIdLoan(loanId);
         dtoIntFilterLoan.setPaginationKey(pageSize);
         dtoIntFilterLoan.setPageSize(paginationKey);
+        if(filter.trim().isEmpty() || filter == null || filter.trim().equalsIgnoreCase("null")) {
+            throw new BusinessServiceException(EnumError.FILTER_EMPTY.getAlias());
+        }
 
-        //Manejamos el filter
+        if(paginationKey == null || pageSize == null) {
+            throw new BusinessServiceException(EnumError.WRONG_PARAMETERS.getAlias());
+        }
+            //Manejamos el filter
             log.info("A query string (filter) has been sended Loan ---> : " + filter);
             SearchCondition<DTOIntFilterLoan> sc;
             try {
@@ -69,9 +75,9 @@ public class LoanFilterConverter{
                     String value = st.getValue().toString();
 
                     if (property.toLowerCase().equals("transactiondate") && condition.equals(ConditionType.GREATER_OR_EQUALS.toString())) {
-                    	fechaInicial = value;
+                        fechaInicial = value;
                     } else if (property.toLowerCase().equals("transactiondate") && condition.equals(ConditionType.LESS_OR_EQUALS.toString())) {
-                    	fechaFinal = value;
+                        fechaFinal = value;
                     }
                 }
 
@@ -89,10 +95,10 @@ public class LoanFilterConverter{
                 SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd");
                 Date startDateFilter = null;
                 Date endtDateFilter = null;
-                
+
                 try {
-                	startDateFilter = formato.parse(fechaInicial);
-                	endtDateFilter = formato.parse(fechaInicial);
+                    startDateFilter = formato.parse(fechaInicial);
+                    endtDateFilter = formato.parse(fechaInicial);
                 } catch (ParseException ex) {
                     throw new BusinessServiceException(EnumError.WRONG_PARAMETERS.getAlias());
                 }
@@ -102,7 +108,7 @@ public class LoanFilterConverter{
                         .validate();
 
                 log.info(" Filter starDateFilter: " + startDateFilter + " SMC : getCreditCardCharges SN Loan ");
-                      
+
                 dtoIntFilterLoan.setFechaInicial(startDateFilter);
                 dtoIntFilterLoan.setFechaFinal(endtDateFilter);
 
@@ -113,6 +119,7 @@ public class LoanFilterConverter{
                 log.error("IllegalArgumentException - The product type is an invalid type - does not exist: " + e.getMessage());
                 throw new BusinessServiceException(EnumError.WRONG_PARAMETERS.getAlias(), filter, e.getMessage());
             }
+
         return dtoIntFilterLoan;
     }
 
