@@ -1,4 +1,4 @@
-package com.bbva.czic.loan.dao;
+package com.bbva.czic.loan.dao.impl;
 
 
 import com.bbva.czic.loan.business.dto.*;

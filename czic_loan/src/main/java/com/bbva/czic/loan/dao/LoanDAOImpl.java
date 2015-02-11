@@ -1,8 +1,8 @@
 package com.bbva.czic.loan.dao;
 
-
 import com.bbva.czic.loan.business.dto.*;
 
+import com.bbva.czic.loan.dao.impl.LoanDAO;
 import com.bbva.czic.loan.dao.tx.TxGetRotaryQuota;
 import com.bbva.czic.loan.dao.tx.TxGetRotaryQuotaMovement;
 import com.bbva.czic.loan.dao.tx.TxListRotaryQuotaMovements;
@@ -14,7 +14,6 @@ import com.bbva.jee.arq.spring.core.log.I18nLogFactory;
 import javax.annotation.Resource;
 
 import java.util.List;
-
 
 @Repository(value = "loanDao")
 public class LoanDAOImpl implements LoanDAO {

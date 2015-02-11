@@ -17,6 +17,8 @@ public class DTOIntFilterRotaryMovement {
     @NumberFormat(style = NumberFormat.Style.NUMBER)
     private Integer idMovement;
 
+    public DTOIntFilterRotaryMovement(){ }
+
     public DTOIntFilterRotaryMovement(String idLoan, Integer idMovement){
         this.idLoan = idLoan;
         this.idMovement = idMovement;

@@ -49,6 +49,14 @@ public class Conditions implements Serializable {
 		return category;
 	}
 
+	public String getAlias() {
+		return alias;
+	}
+
+	public void setAlias(String alias) {
+		this.alias = alias;
+	}
+
 	public void setCategory(String category) {
 		this.category = category;
 	}
