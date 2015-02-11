@@ -1,4 +1,4 @@
-package com.bbva.czic.loan.dao.model;
+package com.bbva.czic.loan.dao;
 
 import com.bbva.czic.loan.business.dto.*;
 import com.bbva.czic.loan.dao.LoanDAOImpl;
@@ -60,7 +60,7 @@ public class LoanDAOTest extends SpringContextBbvaTest {
 
         when(txGetRotaryQuota.invoke(anyString())).thenReturn(dtoIntLoan);
 
-        DTOIntLoan result = loanDAOImpl.getRotaryQuota(anyString());
+        DTOIntLoan result = loanDAOImpl.getRotaryQuota("123");
 
         Mockito.verify(txGetRotaryQuota).invoke(anyString());
 

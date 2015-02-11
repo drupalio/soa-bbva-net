@@ -1,24 +1,19 @@
-package com.bbva.czic.loan.facade.V01;
+package com.bbva.czic.loan.facade.v01.impl;
 
 import com.bbva.czic.dto.net.*;
 import com.bbva.czic.loan.business.ISrvIntLoan;
 import com.bbva.czic.loan.business.dto.*;
-import com.bbva.czic.loan.business.impl.SrvIntLoan;
 import com.bbva.czic.loan.facade.v01.ISrvLoanV01;
-import com.bbva.czic.loan.facade.v01.impl.SrvLoanV01;
 import com.bbva.czic.loan.facade.v01.mappers.ILoanMapper;
-import com.bbva.czic.loan.facade.v01.mappers.impl.LoanMapper;
 import com.bbva.czic.loan.facade.v01.utils.impl.LoanFilterConverter;
 import com.bbva.czic.routine.commons.rm.utils.errors.EnumError;
 import com.bbva.czic.routine.commons.rm.utils.test.SpringContextBbvaTest;
-import com.bbva.jee.arq.spring.core.host.ServicioTransacciones;
 import com.bbva.jee.arq.spring.core.servicing.gce.BusinessServiceException;
 import junit.framework.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 
 import java.util.ArrayList;
@@ -33,6 +28,7 @@ import static org.mockito.Mockito.when;
  * Created by Entelgy on 06/02/2015.
  */
 public class SrvLoanV01Test extends SpringContextBbvaTest {
+
 
     @Mock
     private ILoanMapper loanMapper;
@@ -57,38 +53,17 @@ public class SrvLoanV01Test extends SpringContextBbvaTest {
 
         final Loan loan = new Loan();
         loan.setId("1123556");
-        loan.setId("20684968230915840285");
-        loan.setType("QA");
-        loan.setName("Credito");
-        loan.setBalance(new Balance());
-        loan.setDebt(new Balance());
-        loan.setPayment(new Payment());
-        loan.setStatus("ok");
 
         final DTOIntLoan dtoIntLoan = new DTOIntLoan();
         dtoIntLoan.setId("1234");
 
-        when(iSrvIntLoan.getRotaryQuota("123")).thenReturn(dtoIntLoan);
-        when(loanMapper.map(dtoIntLoan)).thenReturn(loan);
-
-        final Loan result = srvLoanV01.getRotaryQuota("123");
-
-        Assert.assertNotNull(result);
-    }
-/*
-     @Test
-    public void verifyMappingDTOIntLoanToLoanTest(){
-
-        final Loan loan = new Loan();
-        loan.setId("1123556");
-
+        when(iSrvIntLoan.getRotaryQuota(anyString())).thenReturn(dtoIntLoan);
         when(loanMapper.map(any(DTOIntLoan.class))).thenReturn(loan);
 
-        final Loan result = srvLoanV01.getRotaryQuota("123");
+        final Loan result = srvLoanV01.getRotaryQuota(anyString());
 
         Assert.assertNotNull(result);
     }
-
 
     @Test
     public void callListRotaryQuotaMovementsWithParametersAllOkTest(){
@@ -117,19 +92,7 @@ public class SrvLoanV01Test extends SpringContextBbvaTest {
         Assert.assertNotNull(m);
     }
 
-    @Test
-    public void verifyMappingDTOIntRotaryQuotaMoveToRotaryQuotaMoveTest(){
 
-        final List<Movement> movementList = new ArrayList<Movement>();
-
-        String filter = "(transactionDate=ge=2014-01-12;transactionDate=le=02015-01-10)";
-
-        when(loanMapper.map(anyList())).thenReturn(movementList);
-
-        final List<Movement> m = srvLoanV01.listRotaryQuotaMovements("00816641", 5, 4, filter);
-
-        Assert.assertNotNull(m);
-    }
 
     @Test
     public void callGetRotaryQuotaMovementWithParametersAllOkTest(){
@@ -182,18 +145,10 @@ public class SrvLoanV01Test extends SpringContextBbvaTest {
         srvLoanV01.listRotaryQuotaMovements("00816641", 5, 4, filter);
     }
 
-    @Test(expected = BusinessServiceException.class)
-    public void converterDTOIntRotaryQuotaMoveToRotaryQuotaMoveMapperException(){
 
-        BusinessServiceException bsn = getBsnExeptionByAlias(EnumError.NO_DATA.getAlias());
-
-        when(loanMapper.map(any(DTOIntRotaryQuotaMove.class))).thenThrow(bsn);
-
-        srvLoanV01.getRotaryQuotaMovement("1234", "56789");
-    }
 
     private BusinessServiceException getBsnExeptionByAlias(String alias){
         return new BusinessServiceException(alias);
-   }*/
+   }
 }
 
