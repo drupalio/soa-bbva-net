@@ -91,6 +91,7 @@ public class TxProductMapperImpl extends AbstractBbvaTxConfigurableMapper implem
 		
 		// Map FormatoOZECNTS0 <-> DTOIntConditions (OZNL)
 		factory.classMap(FormatoOZECNLS0.class, DTOIntMovement.class)
+				.field("numoper", "id")
 				.field("numoper", "operation.code")
 				.field("fechope", "transactionDate")
 				.field("descopr", "operation.description")
