@@ -32,7 +32,7 @@ public class TransaccionOznlMock implements InvocadorTransaccion<PeticionTransac
 		formato1.setFechope(new Date());
 		formato1.setNumoper(new Random().nextInt(Integer.MAX_VALUE));
 		formato1.setTipoopr("1");
-		formato1.setValorop("2000");
+		formato1.setValorop(new Random().nextInt(Integer.MAX_VALUE) + "");
 
 		CopySalida copy1 = new CopySalida();
 		copy1.setCopy(formato1);
@@ -45,7 +45,7 @@ public class TransaccionOznlMock implements InvocadorTransaccion<PeticionTransac
 		formato2.setFechope(new Date());
 		formato2.setNumoper(new Random().nextInt(Integer.MAX_VALUE));
 		formato2.setTipoopr("2");
-		formato2.setValorop("3000");
+		formato2.setValorop(new Random().nextInt(Integer.MAX_VALUE) + "");
 
 		CopySalida copy2 = new CopySalida();
 		copy2.setCopy(formato2);
@@ -58,7 +58,7 @@ public class TransaccionOznlMock implements InvocadorTransaccion<PeticionTransac
 		formato3.setFechope(new Date());
 		formato3.setNumoper(100);
 		formato3.setTipoopr("4");
-		formato3.setValorop("4000");
+		formato3.setValorop(new Random().nextInt(Integer.MAX_VALUE) + "");
 
 		CopySalida copy3 = new CopySalida();
 		copy3.setCopy(formato3);
