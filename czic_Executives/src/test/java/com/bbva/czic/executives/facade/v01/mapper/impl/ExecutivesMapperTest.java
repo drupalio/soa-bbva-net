@@ -2,6 +2,7 @@ package com.bbva.czic.executives.facade.v01.mapper.impl;
 
 import com.bbva.czic.dto.net.Executive;
 import com.bbva.czic.executives.business.dto.DTOIntExecutive;
+import com.bbva.czic.executives.business.dto.DTOIntExecutivesFilter;
 import com.bbva.czic.executives.business.dto.DTOIntOffice;
 import com.bbva.czic.executives.dao.model.oznr.FormatoOZECNRS0;
 import com.bbva.czic.executives.facade.v01.impl.SrvExecutivesV01;
@@ -51,6 +52,15 @@ public class ExecutivesMapperTest {
         assertEquals(dtoIntExecutive.getOffice().getCode(),executive.getOffice().getCode());
         assertEquals(dtoIntExecutive.getOffice().getPostalAddress(),executive.getOffice().getPostalAddress());
 
+
+    }
+
+    @Test
+    public void getDTOIntFilter() {
+
+        DTOIntExecutivesFilter dtoIntExecutivesFilter=    executivesMapper.getDTOIntFilter("id==010203405;type==CUSTOMER");
+        assertEquals("010203405",dtoIntExecutivesFilter.getId());
+        assertEquals("CUSTOMER",dtoIntExecutivesFilter.getType());
 
     }
 }

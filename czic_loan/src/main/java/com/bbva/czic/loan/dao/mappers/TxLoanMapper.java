@@ -13,14 +13,9 @@ import com.bbva.czic.loan.dao.model.oznk.FormatoOZNCENK0;
 import com.bbva.czic.loan.dao.model.oznk.FormatoOZNCSNK0;
 import com.bbva.czic.routine.commons.rm.utils.mappers.AbstractBbvaTxConfigurableMapper;
 import com.bbva.czic.routine.mapper.MapperFactory;
-import com.bbva.czic.routine.mapper.factory.MoneyFactory;
-import com.bbva.czic.routine.mapper.impl.ConfigurableMapper;
-import com.bbva.czic.routine.mapper.metadata.TypeFactory;
 import com.bbva.jee.arq.spring.core.log.I18nLog;
 import com.bbva.jee.arq.spring.core.log.I18nLogFactory;
-import com.bbva.jee.arq.spring.core.servicing.utils.Money;
 import org.springframework.stereotype.Component;
-
 
 @Component(value = "tx-loan-mapper")
 public class TxLoanMapper extends AbstractBbvaTxConfigurableMapper implements ITxLoanMapper {
