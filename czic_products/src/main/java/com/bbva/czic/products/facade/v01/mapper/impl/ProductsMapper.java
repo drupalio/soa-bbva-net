@@ -145,21 +145,20 @@ public class ProductsMapper extends AbstractBbvaConfigurableMapper implements
 
 	}
 
-	public DTOIntFilterExtract getDtoIntFilterExtract(String productId, String extractId,
+	public DTOIntFilterExtract getDtoIntFilterExtract(String productId,
 			String filter) {
-		final String monthGe = this.getGeValue(filter,"month");
-		final String monthLe = this.getLeValue(filter,"month");
-		final String yearGe = this.getGeValue(filter,"year");
-		final String yearLe = this.getLeValue(filter,"year");
-
 		DTOIntFilterExtract dtoIntFilter = new DTOIntFilterExtract();
-		dtoIntFilter.setExtractId(extractId);
+		if (filter != null) {
+			final String month = this.getEqValue(filter, "month");
+			final String year = this.getEqValue(filter, "year");
+			final String extractId = this.getEqValue(filter, "extractId");
+			dtoIntFilter.setExtractId(extractId);
+			dtoIntFilter.setMonth(month);
+			dtoIntFilter.setYear(year);
+		}
+
 		dtoIntFilter.setProductId(productId);
-		dtoIntFilter.setStartMonth(monthGe);
-		dtoIntFilter.setEndMonth(monthLe);
-		dtoIntFilter.setStartYear(yearGe);
-		dtoIntFilter.setEndYear(yearLe);
-		
+
 		return dtoIntFilter;
 	}
 
