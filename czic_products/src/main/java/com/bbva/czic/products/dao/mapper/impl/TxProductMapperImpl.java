@@ -153,7 +153,7 @@ public class TxProductMapperImpl extends AbstractBbvaTxConfigurableMapper implem
 
 	@Override
 	public FormatoOZECN2E0 mapInOzn2(DTOIntFilterExtract dtoIn) {
-		if(dtoIn.getEndMonth()==null || dtoIn.getEndYear()==null){
+		if(dtoIn.getMonth()==null || dtoIn.getYear()==null){
 			return mapInOzn2ListExtracts(dtoIn);
 		}
 		return mapInOzn2getExtracts(dtoIn);
@@ -169,25 +169,13 @@ public class TxProductMapperImpl extends AbstractBbvaTxConfigurableMapper implem
 
 	private FormatoOZECN2E0 mapInOzn2getExtracts(DTOIntFilterExtract dtoIn) {
 		FormatoOZECN2E0 formato = new FormatoOZECN2E0();
-		// Se inicializa el string parseable con la cabecera
-		String parser = headGenerate;
-		// Se obtiene el mes inicial
-		int month = Integer.parseInt(dtoIn.getStartMonth());
-		// Se realiza un ciclo para parsear todos los extractos presentes en dichos meses
-		for (int i = Integer.parseInt(dtoIn.getStartYear()); i <= Integer
-				.parseInt(dtoIn.getEndYear()); i++) {
-			while (month <= 12) {
-				parser = parser
-						+ REQUEST_EXTRACT.replace("$",""
-							+ IDPRODUCT.replace("$",dtoIn.getProductId())
-							+ YEAR.replace("$", i + "")
-							+ MONTH.replace("$", month + "")
-							+ EXTERNAL_CODE.replace("$",dtoIn.getEndMonth()));
-				month++;
-			}
-			month = 1;
-		}
-		parser = parser + tailGenerate;
+		String parser = headGenerate
+				+ REQUEST_EXTRACT.replace("$",""
+				+ IDPRODUCT.replace("$",dtoIn.getProductId())
+				+ YEAR.replace("$", dtoIn.getYear() + "")
+				+ MONTH.replace("$", dtoIn.getMonth() + "")
+				+ EXTERNAL_CODE.replace("$",dtoIn.getMonth()))
+				+ tailGenerate;
 		formato.setLongtra(parser.length());
 		return processPlot(formato,parser);
 	}
