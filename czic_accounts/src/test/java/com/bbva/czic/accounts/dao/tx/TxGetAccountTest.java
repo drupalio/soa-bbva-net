@@ -87,4 +87,11 @@ public class TxGetAccountTest extends SpringContextBbvaTest {
         DTOIntAccount salida = txGetAccount.mapResponseFormatToDtoOut(formato, new DTOIntFilterAccount());
         assertNotNull(salida);
     }
+
+    @Test
+    public void testGetTransaction(){
+        InvocadorTransaccion<PeticionTransaccionOzna, RespuestaTransaccionOzna> transaccion =
+                (InvocadorTransaccion<PeticionTransaccionOzna, RespuestaTransaccionOzna>) txGetAccount.getTransaction();
+        assertNotNull(transaccion);
+    }
 }
