@@ -13,16 +13,10 @@ import com.bbva.czic.loan.dao.model.oznk.FormatoOZNCENK0;
 import com.bbva.czic.loan.dao.model.oznk.FormatoOZNCSNK0;
 import com.bbva.czic.routine.commons.rm.utils.mappers.AbstractBbvaTxConfigurableMapper;
 import com.bbva.czic.routine.mapper.MapperFactory;
-import com.bbva.jee.arq.spring.core.log.I18nLog;
-import com.bbva.jee.arq.spring.core.log.I18nLogFactory;
 import org.springframework.stereotype.Component;
 
 @Component(value = "tx-loan-mapper")
 public class TxLoanMapper extends AbstractBbvaTxConfigurableMapper implements ITxLoanMapper {
-
-	private static I18nLog log = I18nLogFactory.getLogI18n(TxLoanMapper.class,
-			"META-INF/spring/i18n/log/mensajesLog");
-
 
 	@Override
 	protected void configure(MapperFactory factory) {
@@ -38,6 +32,7 @@ public class TxLoanMapper extends AbstractBbvaTxConfigurableMapper implements IT
 				.field("nomtarj", "idLoan")
 				.field("nommovi", "idMovement")
 				.byDefault().register();
+
 
 		// Map  FormatoOZNCSNJ0 DTOIntLoan
 		factory.classMap(FormatoOZNCSNJ0.class, DTOIntLoan.class)

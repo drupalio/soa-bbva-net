@@ -5,6 +5,8 @@ import com.bbva.czic.loan.dao.mappers.TxLoanMapper;
 import com.bbva.czic.loan.dao.model.ozni.FormatoOZNCENI0;
 import com.bbva.czic.loan.dao.model.ozni.FormatoOZNCSNI0;
 import com.bbva.czic.loan.dao.model.oznj.FormatoOZNCENJ0;
+import com.bbva.czic.loan.dao.model.oznj.FormatoOZNCSNJ0;
+import com.bbva.czic.loan.dao.model.oznk.FormatoOZNCENK0;
 import com.bbva.czic.loan.dao.model.oznk.FormatoOZNCSNK0;
 import com.bbva.czic.loan.dao.tx.TxGetRotaryQuota;
 import junit.framework.Assert;
@@ -14,35 +16,25 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.when;
 
 public class TxLoanMapperTest{
 
-	@Mock
-	private TxGetRotaryQuota txGetRotaryQuota;
-
-	@Mock
 	private TxLoanMapper txLoanMapper;
 
 	@Before
 	public void init(){
 		txLoanMapper = new TxLoanMapper();
-		MockitoAnnotations.initMocks(this);
 	}
 
     @Test
 	public void mapperFormatoOZNCENJ0ToDTOIntLoan(){
-
-		DTOIntLoan dtoIntLoan = new DTOIntLoan();
-		dtoIntLoan.setId("123");
-
-		FormatoOZNCENJ0 formatoOZNCENJ0 = new FormatoOZNCENJ0();
-		formatoOZNCENJ0.setNomtarj("1234");
-
-		DTOIntFilterLoan dtoIntFilterLoan = new DTOIntFilterLoan();
-
-		when(txLoanMapper.mapInOznj(any(DTOIntFilterLoan.class))).thenReturn(formatoOZNCENJ0);
+		final DTOIntFilterLoan dtoIntFilterLoan = new DTOIntFilterLoan();
+		dtoIntFilterLoan.setIdLoan("1234");
 
 		final FormatoOZNCENJ0 result = txLoanMapper.mapInOznj(dtoIntFilterLoan);
 
@@ -50,14 +42,44 @@ public class TxLoanMapperTest{
     }
 
 	@Test
+	public void mapOutOznj(){
+		txLoanMapper.mapOutOznj(new FormatoOZNCSNJ0());
+	}
+
+	@Test
+	public void callMapInOznkTest(){
+
+		final DTOIntFilterLoan dtoIntFilterLoan = new DTOIntFilterLoan();
+		dtoIntFilterLoan.setIdLoan("12345");
+		dtoIntFilterLoan.setIdMovement("3");
+
+		final FormatoOZNCENK0 result = txLoanMapper.mapInOznk(dtoIntFilterLoan);
+
+		Assert.assertNotNull(result);
+	}
+
+	@Test
+	public void callmapInOzniTest(){
+
+		final DTOIntFilterLoan dtoIntFilterLoan = new DTOIntFilterLoan();
+		dtoIntFilterLoan.setIdLoan("12345");
+		dtoIntFilterLoan.setFechaInicial(new Date());
+		dtoIntFilterLoan.setFechaFinal(new Date());
+		dtoIntFilterLoan.setPaginationKey(3);
+
+		final FormatoOZNCENI0 result = txLoanMapper.mapInOzni(dtoIntFilterLoan);
+
+		Assert.assertNotNull(result);
+	}
+
+	@Test
 	public void mapperFormatoOZNCENI0ToDTOIntLoan(){
 
-		DTOIntMovement dtoIntMovement = new DTOIntMovement();
-		dtoIntMovement.setId("123");
-
 		FormatoOZNCSNI0 formatoOZNCSNI0 = new FormatoOZNCSNI0();
-
-		when(txLoanMapper.mapOutOzni(any(FormatoOZNCSNI0.class))).thenReturn(dtoIntMovement);
+		formatoOZNCSNI0.setResto("12345");
+		formatoOZNCSNI0.setValorop("20300");
+		formatoOZNCSNI0.setNumeope("2345");
+		formatoOZNCSNI0.setTipope("Pago");
 
 		final DTOIntMovement result = txLoanMapper.mapOutOzni(formatoOZNCSNI0);
 
@@ -67,15 +89,23 @@ public class TxLoanMapperTest{
 	@Test
 	public void mapperFormatoOZNCENK0ToDTOIntLoan(){
 
-		DTOIntRotaryQuotaMove dtoIntRotaryQuotaMove = new DTOIntRotaryQuotaMove();
-
-		FormatoOZNCSNK0 formatoOZNCSNK0 = new FormatoOZNCSNK0();
+		final FormatoOZNCSNK0 formatoOZNCSNK0 = new FormatoOZNCSNK0();
 		formatoOZNCSNK0.setEstado("Activo");
-
-		when(txLoanMapper.mapOutOznk(any(FormatoOZNCSNK0.class))).thenReturn(dtoIntRotaryQuotaMove);
+		formatoOZNCSNK0.setNumemov("23");
+		formatoOZNCSNK0.setFechaop(new Date(20140313));
+		formatoOZNCSNK0.setResto("234");
+		formatoOZNCSNK0.setImporte("8000");
+		formatoOZNCSNK0.setDescop("500");
+		formatoOZNCSNK0.setCoutaf("23400");
+		formatoOZNCSNK0.setCoutat("3");
+		formatoOZNCSNK0.setEstado("Activa");
 
 		final DTOIntRotaryQuotaMove result = txLoanMapper.mapOutOznk(formatoOZNCSNK0);
 
-		Assert.assertNotNull(result);
+		Assert.assertEquals(result.getId(), formatoOZNCSNK0.getNumemov());
+		Assert.assertEquals(result.getConcept(), formatoOZNCSNK0.getResto());
+		Assert.assertEquals(result.getRemainingQuotas().toString(), formatoOZNCSNK0.getCoutaf());
+		Assert.assertEquals(result.getNumbersOfQuota().toString(), formatoOZNCSNK0.getCoutat());
+		Assert.assertEquals(result.getStatus(), formatoOZNCSNK0.getEstado());
 	}
 }
