@@ -65,7 +65,6 @@ public class TxCustomerMapper extends AbstractBbvaTxConfigurableMapper implement
 
 		// map DTOIntAccMovementsResumesFilter <-> FormatoOZECNQE0
 		factory.classMap(DTOIntAccMovementsResumesFilter.class, FormatoOZECNQE0.class)
-				.field("customerId", "idusuar")
 				.field("startDate", "fechain")
 				.field("endDate", "fechafi")
 				.byDefault().register();
