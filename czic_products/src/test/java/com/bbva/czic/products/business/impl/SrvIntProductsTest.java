@@ -104,69 +104,69 @@ public class SrvIntProductsTest extends SpringContextBbvaTest {
 	
 	@Test
 	public void testListExtractsSuccess() {
-//		
-//		// setUp - expectation
-//		DTOIntExtractOutput dtoExtractOutput = mockDTOIntExtractOutputEntity();
-//		DTOIntFilterExtract dtoIntFilterExtract = mockDTOIntFilterExtractNoExtractIdEntity();
-//		when(productsDAO.listExtracts(any(DTOIntFilterExtract.class))).thenReturn(dtoExtractOutput);
-//
-//		//Test
-//		List<DTOIntExtract> initialResult= srv.listExtracts(dtoIntFilterExtract);
-//		assertNotNull(initialResult);
+		
+		// setUp - expectation
+		DTOIntExtractOutput dtoExtractOutput = mockDTOIntExtractOutputEntity();
+		DTOIntFilterExtract dtoIntFilterExtract = mockDTOIntFilterExtractNoExtractIdEntity();
+		when(productsDAO.listExtracts(any(DTOIntFilterExtract.class))).thenReturn(dtoExtractOutput);
+
+		//Test
+		List<DTOIntExtract> initialResult= srv.listExtracts(dtoIntFilterExtract);
+		assertNotNull(initialResult);
 	}
 	
 	@Test
 	public void testGetExtractsSuccess() {
-//		
-//		// setUp - expectation
-//		DTOIntExtractOutput dtoExtractOutput = mockDTOIntExtractOutputEntity();
-//		DTOIntFilterExtract dtoIntFilterExtract = mockDTOIntFilterExtractEntity();
-//		when(productsDAO.listExtracts(any(DTOIntFilterExtract.class))).thenReturn(dtoExtractOutput);
-//
-//		//Test
-//		List<DTOIntExtract> initialResult= srv.listExtracts(dtoIntFilterExtract);
-//		assertNotNull(initialResult);
+		
+		// setUp - expectation
+		DTOIntExtractOutput dtoExtractOutput = mockDTOIntExtractOutputEntity();
+		DTOIntFilterExtract dtoIntFilterExtract = mockDTOIntFilterExtractEntity();
+		when(productsDAO.listExtracts(any(DTOIntFilterExtract.class))).thenReturn(dtoExtractOutput);
+
+		//Test
+		List<DTOIntExtract> initialResult= srv.listExtracts(dtoIntFilterExtract);
+		assertNotNull(initialResult);
 	}
 
 	@Test(expected = BusinessServiceException.class)
 	public void testListExtractDaoException() {
-//		// setUp - expectation
-//		DTOIntFilterExtract dtoIntFilterExtract = mockDTOIntFilterExtractEntity();
-//		BusinessServiceException bsn = new BusinessServiceException(
-//				EnumError.TECHNICAL_ERROR.getAlias());
-//		when(productsDAO.listExtracts(any(DTOIntFilterExtract.class))).thenThrow(bsn);
-//
-//		// Test
-//		srv.listExtracts(dtoIntFilterExtract);
+		// setUp - expectation
+		DTOIntFilterExtract dtoIntFilterExtract = mockDTOIntFilterExtractEntity();
+		BusinessServiceException bsn = new BusinessServiceException(
+				EnumError.TECHNICAL_ERROR.getAlias());
+		when(productsDAO.listExtracts(any(DTOIntFilterExtract.class))).thenThrow(bsn);
+
+		// Test
+		srv.listExtracts(dtoIntFilterExtract);
 	}
 	
 	@Test(expected = IllegalArgumentException.class)
 	public void testListExtractsNullInputDto() {
-//
-//		// setUp - expectation
-//		DTOIntExtractOutput dtoExtractOutput = null;
-//		DTOIntFilterExtract dtoIntFilterExtract = mockDTOIntFilterExtractNoExtractIdEntity();
-//		when(productsDAO.listExtracts(any(DTOIntFilterExtract.class)))
-//				.thenReturn(dtoExtractOutput);
-//
-//		// Test
-//		List<DTOIntExtract> initialResult = srv
-//				.listExtracts(dtoIntFilterExtract);
-//		assertNotNull(initialResult);
+
+		// setUp - expectation
+		DTOIntExtractOutput dtoExtractOutput = null;
+		DTOIntFilterExtract dtoIntFilterExtract = mockDTOIntFilterExtractNoExtractIdEntity();
+		when(productsDAO.listExtracts(any(DTOIntFilterExtract.class)))
+				.thenReturn(dtoExtractOutput);
+
+		// Test
+		List<DTOIntExtract> initialResult = srv
+				.listExtracts(dtoIntFilterExtract);
+		assertNotNull(initialResult);
 	}
 	
 	@Test(expected = IllegalArgumentException.class)
 	public void testListExtractsNullOutputDto() {
-//
-//		// setUp - expectation
-//		DTOIntFilterExtract dtoIntFilterExtract = mockDTOIntFilterExtractNoExtractIdEntity();
-//		when(productsDAO.listExtracts(any(DTOIntFilterExtract.class)))
-//				.thenReturn(null);
-//
-//		// Test
-//		List<DTOIntExtract> initialResult = srv
-//				.listExtracts(dtoIntFilterExtract);
-//		assertNotNull(initialResult);
+
+		// setUp - expectation
+		DTOIntFilterExtract dtoIntFilterExtract = mockDTOIntFilterExtractNoExtractIdEntity();
+		when(productsDAO.listExtracts(any(DTOIntFilterExtract.class)))
+				.thenReturn(null);
+
+		// Test
+		List<DTOIntExtract> initialResult = srv
+				.listExtracts(dtoIntFilterExtract);
+		assertNotNull(initialResult);
 	}
 
 	
@@ -188,26 +188,21 @@ public class SrvIntProductsTest extends SpringContextBbvaTest {
 		return dtoIntExtractOutput;
 	}
 	
-//	public DTOIntFilterExtract mockDTOIntFilterExtractNoExtractIdEntity() {
-//		DTOIntFilterExtract filter = new DTOIntFilterExtract();
-//		filter.setProductId(dataF.getNumberText(20));
-//		filter.setEndMonth(dataF.getNumberBetween(10,12)+"");
-//		filter.setStartMonth("01");
-//		filter.setStartYear(dataF.getNumberBetween(2000,2005)+"");
-//		filter.setEndYear(dataF.getNumberBetween(2010,2015)+"");
-//		return filter;
-//	}
+	public DTOIntFilterExtract mockDTOIntFilterExtractNoExtractIdEntity() {
+		DTOIntFilterExtract filter = new DTOIntFilterExtract();
+		filter.setProductId(dataF.getNumberText(20));
+		return filter;
+	}
 	
-//	public DTOIntFilterExtract mockDTOIntFilterExtractEntity() {
-//		DTOIntFilterExtract filter = new DTOIntFilterExtract();
-//		filter.setProductId(dataF.getNumberText(20));
-//		filter.setExtractId(dataF.getNumberText(8));
-//		filter.setEndMonth("01");
-//		filter.setStartMonth("01");
-//		filter.setStartYear("2014");
-//		filter.setEndYear("2014");
-//		return filter;
-//	}
+	public DTOIntFilterExtract mockDTOIntFilterExtractEntity() {
+		DTOIntFilterExtract filter = new DTOIntFilterExtract();
+		filter.setProductId(dataF.getNumberText(20));
+		filter.setExtractId(dataF.getNumberText(8));
+		filter.setProductId(dataF.getNumberText(20));
+		filter.setMonth(dataF.getNumberBetween(10,12)+"");
+		filter.setYear(dataF.getNumberBetween(1990,2015)+"");
+		return filter;
+	}
 
 	//------------getMovement-----------------
 

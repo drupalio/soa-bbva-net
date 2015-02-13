@@ -16,7 +16,9 @@ import com.bbva.czic.products.business.dto.DTOIntFilterMovements;
 import com.bbva.czic.products.business.dto.DTOIntMovement;
 import com.bbva.czic.products.business.dto.DTOIntProduct;
 import com.bbva.czic.products.dao.IProductsDAO;
+import com.bbva.czic.routine.commons.rm.utils.EDateFormat;
 import com.bbva.czic.routine.commons.rm.utils.validator.DtoValidator;
+import com.bbva.czic.routine.commons.rm.utils.validator.impl.DateValidator;
 import com.bbva.czic.routine.commons.rm.utils.validator.impl.StringValidator;
 import com.bbva.jee.arq.spring.core.log.I18nLog;
 import com.bbva.jee.arq.spring.core.log.I18nLogFactory;
@@ -61,6 +63,7 @@ public class SrvIntProducts implements ISrvIntProducts {
 					.isNumericMonth(dtoIntFilterExtract.getMonth())
 					.isNumericText(dtoIntFilterExtract.getYear())
 					.validate();
+			new DateValidator().noFuture(dtoIntFilterExtract.getMonth()+dtoIntFilterExtract.getYear(),EDateFormat.MES_ANIO);
 		} 
 
 		// 2. Get response

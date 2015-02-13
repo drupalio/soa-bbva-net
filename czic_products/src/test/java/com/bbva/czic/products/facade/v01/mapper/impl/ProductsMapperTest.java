@@ -48,19 +48,25 @@ public class ProductsMapperTest {
 		assertEquals(listDto.get(0).getUrl(),extract.get(0).getUrl());
 	}
 	
-//	@Test
-//	public void mapInListExtractsTest(){
-//		String productId = "00130693000100000010";
-//		String extractId = "123456789";
-//		String filter = "(month=02;year=2014)";
-//		DTOIntFilterExtract dtoFilter = productsMapper.getDtoIntFilterExtract(productId,extractId, filter);
-//		assertEquals(productId,dtoFilter.getProductId());
-//		assertEquals(extractId,dtoFilter.getExtractId());
-//		assertEquals("02",dtoFilter.getMonth());
-//		assertEquals("01",dtoFilter.getStartMonth());
-//		assertEquals("2014",dtoFilter.getEndYear());
-//		assertEquals("2014",dtoFilter.getStartYear());
-//	}
+	@Test
+	public void mapInListFilterExtractsTest(){
+		String productId = "00130693000100000010";
+		String extractId = "123456789";
+		String filter = "(extractId=="+extractId+";month==02;year==2014)";
+		DTOIntFilterExtract dtoFilter = productsMapper.getDtoIntFilterExtract(productId, filter);
+		assertEquals(productId,dtoFilter.getProductId());
+		assertEquals(extractId,dtoFilter.getExtractId());
+		assertEquals("02",dtoFilter.getMonth());
+		assertEquals("2014",dtoFilter.getYear());
+	}
+	
+	@Test
+	public void mapInListExtractsTest(){
+		String productId = "00130693000100000010";
+		String filter = null;
+		DTOIntFilterExtract dtoFilter = productsMapper.getDtoIntFilterExtract(productId, filter);
+		assertEquals(productId,dtoFilter.getProductId());
+	}
 	
 //  ------------------ getConditions ------------------
 	
