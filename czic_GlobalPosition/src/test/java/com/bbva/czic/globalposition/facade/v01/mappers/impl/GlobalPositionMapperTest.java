@@ -1,4 +1,4 @@
-package com.bbva.czic.globalposition.facade.v01.mappers;
+package com.bbva.czic.globalposition.facade.v01.mappers.impl;
 
 import com.bbva.czic.dto.net.*;
 import com.bbva.czic.globalposition.business.dto.*;
