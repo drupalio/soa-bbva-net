@@ -60,7 +60,7 @@ public class CustomerMapper extends AbstractBbvaConfigurableMapper implements IC
     }
 
     @Override
-    public DTOIntAccMovementsResumesFilter getDTOIntMovementResumesFilter(final String customerId, final String filter) {
+    public DTOIntAccMovementsResumesFilter getDTOIntMovementResumesFilter(final String filter) {
         final String startDate = this.getGeValue(filter, FiqlType.month.name());
         final String endDate = this.getLeValue(filter, FiqlType.month.name());
 
@@ -68,8 +68,6 @@ public class CustomerMapper extends AbstractBbvaConfigurableMapper implements IC
 
         intFilterCustomerResumes.setStartDate(startDate);
         intFilterCustomerResumes.setEndDate(endDate);
-
-        intFilterCustomerResumes.setCustomerId(customerId);
 
         return intFilterCustomerResumes;
     }

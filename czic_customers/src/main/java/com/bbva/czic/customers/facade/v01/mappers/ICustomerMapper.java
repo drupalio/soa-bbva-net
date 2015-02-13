@@ -13,7 +13,7 @@ import java.util.List;
  * @author Entelgy Colombia.
  */
 public interface ICustomerMapper {
-    DTOIntAccMovementsResumesFilter getDTOIntMovementResumesFilter(String customerId, String filter);
+    DTOIntAccMovementsResumesFilter getDTOIntMovementResumesFilter(String filter);
 
     List<AccMovementsResume> mapAccMovementsResume(List<DTOIntAccMovementsResume> accMovementsResumes);
 

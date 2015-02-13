@@ -23,9 +23,8 @@ public class TxAddChannel  extends SimpleBbvaTransaction<DTOIntAddChannel, Forma
     @Override
     protected FormatoOZECNWE0 mapDtoInToRequestFormat(DTOIntAddChannel dtoIn) {
         FormatoOZECNWE0 formatoOZECNWE0 = new FormatoOZECNWE0();
-
         formatoOZECNWE0.setUsuario(dtoIn.getCustomerId());
-        formatoOZECNWE0.setCanal(dtoIn.getChannelId());
+
         return formatoOZECNWE0;
     }
 

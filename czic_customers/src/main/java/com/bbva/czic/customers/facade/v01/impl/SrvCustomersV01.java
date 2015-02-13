@@ -116,24 +116,18 @@ public class SrvCustomersV01 implements ISrvCustomersV01, com.bbva.jee.arq.sprin
 			@ApiResponse(code = 409, message = "Data not found"), @ApiResponse(code = 500, message = "Technical Error") })
 	@GET
 	@ElementClass(response = List.class)
-	@Path("/{customerId}/accounts/movementsResume")
+	@Path("/accounts/movementsResume")
 	@SMC(registryID = "SMCCO1400025", logicalID = "getListAccountsMovementsResume")
 	public List<AccMovementsResume> listAccountsMovementsResume(
-			@ApiParam(value = "Claim identifier param") @PathParam("customerId") String customerId,
 			@ApiParam(value = "filter param") @QueryParam("$filter") String filter) {
 
 		log.info("Into listAccountsMovementsResume...");
 
 		// 1. Validate filter FIQL
 		new FiqlValidator(filter).hasGeAndLe("month").validateIfExist();
-		new StringValidator().notIsNull(customerId).validate();
-
-		// 1.b Validate customerId not is Null
-		new StringValidator().notIsNull(customerId).isNumericText(customerId).validate();
 
 		// 2. Mapping to DTOIntFilter
-		final DTOIntAccMovementsResumesFilter filterCustomerResumes = customerMapper.getDTOIntMovementResumesFilter(
-				customerId, filter);
+		final DTOIntAccMovementsResumesFilter filterCustomerResumes = customerMapper.getDTOIntMovementResumesFilter(filter);
 
 		// 3. Invoke SrvIntCustomers and Mapping to canonical DTO
 		List<DTOIntAccMovementsResume> accMovementsResumes = srvIntCustomers
@@ -193,14 +187,13 @@ public class SrvCustomersV01 implements ISrvCustomersV01, com.bbva.jee.arq.sprin
 			@ApiResponse(code = 400, message = "Wrong parameters"),
 			@ApiResponse(code = 409, message = "Data not found"), @ApiResponse(code = 500, message = "Technical Error") })
 	@PUT
-	@Path("/{customerId}/custommerChannels/{channelId}")
+	@Path("/{customerId}/addChannel")
 	@SMC(registryID = "SMCCO1500009", logicalID = "addChannel")
 
-	public Response addChannel(@ApiParam(value = "Claim identifier param") @PathParam("customerId") String customerId,
-							   @ApiParam(value = "Claim channerlid param") @PathParam("channelId") String channelId) {
+	public Response addChannel(@ApiParam(value = "Claim identifier param") @PathParam("customerId") String customerId) {
 
 		log.info("Into addChannel...");
-		srvIntCustomers.addChannel(new DTOIntAddChannel(customerId, channelId));
+		srvIntCustomers.addChannel(new DTOIntAddChannel(customerId));
 
 		return Response.ok().build();
 	}
