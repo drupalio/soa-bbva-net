@@ -3,6 +3,7 @@
 
 package com.bbva.czic.products.dao.model.oznm;
 
+import java.lang.String;
 
 privileged aspect FormatoOZNCENM0_Roo_JavaBean {
     
@@ -28,14 +29,6 @@ privileged aspect FormatoOZNCENM0_Roo_JavaBean {
     
     public void FormatoOZNCENM0.setNummov(String nummov) {
         this.nummov = nummov;
-    }
-    
-    public String FormatoOZNCENM0.getNumcli() {
-        return this.numcli;
-    }
-    
-    public void FormatoOZNCENM0.setNumcli(String numcli) {
-        this.numcli = numcli;
     }
     
 }

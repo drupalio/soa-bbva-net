@@ -3,7 +3,8 @@
 
 package com.bbva.czic.products.dao.model.oznl;
 
-import java.math.BigDecimal;
+import java.lang.Integer;
+import java.lang.String;
 import java.util.Date;
 
 privileged aspect FormatoOZECNLE0_Roo_JavaBean {
@@ -14,14 +15,6 @@ privileged aspect FormatoOZECNLE0_Roo_JavaBean {
     
     public void FormatoOZECNLE0.setNumprod(String numprod) {
         this.numprod = numprod;
-    }
-    
-    public String FormatoOZECNLE0.getUsuario() {
-        return this.usuario;
-    }
-    
-    public void FormatoOZECNLE0.setUsuario(String usuario) {
-        this.usuario = usuario;
     }
     
     public Integer FormatoOZECNLE0.getIndpagi() {
@@ -56,19 +49,19 @@ privileged aspect FormatoOZECNLE0_Roo_JavaBean {
         this.fecfin = fecfin;
     }
     
-    public BigDecimal FormatoOZECNLE0.getSalinc() {
+    public String FormatoOZECNLE0.getSalinc() {
         return this.salinc;
     }
     
-    public void FormatoOZECNLE0.setSalinc(BigDecimal salinc) {
+    public void FormatoOZECNLE0.setSalinc(String salinc) {
         this.salinc = salinc;
     }
     
-    public BigDecimal FormatoOZECNLE0.getSalfin() {
+    public String FormatoOZECNLE0.getSalfin() {
         return this.salfin;
     }
     
-    public void FormatoOZECNLE0.setSalfin(BigDecimal salfin) {
+    public void FormatoOZECNLE0.setSalfin(String salfin) {
         this.salfin = salfin;
     }
     

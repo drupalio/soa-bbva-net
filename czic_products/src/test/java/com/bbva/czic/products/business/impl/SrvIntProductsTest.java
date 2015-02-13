@@ -214,7 +214,7 @@ public class SrvIntProductsTest extends SpringContextBbvaTest {
 	@Test(expected = BusinessServiceException.class)
 	public void testGetMovementInvalidFilter(){
 		final DTOIntFilterMovements dtoIntFilterMovements = new DTOIntFilterMovements();
-		dtoIntFilterMovements.setCustomerId("123");
+		dtoIntFilterMovements.setProductId("123");
 		srv.getMovement(dtoIntFilterMovements);
 	}
 
@@ -256,7 +256,6 @@ public class SrvIntProductsTest extends SpringContextBbvaTest {
 	public void testGetMovement(){
 		final DTOIntFilterMovements filterMovement = new DTOIntFilterMovements();
 		filterMovement.setProductId("01020304050607080900");
-		filterMovement.setCustomerId("12345678");
 		filterMovement.setMovementId("0102030400");
 		filterMovement.setPageSize(10);
 		filterMovement.setPaginationKey(1);
@@ -287,7 +286,7 @@ public class SrvIntProductsTest extends SpringContextBbvaTest {
 	@Test(expected = BusinessServiceException.class)
 	public void testListMovementsInvalidFilter(){
 		final DTOIntFilterMovements dtoIntFilterMovements = new DTOIntFilterMovements();
-		dtoIntFilterMovements.setCustomerId("123");
+		dtoIntFilterMovements.setProductId("123");
 		srv.listMovements(dtoIntFilterMovements);
 	}
 
@@ -331,7 +330,6 @@ public class SrvIntProductsTest extends SpringContextBbvaTest {
 	public void testListMovements(){
 		final DTOIntFilterMovements filterMovement = new DTOIntFilterMovements();
 		filterMovement.setProductId("01020304050607080900");
-		filterMovement.setCustomerId("12345678");
 		filterMovement.setMovementId("0102030400");
 		filterMovement.setPageSize(10);
 		filterMovement.setPaginationKey(1);

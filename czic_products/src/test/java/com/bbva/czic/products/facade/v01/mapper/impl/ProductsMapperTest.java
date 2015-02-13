@@ -187,7 +187,6 @@ public class ProductsMapperTest {
 
 
         assertEquals("01020304050607080900",dtoIntFilterMovements.getProductId());
-        assertEquals("0102030405",dtoIntFilterMovements.getCustomerId());
         assertEquals("AH",dtoIntFilterMovements.getProductType());
         assertEquals(new Integer(1),dtoIntFilterMovements.getPaginationKey());
         assertEquals(new Integer(10),dtoIntFilterMovements.getPageSize());
@@ -202,7 +201,6 @@ public class ProductsMapperTest {
 
         assertEquals("01020304050607080900",dtoIntFilterMovements.getProductId());
         assertEquals("012345678",dtoIntFilterMovements.getMovementId());
-        assertEquals("0102030405",dtoIntFilterMovements.getCustomerId());
         assertEquals("AH",dtoIntFilterMovements.getProductType());
     }
 

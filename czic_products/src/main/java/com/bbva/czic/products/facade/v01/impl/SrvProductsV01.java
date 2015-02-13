@@ -153,7 +153,7 @@ public class SrvProductsV01 implements ISrvProductsV01,
 		}
 
 		// 2. Validate filter
-		new FiqlValidator(filter).exist().hasEq("customerId")
+		new FiqlValidator(filter).exist()
 				.hasEq("productType").validate();
 
 		// Mapeo del filtro a DTO
@@ -193,7 +193,7 @@ public class SrvProductsV01 implements ISrvProductsV01,
 		}
 
 		// 2. Validate filter
-		new FiqlValidator(filter).hasEq("customerId").hasEq("productType").hasGeAndLe("transactionDate")
+		new FiqlValidator(filter).hasEq("productType").hasGeAndLe("transactionDate")
 				.hasGeOrLe("value").validateAny();
 
 		// Mapeo del filtro a DTO
