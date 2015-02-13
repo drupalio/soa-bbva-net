@@ -12,11 +12,11 @@ import java.util.Currency;
  */
 public class FormatBalanceToDTOBalanceConverter {
 
-    @Value("${locale.default.currency.iso}")
-    private String CURRENCY;
+    @Value("${locale.default.currency.iso}" )
+    private String CURRENCY = "COP";
 
     @Value("${currency.default.decimal.divider}")
-    private String DECIMAL_DIVIDER;
+    private String DECIMAL_DIVIDER = "100";
 
     public DTOIntBalance convert(String totalBalance, String availableBalance) {
         final DTOIntBalance balance = new DTOIntBalance();
@@ -37,5 +37,6 @@ public class FormatBalanceToDTOBalanceConverter {
 
         return balance;
     }
+
 
 }
