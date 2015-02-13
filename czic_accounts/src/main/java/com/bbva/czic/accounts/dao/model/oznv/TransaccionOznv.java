@@ -36,4 +36,8 @@ public class TransaccionOznv implements InvocadorTransaccion<PeticionTransaccion
 	@Override
 	public void vaciarCache() {
 	}
+
+	public void setServicioTransacciones(ServicioTransacciones servicioTransacciones) {
+		this.servicioTransacciones = servicioTransacciones;
+	}
 }
