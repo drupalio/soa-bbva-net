@@ -11,7 +11,7 @@ import javax.validation.constraints.Pattern;
  */
 public class DTOIntProductFilter {
 
-	@NotEmpty
+
 	@Pattern(regexp = "^\\d{8}$")
 	private String idCustomer;
 

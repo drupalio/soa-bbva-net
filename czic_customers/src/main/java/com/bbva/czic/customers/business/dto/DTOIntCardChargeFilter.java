@@ -9,7 +9,7 @@ import javax.validation.constraints.Pattern;
  * @author Entelgy Colombia.
  */
 public class DTOIntCardChargeFilter {
-    @NotEmpty
+
     @Pattern(regexp = "^\\d{8}$")
     String customerId;
     String startDate;

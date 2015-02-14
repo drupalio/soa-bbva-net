@@ -10,7 +10,7 @@ import javax.validation.constraints.Size;
  */
 public class DTOIntExecutivesFilter {
 
-    @NotNull
+
     @Size(min=1)
     private String id;
     @NotNull
