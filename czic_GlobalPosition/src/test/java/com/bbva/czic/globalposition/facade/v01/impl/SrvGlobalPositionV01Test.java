@@ -46,9 +46,9 @@ public class SrvGlobalPositionV01Test {
 
 		productList.add(product);
 
-		when(srvGlobalPositionV01.getExtractGlobalBalance("123", "productType==PC")).thenReturn(productList);
+		when(srvGlobalPositionV01.getExtractGlobalBalance("productType==PC")).thenReturn(productList);
 
-		List<Product> resultList = srvGlobalPositionV01.getExtractGlobalBalance("123", "(productType==PC)");
+		List<Product> resultList = srvGlobalPositionV01.getExtractGlobalBalance("(productType==PC)");
 
 		Assert.assertNotNull(resultList);
 	}

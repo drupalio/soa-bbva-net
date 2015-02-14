@@ -37,7 +37,6 @@ public class TxGetExtractGlobalBalanceNoTCTest  {
 
 		final DTOIntProductFilter dtoIntProductFilter = new DTOIntProductFilter();
 		dtoIntProductFilter.setProductType("QA");
-		dtoIntProductFilter.setIdCustomer("12345");
 
 		final FormatoOZECN1E0 formatoOZECN1E0 = new FormatoOZECN1E0();
 		formatoOZECN1E0.setNumclie("12345");
