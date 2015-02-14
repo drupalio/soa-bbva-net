@@ -11,7 +11,7 @@ public class EnumCategoryConverter extends BidirectionalConverter<String, EnumCa
 
     @Override
     public EnumCardChargeCategory convertTo(String source, Type<EnumCardChargeCategory> destinationType) {
-        return EnumCardChargeCategory.valueOf(source);
+        return EnumCardChargeCategory.fromString(source);
     }
 
     @Override

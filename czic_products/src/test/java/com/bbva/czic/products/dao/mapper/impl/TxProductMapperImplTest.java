@@ -73,14 +73,12 @@ public class TxProductMapperImplTest extends SpringContextBbvaTest {
 	public void mapInOznm() {
 
 		DTOIntFilterMovements filter = new DTOIntFilterMovements();
-		filter.setCustomerId("123456789");
 		filter.setProductId("01020304050607080900");
 		filter.setProductType("AH");
 		filter.setMovementId("000011123");
 
 		FormatoOZNCENM0 entrada = txProductMapper.mapInOznm(filter);
 
-		assertEquals(filter.getCustomerId(), entrada.getNumcli());
 		assertEquals(filter.getProductId(), entrada.getNocuent());
 		assertEquals(filter.getProductType(), entrada.getTiprod());
 		assertEquals(filter.getMovementId(), entrada.getNummov());

@@ -107,7 +107,6 @@ public class SrvIntCustomers implements ISrvIntCustomers {
 
 		new StringValidator()
 				.notIsNull(dtoIntAddChannel.getCustomerId())
-				.notIsNull(dtoIntAddChannel.getChannelId())
 				.validate();
 
 		customersDao.addChannel(dtoIntAddChannel);

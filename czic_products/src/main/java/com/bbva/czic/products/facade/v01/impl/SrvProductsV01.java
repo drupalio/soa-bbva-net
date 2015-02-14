@@ -147,13 +147,13 @@ public class SrvProductsV01 implements ISrvProductsV01,
 								@ApiParam(value = "filter param") @DefaultValue("null") @QueryParam("$filter") String filter) {
 
 		// 1. Validate parameter
-		if (movementId == null || movementId.trim().isEmpty()||productId == null || productId.trim().isEmpty()) {
+		if (movementId == null || movementId.trim().isEmpty()) {
 			throw new BusinessServiceException(
 					EnumError.WRONG_PARAMETERS.getAlias());
 		}
 
 		// 2. Validate filter
-		new FiqlValidator(filter).exist().hasEq("customerId")
+		new FiqlValidator(filter).exist()
 				.hasEq("productType").validate();
 
 		// Mapeo del filtro a DTO
@@ -186,14 +186,8 @@ public class SrvProductsV01 implements ISrvProductsV01,
 										@ApiParam(value = "pagination key") @DefaultValue("null") @QueryParam("paginationKey") Integer paginationKey,
 										@ApiParam(value = "pagination size") @DefaultValue("null") @QueryParam("pageSize") Integer pageSize) {
 
-		// 1. Validate parameter
-		if (productId == null || productId.trim().isEmpty()) {
-			throw new BusinessServiceException(
-					EnumError.WRONG_PARAMETERS.getAlias());
-		}
-
-		// 2. Validate filter
-		new FiqlValidator(filter).hasEq("customerId").hasEq("productType").hasGeAndLe("transactionDate")
+		// 1. Validate filter
+		new FiqlValidator(filter).hasEq("productType").hasGeAndLe("transactionDate")
 				.hasGeOrLe("value").validateAny();
 
 		// Mapeo del filtro a DTO

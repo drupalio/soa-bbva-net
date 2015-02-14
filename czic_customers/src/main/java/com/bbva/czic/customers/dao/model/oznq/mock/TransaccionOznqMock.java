@@ -34,7 +34,7 @@ public class TransaccionOznqMock implements InvocadorTransaccion<PeticionTransac
 
 			FormatoOZECNQS0 formatoSalida = new FormatoOZECNQS0();
 
-			formatoSalida.setMes("0" + 1);
+			formatoSalida.setMes("0" + i);
 			formatoSalida.setSaltota(new BigDecimal(100000));
 			formatoSalida.setValcarg(new BigDecimal(50000));
 			formatoSalida.setValdepo(new BigDecimal(300000));

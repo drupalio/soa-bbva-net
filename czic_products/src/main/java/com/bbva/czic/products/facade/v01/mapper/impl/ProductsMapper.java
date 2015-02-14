@@ -106,11 +106,9 @@ public class ProductsMapper extends AbstractBbvaConfigurableMapper implements
 	@Override
 	public DTOIntFilterMovements getDTOIntFilterGetMovement(String productId,String movementId, String filter) {
 
-		final String customerId = this.getEqValue(filter, FiqlType.customerId.name());
 		final String productType = this.getEqValue(filter, FiqlType.productType.name());
 
 		final DTOIntFilterMovements dtoIntFilterMovements = new DTOIntFilterMovements();
-		dtoIntFilterMovements.setCustomerId(customerId);
 		dtoIntFilterMovements.setProductType(productType);
 		dtoIntFilterMovements.setProductId(productId);
 		dtoIntFilterMovements.setMovementId(movementId);
@@ -126,11 +124,9 @@ public class ProductsMapper extends AbstractBbvaConfigurableMapper implements
 		final String transactionDateEnd = this.getLeValue(filter, FiqlType.transactionDate.name());
 		final String valueStart = this.getGeValue(filter, FiqlType.value.name());
 		final String valueEnd = this.getLeValue(filter, FiqlType.value.name());
-		final String customerId = this.getEqValue(filter, FiqlType.customerId.name());
 		final String productType = this.getEqValue(filter, FiqlType.productType.name());
 
 		final DTOIntFilterMovements dtoIntFilterMovements = new DTOIntFilterMovements();
-		dtoIntFilterMovements.setCustomerId(customerId);
 		dtoIntFilterMovements.setProductType(productType);
 		dtoIntFilterMovements.setProductId(productId);
 		dtoIntFilterMovements.setPageSize(pageSize);

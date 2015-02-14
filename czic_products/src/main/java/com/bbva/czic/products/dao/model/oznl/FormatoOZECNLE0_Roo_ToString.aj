@@ -3,6 +3,7 @@
 
 package com.bbva.czic.products.dao.model.oznl;
 
+import java.lang.String;
 
 privileged aspect FormatoOZECNLE0_Roo_ToString {
     
@@ -14,8 +15,7 @@ privileged aspect FormatoOZECNLE0_Roo_ToString {
         sb.append("Numprod: ").append(getNumprod()).append(", ");
         sb.append("Salfin: ").append(getSalfin()).append(", ");
         sb.append("Salinc: ").append(getSalinc()).append(", ");
-        sb.append("Tampagi: ").append(getTampagi()).append(", ");
-        sb.append("Usuario: ").append(getUsuario());
+        sb.append("Tampagi: ").append(getTampagi());
         return sb.toString();
     }
     

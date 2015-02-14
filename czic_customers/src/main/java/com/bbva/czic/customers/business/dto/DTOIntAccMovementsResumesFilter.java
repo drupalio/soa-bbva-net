@@ -14,23 +14,11 @@ import org.hibernate.validator.constraints.Length;
  */
 public class DTOIntAccMovementsResumesFilter {
 
-	@NotNull
-	@Pattern(regexp = "[0-9]{8}")
-	private String customerId;
-
 	private String startDate;
 
 	private String endDate;
 
 	public DTOIntAccMovementsResumesFilter() {
-	}
-
-	public String getCustomerId() {
-		return customerId;
-	}
-
-	public void setCustomerId(String customerId) {
-		this.customerId = customerId;
 	}
 
 	public String getStartDate() {
@@ -51,7 +39,7 @@ public class DTOIntAccMovementsResumesFilter {
 
 	@Override
 	public String toString() {
-		return "DTOIntFilterCustomerResumes{" + "customerId='" + customerId + '\'' + ", startDate=" + startDate
+		return "DTOIntFilterCustomerResumes{startDate=" + startDate
 				+ ", endDate=" + endDate + '}';
 	}
 }

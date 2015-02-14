@@ -3,6 +3,8 @@
 
 package com.bbva.czic.products.dao.model.oznl;
 
+import java.lang.Integer;
+import java.lang.String;
 import java.util.Date;
 
 privileged aspect FormatoOZECNLS0_Roo_JavaBean {

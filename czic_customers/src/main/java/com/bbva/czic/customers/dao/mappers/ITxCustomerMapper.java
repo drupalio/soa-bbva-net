@@ -18,7 +18,7 @@ public interface ITxCustomerMapper {
 	
 	/**
 	 * 
-	 * @param customerId
+	 * @param customerFilter
 	 * @return
 	 */
 	FormatoOZNCENB0 mapInOznb(DTOIntCustomerFilter customerFilter);

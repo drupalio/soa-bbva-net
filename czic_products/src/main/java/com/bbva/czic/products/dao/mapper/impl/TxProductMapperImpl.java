@@ -46,7 +46,6 @@ public class TxProductMapperImpl extends AbstractBbvaTxConfigurableMapper implem
 				.field("productId", "nocuent").byDefault()
 				.field("productType", "tiprod")
 				.field("movementId", "nummov")
-				.field("customerId", "numcli")
 				.register();
 
 		// Map DTOIntFilter <-> FormatoOZNCENM0 (OZNL)

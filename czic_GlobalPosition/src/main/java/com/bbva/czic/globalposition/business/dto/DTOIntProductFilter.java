@@ -10,7 +10,6 @@ import javax.validation.constraints.Pattern;
  * @author Entelgy Colombia.
  */
 public class DTOIntProductFilter {
-
 	@Pattern(regexp = "^[A-Z]{2}$")
 	private String productType;
 

@@ -3,6 +3,7 @@
 
 package com.bbva.czic.products.dao.model.oznt;
 
+import java.lang.String;
 import java.util.Date;
 
 privileged aspect FormatoOZECNTS0_Roo_JavaBean {
