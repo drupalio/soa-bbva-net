@@ -116,8 +116,9 @@ public class SrvIntCustomers implements ISrvIntCustomers {
 
 	@Override
 	public void verifyCustomer(DTOIntCustomerOperation customerOperation) {
-
 		DtoValidator.validate(customerOperation);
-		
+
+		customersDao.verifyCustomer(customerOperation);
+		log.info("SrvInt: verifiedCustomer");
 	}
 }

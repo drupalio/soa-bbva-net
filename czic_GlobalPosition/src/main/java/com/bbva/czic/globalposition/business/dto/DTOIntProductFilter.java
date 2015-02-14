@@ -11,20 +11,8 @@ import javax.validation.constraints.Pattern;
  */
 public class DTOIntProductFilter {
 
-	@NotEmpty
-	@Pattern(regexp = "^\\d{8}$")
-	private String idCustomer;
-
 	@Pattern(regexp = "^[A-Z]{2}$")
 	private String productType;
-
-	public String getIdCustomer() {
-		return idCustomer;
-	}
-
-	public void setIdCustomer(String idCustomer) {
-		this.idCustomer = idCustomer;
-	}
 
 	public String getProductType() {
 		return productType;

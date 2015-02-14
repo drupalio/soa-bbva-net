@@ -48,7 +48,6 @@ public class TestGlobalPositionDAO {
 
 		DTOIntProductFilter dtoIntProductFilter = new DTOIntProductFilter();
 		dtoIntProductFilter.setProductType("QA");
-		dtoIntProductFilter.setIdCustomer("123456");
 
 		DTOIntProduct dtoIntProduct = new DTOIntProduct();
 		dtoIntProduct.setId("123456");
@@ -72,7 +71,6 @@ public class TestGlobalPositionDAO {
 
 		DTOIntProductFilter dtoIntProductFilter = new DTOIntProductFilter();
 		dtoIntProductFilter.setProductType("TC");
-		dtoIntProductFilter.setIdCustomer("123456");
 
 		DTOIntProduct dtoIntProduct = new DTOIntProduct();
 		dtoIntProduct.setId("123456");
