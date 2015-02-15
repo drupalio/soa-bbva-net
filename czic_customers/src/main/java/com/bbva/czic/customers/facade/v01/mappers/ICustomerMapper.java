@@ -19,7 +19,7 @@ public interface ICustomerMapper {
 
     List<CardCharge> mapCardCharges(List<DTOIntCardCharge> intCardCharges);
 
-    DTOIntCardChargeFilter getCreditCardChargesFilter(String customerId, String filter);
+    DTOIntCardChargeFilter getCreditCardChargesFilter(String filter);
 
     DTOIntCustomerOperation map(CustomerOperation operation);
 
