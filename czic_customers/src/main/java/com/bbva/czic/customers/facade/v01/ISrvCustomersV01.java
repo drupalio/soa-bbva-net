@@ -11,11 +11,11 @@ import java.util.List;
 
 public interface ISrvCustomersV01 {
 
-	List<CardCharge> listCreditCardsCharges( String customerId, String filter);
+	List<CardCharge> listCreditCardsCharges(String filter);
 
  	List<AccMovementsResume> listAccountsMovementsResume(String filter);
 
- 	Customer getCustomer(String customerId);
+ 	Customer getCustomer(String customer);
 
 	Response addChannel(String customerId);
 

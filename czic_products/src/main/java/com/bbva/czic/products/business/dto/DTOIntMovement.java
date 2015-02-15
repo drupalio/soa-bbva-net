@@ -26,6 +26,8 @@ public class DTOIntMovement {
     private String status;
     private String productId;
     private String productType;
+    @NotNull
+    private Money originValue;
 
     public DTOIntMovement() {
         //default constructor
@@ -118,5 +120,14 @@ public class DTOIntMovement {
     public void setProductType(String productType) {
         this.productType = productType;
     }
+
+	public Money getOriginValue() {
+		return originValue;
+	}
+
+	public void setOriginValue(Money originValue) {
+		this.originValue = originValue;
+	}
+    
 
 }

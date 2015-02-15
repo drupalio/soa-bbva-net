@@ -83,13 +83,12 @@ public class CustomerMapper extends AbstractBbvaConfigurableMapper implements IC
     }
 
     @Override
-    public DTOIntCardChargeFilter getCreditCardChargesFilter(final String customerId, final String filter) {
+    public DTOIntCardChargeFilter getCreditCardChargesFilter(final String filter) {
         final String startDate = this.getGeValue(filter, FiqlType.chargeDate.name());
         final String endDate = this.getLeValue(filter, FiqlType.chargeDate.name());
 
         final DTOIntCardChargeFilter cardChargeFilter = new DTOIntCardChargeFilter();
 
-        cardChargeFilter.setCustomerId(customerId);
         cardChargeFilter.setStartDate(startDate);
         cardChargeFilter.setEndDate(endDate);
 

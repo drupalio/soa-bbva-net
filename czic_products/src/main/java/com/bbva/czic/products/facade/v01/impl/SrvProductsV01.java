@@ -142,7 +142,7 @@ public class SrvProductsV01 implements ISrvProductsV01,
 	@Produces({MediaType.APPLICATION_JSON})
 	@ElementClass(response = AccMoveDetail.class)
 	@SMC(registryID="SMCCO1500001",logicalID="getMovement")
-	public Movement getMovement(@ApiParam(value = "identifier param") @PathParam("productId") String productId,
+	public AccMoveDetail getMovement(@ApiParam(value = "identifier param") @PathParam("productId") String productId,
 								@ApiParam(value = "filter param") @PathParam("movementId") String movementId,
 								@ApiParam(value = "filter param") @DefaultValue("null") @QueryParam("$filter") String filter) {
 
@@ -160,10 +160,7 @@ public class SrvProductsV01 implements ISrvProductsV01,
 		DTOIntFilterMovements dtoIntFilterMovements = productsMapper.getDTOIntFilterGetMovement(productId,movementId,filter);
 
 		// 3. Invoke SrvIntCustomers and Mapping to canonical DTO
-		Movement move = new Movement();
-		move = productsMapper.mapMovement(srvIntProducts
-				.getMovement(dtoIntFilterMovements));
-		return move ;
+		return productsMapper.mapMovement(srvIntProducts.getMovement(dtoIntFilterMovements)) ;
 
 	}
 

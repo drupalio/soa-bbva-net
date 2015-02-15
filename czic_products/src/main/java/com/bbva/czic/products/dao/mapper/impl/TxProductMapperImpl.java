@@ -91,7 +91,7 @@ public class TxProductMapperImpl extends AbstractBbvaTxConfigurableMapper implem
 				.field("saldo", "office.name") //-------------------
 				.field("plaza", "office.location.city.name")
 				.field("plaza", "office.location.dtoIntState.name")
-
+				.field("saldo", "originValue")
 				.byDefault()
 				.register();
 		
