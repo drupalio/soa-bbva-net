@@ -11,6 +11,7 @@ public class DTOIntOffice {
     private String postalAddress;
     private DTOIntLocation location;
 
+
     public DTOIntOffice() {
         //default constructor
     }

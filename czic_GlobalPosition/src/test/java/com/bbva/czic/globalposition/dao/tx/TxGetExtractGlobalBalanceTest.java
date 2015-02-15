@@ -41,7 +41,6 @@ public class TxGetExtractGlobalBalanceTest  {
         formatoOZECN1E0.setTipprod("QA");
 
         final DTOIntProductFilter dtoIntProductFilter = new DTOIntProductFilter();
-        dtoIntProductFilter.setIdCustomer("2345678");
         dtoIntProductFilter.setProductType("QA");
 
         Mockito.when(txGetExtractGlobalBalanceNoTC.mapDtoInToRequestFormat(any(DTOIntProductFilter.class)))
@@ -49,7 +48,6 @@ public class TxGetExtractGlobalBalanceTest  {
 
         final FormatoOZECN1E0 result = txGetExtractGlobalBalanceNoTC.mapDtoInToRequestFormat(new DTOIntProductFilter());
 
-        Assert.assertEquals(result.getNumclie(), dtoIntProductFilter.getIdCustomer());
         Assert.assertEquals(result.getTipprod(), dtoIntProductFilter.getProductType());
     }
 

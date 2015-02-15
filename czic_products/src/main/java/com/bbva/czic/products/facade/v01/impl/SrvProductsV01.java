@@ -142,12 +142,12 @@ public class SrvProductsV01 implements ISrvProductsV01,
 	@Produces({MediaType.APPLICATION_JSON})
 	@ElementClass(response = AccMoveDetail.class)
 	@SMC(registryID="SMCCO1500001",logicalID="getMovement")
-	public Movement getMovement(@ApiParam(value = "identifier param") @PathParam("productId") String productId,
+	public AccMoveDetail getMovement(@ApiParam(value = "identifier param") @PathParam("productId") String productId,
 								@ApiParam(value = "filter param") @PathParam("movementId") String movementId,
 								@ApiParam(value = "filter param") @DefaultValue("null") @QueryParam("$filter") String filter) {
 
 		// 1. Validate parameter
-		if (movementId == null || movementId.trim().isEmpty()||productId == null || productId.trim().isEmpty()) {
+		if (movementId == null || movementId.trim().isEmpty()) {
 			throw new BusinessServiceException(
 					EnumError.WRONG_PARAMETERS.getAlias());
 		}
@@ -160,10 +160,7 @@ public class SrvProductsV01 implements ISrvProductsV01,
 		DTOIntFilterMovements dtoIntFilterMovements = productsMapper.getDTOIntFilterGetMovement(productId,movementId,filter);
 
 		// 3. Invoke SrvIntCustomers and Mapping to canonical DTO
-		Movement move = new Movement();
-		move = productsMapper.mapMovement(srvIntProducts
-				.getMovement(dtoIntFilterMovements));
-		return move ;
+		return productsMapper.mapMovement(srvIntProducts.getMovement(dtoIntFilterMovements)) ;
 
 	}
 
@@ -186,13 +183,7 @@ public class SrvProductsV01 implements ISrvProductsV01,
 										@ApiParam(value = "pagination key") @DefaultValue("null") @QueryParam("paginationKey") Integer paginationKey,
 										@ApiParam(value = "pagination size") @DefaultValue("null") @QueryParam("pageSize") Integer pageSize) {
 
-		// 1. Validate parameter
-		if (productId == null || productId.trim().isEmpty()) {
-			throw new BusinessServiceException(
-					EnumError.WRONG_PARAMETERS.getAlias());
-		}
-
-		// 2. Validate filter
+		// 1. Validate filter
 		new FiqlValidator(filter).hasEq("productType").hasGeAndLe("transactionDate")
 				.hasGeOrLe("value").validateAny();
 

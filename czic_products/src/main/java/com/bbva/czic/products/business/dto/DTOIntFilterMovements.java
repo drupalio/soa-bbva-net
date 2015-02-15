@@ -11,7 +11,7 @@ import org.hibernate.validator.constraints.NotEmpty;
 public class DTOIntFilterMovements {
     private String productType;
     private String movementId;
-    @NotNull
+
     @Size(min=20,max=20)
     private String productId;
     private Integer paginationKey;

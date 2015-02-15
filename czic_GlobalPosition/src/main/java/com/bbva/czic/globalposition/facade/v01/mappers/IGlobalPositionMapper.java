@@ -9,7 +9,7 @@ public interface IGlobalPositionMapper {
 
     List<Product> map(List<DTOIntProduct> products);
 
-    DTOIntProductFilter getDTOIntFilter(String customerId, String filter);
+    DTOIntProductFilter getDTOIntFilter(String filter);
 
     Product map(DTOIntProduct intProduct);
 

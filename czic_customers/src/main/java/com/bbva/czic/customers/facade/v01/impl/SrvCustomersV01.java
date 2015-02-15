@@ -86,10 +86,9 @@ public class SrvCustomersV01 implements ISrvCustomersV01, com.bbva.jee.arq.sprin
 			@ApiResponse(code = 409, message = "Data not found"), @ApiResponse(code = 500, message = "Technical Error") })
 	@GET
 	@ElementClass(response = List.class)
-	@Path("/{customerId}/creditCard/cardCharges")
+	@Path("/creditCard/cardCharges")
 	@SMC(registryID = "SMCCO1400024", logicalID = "getlistCreditCardsCharges")
 	public List<CardCharge> listCreditCardsCharges(
-			@ApiParam(value = "Claim identifier param") @PathParam("customerId") String customerId,
 			@ApiParam(value = "filter param") @QueryParam("$filter") String filter) {
 
 		log.info("Into listCreditCardsCharges...");
@@ -98,7 +97,7 @@ public class SrvCustomersV01 implements ISrvCustomersV01, com.bbva.jee.arq.sprin
 		new FiqlValidator(filter).hasGeAndLe(FiqlType.chargeDate.name()).validateIfExist();
 
 		// 2. Mapping to DTOIntFilter
-		final DTOIntCardChargeFilter cardChargeFilter = customerMapper.getCreditCardChargesFilter(customerId, filter);
+		final DTOIntCardChargeFilter cardChargeFilter = customerMapper.getCreditCardChargesFilter(filter);
 
 		// 3. Invoke SrvIntCustomers and Mapping to canonical DTO
 		List<DTOIntCardCharge> intCardCharges = srvIntCustomers.listCreditCharges(cardChargeFilter);
