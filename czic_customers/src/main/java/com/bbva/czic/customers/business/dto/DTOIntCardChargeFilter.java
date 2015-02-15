@@ -6,6 +6,7 @@ package com.bbva.czic.customers.business.dto;
  */
 public class DTOIntCardChargeFilter {
 
+
     String startDate;
     String endDate;
 

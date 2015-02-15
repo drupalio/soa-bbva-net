@@ -30,3 +30,8 @@ sarc importTransaction --protocol PS9_MX --copy DBG.CN.YLQ.QGDTCCT.KNOZNH.txt,DB
  sarc importTransaction --protocol PS9_MX --copy DOF.CN.YLQ.QGDTCCT.KNOZN0.txt,DOF.CN.YLQ.QGDTFDF.OZNCEOM0.txt
 exit
 // ServicesArchitecture log closed at 2015-01-12 12:29:30
+// ServicesArchitecture log opened at 2015-02-14 15:15:36
+// [failed] sarc importTransaction --protocol PS9_MX --copy COBD.CN.TMP.QGDTFDF.OZECN1E0_v2.txt,OZECN1S0_FDF.txt,OZN1_CCT.txt,OZN1_FDX.txt
+ sarc importTransaction --protocol PS9_MX --copy COBD.CN.TMP.QGDTFDF.OZECN1E0_v2.txt,OZECN1S0_FDF.txt,OZN1_CCT.txt,OZN1_FDX.txt
+exit
+// ServicesArchitecture log closed at 2015-02-14 15:20:43

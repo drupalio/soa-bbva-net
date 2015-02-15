@@ -10,7 +10,7 @@ import com.bbva.czic.routine.mapper.metadata.Type;
 public class CardChargeCategoryConverter extends BidirectionalConverter<String, EnumCardChargeCategory> {
     @Override
     public EnumCardChargeCategory convertTo(String source, Type<EnumCardChargeCategory> destinationType) {
-        return EnumCardChargeCategory.valueOf(source);
+        return EnumCardChargeCategory.fromString(source);
     }
 
     @Override

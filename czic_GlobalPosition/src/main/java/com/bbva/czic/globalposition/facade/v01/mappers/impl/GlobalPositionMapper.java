@@ -79,11 +79,10 @@ public class GlobalPositionMapper extends AbstractBbvaConfigurableMapper impleme
     }
 
     @Override
-    public DTOIntProductFilter getDTOIntFilter(final String customerId, final String filter) {
+    public DTOIntProductFilter getDTOIntFilter(final String filter) {
         final String productType = this.getEqValue(filter, FiqlType.productType.name());
 
         final DTOIntProductFilter intProductFilter = new DTOIntProductFilter();
-        intProductFilter.setIdCustomer(customerId);
         intProductFilter.setProductType(productType);
 
         return intProductFilter;

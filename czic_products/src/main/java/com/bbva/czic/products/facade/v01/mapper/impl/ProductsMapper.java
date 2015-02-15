@@ -60,11 +60,18 @@ public class ProductsMapper extends AbstractBbvaConfigurableMapper implements
 
 		// Movement
 		factory.classMap(Movement.class, DTOIntMovement.class)
-				.field("id", "id").field("concept", "concept")
+				.field("id", "id")
+				.field("concept", "concept")
+				.field("value", "value")
+				.field("balance", "balance")
+				.field("operation.code", "operation.code")
+				.field("operation.description", "operation.description")
 				.field("transactionDate", "transactionDate")
 				.field("operationDate", "operationDate")
-				.field("office", "office").field("status", "status")
-				.field("value", "value").field("balance", "balance")
+				.field("office.postalAddress", "office.postalAddress")
+				.field("office.name", "office.name")
+				.field("office.location.city.name", "office.location.city.name")
+				.field("office.location.dtoIntState.name", "office.location.dtoIntState.name")
 				.byDefault().register();
 		// Office
 		factory.classMap(Office.class, DTOIntOffice.class)
