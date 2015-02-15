@@ -2,6 +2,7 @@ package com.bbva.czic.products.facade.v01.mapper;
 
 import java.util.List;
 
+import com.bbva.czic.dto.net.AccMoveDetail;
 import com.bbva.czic.dto.net.Conditions;
 import com.bbva.czic.dto.net.Extract;
 import com.bbva.czic.dto.net.Movement;
@@ -24,7 +25,7 @@ public interface IProductsMapper {
 
 	public DTOIntFilterMovements getDTOIntFilterGetMovement(String productId,String movementId, String filter);
 
-	public Movement mapMovement(DTOIntMovement dtoIntMovement);
+	public AccMoveDetail mapMovement(DTOIntMovement dtoIntMovement);
 
 	public List<Movement> mapMovements(List<DTOIntMovement> listaDTOIntMovements);
 

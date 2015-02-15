@@ -1,7 +1,6 @@
 package com.bbva.czic.products.facade.v01.impl;
 
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.anyList;
 import static org.mockito.Mockito.when;
@@ -17,12 +16,12 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
+import com.bbva.czic.dto.net.AccMoveDetail;
 import com.bbva.czic.dto.net.Conditions;
 import com.bbva.czic.dto.net.Extract;
 import com.bbva.czic.dto.net.Movement;
 import com.bbva.czic.dto.net.Office;
 import com.bbva.czic.products.business.ISrvIntProducts;
-import com.bbva.czic.products.business.dto.DTOIntActivity;
 import com.bbva.czic.products.business.dto.DTOIntConditions;
 import com.bbva.czic.products.business.dto.DTOIntExtract;
 import com.bbva.czic.products.business.dto.DTOIntFilterExtract;
@@ -104,6 +103,7 @@ public class SrvProductsV01Test extends SpringContextBbvaTest{
 	@Test
 	public void testListExtractsSrvIntNoFilter() {
 		List<Extract> extracts = srv.listExtracts("00130693000100000010", "");
+		assertEquals(0,extracts.size());
 	}
 	
 	@Test(expected = BusinessServiceException.class)
@@ -181,7 +181,7 @@ public class SrvProductsV01Test extends SpringContextBbvaTest{
 
     @Test
     public void testGetMovement(){
-        Movement movement = new Movement();
+        AccMoveDetail movement = new AccMoveDetail();
         movement.setId("00000122233");
 
         DTOIntMovement intMovement = new DTOIntMovement();

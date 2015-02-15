@@ -3,8 +3,10 @@ package com.bbva.czic.products.facade.v01.mapper.impl;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.hibernate.id.enhanced.AccessCallback;
 import org.springframework.stereotype.Component;
 
+import com.bbva.czic.dto.net.AccMoveDetail;
 import com.bbva.czic.dto.net.City;
 import com.bbva.czic.dto.net.Conditions;
 import com.bbva.czic.dto.net.Extract;
@@ -59,7 +61,7 @@ public class ProductsMapper extends AbstractBbvaConfigurableMapper implements
 				TypeFactory.<Money> valueOf(Money.class));
 
 		// Movement
-		factory.classMap(Movement.class, DTOIntMovement.class)
+		factory.classMap(AccMoveDetail.class, DTOIntMovement.class)
 				.field("id", "id")
 				.field("concept", "concept")
 				.field("value", "value")
@@ -71,7 +73,8 @@ public class ProductsMapper extends AbstractBbvaConfigurableMapper implements
 				.field("office.postalAddress", "office.postalAddress")
 				.field("office.name", "office.name")
 				.field("office.location.city.name", "office.location.city.name")
-				.field("office.location.dtoIntState.name", "office.location.dtoIntState.name")
+				.field("office.location.state.name", "office.location.dtoIntState.name")
+				.field("originValue", "originValue")
 				.byDefault().register();
 		// Office
 		factory.classMap(Office.class, DTOIntOffice.class)
@@ -181,9 +184,9 @@ public class ProductsMapper extends AbstractBbvaConfigurableMapper implements
 	}
 
 	@Override
-	public Movement mapMovement(DTOIntMovement dtoIntMovement) {
+	public AccMoveDetail mapMovement(DTOIntMovement dtoIntMovement) {
 		log.info("map- return:Account-parameter:dtoIntAccount");
-		return map(dtoIntMovement,Movement.class);
+		return map(dtoIntMovement,AccMoveDetail.class);
 	}
 
 	@Override

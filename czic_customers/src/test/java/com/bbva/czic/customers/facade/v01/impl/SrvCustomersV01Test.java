@@ -105,42 +105,42 @@ public class SrvCustomersV01Test extends SpringContextBbvaTest{
     public void testListCreditCardChargesSrvIntEmptyCustomerId(){
         final BusinessServiceException bsn = getBsnExeptionByAlias(EnumError.NO_DATA.getAlias());
         when(srvIntCustomer.listCreditCharges(any(DTOIntCardChargeFilter.class))).thenThrow(bsn);
-        srv.listCreditCardsCharges("  ","(chargeDate=ge=2015-12-24;chargeDate=le=2016-01-10)");
+        srv.listCreditCardsCharges("(chargeDate=ge=2015-12-24;chargeDate=le=2016-01-10)");
     }
     
     @Test(expected = BusinessServiceException.class)
     public void testListCreditCardChargesSrvIntCustomerId(){
     	final BusinessServiceException bsn = getBsnExeptionByAlias(EnumError.NO_DATA.getAlias());
         when(srvIntCustomer.listCreditCharges(any(DTOIntCardChargeFilter.class))).thenThrow(bsn);
-        srv.listCreditCardsCharges(null,"");
+        srv.listCreditCardsCharges("");
     }
     
     @Test(expected = BusinessServiceException.class)
     public void testListCreditCardChargesSrvIntBadfilterFutureDate(){
         final BusinessServiceException bsn = getBsnExeptionByAlias(EnumError.NO_DATA.getAlias());
         when(srvIntCustomer.listCreditCharges(any(DTOIntCardChargeFilter.class))).thenThrow(bsn);
-        srv.listCreditCardsCharges("12345678","(chargeDate=ge=2015-12-24;chargeDate=le=2016-01-10)");
+        srv.listCreditCardsCharges("(chargeDate=ge=2015-12-24;chargeDate=le=2016-01-10)");
     }
     
     @Test(expected = BusinessServiceException.class)
     public void testListCreditCardChargesSrvIntBadfilterDateInterval(){
         final BusinessServiceException bsn = getBsnExeptionByAlias(EnumError.NO_DATA.getAlias());
         when(srvIntCustomer.listCreditCharges(any(DTOIntCardChargeFilter.class))).thenThrow(bsn);
-        srv.listCreditCardsCharges("12345678","(chargeDate=ge=2015-12-24;chargeDate=le=2014-01-10)");
+        srv.listCreditCardsCharges("(chargeDate=ge=2015-12-24;chargeDate=le=2014-01-10)");
     }
     
     @Test(expected = BusinessServiceException.class)
     public void testListCreditCardChargesNoFilter(){
     	final BusinessServiceException bsn = getBsnExeptionByAlias(EnumError.NO_DATA.getAlias());
         when(srvIntCustomer.listCreditCharges(any(DTOIntCardChargeFilter.class))).thenThrow(bsn);
-        srv.listCreditCardsCharges("12345678",null);
+        srv.listCreditCardsCharges(null);
     }
     
     @Test(expected = BusinessServiceException.class)
     public void testListCreditCardChargesSrvIntException(){
     	final BusinessServiceException bsn = getBsnExeptionByAlias(EnumError.NO_DATA.getAlias());
         when(srvIntCustomer.listCreditCharges(any(DTOIntCardChargeFilter.class))).thenThrow(bsn);
-        srv.listCreditCardsCharges("12345678","(chargeDate=ge=2014-12-24;chargeDate=le=2015-01-10)");
+        srv.listCreditCardsCharges("(chargeDate=ge=2014-12-24;chargeDate=le=2015-01-10)");
     }
 
     @SuppressWarnings("unchecked")
@@ -148,7 +148,7 @@ public class SrvCustomersV01Test extends SpringContextBbvaTest{
     public void testListCreditCardChargesMapperException(){
         final BusinessServiceException bsn = getBsnExeptionByAlias(EnumError.NO_DATA.getAlias());
         when(iProductsMapper.mapCardCharges(anyList())).thenThrow(bsn);
-        srv.listCreditCardsCharges("12345678","(chargeDate=ge=2014-12-24;chargeDate=le=2015-01-10)");
+        srv.listCreditCardsCharges("(chargeDate=ge=2014-12-24;chargeDate=le=2015-01-10)");
     }
 
     @SuppressWarnings("unchecked")
@@ -160,7 +160,7 @@ public class SrvCustomersV01Test extends SpringContextBbvaTest{
         when(srvIntCustomer.listCreditCharges(any(DTOIntCardChargeFilter.class))).thenReturn(dtoIntCardCharges);
         when(iProductsMapper.mapCardCharges(anyList())).thenReturn(cardCharges);
 
-        final List<CardCharge> c = srv.listCreditCardsCharges("12345678","(chargeDate=ge=2014-12-24;chargeDate=le=2015-01-10)");
+        final List<CardCharge> c = srv.listCreditCardsCharges("(chargeDate=ge=2014-12-24;chargeDate=le=2015-01-10)");
 
         assertNotNull(c);
     }
