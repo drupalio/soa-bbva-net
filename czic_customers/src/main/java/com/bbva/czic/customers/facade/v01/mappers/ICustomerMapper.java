@@ -25,5 +25,5 @@ public interface ICustomerMapper {
 
     Customer mapCustomer(DTOIntCustomer intCustomer);
 
-    DTOIntCustomerFilter mapDTOIntCustomerFilter(String customerId);
+    DTOIntCustomerFilter mapDTOIntCustomerFilter(String filter);
 }

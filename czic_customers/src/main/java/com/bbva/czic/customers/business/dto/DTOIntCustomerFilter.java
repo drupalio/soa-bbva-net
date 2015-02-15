@@ -7,14 +7,14 @@ import javax.validation.constraints.Pattern;
  */
 public class DTOIntCustomerFilter {
 
-    @Pattern(regexp = "[0-9]{8}")
-    private String id;
+//    @Pattern(regexp = "[0-9]{8}")
+    private String idDocument;
 
     public String getId() {
-        return id;
+        return idDocument;
     }
 
     public void setId(String id) {
-        this.id = id;
+        this.idDocument = id;
     }
 }

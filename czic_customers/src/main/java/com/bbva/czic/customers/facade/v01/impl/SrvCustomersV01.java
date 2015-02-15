@@ -144,12 +144,14 @@ public class SrvCustomersV01 implements ISrvCustomersV01, com.bbva.jee.arq.sprin
 			@ApiResponse(code = 409, message = "Data not found"), @ApiResponse(code = 500, message = "Technical Error") })
 	@GET
 	@ElementClass(response = Customer.class)
-	@Path("/{customerId}")
+	@Path("/getCustomer")
 	@SMC(registryID = "SMCCO1400023", logicalID = "getCustomer")
-	public Customer getCustomer(@ApiParam(value = "Claim identifier param") @PathParam("customerId") String customerId) {
+	public Customer getCustomer(
+			@ApiParam(value = "filter param") @QueryParam("$filter") String filter) {
+		
 		log.info("Into getCustomer...");
 
-		final DTOIntCustomerFilter customerFilter = customerMapper.mapDTOIntCustomerFilter(customerId);
+		final DTOIntCustomerFilter customerFilter = customerMapper.mapDTOIntCustomerFilter(filter);
 		// 1. Invoke SrvIntCustomers and Mapping to canonical DTO
 		return customerMapper.mapCustomer(srvIntCustomers.getCustomer(customerFilter));
 	}

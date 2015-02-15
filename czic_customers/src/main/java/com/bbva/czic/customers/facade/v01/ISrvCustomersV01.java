@@ -15,9 +15,9 @@ public interface ISrvCustomersV01 {
 
  	List<AccMovementsResume> listAccountsMovementsResume(String filter);
 
- 	Customer getCustomer(String customer);
+ 	Customer getCustomer(String filter);
 
-	Response addChannel(String customerId);
+	Response addChannel(String filter);
 
 	Response verifyCustomer(String channelId, CustomerOperation operation);
 }
