@@ -77,14 +77,20 @@ public class TxProductMapperImpl extends AbstractBbvaTxConfigurableMapper implem
 		
 		// Map FormatoOZECNTS0 <-> DTOIntConditions (OZNM)
 		factory.classMap(FormatoOZNCSNM0.class, DTOIntMovement.class)
+				//TODO Mapear saldo con valor origen
 				.field("numecta", "id")
-				.field("fchoper", "transactionDate")
 				.field("resto", "concept")
 				.field("valor", "value")
 				.field("baloper", "balance")
-				.field("tipo", "productType")
+				.field("tipo", "operation.code")
 				.field("descodi", "operation.description")
+				.field("fchoper", "transactionDate")
 				.field("fchvalr", "operationDate")
+				.field("ctroorg", "office.postalAddress")
+				.field("ctroorg", "office.name")
+				.field("plaza", "office.location.city.name")
+				.field("plaza", "office.location.dtoIntState.name")
+
 				.byDefault()
 				.register();
 		
