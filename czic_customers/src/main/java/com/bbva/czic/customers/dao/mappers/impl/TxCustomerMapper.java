@@ -77,7 +77,7 @@ public class TxCustomerMapper extends AbstractBbvaTxConfigurableMapper implement
 				.converter(MONTH_CONVERTER).add().byDefault().register();
 
 		// map DTOIntCardChargeFilter <-> FormatoOZECNPE0
-		factory.classMap(DTOIntCardChargeFilter.class, FormatoOZECNPE0.class).field("customerId", "idusuar")
+		factory.classMap(DTOIntCardChargeFilter.class, FormatoOZECNPE0.class)
 				.fieldMap("startDate", "fechain").converter(SIMPLE_DATE_CONVERTER).add().fieldMap("endDate", "fechafi")
 				.converter(SIMPLE_DATE_CONVERTER).add().byDefault().register();
 
