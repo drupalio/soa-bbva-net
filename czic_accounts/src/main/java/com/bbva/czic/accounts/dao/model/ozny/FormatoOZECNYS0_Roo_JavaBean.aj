@@ -4,7 +4,6 @@
 package com.bbva.czic.accounts.dao.model.ozny;
 
 import java.lang.String;
-import java.math.BigDecimal;
 import java.util.Date;
 
 privileged aspect FormatoOZECNYS0_Roo_JavaBean {
@@ -25,11 +24,11 @@ privileged aspect FormatoOZECNYS0_Roo_JavaBean {
         this.fechemi = fechemi;
     }
     
-    public BigDecimal FormatoOZECNYS0.getValcheq() {
+    public String FormatoOZECNYS0.getValcheq() {
         return this.valcheq;
     }
     
-    public void FormatoOZECNYS0.setValcheq(BigDecimal valcheq) {
+    public void FormatoOZECNYS0.setValcheq(String valcheq) {
         this.valcheq = valcheq;
     }
     
@@ -41,12 +40,12 @@ privileged aspect FormatoOZECNYS0_Roo_JavaBean {
         this.estcheq = estcheq;
     }
     
-    public Date FormatoOZECNYS0.getFechmod() {
-        return this.fechmod;
+    public Date FormatoOZECNYS0.getFecmodi() {
+        return this.fecmodi;
     }
     
-    public void FormatoOZECNYS0.setFechmod(Date fechmod) {
-        this.fechmod = fechmod;
+    public void FormatoOZECNYS0.setFecmodi(Date fecmodi) {
+        this.fecmodi = fecmodi;
     }
     
 }
