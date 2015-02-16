@@ -8,6 +8,7 @@ import java.util.Date;
 public class DTOIntConditions {
 
     public final static long serialVersionUID = 1L;
+    private String type;
     private String alias;
     private String category;
     private String description;
@@ -76,4 +77,11 @@ public class DTOIntConditions {
         this.mobilizationConditions = mobilizationConditions;
     }
 
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
 }

@@ -43,6 +43,7 @@ public class ProductsMapper extends AbstractBbvaConfigurableMapper implements
 
 		// Map DTOIntConditions <-> Conditions
 		factory.classMap(Conditions.class, DTOIntConditions.class)
+				.field("type", "type")
 				.field("alias", "alias")
 				.field("category", "category")
 				.field("description", "description")
