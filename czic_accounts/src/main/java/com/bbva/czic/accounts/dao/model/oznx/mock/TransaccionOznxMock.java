@@ -37,7 +37,7 @@ public class TransaccionOznxMock implements InvocadorTransaccion<PeticionTransac
             salida.setFechmod(dataFactory.getDateBetween(dataFactory.getDate(2014, 12, 01), new Date()));
             salida.setIndpagi(dataFactory.getNumberBetween(1, 10));
             salida.setNumcheq(dataFactory.getNumberText(9));
-            salida.setValcheq(new BigDecimal(dataFactory.getNumberBetween(100000, 200000)));
+            salida.setValcheq(String.valueOf(dataFactory.getNumberBetween(100000, 200000)));
             salida.setNumprod((peticion.getCuerpo().getParte(FormatoOZECNXE0.class)).getNumprod());
 
             CopySalida copySalida = new CopySalida();

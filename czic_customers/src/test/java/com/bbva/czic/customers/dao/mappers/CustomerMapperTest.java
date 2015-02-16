@@ -64,7 +64,6 @@ public class CustomerMapperTest {
 
 	private FormatoOZNCSNB0 mockFormatoOZNBSalida() {
 		FormatoOZNCSNB0 formatoS = new FormatoOZNCSNB0();
-		formatoS.setNumclie("1");
 		formatoS.setNomclie("Cliente de prueba");
 		formatoS.setSegment("PERSONA");
 		formatoS.setCorreo("prueba@bbva.com");
