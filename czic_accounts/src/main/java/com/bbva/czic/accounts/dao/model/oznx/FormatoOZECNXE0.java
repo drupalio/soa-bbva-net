@@ -1,14 +1,15 @@
 package com.bbva.czic.accounts.dao.model.oznx;
 
 
-import com.bbva.jee.arq.spring.core.host.Campo;
-import com.bbva.jee.arq.spring.core.host.Formato;
-import com.bbva.jee.arq.spring.core.host.TipoCampo;
+import java.util.Date;
+
 import org.springframework.roo.addon.javabean.RooJavaBean;
 import org.springframework.roo.addon.serializable.RooSerializable;
 import org.springframework.roo.addon.tostring.RooToString;
 
-import java.util.Date;
+import com.bbva.jee.arq.spring.core.host.Campo;
+import com.bbva.jee.arq.spring.core.host.Formato;
+import com.bbva.jee.arq.spring.core.host.TipoCampo;
 
 /**
  * Formato de datos <code>OZECNXE0</code> de la transacci&oacute;n <code>OZNX</code>
@@ -19,8 +20,7 @@ import java.util.Date;
 @RooJavaBean
 @RooToString
 @RooSerializable
-public class
-		FormatoOZECNXE0 {
+public class FormatoOZECNXE0 {
 
 	/**
 	 * <p>Campo <code>INDPAGI</code>, &iacute;ndice: <code>1</code>, tipo: <code>ENTERO</code>
@@ -57,8 +57,5 @@ public class
 	 */
 	@Campo(indice = 6, nombre = "ESTCHEQ", tipo = TipoCampo.ALFANUMERICO, longitudMinima = 1, longitudMaxima = 1)
 	private String estcheq;
-
-
-	public void setId(String id) {
-	}
+	
 }
