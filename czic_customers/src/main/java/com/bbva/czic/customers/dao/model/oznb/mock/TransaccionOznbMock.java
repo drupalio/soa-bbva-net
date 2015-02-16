@@ -31,7 +31,6 @@ public class TransaccionOznbMock implements InvocadorTransaccion<PeticionTransac
 		CopySalida salida = new CopySalida();
 		
 		formatoSalida.setNomclie(dataFactory.getBusinessName());
-		formatoSalida.setNumclie(dataFactory.getNumberText(8));
 		formatoSalida.setSegment(EnumSegmentType.OTRO.toString());
 		formatoSalida.setCorreo(dataFactory.getEmailAddress());
 		formatoSalida.setDescvia(dataFactory.getAddress());

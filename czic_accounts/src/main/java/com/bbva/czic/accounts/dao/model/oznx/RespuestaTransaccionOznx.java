@@ -15,7 +15,7 @@ import com.bbva.jee.arq.spring.core.host.MensajeMultiparte;
 /**
  * Bean de respuesta para la transacci&oacute;n <code>OZNX</code>
  * 
- * @see com.bbva.czic.accounts.dao.model.oznx.PeticionTransaccionOznx
+ * @see PeticionTransaccionOznx
  * 
  * @author Arquitectura Spring BBVA
  */
