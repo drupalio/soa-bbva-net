@@ -40,6 +40,7 @@ public class TransaccionOzntMock implements InvocadorTransaccion<PeticionTransac
         salida.setCiudofi(dataFactory.getRandomText(20));
         salida.setNomofic(dataFactory.getRandomText(20));
         salida.setPaisofi(dataFactory.getRandomText(20));
+        salida.setConprod("9000");
 
         copySalida.setCopy(salida);
         respuesta.getCuerpo().getPartes().add(copySalida);
