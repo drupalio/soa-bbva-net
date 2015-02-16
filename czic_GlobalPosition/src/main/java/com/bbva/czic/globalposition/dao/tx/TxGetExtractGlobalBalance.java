@@ -5,11 +5,9 @@ import javax.annotation.Resource;
 import com.bbva.czic.globalposition.business.dto.DTOIntProduct;
 import com.bbva.czic.globalposition.business.dto.DTOIntProductFilter;
 import com.bbva.czic.globalposition.dao.mappers.ITxGlobalPositionMapper;
-import com.bbva.czic.globalposition.dao.model.ozn1.FormatoOZECN1E0;
-import com.bbva.czic.globalposition.dao.model.ozn1.FormatoOZECN1S1;
-import com.bbva.czic.globalposition.dao.model.ozn1.PeticionTransaccionOzn1;
-import com.bbva.czic.globalposition.dao.model.ozn1.RespuestaTransaccionOzn1;
+import com.bbva.czic.globalposition.dao.model.ozn1.*;
 import com.bbva.czic.routine.commons.rm.utils.tx.Tx;
+import com.bbva.czic.routine.commons.rm.utils.tx.impl.DoubleBbvaTransaction;
 import com.bbva.czic.routine.commons.rm.utils.tx.impl.MultiBbvaTransaction;
 import com.bbva.jee.arq.spring.core.host.InvocadorTransaccion;
 
@@ -18,7 +16,7 @@ import com.bbva.jee.arq.spring.core.host.InvocadorTransaccion;
  */
 @Tx("tx-get-extract-global-balance")
 public class TxGetExtractGlobalBalance extends
-		MultiBbvaTransaction<DTOIntProductFilter, FormatoOZECN1E0, DTOIntProduct, FormatoOZECN1S1> {
+		DoubleBbvaTransaction<DTOIntProductFilter, FormatoOZECN1E0, DTOIntProduct, FormatoOZECN1S1, FormatoOZECN1S0> {
 
 	@Resource(name = "transaccionOzn1")
 	private transient InvocadorTransaccion<PeticionTransaccionOzn1, RespuestaTransaccionOzn1> transaccionOzn1;
@@ -34,6 +32,11 @@ public class TxGetExtractGlobalBalance extends
 	@Override
 	protected DTOIntProduct mapResponseFormatToDtoOut(FormatoOZECN1S1 formatOutput, DTOIntProductFilter dtoIn) {
 		return txGlobalPositionMapper.mapOutOzn1S1(formatOutput);
+	}
+
+	@Override
+	protected DTOIntProduct mapResponseFormatToDtoOut2(FormatoOZECN1S0 formatOutput, DTOIntProductFilter dtoIn) {
+		return txGlobalPositionMapper.mapOutOzn1S0(formatOutput);
 	}
 
 	@Override
