@@ -23,19 +23,19 @@ public class FormatoOZECNUS0 {
 	/**
 	 * <p>Campo <code>VALDEPO</code>, &iacute;ndice: <code>1</code>, tipo: <code>ALFANUMERICO</code>
 	 */
-	@Campo(indice = 1, nombre = "VALDEPO", tipo = TipoCampo.ALFANUMERICO, longitudMinima = 19, longitudMaxima = 19)
+	@Campo(indice = 1, nombre = "VALDEPO", tipo = TipoCampo.ALFANUMERICO, longitudMinima = 18, longitudMaxima = 18)
 	private String valdepo;
 	
 	/**
 	 * <p>Campo <code>VALCARG</code>, &iacute;ndice: <code>2</code>, tipo: <code>ALFANUMERICO</code>
 	 */
-	@Campo(indice = 2, nombre = "VALCARG", tipo = TipoCampo.ALFANUMERICO, longitudMinima = 19, longitudMaxima = 19)
+	@Campo(indice = 2, nombre = "VALCARG", tipo = TipoCampo.ALFANUMERICO, longitudMinima = 18, longitudMaxima = 18)
 	private String valcarg;
 	
 	/**
 	 * <p>Campo <code>SALDTOT</code>, &iacute;ndice: <code>3</code>, tipo: <code>ALFANUMERICO</code>
 	 */
-	@Campo(indice = 3, nombre = "SALDTOT", tipo = TipoCampo.ALFANUMERICO, longitudMinima = 19, longitudMaxima = 19)
+	@Campo(indice = 3, nombre = "SALDTOT", tipo = TipoCampo.ALFANUMERICO, longitudMinima = 18, longitudMaxima = 18)
 	private String saldtot;
 	
 	/**

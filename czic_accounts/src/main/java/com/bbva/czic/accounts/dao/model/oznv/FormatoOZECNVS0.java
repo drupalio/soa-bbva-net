@@ -23,7 +23,7 @@ public class FormatoOZECNVS0 {
 	/**
 	 * <p>Campo <code>SALDDIS</code>, &iacute;ndice: <code>1</code>, tipo: <code>ALFANUMERICO</code>
 	 */
-	@Campo(indice = 1, nombre = "SALDDIS", tipo = TipoCampo.ALFANUMERICO, longitudMinima = 19, longitudMaxima = 19)
+	@Campo(indice = 1, nombre = "SALDDIS", tipo = TipoCampo.ALFANUMERICO, longitudMinima = 18, longitudMaxima = 18)
 	private String salddis;
 	
 	/**
