@@ -30,8 +30,8 @@ public class TxExecutiveMapperImpl extends AbstractBbvaTxConfigurableMapper impl
 		 * MAPEO DE ENTRADAS
 		 */
 		// Map DTOIntFilter <-> FormatoOZNCENA0 (OZNA)
-		factory.classMap(DTOIntExecutivesFilter.class, FormatoOZECNRE0.class).field("id", "idusuar").byDefault()
-				.register();
+		//factory.classMap(DTOIntExecutivesFilter.class, FormatoOZECNRE0.class).field("id", "idusuar").byDefault()
+		//		.register();
 
 		/**
 		 * MAPEO DE SALIDAS

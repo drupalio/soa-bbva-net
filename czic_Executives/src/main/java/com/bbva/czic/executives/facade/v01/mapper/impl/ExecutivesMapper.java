@@ -42,11 +42,9 @@ public class ExecutivesMapper extends AbstractBbvaConfigurableMapper implements 
 	@Override
 	public DTOIntExecutivesFilter getDTOIntFilter(String filter) {
 
-		final String id = this.getEqValue(filter, FiqlType.id.name());
 		final String type = this.getEqValue(filter, FiqlType.type.name());
 
 		final DTOIntExecutivesFilter dtoIntExecutivesFilter = new DTOIntExecutivesFilter();
-		dtoIntExecutivesFilter.setId(id);
 		dtoIntExecutivesFilter.setType(type);
 
 		return dtoIntExecutivesFilter;
