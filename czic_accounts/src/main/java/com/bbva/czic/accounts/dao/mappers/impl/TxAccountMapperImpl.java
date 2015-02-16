@@ -100,9 +100,13 @@ public class TxAccountMapperImpl extends AbstractBbvaTxConfigurableMapper implem
 		 * MAPEO DE SALIDAS
 		 */
 		// Map FormatoOZECNVS0 <-> DTOIntMonthlyBalances (OZNy)
-		factory.classMap(FormatoOZECNYS0.class, DTOIntCheck.class).field("numcheq", "id").field("fechemi", "issueDate")
-				.field("valcheq", "value.amount").field("estcheq", "status")
-				.field("fechmod", "modifiedDate").byDefault().register();
+		factory.classMap(FormatoOZECNYS0.class, DTOIntCheck.class)
+				.field("numcheq", "id")
+				.field("fechemi", "issueDate")
+				.field("valcheq", "value.amount")
+				.field("estcheq", "status")
+				.field("fecmodi", "modifiedDate")
+				.byDefault().register();
 
 	}
 
