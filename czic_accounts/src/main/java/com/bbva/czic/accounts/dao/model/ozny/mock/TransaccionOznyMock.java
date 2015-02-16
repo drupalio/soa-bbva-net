@@ -23,9 +23,9 @@ public class TransaccionOznyMock implements InvocadorTransaccion<PeticionTransac
 
         RespuestaTransaccionOzny resultado = new RespuestaTransaccionOzny();
         FormatoOZECNYS0 formato = new FormatoOZECNYS0();
-      formato.setValcheq(new BigDecimal("1000000"));
+      formato.setValcheq("1000000");
         formato.setNumcheq("002233");
-        formato.setFechmod(new Date());
+        formato.setFechemi(new Date());
         formato.setFechemi(new Date());
         formato.setEstcheq("Solicitado");
 

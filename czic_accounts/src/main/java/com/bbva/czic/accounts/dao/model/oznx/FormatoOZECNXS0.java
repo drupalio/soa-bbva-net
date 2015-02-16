@@ -1,15 +1,14 @@
 package com.bbva.czic.accounts.dao.model.oznx;
 
-import com.bbva.czic.routine.commons.rm.utils.tx.IFormatNotApply;
+import java.util.Date;
+
 import com.bbva.jee.arq.spring.core.host.Campo;
-import com.bbva.jee.arq.spring.core.host.Formato;
 import com.bbva.jee.arq.spring.core.host.TipoCampo;
+import com.bbva.jee.arq.spring.core.host.Formato;
+
 import org.springframework.roo.addon.javabean.RooJavaBean;
 import org.springframework.roo.addon.serializable.RooSerializable;
 import org.springframework.roo.addon.tostring.RooToString;
-
-import java.math.BigDecimal;
-import java.util.Date;
 
 
 /**
@@ -21,7 +20,7 @@ import java.util.Date;
 @RooJavaBean
 @RooToString
 @RooSerializable
-public class FormatoOZECNXS0 implements IFormatNotApply {
+public class FormatoOZECNXS0 {
 	
 	/**
 	 * <p>Campo <code>INDPAGI</code>, &iacute;ndice: <code>1</code>, tipo: <code>ENTERO</code>
@@ -48,10 +47,10 @@ public class FormatoOZECNXS0 implements IFormatNotApply {
 	private Date fechemi;
 	
 	/**
-	 * <p>Campo <code>VALCHEQ</code>, &iacute;ndice: <code>5</code>, tipo: <code>DECIMAL</code>
+	 * <p>Campo <code>VALCHEQ</code>, &iacute;ndice: <code>5</code>, tipo: <code>ALFANUMERICO</code>
 	 */
-	@Campo(indice = 5, nombre = "VALCHEQ", tipo = TipoCampo.DECIMAL, longitudMinima = 17, longitudMaxima = 17, signo = true, decimales = 2)
-	private BigDecimal valcheq;
+	@Campo(indice = 5, nombre = "VALCHEQ", tipo = TipoCampo.ALFANUMERICO, longitudMinima = 18, longitudMaxima = 18)
+	private String valcheq;
 	
 	/**
 	 * <p>Campo <code>ESTCHEQ</code>, &iacute;ndice: <code>6</code>, tipo: <code>ALFANUMERICO</code>
