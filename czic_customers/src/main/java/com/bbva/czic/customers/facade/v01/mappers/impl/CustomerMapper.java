@@ -11,6 +11,7 @@ import com.bbva.czic.customers.business.dto.DTOIntCardChargeFilter;
 import com.bbva.czic.customers.business.dto.DTOIntCustomer;
 import com.bbva.czic.customers.business.dto.DTOIntCustomerFilter;
 import com.bbva.czic.customers.business.dto.DTOIntCustomerOperation;
+import com.bbva.czic.customers.business.dto.DTOIntDocument;
 import com.bbva.czic.customers.dao.converters.CardChargeCategoryConverter;
 import com.bbva.czic.customers.facade.v01.mappers.ICustomerMapper;
 import com.bbva.czic.dto.net.AccMovementsResume;
@@ -18,6 +19,7 @@ import com.bbva.czic.dto.net.CardCharge;
 import com.bbva.czic.dto.net.Customer;
 import com.bbva.czic.dto.net.CustomerOperation;
 import com.bbva.czic.dto.net.Document;
+import com.bbva.czic.dto.net.EnumDocumentType;
 import com.bbva.czic.routine.commons.rm.utils.converter.EmailStringConverter;
 import com.bbva.czic.routine.commons.rm.utils.fiql.FiqlType;
 import com.bbva.czic.routine.commons.rm.utils.mappers.AbstractBbvaConfigurableMapper;
@@ -116,9 +118,15 @@ public class CustomerMapper extends AbstractBbvaConfigurableMapper implements IC
 
     @Override
     public DTOIntCustomerFilter mapDTOIntCustomerFilter(final String filter) {
-        final DTOIntCustomerFilter customerFilter = new DTOIntCustomerFilter();
+        DTOIntCustomerFilter customerFilter = new DTOIntCustomerFilter();
         final String idDocument = this.getEqValue(filter,"document");
-        customerFilter.setIdDocument(idDocument);
+        final String username = this.getEqValue(filter,"username");
+        final String documentType = this.getEqValue(filter,"documentType");
+        customerFilter.setDocument(new DTOIntDocument());
+        customerFilter.getDocument().setNumber(idDocument);
+        customerFilter.getDocument().setType(documentType);
+        customerFilter.setUsername(username);
+        customerFilter.setConcat(customerFilter.getUsername()+customerFilter.getDocument().getType()+customerFilter.getDocument().getNumber());
         return customerFilter;
     }
 
