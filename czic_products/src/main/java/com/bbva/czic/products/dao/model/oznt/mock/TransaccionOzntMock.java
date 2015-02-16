@@ -13,44 +13,44 @@ import com.bbva.jee.arq.spring.core.host.protocolo.ps9.aplicacion.CopySalida;
 
 /**
  * Invocador de la transacci&oacute;n <code>OZNT</code>
- * 
+ *
  * @see PeticionTransaccionOznt
  * @see RespuestaTransaccionOznt
  */
 @Profile("dev")
 @Transaction(value = "transaccionOznt")
 public class TransaccionOzntMock implements InvocadorTransaccion<PeticionTransaccionOznt,RespuestaTransaccionOznt> {
-	
-	final String MOCK_PRODUCT_TYPE = "AQ";
+
+    final String MOCK_PRODUCT_TYPE = "AQ";
 
 
-	@Override
-	public RespuestaTransaccionOznt invocar(PeticionTransaccionOznt transaccion) throws ExcepcionTransaccion {
-		final RespuestaTransaccionOznt respuesta = new RespuestaTransaccionOznt();
-		final FormatoOZECNTS0 salida = new FormatoOZECNTS0();
-		final DataFactory dataFactory = new DataFactory();
-		CopySalida copySalida = new CopySalida();
-		
-		salida.setTipprod(MOCK_PRODUCT_TYPE);
-		salida.setDesprod("Cuenta Ahorros");
-		salida.setTialias("Titular de la cuenta");
-		salida.setCategor("Plan clásico");
-		salida.setFechape(dataFactory.getBirthDate());
-		salida.setDirofic(dataFactory.getRandomText(40));
-		salida.setCiudofi(dataFactory.getRandomText(20));
-		salida.setNomofic(dataFactory.getRandomText(20));
-		salida.setPaisofi(dataFactory.getRandomText(20));
+    @Override
+    public RespuestaTransaccionOznt invocar(PeticionTransaccionOznt transaccion) throws ExcepcionTransaccion {
+        final RespuestaTransaccionOznt respuesta = new RespuestaTransaccionOznt();
+        final FormatoOZECNTS0 salida = new FormatoOZECNTS0();
+        final DataFactory dataFactory = new DataFactory();
+        CopySalida copySalida = new CopySalida();
 
-		copySalida.setCopy(salida);
-		respuesta.getCuerpo().getPartes().add(copySalida);
-		return respuesta;
-	}
-	
-	@Override
-	public RespuestaTransaccionOznt invocarCache(PeticionTransaccionOznt transaccion) throws ExcepcionTransaccion {
-		return null;
-	}
-	
-	@Override
-	public void vaciarCache() {}	
+        salida.setTipprod(MOCK_PRODUCT_TYPE);
+        salida.setDesprod("Cuenta Ahorros");
+        salida.setTialias("Titular de la cuenta");
+        salida.setCategor("Plan clásico");
+        salida.setFechape(dataFactory.getBirthDate());
+        salida.setDirofic(dataFactory.getRandomText(40));
+        salida.setCiudofi(dataFactory.getRandomText(20));
+        salida.setNomofic(dataFactory.getRandomText(20));
+        salida.setPaisofi(dataFactory.getRandomText(20));
+
+        copySalida.setCopy(salida);
+        respuesta.getCuerpo().getPartes().add(copySalida);
+        return respuesta;
+    }
+
+    @Override
+    public RespuestaTransaccionOznt invocarCache(PeticionTransaccionOznt transaccion) throws ExcepcionTransaccion {
+        return null;
+    }
+
+    @Override
+    public void vaciarCache() {}
 }
