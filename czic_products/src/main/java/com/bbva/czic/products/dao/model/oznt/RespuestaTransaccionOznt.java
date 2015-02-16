@@ -7,10 +7,10 @@ import org.springframework.roo.addon.tostring.RooToString;
 import com.bbva.jee.arq.spring.core.host.Cabecera;
 import com.bbva.jee.arq.spring.core.host.Cuerpo;
 import com.bbva.jee.arq.spring.core.host.CuerpoMultiparte;
-import com.bbva.jee.arq.spring.core.host.MensajeMultiparte;
-import com.bbva.jee.arq.spring.core.host.Multiformato;
 import com.bbva.jee.arq.spring.core.host.NombreCabecera;
 import com.bbva.jee.arq.spring.core.host.RespuestaTransaccion;
+import com.bbva.jee.arq.spring.core.host.Multiformato;
+import com.bbva.jee.arq.spring.core.host.MensajeMultiparte;
 
 /**
  * Bean de respuesta para la transacci&oacute;n <code>OZNT</code>
@@ -19,8 +19,9 @@ import com.bbva.jee.arq.spring.core.host.RespuestaTransaccion;
  * 
  * @author Arquitectura Spring BBVA
  */
+
 @RespuestaTransaccion
-@Multiformato(formatos = {FormatoOZECNTS0.class })
+@Multiformato(formatos = {FormatoOZECNTS1.class, FormatoOZECNTS0.class})
 @RooJavaBean
 @RooToString
 @RooSerializable
