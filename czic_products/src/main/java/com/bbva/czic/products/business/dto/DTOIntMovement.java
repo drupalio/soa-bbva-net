@@ -26,7 +26,6 @@ public class DTOIntMovement {
     private String status;
     private String productId;
     private String productType;
-    @NotNull
     private Money originValue;
 
     public DTOIntMovement() {
