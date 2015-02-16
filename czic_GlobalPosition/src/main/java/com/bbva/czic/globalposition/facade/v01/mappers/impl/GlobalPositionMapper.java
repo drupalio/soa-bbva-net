@@ -75,7 +75,13 @@ public class GlobalPositionMapper extends AbstractBbvaConfigurableMapper impleme
 
     @Override
     public List<Product> map(final List<DTOIntProduct> intProducts) {
-        return mapAsList(intProducts, Product.class);
+        List<Product> products = mapAsList(intProducts, Product.class);
+        for(Product prod : products){
+            if(prod.getVisible() == null){
+                prod.setVisible(true);
+            }
+        }
+        return products;
     }
 
     @Override

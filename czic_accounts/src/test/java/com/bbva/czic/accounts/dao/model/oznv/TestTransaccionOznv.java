@@ -29,6 +29,7 @@ public class TestTransaccionOznv extends SpringContextBbvaTest {
 		transaccion.setServicioTransacciones(servicioTransacciones);
 	}
 
+
 	@Test
 	public void checkInvocarOK() throws ExcepcionTransaccion {
 

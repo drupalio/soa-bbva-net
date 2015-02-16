@@ -23,6 +23,8 @@ import com.wordnik.swagger.annotations.ApiModelProperty;
 public class Conditions implements Serializable {
 
 	public final static long serialVersionUID = 1L;
+	@ApiModelProperty(value = "tipo decuenta", required = true)
+	private String type;
 	@ApiModelProperty(value = "Alias asociado al titular de la cuenta", required = true)
 	private String alias;
 	@ApiModelProperty(value = "Tipo de plan asociado al producto", required = true)
@@ -109,4 +111,11 @@ public class Conditions implements Serializable {
 		this.activities = activities;
 	}
 
+	public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
+	}
 }

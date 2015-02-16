@@ -4,15 +4,14 @@
 package com.bbva.czic.accounts.dao.model.oznv;
 
 import java.lang.String;
-import java.math.BigDecimal;
 
 privileged aspect FormatoOZECNVS0_Roo_JavaBean {
     
-    public BigDecimal FormatoOZECNVS0.getSalddis() {
+    public String FormatoOZECNVS0.getSalddis() {
         return this.salddis;
     }
     
-    public void FormatoOZECNVS0.setSalddis(BigDecimal salddis) {
+    public void FormatoOZECNVS0.setSalddis(String salddis) {
         this.salddis = salddis;
     }
     
