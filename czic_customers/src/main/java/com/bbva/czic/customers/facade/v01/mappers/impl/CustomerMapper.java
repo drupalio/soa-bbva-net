@@ -104,7 +104,9 @@ public class CustomerMapper extends AbstractBbvaConfigurableMapper implements IC
 
     @Override
     public DTOIntCustomerOperation map(final CustomerOperation operation) {
-        return map(operation, DTOIntCustomerOperation.class);
+        DTOIntCustomerOperation dto = map(operation, DTOIntCustomerOperation.class);
+        dto.setDocumentType(operation.getCustomer().getDocument().getType().getCode());
+        return dto;
     }
 
     @Override

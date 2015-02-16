@@ -9,6 +9,7 @@ public class DTOIntCustomerFilter {
 //    @Pattern(regexp = "[0-9]{8}")
     private String idDocument;
 
+
 	public String getIdDocument() {
 		return idDocument;
 	}
@@ -16,6 +17,5 @@ public class DTOIntCustomerFilter {
 	public void setIdDocument(String idDocument) {
 		this.idDocument = idDocument;
 	}
-
 
 }

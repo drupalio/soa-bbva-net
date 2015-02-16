@@ -35,3 +35,7 @@ exit
  sarc importTransaction --protocol PS9_MX --copy COBD.CN.TMP.QGDTFDF.OZECN1E0_v2.txt,OZECN1S0_FDF.txt,OZN1_CCT.txt,OZN1_FDX.txt
 exit
 // ServicesArchitecture log closed at 2015-02-14 15:20:43
+// ServicesArchitecture log opened at 2015-02-15 17:29:14
+sarc importTransaction --protocol PS9_MX --copy OZN1cct.txt,OZECN1E0fdf.txt,OZECN1S0fdf.txt,OZECN1S1fdf.txt,OZN1fdx.txt
+exit
+// ServicesArchitecture log closed at 2015-02-15 17:30:13

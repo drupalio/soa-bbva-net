@@ -25,12 +25,11 @@ public class StringMoneyConverter extends CustomConverter<String, Money> {
 		final Money result = new Money();
 		result.setCurrency(CurrencyEnum.COP.name());
 
-		final String entera = StringUtils.left(source, source.length() - DECIMAL_SIZE);
-		final String decimal = StringUtils.right(source, DECIMAL_SIZE);
+		final String entera = StringUtils.left(source.trim(), source.trim().length() - DECIMAL_SIZE);
+		final String decimal = StringUtils.right(source.trim(), DECIMAL_SIZE);
 		final BigDecimal amount = new BigDecimal(entera + "." + decimal);
 		result.setAmount(amount);
 
 		return result;
 	}
-
 }
