@@ -49,7 +49,7 @@ public class FormatoOZECNXS0 {
 	/**
 	 * <p>Campo <code>VALCHEQ</code>, &iacute;ndice: <code>5</code>, tipo: <code>ALFANUMERICO</code>
 	 */
-	@Campo(indice = 5, nombre = "VALCHEQ", tipo = TipoCampo.ALFANUMERICO, longitudMinima = 19, longitudMaxima = 19)
+	@Campo(indice = 5, nombre = "VALCHEQ", tipo = TipoCampo.ALFANUMERICO, longitudMinima = 18, longitudMaxima = 18)
 	private String valcheq;
 	
 	/**
