@@ -54,11 +54,11 @@ public class TxCustomerMapper extends AbstractBbvaTxConfigurableMapper implement
 		 */
 		factory.getConverterFactory().registerConverter(new StringMoneyConverter());
 
-		factory.classMap(DTOIntCustomerFilter.class, FormatoOZNCENB0.class).field("idDocument", "numclie").byDefault()
+		factory.classMap(DTOIntCustomerFilter.class, FormatoOZNCENB0.class).field("idDocument", "clveacc").byDefault()
 				.register();
 
 		// map FormatoOZECNBS0 <-> DTOIntCustomer (OZNB)
-		factory.classMap(DTOIntCustomer.class, FormatoOZNCSNB0.class).field("id", "numclie").field("name", "nomclie")
+		factory.classMap(DTOIntCustomer.class, FormatoOZNCSNB0.class)/*.field("id", "numclie")*/.field("name", "nomclie")
 				.field("segment", "segment").field("stratum", "estrato").field("homeLocation.cityName", "ciudvia")
 				.field("homeLocation.stateName", "depavia").field("homeLocation.countryName", "paisvia")
 				.field("homeLocation.postalAddress", "descvia").field("residenceYears", "anosvda")
@@ -77,7 +77,7 @@ public class TxCustomerMapper extends AbstractBbvaTxConfigurableMapper implement
 				.converter(MONTH_CONVERTER).add().byDefault().register();
 
 		// map DTOIntCardChargeFilter <-> FormatoOZECNPE0
-		factory.classMap(DTOIntCardChargeFilter.class, FormatoOZECNPE0.class).field("customerId", "idusuar")
+		factory.classMap(DTOIntCardChargeFilter.class, FormatoOZECNPE0.class)
 				.fieldMap("startDate", "fechain").converter(SIMPLE_DATE_CONVERTER).add().fieldMap("endDate", "fechafi")
 				.converter(SIMPLE_DATE_CONVERTER).add().byDefault().register();
 

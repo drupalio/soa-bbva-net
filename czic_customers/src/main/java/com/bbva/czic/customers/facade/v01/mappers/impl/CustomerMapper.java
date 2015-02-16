@@ -116,7 +116,7 @@ public class CustomerMapper extends AbstractBbvaConfigurableMapper implements IC
     public DTOIntCustomerFilter mapDTOIntCustomerFilter(final String filter) {
         final DTOIntCustomerFilter customerFilter = new DTOIntCustomerFilter();
         final String idDocument = this.getEqValue(filter,"document");
-        customerFilter.setId(idDocument);
+        customerFilter.setIdDocument(idDocument);
         return customerFilter;
     }
 
