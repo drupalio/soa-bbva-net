@@ -137,7 +137,9 @@ public class TxAccountMapperImpl extends AbstractBbvaTxConfigurableMapper implem
 
 	@Override
 	public DTOIntAccMovementsResume mapOutOznu(FormatoOZECNUS0 formatOutput) {
-		return map(formatOutput, DTOIntAccMovementsResume.class);
+		DTOIntAccMovementsResume resume = map(formatOutput, DTOIntAccMovementsResume.class);
+		resume.setMonth(resume.getMonth().substring(0,1));
+		return resume;
 	}
 	
 	@Override
