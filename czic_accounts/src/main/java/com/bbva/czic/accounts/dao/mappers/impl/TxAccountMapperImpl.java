@@ -21,6 +21,7 @@ import com.bbva.czic.accounts.dao.model.oznv.FormatoOZECNVE0;
 import com.bbva.czic.accounts.dao.model.oznv.FormatoOZECNVS0;
 import com.bbva.czic.accounts.dao.model.ozny.FormatoOZECNYE0;
 import com.bbva.czic.accounts.dao.model.ozny.FormatoOZECNYS0;
+import com.bbva.czic.dto.net.EnumMonth;
 import com.bbva.czic.routine.commons.rm.utils.converter.StringMoneyConverter;
 import com.bbva.czic.routine.commons.rm.utils.mappers.AbstractBbvaTxConfigurableMapper;
 import com.bbva.czic.routine.commons.rm.utils.mappers.Mapper;
@@ -138,7 +139,7 @@ public class TxAccountMapperImpl extends AbstractBbvaTxConfigurableMapper implem
 	@Override
 	public DTOIntAccMovementsResume mapOutOznu(FormatoOZECNUS0 formatOutput) {
 		DTOIntAccMovementsResume resume = map(formatOutput, DTOIntAccMovementsResume.class);
-		resume.setMonth(resume.getMonth().substring(0,1));
+		resume.setMonth(EnumMonth.getByCode(resume.getMonth().substring(0,1)).name());
 		return resume;
 	}
 	
