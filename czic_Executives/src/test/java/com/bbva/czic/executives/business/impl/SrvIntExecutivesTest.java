@@ -54,7 +54,7 @@ public class SrvIntExecutivesTest extends SpringContextBbvaTest {
 	@Test(expected = BusinessServiceException.class)
 	public void testGetExecutiveInvalidFilter(){
 		final DTOIntExecutivesFilter filterExecutive = new DTOIntExecutivesFilter();
-		filterExecutive.setId("123456");
+		//filterExecutive.setId("123456");
 
 		srv.getExecutive(filterExecutive);
 	}
@@ -62,7 +62,7 @@ public class SrvIntExecutivesTest extends SpringContextBbvaTest {
 	@Test(expected = BusinessServiceException.class)
 	public void testGetExecutiveInvalidExecutiveId(){
 		final DTOIntExecutivesFilter filterExecutive = new DTOIntExecutivesFilter();
-		filterExecutive.setId("ABCDE");
+	//	filterExecutive.setId("ABCDE");
 
 		srv.getExecutive(filterExecutive);
 	}
@@ -70,7 +70,7 @@ public class SrvIntExecutivesTest extends SpringContextBbvaTest {
 	@Test(expected = BusinessServiceException.class)
 	public void testGetExecutiveDaoException(){
 		final DTOIntExecutivesFilter filterExecutive = new DTOIntExecutivesFilter();
-		filterExecutive.setId("ABCDE");
+	//	filterExecutive.setId("ABCDE");
 
 		when(executivesDAO.getExecutive(any(DTOIntExecutivesFilter.class)))
 				.thenThrow(bsn);
@@ -81,7 +81,7 @@ public class SrvIntExecutivesTest extends SpringContextBbvaTest {
 	@Test(expected = BusinessServiceException.class)
 	public void testGetExecutiveOutputException(){
 		final DTOIntExecutivesFilter filterExecutive = new DTOIntExecutivesFilter();
-		filterExecutive.setId("ABCDE");
+	//	filterExecutive.setId("ABCDE");
 
 		final DTOIntExecutive dtoIntExecutive = new DTOIntExecutive();
 		dtoIntExecutive.setName("Rodolfo Mesa");
@@ -96,7 +96,7 @@ public class SrvIntExecutivesTest extends SpringContextBbvaTest {
 	@Test
 	public void testGetExecutive(){
 		final DTOIntExecutivesFilter filterExecutive = new DTOIntExecutivesFilter();
-		filterExecutive.setId("123456");
+		//filterExecutive.setId("123456");
 		filterExecutive.setType("CUSTOMER");
 
 		final DTOIntExecutive dtoIntExecutive = new DTOIntExecutive();

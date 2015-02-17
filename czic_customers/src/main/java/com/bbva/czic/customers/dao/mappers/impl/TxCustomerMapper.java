@@ -54,7 +54,7 @@ public class TxCustomerMapper extends AbstractBbvaTxConfigurableMapper implement
 		 */
 		factory.getConverterFactory().registerConverter(new StringMoneyConverter());
 
-		factory.classMap(DTOIntCustomerFilter.class, FormatoOZNCENB0.class).field("idDocument", "clveacc").byDefault()
+		factory.classMap(DTOIntCustomerFilter.class, FormatoOZNCENB0.class).field("concat", "clveacc").byDefault()
 				.register();
 
 		// map FormatoOZECNBS0 <-> DTOIntCustomer (OZNB)

@@ -67,11 +67,18 @@ public class TxProductMapperImpl extends AbstractBbvaTxConfigurableMapper implem
 		 * MAPEO DE SALIDAS
 		 */
 		// Map FormatoOZECNTS0 <-> DTOIntConditions (OZNT)
-		factory.classMap(DTOIntConditions.class, FormatoOZECNTS0.class).field("alias", "tialias").field("category", "categor")
-				.field("description", "desprod").field("openingDate", "fechape")
-				.field("commission", "comprod").field("mobilizationConditions", "conprod")
-				.field("office.name", "nomofic").field("office.postalAddress", "dirofic")
-				.field("office.location.city.name", "ciudofi").field("office.location.country.name", "paisofi")
+		factory.classMap(DTOIntConditions.class, FormatoOZECNTS0.class)
+				.field("type", "tipprod")
+				.field("alias", "tialias")
+				.field("category", "categor")
+				.field("description", "desprod")
+				.field("openingDate", "fechape")
+				.field("commission", "comprod")
+				.field("mobilizationConditions", "conprod")
+				.field("office.name", "nomofic")
+				.field("office.postalAddress", "dirofic")
+				.field("office.location.city.name", "ciudofi")
+				.field("office.location.country.name", "paisofi")
 				.byDefault()
 				.register();
 		

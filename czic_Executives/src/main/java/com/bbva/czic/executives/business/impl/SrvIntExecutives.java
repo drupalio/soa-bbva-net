@@ -44,7 +44,6 @@ public class SrvIntExecutives implements ISrvIntExecutives {
 	public DTOIntExecutive getExecutive(DTOIntExecutivesFilter dtoIntExecutivesFilter) {
 		// 1. Validate DtoIntFilterAccount
 		DtoValidator.validate(dtoIntExecutivesFilter);
-		new StringValidator().isNumericText(dtoIntExecutivesFilter.getId()).validate();
 		// 2. Get response
 		final DTOIntExecutive result = executivesDAO.getExecutive(dtoIntExecutivesFilter);
 
