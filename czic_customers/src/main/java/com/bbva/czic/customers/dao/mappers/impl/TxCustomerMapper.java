@@ -58,7 +58,7 @@ public class TxCustomerMapper extends AbstractBbvaTxConfigurableMapper implement
 				.register();
 
 		// map FormatoOZECNBS0 <-> DTOIntCustomer (OZNB)
-		factory.classMap(DTOIntCustomer.class, FormatoOZNCSNB0.class)/*.field("id", "numclie")*/.field("name", "nomclie")
+		factory.classMap(DTOIntCustomer.class, FormatoOZNCSNB0.class).field("name", "nomclie")
 				.field("segment", "segment").field("stratum", "estrato").field("homeLocation.cityName", "ciudvia")
 				.field("homeLocation.stateName", "depavia").field("homeLocation.countryName", "paisvia")
 				.field("homeLocation.postalAddress", "descvia").field("residenceYears", "anosvda")

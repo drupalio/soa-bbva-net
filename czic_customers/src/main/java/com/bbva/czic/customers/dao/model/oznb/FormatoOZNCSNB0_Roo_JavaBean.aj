@@ -7,6 +7,14 @@ import java.lang.String;
 
 privileged aspect FormatoOZNCSNB0_Roo_JavaBean {
     
+    public String FormatoOZNCSNB0.getNumclie() {
+        return this.numclie;
+    }
+    
+    public void FormatoOZNCSNB0.setNumclie(String numclie) {
+        this.numclie = numclie;
+    }
+    
     public String FormatoOZNCSNB0.getNomclie() {
         return this.nomclie;
     }

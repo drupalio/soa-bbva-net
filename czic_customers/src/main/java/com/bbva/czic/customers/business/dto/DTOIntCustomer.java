@@ -16,13 +16,9 @@ public class DTOIntCustomer {
 	private String id;
 	private Document document;
 	private String username;
-	@NotBlank
 	private String name;
-	@NotNull
 	private String segment;
-	@NotNull
 	private ContactInfo emails= new ContactInfo();
-	@NotNull
 	private Place homeLocation;
 	private Integer stratum;
 	private Integer residenceYears;
