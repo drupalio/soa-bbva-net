@@ -68,8 +68,10 @@ public class TxCustomerMapper extends AbstractBbvaTxConfigurableMapper implement
 				.field("lastConnectionTime", "ultconx").byDefault().register();
 
 		// map DTOIntAccMovementsResumesFilter <-> FormatoOZECNQE0
-		factory.classMap(DTOIntAccMovementsResumesFilter.class, FormatoOZECNQE0.class).field("startDate", "fechain")
-				.field("endDate", "fechafi").byDefault().register();
+		factory.classMap(DTOIntAccMovementsResumesFilter.class, FormatoOZECNQE0.class)
+				.field("startDate", "fechain")
+				.field("endDate", "fechafi")
+				.byDefault().register();
 
 		// map FormatoOZECNQS0 <-> DTOIntAccMovementsResume
 		factory.classMap(FormatoOZECNQS0.class, DTOIntAccMovementsResume.class).field("valdepo", "income")
