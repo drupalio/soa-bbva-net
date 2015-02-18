@@ -183,7 +183,7 @@ public class SrvCustomersV01Test extends SpringContextBbvaTest{
 		customer.setLastAccessDate(dataF.getDate(2015, 1, 1).toString());
 		customer.setHomeLocation(new Place());
 		customer.setOfficeLocation(new Place());
-		customer.setDwelingType(EnumDwelingType.VALIDAR);
+		customer.setDwelingType("6");
 		customer.setResidenceYears(dataF.getNumberBetween(0, 10));
 		customer.setSegment(EnumSegmentType.CORPORATIVO);
 		return customer;
