@@ -11,7 +11,7 @@ import javax.xml.bind.annotation.XmlType;
 @XmlType(name = "EnumDocumentType", namespace = "urn:com:bbva:czic:dto:net")
 @XmlAccessorType(XmlAccessType.FIELD)
 public enum EnumDocumentType implements Serializable {
-	CEDULACIUDADANIA("1"), CEDULAEXTRANJERIA("2"), TARJETAIDENTIDAD("3"), PASAPORTE("4"), IDENTIFICACIONPERSONAL("5");
+	CEDULACIUDADANIA("1"), CEDULAEXTRANJERIA("2"), TARJETAIDENTIDAD("4"), PASAPORTE("4"), IDENTIFICACIONPERSONAL("5");
 
 	private String code;
 
