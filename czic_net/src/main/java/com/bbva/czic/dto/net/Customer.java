@@ -48,7 +48,7 @@ public class Customer implements Serializable {
 	@Min(0)
 	private Integer homeMembers;
 	@ApiModelProperty("Estrato del cliente")
-	private EnumDwelingType dwelingType;
+	private String dwelingType;
 	@ApiModelProperty("Ubicacion de la oficina")
 	private Place officeLocation;
 	@XmlJavaTypeAdapter(CalendarAdapter.class)
@@ -139,11 +139,11 @@ public class Customer implements Serializable {
 		this.homeMembers = homeMembers;
 	}
 
-	public EnumDwelingType getDwelingType() {
+	public String getDwelingType() {
 		return dwelingType;
 	}
 
-	public void setDwelingType(EnumDwelingType dwelingType) {
+	public void setDwelingType(String dwelingType) {
 		this.dwelingType = dwelingType;
 	}
 

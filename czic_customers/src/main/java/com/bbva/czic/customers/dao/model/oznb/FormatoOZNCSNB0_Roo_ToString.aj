@@ -20,6 +20,7 @@ privileged aspect FormatoOZNCSNB0_Roo_ToString {
         sb.append("Estrato: ").append(getEstrato()).append(", ");
         sb.append("Nomclie: ").append(getNomclie()).append(", ");
         sb.append("Nropnas: ").append(getNropnas()).append(", ");
+        sb.append("Numclie: ").append(getNumclie()).append(", ");
         sb.append("Paisofi: ").append(getPaisofi()).append(", ");
         sb.append("Paisvia: ").append(getPaisvia()).append(", ");
         sb.append("Segment: ").append(getSegment()).append(", ");
