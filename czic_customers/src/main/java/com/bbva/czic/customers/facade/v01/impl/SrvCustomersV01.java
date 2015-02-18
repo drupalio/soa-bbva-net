@@ -188,13 +188,14 @@ public class SrvCustomersV01 implements ISrvCustomersV01, com.bbva.jee.arq.sprin
 			@ApiResponse(code = 400, message = "Wrong parameters"),
 			@ApiResponse(code = 409, message = "Data not found"), @ApiResponse(code = 500, message = "Technical Error") })
 	@PUT
-	@Path("/{customerId}/addChannel")
+	@Path("/{customerId}/addChannel/{channelId}")
 	@SMC(registryID = "SMCCO1500009", logicalID = "addChannel")
 
-	public Response addChannel(@ApiParam(value = "Claim identifier param") @PathParam("customerId") String customerId) {
+	public Response addChannel(@ApiParam(value = "Claim identifier param") @PathParam("customerId") String customerId,
+							   @ApiParam(value = "Channel identifier param") @PathParam("channelId") String channelId) {
 
 		log.info("Into addChannel...");
-		srvIntCustomers.addChannel(new DTOIntAddChannel(customerId));
+		srvIntCustomers.addChannel(new DTOIntAddChannel(customerId, channelId));
 
 		return Response.ok().build();
 	}

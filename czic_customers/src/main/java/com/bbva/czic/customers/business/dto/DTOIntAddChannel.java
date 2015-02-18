@@ -13,10 +13,15 @@ public class DTOIntAddChannel {
     @Length(min = 8, max = 8)
     private String customerId;
 
+    @NotNull
+    @Length(min = 4, max = 4)
+    private String channelId;
+
     public DTOIntAddChannel(){    }
 
-    public DTOIntAddChannel(String customerId){
+    public DTOIntAddChannel(String customerId, String channelId){
         this.customerId = customerId;
+        this.setChannelId(channelId);
     }
 
     public String getCustomerId() {
@@ -25,5 +30,13 @@ public class DTOIntAddChannel {
 
     public void setCustomerId(String customerId) {
         this.customerId = customerId;
+    }
+
+    public String getChannelId() {
+        return channelId;
+    }
+
+    public void setChannelId(String channelId) {
+        this.channelId = channelId;
     }
 }
