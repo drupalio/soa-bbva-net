@@ -80,7 +80,7 @@ public class TxCustomerMapper extends AbstractBbvaTxConfigurableMapper implement
 				.converter(SIMPLE_DATE_CONVERTER).add().byDefault().register();
 
 		factory.classMap(FormatoOZECNPS0.class, DTOIntCardCharge.class).fieldMap("categor", "category")
-				.converter(CARD_CHARGE_CATEGORY_CONVERTER).add().field("valcate", "amount").byDefault().register();
+					.converter(CARD_CHARGE_CATEGORY_CONVERTER).add().field("valcate", "amount").byDefault().register();
 
         // map FormatoOZECNWE0 to DTOIntAddChannel
 		factory.classMap(FormatoOZECNWE0.class, DTOIntAddChannel.class)
