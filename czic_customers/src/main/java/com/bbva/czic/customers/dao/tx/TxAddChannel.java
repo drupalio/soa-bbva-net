@@ -1,6 +1,7 @@
 package com.bbva.czic.customers.dao.tx;
 
 import com.bbva.czic.customers.business.dto.DTOIntAddChannel;
+import com.bbva.czic.customers.dao.mappers.ITxCustomerMapper;
 import com.bbva.czic.customers.dao.model.oznw.FormatoOZECNWE0;
 import com.bbva.czic.customers.dao.model.oznw.PeticionTransaccionOznw;
 import com.bbva.czic.customers.dao.model.oznw.RespuestaTransaccionOznw;
@@ -17,16 +18,15 @@ import javax.annotation.Resource;
 @Component(value = "tx-add-channel")
 public class TxAddChannel  extends SimpleBbvaTransaction<DTOIntAddChannel, FormatoOZECNWE0, DTOIntAddChannel, IFormatNotApply> {
 
+    @Resource(name = "txCustomerMapper")
+    private ITxCustomerMapper iTxCustomerMapper;
+
     @Resource(name="transaccionOznb")
     private transient InvocadorTransaccion<PeticionTransaccionOznw, RespuestaTransaccionOznw> transaccionOznw;
 
     @Override
     protected FormatoOZECNWE0 mapDtoInToRequestFormat(DTOIntAddChannel dtoIn) {
-        FormatoOZECNWE0 formatoOZECNWE0 = new FormatoOZECNWE0();
-        formatoOZECNWE0.setUsuario(dtoIn.getCustomerId());
-        formatoOZECNWE0.setCanal(dtoIn.getChannelId());
-
-        return formatoOZECNWE0;
+       return iTxCustomerMapper.mapInOznw(dtoIn);
     }
 
     @Override
