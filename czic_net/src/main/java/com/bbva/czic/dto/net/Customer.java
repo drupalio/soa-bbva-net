@@ -33,7 +33,7 @@ public class Customer implements Serializable {
 	@ApiModelProperty("Nombre del cliente")
 	private String name;
 	@ApiModelProperty("Segmento del cliente")
-	private EnumSegmentType segment;
+	private String segment;
 	@ApiModelProperty("Información de contacto que contiene los emails del cliente")
 	private ContactInfo contactInfo;
 	@ApiModelProperty("Ubicacion de la casa")
@@ -91,11 +91,11 @@ public class Customer implements Serializable {
 		this.name = name;
 	}
 
-	public EnumSegmentType getSegment() {
+	public String getSegment() {
 		return segment;
 	}
 
-	public void setSegment(EnumSegmentType segment) {
+	public void setSegment(String segment) {
 		this.segment = segment;
 	}
 
