@@ -3,14 +3,10 @@ package com.bbva.czic.customers.dao.mappers.impl;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.bbva.czic.customers.business.dto.*;
+import com.bbva.czic.customers.dao.model.oznw.FormatoOZECNWE0;
 import org.springframework.stereotype.Component;
 
-import com.bbva.czic.customers.business.dto.DTOIntAccMovementsResume;
-import com.bbva.czic.customers.business.dto.DTOIntAccMovementsResumesFilter;
-import com.bbva.czic.customers.business.dto.DTOIntCardCharge;
-import com.bbva.czic.customers.business.dto.DTOIntCardChargeFilter;
-import com.bbva.czic.customers.business.dto.DTOIntCustomer;
-import com.bbva.czic.customers.business.dto.DTOIntCustomerFilter;
 import com.bbva.czic.customers.dao.converters.CardChargeCategoryConverter;
 import com.bbva.czic.customers.dao.mappers.ITxCustomerMapper;
 import com.bbva.czic.customers.dao.model.oznb.FormatoOZNCENB0;
@@ -86,11 +82,22 @@ public class TxCustomerMapper extends AbstractBbvaTxConfigurableMapper implement
 		factory.classMap(FormatoOZECNPS0.class, DTOIntCardCharge.class).fieldMap("categor", "category")
 				.converter(CARD_CHARGE_CATEGORY_CONVERTER).add().field("valcate", "amount").byDefault().register();
 
+        // map FormatoOZECNWE0 to DTOIntAddChannel
+		factory.classMap(FormatoOZECNWE0.class, DTOIntAddChannel.class)
+				.field("usuario", "customerId")
+				.field("canal", "channelId")
+				.byDefault().register();
+
 	}
 
 	@Override
 	public FormatoOZNCENB0 mapInOznb(DTOIntCustomerFilter customerFilter) {
 		return map(customerFilter, FormatoOZNCENB0.class);
+	}
+
+	@Override
+	public FormatoOZECNWE0 mapInOznw(DTOIntAddChannel customerFilter) {
+		return map(customerFilter, FormatoOZECNWE0.class);
 	}
 
 	@Override
