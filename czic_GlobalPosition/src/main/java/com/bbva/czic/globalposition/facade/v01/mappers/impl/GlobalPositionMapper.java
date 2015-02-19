@@ -80,6 +80,9 @@ public class GlobalPositionMapper extends AbstractBbvaConfigurableMapper impleme
             if(prod.getVisible() == null){
                 prod.setVisible(true);
             }
+            if (prod.getOperable() == null){
+                prod.setOperable(true);
+            }
         }
         return products;
     }
