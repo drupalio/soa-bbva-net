@@ -39,6 +39,8 @@ public interface TxProductsMapper {
 	
 	public static final String WORD="http";
 	
+	public static final String FILLER="                                                                                                   ";
+	
 	public FormatoOZECNTE0 mapInOznt(DTOIntProduct dtoIn);
 
 	public DTOIntConditions mapOutOznt(FormatoOZECNTS0 formatOutput);

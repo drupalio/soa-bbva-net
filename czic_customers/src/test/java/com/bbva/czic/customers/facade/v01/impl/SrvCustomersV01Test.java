@@ -185,7 +185,7 @@ public class SrvCustomersV01Test extends SpringContextBbvaTest{
 		customer.setOfficeLocation(new Place());
 		customer.setDwelingType("6");
 		customer.setResidenceYears(dataF.getNumberBetween(0, 10));
-		customer.setSegment(EnumSegmentType.CORPORATIVO);
+		customer.setSegment("CORPORATIVO");
 		return customer;
 	}
 

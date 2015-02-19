@@ -98,9 +98,13 @@ public class SrvIntCustomers implements ISrvIntCustomers {
 		DtoValidator.validate(dtoIntCustomer);
 		log.info("SrvInt: gettingIntoMapper: " + dtoIntCustomer);
 		return dtoIntCustomer;
-
 	}
 
+	/**
+	 *
+	 * @param dtoIntAddChannel
+	 */
+	@Override
 	public void addChannel(final DTOIntAddChannel dtoIntAddChannel){
 
 		DtoValidator.validate(dtoIntAddChannel);
