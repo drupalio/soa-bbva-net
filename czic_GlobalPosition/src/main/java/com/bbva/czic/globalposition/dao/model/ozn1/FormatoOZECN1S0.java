@@ -18,7 +18,7 @@ import org.springframework.roo.addon.tostring.RooToString;
 @RooJavaBean
 @RooToString
 @RooSerializable
-public class FormatoOZECN1S0 {
+public class 	FormatoOZECN1S0 {
 	
 	/**
 	 * <p>Campo <code>TIPPROD</code>, &iacute;ndice: <code>1</code>, tipo: <code>ALFANUMERICO</code>
