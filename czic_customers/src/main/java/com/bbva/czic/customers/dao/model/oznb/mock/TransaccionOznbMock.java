@@ -33,18 +33,18 @@ public class TransaccionOznbMock implements InvocadorTransaccion<PeticionTransac
 		formatoSalida.setNomclie(dataFactory.getBusinessName());
 		formatoSalida.setSegment(null);
 		formatoSalida.setCorreo(dataFactory.getEmailAddress());
-		formatoSalida.setDescvia(dataFactory.getAddress());
+		formatoSalida.setDescvia(null);
 		formatoSalida.setCiudvia(null);
 		formatoSalida.setDepavia(null);
-		formatoSalida.setPaisvia("0");
-		formatoSalida.setEstrato(dataFactory.getNumberText(1));
-		formatoSalida.setAnosvda(dataFactory.getNumberText(2));
-		formatoSalida.setNropnas(dataFactory.getNumberText(2));
+		formatoSalida.setPaisvia(null);
+		formatoSalida.setEstrato(null);
+		formatoSalida.setAnosvda(null);
+		formatoSalida.setNropnas(null);
 		formatoSalida.setTpovvda(null);
-		formatoSalida.setDescofi(dataFactory.getAddress());
+		formatoSalida.setDescofi(null);
 		formatoSalida.setCiudofi(null);
 		formatoSalida.setDepaofi(null);
-		formatoSalida.setPaisofi("0");
+		formatoSalida.setPaisofi(null);
 		formatoSalida.setUltconx(dataFactory.getDate(2015, 12, 12).toString());
 		
 		salida.setCopy(formatoSalida);

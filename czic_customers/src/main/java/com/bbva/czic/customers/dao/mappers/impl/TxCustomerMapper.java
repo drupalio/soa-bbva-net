@@ -111,10 +111,11 @@ public class TxCustomerMapper extends AbstractBbvaTxConfigurableMapper implement
 		email.setActive(true);
 		email.setAddress(formatOutput.getCorreo());
 		email.setPrimary(true);
-		email.setSource(EnumContactSourceType.WEB);
+		email.setSource("WEB");
 		emails.add(email);
 		contacto.setEmails(emails);
 		contacto.setPhoneNumbers(phones);
+		dtoIntCustomer.setEmails(contacto);
 		return dtoIntCustomer;
 	}
 

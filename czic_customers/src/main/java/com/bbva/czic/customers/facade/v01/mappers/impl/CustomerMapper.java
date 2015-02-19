@@ -1,5 +1,6 @@
 package com.bbva.czic.customers.facade.v01.mappers.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.stereotype.Component;
@@ -16,10 +17,13 @@ import com.bbva.czic.customers.dao.converters.CardChargeCategoryConverter;
 import com.bbva.czic.customers.facade.v01.mappers.ICustomerMapper;
 import com.bbva.czic.dto.net.AccMovementsResume;
 import com.bbva.czic.dto.net.CardCharge;
+import com.bbva.czic.dto.net.ContactInfo;
 import com.bbva.czic.dto.net.Customer;
 import com.bbva.czic.dto.net.CustomerOperation;
 import com.bbva.czic.dto.net.Document;
+import com.bbva.czic.dto.net.Email;
 import com.bbva.czic.dto.net.EnumDocumentType;
+import com.bbva.czic.dto.net.PhoneNumber;
 import com.bbva.czic.routine.commons.rm.utils.converter.EmailStringConverter;
 import com.bbva.czic.routine.commons.rm.utils.fiql.FiqlType;
 import com.bbva.czic.routine.commons.rm.utils.mappers.AbstractBbvaConfigurableMapper;
@@ -64,7 +68,7 @@ public class CustomerMapper extends AbstractBbvaConfigurableMapper implements IC
                 .byDefault().register();
 
         factory.classMap(Customer.class, DTOIntCustomer.class)
-
+        		.field("contactInfo","emails")
                 .byDefault().register();
     }
 
@@ -113,7 +117,8 @@ public class CustomerMapper extends AbstractBbvaConfigurableMapper implements IC
 
     @Override
     public Customer mapCustomer(final DTOIntCustomer intCustomer) {
-        return map(intCustomer, Customer.class);
+    	Customer c = map(intCustomer, Customer.class);
+        return c;
     }
 
     @Override
