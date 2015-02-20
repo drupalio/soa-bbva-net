@@ -31,60 +31,60 @@ public class FormatoOZECN2E0 {
 	 * <p>Campo <code>SUBTRM1</code>, &iacute;ndice: <code>2</code>, tipo: <code>ALFANUMERICO</code>
 	 */
 	@Campo(indice = 2, nombre = "SUBTRM1", tipo = TipoCampo.ALFANUMERICO, longitudMinima = 100, longitudMaxima = 100)
-	private String subtrm1=TxProductsMapper.FILLER;
+	private String subtrm1;
 	
 	/**
 	 * <p>Campo <code>SUBTRM2</code>, &iacute;ndice: <code>3</code>, tipo: <code>ALFANUMERICO</code>
 	 */
 	@Campo(indice = 3, nombre = "SUBTRM2", tipo = TipoCampo.ALFANUMERICO, longitudMinima = 100, longitudMaxima = 100)
-	private String subtrm2=TxProductsMapper.FILLER;  
+	private String subtrm2;
 	
 	/**
 	 * <p>Campo <code>SUBTRM3</code>, &iacute;ndice: <code>4</code>, tipo: <code>ALFANUMERICO</code>
 	 */
 	@Campo(indice = 4, nombre = "SUBTRM3", tipo = TipoCampo.ALFANUMERICO, longitudMinima = 100, longitudMaxima = 100)
-	private String subtrm3=TxProductsMapper.FILLER;  
+	private String subtrm3;
 	
 	/**
 	 * <p>Campo <code>SUBTRM4</code>, &iacute;ndice: <code>5</code>, tipo: <code>ALFANUMERICO</code>
 	 */
 	@Campo(indice = 5, nombre = "SUBTRM4", tipo = TipoCampo.ALFANUMERICO, longitudMinima = 100, longitudMaxima = 100)
-	private String subtrm4=TxProductsMapper.FILLER;  
+	private String subtrm4;
 	
 	/**
 	 * <p>Campo <code>SUBTRM5</code>, &iacute;ndice: <code>6</code>, tipo: <code>ALFANUMERICO</code>
 	 */
 	@Campo(indice = 6, nombre = "SUBTRM5", tipo = TipoCampo.ALFANUMERICO, longitudMinima = 100, longitudMaxima = 100)
-	private String subtrm5=TxProductsMapper.FILLER;  
+	private String subtrm5;
 	
 	/**
 	 * <p>Campo <code>SUBTRM6</code>, &iacute;ndice: <code>7</code>, tipo: <code>ALFANUMERICO</code>
 	 */
 	@Campo(indice = 7, nombre = "SUBTRM6", tipo = TipoCampo.ALFANUMERICO, longitudMinima = 100, longitudMaxima = 100)
-	private String subtrm6=TxProductsMapper.FILLER;  
+	private String subtrm6;
 	
 	/**
 	 * <p>Campo <code>SUBTRM7</code>, &iacute;ndice: <code>8</code>, tipo: <code>ALFANUMERICO</code>
 	 */
 	@Campo(indice = 8, nombre = "SUBTRM7", tipo = TipoCampo.ALFANUMERICO, longitudMinima = 100, longitudMaxima = 100)
-	private String subtrm7=TxProductsMapper.FILLER;  
+	private String subtrm7;
 	
 	/**
 	 * <p>Campo <code>SUBTRM8</code>, &iacute;ndice: <code>9</code>, tipo: <code>ALFANUMERICO</code>
 	 */
 	@Campo(indice = 9, nombre = "SUBTRM8", tipo = TipoCampo.ALFANUMERICO, longitudMinima = 100, longitudMaxima = 100)
-	private String subtrm8=TxProductsMapper.FILLER;  
+	private String subtrm8;
 	
 	/**
 	 * <p>Campo <code>SUBTRM9</code>, &iacute;ndice: <code>10</code>, tipo: <code>ALFANUMERICO</code>
 	 */
 	@Campo(indice = 10, nombre = "SUBTRM9", tipo = TipoCampo.ALFANUMERICO, longitudMinima = 100, longitudMaxima = 100)
-	private String subtrm9=TxProductsMapper.FILLER;  
+	private String subtrm9;
 	
 	/**
 	 * <p>Campo <code>SUBTRM0</code>, &iacute;ndice: <code>11</code>, tipo: <code>ALFANUMERICO</code>
 	 */
 	@Campo(indice = 11, nombre = "SUBTRM0", tipo = TipoCampo.ALFANUMERICO, longitudMinima = 100, longitudMaxima = 100)
-	private String subtrm0=TxProductsMapper.FILLER;  
+	private String subtrm0;
 	
 }

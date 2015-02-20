@@ -60,7 +60,7 @@ public class TxProductMapperImpl extends AbstractBbvaTxConfigurableMapper implem
 				.register();
 		
 		// Map  DTOIntFilterExtract <-> FormatoOZECN2S0(OZN2)
-		factory.classMap(FormatoOZECN2E0.class,DTOIntFilterExtract.class)
+		factory.classMap(FormatoOZECN2E0.class, DTOIntFilterExtract.class)
 						.customize(new ExtractListMapperIn()).byDefault().register();
 		
 		/**
@@ -117,7 +117,7 @@ public class TxProductMapperImpl extends AbstractBbvaTxConfigurableMapper implem
 		
 		// Map FormatoOZECN2S0 <-> DTOIntExtractOutput (OZN2)
 		factory.classMap(DTOIntExtractOutput.class,FormatoOZECN2S0.class)
-				.customize(new ExtractListMapperOut()).byDefault().register();
+				.customize(new ExtractListMapperOut()).register();
 	}
 
 	@Override
