@@ -22,7 +22,7 @@ public class Email
 
     public final static long serialVersionUID = 1L;
     @ApiModelProperty("Fuente de los contactos")
-    private EnumContactSourceType source;
+    private String source;
     @ApiModelProperty("Direccion de correo electronico")
 	@org.hibernate.validator.constraints.Email
     private String address;
@@ -35,11 +35,11 @@ public class Email
         //default constructor
     }
 
-    public EnumContactSourceType getSource() {
+    public String getSource() {
         return source;
     }
 
-    public void setSource(EnumContactSourceType source) {
+    public void setSource(String source) {
         this.source = source;
     }
 

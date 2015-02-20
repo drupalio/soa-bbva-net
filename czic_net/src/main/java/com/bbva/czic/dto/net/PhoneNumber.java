@@ -23,7 +23,7 @@ public class PhoneNumber
 
     public final static long serialVersionUID = 1L;
     @ApiModelProperty("Fuente de los contactos")
-    private EnumContactSourceType contactSource;
+    private String contactSource;
     @ApiModelProperty("Codigo del pais")
     private String countryCode;
     @ApiModelProperty(" Codigo de la region")
@@ -31,7 +31,7 @@ public class PhoneNumber
     @ApiModelProperty("Numero de telefono")
     private String number;
     @ApiModelProperty("Fuente de tipo de numero")
-    private EnumPhoneNumberType type;
+    private String type;
     @ApiModelProperty("Numero por defecto")
     private Boolean primary;
     @ApiModelProperty("Numero activo")
@@ -41,11 +41,11 @@ public class PhoneNumber
         //default constructor
     }
 
-    public EnumContactSourceType getContactSource() {
+    public String getContactSource() {
         return contactSource;
     }
 
-    public void setContactSource(EnumContactSourceType contactSource) {
+    public void setContactSource(String contactSource) {
         this.contactSource = contactSource;
     }
 
@@ -73,11 +73,11 @@ public class PhoneNumber
         this.number = number;
     }
 
-    public EnumPhoneNumberType getType() {
+    public String getType() {
         return type;
     }
 
-    public void setType(EnumPhoneNumberType type) {
+    public void setType(String type) {
         this.type = type;
     }
 
