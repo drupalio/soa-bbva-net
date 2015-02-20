@@ -18,8 +18,13 @@ public class TransaccionOznz implements InvocadorTransaccion<PeticionTransaccion
 	
 	@Autowired
 	private ServicioTransacciones servicioTransacciones;
-	
+
+	public void setServicioTransacciones(ServicioTransacciones servicioTransacciones) {
+		this.servicioTransacciones = servicioTransacciones;
+	}
+
 	@Override
+
 	public RespuestaTransaccionOznz invocar(PeticionTransaccionOznz transaccion) throws ExcepcionTransaccion {
 		return servicioTransacciones.invocar(PeticionTransaccionOznz.class, RespuestaTransaccionOznz.class, transaccion);
 	}
