@@ -181,7 +181,7 @@ public class TxProductMapperImpl extends AbstractBbvaTxConfigurableMapper implem
 		return map(formatOutput,DTOIntExtractOutput.class);
 	}
 	
-	public static class ExtractListMapperIn extends CustomMapper<FormatoOZECN2E0,DTOIntFilterExtract>{
+	public class ExtractListMapperIn extends CustomMapper<FormatoOZECN2E0,DTOIntFilterExtract>{
 		
 		@Override
 		public void mapBtoA(DTOIntFilterExtract b, FormatoOZECN2E0 a,MappingContext context) {
@@ -258,7 +258,7 @@ public class TxProductMapperImpl extends AbstractBbvaTxConfigurableMapper implem
 		}
 	}
 	
-	public static class ExtractListMapperOut extends CustomMapper<DTOIntExtractOutput,FormatoOZECN2S0> {
+	public class ExtractListMapperOut extends CustomMapper<DTOIntExtractOutput,FormatoOZECN2S0> {
 		
 		@Override
 		public void mapBtoA(FormatoOZECN2S0 b, DTOIntExtractOutput a,MappingContext context) {
