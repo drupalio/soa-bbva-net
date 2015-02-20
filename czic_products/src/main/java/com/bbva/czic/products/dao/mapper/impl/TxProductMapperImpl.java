@@ -213,41 +213,46 @@ public class TxProductMapperImpl extends AbstractBbvaTxConfigurableMapper implem
 		}
 		
 		private FormatoOZECN2E0 processPlot(FormatoOZECN2E0 formato,String parser) {
-			for (int i = 0; i < parser.length(); i++) {
+			int longitud=parser.length();
+			int plotLength=PLOT_LENGTH;
+			for (int i = 0; i < longitud; i++) {
+				if(plotLength>parser.length()){
+					plotLength=parser.length();
+				}
 				switch (i) {
 				case 0:
-					formato.setSubtrm0(parser.substring(0, PLOT_LENGTH));
+					formato.setSubtrm0(parser.substring(0, plotLength));
 					break;
 				case 100:
-					formato.setSubtrm1(parser.substring(0, PLOT_LENGTH));
+					formato.setSubtrm1(parser.substring(0, plotLength));
 					break;
 				case 200:
-					formato.setSubtrm2(parser.substring(0, PLOT_LENGTH));
+					formato.setSubtrm2(parser.substring(0, plotLength));
 					break;
 				case 300:
-					formato.setSubtrm3(parser.substring(0, PLOT_LENGTH));
+					formato.setSubtrm3(parser.substring(0, plotLength));
 					break;
 				case 400:
-					formato.setSubtrm4(parser.substring(0, PLOT_LENGTH));
+					formato.setSubtrm4(parser.substring(0, plotLength));
 					break;
 				case 500:
-					formato.setSubtrm5(parser.substring(0, PLOT_LENGTH));
+					formato.setSubtrm5(parser.substring(0, plotLength));
 					break;
 				case 600:
-					formato.setSubtrm6(parser.substring(0, PLOT_LENGTH));
+					formato.setSubtrm6(parser.substring(0, plotLength));
 					break;
 				case 700:
-					formato.setSubtrm7(parser.substring(0, PLOT_LENGTH));
+					formato.setSubtrm7(parser.substring(0, plotLength));
 					break;
 				case 800:
-					formato.setSubtrm8(parser.substring(0, PLOT_LENGTH));
+					formato.setSubtrm8(parser.substring(0, plotLength));
 					break;
 				case 900:
-					formato.setSubtrm9(parser.substring(0, PLOT_LENGTH));
+					formato.setSubtrm9(parser.substring(0, plotLength));
 					break;
 				}
-				parser = parser.substring(PLOT_LENGTH);
-				i += PLOT_LENGTH;
+				parser = parser.substring(plotLength);
+				i += plotLength;
 			}
 			return formato;
 		}
