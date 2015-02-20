@@ -21,7 +21,7 @@ public class TxAddChannel  extends SimpleBbvaTransaction<DTOIntAddChannel, Forma
     @Resource(name = "txCustomerMapper")
     private ITxCustomerMapper iTxCustomerMapper;
 
-    @Resource(name="transaccionOznb")
+    @Resource(name="transaccionOznw")
     private transient InvocadorTransaccion<PeticionTransaccionOznw, RespuestaTransaccionOznw> transaccionOznw;
 
     @Override
