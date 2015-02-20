@@ -25,14 +25,20 @@ import com.bbva.czic.routine.commons.rm.utils.mappers.Mapper;
 import com.bbva.czic.routine.mapper.CustomMapper;
 import com.bbva.czic.routine.mapper.MapperFactory;
 import com.bbva.czic.routine.mapper.MappingContext;
+import com.bbva.jee.arq.spring.core.log.I18nLog;
+import com.bbva.jee.arq.spring.core.log.I18nLogFactory;
 
 
 @Mapper(value = "txProductMapper")
 public class TxProductMapperImpl extends AbstractBbvaTxConfigurableMapper implements TxProductsMapper{
 
+	private static I18nLog log = I18nLogFactory
+			.getLogI18n(TxProductMapperImpl.class, "META-INF/spring/i18n/log/mensajesLog");
+	
 	@Override
 	protected void configure(MapperFactory factory) {
 		super.configure(factory);
+		log.info(" Gettin'into TxProductMapperImpl:configure ");
 		
 		/**
 		 * MAPEO DE ENTRADAS
@@ -118,6 +124,8 @@ public class TxProductMapperImpl extends AbstractBbvaTxConfigurableMapper implem
 		// Map FormatoOZECN2S0 <-> DTOIntExtractOutput (OZN2)
 		factory.classMap(DTOIntExtractOutput.class,FormatoOZECN2S0.class)
 				.customize(new ExtractListMapperOut()).register();
+		
+		log.info(" Exittin'into TxProductMapperImpl:configure ");
 	}
 
 	@Override
@@ -173,11 +181,13 @@ public class TxProductMapperImpl extends AbstractBbvaTxConfigurableMapper implem
 
 	@Override
 	public FormatoOZECN2E0 mapInOzn2(DTOIntFilterExtract dtoIn) {
+		log.info("Gettin' into mapInOzn2: "+dtoIn.toString());
 		return map(dtoIn,FormatoOZECN2E0.class);
 	}
 
 	@Override
 	public DTOIntExtractOutput mapOutOzn2(FormatoOZECN2S0 formatOutput) {
+		log.info("Gettin' into mapOutOzn2: "+formatOutput.getSaltr01()+formatOutput.getSaltr02()+formatOutput.getSaltr03()+formatOutput.getSaltr04());
 		return map(formatOutput,DTOIntExtractOutput.class);
 	}
 	
@@ -185,14 +195,17 @@ public class TxProductMapperImpl extends AbstractBbvaTxConfigurableMapper implem
 		
 		@Override
 		public void mapBtoA(DTOIntFilterExtract b, FormatoOZECN2E0 a,MappingContext context) {
+			log.info("Gettin' into ExtractListMapperIn.mapBtoA: DTO="+b.toString());
 			if(b.getExtractId()==null){
 				a=mapInOzn2ListExtracts(b);
 			}else{
 				a=mapInOzn2getExtracts(b);
 			}
+			log.info("Gettin' out ExtractListMapperIn.mapBtoA: trama="+a.getSubtrm0()+a.getSubtrm1()+a.getSubtrm2()+a.getSubtrm3());
 		}
 		
 		private FormatoOZECN2E0 mapInOzn2getExtracts(DTOIntFilterExtract dtoIn) {
+			log.info("Gettin' into ExtractListMapperIn.mapInOzn2getExtracts: DTO="+dtoIn.toString());
 			FormatoOZECN2E0 formato = new FormatoOZECN2E0();
 			String parser = headGenerate
 					+ REQUEST_EXTRACT.replace("$",""
@@ -202,19 +215,33 @@ public class TxProductMapperImpl extends AbstractBbvaTxConfigurableMapper implem
 						+ EXTERNAL_CODE.replace("$",dtoIn.getExtractId())) 
 					+ tailGenerate;
 			formato.setLongtra(parser.length());
+			log.info("Gettin' out ExtractListMapperIn.mapInOzn2getExtracts: trama="+parser);
 			return processPlot(formato, parser);
 		}
 
 		private FormatoOZECN2E0 mapInOzn2ListExtracts(DTOIntFilterExtract dtoIn) {
+			log.info("Gettin' into ExtractListMapperIn.mapInOzn2ListExtracts: DTO="+dtoIn.toString());
 			FormatoOZECN2E0 formato = new FormatoOZECN2E0();
 			String parser = headGet + dtoIn.getProductId() + tailGet;
 			formato.setLongtra(parser.length());
+			log.info("Gettin' out ExtractListMapperIn.mapInOzn2ListExtracts: trama="+parser);
 			return processPlot(formato,parser);
 		}
 		
 		private FormatoOZECN2E0 processPlot(FormatoOZECN2E0 formato,String parser) {
+			log.info("Gettin' into ExtractListMapperIn.processPlot: DTO="+parser.toString());
 			int longitud=parser.length();
 			int plotLength=PLOT_LENGTH;
+			formato.setSubtrm0("");
+			formato.setSubtrm1("");
+			formato.setSubtrm2("");
+			formato.setSubtrm3("");
+			formato.setSubtrm4("");
+			formato.setSubtrm5("");
+			formato.setSubtrm6("");
+			formato.setSubtrm7("");
+			formato.setSubtrm8("");
+			formato.setSubtrm9("");
 			for (int i = 0; i < longitud; i++) {
 				if(plotLength>parser.length()){
 					plotLength=parser.length();
@@ -254,6 +281,7 @@ public class TxProductMapperImpl extends AbstractBbvaTxConfigurableMapper implem
 				parser = parser.substring(plotLength);
 				i += plotLength;
 			}
+			log.info("Gettin' out ExtractListMapperIn.processPlot: trama="+formato.getSubtrm0()+formato.getSubtrm1()+formato.getSubtrm2()+formato.getSubtrm3());
 			return formato;
 		}
 	}
