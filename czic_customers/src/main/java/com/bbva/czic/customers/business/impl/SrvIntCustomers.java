@@ -72,7 +72,7 @@ public class SrvIntCustomers implements ISrvIntCustomers {
 		// 2. Get response
 		final List<DTOIntCardCharge> intCardCharges = customersDao.listCreditCardCharges(cardChargeFilter);
 
-		// 3. Validate output
+		// 3. Validate ooutput
 		DtoValidator.validate(intCardCharges);
 
 		return intCardCharges;
