@@ -10,6 +10,14 @@ public class DTOIntFilterExtract {
 	private String month;
 	private String year;
 	
+	
+	
+	@Override
+	public String toString() {
+		return "DTOIntFilterExtract [productId=" + productId + ", extractId="
+				+ extractId + ", month=" + month + ", year=" + year + "]";
+	}
+	
 	public String getProductId() {
 		return productId;
 	}
