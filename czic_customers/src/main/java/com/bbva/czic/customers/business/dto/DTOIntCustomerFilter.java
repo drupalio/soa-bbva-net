@@ -1,20 +1,41 @@
 package com.bbva.czic.customers.business.dto;
 
-import javax.validation.constraints.Pattern;
+import javax.validation.constraints.NotNull;
+
+import org.hibernate.validator.constraints.NotEmpty;
+
+
+
 
 /**
  * @author Entelgy Colombia.
  */
 public class DTOIntCustomerFilter {
 
-    @Pattern(regexp = "[0-9]{8}")
-    private String id;
+	@NotNull
+	private DTOIntDocument document;
+	@NotEmpty
+    private String username;
+    @NotEmpty
+    private String concat;
+    
+	public String getConcat() {
+		return concat;
+	}
+	public void setConcat(String concat) {
+		this.concat = concat;
+	}
+	public DTOIntDocument getDocument() {
+		return document;
+	}
+	public void setDocument(DTOIntDocument document) {
+		this.document = document;
+	}
+	public String getUsername() {
+		return username;
+	}
+	public void setUsername(String username) {
+		this.username = username;
+	}
 
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
 }

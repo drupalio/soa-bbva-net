@@ -152,7 +152,37 @@ sarc generatePackage
 sarc generatePackage
 exit
 // ServicesArchitecture log closed at 2015-01-27 11:03:23
-// ServicesArchitecture log opened at 2015-02-10 16:49:00
+<<<<<<< HEAD
+// ServicesArchitecture log opened at 2015-02-14 15:14:44
+exit
+// ServicesArchitecture log closed at 2015-02-14 15:15:16
+=======
+// ServicesArchitecture log opened at 2015-02-14 14:52:13
 sarc generatePackage
 exit
-// ServicesArchitecture log closed at 2015-02-10 17:01:37
+// ServicesArchitecture log closed at 2015-02-14 15:16:06
+>>>>>>> 4abb8ffd88801cbc6e4a379e4626a1a814fe04b5
+// ServicesArchitecture log opened at 2015-02-14 16:31:32
+sarc generatePackage
+exit
+// ServicesArchitecture log closed at 2015-02-14 16:41:05
+// ServicesArchitecture log opened at 2015-02-14 18:06:40
+sarc generatePackage
+exit
+// ServicesArchitecture log closed at 2015-02-14 18:20:25
+// ServicesArchitecture log opened at 2015-02-17 16:05:45
+exit
+// ServicesArchitecture log closed at 2015-02-17 16:05:54
+// ServicesArchitecture log opened at 2015-02-18 19:27:35
+sarc generatePackage
+// ServicesArchitecture log opened at 2015-02-19 12:27:30
+// ServicesArchitecture log opened at 2015-02-20 07:38:51
+sarc generatePackage
+// ServicesArchitecture log opened at 2015-02-20 14:23:42
+sarc generatePackage
+exit
+// ServicesArchitecture log closed at 2015-02-20 14:26:09
+// ServicesArchitecture log opened at 2015-02-20 15:52:51
+sarc generatePackage
+// ServicesArchitecture log opened at 2015-02-20 16:47:53
+sarc generatePackage

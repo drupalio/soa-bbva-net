@@ -38,10 +38,4 @@ public class FormatoOZNCENM0 {
 	@Campo(indice = 3, nombre = "NUMMOV", tipo = TipoCampo.ALFANUMERICO, longitudMinima = 9, longitudMaxima = 9)
 	private String nummov;
 	
-	/**
-	 * <p>Campo <code>NUMCLI</code>, &iacute;ndice: <code>4</code>, tipo: <code>ALFANUMERICO</code>
-	 */
-	@Campo(indice = 4, nombre = "NUMCLI", tipo = TipoCampo.ALFANUMERICO, longitudMinima = 8, longitudMaxima = 8)
-	private String numcli;
-	
 }

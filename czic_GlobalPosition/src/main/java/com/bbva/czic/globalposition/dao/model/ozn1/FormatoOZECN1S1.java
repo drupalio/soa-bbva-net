@@ -35,13 +35,13 @@ public class FormatoOZECN1S1 {
 	/**
 	 * <p>Campo <code>SALTOTA</code>, &iacute;ndice: <code>3</code>, tipo: <code>ALFANUMERICO</code>
 	 */
-	@Campo(indice = 3, nombre = "SALTOTA", tipo = TipoCampo.ALFANUMERICO, longitudMinima = 19, longitudMaxima = 19)
+	@Campo(indice = 3, nombre = "SALTOTA", tipo = TipoCampo.ALFANUMERICO, longitudMinima = 18, longitudMaxima = 18)
 	private String saltota;
 	
 	/**
 	 * <p>Campo <code>SALDISP</code>, &iacute;ndice: <code>4</code>, tipo: <code>ALFANUMERICO</code>
 	 */
-	@Campo(indice = 4, nombre = "SALDISP", tipo = TipoCampo.ALFANUMERICO, longitudMinima = 19, longitudMaxima = 19)
+	@Campo(indice = 4, nombre = "SALDISP", tipo = TipoCampo.ALFANUMERICO, longitudMinima = 18, longitudMaxima = 18)
 	private String saldisp;
 	
 	/**

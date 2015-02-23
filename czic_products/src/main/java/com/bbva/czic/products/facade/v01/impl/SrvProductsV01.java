@@ -112,21 +112,16 @@ public class SrvProductsV01 implements ISrvProductsV01,
 			@ApiResponse(code = 200, message = "Found Sucessfully", response = Response.class),
 			@ApiResponse(code = 500, message = "Technical Error") })
 	@GET
-	@Path("/{productId}/extracts/{extractId}")
+	@Path("/{productId}/extracts")
 	@SMC(registryID = "SMCCO1500011", logicalID = "listExtracts")
 	public List<Extract> listExtracts(
 			@ApiParam(value = "identifier param") @PathParam("productId") String productId,
-			@ApiParam(value = "identifier param") @PathParam("extractId") String extractId,
 			@ApiParam(value = "filter param") @QueryParam("$filter") String filter) {
 
-		// 1. Validate filter
-		new FiqlValidator(filter).exist().hasGeAndLe("month")
-				.hasGeAndLe("year").validate();
-
-		// 2. Mapping filter -> DTO
+		// 1. Mapping filter -> DTO
 		DTOIntFilterExtract dtoIntFilterExtract = productsMapper
-				.getDtoIntFilterExtract(productId,extractId, filter);
-		// 3. Invoke SrvIntCustomers and Mapping to canonical DTO
+				.getDtoIntFilterExtract(productId, filter);
+		// 2. Invoke SrvIntCustomers and Mapping to canonical DTO
 		return productsMapper.mapExtracts(srvIntProducts
 				.listExtracts(dtoIntFilterExtract));
 	}
@@ -147,28 +142,25 @@ public class SrvProductsV01 implements ISrvProductsV01,
 	@Produces({MediaType.APPLICATION_JSON})
 	@ElementClass(response = AccMoveDetail.class)
 	@SMC(registryID="SMCCO1500001",logicalID="getMovement")
-	public Movement getMovement(@ApiParam(value = "identifier param") @PathParam("productId") String productId,
+	public AccMoveDetail getMovement(@ApiParam(value = "identifier param") @PathParam("productId") String productId,
 								@ApiParam(value = "filter param") @PathParam("movementId") String movementId,
 								@ApiParam(value = "filter param") @DefaultValue("null") @QueryParam("$filter") String filter) {
 
 		// 1. Validate parameter
-		if (movementId == null || movementId.trim().isEmpty()||productId == null || productId.trim().isEmpty()) {
+		if (movementId == null || movementId.trim().isEmpty()) {
 			throw new BusinessServiceException(
 					EnumError.WRONG_PARAMETERS.getAlias());
 		}
 
 		// 2. Validate filter
-		new FiqlValidator(filter).exist().hasEq("customerId")
+		new FiqlValidator(filter).exist()
 				.hasEq("productType").validate();
 
 		// Mapeo del filtro a DTO
 		DTOIntFilterMovements dtoIntFilterMovements = productsMapper.getDTOIntFilterGetMovement(productId,movementId,filter);
 
 		// 3. Invoke SrvIntCustomers and Mapping to canonical DTO
-		Movement move = new Movement();
-		move = productsMapper.mapMovement(srvIntProducts
-				.getMovement(dtoIntFilterMovements));
-		return move ;
+		return productsMapper.mapMovement(srvIntProducts.getMovement(dtoIntFilterMovements)) ;
 
 	}
 
@@ -191,14 +183,8 @@ public class SrvProductsV01 implements ISrvProductsV01,
 										@ApiParam(value = "pagination key") @DefaultValue("null") @QueryParam("paginationKey") Integer paginationKey,
 										@ApiParam(value = "pagination size") @DefaultValue("null") @QueryParam("pageSize") Integer pageSize) {
 
-		// 1. Validate parameter
-		if (productId == null || productId.trim().isEmpty()) {
-			throw new BusinessServiceException(
-					EnumError.WRONG_PARAMETERS.getAlias());
-		}
-
-		// 2. Validate filter
-		new FiqlValidator(filter).hasEq("customerId").hasEq("productType").hasGeAndLe("transactionDate")
+		// 1. Validate filter
+		new FiqlValidator(filter).hasEq("productType").hasGeAndLe("transactionDate")
 				.hasGeOrLe("value").validateAny();
 
 		// Mapeo del filtro a DTO

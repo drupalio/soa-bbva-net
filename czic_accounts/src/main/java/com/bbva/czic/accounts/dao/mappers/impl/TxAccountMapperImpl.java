@@ -21,6 +21,7 @@ import com.bbva.czic.accounts.dao.model.oznv.FormatoOZECNVE0;
 import com.bbva.czic.accounts.dao.model.oznv.FormatoOZECNVS0;
 import com.bbva.czic.accounts.dao.model.ozny.FormatoOZECNYE0;
 import com.bbva.czic.accounts.dao.model.ozny.FormatoOZECNYS0;
+import com.bbva.czic.dto.net.EnumMonth;
 import com.bbva.czic.routine.commons.rm.utils.converter.StringMoneyConverter;
 import com.bbva.czic.routine.commons.rm.utils.mappers.AbstractBbvaTxConfigurableMapper;
 import com.bbva.czic.routine.commons.rm.utils.mappers.Mapper;
@@ -100,9 +101,13 @@ public class TxAccountMapperImpl extends AbstractBbvaTxConfigurableMapper implem
 		 * MAPEO DE SALIDAS
 		 */
 		// Map FormatoOZECNVS0 <-> DTOIntMonthlyBalances (OZNy)
-		factory.classMap(FormatoOZECNYS0.class, DTOIntCheck.class).field("numcheq", "id").field("fechemi", "issueDate")
-				.field("valcheq", "value.amount").field("estcheq", "status")
-				.field("fechmod", "modifiedDate").byDefault().register();
+		factory.classMap(FormatoOZECNYS0.class, DTOIntCheck.class)
+				.field("numcheq", "id")
+				.field("fechemi", "issueDate")
+				.field("valcheq", "value.amount")
+				.field("estcheq", "status")
+				.field("fecmodi", "modifiedDate")
+				.byDefault().register();
 
 	}
 
@@ -133,7 +138,9 @@ public class TxAccountMapperImpl extends AbstractBbvaTxConfigurableMapper implem
 
 	@Override
 	public DTOIntAccMovementsResume mapOutOznu(FormatoOZECNUS0 formatOutput) {
-		return map(formatOutput, DTOIntAccMovementsResume.class);
+		DTOIntAccMovementsResume resume = map(formatOutput, DTOIntAccMovementsResume.class);
+		resume.setMonth(EnumMonth.getByCode(resume.getMonth().substring(0,2)).name());
+		return resume;
 	}
 	
 	@Override

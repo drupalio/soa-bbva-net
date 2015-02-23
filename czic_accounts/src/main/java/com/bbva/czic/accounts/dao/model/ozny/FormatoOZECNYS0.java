@@ -1,6 +1,5 @@
 package com.bbva.czic.accounts.dao.model.ozny;
 
-import java.math.BigDecimal;
 import java.util.Date;
 
 import com.bbva.jee.arq.spring.core.host.Campo;
@@ -36,10 +35,10 @@ public class FormatoOZECNYS0 {
 	private Date fechemi;
 	
 	/**
-	 * <p>Campo <code>VALCHEQ</code>, &iacute;ndice: <code>3</code>, tipo: <code>DECIMAL</code>
+	 * <p>Campo <code>VALCHEQ</code>, &iacute;ndice: <code>3</code>, tipo: <code>ALFANUMERICO</code>
 	 */
-	@Campo(indice = 3, nombre = "VALCHEQ", tipo = TipoCampo.DECIMAL, longitudMinima = 17, longitudMaxima = 17, signo = true, decimales = 2)
-	private BigDecimal valcheq;
+	@Campo(indice = 3, nombre = "VALCHEQ", tipo = TipoCampo.ALFANUMERICO, longitudMinima = 18, longitudMaxima = 18)
+	private String valcheq;
 	
 	/**
 	 * <p>Campo <code>ESTCHEQ</code>, &iacute;ndice: <code>4</code>, tipo: <code>ALFANUMERICO</code>
@@ -48,9 +47,9 @@ public class FormatoOZECNYS0 {
 	private String estcheq;
 	
 	/**
-	 * <p>Campo <code>FECHMOD</code>, &iacute;ndice: <code>5</code>, tipo: <code>FECHA</code>
+	 * <p>Campo <code>FECMODI</code>, &iacute;ndice: <code>5</code>, tipo: <code>FECHA</code>
 	 */
-	@Campo(indice = 5, nombre = "FECHMOD", tipo = TipoCampo.FECHA, longitudMinima = 10, longitudMaxima = 10, formato = "yyyy-MM-dd")
-	private Date fechmod;
+	@Campo(indice = 5, nombre = "FECMODI", tipo = TipoCampo.FECHA, longitudMinima = 10, longitudMaxima = 10, formato = "yyyy-MM-dd")
+	private Date fecmodi;
 	
 }

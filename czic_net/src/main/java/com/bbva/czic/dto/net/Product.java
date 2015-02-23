@@ -1,6 +1,7 @@
 package com.bbva.czic.dto.net;
 
 import com.wordnik.swagger.annotations.ApiModelProperty;
+import org.hibernate.validator.constraints.Length;
 
 import javax.validation.constraints.Pattern;
 import javax.xml.bind.annotation.XmlAccessType;
@@ -23,7 +24,8 @@ public class Product implements Serializable {
 	private String id;
 
 	@ApiModelProperty(value = "", required = true)
-	@Pattern(regexp = "^[A-Z]{2}$")
+//	@Pattern(regexp = "^[A-Z]{2}$")
+	@Length(max = 2)
 	private String type;
 
 	@ApiModelProperty(value = "Nombre del producto", required = true)

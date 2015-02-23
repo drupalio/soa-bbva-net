@@ -6,7 +6,6 @@ import com.bbva.czic.customers.business.dto.*;
 import com.bbva.czic.customers.business.dto.DTOIntCustomerFilter;
 
 public interface ISrvIntCustomers {
- 	
 
 	List<DTOIntAccMovementsResume> getListAccountsMovementsResume(DTOIntAccMovementsResumesFilter accMovementResumeFilter);
 

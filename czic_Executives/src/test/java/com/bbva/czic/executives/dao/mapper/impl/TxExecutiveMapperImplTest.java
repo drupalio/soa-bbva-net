@@ -34,12 +34,9 @@ public class TxExecutiveMapperImplTest {
 
         DTOIntExecutivesFilter dtoIntExecutivesFilter = new DTOIntExecutivesFilter();
         dtoIntExecutivesFilter.setType("A");
-        dtoIntExecutivesFilter.setId("0100230404");
 
         FormatoOZECNRE0 formato = new FormatoOZECNRE0();
         formato = txExecutiveMapperImpl.mapInOznr(dtoIntExecutivesFilter);
-
-        assertEquals(dtoIntExecutivesFilter.getId(),formato.getIdusuar());
     }
 
     @Test

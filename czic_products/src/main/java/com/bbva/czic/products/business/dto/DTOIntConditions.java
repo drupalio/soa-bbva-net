@@ -1,6 +1,8 @@
 
 package com.bbva.czic.products.business.dto;
 
+import com.bbva.czic.dto.net.Activity;
+
 import java.util.Date;
 
 
@@ -8,6 +10,7 @@ import java.util.Date;
 public class DTOIntConditions {
 
     public final static long serialVersionUID = 1L;
+    private String type;
     private String alias;
     private String category;
     private String description;
@@ -15,6 +18,7 @@ public class DTOIntConditions {
     private String commission;
     private DTOIntOffice office;
     private String mobilizationConditions;
+    private Activity activity;
 
     public DTOIntConditions() {
         //default constructor
@@ -76,4 +80,19 @@ public class DTOIntConditions {
         this.mobilizationConditions = mobilizationConditions;
     }
 
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public Activity getActivity() {
+        return activity;
+    }
+
+    public void setActivity(Activity activity) {
+        this.activity = activity;
+    }
 }

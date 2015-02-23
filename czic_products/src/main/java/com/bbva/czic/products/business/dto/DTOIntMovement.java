@@ -23,9 +23,10 @@ public class DTOIntMovement {
     @NotNull
     private DTOIntOperation operation;
     private DTOIntOffice office;
-    private DTOIntEnumAccountState status;
+    private String status;
     private String productId;
-    private DTOIntEnumProductType productType;
+    private String productType;
+    private Money originValue;
 
     public DTOIntMovement() {
         //default constructor
@@ -95,11 +96,11 @@ public class DTOIntMovement {
         this.office = office;
     }
 
-    public DTOIntEnumAccountState getStatus() {
+    public String getStatus() {
         return status;
     }
 
-    public void setStatus(DTOIntEnumAccountState status) {
+    public void setStatus(String status) {
         this.status = status;
     }
 
@@ -111,12 +112,21 @@ public class DTOIntMovement {
         this.productId = productId;
     }
 
-    public DTOIntEnumProductType getProductType() {
+    public String getProductType() {
         return productType;
     }
 
-    public void setProductType(DTOIntEnumProductType productType) {
+    public void setProductType(String productType) {
         this.productType = productType;
     }
+
+	public Money getOriginValue() {
+		return originValue;
+	}
+
+	public void setOriginValue(Money originValue) {
+		this.originValue = originValue;
+	}
+    
 
 }

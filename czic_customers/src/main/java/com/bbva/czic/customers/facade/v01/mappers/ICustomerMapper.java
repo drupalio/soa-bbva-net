@@ -13,17 +13,17 @@ import java.util.List;
  * @author Entelgy Colombia.
  */
 public interface ICustomerMapper {
-    DTOIntAccMovementsResumesFilter getDTOIntMovementResumesFilter(String customerId, String filter);
+    DTOIntAccMovementsResumesFilter getDTOIntMovementResumesFilter(String filter);
 
     List<AccMovementsResume> mapAccMovementsResume(List<DTOIntAccMovementsResume> accMovementsResumes);
 
     List<CardCharge> mapCardCharges(List<DTOIntCardCharge> intCardCharges);
 
-    DTOIntCardChargeFilter getCreditCardChargesFilter(String customerId, String filter);
+    DTOIntCardChargeFilter getCreditCardChargesFilter(String filter);
 
     DTOIntCustomerOperation map(CustomerOperation operation);
 
     Customer mapCustomer(DTOIntCustomer intCustomer);
 
-    DTOIntCustomerFilter mapDTOIntCustomerFilter(String customerId);
+    DTOIntCustomerFilter mapDTOIntCustomerFilter(String filter);
 }

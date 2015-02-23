@@ -72,7 +72,7 @@ public class SrvIntCustomers implements ISrvIntCustomers {
 		// 2. Get response
 		final List<DTOIntCardCharge> intCardCharges = customersDao.listCreditCardCharges(cardChargeFilter);
 
-		// 3. Validate output
+		// 3. Validate ooutput
 		DtoValidator.validate(intCardCharges);
 
 		return intCardCharges;
@@ -98,9 +98,13 @@ public class SrvIntCustomers implements ISrvIntCustomers {
 		DtoValidator.validate(dtoIntCustomer);
 		log.info("SrvInt: gettingIntoMapper: " + dtoIntCustomer);
 		return dtoIntCustomer;
-
 	}
 
+	/**
+	 *
+	 * @param dtoIntAddChannel
+	 */
+	@Override
 	public void addChannel(final DTOIntAddChannel dtoIntAddChannel){
 
 		DtoValidator.validate(dtoIntAddChannel);
@@ -116,8 +120,9 @@ public class SrvIntCustomers implements ISrvIntCustomers {
 
 	@Override
 	public void verifyCustomer(DTOIntCustomerOperation customerOperation) {
-
 		DtoValidator.validate(customerOperation);
-		
+
+		customersDao.verifyCustomer(customerOperation);
+		log.info("SrvInt: verifiedCustomer");
 	}
 }

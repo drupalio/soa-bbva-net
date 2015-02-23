@@ -21,6 +21,7 @@ import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -82,7 +83,8 @@ public class SrvIntLoanTest extends SpringContextBbvaTest {
 		dtoIntMovement.setBalance(new Money());
 		dtoIntMovement.setValue(new Money());
 		dtoIntMovement.setOperation(new Operation());
-		dtoIntMovement.setTransactionDate("2013-05-12");
+		Calendar calendar = Calendar.getInstance();
+		dtoIntMovement.setTransactionDate(calendar);
 
 		dtoIntMovementList.add(dtoIntMovement);
 

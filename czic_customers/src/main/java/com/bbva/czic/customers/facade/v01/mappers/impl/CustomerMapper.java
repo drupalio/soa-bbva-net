@@ -1,20 +1,33 @@
 package com.bbva.czic.customers.facade.v01.mappers.impl;
 
-import com.bbva.czic.customers.business.dto.*;
-import com.bbva.czic.customers.dao.converters.CardChargeCategoryConverter;
+import java.util.ArrayList;
+import java.util.List;
+
+import org.springframework.stereotype.Component;
+
+import com.bbva.czic.customers.business.dto.DTOIntAccMovementsResume;
+import com.bbva.czic.customers.business.dto.DTOIntAccMovementsResumesFilter;
+import com.bbva.czic.customers.business.dto.DTOIntCardCharge;
+import com.bbva.czic.customers.business.dto.DTOIntCardChargeFilter;
+import com.bbva.czic.customers.business.dto.DTOIntCustomer;
 import com.bbva.czic.customers.business.dto.DTOIntCustomerFilter;
+import com.bbva.czic.customers.business.dto.DTOIntCustomerOperation;
+import com.bbva.czic.customers.business.dto.DTOIntDocument;
+import com.bbva.czic.customers.dao.converters.CardChargeCategoryConverter;
 import com.bbva.czic.customers.facade.v01.mappers.ICustomerMapper;
 import com.bbva.czic.dto.net.AccMovementsResume;
 import com.bbva.czic.dto.net.CardCharge;
+import com.bbva.czic.dto.net.ContactInfo;
 import com.bbva.czic.dto.net.Customer;
 import com.bbva.czic.dto.net.CustomerOperation;
+import com.bbva.czic.dto.net.Document;
+import com.bbva.czic.dto.net.Email;
+import com.bbva.czic.dto.net.EnumDocumentType;
+import com.bbva.czic.dto.net.PhoneNumber;
 import com.bbva.czic.routine.commons.rm.utils.converter.EmailStringConverter;
 import com.bbva.czic.routine.commons.rm.utils.fiql.FiqlType;
 import com.bbva.czic.routine.commons.rm.utils.mappers.AbstractBbvaConfigurableMapper;
 import com.bbva.czic.routine.mapper.MapperFactory;
-import org.springframework.stereotype.Component;
-
-import java.util.List;
 
 /**
  * @author Entelgy Colombia.
@@ -55,12 +68,12 @@ public class CustomerMapper extends AbstractBbvaConfigurableMapper implements IC
                 .byDefault().register();
 
         factory.classMap(Customer.class, DTOIntCustomer.class)
-
+        		.field("contactInfo","emails")
                 .byDefault().register();
     }
 
     @Override
-    public DTOIntAccMovementsResumesFilter getDTOIntMovementResumesFilter(final String customerId, final String filter) {
+    public DTOIntAccMovementsResumesFilter getDTOIntMovementResumesFilter(final String filter) {
         final String startDate = this.getGeValue(filter, FiqlType.month.name());
         final String endDate = this.getLeValue(filter, FiqlType.month.name());
 
@@ -68,8 +81,6 @@ public class CustomerMapper extends AbstractBbvaConfigurableMapper implements IC
 
         intFilterCustomerResumes.setStartDate(startDate);
         intFilterCustomerResumes.setEndDate(endDate);
-
-        intFilterCustomerResumes.setCustomerId(customerId);
 
         return intFilterCustomerResumes;
     }
@@ -85,13 +96,12 @@ public class CustomerMapper extends AbstractBbvaConfigurableMapper implements IC
     }
 
     @Override
-    public DTOIntCardChargeFilter getCreditCardChargesFilter(final String customerId, final String filter) {
+    public DTOIntCardChargeFilter getCreditCardChargesFilter(final String filter) {
         final String startDate = this.getGeValue(filter, FiqlType.chargeDate.name());
         final String endDate = this.getLeValue(filter, FiqlType.chargeDate.name());
 
         final DTOIntCardChargeFilter cardChargeFilter = new DTOIntCardChargeFilter();
 
-        cardChargeFilter.setCustomerId(customerId);
         cardChargeFilter.setStartDate(startDate);
         cardChargeFilter.setEndDate(endDate);
 
@@ -100,19 +110,28 @@ public class CustomerMapper extends AbstractBbvaConfigurableMapper implements IC
 
     @Override
     public DTOIntCustomerOperation map(final CustomerOperation operation) {
-        return map(operation, DTOIntCustomerOperation.class);
+        DTOIntCustomerOperation dto = map(operation, DTOIntCustomerOperation.class);
+        dto.setDocumentType(operation.getCustomer().getDocument().getType().getCode());
+        return dto;
     }
 
     @Override
     public Customer mapCustomer(final DTOIntCustomer intCustomer) {
-        return map(intCustomer, Customer.class);
+    	Customer c = map(intCustomer, Customer.class);
+        return c;
     }
 
     @Override
-    public DTOIntCustomerFilter mapDTOIntCustomerFilter(final String customerId) {
-        final DTOIntCustomerFilter customerFilter = new DTOIntCustomerFilter();
-        customerFilter.setId(customerId);
-
+    public DTOIntCustomerFilter mapDTOIntCustomerFilter(final String filter) {
+        DTOIntCustomerFilter customerFilter = new DTOIntCustomerFilter();
+        final String idDocument = this.getEqValue(filter,"document");
+        final String username = this.getEqValue(filter,"username");
+        final String documentType = this.getEqValue(filter,"documentType");
+        customerFilter.setDocument(new DTOIntDocument());
+        customerFilter.getDocument().setNumber(idDocument);
+        customerFilter.getDocument().setType(documentType);
+        customerFilter.setUsername(username);
+        customerFilter.setConcat(customerFilter.getUsername()+customerFilter.getDocument().getType()+customerFilter.getDocument().getNumber());
         return customerFilter;
     }
 

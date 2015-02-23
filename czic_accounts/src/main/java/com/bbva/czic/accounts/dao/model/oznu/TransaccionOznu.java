@@ -30,7 +30,11 @@ public class TransaccionOznu implements InvocadorTransaccion<PeticionTransaccion
 	public RespuestaTransaccionOznu invocarCache(PeticionTransaccionOznu transaccion) throws ExcepcionTransaccion {
 		return servicioTransacciones.invocar(PeticionTransaccionOznu.class, RespuestaTransaccionOznu.class, transaccion);
 	}
-	
+
+	public void setServicioTransacciones(ServicioTransacciones servicioTransacciones) {
+		this.servicioTransacciones = servicioTransacciones;
+	}
+
 	@Override
 	public void vaciarCache() {}	
 }

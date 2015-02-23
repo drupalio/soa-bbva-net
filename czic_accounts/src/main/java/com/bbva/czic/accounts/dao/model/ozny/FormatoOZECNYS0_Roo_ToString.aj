@@ -11,7 +11,7 @@ privileged aspect FormatoOZECNYS0_Roo_ToString {
         StringBuilder sb = new StringBuilder();
         sb.append("Estcheq: ").append(getEstcheq()).append(", ");
         sb.append("Fechemi: ").append(getFechemi()).append(", ");
-        sb.append("Fechmod: ").append(getFechmod()).append(", ");
+        sb.append("Fecmodi: ").append(getFecmodi()).append(", ");
         sb.append("Numcheq: ").append(getNumcheq()).append(", ");
         sb.append("Valcheq: ").append(getValcheq());
         return sb.toString();

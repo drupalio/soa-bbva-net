@@ -1,5 +1,6 @@
 package com.bbva.czic.accounts.dao.mappers;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Currency;
 
@@ -29,7 +30,7 @@ public class ListCheckMapper
 
 		intCheck.setId(outFormat.getNumcheq());
 		intCheck.setIssueDate(outFormat.getFechemi());
-		intCheck.setValue(new Money(Currency.getInstance(CurrencyEnum.COP.toString()), outFormat.getValcheq()));
+		intCheck.setValue(new Money(Currency.getInstance(CurrencyEnum.COP.toString()),new BigDecimal(outFormat.getValcheq())));
 		intCheck.setStatus(outFormat.getEstcheq());
 		intCheck.setModifiedDate(outFormat.getFechmod());
 
@@ -55,7 +56,7 @@ public class ListCheckMapper
 		formatoOZECNYE0.setFechini(dtoIn.getStartDate());
 		formatoOZECNYE0.setFechfin(dtoIn.getEndDate());
 		formatoOZECNYE0.setEstcheq(dtoIn.getStatus().toString());
-		formatoOZECNYE0.setId(dtoIn.getId());
+		//formatoOZECNYE0.setId(dtoIn.getId());
 
 		return formatoOZECNYE0;
 	}

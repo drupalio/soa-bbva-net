@@ -1,7 +1,5 @@
 package com.bbva.czic.accounts.dao.model.oznv;
 
-import java.math.BigDecimal;
-
 import com.bbva.jee.arq.spring.core.host.Campo;
 import com.bbva.jee.arq.spring.core.host.TipoCampo;
 import com.bbva.jee.arq.spring.core.host.Formato;
@@ -23,10 +21,10 @@ import org.springframework.roo.addon.tostring.RooToString;
 public class FormatoOZECNVS0 {
 	
 	/**
-	 * <p>Campo <code>SALDDIS</code>, &iacute;ndice: <code>1</code>, tipo: <code>DECIMAL</code>
+	 * <p>Campo <code>SALDDIS</code>, &iacute;ndice: <code>1</code>, tipo: <code>ALFANUMERICO</code>
 	 */
-	@Campo(indice = 1, nombre = "SALDDIS", tipo = TipoCampo.DECIMAL, longitudMinima = 17, longitudMaxima = 17, decimales = 2)
-	private BigDecimal salddis;
+	@Campo(indice = 1, nombre = "SALDDIS", tipo = TipoCampo.ALFANUMERICO, longitudMinima = 18, longitudMaxima = 18)
+	private String salddis;
 	
 	/**
 	 * <p>Campo <code>MES</code>, &iacute;ndice: <code>2</code>, tipo: <code>ALFANUMERICO</code>

@@ -1,7 +1,6 @@
 package com.bbva.czic.products.facade.v01.impl;
 
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.anyList;
 import static org.mockito.Mockito.when;
@@ -17,12 +16,12 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
+import com.bbva.czic.dto.net.AccMoveDetail;
 import com.bbva.czic.dto.net.Conditions;
 import com.bbva.czic.dto.net.Extract;
 import com.bbva.czic.dto.net.Movement;
 import com.bbva.czic.dto.net.Office;
 import com.bbva.czic.products.business.ISrvIntProducts;
-import com.bbva.czic.products.business.dto.DTOIntActivity;
 import com.bbva.czic.products.business.dto.DTOIntConditions;
 import com.bbva.czic.products.business.dto.DTOIntExtract;
 import com.bbva.czic.products.business.dto.DTOIntFilterExtract;
@@ -101,28 +100,29 @@ public class SrvProductsV01Test extends SpringContextBbvaTest{
 
 //  ------------------ listExtracts ------------------
     
-	@Test(expected = BusinessServiceException.class)
+	@Test
 	public void testListExtractsSrvIntNoFilter() {
-		srv.listExtracts("00130693000100000010", "123456789", "");
+		List<Extract> extracts = srv.listExtracts("00130693000100000010", "");
+		assertEquals(0,extracts.size());
 	}
 	
 	@Test(expected = BusinessServiceException.class)
 	public void testListExtractsSrvIntBadDate() {
-		srv.listExtracts("00130693000100000010", "123456789","(month=le=01;year=ge=2015;year=le=2014)");
+		srv.listExtracts("00130693000100000010", "(extractId=123456789;month==01;year==2016)");
 	}
 
 	@Test(expected = BusinessServiceException.class)
 	public void testListExtractsSrvIntException() {
 		final BusinessServiceException bsn = getBsnExeptionByAlias(EnumError.NO_DATA.getAlias());
 		when(srvIntProducts.listExtracts(any(DTOIntFilterExtract.class))).thenThrow(bsn);
-		srv.listExtracts("00130693000100000010", "123456789","(month=ge=01;month=le=01;year=ge=2014;year=le=2014)");
+		srv.listExtracts("00130693000100000010","(extractId=123456789;month==01;year==2015)");
 	}
 
 	@Test(expected = BusinessServiceException.class)
 	public void testListExtractsMapperException() {
 		final BusinessServiceException bsn = getBsnExeptionByAlias(EnumError.NO_DATA.getAlias());
 		when(iProductsMapper.mapExtracts(anyList())).thenThrow(bsn);
-		srv.listExtracts("00130693000100000010", "123456789","(month=ge=01;month=le=01;year=ge=2014;year=le=2014)");
+		srv.listExtracts("00130693000100000010","(extractId=123456789;month==01;year==2015)");
 	}
 
   @Test
@@ -133,7 +133,7 @@ public class SrvProductsV01Test extends SpringContextBbvaTest{
       when(srvIntProducts.listExtracts(any(DTOIntFilterExtract.class))).thenReturn(dtoIntExtracts);
       when(iProductsMapper.mapExtracts(anyList())).thenReturn(extracts);
 
-      final List<Extract> result = srv.listExtracts("00130693000100000010", "123456789","(month=ge=01;month=le=01;year=ge=2014;year=le=2014)");
+      final List<Extract> result = srv.listExtracts("00130693000100000010","(extractId=123456789;month==01;year==2014)");
 
       assertNotNull(result);
   }
@@ -181,7 +181,7 @@ public class SrvProductsV01Test extends SpringContextBbvaTest{
 
     @Test
     public void testGetMovement(){
-        Movement movement = new Movement();
+        AccMoveDetail movement = new AccMoveDetail();
         movement.setId("00000122233");
 
         DTOIntMovement intMovement = new DTOIntMovement();

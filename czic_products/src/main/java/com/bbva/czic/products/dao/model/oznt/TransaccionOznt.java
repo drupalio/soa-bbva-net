@@ -1,12 +1,13 @@
 package com.bbva.czic.products.dao.model.oznt;
 
+import com.bbva.czic.routine.commons.rm.utils.tx.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Profile;
+import org.springframework.stereotype.Component;
 
-import com.bbva.czic.routine.commons.rm.utils.tx.Transaction;
 import com.bbva.jee.arq.spring.core.host.ExcepcionTransaccion;
-import com.bbva.jee.arq.spring.core.host.InvocadorTransaccion;
 import com.bbva.jee.arq.spring.core.host.ServicioTransacciones;
+import com.bbva.jee.arq.spring.core.host.InvocadorTransaccion;
 
 /**
  * Invocador de la transacci&oacute;n <code>OZNT</code>

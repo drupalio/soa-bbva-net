@@ -7,6 +7,7 @@ import com.bbva.czic.executives.business.dto.DTOIntExecutivesFilter;
 import com.bbva.czic.executives.dao.ExecutivesDAO;
 import com.bbva.czic.routine.commons.rm.utils.errors.EnumError;
 import com.bbva.czic.routine.commons.rm.utils.validator.DtoValidator;
+import com.bbva.czic.routine.commons.rm.utils.validator.impl.StringValidator;
 import com.bbva.jee.arq.spring.core.log.I18nLog;
 import com.bbva.jee.arq.spring.core.log.I18nLogFactory;
 import com.bbva.jee.arq.spring.core.servicing.gce.BusinessServiceException;

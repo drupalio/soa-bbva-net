@@ -49,4 +49,16 @@ public class StringValidator extends Validator {
 		}
 		return this;
 	}
+	
+	/**Valida que la string esté entre los valores 01 y 12 correspondientes a los meses
+	 * 
+	 * @param month
+	 * @return
+	 */
+	public StringValidator isNumericMonth(String month) {
+		if (StringUtils.isEmpty(month) || month.equals("null") || Integer.parseInt(month)<0 || Integer.parseInt(month)>12) {
+			exceptions.add(new BusinessServiceException(EnumError.WRONG_PARAMETERS.getAlias()));
+		}
+		return this;
+	}
 }

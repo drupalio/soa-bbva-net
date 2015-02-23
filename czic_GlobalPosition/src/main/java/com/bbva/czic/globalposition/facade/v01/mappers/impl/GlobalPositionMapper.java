@@ -75,15 +75,23 @@ public class GlobalPositionMapper extends AbstractBbvaConfigurableMapper impleme
 
     @Override
     public List<Product> map(final List<DTOIntProduct> intProducts) {
-        return mapAsList(intProducts, Product.class);
+        List<Product> products = mapAsList(intProducts, Product.class);
+        for(Product prod : products){
+            if(prod.getVisible() == null){
+                prod.setVisible(true);
+            }
+            if (prod.getOperable() == null){
+                prod.setOperable(true);
+            }
+        }
+        return products;
     }
 
     @Override
-    public DTOIntProductFilter getDTOIntFilter(final String customerId, final String filter) {
+    public DTOIntProductFilter getDTOIntFilter(final String filter) {
         final String productType = this.getEqValue(filter, FiqlType.productType.name());
 
         final DTOIntProductFilter intProductFilter = new DTOIntProductFilter();
-        intProductFilter.setIdCustomer(customerId);
         intProductFilter.setProductType(productType);
 
         return intProductFilter;

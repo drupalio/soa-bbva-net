@@ -7,12 +7,12 @@ import java.lang.String;
 
 privileged aspect FormatoOZNCENB0_Roo_JavaBean {
     
-    public String FormatoOZNCENB0.getNumclie() {
-        return this.numclie;
+    public String FormatoOZNCENB0.getClveacc() {
+        return this.clveacc;
     }
     
-    public void FormatoOZNCENB0.setNumclie(String numclie) {
-        this.numclie = numclie;
+    public void FormatoOZNCENB0.setClveacc(String clveacc) {
+        this.clveacc = clveacc;
     }
     
 }

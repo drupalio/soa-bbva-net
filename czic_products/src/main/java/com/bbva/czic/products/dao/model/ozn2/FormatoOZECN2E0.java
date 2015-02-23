@@ -5,6 +5,7 @@ import org.springframework.roo.addon.javabean.RooJavaBean;
 import org.springframework.roo.addon.serializable.RooSerializable;
 import org.springframework.roo.addon.tostring.RooToString;
 
+import com.bbva.czic.products.dao.mapper.TxProductsMapper;
 import com.bbva.jee.arq.spring.core.host.Campo;
 import com.bbva.jee.arq.spring.core.host.Formato;
 import com.bbva.jee.arq.spring.core.host.TipoCampo;

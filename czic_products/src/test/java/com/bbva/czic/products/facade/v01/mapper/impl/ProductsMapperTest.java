@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import com.bbva.czic.products.business.dto.*;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.MockitoAnnotations;
@@ -16,15 +17,6 @@ import org.mockito.MockitoAnnotations;
 import com.bbva.czic.dto.net.Conditions;
 import com.bbva.czic.dto.net.Extract;
 import com.bbva.czic.dto.net.Movement;
-import com.bbva.czic.products.business.dto.DTOIntConditions;
-import com.bbva.czic.products.business.dto.DTOIntEnumAccountState;
-import com.bbva.czic.products.business.dto.DTOIntEnumProductType;
-import com.bbva.czic.products.business.dto.DTOIntExtract;
-import com.bbva.czic.products.business.dto.DTOIntFilterExtract;
-import com.bbva.czic.products.business.dto.DTOIntMovement;
-import com.bbva.czic.products.business.dto.DTOIntOffice;
-import com.bbva.czic.products.business.dto.DTOIntOperation;
-import com.bbva.czic.products.business.dto.DTOIntProduct;
 import com.bbva.czic.products.facade.v01.impl.SrvProductsV01Test;
 import com.bbva.jee.arq.spring.core.servicing.utils.Money;
 
@@ -57,17 +49,23 @@ public class ProductsMapperTest {
 	}
 	
 	@Test
-	public void mapInListExtractsTest(){
+	public void mapInListFilterExtractsTest(){
 		String productId = "00130693000100000010";
 		String extractId = "123456789";
-		String filter = "(month=ge=01;month=le=02;year=ge=2014;year=le=2014)";
-		DTOIntFilterExtract dtoFilter = productsMapper.getDtoIntFilterExtract(productId,extractId, filter);
+		String filter = "(extractId=="+extractId+";month==02;year==2014)";
+		DTOIntFilterExtract dtoFilter = productsMapper.getDtoIntFilterExtract(productId, filter);
 		assertEquals(productId,dtoFilter.getProductId());
 		assertEquals(extractId,dtoFilter.getExtractId());
-		assertEquals("02",dtoFilter.getEndMonth());
-		assertEquals("01",dtoFilter.getStartMonth());
-		assertEquals("2014",dtoFilter.getEndYear());
-		assertEquals("2014",dtoFilter.getStartYear());
+		assertEquals("02",dtoFilter.getMonth());
+		assertEquals("2014",dtoFilter.getYear());
+	}
+	
+	@Test
+	public void mapInListExtractsTest(){
+		String productId = "00130693000100000010";
+		String filter = null;
+		DTOIntFilterExtract dtoFilter = productsMapper.getDtoIntFilterExtract(productId, filter);
+		assertEquals(productId,dtoFilter.getProductId());
 	}
 	
 //  ------------------ getConditions ------------------
@@ -81,7 +79,7 @@ public class ProductsMapperTest {
 		assertEquals(conditions.getCategory(),dtoCond.getCategory());
 		assertEquals(conditions.getDescription(),dtoCond.getDescription());
 		assertEquals(conditions.getCommission(), dtoCond.getCommission());
-		assertEquals(conditions.getActivities(), conditions.getActivities());
+		assertEquals(conditions.getActivity(), conditions.getActivity());
 	}
 	
 	@Test
@@ -109,10 +107,10 @@ public class ProductsMapperTest {
         dtoIntMovement.setOperation(dtoIntOperation);
         dtoIntMovement.setOperationDate(new Date());
         dtoIntMovement.setProductId("00000012345523");
-        dtoIntMovement.setProductType(new DTOIntEnumProductType());
+        dtoIntMovement.setProductType("TR");
         DTOIntEnumAccountState dtoIntEnumAccountState = new DTOIntEnumAccountState();
         dtoIntEnumAccountState.setEnumValue("AC");
-        dtoIntMovement.setStatus(dtoIntEnumAccountState);
+        dtoIntMovement.setStatus("Activo");
         Money value = new Money();
         value.setAmount(new BigDecimal("2000"));
         dtoIntMovement.setValue(value);
@@ -128,7 +126,7 @@ public class ProductsMapperTest {
         assertEquals( dtoIntMovement.getOffice().getPostalAddress(),movement.getOffice().getPostalAddress());
         assertEquals(dtoIntMovement.getOperation().getCode(),movement.getOperation().getCode());
         assertEquals( dtoIntMovement.getOperationDate(),movement.getOperationDate().getTime());
-        assertEquals(dtoIntMovement.getStatus().getEnumValue(),movement.getStatus());
+        assertEquals(dtoIntMovement.getStatus(),movement.getStatus());
         assertEquals(dtoIntMovement.getValue().getAmount(),movement.getValue().getAmount());
         assertEquals(dtoIntMovement.getTransactionDate(),movement.getTransactionDate().getTime());
     }
@@ -154,10 +152,10 @@ public class ProductsMapperTest {
         dtoIntMovement.setOperation(dtoIntOperation);
         dtoIntMovement.setOperationDate(new Date());
         dtoIntMovement.setProductId("00000012345523");
-        dtoIntMovement.setProductType(new DTOIntEnumProductType());
+        dtoIntMovement.setProductType("TR");
         DTOIntEnumAccountState dtoIntEnumAccountState = new DTOIntEnumAccountState();
         dtoIntEnumAccountState.setEnumValue("AC");
-        dtoIntMovement.setStatus(dtoIntEnumAccountState);
+        dtoIntMovement.setStatus("Activo");
         Money value = new Money();
         value.setAmount(new BigDecimal("2000"));
         dtoIntMovement.setValue(value);
@@ -180,10 +178,36 @@ public class ProductsMapperTest {
         assertEquals( dtoIntMovement.getOffice().getPostalAddress(),listMovement.get(1).getOffice().getPostalAddress());
         assertEquals(dtoIntMovement.getOperation().getCode(),listMovement.get(1).getOperation().getCode());
         assertEquals( dtoIntMovement.getOperationDate(),listMovement.get(1).getOperationDate().getTime());
-        assertEquals(dtoIntMovement.getStatus().getEnumValue(),listMovement.get(1).getStatus());
+        assertEquals(dtoIntMovement.getStatus(),listMovement.get(1).getStatus());
         assertEquals(dtoIntMovement.getValue().getAmount(),listMovement.get(1).getValue().getAmount());
         assertEquals(dtoIntMovement.getTransactionDate(),listMovement.get(1).getTransactionDate().getTime());
 
+    }
+
+
+    @Test()
+    public void getDTOIntFilterGetListMovements() {
+
+        DTOIntFilterMovements dtoIntFilterMovements = new DTOIntFilterMovements();
+        dtoIntFilterMovements=productsMapper.getDTOIntFilterGetListMovements("01020304050607080900","customerId==0102030405;productType==AH",1,10);
+
+
+        assertEquals("01020304050607080900",dtoIntFilterMovements.getProductId());
+        assertEquals("AH",dtoIntFilterMovements.getProductType());
+        assertEquals(new Integer(1),dtoIntFilterMovements.getPaginationKey());
+        assertEquals(new Integer(10),dtoIntFilterMovements.getPageSize());
+    }
+
+
+    @Test()
+    public void getDTOIntFilterGetMovement() {
+
+        DTOIntFilterMovements dtoIntFilterMovements = new DTOIntFilterMovements();
+        dtoIntFilterMovements=productsMapper.getDTOIntFilterGetMovement("01020304050607080900", "012345678", "customerId==0102030405;productType==AH");
+
+        assertEquals("01020304050607080900",dtoIntFilterMovements.getProductId());
+        assertEquals("012345678",dtoIntFilterMovements.getMovementId());
+        assertEquals("AH",dtoIntFilterMovements.getProductType());
     }
 
 }

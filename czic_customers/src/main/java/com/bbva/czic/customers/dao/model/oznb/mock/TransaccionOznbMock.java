@@ -31,21 +31,20 @@ public class TransaccionOznbMock implements InvocadorTransaccion<PeticionTransac
 		CopySalida salida = new CopySalida();
 		
 		formatoSalida.setNomclie(dataFactory.getBusinessName());
-		formatoSalida.setNumclie(dataFactory.getNumberText(8));
-		formatoSalida.setSegment(EnumSegmentType.OTRO.toString());
+		formatoSalida.setSegment(null);
 		formatoSalida.setCorreo(dataFactory.getEmailAddress());
-		formatoSalida.setDescvia(dataFactory.getAddress());
-		formatoSalida.setCiudvia(dataFactory.getCity());
-		formatoSalida.setDepavia(dataFactory.getCity());
-		formatoSalida.setPaisvia(dataFactory.getStreetName());
-		formatoSalida.setEstrato(dataFactory.getNumberText(1));
-		formatoSalida.setAnosvda(dataFactory.getNumberText(2));
-		formatoSalida.setNropnas(dataFactory.getNumberText(2));
-		formatoSalida.setTpovvda(EnumDwelingType.VALIDAR.toString());
-		formatoSalida.setDescofi(dataFactory.getAddress());
-		formatoSalida.setCiudofi(dataFactory.getCity());
-		formatoSalida.setDepaofi(dataFactory.getCity());
-		formatoSalida.setPaisofi(dataFactory.getStreetName());
+		formatoSalida.setDescvia(null);
+		formatoSalida.setCiudvia(null);
+		formatoSalida.setDepavia(null);
+		formatoSalida.setPaisvia(null);
+		formatoSalida.setEstrato(null);
+		formatoSalida.setAnosvda(null);
+		formatoSalida.setNropnas(null);
+		formatoSalida.setTpovvda(null);
+		formatoSalida.setDescofi(null);
+		formatoSalida.setCiudofi(null);
+		formatoSalida.setDepaofi(null);
+		formatoSalida.setPaisofi(null);
 		formatoSalida.setUltconx(dataFactory.getDate(2015, 12, 12).toString());
 		
 		salida.setCopy(formatoSalida);

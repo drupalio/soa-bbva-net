@@ -10,15 +10,10 @@ import com.bbva.czic.loan.facade.v01.mappers.ILoanMapper;
 import com.bbva.czic.routine.commons.rm.utils.mappers.AbstractBbvaConfigurableMapper;
 import com.bbva.czic.routine.commons.rm.utils.mappers.Mapper;
 import com.bbva.czic.routine.mapper.MapperFactory;
-import com.bbva.jee.arq.spring.core.log.I18nLog;
-import com.bbva.jee.arq.spring.core.log.I18nLogFactory;
 import java.util.List;
 
 @Mapper(value = "loan-mapper")
 public class LoanMapper extends AbstractBbvaConfigurableMapper implements ILoanMapper {
-
-	private static I18nLog log = I18nLogFactory
-			.getLogI18n(LoanMapper.class, "META-INF/spring/i18n/log/mensajesLog");
 
 	/**
 	 *
@@ -37,6 +32,16 @@ public class LoanMapper extends AbstractBbvaConfigurableMapper implements ILoanM
 				.field("status", "status")
 				.field("payment", "payment")
 				.field("debt", "debt")
+				.field("balance", "balance")
+				.byDefault().register();
+
+		// Map DTOIntLoan <-> Loan
+		factory.classMap(DTOIntMovement.class, Movement.class)
+				.field("id", "id")
+				.field("concept", "concept")
+				.field("transactionDate", "transactionDate")
+				.field("operation", "operation")
+				.field("value", "value")
 				.field("balance", "balance")
 				.byDefault().register();
 
@@ -61,7 +66,6 @@ public class LoanMapper extends AbstractBbvaConfigurableMapper implements ILoanM
 	 */
 	@Override
 	public Loan map(DTOIntLoan dtoIntLoan) {
-
 		return map(dtoIntLoan, Loan.class);
 	}
 

@@ -10,12 +10,10 @@ import javax.validation.constraints.NotNull;
 public class DTOIntAddChannel {
 
     @NotNull
-
     @Length(min = 8, max = 8)
     private String customerId;
 
     @NotNull
-
     @Length(min = 4, max = 4)
     private String channelId;
 
@@ -23,7 +21,7 @@ public class DTOIntAddChannel {
 
     public DTOIntAddChannel(String customerId, String channelId){
         this.customerId = customerId;
-        this.channelId = channelId;
+        this.setChannelId(channelId);
     }
 
     public String getCustomerId() {

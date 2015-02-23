@@ -10,13 +10,8 @@ import org.hibernate.validator.constraints.NotEmpty;
  */
 public class DTOIntFilterMovements {
     private String productType;
-    @NotNull
-    @NotEmpty
-    @Size(min=8,max=8)
-    private String customerId;
     private String movementId;
-    @NotNull
-    @NotEmpty
+
     @Size(min=20,max=20)
     private String productId;
     private Integer paginationKey;
@@ -48,14 +43,6 @@ public class DTOIntFilterMovements {
 
     public void setProductType(String productType) {
         this.productType = productType;
-    }
-
-    public String getCustomerId() {
-        return customerId;
-    }
-
-    public void setCustomerId(String customerId) {
-        this.customerId = customerId;
     }
 
     public Integer getPaginationKey() {

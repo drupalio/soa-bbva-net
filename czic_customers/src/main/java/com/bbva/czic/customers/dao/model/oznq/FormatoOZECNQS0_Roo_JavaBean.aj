@@ -4,31 +4,30 @@
 package com.bbva.czic.customers.dao.model.oznq;
 
 import java.lang.String;
-import java.math.BigDecimal;
 
 privileged aspect FormatoOZECNQS0_Roo_JavaBean {
     
-    public BigDecimal FormatoOZECNQS0.getValdepo() {
+    public String FormatoOZECNQS0.getValdepo() {
         return this.valdepo;
     }
     
-    public void FormatoOZECNQS0.setValdepo(BigDecimal valdepo) {
+    public void FormatoOZECNQS0.setValdepo(String valdepo) {
         this.valdepo = valdepo;
     }
     
-    public BigDecimal FormatoOZECNQS0.getValcarg() {
+    public String FormatoOZECNQS0.getValcarg() {
         return this.valcarg;
     }
     
-    public void FormatoOZECNQS0.setValcarg(BigDecimal valcarg) {
+    public void FormatoOZECNQS0.setValcarg(String valcarg) {
         this.valcarg = valcarg;
     }
     
-    public BigDecimal FormatoOZECNQS0.getSaltota() {
+    public String FormatoOZECNQS0.getSaltota() {
         return this.saltota;
     }
     
-    public void FormatoOZECNQS0.setSaltota(BigDecimal saltota) {
+    public void FormatoOZECNQS0.setSaltota(String saltota) {
         this.saltota = saltota;
     }
     

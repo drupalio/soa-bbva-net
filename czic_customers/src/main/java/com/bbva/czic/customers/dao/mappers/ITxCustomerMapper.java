@@ -8,6 +8,7 @@ import com.bbva.czic.customers.dao.model.oznp.FormatoOZECNPS0;
 import com.bbva.czic.customers.dao.model.oznq.FormatoOZECNQE0;
 import com.bbva.czic.customers.dao.model.oznq.FormatoOZECNQS0;
 import com.bbva.czic.customers.business.dto.DTOIntCustomerFilter;
+import com.bbva.czic.customers.dao.model.oznw.FormatoOZECNWE0;
 
 /**
  * 
@@ -18,7 +19,7 @@ public interface ITxCustomerMapper {
 	
 	/**
 	 * 
-	 * @param customerId
+	 * @param customerFilter
 	 * @return
 	 */
 	FormatoOZNCENB0 mapInOznb(DTOIntCustomerFilter customerFilter);
@@ -37,4 +38,6 @@ public interface ITxCustomerMapper {
 	FormatoOZECNPE0 mapInOznp(DTOIntCardChargeFilter cardChargeFilter);
 
 	DTOIntCardCharge mapOutOznp(FormatoOZECNPS0 formatoSalida);
+
+	FormatoOZECNWE0 mapInOznw(DTOIntAddChannel customerFilter);
 }

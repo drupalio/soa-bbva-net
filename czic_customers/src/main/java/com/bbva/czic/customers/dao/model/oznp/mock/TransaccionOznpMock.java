@@ -1,78 +1,53 @@
 package com.bbva.czic.customers.dao.model.oznp.mock;
 
-import java.io.IOException;
-import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.List;
-
-import org.codehaus.jackson.map.ObjectMapper;
-import org.codehaus.jackson.type.TypeReference;
-import org.fluttercode.datafactory.impl.DataFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Profile;
-import org.springframework.stereotype.Component;
-
 import com.bbva.czic.customers.dao.model.oznp.FormatoOZECNPS0;
 import com.bbva.czic.customers.dao.model.oznp.PeticionTransaccionOznp;
 import com.bbva.czic.customers.dao.model.oznp.RespuestaTransaccionOznp;
+import com.bbva.czic.dto.net.EnumCardChargeCategory;
 import com.bbva.jee.arq.spring.core.host.ExcepcionTransaccion;
 import com.bbva.jee.arq.spring.core.host.InvocadorTransaccion;
-import com.bbva.jee.arq.spring.core.host.ServicioTransacciones;
 import com.bbva.jee.arq.spring.core.host.protocolo.ps9.aplicacion.CopySalida;
+import org.fluttercode.datafactory.impl.DataFactory;
+import org.springframework.context.annotation.Profile;
+import org.springframework.stereotype.Component;
+
+import java.math.BigDecimal;
 
 /**
  * Invocador de la transacci&oacute;n <code>OZNP</code>
  * 
- * @see PeticionTransaccionOznp
- * @see RespuestaTransaccionOznp
+ * @see com.bbva.czic.customers.dao.model.oznp.PeticionTransaccionOznp
+ * @see com.bbva.czic.customers.dao.model.oznp.RespuestaTransaccionOznp
  */
-@Component("transaccionOznp")
-@Profile("dev")
+@Profile(value = "dev")
+@Component(value = "transaccionOznp")
 public class TransaccionOznpMock implements InvocadorTransaccion<PeticionTransaccionOznp,RespuestaTransaccionOznp> {
-	
-	@Autowired
-	private ServicioTransacciones servicioTransacciones;
-	
+
 	@Override
-	public RespuestaTransaccionOznp invocar(PeticionTransaccionOznp transaccion) throws ExcepcionTransaccion {
+	public RespuestaTransaccionOznp invocar(PeticionTransaccionOznp peticion) throws ExcepcionTransaccion {
+
 		final RespuestaTransaccionOznp respuesta = new RespuestaTransaccionOznp();
+		final DataFactory dataFactory = new DataFactory();
 
-		try {
-			respuesta.getCuerpo().getPartes().addAll(getCopyOZECNPS0List());
-		} catch (IOException e) {
-			e.printStackTrace();
+		for(EnumCardChargeCategory item : EnumCardChargeCategory.values()){
+			FormatoOZECNPS0 formatoSalida = new FormatoOZECNPS0();
+			formatoSalida.setCategor(item.getText());
+			formatoSalida.setValcate(new BigDecimal(dataFactory.getNumberBetween(10000, 20000)));
+
+			CopySalida salida = new CopySalida();
+			salida.setCopy(formatoSalida);
+			respuesta.getCuerpo().getPartes().add(salida);
 		}
-
 		return respuesta;
 	}
 
 	@Override
-	public RespuestaTransaccionOznp invocarCache(
-			PeticionTransaccionOznp peticion) throws ExcepcionTransaccion {
-		// TODO Auto-generated method stub
+	public RespuestaTransaccionOznp invocarCache(PeticionTransaccionOznp peticion) throws ExcepcionTransaccion {
 		return null;
 	}
 
 	@Override
 	public void vaciarCache() {
-		// TODO Auto-generated method stub
-		
-	}
 
-	private List<CopySalida> getCopyOZECNPS0List() throws IOException {
-
-		List<CopySalida> copies = new ArrayList<CopySalida>();
-
-		List<FormatoOZECNPS0> formatoOZECNPS0s = new ObjectMapper().readValue(this.getClass().getClassLoader()
-				.getResourceAsStream("mocks/formatoOznp.json"), new TypeReference<List<FormatoOZECNPS0>>() {
-		});
-
-		for (FormatoOZECNPS0 formatoOZECNPS0 : formatoOZECNPS0s) {
-			CopySalida copy = new CopySalida();
-			copy.setCopy(formatoOZECNPS0);
-			copies.add(copy);
-		}
-
-		return copies;
 	}
 }

@@ -43,7 +43,7 @@ public class TxGlobalPositionMapper extends AbstractBbvaTxConfigurableMapper imp
 		/*
 		 * DTOIntProductFilter <-> FormatoOZECN1E0
 		 */
-		factory.classMap(DTOIntProductFilter.class, FormatoOZECN1E0.class).field("idCustomer", "numclie")
+		factory.classMap(DTOIntProductFilter.class, FormatoOZECN1E0.class)
 				.field("productType", "tipprod").byDefault().register();
 
 		/*

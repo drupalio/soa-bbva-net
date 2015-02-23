@@ -2,11 +2,12 @@ package com.bbva.czic.globalposition.dao.utils.converters;
 
 import com.bbva.czic.routine.mapper.converter.BidirectionalConverter;
 import com.bbva.czic.routine.mapper.metadata.Type;
+import org.mockito.Mock;
 
 /**
  * @author Entelgy Colombia.
  */
-public class StringOperabilityConverter extends BidirectionalConverter<String, Boolean> {
+public class StringOperabilityConverter extends BidirectionalConverter<String, Boolean>{
 
 	private static final String BLOCKED = "B";
 

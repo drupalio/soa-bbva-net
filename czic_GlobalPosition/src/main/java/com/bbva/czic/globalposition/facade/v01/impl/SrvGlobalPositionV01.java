@@ -29,13 +29,11 @@ import com.bbva.czic.globalposition.business.dto.DTOIntProduct;
 import com.bbva.czic.globalposition.business.dto.DTOIntProductFilter;
 import com.bbva.czic.globalposition.facade.v01.ISrvGlobalPositionV01;
 import com.bbva.czic.globalposition.facade.v01.mappers.IGlobalPositionMapper;
-import com.bbva.czic.routine.commons.rm.utils.errors.EnumError;
 import com.bbva.jee.arq.spring.core.log.I18nLog;
 import com.bbva.jee.arq.spring.core.log.I18nLogFactory;
 import com.bbva.jee.arq.spring.core.servicing.annotations.SMC;
 import com.bbva.jee.arq.spring.core.servicing.annotations.SN;
 import com.bbva.jee.arq.spring.core.servicing.annotations.VN;
-import com.bbva.jee.arq.spring.core.servicing.gce.BusinessServiceException;
 import com.wordnik.swagger.annotations.Api;
 import com.wordnik.swagger.annotations.ApiOperation;
 import com.wordnik.swagger.annotations.ApiParam;
@@ -83,12 +81,11 @@ public class SrvGlobalPositionV01 implements ISrvGlobalPositionV01,
 			@ApiResponse(code = 500, message = "Technical Error"),
 			@ApiResponse(code = 400, message = "wrongParameters"), @ApiResponse(code = 409, message = "noData") })
 	@GET
-	@Path("/customers/{customerId}/products")
+	@Path("/customers/products")
 	@Produces({ MediaType.APPLICATION_JSON })
 	@ElementClass(response = List.class)
 	@SMC(registryID = "SMCCO1400003", logicalID = "getExtractGlobalBalance")
 	public List<Product> getExtractGlobalBalance(
-			@ApiParam(value = "Customer identifier") @PathParam("customerId") String customerId,
 			@ApiParam(value = "filter param") @QueryParam("$filter") String filter) {
 
 		log.info("SrvGlobalPositionV01.getExtractGlobalBalance : HOT SWAP");
@@ -97,7 +94,7 @@ public class SrvGlobalPositionV01 implements ISrvGlobalPositionV01,
 		new FiqlValidator(filter).hasEq(PRODUCT_TYPE).validateIfExist();
 
 		// 2. Mapping to DTOIntFilter
-		final DTOIntProductFilter filterProduct = globalPositionMapper.getDTOIntFilter(customerId, filter);
+		final DTOIntProductFilter filterProduct = globalPositionMapper.getDTOIntFilter(filter);
 
 		// 3. Invoke SrvIntAccounts and Mapping to canonical DTO
 		List<DTOIntProduct> products = srvIntGlobalPosition.getExtractGlobalBalance(filterProduct);

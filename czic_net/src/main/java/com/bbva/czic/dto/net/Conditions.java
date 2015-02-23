@@ -23,6 +23,8 @@ import com.wordnik.swagger.annotations.ApiModelProperty;
 public class Conditions implements Serializable {
 
 	public final static long serialVersionUID = 1L;
+	@ApiModelProperty(value = "tipo decuenta", required = true)
+	private String type;
 	@ApiModelProperty(value = "Alias asociado al titular de la cuenta", required = true)
 	private String alias;
 	@ApiModelProperty(value = "Tipo de plan asociado al producto", required = true)
@@ -39,7 +41,7 @@ public class Conditions implements Serializable {
 	@ApiModelProperty("")
 	private String mobilizationConditions;
 	@ApiModelProperty(value = "ultimas actividades realizadas", required = true)
-	private List<Activity> activities;
+	private Activity activity;
 
 	public Conditions() {
 		// default constructor
@@ -101,12 +103,19 @@ public class Conditions implements Serializable {
 		this.mobilizationConditions = mobilizationConditions;
 	}
 
-	public List<Activity> getActivities() {
-		return activities;
+	public String getType() {
+		return type;
 	}
 
-	public void setActivities(List<Activity> activities) {
-		this.activities = activities;
+	public void setType(String type) {
+		this.type = type;
 	}
 
+	public Activity getActivity() {
+		return activity;
+	}
+
+	public void setActivity(Activity activity) {
+		this.activity = activity;
+	}
 }

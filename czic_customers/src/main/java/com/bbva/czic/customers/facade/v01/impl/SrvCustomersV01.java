@@ -86,10 +86,9 @@ public class SrvCustomersV01 implements ISrvCustomersV01, com.bbva.jee.arq.sprin
 			@ApiResponse(code = 409, message = "Data not found"), @ApiResponse(code = 500, message = "Technical Error") })
 	@GET
 	@ElementClass(response = List.class)
-	@Path("/{customerId}/creditCard/cardCharges")
+	@Path("/creditCard/cardCharges")
 	@SMC(registryID = "SMCCO1400024", logicalID = "getlistCreditCardsCharges")
 	public List<CardCharge> listCreditCardsCharges(
-			@ApiParam(value = "Claim identifier param") @PathParam("customerId") String customerId,
 			@ApiParam(value = "filter param") @QueryParam("$filter") String filter) {
 
 		log.info("Into listCreditCardsCharges...");
@@ -98,7 +97,7 @@ public class SrvCustomersV01 implements ISrvCustomersV01, com.bbva.jee.arq.sprin
 		new FiqlValidator(filter).hasGeAndLe(FiqlType.chargeDate.name()).validateIfExist();
 
 		// 2. Mapping to DTOIntFilter
-		final DTOIntCardChargeFilter cardChargeFilter = customerMapper.getCreditCardChargesFilter(customerId, filter);
+		final DTOIntCardChargeFilter cardChargeFilter = customerMapper.getCreditCardChargesFilter(filter);
 
 		// 3. Invoke SrvIntCustomers and Mapping to canonical DTO
 		List<DTOIntCardCharge> intCardCharges = srvIntCustomers.listCreditCharges(cardChargeFilter);
@@ -116,24 +115,18 @@ public class SrvCustomersV01 implements ISrvCustomersV01, com.bbva.jee.arq.sprin
 			@ApiResponse(code = 409, message = "Data not found"), @ApiResponse(code = 500, message = "Technical Error") })
 	@GET
 	@ElementClass(response = List.class)
-	@Path("/{customerId}/accounts/movementsResume")
+	@Path("/accounts/movementsResume")
 	@SMC(registryID = "SMCCO1400025", logicalID = "getListAccountsMovementsResume")
 	public List<AccMovementsResume> listAccountsMovementsResume(
-			@ApiParam(value = "Claim identifier param") @PathParam("customerId") String customerId,
 			@ApiParam(value = "filter param") @QueryParam("$filter") String filter) {
 
 		log.info("Into listAccountsMovementsResume...");
 
 		// 1. Validate filter FIQL
 		new FiqlValidator(filter).hasGeAndLe("month").validateIfExist();
-		new StringValidator().notIsNull(customerId).validate();
-
-		// 1.b Validate customerId not is Null
-		new StringValidator().notIsNull(customerId).isNumericText(customerId).validate();
 
 		// 2. Mapping to DTOIntFilter
-		final DTOIntAccMovementsResumesFilter filterCustomerResumes = customerMapper.getDTOIntMovementResumesFilter(
-				customerId, filter);
+		final DTOIntAccMovementsResumesFilter filterCustomerResumes = customerMapper.getDTOIntMovementResumesFilter(filter);
 
 		// 3. Invoke SrvIntCustomers and Mapping to canonical DTO
 		List<DTOIntAccMovementsResume> accMovementsResumes = srvIntCustomers
@@ -151,12 +144,14 @@ public class SrvCustomersV01 implements ISrvCustomersV01, com.bbva.jee.arq.sprin
 			@ApiResponse(code = 409, message = "Data not found"), @ApiResponse(code = 500, message = "Technical Error") })
 	@GET
 	@ElementClass(response = Customer.class)
-	@Path("/{customerId}")
+	@Path("/getCustomer")
 	@SMC(registryID = "SMCCO1400023", logicalID = "getCustomer")
-	public Customer getCustomer(@ApiParam(value = "Claim identifier param") @PathParam("customerId") String customerId) {
+	public Customer getCustomer(
+			@ApiParam(value = "filter param") @QueryParam("$filter") String filter) {
+		
 		log.info("Into getCustomer...");
 
-		final DTOIntCustomerFilter customerFilter = customerMapper.mapDTOIntCustomerFilter(customerId);
+		final DTOIntCustomerFilter customerFilter = customerMapper.mapDTOIntCustomerFilter(filter);
 		// 1. Invoke SrvIntCustomers and Mapping to canonical DTO
 		return customerMapper.mapCustomer(srvIntCustomers.getCustomer(customerFilter));
 	}
@@ -193,11 +188,11 @@ public class SrvCustomersV01 implements ISrvCustomersV01, com.bbva.jee.arq.sprin
 			@ApiResponse(code = 400, message = "Wrong parameters"),
 			@ApiResponse(code = 409, message = "Data not found"), @ApiResponse(code = 500, message = "Technical Error") })
 	@PUT
-	@Path("/{customerId}/custommerChannels/{channelId}")
+	@Path("/{customerId}/addChannel/{channelId}")
 	@SMC(registryID = "SMCCO1500009", logicalID = "addChannel")
 
 	public Response addChannel(@ApiParam(value = "Claim identifier param") @PathParam("customerId") String customerId,
-							   @ApiParam(value = "Claim channerlid param") @PathParam("channelId") String channelId) {
+							   @ApiParam(value = "Channel identifier param") @PathParam("channelId") String channelId) {
 
 		log.info("Into addChannel...");
 		srvIntCustomers.addChannel(new DTOIntAddChannel(customerId, channelId));

@@ -32,8 +32,7 @@ public class TxGetConditions extends SimpleBbvaTransaction<DTOIntProduct, Format
 	}
 
 	@Override
-	protected DTOIntConditions mapResponseFormatToDtoOut(
-			FormatoOZECNTS0 formatOutput, DTOIntProduct dtoIn) {
+	protected DTOIntConditions mapResponseFormatToDtoOut(FormatoOZECNTS0 formatOutput, DTOIntProduct dtoIn) {
 		return txProductMapper.mapOutOznt(formatOutput);
 	}
 

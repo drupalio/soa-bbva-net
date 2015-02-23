@@ -1,59 +1,71 @@
 package com.bbva.czic.globalposition.dao.model.oznh;
 
-import org.apache.commons.logging.Log;
-import org.junit.Ignore;
+import com.bbva.czic.routine.commons.rm.utils.test.SpringContextBbvaTest;
+import com.bbva.jee.arq.spring.core.host.ServicioTransacciones;
+import junit.framework.Assert;
+import org.junit.Before;
 import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.TestExecutionListeners;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.springframework.test.context.support.DependencyInjectionTestExecutionListener;
+import org.mockito.Mockito;
 
 import com.bbva.jee.arq.spring.core.host.ExcepcionTransaccion;
-import com.bbva.jee.arq.spring.core.host.protocolo.ExcepcionRespuestaHost;
-import com.bbva.jee.arq.spring.core.host.transporte.ExcepcionTransporte;
-import com.bbva.jee.arq.spring.core.log.I18nLogFactory;
-import com.bbva.jee.arq.spring.core.servicing.test.BusinessServiceTestContextLoader;
 
-/**
- * Test de la transacci&oacute;n <code>OZNH</code>
- * 
- * @author Arquitectura Spring BBVA
- */
-@RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(loader = BusinessServiceTestContextLoader.class, locations = {
-		"classpath*:/META-INF/spring/applicationContext-*.xml", "classpath:/META-INF/spring/business-service.xml",
-		"classpath:/META-INF/spring/business-service-test.xml" })
-@TestExecutionListeners(listeners = {
-// MockInvocationContextTestExecutionListener.class,
-DependencyInjectionTestExecutionListener.class })
-public class TestTransaccionOznh {
+public class TestTransaccionOznh extends SpringContextBbvaTest {
 
-	private static final Log LOG = I18nLogFactory.getLog(TestTransaccionOznh.class);
+	private ServicioTransacciones servicioTransacciones;
 
-	@Autowired
 	private TransaccionOznh transaccion;
 
-	@Ignore
-	@Test
-	public void test() throws ExcepcionTransaccion {
-
-		PeticionTransaccionOznh peticion = new PeticionTransaccionOznh();
-
-		/*
-		 * TODO: poblar la peticion con valores adecuados
-		 */
-
-		try {
-			LOG.info("Invocando transaccion, peticion: " + peticion);
-			RespuestaTransaccionOznh respuesta = transaccion.invocar(peticion);
-			LOG.info("Recibida respuesta: " + respuesta);
-		} catch (ExcepcionRespuestaHost e) {
-			LOG.error("Error recibido desde host, codigoError: " + e.getCodigoError() + ", descripcion: "
-					+ e.getMessage());
-		} catch (ExcepcionTransporte e) {
-			LOG.error("Error de transporte", e);
-		}
+	@Before
+	public void init(){
+		transaccion = new TransaccionOznh();
+		servicioTransacciones = Mockito.mock(ServicioTransacciones.class);
+		transaccion.setServicioTransacciones(servicioTransacciones);
 	}
+
+	@Test
+	public void checkInvocarOK() throws ExcepcionTransaccion {
+
+		PeticionTransaccionOznh peticionTransaccionOznh = new PeticionTransaccionOznh();
+		RespuestaTransaccionOznh respuestaTransaccionOznh = new RespuestaTransaccionOznh();
+
+		Mockito.when(servicioTransacciones.invocar(PeticionTransaccionOznh.class, RespuestaTransaccionOznh.class,
+				peticionTransaccionOznh)).thenReturn(respuestaTransaccionOznh);
+
+		RespuestaTransaccionOznh result = transaccion.invocar(peticionTransaccionOznh);
+
+		Mockito.verify(servicioTransacciones).invocar(PeticionTransaccionOznh.class, RespuestaTransaccionOznh.class,
+				peticionTransaccionOznh);
+
+		Assert.assertNotNull(result);
+	}
+
+	@Test(expected = ExcepcionTransaccion.class)
+	public void checkInvocarThrowsException() throws ExcepcionTransaccion {
+
+		PeticionTransaccionOznh peticionTransaccionOznh = new PeticionTransaccionOznh();
+
+		Mockito.when(servicioTransacciones.invocar(PeticionTransaccionOznh.class, RespuestaTransaccionOznh.class,
+				peticionTransaccionOznh)).thenThrow(new ExcepcionTransaccion());
+
+		transaccion.invocar(peticionTransaccionOznh);
+	}
+
+	@Test
+	public void checkInvocarCacheOK() throws ExcepcionTransaccion {
+
+		PeticionTransaccionOznh peticionTransaccionOznh = new PeticionTransaccionOznh();
+		RespuestaTransaccionOznh respuestaTransaccionOznh = new RespuestaTransaccionOznh();
+
+		Mockito.when(servicioTransacciones.invocar(PeticionTransaccionOznh.class, RespuestaTransaccionOznh.class,
+				peticionTransaccionOznh)).thenReturn(respuestaTransaccionOznh);
+
+		RespuestaTransaccionOznh result = transaccion.invocarCache(peticionTransaccionOznh);
+
+		Mockito.verify(servicioTransacciones).invocar(PeticionTransaccionOznh.class, RespuestaTransaccionOznh.class,
+				peticionTransaccionOznh);
+
+		Assert.assertNotNull(result);
+	}
+
+
 }

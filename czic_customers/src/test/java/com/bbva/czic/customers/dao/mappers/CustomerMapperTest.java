@@ -64,7 +64,6 @@ public class CustomerMapperTest {
 
 	private FormatoOZNCSNB0 mockFormatoOZNBSalida() {
 		FormatoOZNCSNB0 formatoS = new FormatoOZNCSNB0();
-		formatoS.setNumclie("1");
 		formatoS.setNomclie("Cliente de prueba");
 		formatoS.setSegment("PERSONA");
 		formatoS.setCorreo("prueba@bbva.com");
@@ -96,7 +95,7 @@ public class CustomerMapperTest {
 		email.setActive(true);
 		email.setAddress("prueba@bbva.com");
 		email.setPrimary(true);
-		email.setSource(EnumContactSourceType.WEB);
+		email.setSource("WEB");
 		emails.add(email);
 		contacto.setEmails(emails);
 		contacto.setPhoneNumbers(new ArrayList<PhoneNumber>());

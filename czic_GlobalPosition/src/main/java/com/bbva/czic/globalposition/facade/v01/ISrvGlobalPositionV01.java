@@ -17,7 +17,7 @@ import java.util.List;
 
 
 public interface ISrvGlobalPositionV01 {
- 	public List<Product> getExtractGlobalBalance(String customerId, String filter);
+ 	public List<Product> getExtractGlobalBalance(String filter);
 
 	Response updateProductVisibility(String idProduct, Product infoProduct);
 

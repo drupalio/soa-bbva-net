@@ -3,8 +3,10 @@ package com.bbva.czic.products.facade.v01.mapper.impl;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.hibernate.id.enhanced.AccessCallback;
 import org.springframework.stereotype.Component;
 
+import com.bbva.czic.dto.net.AccMoveDetail;
 import com.bbva.czic.dto.net.City;
 import com.bbva.czic.dto.net.Conditions;
 import com.bbva.czic.dto.net.Extract;
@@ -41,16 +43,23 @@ public class ProductsMapper extends AbstractBbvaConfigurableMapper implements
 
 		// Map DTOIntConditions <-> Conditions
 		factory.classMap(Conditions.class, DTOIntConditions.class)
+				.field("type", "type")
 				.field("alias", "alias")
 				.field("category", "category")
 				.field("description", "description")
 				.field("openingDate", "openingDate")
 				.field("commission", "commission")
+				.field("mobilizationConditions", "mobilizationConditions")
 				.field("office.name", "office.name")
 				.field("office.postalAddress", "office.postalAddress")
 				.field("office.location.city.name", "office.location.city.name")
 				.field("office.location.country.name", "office.location.country.name")
-				.field("mobilizationConditions", "mobilizationConditions")
+				.field("activity.operationDate", "activity.operationDate")
+				.field("activity.executionDate", "activity.executionDate")
+				.field("activity.function.id", "activity.function.id")
+				.field("activity.function.type", "activity.function.type")
+				.field("activity.amount", "activity.amount")
+				.field("activity.reference", "activity.reference")
 				.byDefault()
 				.register();
 
@@ -59,12 +68,20 @@ public class ProductsMapper extends AbstractBbvaConfigurableMapper implements
 				TypeFactory.<Money> valueOf(Money.class));
 
 		// Movement
-		factory.classMap(Movement.class, DTOIntMovement.class)
-				.field("id", "id").field("concept", "concept")
+		factory.classMap(AccMoveDetail.class, DTOIntMovement.class)
+				.field("id", "id")
+				.field("concept", "concept")
+				.field("value", "value")
+				.field("balance", "balance")
+				.field("operation.code", "operation.code")
+				.field("operation.description", "operation.description")
 				.field("transactionDate", "transactionDate")
 				.field("operationDate", "operationDate")
-				.field("office", "office").field("status", "status.enumValue")
-				.field("value", "value").field("balance", "balance")
+				.field("office.postalAddress", "office.postalAddress")
+				.field("office.name", "office.name")
+				.field("office.location.city.name", "office.location.city.name")
+				.field("office.location.state.name", "office.location.dtoIntState.name")
+				.field("originValue", "originValue")
 				.byDefault().register();
 		// Office
 		factory.classMap(Office.class, DTOIntOffice.class)
@@ -106,11 +123,9 @@ public class ProductsMapper extends AbstractBbvaConfigurableMapper implements
 	@Override
 	public DTOIntFilterMovements getDTOIntFilterGetMovement(String productId,String movementId, String filter) {
 
-		final String customerId = this.getEqValue(filter, FiqlType.customerId.name());
 		final String productType = this.getEqValue(filter, FiqlType.productType.name());
 
 		final DTOIntFilterMovements dtoIntFilterMovements = new DTOIntFilterMovements();
-		dtoIntFilterMovements.setCustomerId(customerId);
 		dtoIntFilterMovements.setProductType(productType);
 		dtoIntFilterMovements.setProductId(productId);
 		dtoIntFilterMovements.setMovementId(movementId);
@@ -126,11 +141,9 @@ public class ProductsMapper extends AbstractBbvaConfigurableMapper implements
 		final String transactionDateEnd = this.getLeValue(filter, FiqlType.transactionDate.name());
 		final String valueStart = this.getGeValue(filter, FiqlType.value.name());
 		final String valueEnd = this.getLeValue(filter, FiqlType.value.name());
-		final String customerId = this.getEqValue(filter, FiqlType.customerId.name());
 		final String productType = this.getEqValue(filter, FiqlType.productType.name());
 
 		final DTOIntFilterMovements dtoIntFilterMovements = new DTOIntFilterMovements();
-		dtoIntFilterMovements.setCustomerId(customerId);
 		dtoIntFilterMovements.setProductType(productType);
 		dtoIntFilterMovements.setProductId(productId);
 		dtoIntFilterMovements.setPageSize(pageSize);
@@ -145,21 +158,20 @@ public class ProductsMapper extends AbstractBbvaConfigurableMapper implements
 
 	}
 
-	public DTOIntFilterExtract getDtoIntFilterExtract(String productId, String extractId,
+	public DTOIntFilterExtract getDtoIntFilterExtract(String productId,
 			String filter) {
-		final String monthGe = this.getGeValue(filter,"month");
-		final String monthLe = this.getLeValue(filter,"month");
-		final String yearGe = this.getGeValue(filter,"year");
-		final String yearLe = this.getLeValue(filter,"year");
-
 		DTOIntFilterExtract dtoIntFilter = new DTOIntFilterExtract();
-		dtoIntFilter.setExtractId(extractId);
+		if (filter != null) {
+			final String month = this.getEqValue(filter, "month");
+			final String year = this.getEqValue(filter, "year");
+			final String extractId = this.getEqValue(filter, "extractId");
+			dtoIntFilter.setExtractId(extractId);
+			dtoIntFilter.setMonth(month);
+			dtoIntFilter.setYear(year);
+		}
+
 		dtoIntFilter.setProductId(productId);
-		dtoIntFilter.setStartMonth(monthGe);
-		dtoIntFilter.setEndMonth(monthLe);
-		dtoIntFilter.setStartYear(yearGe);
-		dtoIntFilter.setEndYear(yearLe);
-		
+
 		return dtoIntFilter;
 	}
 
@@ -179,9 +191,9 @@ public class ProductsMapper extends AbstractBbvaConfigurableMapper implements
 	}
 
 	@Override
-	public Movement mapMovement(DTOIntMovement dtoIntMovement) {
+	public AccMoveDetail mapMovement(DTOIntMovement dtoIntMovement) {
 		log.info("map- return:Account-parameter:dtoIntAccount");
-		return map(dtoIntMovement,Movement.class);
+		return map(dtoIntMovement,AccMoveDetail.class);
 	}
 
 	@Override

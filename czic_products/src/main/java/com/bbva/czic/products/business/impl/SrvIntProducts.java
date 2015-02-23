@@ -1,6 +1,5 @@
 package com.bbva.czic.products.business.impl;
 
-import java.util.Date;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -20,6 +19,7 @@ import com.bbva.czic.products.dao.IProductsDAO;
 import com.bbva.czic.routine.commons.rm.utils.EDateFormat;
 import com.bbva.czic.routine.commons.rm.utils.validator.DtoValidator;
 import com.bbva.czic.routine.commons.rm.utils.validator.impl.DateValidator;
+import com.bbva.czic.routine.commons.rm.utils.validator.impl.StringValidator;
 import com.bbva.jee.arq.spring.core.log.I18nLog;
 import com.bbva.jee.arq.spring.core.log.I18nLogFactory;
 import com.bbva.jee.arq.spring.core.servicing.utils.BusinessServicesToolKit;
@@ -58,20 +58,13 @@ public class SrvIntProducts implements ISrvIntProducts {
 		DtoValidator.validate(dtoIntFilterExtract);
 		
 		if (dtoIntFilterExtract.getExtractId() != null) {
-			DateValidator validator = (DateValidator) new DateValidator()
-					.noFuture(dtoIntFilterExtract.getStartMonth()+dtoIntFilterExtract.getStartYear(),
-							EDateFormat.MES_ANIO)
-					.equals(dtoIntFilterExtract.getStartMonth() + dtoIntFilterExtract.getStartYear(),
-							dtoIntFilterExtract.getEndMonth() + dtoIntFilterExtract.getEndYear())
+			new StringValidator()
+					.isNumericText(dtoIntFilterExtract.getExtractId())
+					.isNumericMonth(dtoIntFilterExtract.getMonth())
+					.isNumericText(dtoIntFilterExtract.getYear())
 					.validate();
-		} else {
-			DateValidator validator = (DateValidator) new DateValidator()
-					.noFuture(dtoIntFilterExtract.getStartMonth()+dtoIntFilterExtract.getStartYear(),
-							EDateFormat.MES_ANIO)
-					.validDateRange(dtoIntFilterExtract.getStartMonth()+dtoIntFilterExtract.getStartYear(),
-							dtoIntFilterExtract.getEndMonth()+dtoIntFilterExtract.getEndYear(),EDateFormat.MES_ANIO)
-					.validate();
-		}
+			new DateValidator().noFuture(dtoIntFilterExtract.getMonth()+dtoIntFilterExtract.getYear(),EDateFormat.MES_ANIO);
+		} 
 
 		// 2. Get response
 		final DTOIntExtractOutput result = productsDAO
@@ -80,7 +73,7 @@ public class SrvIntProducts implements ISrvIntProducts {
 		// 3. Validate output
 		DtoValidator.validate(result);
 
-		log.info(" getConditions Conditions ");
+		log.info(" listExtracts Extract ");
 		return result.getExtracts();
 	}
 

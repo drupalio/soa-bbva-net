@@ -83,7 +83,7 @@ public class SrvExecutivesV01 implements ISrvExecutivesV01,
 			@ApiParam(value = "order by param") @DefaultValue("null") @QueryParam("$sort") String sort) {
 
 		// 1. Validate filter FIQL
-		new FiqlValidator(filter).exist().hasEq("id").hasEq("type").validate();
+		new FiqlValidator(filter).exist().hasEq("type").validate();
 
 		// 2. Mapping to DTOIntFilter
 		DTOIntExecutivesFilter dtoIntExecutivesFilter = iExecutivesMapper.getDTOIntFilter(filter);

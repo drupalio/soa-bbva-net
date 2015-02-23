@@ -33,7 +33,7 @@ public class Customer implements Serializable {
 	@ApiModelProperty("Nombre del cliente")
 	private String name;
 	@ApiModelProperty("Segmento del cliente")
-	private EnumSegmentType segment;
+	private String segment;
 	@ApiModelProperty("Información de contacto que contiene los emails del cliente")
 	private ContactInfo contactInfo;
 	@ApiModelProperty("Ubicacion de la casa")
@@ -48,7 +48,7 @@ public class Customer implements Serializable {
 	@Min(0)
 	private Integer homeMembers;
 	@ApiModelProperty("Estrato del cliente")
-	private EnumDwelingType dwelingType;
+	private String dwelingType;
 	@ApiModelProperty("Ubicacion de la oficina")
 	private Place officeLocation;
 	@XmlJavaTypeAdapter(CalendarAdapter.class)
@@ -91,11 +91,11 @@ public class Customer implements Serializable {
 		this.name = name;
 	}
 
-	public EnumSegmentType getSegment() {
+	public String getSegment() {
 		return segment;
 	}
 
-	public void setSegment(EnumSegmentType segment) {
+	public void setSegment(String segment) {
 		this.segment = segment;
 	}
 
@@ -139,11 +139,11 @@ public class Customer implements Serializable {
 		this.homeMembers = homeMembers;
 	}
 
-	public EnumDwelingType getDwelingType() {
+	public String getDwelingType() {
 		return dwelingType;
 	}
 
-	public void setDwelingType(EnumDwelingType dwelingType) {
+	public void setDwelingType(String dwelingType) {
 		this.dwelingType = dwelingType;
 	}
 
