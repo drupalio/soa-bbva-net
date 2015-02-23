@@ -16,6 +16,15 @@ public class DTOIntExtract {
 	private String url;
 	private String generationDate;
 
+	
+	
+	@Override
+	public String toString() {
+		return "DTOIntExtract [month=" + month + ", year=" + year
+				+ ", extCode=" + extCode + ", auxCode=" + auxCode + ", url="
+				+ url + ", generationDate=" + generationDate + "]";
+	}
+
 	public String getMonth() {
 		return month;
 	}

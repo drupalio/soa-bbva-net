@@ -128,4 +128,6 @@ public class FormatoOZECN2S0 {
 	@Campo(indice = 18, nombre = "SALTR18", tipo = TipoCampo.ALFANUMERICO, longitudMinima = 100, longitudMaxima = 100)
 	private String saltr18;
 	
+	
+	
 }
