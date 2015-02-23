@@ -75,6 +75,14 @@ public class TxLoanMapper extends AbstractBbvaTxConfigurableMapper implements IT
 				.field("tipope", "operation")
 				.byDefault().register();
 
+		// Map  FormatoOZNCENI0 DTOIntFilterLoan
+		factory.classMap(FormatoOZNCENI0.class, DTOIntFilterLoan.class)
+				.field("notarje", "idLoan")
+				.field("fechini", "fechaInicial")
+				.field("fechafi", "fechaFinal")
+				.field("indpag", "paginationKey")
+				.field("pospag", "pageSize")
+				.byDefault().register();
 	}
 
 	/**
