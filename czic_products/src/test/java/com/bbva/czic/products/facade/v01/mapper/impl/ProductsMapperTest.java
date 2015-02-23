@@ -79,7 +79,7 @@ public class ProductsMapperTest {
 		assertEquals(conditions.getCategory(),dtoCond.getCategory());
 		assertEquals(conditions.getDescription(),dtoCond.getDescription());
 		assertEquals(conditions.getCommission(), dtoCond.getCommission());
-		assertEquals(conditions.getActivities(), conditions.getActivities());
+		assertEquals(conditions.getActivity(), conditions.getActivity());
 	}
 	
 	@Test

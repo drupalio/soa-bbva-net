@@ -49,11 +49,17 @@ public class ProductsMapper extends AbstractBbvaConfigurableMapper implements
 				.field("description", "description")
 				.field("openingDate", "openingDate")
 				.field("commission", "commission")
+				.field("mobilizationConditions", "mobilizationConditions")
 				.field("office.name", "office.name")
 				.field("office.postalAddress", "office.postalAddress")
 				.field("office.location.city.name", "office.location.city.name")
 				.field("office.location.country.name", "office.location.country.name")
-				.field("mobilizationConditions", "mobilizationConditions")
+				.field("activity.operationDate", "activity.operationDate")
+				.field("activity.executionDate", "activity.executionDate")
+				.field("activity.function.id", "activity.function.id")
+				.field("activity.function.type", "activity.function.type")
+				.field("activity.amount", "activity.amount")
+				.field("activity.reference", "activity.reference")
 				.byDefault()
 				.register();
 

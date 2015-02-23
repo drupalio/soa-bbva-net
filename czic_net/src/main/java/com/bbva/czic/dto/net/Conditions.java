@@ -41,7 +41,7 @@ public class Conditions implements Serializable {
 	@ApiModelProperty("")
 	private String mobilizationConditions;
 	@ApiModelProperty(value = "ultimas actividades realizadas", required = true)
-	private List<Activity> activities;
+	private Activity activity;
 
 	public Conditions() {
 		// default constructor
@@ -103,19 +103,19 @@ public class Conditions implements Serializable {
 		this.mobilizationConditions = mobilizationConditions;
 	}
 
-	public List<Activity> getActivities() {
-		return activities;
-	}
-
-	public void setActivities(List<Activity> activities) {
-		this.activities = activities;
-	}
-
 	public String getType() {
 		return type;
 	}
 
 	public void setType(String type) {
 		this.type = type;
+	}
+
+	public Activity getActivity() {
+		return activity;
+	}
+
+	public void setActivity(Activity activity) {
+		this.activity = activity;
 	}
 }
