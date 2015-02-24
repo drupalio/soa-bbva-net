@@ -14,6 +14,7 @@ import com.bbva.czic.products.dao.model.oznm.FormatoOZNCENM0;
 import com.bbva.czic.products.dao.model.oznm.FormatoOZNCSNM0;
 import com.bbva.czic.products.dao.model.oznt.FormatoOZECNTE0;
 import com.bbva.czic.products.dao.model.oznt.FormatoOZECNTS0;
+import com.bbva.czic.products.dao.model.oznt.FormatoOZECNTS1;
 
 public interface TxProductsMapper {
 
@@ -40,7 +41,9 @@ public interface TxProductsMapper {
 	public static final String WORD="http";
 	
 	public static final String FILLER="                                                                                                   ";
-	
+
+	DTOIntConditions mapOutOznt1(FormatoOZECNTS1 formatOutput);
+
 	public FormatoOZECNTE0 mapInOznt(DTOIntProduct dtoIn);
 
 	public DTOIntConditions mapOutOznt(FormatoOZECNTS0 formatOutput);

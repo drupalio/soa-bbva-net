@@ -20,6 +20,7 @@ import com.bbva.czic.products.dao.model.oznm.FormatoOZNCENM0;
 import com.bbva.czic.products.dao.model.oznm.FormatoOZNCSNM0;
 import com.bbva.czic.products.dao.model.oznt.FormatoOZECNTE0;
 import com.bbva.czic.products.dao.model.oznt.FormatoOZECNTS0;
+import com.bbva.czic.products.dao.model.oznt.FormatoOZECNTS1;
 import com.bbva.czic.routine.commons.rm.utils.mappers.AbstractBbvaTxConfigurableMapper;
 import com.bbva.czic.routine.commons.rm.utils.mappers.Mapper;
 import com.bbva.czic.routine.mapper.CustomMapper;
@@ -93,8 +94,12 @@ public class TxProductMapperImpl extends AbstractBbvaTxConfigurableMapper implem
 				.field("activity.reference","reffunc")
 				.byDefault()
 				.register();
+
+		// Map FormatoOZECNTS0 <-> DTOIntConditions (OZNT)****************
+		factory.classMap(DTOIntConditions.class, FormatoOZECNTS1.class)
+				.field("holder.alias", "titular").byDefault().register();
 		
-		// Map FormatoOZECNTS0 <-> DTOIntConditions (OZNM)
+		// Map FormatoOZECNTS1 <-> DTOIntConditions (OZNM)
 		factory.classMap(FormatoOZNCSNM0.class, DTOIntMovement.class)
 				//TODO Mapear saldo con valor origen
 				.field("numecta", "id")
@@ -157,6 +162,11 @@ public class TxProductMapperImpl extends AbstractBbvaTxConfigurableMapper implem
 	@Override
 	public FormatoOZECNTE0 mapInOznt(DTOIntProduct dtoIn) {
 		return map(dtoIn,FormatoOZECNTE0.class);
+	}
+
+	@Override
+	public DTOIntConditions mapOutOznt1(FormatoOZECNTS1 formatOutput) {
+		return map(formatOutput, DTOIntConditions.class);
 	}
 
 	@Override
