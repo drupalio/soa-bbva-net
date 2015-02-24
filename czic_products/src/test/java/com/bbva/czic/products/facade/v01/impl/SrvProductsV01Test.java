@@ -146,7 +146,7 @@ public class SrvProductsV01Test extends SpringContextBbvaTest{
 
 	public static Conditions mockConditionsEntity() {
 		Conditions condition = new Conditions();
-		condition.setOpeningDate(new GregorianCalendar());
+		condition.setOpeningDate(new Date());
 		condition.setCategory("");
 		condition.setDescription("");
 		condition.setOffice(new Office());
@@ -158,7 +158,7 @@ public class SrvProductsV01Test extends SpringContextBbvaTest{
 	public static DTOIntConditions mockDTOIntConditionsEntity() {
 		DTOIntConditions condition = new DTOIntConditions();
 		condition.setAlias("");
-		condition.setOpeningDate(new Date());
+//		condition.setOpeningDate(new Date());
 		condition.setCategory("");
 		condition.setDescription("");
 		condition.setOffice(new DTOIntOffice());
