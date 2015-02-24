@@ -2,15 +2,13 @@ package com.bbva.czic.products.dao.tx;
 
 import javax.annotation.Resource;
 
+import com.bbva.czic.products.dao.model.oznt.*;
+import com.bbva.czic.routine.commons.rm.utils.tx.impl.DoubleBbvaTransaction;
 import org.springframework.stereotype.Component;
 
 import com.bbva.czic.products.business.dto.DTOIntConditions;
 import com.bbva.czic.products.business.dto.DTOIntProduct;
 import com.bbva.czic.products.dao.mapper.TxProductsMapper;
-import com.bbva.czic.products.dao.model.oznt.FormatoOZECNTE0;
-import com.bbva.czic.products.dao.model.oznt.FormatoOZECNTS0;
-import com.bbva.czic.products.dao.model.oznt.PeticionTransaccionOznt;
-import com.bbva.czic.products.dao.model.oznt.RespuestaTransaccionOznt;
 import com.bbva.czic.routine.commons.rm.utils.tx.impl.SimpleBbvaTransaction;
 import com.bbva.jee.arq.spring.core.host.InvocadorTransaccion;
 
