@@ -66,6 +66,7 @@ public class TxProductMapperImpl extends AbstractBbvaTxConfigurableMapper implem
 				.field("valueEnd", "salfin").byDefault()
 				.register();
 		
+		//Para efectos de orden se construyó un custom mapper para la entrada del servicio
 		// Map  DTOIntFilterExtract <-> FormatoOZECN2S0(OZN2)
 		factory.classMap(FormatoOZECN2E0.class, DTOIntFilterExtract.class)
 						.customize(new ExtractListMapperIn()).byDefault().register();
@@ -132,6 +133,7 @@ public class TxProductMapperImpl extends AbstractBbvaTxConfigurableMapper implem
 				.byDefault()
 				.register();
 		
+		//Para efectos de orden se construyó un custom mapper para la salida del servicio
 		// Map FormatoOZECN2S0 <-> DTOIntExtractOutput (OZN2)
 		factory.classMap(DTOIntExtractOutput.class,FormatoOZECN2S0.class)
 				.customize(new ExtractListMapperOut()).register();
@@ -207,8 +209,17 @@ public class TxProductMapperImpl extends AbstractBbvaTxConfigurableMapper implem
 		return map(formatOutput,DTOIntExtractOutput.class);
 	}
 	
+	/**Inner Class de tipo customMapper para el mapeo de la entrada a la transacción OZN2 por trama plana
+	 * 
+	 * @author Entelgy
+	 *
+	 */
 	public class ExtractListMapperIn extends CustomMapper<FormatoOZECN2E0,DTOIntFilterExtract>{
 		
+		/**Método abstracto de mapeo del DTO interno al Formato de entrada de la transacción,
+		 * aquí se realiza el llamado a todos los diferentes métodos que seleccionan los modos del servicio.
+		 * 
+		 */
 		@Override
 		public void mapBtoA(final DTOIntFilterExtract dtoIntFilterExtract,final FormatoOZECN2E0 formatoEntrada,MappingContext context) {
 			log.info("Gettin' into ExtractListMapperIn.mapBtoA: DTO="+dtoIntFilterExtract.toString());
@@ -220,6 +231,14 @@ public class TxProductMapperImpl extends AbstractBbvaTxConfigurableMapper implem
 			log.info("Gettin' out ExtractListMapperIn.mapBtoA: trama="+formatoEntrada.getSubtrm0()+formatoEntrada.getSubtrm1()+formatoEntrada.getSubtrm2()+formatoEntrada.getSubtrm3());
 		}
 		
+		/**Mapeo de entrada para el modo del servicio de obtención de extracto, para ello el toma la información del filtro
+		 * y mediante Tokens y concatenaciones introduce la información en la trama plana en la variable parser
+		 * para luego ser procesada
+		 * 
+		 * @param dtoIntExtract dtoInterno con la información para obtener el extracto
+		 * @param formatoEntrada Formato de entrada de la transacción OZN2
+		 * @return
+		 */
 		private FormatoOZECN2E0 mapInOzn2getExtracts(DTOIntFilterExtract dtoIntExtract,FormatoOZECN2E0 formatoEntrada) {
 			log.info("Gettin' into ExtractListMapperIn.mapInOzn2getExtracts: DTO="+dtoIntExtract.toString());
 			String parser = headGenerate
@@ -234,6 +253,13 @@ public class TxProductMapperImpl extends AbstractBbvaTxConfigurableMapper implem
 			return processPlot(formatoEntrada, parser);
 		}
 
+		/**Mapeo de entrada para el modo del servicio de listado de extractos, para ello toma el número de producto y lo concatena
+		 * con la trama XML plana y lo coloca en la variable parser para luego ser procesada.
+		 * 
+		 *@param dtoIntExtract dtoInterno con la información para obtener el listado de extractos
+		 * @param formatoEntrada Formato de entrada de la transacción OZN2
+		 * @return
+		 */
 		private FormatoOZECN2E0 mapInOzn2ListExtracts(DTOIntFilterExtract dtoIntExtract,FormatoOZECN2E0 formatoEntrada) {
 			log.info("Gettin' into ExtractListMapperIn.mapInOzn2ListExtracts: DTO="+dtoIntExtract.toString());
 			String parser = headGet + dtoIntExtract.getProductId() + tailGet;
@@ -242,6 +268,12 @@ public class TxProductMapperImpl extends AbstractBbvaTxConfigurableMapper implem
 			return processPlot(formatoEntrada,parser);
 		}
 		
+		/**Procesa la trama, cortandola en cadenas de 100 para poder mapearlas en las variables del formato de entrada
+		 * 
+		 * @param formatoEntrada Formato de entrada de la transacción OZN2
+		 * @param parser Trama XML concatenada
+		 * @return
+		 */
 		private FormatoOZECN2E0 processPlot(FormatoOZECN2E0 formatoEntrada,String parser) {
 			log.info("Gettin' into ExtractListMapperIn.processPlot: DTO="+parser.toString());
 			int longitud=parser.length();
@@ -300,8 +332,17 @@ public class TxProductMapperImpl extends AbstractBbvaTxConfigurableMapper implem
 		}
 	}
 	
+	/**Inner Class de tipo customMapper para el mapeo de la salida a la transacción OZN2 por trama plana
+	 * 
+	 * @author Entelgy
+	 *
+	 */
 	public class ExtractListMapperOut extends CustomMapper<DTOIntExtractOutput,FormatoOZECN2S0> {
 		
+		/**Clase genérica del mapeo. Allí primero se concatena las cadenas de las salidas del servicio, si vienen nula, se coloca un espacio.
+		 * Posteriormente se selecciona el método de mapeo basado en la evaluación de la trama.
+		 * 
+		 */
 		@Override
 		public void mapBtoA(final FormatoOZECN2S0 formatoSalida,final DTOIntExtractOutput dtoIntExtractOutput,MappingContext context) {
 			log.info("Gettin' into ExtractListMapperOut.mapBtoA: Trama="+formatoSalida.toString());
@@ -319,6 +360,11 @@ public class TxProductMapperImpl extends AbstractBbvaTxConfigurableMapper implem
 			log.info("Gettin' out ExtractListMapperOut.mapBtoA: DTO="+dtoIntExtractOutput.toString());
 		}
 
+		/**Verifica que la cadena no venga nula, si lo es, retorna una cadena vacía.
+		 * 
+		 * @param string cadena de entrada
+		 * @return
+		 */
 		private String dnull(String string) {
 			if(string==null){
 				return "";
@@ -326,6 +372,12 @@ public class TxProductMapperImpl extends AbstractBbvaTxConfigurableMapper implem
 			return string;
 		}
 
+		/**Mapeo de salida para el modo de listado de extractos. La captura de datos se hace mediante StringTokenizers
+		 * ya que la trama viene partida con '|' y ';' entonces con esto se captura toda la información
+		 * 
+		 * @param dtoIntExtractOut Dto de salida
+		 * @param plot trama plana de salida
+		 */
 		private void mapListExtracts(DTOIntExtractOutput dtoIntExtractOut, String plot) {
 			log.info("Gettin' into ExtractListMapperOut.mapListExtracts: Trama="+plot);
 			dtoIntExtractOut.setExtracts(new ArrayList<DTOIntExtract>());
@@ -351,6 +403,12 @@ public class TxProductMapperImpl extends AbstractBbvaTxConfigurableMapper implem
 			
 		}
 
+		/**Mapeo de salida para el modo de obtención de extractos. La captura de datos se hace mediante StringTokenizers
+		 * ya que la trama viene partida con '|' y ';' entonces con esto se captura toda la información
+		 * 
+		 * @param dtoIntExtractOut Dto de salida
+		 * @param plot trama plana de salida
+		 */
 		private void mapGetExtracts(DTOIntExtractOutput dtoIntExtractOut, String plot) {
 			log.info("Gettin' into ExtractListMapperOut.mapGetExtracts: Trama="+plot);
 			dtoIntExtractOut.setExtracts(new ArrayList<DTOIntExtract>());
@@ -370,6 +428,12 @@ public class TxProductMapperImpl extends AbstractBbvaTxConfigurableMapper implem
 		};
 	}
 
+	/**Evalua si la trama contiene una URL mediante la busqueda de la palabra 'http'
+	 * Esta palabra puede ser cambiada en la interfaz de esta clase
+	 * 
+	 * @param formatOutput Formato de salida
+	 * @return booleano que es verdadero si encuentra la palabra
+	 */
 	private static boolean evaluatePlot(FormatoOZECN2S0 formatOutput) {
 		return (formatOutput.getSaltr01()!=null && formatOutput.getSaltr01().contains(WORD)) || 
 				(formatOutput.getSaltr02()!=null && formatOutput.getSaltr02().contains(WORD)) || 

@@ -158,6 +158,15 @@ public class ProductsMapper extends AbstractBbvaConfigurableMapper implements
 
 	}
 
+	/**Mapeo del Filtro al DTO del filtro para la entrada de la transacción,
+	 * si es para el modo listado de extractos, el filtro debe ir nulo, de lo contrario
+	 * este debe incluir el extractId o código externo, mes y año obligatoriamente
+	 * 
+	 * @param productId identificador del producto
+	 * @param filter filtro de la URL
+	 * 
+	 */
+	@Override
 	public DTOIntFilterExtract getDtoIntFilterExtract(String productId,
 			String filter) {
 		DTOIntFilterExtract dtoIntFilter = new DTOIntFilterExtract();
@@ -175,6 +184,13 @@ public class ProductsMapper extends AbstractBbvaConfigurableMapper implements
 		return dtoIntFilter;
 	}
 
+	/**Mapeo de salida del dto extractos a la entidad canónica, la única diferencia entre estas entidades
+	 * es el código de control que no se sabe en realidad para que se usa pero que sin embargo, para efectos
+	 * futuros, se captura.
+	 * 
+	 * @param list Listado de extractos en el dto interno
+	 * 
+	 */
 	@Override
 	public List<Extract> mapExtracts(List<DTOIntExtract> list) {
 		List<Extract> extracts = new ArrayList<Extract>();
