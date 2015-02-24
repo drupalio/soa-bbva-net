@@ -43,6 +43,8 @@ public class Conditions implements Serializable {
 	@ApiModelProperty(value = "ultimas actividades realizadas", required = true)
 	private Activity activity;
 
+	private List<Holder> holders;
+
 	public Conditions() {
 		// default constructor
 	}
@@ -117,5 +119,13 @@ public class Conditions implements Serializable {
 
 	public void setActivity(Activity activity) {
 		this.activity = activity;
+	}
+
+	public List<Holder> getHolders() {
+		return holders;
+	}
+
+	public void setHolders(List<Holder> holders) {
+		this.holders = holders;
 	}
 }
