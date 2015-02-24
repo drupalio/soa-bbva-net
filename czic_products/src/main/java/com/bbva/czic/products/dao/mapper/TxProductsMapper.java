@@ -1,12 +1,7 @@
 package com.bbva.czic.products.dao.mapper;
 
 import com.bbva.czic.dto.net.Holder;
-import com.bbva.czic.products.business.dto.DTOIntConditions;
-import com.bbva.czic.products.business.dto.DTOIntExtractOutput;
-import com.bbva.czic.products.business.dto.DTOIntFilterExtract;
-import com.bbva.czic.products.business.dto.DTOIntFilterMovements;
-import com.bbva.czic.products.business.dto.DTOIntMovement;
-import com.bbva.czic.products.business.dto.DTOIntProduct;
+import com.bbva.czic.products.business.dto.*;
 import com.bbva.czic.products.dao.model.ozn2.FormatoOZECN2E0;
 import com.bbva.czic.products.dao.model.ozn2.FormatoOZECN2S0;
 import com.bbva.czic.products.dao.model.oznl.FormatoOZECNLE0;
@@ -43,7 +38,7 @@ public interface TxProductsMapper {
 	
 	public static final String FILLER="                                                                                                   ";
 
-	Holder mapOutOznt1(FormatoOZECNTS1 formatOutput);
+	DTOIntHolder mapOutOznt1(FormatoOZECNTS1 formatOutput);
 
 	public FormatoOZECNTE0 mapInOznt(DTOIntProduct dtoIn);
 

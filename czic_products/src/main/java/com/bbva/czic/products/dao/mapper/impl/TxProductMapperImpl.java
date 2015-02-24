@@ -5,13 +5,7 @@ import java.util.ArrayList;
 import java.util.StringTokenizer;
 
 import com.bbva.czic.dto.net.Holder;
-import com.bbva.czic.products.business.dto.DTOIntConditions;
-import com.bbva.czic.products.business.dto.DTOIntExtract;
-import com.bbva.czic.products.business.dto.DTOIntExtractOutput;
-import com.bbva.czic.products.business.dto.DTOIntFilterExtract;
-import com.bbva.czic.products.business.dto.DTOIntFilterMovements;
-import com.bbva.czic.products.business.dto.DTOIntMovement;
-import com.bbva.czic.products.business.dto.DTOIntProduct;
+import com.bbva.czic.products.business.dto.*;
 import com.bbva.czic.products.dao.mapper.TxProductsMapper;
 import com.bbva.czic.products.dao.model.ozn2.FormatoOZECN2E0;
 import com.bbva.czic.products.dao.model.ozn2.FormatoOZECN2S0;
@@ -98,7 +92,7 @@ public class TxProductMapperImpl extends AbstractBbvaTxConfigurableMapper implem
 				.register();
 
 		// Map FormatoOZECNTS1 <-> DTOIntConditions (OZNT)****************
-		factory.classMap(FormatoOZECNTS1.class, Holder.class)
+		factory.classMap(FormatoOZECNTS1.class, DTOIntHolder.class)
 				.field("titular", "alias").byDefault().register();
 		
 		// Map FormatoOZNCSNM0 <-> DTOIntMovement (OZNM)
@@ -168,8 +162,8 @@ public class TxProductMapperImpl extends AbstractBbvaTxConfigurableMapper implem
 	}
 
 	@Override
-	public Holder mapOutOznt1(FormatoOZECNTS1 formatOutput) {
-		return  map(formatOutput, Holder.class);
+	public DTOIntHolder mapOutOznt1(FormatoOZECNTS1 formatOutput) {
+		return  map(formatOutput, DTOIntHolder.class);
 	}
 
 	@Override
