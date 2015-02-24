@@ -7,7 +7,7 @@ import java.io.Serializable;
 /**
  * Created by Entelgy on 24/02/2015.
  */
-public class DTOIntHolder  extends User implements Serializable {
+public class DTOIntHolder  extends DTOIntUser implements Serializable {
 
     private String alias;
 

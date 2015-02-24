@@ -25,6 +25,7 @@ public class ProductsMapper extends AbstractBbvaConfigurableMapper implements
 
 		super.configure(factory);
 		factory.classMap(DTOIntHolder.class, Holder.class)
+				.field("name", "name")
 				.field("alias", "alias")
 				.byDefault().register();
 
