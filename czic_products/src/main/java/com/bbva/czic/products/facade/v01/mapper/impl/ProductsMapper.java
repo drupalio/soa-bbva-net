@@ -42,7 +42,7 @@ public class ProductsMapper extends AbstractBbvaConfigurableMapper implements
 		super.configure(factory);
 
 		// Map DTOIntConditions <-> Conditions
-		factory.classMap(Conditions.class, DTOIntConditions.class)
+		factory.classMap(DTOIntConditions.class, Conditions.class)
 				.field("type", "type")
 				.field("alias", "alias")
 				.field("category", "category")
@@ -54,13 +54,9 @@ public class ProductsMapper extends AbstractBbvaConfigurableMapper implements
 				.field("office.postalAddress", "office.postalAddress")
 				.field("office.location.city.name", "office.location.city.name")
 				.field("office.location.country.name", "office.location.country.name")
-				.field("activity.operationDate", "activity.operationDate")
-				.field("activity.executionDate", "activity.executionDate")
-				.field("activity.function.id", "activity.function.id")
-				.field("activity.function.type", "activity.function.type")
-				.field("activity.amount", "activity.amount")
-				.field("activity.reference", "activity.reference")
-				.byDefault()
+				.field("activity", "activity")
+				.field("holders[0]", "holders[0]")
+
 				.register();
 
 		// Add ProductDTO Factory
@@ -110,7 +106,7 @@ public class ProductsMapper extends AbstractBbvaConfigurableMapper implements
 	@Override
 	public Conditions map(DTOIntConditions intConditions) {
 		log.info("map- return:Conditions-parameter:DTOIntConditions");
-		return map(intConditions,Conditions.class);
+		return map(intConditions, Conditions.class);
 	}
 
 	@Override

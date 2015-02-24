@@ -4,6 +4,7 @@ package com.bbva.czic.products.dao.mapper.impl;
 import java.util.ArrayList;
 import java.util.StringTokenizer;
 
+import com.bbva.czic.dto.net.Holder;
 import com.bbva.czic.products.business.dto.DTOIntConditions;
 import com.bbva.czic.products.business.dto.DTOIntExtract;
 import com.bbva.czic.products.business.dto.DTOIntExtractOutput;
@@ -96,11 +97,11 @@ public class TxProductMapperImpl extends AbstractBbvaTxConfigurableMapper implem
 				.byDefault()
 				.register();
 
-		// Map FormatoOZECNTS0 <-> DTOIntConditions (OZNT)****************
-		factory.classMap(DTOIntConditions.class, FormatoOZECNTS1.class)
-				.field("holder.alias", "titular").byDefault().register();
+		// Map FormatoOZECNTS1 <-> DTOIntConditions (OZNT)****************
+		factory.classMap(FormatoOZECNTS1.class, Holder.class)
+				.field("titular", "alias").byDefault().register();
 		
-		// Map FormatoOZECNTS1 <-> DTOIntConditions (OZNM)
+		// Map FormatoOZNCSNM0 <-> DTOIntMovement (OZNM)
 		factory.classMap(FormatoOZNCSNM0.class, DTOIntMovement.class)
 				//TODO Mapear saldo con valor origen
 				.field("numecta", "id")
@@ -167,8 +168,8 @@ public class TxProductMapperImpl extends AbstractBbvaTxConfigurableMapper implem
 	}
 
 	@Override
-	public DTOIntConditions mapOutOznt1(FormatoOZECNTS1 formatOutput) {
-		return map(formatOutput, DTOIntConditions.class);
+	public Holder mapOutOznt1(FormatoOZECNTS1 formatOutput) {
+		return  map(formatOutput, Holder.class);
 	}
 
 	@Override

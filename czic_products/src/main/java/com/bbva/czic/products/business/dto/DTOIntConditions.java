@@ -2,9 +2,11 @@
 package com.bbva.czic.products.business.dto;
 
 import com.bbva.czic.dto.net.Activity;
+import com.bbva.czic.dto.net.Holder;
 
+import java.util.Calendar;
 import java.util.Date;
-
+import java.util.List;
 
 
 public class DTOIntConditions {
@@ -19,6 +21,7 @@ public class DTOIntConditions {
     private DTOIntOffice office;
     private String mobilizationConditions;
     private Activity activity;
+    private List<Holder> holders;
 
     public DTOIntConditions() {
         //default constructor
@@ -94,5 +97,13 @@ public class DTOIntConditions {
 
     public void setActivity(Activity activity) {
         this.activity = activity;
+    }
+
+    public List<Holder> getHolders() {
+        return holders;
+    }
+
+    public void setHolders(List<Holder> holders) {
+        this.holders = holders;
     }
 }
