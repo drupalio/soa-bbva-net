@@ -3,27 +3,11 @@ package com.bbva.czic.products.facade.v01.mapper.impl;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.bbva.czic.dto.net.*;
+import com.bbva.czic.products.business.dto.*;
 import org.hibernate.id.enhanced.AccessCallback;
 import org.springframework.stereotype.Component;
 
-import com.bbva.czic.dto.net.AccMoveDetail;
-import com.bbva.czic.dto.net.City;
-import com.bbva.czic.dto.net.Conditions;
-import com.bbva.czic.dto.net.Extract;
-import com.bbva.czic.dto.net.Location;
-import com.bbva.czic.dto.net.Movement;
-import com.bbva.czic.dto.net.Office;
-import com.bbva.czic.dto.net.State;
-import com.bbva.czic.products.business.dto.DTOIntCity;
-import com.bbva.czic.products.business.dto.DTOIntConditions;
-import com.bbva.czic.products.business.dto.DTOIntExtract;
-import com.bbva.czic.products.business.dto.DTOIntFilterExtract;
-import com.bbva.czic.products.business.dto.DTOIntFilterMovements;
-import com.bbva.czic.products.business.dto.DTOIntLocation;
-import com.bbva.czic.products.business.dto.DTOIntMovement;
-import com.bbva.czic.products.business.dto.DTOIntOffice;
-import com.bbva.czic.products.business.dto.DTOIntProduct;
-import com.bbva.czic.products.business.dto.DTOIntState;
 import com.bbva.czic.products.facade.v01.mapper.IProductsMapper;
 import com.bbva.czic.routine.commons.rm.utils.fiql.FiqlType;
 import com.bbva.czic.routine.commons.rm.utils.mappers.AbstractBbvaConfigurableMapper;
@@ -40,6 +24,9 @@ public class ProductsMapper extends AbstractBbvaConfigurableMapper implements
 	protected void configure(MapperFactory factory) {
 
 		super.configure(factory);
+		factory.classMap(DTOIntHolder.class, Holder.class)
+				.field("alias", "alias")
+				.byDefault().register();
 
 		// Map DTOIntConditions <-> Conditions
 		factory.classMap(DTOIntConditions.class, Conditions.class)
@@ -55,7 +42,7 @@ public class ProductsMapper extends AbstractBbvaConfigurableMapper implements
 				.field("office.location.city.name", "office.location.city.name")
 				.field("office.location.country.name", "office.location.country.name")
 				.field("activity", "activity")
-				.field("holders[0]", "holders[0]")
+				.field("holders", "holders")
 
 				.register();
 

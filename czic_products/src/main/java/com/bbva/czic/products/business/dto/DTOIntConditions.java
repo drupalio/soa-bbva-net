@@ -21,7 +21,7 @@ public class DTOIntConditions {
     private DTOIntOffice office;
     private String mobilizationConditions;
     private Activity activity;
-    private List<Holder> holders;
+    private List<DTOIntHolder> holders;
 
     public DTOIntConditions() {
         //default constructor
@@ -99,11 +99,11 @@ public class DTOIntConditions {
         this.activity = activity;
     }
 
-    public List<Holder> getHolders() {
+    public List<DTOIntHolder> getHolders() {
         return holders;
     }
 
-    public void setHolders(List<Holder> holders) {
+    public void setHolders(List<DTOIntHolder> holders) {
         this.holders = holders;
     }
 }

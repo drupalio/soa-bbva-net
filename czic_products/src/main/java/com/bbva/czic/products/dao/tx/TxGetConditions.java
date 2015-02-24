@@ -3,6 +3,7 @@ package com.bbva.czic.products.dao.tx;
 import javax.annotation.Resource;
 
 import com.bbva.czic.dto.net.Holder;
+import com.bbva.czic.products.business.dto.DTOIntHolder;
 import com.bbva.czic.products.dao.model.oznt.*;
 import com.bbva.czic.routine.commons.rm.utils.tx.impl.DoubleBbvaTransaction;
 import com.bbva.czic.routine.commons.rm.utils.tx.impl.SimpleDobleFormatBbvaTransaction;
@@ -42,7 +43,7 @@ public class TxGetConditions extends SimpleDobleFormatBbvaTransaction<DTOIntProd
 
 	@Override
 	protected DTOIntConditions mapResponseFormatToInnerDtoOfOutDto(FormatoOZECNTS1 formatInnerOutput, DTOIntConditions dtoOut) {
-		List<Holder> holderList = new ArrayList<Holder>();
+		List<DTOIntHolder> holderList = new ArrayList<DTOIntHolder>();
 		holderList.add(txProductMapper.mapOutOznt1(formatInnerOutput));
 		dtoOut.setHolders(holderList);
 		return dtoOut;
