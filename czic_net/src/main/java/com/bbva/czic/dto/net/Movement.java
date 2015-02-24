@@ -52,11 +52,9 @@ public class Movement  implements Serializable
     private Office office;
     @ApiModelProperty(value = "Campo alfanum\u00e9rico que permite identificar la red utilizada para la operaci\u00f3n", required = true)
     private String status;
-    @XmlJavaTypeAdapter(MoneyAdapter.class)
     @XmlElement(type = Money.class)
     @ApiModelProperty("valor de la operacion")
     private Money value;
-    @XmlJavaTypeAdapter(MoneyAdapter.class)
     @XmlElement(type = Money.class)
     @ApiModelProperty("")
     private Money balance;
