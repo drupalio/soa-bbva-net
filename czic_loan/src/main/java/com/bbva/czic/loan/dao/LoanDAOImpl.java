@@ -25,7 +25,7 @@ public class LoanDAOImpl implements LoanDAO {
 	 * OZNJ
 	 */
 	@Resource(name = "tx-get-rotary-quota")
-	private TxGetRotaryQuota txGetRotaryQuota;
+	private TxGetRotaryQuota txGetRotaryQuota;  
 
 
 	/**

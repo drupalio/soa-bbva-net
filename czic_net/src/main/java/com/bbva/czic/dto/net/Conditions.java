@@ -2,6 +2,7 @@ package com.bbva.czic.dto.net;
 
 import java.io.Serializable;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import javax.validation.constraints.NotNull;
@@ -31,9 +32,9 @@ public class Conditions implements Serializable {
 	private String category;
 	@ApiModelProperty("Descripcion del tipo de producto")
 	private String description;
-	@XmlJavaTypeAdapter(CalendarAdapter.class)
+	//@XmlJavaTypeAdapter(CalendarAdapter.class)
 	@ApiModelProperty(value = " Fecha en la que se realizo la apertura del producto", required = true)
-	private Calendar openingDate;
+	private Date openingDate;
 	@ApiModelProperty(value = "Tipo de comision que aplica para el producto", required = true)
 	private String commission;
 	@ApiModelProperty(value = "Datos de la oficina donde se realizo la apertura del producto", required = true)
@@ -41,7 +42,9 @@ public class Conditions implements Serializable {
 	@ApiModelProperty("")
 	private String mobilizationConditions;
 	@ApiModelProperty(value = "ultimas actividades realizadas", required = true)
-	private List<Activity> activities;
+	private Activity activity;
+
+	private List<Holder> holders;
 
 	public Conditions() {
 		// default constructor
@@ -71,11 +74,11 @@ public class Conditions implements Serializable {
 		this.description = description;
 	}
 
-	public Calendar getOpeningDate() {
+	public Date getOpeningDate() {
 		return openingDate;
 	}
 
-	public void setOpeningDate(Calendar openingDate) {
+	public void setOpeningDate(Date openingDate) {
 		this.openingDate = openingDate;
 	}
 
@@ -103,19 +106,27 @@ public class Conditions implements Serializable {
 		this.mobilizationConditions = mobilizationConditions;
 	}
 
-	public List<Activity> getActivities() {
-		return activities;
-	}
-
-	public void setActivities(List<Activity> activities) {
-		this.activities = activities;
-	}
-
 	public String getType() {
 		return type;
 	}
 
 	public void setType(String type) {
 		this.type = type;
+	}
+
+	public Activity getActivity() {
+		return activity;
+	}
+
+	public void setActivity(Activity activity) {
+		this.activity = activity;
+	}
+
+	public List<Holder> getHolders() {
+		return holders;
+	}
+
+	public void setHolders(List<Holder> holders) {
+		this.holders = holders;
 	}
 }

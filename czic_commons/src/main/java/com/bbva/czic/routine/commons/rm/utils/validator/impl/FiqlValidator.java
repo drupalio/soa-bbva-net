@@ -9,7 +9,7 @@ public class FiqlValidator extends Validator {
 
 	private String filter;
 
-	private String originFilter;
+	private final String originFilter;
 
 	private Integer validateCount;
 

@@ -3,13 +3,20 @@ package com.bbva.czic.loan.facade.v01.mappers.impl;
 import com.bbva.czic.dto.net.Loan;
 import com.bbva.czic.dto.net.Movement;
 import com.bbva.czic.dto.net.RotaryQuotaMove;
+import com.bbva.czic.loan.business.dto.DTOIntFilterLoan;
 import com.bbva.czic.loan.business.dto.DTOIntLoan;
 import com.bbva.czic.loan.business.dto.DTOIntMovement;
 import com.bbva.czic.loan.business.dto.DTOIntRotaryQuotaMove;
 import com.bbva.czic.loan.facade.v01.mappers.ILoanMapper;
+import com.bbva.czic.routine.commons.rm.utils.errors.EnumError;
+import com.bbva.czic.routine.commons.rm.utils.fiql.FiqlType;
 import com.bbva.czic.routine.commons.rm.utils.mappers.AbstractBbvaConfigurableMapper;
 import com.bbva.czic.routine.commons.rm.utils.mappers.Mapper;
 import com.bbva.czic.routine.mapper.MapperFactory;
+import com.bbva.jee.arq.spring.core.servicing.gce.BusinessServiceException;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 @Mapper(value = "loan-mapper")
@@ -43,6 +50,7 @@ public class LoanMapper extends AbstractBbvaConfigurableMapper implements ILoanM
 				.field("operation", "operation")
 				.field("value", "value")
 				.field("balance", "balance")
+
 				.byDefault().register();
 
 		// Map DTOIntMovement <-> RotaryQuotaMove
@@ -67,6 +75,24 @@ public class LoanMapper extends AbstractBbvaConfigurableMapper implements ILoanM
 	@Override
 	public Loan map(DTOIntLoan dtoIntLoan) {
 		return map(dtoIntLoan, Loan.class);
+	}
+
+	@Override
+	public DTOIntFilterLoan getDtoIntFilter(String filter) {
+		final String startDate =  this.getGeValue(filter, FiqlType.transactionDate.name());
+		final String endDate = this.getLeValue(filter, FiqlType.transactionDate.name());
+
+		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+
+		final DTOIntFilterLoan dtoIntFilterLoan = new DTOIntFilterLoan();
+		try {
+			dtoIntFilterLoan.setFechaInicial(simpleDateFormat.parse(startDate));
+			dtoIntFilterLoan.setFechaFinal(simpleDateFormat.parse(endDate));
+		} catch (ParseException e) {
+			throw new BusinessServiceException(EnumError.WRONG_PARAMETERS.getAlias());
+		}
+
+		return dtoIntFilterLoan;
 	}
 
 	/**

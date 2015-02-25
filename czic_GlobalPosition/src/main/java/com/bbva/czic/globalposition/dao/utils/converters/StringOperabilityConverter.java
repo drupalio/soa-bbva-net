@@ -10,6 +10,7 @@ import org.mockito.Mock;
 public class StringOperabilityConverter extends BidirectionalConverter<String, Boolean>{
 
 	private static final String BLOCKED = "B";
+	public static final String UNBLOCKED = "U";
 
 	@Override
 	public Boolean convertTo(String source, Type<Boolean> destinationType) {
@@ -18,7 +19,7 @@ public class StringOperabilityConverter extends BidirectionalConverter<String, B
 
 	@Override
 	public String convertFrom(Boolean source, Type<String> destinationType) {
-		return (source) ? "B" : "U";
+		return (source) ? UNBLOCKED : BLOCKED;
 	}
 
 }

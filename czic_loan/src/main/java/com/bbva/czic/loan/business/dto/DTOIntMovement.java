@@ -23,7 +23,6 @@ public class DTOIntMovement {
 	@NotNull
 	private Operation operation;
 
-
 	@NotNull
 	private Money value;
 
@@ -71,7 +70,6 @@ public class DTOIntMovement {
 		return value;
 	}
 
-
 	public void setValue(Money value) {
 		this.value = value;
 	}
@@ -83,4 +81,5 @@ public class DTOIntMovement {
 	public void setBalance(Money balance) {
 		this.balance = balance;
 	}
+
 }

@@ -46,17 +46,11 @@ public class TransaccionOzn1Mock implements InvocadorTransaccion<PeticionTransac
 
 			try {
 				respuesta.getCuerpo().getPartes().addAll(getCopyOZECN1S1List());
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-
-		} else {
-
-			try {
 				respuesta.getCuerpo().getPartes().addAll(getCopyOZECN1S0List());
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
+
 		}
 
 		return respuesta;

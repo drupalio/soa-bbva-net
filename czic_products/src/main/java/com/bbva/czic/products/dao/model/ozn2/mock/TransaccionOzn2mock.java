@@ -30,7 +30,7 @@ public class TransaccionOzn2mock implements
 	public RespuestaTransaccionOzn2 invocar(PeticionTransaccionOzn2 transaccion)
 			throws ExcepcionTransaccion {
 		RespuestaTransaccionOzn2 respuesta = new RespuestaTransaccionOzn2();
-		FormatoOZECN2S0 formatoSalida = processPlot(tramaLista);
+		FormatoOZECN2S0 formatoSalida = processPlot(tramaExtractos);
 		final DataFactory dataFactory = new DataFactory();
 		CopySalida salida = new CopySalida();
 		salida.setCopy(formatoSalida);

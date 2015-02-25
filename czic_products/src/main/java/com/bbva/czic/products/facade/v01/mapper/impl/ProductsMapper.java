@@ -3,27 +3,11 @@ package com.bbva.czic.products.facade.v01.mapper.impl;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.bbva.czic.dto.net.*;
+import com.bbva.czic.products.business.dto.*;
 import org.hibernate.id.enhanced.AccessCallback;
 import org.springframework.stereotype.Component;
 
-import com.bbva.czic.dto.net.AccMoveDetail;
-import com.bbva.czic.dto.net.City;
-import com.bbva.czic.dto.net.Conditions;
-import com.bbva.czic.dto.net.Extract;
-import com.bbva.czic.dto.net.Location;
-import com.bbva.czic.dto.net.Movement;
-import com.bbva.czic.dto.net.Office;
-import com.bbva.czic.dto.net.State;
-import com.bbva.czic.products.business.dto.DTOIntCity;
-import com.bbva.czic.products.business.dto.DTOIntConditions;
-import com.bbva.czic.products.business.dto.DTOIntExtract;
-import com.bbva.czic.products.business.dto.DTOIntFilterExtract;
-import com.bbva.czic.products.business.dto.DTOIntFilterMovements;
-import com.bbva.czic.products.business.dto.DTOIntLocation;
-import com.bbva.czic.products.business.dto.DTOIntMovement;
-import com.bbva.czic.products.business.dto.DTOIntOffice;
-import com.bbva.czic.products.business.dto.DTOIntProduct;
-import com.bbva.czic.products.business.dto.DTOIntState;
 import com.bbva.czic.products.facade.v01.mapper.IProductsMapper;
 import com.bbva.czic.routine.commons.rm.utils.fiql.FiqlType;
 import com.bbva.czic.routine.commons.rm.utils.mappers.AbstractBbvaConfigurableMapper;
@@ -40,21 +24,26 @@ public class ProductsMapper extends AbstractBbvaConfigurableMapper implements
 	protected void configure(MapperFactory factory) {
 
 		super.configure(factory);
+		factory.classMap(DTOIntHolder.class, Holder.class)
+				.field("name", "name")
+				.field("alias", "alias")
+				.byDefault().register();
 
 		// Map DTOIntConditions <-> Conditions
-		factory.classMap(Conditions.class, DTOIntConditions.class)
+		factory.classMap(DTOIntConditions.class, Conditions.class)
 				.field("type", "type")
 				.field("alias", "alias")
 				.field("category", "category")
 				.field("description", "description")
 				.field("openingDate", "openingDate")
 				.field("commission", "commission")
+				.field("mobilizationConditions", "mobilizationConditions")
 				.field("office.name", "office.name")
 				.field("office.postalAddress", "office.postalAddress")
 				.field("office.location.city.name", "office.location.city.name")
 				.field("office.location.country.name", "office.location.country.name")
-				.field("mobilizationConditions", "mobilizationConditions")
-				.byDefault()
+				.field("activity", "activity")
+				.field("holders", "holders")
 				.register();
 
 		// Add ProductDTO Factory
@@ -104,7 +93,7 @@ public class ProductsMapper extends AbstractBbvaConfigurableMapper implements
 	@Override
 	public Conditions map(DTOIntConditions intConditions) {
 		log.info("map- return:Conditions-parameter:DTOIntConditions");
-		return map(intConditions,Conditions.class);
+		return map(intConditions, Conditions.class);
 	}
 
 	@Override
@@ -152,6 +141,15 @@ public class ProductsMapper extends AbstractBbvaConfigurableMapper implements
 
 	}
 
+	/**Mapeo del Filtro al DTO del filtro para la entrada de la transacción,
+	 * si es para el modo listado de extractos, el filtro debe ir nulo, de lo contrario
+	 * este debe incluir el extractId o código externo, mes y año obligatoriamente
+	 * 
+	 * @param productId identificador del producto
+	 * @param filter filtro de la URL
+	 * 
+	 */
+	@Override
 	public DTOIntFilterExtract getDtoIntFilterExtract(String productId,
 			String filter) {
 		DTOIntFilterExtract dtoIntFilter = new DTOIntFilterExtract();
@@ -169,6 +167,13 @@ public class ProductsMapper extends AbstractBbvaConfigurableMapper implements
 		return dtoIntFilter;
 	}
 
+	/**Mapeo de salida del dto extractos a la entidad canónica, la única diferencia entre estas entidades
+	 * es el código de control que no se sabe en realidad para que se usa pero que sin embargo, para efectos
+	 * futuros, se captura.
+	 * 
+	 * @param list Listado de extractos en el dto interno
+	 * 
+	 */
 	@Override
 	public List<Extract> mapExtracts(List<DTOIntExtract> list) {
 		List<Extract> extracts = new ArrayList<Extract>();

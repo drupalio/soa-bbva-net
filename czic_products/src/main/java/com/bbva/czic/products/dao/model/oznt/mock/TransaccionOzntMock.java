@@ -1,5 +1,6 @@
 package com.bbva.czic.products.dao.model.oznt.mock;
 
+import com.bbva.czic.products.dao.model.oznt.FormatoOZECNTS1;
 import org.fluttercode.datafactory.impl.DataFactory;
 import org.springframework.context.annotation.Profile;
 
@@ -28,8 +29,10 @@ public class TransaccionOzntMock implements InvocadorTransaccion<PeticionTransac
     public RespuestaTransaccionOznt invocar(PeticionTransaccionOznt transaccion) throws ExcepcionTransaccion {
         final RespuestaTransaccionOznt respuesta = new RespuestaTransaccionOznt();
         final FormatoOZECNTS0 salida = new FormatoOZECNTS0();
+        final FormatoOZECNTS1 salida1 = new FormatoOZECNTS1();
         final DataFactory dataFactory = new DataFactory();
         CopySalida copySalida = new CopySalida();
+        CopySalida copySalida1 = new CopySalida();
 
         salida.setTipprod(MOCK_PRODUCT_TYPE);
         salida.setDesprod("Cuenta Ahorros");
@@ -41,9 +44,16 @@ public class TransaccionOzntMock implements InvocadorTransaccion<PeticionTransac
         salida.setNomofic(dataFactory.getRandomText(20));
         salida.setPaisofi(dataFactory.getRandomText(20));
         salida.setConprod("9000");
+        salida.setTipfunc(dataFactory.getNumberText(10));
 
         copySalida.setCopy(salida);
+
+        salida1.setTitular(dataFactory.getFirstName());
+
+        copySalida1.setCopy(salida1);
+
         respuesta.getCuerpo().getPartes().add(copySalida);
+        respuesta.getCuerpo().getPartes().add(copySalida1);
         return respuesta;
     }
 

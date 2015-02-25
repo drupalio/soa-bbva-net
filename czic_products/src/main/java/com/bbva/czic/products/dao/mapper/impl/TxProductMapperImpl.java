@@ -4,13 +4,8 @@ package com.bbva.czic.products.dao.mapper.impl;
 import java.util.ArrayList;
 import java.util.StringTokenizer;
 
-import com.bbva.czic.products.business.dto.DTOIntConditions;
-import com.bbva.czic.products.business.dto.DTOIntExtract;
-import com.bbva.czic.products.business.dto.DTOIntExtractOutput;
-import com.bbva.czic.products.business.dto.DTOIntFilterExtract;
-import com.bbva.czic.products.business.dto.DTOIntFilterMovements;
-import com.bbva.czic.products.business.dto.DTOIntMovement;
-import com.bbva.czic.products.business.dto.DTOIntProduct;
+import com.bbva.czic.dto.net.Holder;
+import com.bbva.czic.products.business.dto.*;
 import com.bbva.czic.products.dao.mapper.TxProductsMapper;
 import com.bbva.czic.products.dao.model.ozn2.FormatoOZECN2E0;
 import com.bbva.czic.products.dao.model.ozn2.FormatoOZECN2S0;
@@ -20,6 +15,7 @@ import com.bbva.czic.products.dao.model.oznm.FormatoOZNCENM0;
 import com.bbva.czic.products.dao.model.oznm.FormatoOZNCSNM0;
 import com.bbva.czic.products.dao.model.oznt.FormatoOZECNTE0;
 import com.bbva.czic.products.dao.model.oznt.FormatoOZECNTS0;
+import com.bbva.czic.products.dao.model.oznt.FormatoOZECNTS1;
 import com.bbva.czic.routine.commons.rm.utils.mappers.AbstractBbvaTxConfigurableMapper;
 import com.bbva.czic.routine.commons.rm.utils.mappers.Mapper;
 import com.bbva.czic.routine.mapper.CustomMapper;
@@ -65,6 +61,7 @@ public class TxProductMapperImpl extends AbstractBbvaTxConfigurableMapper implem
 				.field("valueEnd", "salfin").byDefault()
 				.register();
 		
+		//Para efectos de orden se construyó un custom mapper para la entrada del servicio
 		// Map  DTOIntFilterExtract <-> FormatoOZECN2S0(OZN2)
 		factory.classMap(FormatoOZECN2E0.class, DTOIntFilterExtract.class)
 						.customize(new ExtractListMapperIn()).byDefault().register();
@@ -72,7 +69,7 @@ public class TxProductMapperImpl extends AbstractBbvaTxConfigurableMapper implem
 		/**
 		 * MAPEO DE SALIDAS
 		 */
-		// Map FormatoOZECNTS0 <-> DTOIntConditions (OZNT)
+		// Map FormatoOZECNTS0 <-> DTOIntConditions (OZNT)****************
 		factory.classMap(DTOIntConditions.class, FormatoOZECNTS0.class)
 				.field("type", "tipprod")
 				.field("alias", "tialias")
@@ -85,10 +82,20 @@ public class TxProductMapperImpl extends AbstractBbvaTxConfigurableMapper implem
 				.field("office.postalAddress", "dirofic")
 				.field("office.location.city.name", "ciudofi")
 				.field("office.location.country.name", "paisofi")
+				.field("activity.operationDate","fecoper")
+				.field("activity.executionDate","fecejec")
+				.field("activity.function.id","tipfunc")
+				.field("activity.function.type","desfunc")
+				.field("activity.amount","cantdad")
+				.field("activity.reference","reffunc")
 				.byDefault()
 				.register();
+
+		// Map FormatoOZECNTS1 <-> DTOIntConditions (OZNT)****************
+		factory.classMap(FormatoOZECNTS1.class, DTOIntHolder.class)
+				.field("titular", "alias").byDefault().register();
 		
-		// Map FormatoOZECNTS0 <-> DTOIntConditions (OZNM)
+		// Map FormatoOZNCSNM0 <-> DTOIntMovement (OZNM)
 		factory.classMap(FormatoOZNCSNM0.class, DTOIntMovement.class)
 				//TODO Mapear saldo con valor origen
 				.field("numecta", "id")
@@ -121,6 +128,7 @@ public class TxProductMapperImpl extends AbstractBbvaTxConfigurableMapper implem
 				.byDefault()
 				.register();
 		
+		//Para efectos de orden se construyó un custom mapper para la salida del servicio
 		// Map FormatoOZECN2S0 <-> DTOIntExtractOutput (OZN2)
 		factory.classMap(DTOIntExtractOutput.class,FormatoOZECN2S0.class)
 				.customize(new ExtractListMapperOut()).register();
@@ -151,6 +159,11 @@ public class TxProductMapperImpl extends AbstractBbvaTxConfigurableMapper implem
 	@Override
 	public FormatoOZECNTE0 mapInOznt(DTOIntProduct dtoIn) {
 		return map(dtoIn,FormatoOZECNTE0.class);
+	}
+
+	@Override
+	public DTOIntHolder mapOutOznt1(FormatoOZECNTS1 formatOutput) {
+		return  map(formatOutput, DTOIntHolder.class);
 	}
 
 	@Override
@@ -191,118 +204,162 @@ public class TxProductMapperImpl extends AbstractBbvaTxConfigurableMapper implem
 		return map(formatOutput,DTOIntExtractOutput.class);
 	}
 	
+	/**Inner Class de tipo customMapper para el mapeo de la entrada a la transacción OZN2 por trama plana
+	 * 
+	 * @author Entelgy
+	 *
+	 */
 	public class ExtractListMapperIn extends CustomMapper<FormatoOZECN2E0,DTOIntFilterExtract>{
 		
+		/**Método abstracto de mapeo del DTO interno al Formato de entrada de la transacción,
+		 * aquí se realiza el llamado a todos los diferentes métodos que seleccionan los modos del servicio.
+		 * 
+		 */
 		@Override
-		public void mapBtoA(DTOIntFilterExtract b, FormatoOZECN2E0 a,MappingContext context) {
-			log.info("Gettin' into ExtractListMapperIn.mapBtoA: DTO="+b.toString());
-			if(b.getExtractId()==null){
-				a=mapInOzn2ListExtracts(b);
+		public void mapBtoA(final DTOIntFilterExtract dtoIntFilterExtract,final FormatoOZECN2E0 formatoEntrada,MappingContext context) {
+			log.info("Gettin' into ExtractListMapperIn.mapBtoA: DTO="+dtoIntFilterExtract.toString());
+			if(dtoIntFilterExtract.getExtractId()==null){
+				mapInOzn2ListExtracts(dtoIntFilterExtract,formatoEntrada);
 			}else{
-				a=mapInOzn2getExtracts(b);
+				mapInOzn2getExtracts(dtoIntFilterExtract,formatoEntrada);
 			}
-			log.info("Gettin' out ExtractListMapperIn.mapBtoA: trama="+a.getSubtrm0()+a.getSubtrm1()+a.getSubtrm2()+a.getSubtrm3());
+			log.info("Gettin' out ExtractListMapperIn.mapBtoA: trama="+formatoEntrada.getSubtrm0()+formatoEntrada.getSubtrm1()+formatoEntrada.getSubtrm2()+formatoEntrada.getSubtrm3());
 		}
 		
-		private FormatoOZECN2E0 mapInOzn2getExtracts(DTOIntFilterExtract dtoIn) {
-			log.info("Gettin' into ExtractListMapperIn.mapInOzn2getExtracts: DTO="+dtoIn.toString());
-			FormatoOZECN2E0 formato = new FormatoOZECN2E0();
+		/**Mapeo de entrada para el modo del servicio de obtención de extracto, para ello el toma la información del filtro
+		 * y mediante Tokens y concatenaciones introduce la información en la trama plana en la variable parser
+		 * para luego ser procesada
+		 * 
+		 * @param dtoIntExtract dtoInterno con la información para obtener el extracto
+		 * @param formatoEntrada Formato de entrada de la transacción OZN2
+		 * @return
+		 */
+		private FormatoOZECN2E0 mapInOzn2getExtracts(DTOIntFilterExtract dtoIntExtract,FormatoOZECN2E0 formatoEntrada) {
+			log.info("Gettin' into ExtractListMapperIn.mapInOzn2getExtracts: DTO="+dtoIntExtract.toString());
 			String parser = headGenerate
 					+ REQUEST_EXTRACT.replace("$",""
-						+ IDPRODUCT.replace("$", dtoIn.getProductId())
-						+ YEAR.replace("$", dtoIn.getYear())
-						+ MONTH.replace("$", dtoIn.getMonth())
-						+ EXTERNAL_CODE.replace("$",dtoIn.getExtractId())) 
+						+ IDPRODUCT.replace("$", dtoIntExtract.getProductId())
+						+ YEAR.replace("$", dtoIntExtract.getYear())
+						+ MONTH.replace("$", dtoIntExtract.getMonth())
+						+ EXTERNAL_CODE.replace("$",dtoIntExtract.getExtractId())) 
 					+ tailGenerate;
-			formato.setLongtra(parser.length());
+			formatoEntrada.setLongtra(parser.length());
 			log.info("Gettin' out ExtractListMapperIn.mapInOzn2getExtracts: trama="+parser);
-			return processPlot(formato, parser);
+			return processPlot(formatoEntrada, parser);
 		}
 
-		private FormatoOZECN2E0 mapInOzn2ListExtracts(DTOIntFilterExtract dtoIn) {
-			log.info("Gettin' into ExtractListMapperIn.mapInOzn2ListExtracts: DTO="+dtoIn.toString());
-			FormatoOZECN2E0 formato = new FormatoOZECN2E0();
-			String parser = headGet + dtoIn.getProductId() + tailGet;
-			formato.setLongtra(parser.length());
+		/**Mapeo de entrada para el modo del servicio de listado de extractos, para ello toma el número de producto y lo concatena
+		 * con la trama XML plana y lo coloca en la variable parser para luego ser procesada.
+		 * 
+		 *@param dtoIntExtract dtoInterno con la información para obtener el listado de extractos
+		 * @param formatoEntrada Formato de entrada de la transacción OZN2
+		 * @return
+		 */
+		private FormatoOZECN2E0 mapInOzn2ListExtracts(DTOIntFilterExtract dtoIntExtract,FormatoOZECN2E0 formatoEntrada) {
+			log.info("Gettin' into ExtractListMapperIn.mapInOzn2ListExtracts: DTO="+dtoIntExtract.toString());
+			String parser = headGet + dtoIntExtract.getProductId() + tailGet;
+			formatoEntrada.setLongtra(parser.length());
 			log.info("Gettin' out ExtractListMapperIn.mapInOzn2ListExtracts: trama="+parser);
-			return processPlot(formato,parser);
+			return processPlot(formatoEntrada,parser);
 		}
 		
-		private FormatoOZECN2E0 processPlot(FormatoOZECN2E0 formato,String parser) {
+		/**Procesa la trama, cortandola en cadenas de 100 para poder mapearlas en las variables del formato de entrada
+		 * 
+		 * @param formatoEntrada Formato de entrada de la transacción OZN2
+		 * @param parser Trama XML concatenada
+		 * @return
+		 */
+		private FormatoOZECN2E0 processPlot(FormatoOZECN2E0 formatoEntrada,String parser) {
 			log.info("Gettin' into ExtractListMapperIn.processPlot: DTO="+parser.toString());
 			int longitud=parser.length();
 			int plotLength=PLOT_LENGTH;
-			formato.setSubtrm0("");
-			formato.setSubtrm1("");
-			formato.setSubtrm2("");
-			formato.setSubtrm3("");
-			formato.setSubtrm4("");
-			formato.setSubtrm5("");
-			formato.setSubtrm6("");
-			formato.setSubtrm7("");
-			formato.setSubtrm8("");
-			formato.setSubtrm9("");
+			formatoEntrada.setSubtrm0("");
+			formatoEntrada.setSubtrm1("");
+			formatoEntrada.setSubtrm2("");
+			formatoEntrada.setSubtrm3("");
+			formatoEntrada.setSubtrm4("");
+			formatoEntrada.setSubtrm5("");
+			formatoEntrada.setSubtrm6("");
+			formatoEntrada.setSubtrm7("");
+			formatoEntrada.setSubtrm8("");
+			formatoEntrada.setSubtrm9("");
 			for (int i = 0; i < longitud; i++) {
 				if(plotLength>parser.length()){
 					plotLength=parser.length();
 				}
 				switch (i) {
 				case 0:
-					formato.setSubtrm0(parser.substring(0, plotLength));
+					formatoEntrada.setSubtrm0(parser.substring(0, plotLength));
 					break;
 				case 100:
-					formato.setSubtrm1(parser.substring(0, plotLength));
+					formatoEntrada.setSubtrm1(parser.substring(0, plotLength));
 					break;
 				case 200:
-					formato.setSubtrm2(parser.substring(0, plotLength));
+					formatoEntrada.setSubtrm2(parser.substring(0, plotLength));
 					break;
 				case 300:
-					formato.setSubtrm3(parser.substring(0, plotLength));
+					formatoEntrada.setSubtrm3(parser.substring(0, plotLength));
 					break;
 				case 400:
-					formato.setSubtrm4(parser.substring(0, plotLength));
+					formatoEntrada.setSubtrm4(parser.substring(0, plotLength));
 					break;
 				case 500:
-					formato.setSubtrm5(parser.substring(0, plotLength));
+					formatoEntrada.setSubtrm5(parser.substring(0, plotLength));
 					break;
 				case 600:
-					formato.setSubtrm6(parser.substring(0, plotLength));
+					formatoEntrada.setSubtrm6(parser.substring(0, plotLength));
 					break;
 				case 700:
-					formato.setSubtrm7(parser.substring(0, plotLength));
+					formatoEntrada.setSubtrm7(parser.substring(0, plotLength));
 					break;
 				case 800:
-					formato.setSubtrm8(parser.substring(0, plotLength));
+					formatoEntrada.setSubtrm8(parser.substring(0, plotLength));
 					break;
 				case 900:
-					formato.setSubtrm9(parser.substring(0, plotLength));
+					formatoEntrada.setSubtrm9(parser.substring(0, plotLength));
 					break;
 				}
 				parser = parser.substring(plotLength);
 				i += plotLength;
 			}
-			log.info("Gettin' out ExtractListMapperIn.processPlot: trama="+formato.getSubtrm0()+formato.getSubtrm1()+formato.getSubtrm2()+formato.getSubtrm3());
-			return formato;
+			log.info("Gettin' out ExtractListMapperIn.processPlot: trama="+formatoEntrada.getSubtrm0()+formatoEntrada.getSubtrm1()+formatoEntrada.getSubtrm2()+formatoEntrada.getSubtrm3());
+			return formatoEntrada;
 		}
 	}
 	
+	/**Inner Class de tipo customMapper para el mapeo de la salida a la transacción OZN2 por trama plana
+	 * 
+	 * @author Entelgy
+	 *
+	 */
 	public class ExtractListMapperOut extends CustomMapper<DTOIntExtractOutput,FormatoOZECN2S0> {
 		
+		/**Clase genérica del mapeo. Allí primero se concatena las cadenas de las salidas del servicio, si vienen nula, se coloca un espacio.
+		 * Posteriormente se selecciona el método de mapeo basado en la evaluación de la trama.
+		 * 
+		 */
 		@Override
-		public void mapBtoA(FormatoOZECN2S0 b, DTOIntExtractOutput a,MappingContext context) {
-			String plot = dnull(b.getSaltr01()) + dnull(b.getSaltr02()) + dnull(b.getSaltr03())
-					+ dnull(b.getSaltr04()) + dnull(b.getSaltr05()) + dnull(b.getSaltr06())
-					+ dnull(b.getSaltr07()) + dnull(b.getSaltr08()) + dnull(b.getSaltr09())
-					+ dnull(b.getSaltr10()) + dnull(b.getSaltr11()) + dnull(b.getSaltr12())
-					+ dnull(b.getSaltr13()) + dnull(b.getSaltr14()) + dnull(b.getSaltr15())
-					+ dnull(b.getSaltr16()) + dnull(b.getSaltr17()) + dnull(b.getSaltr18());
-			if (evaluatePlot(b)) {
-				mapGetExtracts(a, plot);
+		public void mapBtoA(final FormatoOZECN2S0 formatoSalida,final DTOIntExtractOutput dtoIntExtractOutput,MappingContext context) {
+			log.info("Gettin' into ExtractListMapperOut.mapBtoA: Trama="+formatoSalida.toString());
+			String plot = dnull(formatoSalida.getSaltr01()) + dnull(formatoSalida.getSaltr02()) + dnull(formatoSalida.getSaltr03())
+					+ dnull(formatoSalida.getSaltr04()) + dnull(formatoSalida.getSaltr05()) + dnull(formatoSalida.getSaltr06())
+					+ dnull(formatoSalida.getSaltr07()) + dnull(formatoSalida.getSaltr08()) + dnull(formatoSalida.getSaltr09())
+					+ dnull(formatoSalida.getSaltr10()) + dnull(formatoSalida.getSaltr11()) + dnull(formatoSalida.getSaltr12())
+					+ dnull(formatoSalida.getSaltr13()) + dnull(formatoSalida.getSaltr14()) + dnull(formatoSalida.getSaltr15())
+					+ dnull(formatoSalida.getSaltr16()) + dnull(formatoSalida.getSaltr17()) + dnull(formatoSalida.getSaltr18());
+			if (evaluatePlot(formatoSalida)) {
+				mapGetExtracts(dtoIntExtractOutput, plot);
 			} else {
-				mapListExtracts(a, plot);
+				mapListExtracts(dtoIntExtractOutput, plot);
 			}
+			log.info("Gettin' out ExtractListMapperOut.mapBtoA: DTO="+dtoIntExtractOutput.toString());
 		}
 
+		/**Verifica que la cadena no venga nula, si lo es, retorna una cadena vacía.
+		 * 
+		 * @param string cadena de entrada
+		 * @return
+		 */
 		private String dnull(String string) {
 			if(string==null){
 				return "";
@@ -310,8 +367,15 @@ public class TxProductMapperImpl extends AbstractBbvaTxConfigurableMapper implem
 			return string;
 		}
 
-		private void mapListExtracts(DTOIntExtractOutput a, String plot) {
-			a.setExtracts(new ArrayList<DTOIntExtract>());
+		/**Mapeo de salida para el modo de listado de extractos. La captura de datos se hace mediante StringTokenizers
+		 * ya que la trama viene partida con '|' y ';' entonces con esto se captura toda la información
+		 * 
+		 * @param dtoIntExtractOut Dto de salida
+		 * @param plot trama plana de salida
+		 */
+		private void mapListExtracts(DTOIntExtractOutput dtoIntExtractOut, String plot) {
+			log.info("Gettin' into ExtractListMapperOut.mapListExtracts: Trama="+plot);
+			dtoIntExtractOut.setExtracts(new ArrayList<DTOIntExtract>());
 			StringTokenizer listExtracts = new StringTokenizer(plot, "|");
 			listExtracts.nextToken();
 			while (listExtracts.hasMoreElements()) {
@@ -327,13 +391,22 @@ public class TxProductMapperImpl extends AbstractBbvaTxConfigurableMapper implem
 					aux.setMonth(extract.nextToken());
 					extract.nextToken();
 					extract.nextToken();
-					a.getExtracts().add(aux);
+					dtoIntExtractOut.getExtracts().add(aux);
 				}
 			}
+			log.info("Gettin' out ExtractListMapperOut.mapListExtracts: DTO="+dtoIntExtractOut.toString());
+			
 		}
 
-		private void mapGetExtracts(DTOIntExtractOutput a, String plot) {
-			a.setExtracts(new ArrayList<DTOIntExtract>());
+		/**Mapeo de salida para el modo de obtención de extractos. La captura de datos se hace mediante StringTokenizers
+		 * ya que la trama viene partida con '|' y ';' entonces con esto se captura toda la información
+		 * 
+		 * @param dtoIntExtractOut Dto de salida
+		 * @param plot trama plana de salida
+		 */
+		private void mapGetExtracts(DTOIntExtractOutput dtoIntExtractOut, String plot) {
+			log.info("Gettin' into ExtractListMapperOut.mapGetExtracts: Trama="+plot);
+			dtoIntExtractOut.setExtracts(new ArrayList<DTOIntExtract>());
 			StringTokenizer listExtracts = new StringTokenizer(plot, "|");
 			listExtracts.nextToken();
 			while (listExtracts.hasMoreElements()) {
@@ -343,12 +416,19 @@ public class TxProductMapperImpl extends AbstractBbvaTxConfigurableMapper implem
 					DTOIntExtract aux = new DTOIntExtract();
 					aux.setExtCode(extract.nextToken());
 					aux.setUrl(extract.nextToken());
-					a.getExtracts().add(aux);
+					dtoIntExtractOut.getExtracts().add(aux);
 				}
 			}
+			log.info("Gettin' out ExtractListMapperOut.mapGetExtracts: DTO="+dtoIntExtractOut.toString());
 		};
 	}
 
+	/**Evalua si la trama contiene una URL mediante la busqueda de la palabra 'http'
+	 * Esta palabra puede ser cambiada en la interfaz de esta clase
+	 * 
+	 * @param formatOutput Formato de salida
+	 * @return booleano que es verdadero si encuentra la palabra
+	 */
 	private static boolean evaluatePlot(FormatoOZECN2S0 formatOutput) {
 		return (formatOutput.getSaltr01()!=null && formatOutput.getSaltr01().contains(WORD)) || 
 				(formatOutput.getSaltr02()!=null && formatOutput.getSaltr02().contains(WORD)) || 

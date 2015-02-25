@@ -52,6 +52,11 @@ public class SrvIntProducts implements ISrvIntProducts {
 		return result;
 	}
 
+	/**Aquí se realiza el llamado al dao. De primera mano se realiza la validación del productId del filtro, y en caso
+	 * de ser en modo de obtención de extracto, realiza las validaciones del extractId, del mes y del año. Así mismo que el dto
+	 * de salida tenga la lista no nula, así sea vacía.
+	 * 
+	 */
 	@Override
 	public List<DTOIntExtract> listExtracts(DTOIntFilterExtract dtoIntFilterExtract) {
 		// 1. Validate DtoIntFilterAccount
