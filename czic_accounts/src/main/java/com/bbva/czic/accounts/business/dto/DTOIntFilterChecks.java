@@ -1,5 +1,6 @@
 package com.bbva.czic.accounts.business.dto;
 
+import com.bbva.czic.dto.net.EnumCheckStatus;
 import org.hibernate.validator.constraints.Length;
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -20,14 +21,14 @@ public class DTOIntFilterChecks {
     private Integer paginationKey;
     @NotNull
     private Integer pageSize;
-    private String status;
+    private EnumCheckStatus status;
 
 
-    public String getStatus() {
+    public EnumCheckStatus getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(EnumCheckStatus status) {
         this.status = status;
     }
 

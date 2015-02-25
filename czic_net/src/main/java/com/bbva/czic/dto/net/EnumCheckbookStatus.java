@@ -9,7 +9,20 @@ import javax.xml.bind.annotation.XmlType;
 @XmlType(name = "EnumCheckbookStatus", namespace = "urn:com:bbva:czic:dto:net")
 @XmlAccessorType(XmlAccessType.FIELD)
 public enum EnumCheckbookStatus {
-    HABILITADO ("H"), SOLICITADO("S");
+    DISPONIBLE("0"),
+    ANULADO("1"),
+    PERDIDO("2"),
+    PAGADOCPD("3"),
+    PAGADOOFF("4"),
+    EXTRAVIADO("5"),
+    REEXPEDIDO("6"),
+    ORDENOPAGO("8"),
+    CPENDIENTEE("9"),
+    REGISTPTE("A"),
+    CEMPAREJADO("B"),
+    REGISTEMP("C"),
+    REEMPLAZADO("R"),
+    REEMPLAZADO1("E");
 
     private String code;
 
