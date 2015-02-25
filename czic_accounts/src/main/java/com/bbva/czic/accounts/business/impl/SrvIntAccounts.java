@@ -25,8 +25,6 @@ public class SrvIntAccounts implements ISrvIntAccounts {
 
 	private String ACCOUNT_MOV_RESUME_DEFAULT = "12";
 
-	@Autowired
-	private BusinessServicesToolKit bussinesToolKit;
 
 	@Resource(name = "accounts-dao")
 	private AccountsDAO accountsDAO;

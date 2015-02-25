@@ -44,7 +44,6 @@ public class ProductsMapper extends AbstractBbvaConfigurableMapper implements
 				.field("office.location.country.name", "office.location.country.name")
 				.field("activity", "activity")
 				.field("holders", "holders")
-
 				.register();
 
 		// Add ProductDTO Factory
