@@ -49,7 +49,7 @@ public class FormatoOZNCENI0 {
 	/**
 	 * <p>Campo <code>POSPAG</code>, &iacute;ndice: <code>5</code>, tipo: <code>ALFANUMERICO</code>
 	 */
-	@Campo(indice = 5, nombre = "POSPAG", tipo = TipoCampo.ALFANUMERICO, longitudMinima = 20, longitudMaxima = 20)
+	@Campo(indice = 5, nombre = "POSPAG", tipo = TipoCampo.ALFANUMERICO, longitudMinima = 50, longitudMaxima = 50)
 	private String pospag;
 	
 }

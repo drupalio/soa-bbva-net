@@ -56,20 +56,4 @@ privileged aspect FormatoOZNCSNI0_Roo_JavaBean {
         this.tipope = tipope;
     }
     
-    public String FormatoOZNCSNI0.getIndpag() {
-        return this.indpag;
-    }
-    
-    public void FormatoOZNCSNI0.setIndpag(String indpag) {
-        this.indpag = indpag;
-    }
-    
-    public String FormatoOZNCSNI0.getPospag() {
-        return this.pospag;
-    }
-    
-    public void FormatoOZNCSNI0.setPospag(String pospag) {
-        this.pospag = pospag;
-    }
-    
 }
