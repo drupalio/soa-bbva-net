@@ -73,6 +73,8 @@ public class TxLoanMapper extends AbstractBbvaTxConfigurableMapper implements IT
 				.field("valorop", "value")
 				.field("balance","balance")
 				.field("tipope", "operation")
+				.field("indpag", "indpag")
+				.field("pospag", "pospag")
 				.byDefault().register();
 
 		// Map  FormatoOZNCENI0 DTOIntFilterLoan

@@ -58,4 +58,16 @@ public class FormatoOZNCSNI0 {
 	@Campo(indice = 6, nombre = "TIPOPE", tipo = TipoCampo.ALFANUMERICO, longitudMinima = 2, longitudMaxima = 2)
 	private String tipope;
 	
+	/**
+	 * <p>Campo <code>INDPAG</code>, &iacute;ndice: <code>7</code>, tipo: <code>ALFANUMERICO</code>
+	 */
+	@Campo(indice = 7, nombre = "INDPAG", tipo = TipoCampo.ALFANUMERICO, longitudMinima = 1, longitudMaxima = 1)
+	private String indpag;
+	
+	/**
+	 * <p>Campo <code>POSPAG</code>, &iacute;ndice: <code>8</code>, tipo: <code>ALFANUMERICO</code>
+	 */
+	@Campo(indice = 8, nombre = "POSPAG", tipo = TipoCampo.ALFANUMERICO, longitudMinima = 20, longitudMaxima = 20)
+	private String pospag;
+	
 }

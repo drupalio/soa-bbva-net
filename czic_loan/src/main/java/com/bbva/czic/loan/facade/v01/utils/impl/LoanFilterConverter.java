@@ -98,7 +98,7 @@ public class LoanFilterConverter{
 
                 try {
                     startDateFilter = formato.parse(fechaInicial);
-                    endtDateFilter = formato.parse(fechaInicial);
+                    endtDateFilter = formato.parse(fechaFinal);
                 } catch (ParseException ex) {
                     throw new BusinessServiceException(EnumError.WRONG_PARAMETERS.getAlias());
                 }
