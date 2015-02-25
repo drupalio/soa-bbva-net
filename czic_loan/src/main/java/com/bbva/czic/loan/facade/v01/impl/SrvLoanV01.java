@@ -13,6 +13,8 @@ import com.bbva.czic.loan.business.dto.DTOIntFilterRotaryMovement;
 import com.bbva.czic.loan.facade.v01.ISrvLoanV01;
 import com.bbva.czic.loan.facade.v01.mappers.ILoanMapper;
 import com.bbva.czic.routine.commons.rm.utils.errors.EnumError;
+import com.bbva.czic.routine.commons.rm.utils.fiql.FiqlType;
+import com.bbva.czic.routine.commons.rm.utils.validator.impl.FiqlValidator;
 import com.bbva.jee.arq.spring.core.servicing.gce.BusinessServiceException;
 import org.apache.commons.lang.StringUtils;
 import org.apache.cxf.jaxrs.model.wadl.ElementClass;
@@ -24,7 +26,6 @@ import com.bbva.czic.dto.net.Movement;
 import com.bbva.czic.loan.business.ISrvIntLoan;
 import com.bbva.czic.loan.business.dto.DTOIntFilterLoan;
 
-import com.bbva.czic.loan.facade.v01.utils.impl.LoanFilterConverter;
 import com.bbva.jee.arq.spring.core.log.I18nLog;
 import com.bbva.jee.arq.spring.core.log.I18nLogFactory;
 import com.bbva.jee.arq.spring.core.servicing.annotations.SMC;
@@ -72,9 +73,6 @@ public class SrvLoanV01 implements ISrvLoanV01,	com.bbva.jee.arq.spring.core.ser
 	@Autowired
 	ISrvIntLoan isrvIntLoan;
 
-	@Resource(name = "loan-filter-converter")
-	LoanFilterConverter loanFilterConverter;
-
 	@ApiOperation(value = "Obtiene la informaci�n general del producto de fianciamiento", notes = "Obtiene la informaci�n general del producto de fianciamiento", response = Loan.class)
 	@ApiResponses(value = {
 			@ApiResponse(code = -1, message = "aliasGCE1"),
@@ -87,6 +85,7 @@ public class SrvLoanV01 implements ISrvLoanV01,	com.bbva.jee.arq.spring.core.ser
 	@SMC(registryID = "SMCCO1400010", logicalID = "getRotaryQuota")
 	public Loan getRotaryQuota(
 			@ApiParam(value = "Claim identifier param") @PathParam("idLoan") String idLoan) {
+		log.info("Iniciado getRotaryQuota");
 		return  iLoanMapper.map(isrvIntLoan.getRotaryQuota(idLoan));
 	}
 
@@ -104,8 +103,16 @@ public class SrvLoanV01 implements ISrvLoanV01,	com.bbva.jee.arq.spring.core.ser
 												   @ApiParam(value = "Loan pagination Key") @QueryParam("paginationKey")  Integer paginationKey,
 												   @ApiParam(value = "Loan page Size") @QueryParam("pageSize") Integer pageSize,
 												   @ApiParam(value = "order by param") @DefaultValue("null") @QueryParam("$filter") String filter) {
-		
-		DTOIntFilterLoan dtoIntFilterLoan = loanFilterConverter.getDTOIntFilter(loanId, paginationKey, pageSize, filter);
+
+		log.info("Iniciado listRotaryQuotaMovements");
+		// 1. Validate filter FIQL
+		new FiqlValidator(filter).hasGeAndLe(FiqlType.transactionDate.name()).validateIfExist();
+
+		final DTOIntFilterLoan dtoIntFilterLoan = iLoanMapper.getDtoIntFilter(filter);
+		dtoIntFilterLoan.setPaginationKey(paginationKey);
+		dtoIntFilterLoan.setPageSize(pageSize);
+		dtoIntFilterLoan.setIdLoan(loanId);
+
 		return iLoanMapper.map(isrvIntLoan.listRotaryQuotaMovements(dtoIntFilterLoan));
 	}
 
@@ -122,6 +129,7 @@ public class SrvLoanV01 implements ISrvLoanV01,	com.bbva.jee.arq.spring.core.ser
 			@ApiParam(value = "Claimer identifier param") @PathParam("idLoan") String idLoan,
 			@ApiParam(value = "Claimer identifier param") @PathParam("idMovement") String idMovement) {
 
+		log.info("Iniciado getRotaryQuotaMovement");
 		if (!StringUtils.isNumeric(idLoan) || !StringUtils.isNumeric(idMovement)) {
 			throw new BusinessServiceException(EnumError.WRONG_PARAMETERS.getAlias());
 		}
