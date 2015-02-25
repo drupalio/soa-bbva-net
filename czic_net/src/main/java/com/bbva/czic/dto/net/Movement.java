@@ -60,6 +60,10 @@ public class Movement  implements Serializable
     private Money balance;
     @ApiModelProperty("Numero de cuotas del pago o movimiento")
     private String numberOfQuotas;
+    @ApiModelProperty("Indicador de paginacion")
+    private String indpag;
+    @ApiModelProperty("Posicion de paginacion")
+    private String pospag;
 
     public Movement() {
         //default constructor
@@ -160,7 +164,21 @@ public class Movement  implements Serializable
 	public void setNumberOfQuotas(String numberOfQuotas) {
 		this.numberOfQuotas = numberOfQuotas;
 	}
-    
-    
 
+
+    public String getIndpag() {
+        return indpag;
+    }
+
+    public void setIndpag(String indpag) {
+        this.indpag = indpag;
+    }
+
+    public String getPospag() {
+        return pospag;
+    }
+
+    public void setPospag(String pospag) {
+        this.pospag = pospag;
+    }
 }
