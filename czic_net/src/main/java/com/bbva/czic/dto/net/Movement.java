@@ -60,6 +60,10 @@ public class Movement  implements Serializable
     private Money balance;
     @ApiModelProperty("Numero de cuotas del pago o movimiento")
     private String numberOfQuotas;
+    @ApiModelProperty("")
+    private Integer remainingQuotas;
+    @ApiModelProperty("")
+    private Balance deb;
 
 
     public Movement() {
@@ -162,4 +166,19 @@ public class Movement  implements Serializable
 		this.numberOfQuotas = numberOfQuotas;
 	}
 
+    public Integer getRemainingQuotas() {
+        return remainingQuotas;
+    }
+
+    public void setRemainingQuotas(Integer remainingQuotas) {
+        this.remainingQuotas = remainingQuotas;
+    }
+
+    public Balance getDeb() {
+        return deb;
+    }
+
+    public void setDeb(Balance deb) {
+        this.deb = deb;
+    }
 }
