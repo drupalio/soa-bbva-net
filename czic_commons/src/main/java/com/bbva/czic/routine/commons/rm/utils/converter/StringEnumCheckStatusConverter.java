@@ -17,7 +17,7 @@ public class StringEnumCheckStatusConverter extends BidirectionalConverter<Strin
 
 	@Override
 	public String convertFrom(String source, Type<String> destinationType) {
-		return null;
+		return EnumCheckStatus.getByCode(source).name();
 	}
 
 	@Override
