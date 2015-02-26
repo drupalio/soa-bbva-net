@@ -37,6 +37,7 @@ public class TxCheckMapperImpl extends AbstractBbvaTxConfigurableMapper implemen
 
 		factory.getConverterFactory().registerConverter(ENUM_CHECK_STATUS_TO_STRING_MAPPER,new EnumCheckStatusConverter());
 		factory.getConverterFactory().registerConverter(STRING_TO_ENUM_CHECK_STATUS_MAPPER,new StringEnumCheckStatusConverter());
+
 		/**
 		 * MAPEO DE ENTRADAS
 		 */

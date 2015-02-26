@@ -130,9 +130,6 @@ public class SrvLoanV01 implements ISrvLoanV01,	com.bbva.jee.arq.spring.core.ser
 			@ApiParam(value = "Claimer identifier param") @PathParam("idMovement") String idMovement) {
 
 		log.info("Iniciado getRotaryQuotaMovement");
-		if (!StringUtils.isNumeric(idLoan) || !StringUtils.isNumeric(idMovement)) {
-			throw new BusinessServiceException(EnumError.WRONG_PARAMETERS.getAlias());
-		}
 		return iLoanMapper.map(isrvIntLoan.getRotaryQuotaMovement(new DTOIntFilterRotaryMovement(idLoan, Integer.parseInt(idMovement))));
 	}
 }
