@@ -125,7 +125,7 @@ public class SrvLoanV01 implements ISrvLoanV01,	com.bbva.jee.arq.spring.core.ser
 	@ElementClass(response = RotaryQuotaMove.class)
 	@Path("/rotaryQuota/{idLoan}/movement/{idMovement}")
 	@SMC(registryID = "SMCCO1400012", logicalID = "getRotaryQuotaMovement")
-	public RotaryQuotaMove getRotaryQuotaMovement(
+	public Movement getRotaryQuotaMovement(
 			@ApiParam(value = "Claimer identifier param") @PathParam("idLoan") String idLoan,
 			@ApiParam(value = "Claimer identifier param") @PathParam("idMovement") String idMovement) {
 

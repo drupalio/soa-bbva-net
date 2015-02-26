@@ -54,15 +54,15 @@ public class LoanMapper extends AbstractBbvaConfigurableMapper implements ILoanM
 				.byDefault().register();
 
 		// Map DTOIntMovement <-> RotaryQuotaMove
-		factory.classMap(DTOIntRotaryQuotaMove.class, RotaryQuotaMove.class)
+		factory.classMap(DTOIntRotaryQuotaMove.class, Movement.class)
 				.field("id", "id")
 				.field("concept", "concept")
 				.field("transactionDate", "transactionDate")
 				.field("operation", "operation")
 				.field("status", "status")
 				.field("value", "value")
-				.field("balance", "balance")
-				.field("numbersOfQuota", "numbersOfQuota")
+				.field("balance", "deb")
+				.field("numbersOfQuota", "numberOfQuotas")
 				.field("remainingQuotas", "remainingQuotas")
 				.byDefault().register();
 	}
@@ -111,7 +111,7 @@ public class LoanMapper extends AbstractBbvaConfigurableMapper implements ILoanM
 	 * @return
 	 */
 	@Override
-	public RotaryQuotaMove map(DTOIntRotaryQuotaMove dtoIntRotaryQuotaMove) {
-		return map(dtoIntRotaryQuotaMove, RotaryQuotaMove.class);
+	public Movement map(DTOIntRotaryQuotaMove dtoIntRotaryQuotaMove) {
+		return map(dtoIntRotaryQuotaMove, Movement.class);
 	}
 }

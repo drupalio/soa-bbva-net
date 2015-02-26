@@ -23,16 +23,20 @@ public class TransaccionOznk implements InvocadorTransaccion<PeticionTransaccion
 	
 	@Override
 	public RespuestaTransaccionOznk invocar(PeticionTransaccionOznk transaccion) throws ExcepcionTransaccion {
-		return servicioTransacciones.invocar(PeticionTransaccionOznk.class, RespuestaTransaccionOznk.class, transaccion);
+		return getServicioTransacciones().invocar(PeticionTransaccionOznk.class, RespuestaTransaccionOznk.class, transaccion);
 	}
 	
 	@Override
 	public RespuestaTransaccionOznk invocarCache(PeticionTransaccionOznk transaccion) throws ExcepcionTransaccion {
-		return servicioTransacciones.invocar(PeticionTransaccionOznk.class, RespuestaTransaccionOznk.class, transaccion);
+		return getServicioTransacciones().invocar(PeticionTransaccionOznk.class, RespuestaTransaccionOznk.class, transaccion);
 	}
 	
 	@Override
 	public void vaciarCache() {}
+
+	public ServicioTransacciones getServicioTransacciones() {
+		return servicioTransacciones;
+	}
 
 	public void setServicioTransacciones(ServicioTransacciones servicioTransacciones) {
 		this.servicioTransacciones = servicioTransacciones;

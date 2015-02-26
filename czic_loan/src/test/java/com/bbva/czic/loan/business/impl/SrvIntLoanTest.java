@@ -120,7 +120,8 @@ public class SrvIntLoanTest extends SpringContextBbvaTest {
 		DTOIntRotaryQuotaMove dtoIntRotaryQuotaMove = new DTOIntRotaryQuotaMove();
 		dtoIntRotaryQuotaMove.setId("123456789");
 		dtoIntRotaryQuotaMove.setConcept("Pago");
-		dtoIntRotaryQuotaMove.setTransactionDate("2014-04-13");
+		Calendar calendar = Calendar.getInstance();
+		dtoIntRotaryQuotaMove.setTransactionDate(calendar);
 		dtoIntRotaryQuotaMove.setOperation(new Operation());
 		dtoIntRotaryQuotaMove.setStatus("Ok");
 		dtoIntRotaryQuotaMove.setValue(new Money());
