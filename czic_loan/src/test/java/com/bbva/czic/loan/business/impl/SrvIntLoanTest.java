@@ -131,7 +131,7 @@ public class SrvIntLoanTest extends SpringContextBbvaTest {
 
 		DTOIntFilterRotaryMovement dtoIntFilterRotaryMovement = new DTOIntFilterRotaryMovement();
 		dtoIntFilterRotaryMovement.setIdLoan("20684968230915840285");
-		dtoIntFilterRotaryMovement.setIdMovement(456734);
+		dtoIntFilterRotaryMovement.setIdMovement("456734");
 
 		when(loanDAO.getRotaryQuotaMovement(any(DTOIntFilterRotaryMovement.class))).thenReturn(dtoIntRotaryQuotaMove);
 

@@ -3,16 +3,15 @@
 
 package com.bbva.czic.loan.dao.model.oznk;
 
-import java.lang.Integer;
 import java.lang.String;
 
 privileged aspect FormatoOZNCENK0_Roo_JavaBean {
     
-    public Integer FormatoOZNCENK0.getNommovi() {
+    public String FormatoOZNCENK0.getNommovi() {
         return this.nommovi;
     }
     
-    public void FormatoOZNCENK0.setNommovi(Integer nommovi) {
+    public void FormatoOZNCENK0.setNommovi(String nommovi) {
         this.nommovi = nommovi;
     }
     

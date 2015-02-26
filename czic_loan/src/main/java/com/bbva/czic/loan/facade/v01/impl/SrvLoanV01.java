@@ -133,6 +133,6 @@ public class SrvLoanV01 implements ISrvLoanV01,	com.bbva.jee.arq.spring.core.ser
 		if (!StringUtils.isNumeric(idLoan) || !StringUtils.isNumeric(idMovement)) {
 			throw new BusinessServiceException(EnumError.WRONG_PARAMETERS.getAlias());
 		}
-		return iLoanMapper.map(isrvIntLoan.getRotaryQuotaMovement(new DTOIntFilterRotaryMovement(idLoan, Integer.parseInt(idMovement))));
+		return iLoanMapper.map(isrvIntLoan.getRotaryQuotaMovement(new DTOIntFilterRotaryMovement(idLoan, idMovement)));
 	}
 }
