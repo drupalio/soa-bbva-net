@@ -15,11 +15,11 @@ public class DTOIntFilterRotaryMovement {
 
     @NotNull
     @NumberFormat(style = NumberFormat.Style.NUMBER)
-    private String idMovement;
+    private Integer idMovement;
 
     public DTOIntFilterRotaryMovement(){ }
 
-    public DTOIntFilterRotaryMovement(String idLoan, String idMovement){
+    public DTOIntFilterRotaryMovement(String idLoan, Integer idMovement){
         this.idLoan = idLoan;
         this.idMovement = idMovement;
     }
@@ -32,11 +32,11 @@ public class DTOIntFilterRotaryMovement {
         this.idLoan = idLoan;
     }
 
-    public String getIdMovement() {
+    public Integer getIdMovement() {
         return idMovement;
     }
 
-    public void setIdMovement(String idMovement) {
+    public void setIdMovement(Integer idMovement) {
         this.idMovement = idMovement;
     }
 }
