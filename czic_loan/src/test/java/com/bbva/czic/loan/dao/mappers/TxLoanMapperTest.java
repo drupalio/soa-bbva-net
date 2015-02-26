@@ -49,11 +49,11 @@ public class TxLoanMapperTest{
 	@Test
 	public void callMapInOznkTest(){
 
-		final DTOIntFilterLoan dtoIntFilterLoan = new DTOIntFilterLoan();
-		dtoIntFilterLoan.setIdLoan("12345");
-		dtoIntFilterLoan.setIdMovement("3");
+		final DTOIntFilterRotaryMovement dtoIntFilterRotaryMovement = new DTOIntFilterRotaryMovement();
+		dtoIntFilterRotaryMovement.setIdLoan("12345");
+		dtoIntFilterRotaryMovement.setIdMovement(3);
 
-		final FormatoOZNCENK0 result = txLoanMapper.mapInOznk(dtoIntFilterLoan);
+		final FormatoOZNCENK0 result = txLoanMapper.mapInOznk(dtoIntFilterRotaryMovement);
 
 		Assert.assertNotNull(result);
 	}
