@@ -22,3 +22,4 @@ public class StringVisibilityConverter extends BidirectionalConverter<String, Bo
 	}
 
 }
+
