@@ -14,7 +14,7 @@ public class StringOperabilityConverter extends BidirectionalConverter<String, B
 
 	@Override
 	public Boolean convertTo(String source, Type<Boolean> destinationType) {
-		return !BLOCKED.equalsIgnoreCase(source);
+		return BLOCKED.equalsIgnoreCase(source.trim());
 	}
 
 	@Override
