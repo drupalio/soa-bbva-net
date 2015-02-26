@@ -24,13 +24,6 @@ public class DTOIntMovement {
 	private Operation operation;
 
 	@NotNull
-	private String indpag;
-
-	@NotNull
-	private String pospag;
-
-
-	@NotNull
 	private Money value;
 
 	@NotNull
@@ -77,7 +70,6 @@ public class DTOIntMovement {
 		return value;
 	}
 
-
 	public void setValue(Money value) {
 		this.value = value;
 	}
@@ -90,19 +82,4 @@ public class DTOIntMovement {
 		this.balance = balance;
 	}
 
-	public String getIndpag() {
-		return indpag;
-	}
-
-	public void setIndpag(String indpag) {
-		this.indpag = indpag;
-	}
-
-	public String getPospag() {
-		return pospag;
-	}
-
-	public void setPospag(String pospag) {
-		this.pospag = pospag;
-	}
 }

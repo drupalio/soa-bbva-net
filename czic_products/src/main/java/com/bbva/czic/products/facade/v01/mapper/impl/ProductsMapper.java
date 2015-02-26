@@ -44,7 +44,6 @@ public class ProductsMapper extends AbstractBbvaConfigurableMapper implements
 				.field("office.location.country.name", "office.location.country.name")
 				.field("activity", "activity")
 				.field("holders", "holders")
-
 				.register();
 
 		// Add ProductDTO Factory
@@ -112,7 +111,7 @@ public class ProductsMapper extends AbstractBbvaConfigurableMapper implements
 		final DTOIntFilterMovements dtoIntFilterMovements = new DTOIntFilterMovements();
 		dtoIntFilterMovements.setProductType(productType);
 		dtoIntFilterMovements.setProductId(productId);
-		dtoIntFilterMovements.setMovementId(movementId);
+		dtoIntFilterMovements.setMovementId(org.apache.commons.lang.StringUtils.leftPad(movementId, 9, '0'));
 
 		return dtoIntFilterMovements;
 

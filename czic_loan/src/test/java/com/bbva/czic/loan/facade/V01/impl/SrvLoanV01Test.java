@@ -5,7 +5,6 @@ import com.bbva.czic.loan.business.ISrvIntLoan;
 import com.bbva.czic.loan.business.dto.*;
 import com.bbva.czic.loan.facade.v01.ISrvLoanV01;
 import com.bbva.czic.loan.facade.v01.mappers.ILoanMapper;
-import com.bbva.czic.loan.facade.v01.utils.impl.LoanFilterConverter;
 import com.bbva.czic.routine.commons.rm.utils.errors.EnumError;
 import com.bbva.czic.routine.commons.rm.utils.test.SpringContextBbvaTest;
 import com.bbva.jee.arq.spring.core.servicing.gce.BusinessServiceException;
@@ -36,8 +35,6 @@ public class SrvLoanV01Test extends SpringContextBbvaTest {
     @Mock
     private ISrvIntLoan iSrvIntLoan;
 
-    @Mock
-    private LoanFilterConverter loanFilterConverter;
 
     @InjectMocks
     private ISrvLoanV01 srvLoanV01;
@@ -84,7 +81,6 @@ public class SrvLoanV01Test extends SpringContextBbvaTest {
         dtoIntMovementList.add(dtoIntMovement);
 
         when(iSrvIntLoan.listRotaryQuotaMovements(any(DTOIntFilterLoan.class))).thenReturn(dtoIntMovementList);
-        when(loanFilterConverter.getDTOIntFilter("00816641", 5, 4, filter)).thenReturn(dtoIntFilterLoan);
         when(loanMapper.map(anyList())).thenReturn(movementList);
 
         final List<Movement> m = srvLoanV01.listRotaryQuotaMovements("00816641", 5, 4, filter);

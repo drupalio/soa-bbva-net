@@ -11,6 +11,8 @@ import com.bbva.czic.accounts.dao.model.oznv.FormatoOZECNVE0;
 import com.bbva.czic.accounts.dao.model.oznv.FormatoOZECNVS0;
 import com.bbva.czic.accounts.dao.model.oznx.FormatoOZECNXE0;
 import com.bbva.czic.accounts.dao.model.oznx.FormatoOZECNXS0;
+import com.bbva.czic.routine.commons.rm.utils.converter.EnumCheckStatusConverter;
+import com.bbva.czic.routine.commons.rm.utils.converter.StringEnumCheckStatusConverter;
 import com.bbva.czic.routine.commons.rm.utils.converter.StringMoneyConverter;
 import com.bbva.czic.routine.commons.rm.utils.mappers.AbstractBbvaTxConfigurableMapper;
 import com.bbva.czic.routine.commons.rm.utils.mappers.Mapper;
@@ -25,13 +27,16 @@ import java.util.List;
 @Mapper(value = "txCheckMapper")
 public class TxCheckMapperImpl extends AbstractBbvaTxConfigurableMapper implements TxCheckMapper {
 
-	/**
-	 * 
-	 */
+	private static final String ENUM_CHECK_STATUS_TO_STRING_MAPPER = "EnumCheckStatusToStringMapper";
+	private static final String STRING_TO_ENUM_CHECK_STATUS_MAPPER = "StringToEnumCheckStatusMapper";
+
 	@Override
 	protected void configure(MapperFactory factory) {
 
 		super.configure(factory);
+
+		factory.getConverterFactory().registerConverter(ENUM_CHECK_STATUS_TO_STRING_MAPPER,new EnumCheckStatusConverter());
+		factory.getConverterFactory().registerConverter(STRING_TO_ENUM_CHECK_STATUS_MAPPER,new StringEnumCheckStatusConverter());
 		/**
 		 * MAPEO DE ENTRADAS
 		 */
@@ -42,7 +47,7 @@ public class TxCheckMapperImpl extends AbstractBbvaTxConfigurableMapper implemen
 				.field("endDate", "fechfin")
 				.field("paginationKey", "indpagi")
 				.field("pageSize", "tampagi")
-				.field("status", "estcheq")
+				.fieldMap("status", "estcheq").converter(ENUM_CHECK_STATUS_TO_STRING_MAPPER).add()
 				.byDefault().register();
 		/**
 		 * MAPEO DE SALIDAS
@@ -51,7 +56,7 @@ public class TxCheckMapperImpl extends AbstractBbvaTxConfigurableMapper implemen
 				.field("id", "numcheq")
 				.field("issueDate", "fechemi")
 				.field("value", "valcheq")
-				.field("status", "estcheq")
+				.fieldMap("status", "estcheq").converter(STRING_TO_ENUM_CHECK_STATUS_MAPPER).add()
 				.field("modifiedDate", "fechmod")
 				.byDefault().register();
 

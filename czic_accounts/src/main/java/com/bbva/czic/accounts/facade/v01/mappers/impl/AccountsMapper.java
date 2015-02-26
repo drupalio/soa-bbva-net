@@ -9,13 +9,7 @@ import java.util.List;
 
 import com.bbva.czic.accounts.business.dto.*;
 import com.bbva.czic.accounts.facade.v01.mappers.IAccountsMapper;
-import com.bbva.czic.dto.net.AccMovementsResume;
-import com.bbva.czic.dto.net.Account;
-import com.bbva.czic.dto.net.Balance;
-import com.bbva.czic.dto.net.Check;
-import com.bbva.czic.dto.net.Checkbook;
-import com.bbva.czic.dto.net.EnumCheckbookStatus;
-import com.bbva.czic.dto.net.MonthlyBalances;
+import com.bbva.czic.dto.net.*;
 import com.bbva.czic.routine.commons.rm.utils.EDateFormat;
 import com.bbva.czic.routine.commons.rm.utils.converter.BigDecimalMoneyConverter;
 import com.bbva.czic.routine.commons.rm.utils.errors.EnumError;
@@ -123,7 +117,15 @@ public class AccountsMapper extends AbstractBbvaConfigurableMapper implements
 			throw new BusinessServiceException(
 					EnumError.WRONG_PARAMETERS.getAlias());
 		}
-		dtoFilter.setStatus(this.getEqValue(filter, "status"));
+
+		if(this.getEqValue(filter, "status") != null) {
+			try {
+				dtoFilter.setStatus(EnumCheckStatus.valueOf(this.getEqValue(filter, "status")));
+			}catch (Exception ie){
+				throw new BusinessServiceException(
+						EnumError.WRONG_PARAMETERS.getAlias());
+			}
+		}
 
 		return dtoFilter;
 	}

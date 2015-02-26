@@ -26,6 +26,9 @@ public class VerifyCustomerMapper implements ISimpleTransactionMapper<DTOIntCust
         formato.setEmail(dtoIn.getEmails() != null && !dtoIn.getEmails().isEmpty()? dtoIn.getEmails().get(0) : StringUtils.EMPTY);
         // TODO : Daniel.Cortes :: validar que valor deberia llegar aca
         formato.setUsuario(dtoIn.getCustomerId());
+
+
+
         return formato;
     }
 

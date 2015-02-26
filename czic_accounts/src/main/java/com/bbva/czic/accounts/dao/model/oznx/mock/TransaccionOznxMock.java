@@ -4,6 +4,8 @@ import com.bbva.czic.accounts.dao.model.oznx.FormatoOZECNXE0;
 import com.bbva.czic.accounts.dao.model.oznx.FormatoOZECNXS0;
 import com.bbva.czic.accounts.dao.model.oznx.PeticionTransaccionOznx;
 import com.bbva.czic.accounts.dao.model.oznx.RespuestaTransaccionOznx;
+import com.bbva.czic.dto.net.EnumCheckStatus;
+import com.bbva.czic.routine.commons.rm.utils.converter.EnumCheckStatusConverter;
 import com.bbva.jee.arq.spring.core.host.ExcepcionTransaccion;
 import com.bbva.jee.arq.spring.core.host.InvocadorTransaccion;
 import com.bbva.jee.arq.spring.core.host.protocolo.ps9.aplicacion.CopySalida;
@@ -32,7 +34,7 @@ public class TransaccionOznxMock implements InvocadorTransaccion<PeticionTransac
 
         for(int i = 0; i < 10; i++) {
             FormatoOZECNXS0 salida = new FormatoOZECNXS0();
-            salida.setEstcheq("HABILITADO");
+            salida.setEstcheq(EnumCheckStatus.ANULADO.getCodigo());
             salida.setFechemi(dataFactory.getDateBetween(dataFactory.getDate(2014, 12, 01), new Date()));
             salida.setFechmod(dataFactory.getDateBetween(dataFactory.getDate(2014, 12, 01), new Date()));
             salida.setIndpagi(dataFactory.getNumberBetween(1, 10));
