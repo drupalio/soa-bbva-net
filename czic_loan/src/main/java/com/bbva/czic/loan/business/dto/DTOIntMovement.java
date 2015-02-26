@@ -82,4 +82,5 @@ public class DTOIntMovement {
 		this.balance = balance;
 	}
 
+
 }
