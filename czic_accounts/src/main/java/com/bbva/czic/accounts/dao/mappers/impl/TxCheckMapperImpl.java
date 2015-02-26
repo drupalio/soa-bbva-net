@@ -11,6 +11,7 @@ import com.bbva.czic.accounts.dao.model.oznv.FormatoOZECNVE0;
 import com.bbva.czic.accounts.dao.model.oznv.FormatoOZECNVS0;
 import com.bbva.czic.accounts.dao.model.oznx.FormatoOZECNXE0;
 import com.bbva.czic.accounts.dao.model.oznx.FormatoOZECNXS0;
+import com.bbva.czic.dto.net.EnumCheckStatus;
 import com.bbva.czic.routine.commons.rm.utils.converter.EnumCheckStatusConverter;
 import com.bbva.czic.routine.commons.rm.utils.converter.StringEnumCheckStatusConverter;
 import com.bbva.czic.routine.commons.rm.utils.converter.StringMoneyConverter;
@@ -35,8 +36,8 @@ public class TxCheckMapperImpl extends AbstractBbvaTxConfigurableMapper implemen
 
 		super.configure(factory);
 
-		factory.getConverterFactory().registerConverter(ENUM_CHECK_STATUS_TO_STRING_MAPPER,new EnumCheckStatusConverter());
-		factory.getConverterFactory().registerConverter(STRING_TO_ENUM_CHECK_STATUS_MAPPER,new StringEnumCheckStatusConverter());
+//		factory.getConverterFactory().registerConverter(ENUM_CHECK_STATUS_TO_STRING_MAPPER,new EnumCheckStatusConverter());
+//		factory.getConverterFactory().registerConverter(STRING_TO_ENUM_CHECK_STATUS_MAPPER,new StringEnumCheckStatusConverter());
 
 		/**
 		 * MAPEO DE ENTRADAS
@@ -48,17 +49,17 @@ public class TxCheckMapperImpl extends AbstractBbvaTxConfigurableMapper implemen
 				.field("endDate", "fechfin")
 				.field("paginationKey", "indpagi")
 				.field("pageSize", "tampagi")
-				.fieldMap("status", "estcheq").converter(ENUM_CHECK_STATUS_TO_STRING_MAPPER).add()
+				.field("status", "estcheq")
 				.byDefault().register();
 		/**
 		 * MAPEO DE SALIDAS
 		 */
-		factory.classMap(DTOIntCheck.class, FormatoOZECNXS0.class)
-				.field("id", "numcheq")
-				.field("issueDate", "fechemi")
-				.field("value", "valcheq")
-				.fieldMap("status", "estcheq").converter(STRING_TO_ENUM_CHECK_STATUS_MAPPER).add()
-				.field("modifiedDate", "fechmod")
+		factory.classMap(FormatoOZECNXS0.class, DTOIntCheck.class)
+				.field("numcheq", "id")
+				.field("fechemi", "issueDate")
+				.field("valcheq", "value")
+				.field("estcheq", "status")
+				.field("fechmod", "modifiedDate")
 				.byDefault().register();
 
 	}
@@ -66,11 +67,19 @@ public class TxCheckMapperImpl extends AbstractBbvaTxConfigurableMapper implemen
 
 	@Override
 	public FormatoOZECNXE0 mapInOznx(DTOIntFilterChecks dtoIn) {
-		return map(dtoIn, FormatoOZECNXE0.class);
+		FormatoOZECNXE0 formato = map(dtoIn, FormatoOZECNXE0.class);
+		if(formato.getEstcheq() != null) {
+			formato.setEstcheq(EnumCheckStatus.valueOf(formato.getEstcheq()).getCodigo());
+		}
+		return formato;
 	}
 
 	@Override
 	public DTOIntCheck mapOutOznx(FormatoOZECNXS0 formatOutput) {
-		return map(formatOutput, DTOIntCheck.class);
+		DTOIntCheck dto = map(formatOutput, DTOIntCheck.class);
+		if(EnumCheckStatus.getByCode(dto.getStatus()) != null) {
+			dto.setStatus(EnumCheckStatus.getByCode(dto.getStatus()).name());
+		}
+		return dto;
 	}
 }

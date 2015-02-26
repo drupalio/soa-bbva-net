@@ -196,7 +196,7 @@ public class SrvAccountsV01 implements ISrvAccountsV01,
 			@ApiParam(value = "Checkbooks identifier") @PathParam("checkbookId") String checkbookId,
 			@ApiParam(value = "account identifier") @PathParam("accountId") String accountId) {
 		// 2. Mapping to DTOIntCheckbook
-		final DTOIntCheckbook dtointCheckbook = iAccountsMapper
+		final DTOIntFilterCheckbooks dtointCheckbook = iAccountsMapper
 				.getDtoIntCheckbook(accountId, checkbookId);
 
 		// 3. Invoke SrvIntAccount and Mapping to canonical DTO

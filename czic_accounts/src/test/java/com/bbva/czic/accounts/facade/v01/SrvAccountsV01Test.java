@@ -219,7 +219,7 @@ public class SrvAccountsV01Test extends SpringContextBbvaTest {
     public void testGetCheckbookSrvIntException(){
         final BusinessServiceException bsn = getBsnExeptionByAlias(EnumError.NO_DATA.getAlias());
 
-        when(srvIntAccounts.getCheckbooks(any(DTOIntCheckbook.class))).thenThrow(bsn);
+        when(srvIntAccounts.getCheckbooks(any(DTOIntFilterCheckbooks.class))).thenThrow(bsn);
 
         srv.getCheckbook("123456","987654");
     }
@@ -235,11 +235,12 @@ public class SrvAccountsV01Test extends SpringContextBbvaTest {
 
     @Test
     public void testGetCheckbook(){
-        final DTOIntCheckbook checkbook = new DTOIntCheckbook();
+        final DTOIntFilterCheckbooks checkbook = new DTOIntFilterCheckbooks();
+        DTOIntCheckbook book = new DTOIntCheckbook();
         final Checkbook answer = new Checkbook();
 
         when(iAccountsMapper.getDtoIntCheckbook(anyString(), anyString())).thenReturn(checkbook);
-        when(srvIntAccounts.getCheckbooks(any(DTOIntCheckbook.class))).thenReturn(checkbook);
+        when(srvIntAccounts.getCheckbooks(any(DTOIntFilterCheckbooks.class))).thenReturn(book);
         when(iAccountsMapper.mapCheckbooks(any(DTOIntCheckbook.class))).thenReturn(answer);
 
        Checkbook books = srv.getCheckbook("123456", "987654");

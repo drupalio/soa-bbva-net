@@ -72,7 +72,7 @@ public class AccountsMapperTest extends SpringContextBbvaTest {
 
 	@Test
 	public void testGetDtoIntCheckbook(){
-		final DTOIntCheckbook dtoFilter =  accountsMapper.getDtoIntCheckbook("651615", "654612");
+		final DTOIntFilterCheckbooks dtoFilter =  accountsMapper.getDtoIntCheckbook("651615", "654612");
 		assertNotNull(dtoFilter);
 	}
 

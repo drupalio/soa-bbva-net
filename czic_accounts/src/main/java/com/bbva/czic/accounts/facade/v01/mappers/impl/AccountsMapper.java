@@ -140,9 +140,9 @@ public class AccountsMapper extends AbstractBbvaConfigurableMapper implements
 	}
 
 	@Override
-	public DTOIntCheckbook getDtoIntCheckbook(String idAccount,
+	public DTOIntFilterCheckbooks getDtoIntCheckbook(String idAccount,
 			String idCheckbook) {
-		final DTOIntCheckbook dtoIntCheckbook = new DTOIntCheckbook();
+		final DTOIntFilterCheckbooks dtoIntCheckbook = new DTOIntFilterCheckbooks();
 		dtoIntCheckbook.setId(idCheckbook);
 		dtoIntCheckbook.setIdAccount(idAccount);
 		return dtoIntCheckbook;
@@ -214,7 +214,6 @@ public class AccountsMapper extends AbstractBbvaConfigurableMapper implements
 	public Checkbook mapCheckbooks(DTOIntCheckbook intCheckbook) {
 
 		final Checkbook checkbook = new Checkbook();
-		checkbook.setId(intCheckbook.getId());
 		checkbook.setFirstCheck(intCheckbook.getFirstCheck() + "");
 		checkbook.setLastCheck(intCheckbook.getLastCheck());
 		checkbook.setTotalCheck(intCheckbook.getTotalCheck());
@@ -231,7 +230,7 @@ public class AccountsMapper extends AbstractBbvaConfigurableMapper implements
 			checkbook.setDeliveryDate(deliveryDate);
 		}
 
-		checkbook.setActualState(EnumCheckbookStatus.getByCode(intCheckbook.getActualState()));
+		checkbook.setActualState(EnumCheckbookStatus.valueOf(intCheckbook.getActualState()));
 
 		return checkbook;
 	}

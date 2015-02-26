@@ -10,8 +10,6 @@ public class DTOIntCheckbook {
 
 	public final static long serialVersionUID = 1L;
 
-	@NotNull
-	@Length(min = 20, max = 20)
 	private String id;
 
 	private String firstCheck;
@@ -26,23 +24,11 @@ public class DTOIntCheckbook {
 
 	private String actualState;
 
-	@NotNull
-	@Length(min = 20, max = 20)
-	private String idAccount;
-
 	public DTOIntCheckbook() {
 		// default constructor
 	}
 
 	public DTOIntCheckbook(String id) {
-		this.id = id;
-	}
-
-	public String getId() {
-		return id;
-	}
-
-	public void setId(String id) {
 		this.id = id;
 	}
 
@@ -94,11 +80,11 @@ public class DTOIntCheckbook {
 		this.actualState = actualState;
 	}
 
-	public String getIdAccount() {
-		return idAccount;
+	public String getId() {
+		return id;
 	}
 
-	public void setIdAccount(String idAccount) {
-		this.idAccount = idAccount;
+	public void setId(String id) {
+		this.id = id;
 	}
 }

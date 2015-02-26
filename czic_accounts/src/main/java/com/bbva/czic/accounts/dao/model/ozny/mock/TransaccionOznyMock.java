@@ -3,6 +3,7 @@ package com.bbva.czic.accounts.dao.model.ozny.mock;
 import com.bbva.czic.accounts.dao.model.ozny.FormatoOZECNYS0;
 import com.bbva.czic.accounts.dao.model.ozny.PeticionTransaccionOzny;
 import com.bbva.czic.accounts.dao.model.ozny.RespuestaTransaccionOzny;
+import com.bbva.czic.dto.net.EnumCheckStatus;
 import com.bbva.jee.arq.spring.core.host.ExcepcionTransaccion;
 import com.bbva.jee.arq.spring.core.host.InvocadorTransaccion;
 import com.bbva.jee.arq.spring.core.host.protocolo.ps9.aplicacion.CopySalida;
@@ -27,7 +28,7 @@ public class TransaccionOznyMock implements InvocadorTransaccion<PeticionTransac
         formato.setNumcheq("002233");
         formato.setFechemi(new Date());
         formato.setFechemi(new Date());
-        formato.setEstcheq("Solicitado");
+        formato.setEstcheq(EnumCheckStatus.EN_IMPRESOR.getCodigo());
 
         CopySalida copy = new CopySalida();
         copy.setCopy(formato);
