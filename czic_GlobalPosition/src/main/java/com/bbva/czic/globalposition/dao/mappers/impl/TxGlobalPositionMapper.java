@@ -50,10 +50,15 @@ public class TxGlobalPositionMapper extends AbstractBbvaTxConfigurableMapper imp
 		 * DTOIntProduct <-> FormatoOZECN1S0
 		 */
 		factory.classMap(DTOIntProduct.class, FormatoOZECN1S0.class).field("id", "numprod")
-				.field("productType", "tipprod").field("balance.total", "saltota").fieldMap("operable", "indoper")
-				.converter(OPERABILITY_CONVERTER).add().fieldMap("visible", "indvisi")
-				.converter(VISIBILITY_CONVERTER).add().field("balance.availableBalance", "saldisp")
-				.field("balance.tradeBalance", "salcanj").field("alias", "alias").field("financialState", "finstat")
+				.field("productType", "tipprod")
+				.field("balance.total", "saltota")
+				.fieldMap("operable", "indoper").converter(OPERABILITY_CONVERTER).add()
+				.fieldMap("visible", "indvisi").converter(VISIBILITY_CONVERTER).add()
+				.field("balance.availableBalance", "saldisp")
+				.field("balance.tradeBalance", "salcanj")
+				.field("alias", "alias")
+				.field("name", "nomprod")
+				.field("financialState", "finstat")
 				.byDefault().register();
 
 		/*
