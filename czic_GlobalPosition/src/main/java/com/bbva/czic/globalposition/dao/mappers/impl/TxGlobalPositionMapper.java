@@ -49,7 +49,8 @@ public class TxGlobalPositionMapper extends AbstractBbvaTxConfigurableMapper imp
 		/*
 		 * DTOIntProduct <-> FormatoOZECN1S0
 		 */
-		factory.classMap(DTOIntProduct.class, FormatoOZECN1S0.class).field("id", "numprod")
+		factory.classMap(DTOIntProduct.class, FormatoOZECN1S0.class)
+				.field("id", "numprod")
 				.field("productType", "tipprod")
 				.field("balance.total", "saltota")
 				.fieldMap("operable", "indoper").converter(OPERABILITY_CONVERTER).add()
@@ -97,7 +98,7 @@ public class TxGlobalPositionMapper extends AbstractBbvaTxConfigurableMapper imp
 		log.info("INICIO - TxGlobalPositionMapper#mapOutOzn1S1 - outFormat: " + formatoOZECN1S1);
 		final DTOIntProduct product = map(formatoOZECN1S1, DTOIntProduct.class);
 
-		if (formatoOZECN1S1.getNumtarj() != null && !formatoOZECN1S1.getNumtarj().isEmpty()) {
+		if (!"DE".equals(formatoOZECN1S1.getTipprod())) {
 			product.setId(formatoOZECN1S1.getNumtarj());
 		}
 		product.setContactInfo(getDtoIntContactInfo(formatoOZECN1S1.getNumcelu()));
