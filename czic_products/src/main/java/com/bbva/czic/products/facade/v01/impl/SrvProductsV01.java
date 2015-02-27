@@ -125,9 +125,29 @@ public class SrvProductsV01 implements ISrvProductsV01,
 		return productsMapper.mapExtracts(srvIntProducts
 				.listExtracts(dtoIntFilterExtract));
 	}
+/*
+	@Override
+	@ApiOperation(value = "Listado Extractos", notes = "Listado De Extractos ", response = Response.class)
+	@ApiResponses(value = {
+			@ApiResponse(code = -1, message = "aliasGCE1"),
+			@ApiResponse(code = -1, message = "aliasGCE2"),
+			@ApiResponse(code = 200, message = "Found Sucessfully", response = Response.class),
+			@ApiResponse(code = 500, message = "Technical Error") })
+	@GET
+	@Path("/{productId}/extracts")
+	@SMC(registryID = "SMCCO1500011", logicalID = "listExtracts")
+	public Extract getExtract(
+			@ApiParam(value = "identifier param") @PathParam("productId") String productId,
+			@ApiParam(value = "filter param") @QueryParam("$filter") String filter) {
 
-
-
+		// 1. Mapping filter -> DTO
+		DTOIntFilterExtract dtoIntFilterExtract = productsMapper
+				.getDtoIntFilterExtract(productId, filter);
+		// 2. Invoke SrvIntCustomers and Mapping to canonical DTO
+		return productsMapper.mapExtracts(srvIntProducts
+				.listExtracts(dtoIntFilterExtract)).get(0);
+	}
+*/
 	@Override
 	@ApiOperation(value="Consulta que trae la informaci�n detallada de un movimiento realizado sobre una cuenta", notes="Consulta de movimiento",response=Movement.class)
 	@ApiResponses(value = {
