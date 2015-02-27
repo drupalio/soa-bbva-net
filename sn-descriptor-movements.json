@@ -72,20 +72,305 @@
     "version" : "V01",
     "description" : "SN movements",
     "smcs" : {
+      "post" : [ {
+        "targetDto" : "enumProductType",
+        "logicalId" : null,
+        "registryId" : null,
+        "description" : null,
+        "notes" : null,
+        "gceErrors" : [ "aliasGCE1", "aliasGCE2" ]
+      }, {
+        "targetDto" : "office",
+        "logicalId" : null,
+        "registryId" : null,
+        "description" : null,
+        "notes" : null,
+        "gceErrors" : [ "aliasGCE1", "aliasGCE2" ]
+      }, {
+        "targetDto" : "operation",
+        "logicalId" : null,
+        "registryId" : null,
+        "description" : null,
+        "notes" : null,
+        "gceErrors" : [ "aliasGCE1", "aliasGCE2" ]
+      }, {
+        "targetDto" : "accMoveDetail",
+        "logicalId" : null,
+        "registryId" : null,
+        "description" : null,
+        "notes" : null,
+        "gceErrors" : [ "aliasGCE1", "aliasGCE2" ]
+      }, {
+        "targetDto" : "movement",
+        "logicalId" : null,
+        "registryId" : null,
+        "description" : null,
+        "notes" : null,
+        "gceErrors" : [ "aliasGCE1", "aliasGCE2" ]
+      }, {
+        "targetDto" : "enumAccountMoveStatus",
+        "logicalId" : null,
+        "registryId" : null,
+        "description" : null,
+        "notes" : null,
+        "gceErrors" : [ "aliasGCE1", "aliasGCE2" ]
+      }, {
+        "targetDto" : "enumAccountState",
+        "logicalId" : null,
+        "registryId" : null,
+        "description" : null,
+        "notes" : null,
+        "gceErrors" : [ "aliasGCE1", "aliasGCE2" ]
+      } ],
+      "put" : [ {
+        "targetDto" : "enumProductType",
+        "logicalId" : null,
+        "registryId" : null,
+        "description" : null,
+        "notes" : null,
+        "gceErrors" : [ "aliasGCE1", "aliasGCE2" ]
+      }, {
+        "targetDto" : "office",
+        "logicalId" : null,
+        "registryId" : null,
+        "description" : null,
+        "notes" : null,
+        "gceErrors" : [ "aliasGCE1", "aliasGCE2" ]
+      }, {
+        "targetDto" : "operation",
+        "logicalId" : null,
+        "registryId" : null,
+        "description" : null,
+        "notes" : null,
+        "gceErrors" : [ "aliasGCE1", "aliasGCE2" ]
+      }, {
+        "targetDto" : "accMoveDetail",
+        "logicalId" : null,
+        "registryId" : null,
+        "description" : null,
+        "notes" : null,
+        "gceErrors" : [ "aliasGCE1", "aliasGCE2" ]
+      }, {
+        "targetDto" : "movement",
+        "logicalId" : null,
+        "registryId" : null,
+        "description" : null,
+        "notes" : null,
+        "gceErrors" : [ "aliasGCE1", "aliasGCE2" ]
+      }, {
+        "targetDto" : "enumAccountMoveStatus",
+        "logicalId" : null,
+        "registryId" : null,
+        "description" : null,
+        "notes" : null,
+        "gceErrors" : [ "aliasGCE1", "aliasGCE2" ]
+      }, {
+        "targetDto" : "enumAccountState",
+        "logicalId" : null,
+        "registryId" : null,
+        "description" : null,
+        "notes" : null,
+        "gceErrors" : [ "aliasGCE1", "aliasGCE2" ]
+      } ],
+      "patch" : [ {
+        "targetDto" : "enumProductType",
+        "logicalId" : null,
+        "registryId" : null,
+        "description" : null,
+        "notes" : null,
+        "gceErrors" : [ "aliasGCE1", "aliasGCE2" ]
+      }, {
+        "targetDto" : "office",
+        "logicalId" : null,
+        "registryId" : null,
+        "description" : null,
+        "notes" : null,
+        "gceErrors" : [ "aliasGCE1", "aliasGCE2" ]
+      }, {
+        "targetDto" : "operation",
+        "logicalId" : null,
+        "registryId" : null,
+        "description" : null,
+        "notes" : null,
+        "gceErrors" : [ "aliasGCE1", "aliasGCE2" ]
+      }, {
+        "targetDto" : "accMoveDetail",
+        "logicalId" : null,
+        "registryId" : null,
+        "description" : null,
+        "notes" : null,
+        "gceErrors" : [ "aliasGCE1", "aliasGCE2" ]
+      }, {
+        "targetDto" : "movement",
+        "logicalId" : null,
+        "registryId" : null,
+        "description" : null,
+        "notes" : null,
+        "gceErrors" : [ "aliasGCE1", "aliasGCE2" ]
+      }, {
+        "targetDto" : "enumAccountMoveStatus",
+        "logicalId" : null,
+        "registryId" : null,
+        "description" : null,
+        "notes" : null,
+        "gceErrors" : [ "aliasGCE1", "aliasGCE2" ]
+      }, {
+        "targetDto" : "enumAccountState",
+        "logicalId" : null,
+        "registryId" : null,
+        "description" : null,
+        "notes" : null,
+        "gceErrors" : [ "aliasGCE1", "aliasGCE2" ]
+      } ],
+      "delete" : [ {
+        "targetDto" : "enumProductType",
+        "logicalId" : null,
+        "registryId" : null,
+        "description" : null,
+        "notes" : null,
+        "gceErrors" : [ "aliasGCE1", "aliasGCE2" ]
+      }, {
+        "targetDto" : "office",
+        "logicalId" : null,
+        "registryId" : null,
+        "description" : null,
+        "notes" : null,
+        "gceErrors" : [ "aliasGCE1", "aliasGCE2" ]
+      }, {
+        "targetDto" : "operation",
+        "logicalId" : null,
+        "registryId" : null,
+        "description" : null,
+        "notes" : null,
+        "gceErrors" : [ "aliasGCE1", "aliasGCE2" ]
+      }, {
+        "targetDto" : "accMoveDetail",
+        "logicalId" : null,
+        "registryId" : null,
+        "description" : null,
+        "notes" : null,
+        "gceErrors" : [ "aliasGCE1", "aliasGCE2" ]
+      }, {
+        "targetDto" : "movement",
+        "logicalId" : null,
+        "registryId" : null,
+        "description" : null,
+        "notes" : null,
+        "gceErrors" : [ "aliasGCE1", "aliasGCE2" ]
+      }, {
+        "targetDto" : "enumAccountMoveStatus",
+        "logicalId" : null,
+        "registryId" : null,
+        "description" : null,
+        "notes" : null,
+        "gceErrors" : [ "aliasGCE1", "aliasGCE2" ]
+      }, {
+        "targetDto" : "enumAccountState",
+        "logicalId" : null,
+        "registryId" : null,
+        "description" : null,
+        "notes" : null,
+        "gceErrors" : [ "aliasGCE1", "aliasGCE2" ]
+      } ],
       "get" : {
-        "byKey" : [ {
-          "targetDto" : "movement",
-          "logicalId" : "getMovement",
-          "registryId" : "SMC201500001",
-          "description" : "Consulta que trae la información detallada de un movimiento realizado sobre una cuenta",
-          "notes" : "Consulta de movimiento",
+        "all" : [ {
+          "targetDto" : "enumProductType",
+          "logicalId" : null,
+          "registryId" : null,
+          "description" : null,
+          "notes" : null,
+          "gceErrors" : [ "aliasGCE1", "aliasGCE2" ]
+        }, {
+          "targetDto" : "office",
+          "logicalId" : null,
+          "registryId" : null,
+          "description" : null,
+          "notes" : null,
+          "gceErrors" : [ "aliasGCE1", "aliasGCE2" ]
+        }, {
+          "targetDto" : "operation",
+          "logicalId" : null,
+          "registryId" : null,
+          "description" : null,
+          "notes" : null,
+          "gceErrors" : [ "aliasGCE1", "aliasGCE2" ]
+        }, {
+          "targetDto" : "accMoveDetail",
+          "logicalId" : null,
+          "registryId" : null,
+          "description" : null,
+          "notes" : null,
           "gceErrors" : [ "aliasGCE1", "aliasGCE2" ]
         }, {
           "targetDto" : "movement",
-          "logicalId" : "listMovements",
-          "registryId" : "SMC201500001",
-          "description" : "Operacion que lista los movimientos asociados a un producto y tipo en particular segun los parametros de busqueda, en el caso de que no se envie nungun parametro retornara los movimientos asociados que esten almacenados en backend.",
-          "notes" : "Listado de movimientos",
+          "logicalId" : null,
+          "registryId" : null,
+          "description" : null,
+          "notes" : null,
+          "gceErrors" : [ "aliasGCE1", "aliasGCE2" ]
+        }, {
+          "targetDto" : "enumAccountMoveStatus",
+          "logicalId" : null,
+          "registryId" : null,
+          "description" : null,
+          "notes" : null,
+          "gceErrors" : [ "aliasGCE1", "aliasGCE2" ]
+        }, {
+          "targetDto" : "enumAccountState",
+          "logicalId" : null,
+          "registryId" : null,
+          "description" : null,
+          "notes" : null,
+          "gceErrors" : [ "aliasGCE1", "aliasGCE2" ]
+        } ],
+        "byKey" : [ {
+          "targetDto" : "enumProductType",
+          "logicalId" : null,
+          "registryId" : null,
+          "description" : null,
+          "notes" : null,
+          "gceErrors" : [ "aliasGCE1", "aliasGCE2" ]
+        }, {
+          "targetDto" : "office",
+          "logicalId" : null,
+          "registryId" : null,
+          "description" : null,
+          "notes" : null,
+          "gceErrors" : [ "aliasGCE1", "aliasGCE2" ]
+        }, {
+          "targetDto" : "operation",
+          "logicalId" : null,
+          "registryId" : null,
+          "description" : null,
+          "notes" : null,
+          "gceErrors" : [ "aliasGCE1", "aliasGCE2" ]
+        }, {
+          "targetDto" : "accMoveDetail",
+          "logicalId" : null,
+          "registryId" : null,
+          "description" : null,
+          "notes" : null,
+          "gceErrors" : [ "aliasGCE1", "aliasGCE2" ]
+        }, {
+          "targetDto" : "movement",
+          "logicalId" : null,
+          "registryId" : null,
+          "description" : null,
+          "notes" : null,
+          "gceErrors" : [ "aliasGCE1", "aliasGCE2" ]
+        }, {
+          "targetDto" : "enumAccountMoveStatus",
+          "logicalId" : null,
+          "registryId" : null,
+          "description" : null,
+          "notes" : null,
+          "gceErrors" : [ "aliasGCE1", "aliasGCE2" ]
+        }, {
+          "targetDto" : "enumAccountState",
+          "logicalId" : null,
+          "registryId" : null,
+          "description" : null,
+          "notes" : null,
           "gceErrors" : [ "aliasGCE1", "aliasGCE2" ]
         } ]
       }
