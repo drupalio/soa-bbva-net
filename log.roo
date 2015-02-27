@@ -209,3 +209,7 @@ exit
 sarc generatePackage
 exit
 // ServicesArchitecture log closed at 2015-02-26 08:31:12
+// ServicesArchitecture log opened at 2015-02-27 10:38:36
+sarc generatePackage
+exit
+// ServicesArchitecture log closed at 2015-02-27 14:50:11

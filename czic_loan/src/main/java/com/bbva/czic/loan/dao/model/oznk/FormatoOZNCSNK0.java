@@ -25,7 +25,7 @@ public class FormatoOZNCSNK0 {
 	/**
 	 * <p>Campo <code>NUMEMOV</code>, &iacute;ndice: <code>1</code>, tipo: <code>ALFANUMERICO</code>
 	 */
-	@Campo(indice = 1, nombre = "NUMEMOV", tipo = TipoCampo.ALFANUMERICO, longitudMinima = 7, longitudMaxima = 7)
+	@Campo(indice = 1, nombre = "NUMEMOV", tipo = TipoCampo.ALFANUMERICO, longitudMinima = 9, longitudMaxima = 9)
 	private String numemov;
 	
 	/**
