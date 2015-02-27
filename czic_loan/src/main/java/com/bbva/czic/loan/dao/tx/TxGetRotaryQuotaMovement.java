@@ -19,7 +19,7 @@ public class TxGetRotaryQuotaMovement extends SimpleBbvaTransaction<DTOIntFilter
     private InvocadorTransaccion<PeticionTransaccionOznk, RespuestaTransaccionOznk> transaccionOznk;
 
     @Resource(name = "tx-loan-mapper")
-    private ITxLoanMapper iTxLoanMapper;
+        private ITxLoanMapper iTxLoanMapper;
 
     /**
      *
@@ -28,11 +28,7 @@ public class TxGetRotaryQuotaMovement extends SimpleBbvaTransaction<DTOIntFilter
      */
     @Override
     protected FormatoOZNCENK0 mapDtoInToRequestFormat(DTOIntFilterRotaryMovement dtoIn) {
-        FormatoOZNCENK0 formatoOZNCSNK0 = new FormatoOZNCENK0();
-
-        formatoOZNCSNK0.setNomtarj(dtoIn.getIdLoan());
-        formatoOZNCSNK0.setNommovi(dtoIn.getIdMovement());
-        return formatoOZNCSNK0;
+        return iTxLoanMapper.mapInOznk(dtoIn);
     }
 
     @Override

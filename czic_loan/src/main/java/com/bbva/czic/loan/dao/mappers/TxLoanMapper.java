@@ -111,7 +111,7 @@ public class TxLoanMapper extends AbstractBbvaTxConfigurableMapper implements IT
 	 * @return
 	 */
 	@Override
-	public FormatoOZNCENK0 mapInOznk(DTOIntFilterLoan dtoIn) {
+	public FormatoOZNCENK0 mapInOznk(DTOIntFilterRotaryMovement dtoIn) {
 		return map(dtoIn, FormatoOZNCENK0.class);
 	}
 
