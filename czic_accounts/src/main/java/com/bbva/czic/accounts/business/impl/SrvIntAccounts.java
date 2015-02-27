@@ -94,7 +94,7 @@ public class SrvIntAccounts implements ISrvIntAccounts {
 	}
 
 	@Override
-	public DTOIntCheckbook getCheckbooks(DTOIntCheckbook dtoIntCheckbook) {
+	public DTOIntCheckbook getCheckbooks(DTOIntFilterCheckbooks dtoIntCheckbook) {
 		// 1. Validate DtoIntFilterAccount
 		DtoValidator.validate(dtoIntCheckbook);
 		new StringValidator().isNumericText(dtoIntCheckbook.getIdAccount())

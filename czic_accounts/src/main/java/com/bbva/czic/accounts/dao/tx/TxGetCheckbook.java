@@ -2,6 +2,7 @@ package com.bbva.czic.accounts.dao.tx;
 
 import javax.annotation.Resource;
 
+import com.bbva.czic.accounts.business.dto.DTOIntFilterCheckbooks;
 import org.springframework.stereotype.Component;
 
 import com.bbva.czic.accounts.business.dto.DTOIntCheckbook;
@@ -18,7 +19,7 @@ import com.bbva.jee.arq.spring.core.host.InvocadorTransaccion;
  * @author Entelgy Colombia.
  */
 @Component(value = "tx-get-checkbook")
-public class TxGetCheckbook extends SimpleBbvaTransaction<DTOIntCheckbook, FormatoOZECNSE0, DTOIntCheckbook, FormatoOZECNSS0> {
+public class TxGetCheckbook extends SimpleBbvaTransaction<DTOIntFilterCheckbooks, FormatoOZECNSE0, DTOIntCheckbook, FormatoOZECNSS0> {
 
 	@Resource(name="transaccionOzns")
 	private transient InvocadorTransaccion<PeticionTransaccionOzns, RespuestaTransaccionOzns> transaccionOzns;
@@ -27,14 +28,15 @@ public class TxGetCheckbook extends SimpleBbvaTransaction<DTOIntCheckbook, Forma
 	private TxAccountMapper txAccountMapper;
 	
 	@Override
-	protected FormatoOZECNSE0 mapDtoInToRequestFormat(DTOIntCheckbook dtoIn) {
+	protected FormatoOZECNSE0 mapDtoInToRequestFormat(DTOIntFilterCheckbooks dtoIn) {
 		return txAccountMapper.mapInOzns(dtoIn);
 	}
 
 	@Override
-	protected DTOIntCheckbook mapResponseFormatToDtoOut(
-			FormatoOZECNSS0 formatOutput, DTOIntCheckbook dtoIn) {
-		return txAccountMapper.mapOutOzns(formatOutput);
+	protected DTOIntCheckbook mapResponseFormatToDtoOut(FormatoOZECNSS0 formatOutput, DTOIntFilterCheckbooks dtoIn) {
+		DTOIntCheckbook dto = txAccountMapper.mapOutOzns(formatOutput);
+		dto.setId(dtoIn.getId());
+		return dto;
 	}
 
 	@Override

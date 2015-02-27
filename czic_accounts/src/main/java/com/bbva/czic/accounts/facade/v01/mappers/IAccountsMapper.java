@@ -30,7 +30,7 @@ public interface IAccountsMapper {
 
 	DTOIntFilterMovResumes getDtoIntFilterMovResumes(String idAccount, String filter);
 	
-	DTOIntCheckbook getDtoIntCheckbook(String idAccount, String idCheckbook);
+	DTOIntFilterCheckbooks getDtoIntCheckbook(String idAccount, String idCheckbook);
 
 	public DTOIntCheckFilter getDTOIntFilterChecks(String checkId,String accountId);
 

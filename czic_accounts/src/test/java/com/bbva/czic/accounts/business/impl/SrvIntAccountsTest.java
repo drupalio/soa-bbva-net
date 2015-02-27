@@ -331,14 +331,14 @@ public class SrvIntAccountsTest extends SpringContextBbvaTest {
 	// ----------------- testGetCheckbooks ----------------------
 	@Test(expected = BusinessServiceException.class)
 	public void testGetCheckbooksInvalidFilter(){
-		final DTOIntCheckbook chkbook = new DTOIntCheckbook();
+		final DTOIntFilterCheckbooks chkbook = new DTOIntFilterCheckbooks();
 
 		srv.getCheckbooks(chkbook);
 	}
 
 	@Test(expected = BusinessServiceException.class)
 	public void testGetChecksInvalidAccountId(){
-		final DTOIntCheckbook chkbook = new DTOIntCheckbook();
+		final DTOIntFilterCheckbooks chkbook = new DTOIntFilterCheckbooks();
 		chkbook.setId(dataFactory.getNumberText(20));
 		chkbook.setIdAccount(dataFactory.getNumberText(18) + "AA");
 
@@ -347,7 +347,7 @@ public class SrvIntAccountsTest extends SpringContextBbvaTest {
 
 	@Test(expected = BusinessServiceException.class)
 	public void testGetCheckbooksInvalidCheckbookId(){
-		final DTOIntCheckbook chkbook = new DTOIntCheckbook();
+		final DTOIntFilterCheckbooks chkbook = new DTOIntFilterCheckbooks();
 		chkbook.setId(dataFactory.getNumberText(18) + "AA");
 		chkbook.setIdAccount(dataFactory.getNumberText(20));
 
@@ -356,22 +356,23 @@ public class SrvIntAccountsTest extends SpringContextBbvaTest {
 
 	@Test(expected = BusinessServiceException.class)
 	public void testGetCheckbooksDAOException(){
-		final DTOIntCheckbook chkbook = new DTOIntCheckbook();
+		final DTOIntFilterCheckbooks chkbook = new DTOIntFilterCheckbooks();
 		chkbook.setId(dataFactory.getNumberText(20));
 		chkbook.setIdAccount(dataFactory.getNumberText(20));
 
-		when(accountsDAO.getCheckbooks(any(DTOIntCheckbook.class))).thenThrow(bsn);
+		when(accountsDAO.getCheckbooks(any(DTOIntFilterCheckbooks.class))).thenThrow(bsn);
 
 		srv.getCheckbooks(chkbook);
 	}
 
 	@Test
 	public void testGetCheckbooks(){
-		final DTOIntCheckbook chkbook = new DTOIntCheckbook();
+		final DTOIntFilterCheckbooks chkbook = new DTOIntFilterCheckbooks();
+		final DTOIntCheckbook book = new DTOIntCheckbook();
 		chkbook.setId(dataFactory.getNumberText(20));
 		chkbook.setIdAccount(dataFactory.getNumberText(20));
 
-		when(accountsDAO.getCheckbooks(any(DTOIntCheckbook.class))).thenReturn(chkbook);
+		when(accountsDAO.getCheckbooks(any(DTOIntFilterCheckbooks.class))).thenReturn(book);
 
 		DTOIntCheckbook result = srv.getCheckbooks(chkbook);
 

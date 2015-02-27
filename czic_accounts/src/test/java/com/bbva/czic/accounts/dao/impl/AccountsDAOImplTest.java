@@ -146,17 +146,18 @@ public class AccountsDAOImplTest extends SpringContextBbvaTest {
 
     @Test(expected = BusinessServiceException.class)
     public void testGetCheckbooksTxException() {
-        DTOIntCheckbook filter = new DTOIntCheckbook();
+        DTOIntFilterCheckbooks filter = new DTOIntFilterCheckbooks();
 
-        when(txGetCheckbook.invoke(any(DTOIntCheckbook.class))).thenThrow(bsn);
+        when(txGetCheckbook.invoke(any(DTOIntFilterCheckbooks.class))).thenThrow(bsn);
         dao.getCheckbooks(filter);
     }
 
     @Test
     public void testGetCheckbooks(){
-        DTOIntCheckbook filter = new DTOIntCheckbook();
+        DTOIntFilterCheckbooks filter = new DTOIntFilterCheckbooks();
+        DTOIntCheckbook book = new DTOIntCheckbook();
 
-        when(txGetCheckbook.invoke(any(DTOIntCheckbook.class))).thenReturn(filter);
+        when(txGetCheckbook.invoke(any(DTOIntFilterCheckbooks.class))).thenReturn(book);
 
         DTOIntCheckbook result = dao.getCheckbooks(filter);
         assertNotNull(result);

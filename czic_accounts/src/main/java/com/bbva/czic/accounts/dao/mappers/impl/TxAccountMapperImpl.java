@@ -2,14 +2,7 @@ package com.bbva.czic.accounts.dao.mappers.impl;
 
 import java.util.ArrayList;
 
-import com.bbva.czic.accounts.business.dto.DTOIntAccMovementsResume;
-import com.bbva.czic.accounts.business.dto.DTOIntAccount;
-import com.bbva.czic.accounts.business.dto.DTOIntCheck;
-import com.bbva.czic.accounts.business.dto.DTOIntCheckFilter;
-import com.bbva.czic.accounts.business.dto.DTOIntCheckbook;
-import com.bbva.czic.accounts.business.dto.DTOIntFilterAccount;
-import com.bbva.czic.accounts.business.dto.DTOIntFilterMovResumes;
-import com.bbva.czic.accounts.business.dto.DTOIntMonthlyBalances;
+import com.bbva.czic.accounts.business.dto.*;
 import com.bbva.czic.accounts.dao.mappers.TxAccountMapper;
 import com.bbva.czic.accounts.dao.model.ozna.FormatoOZNCENA0;
 import com.bbva.czic.accounts.dao.model.ozna.FormatoOZNCSNA0;
@@ -21,6 +14,8 @@ import com.bbva.czic.accounts.dao.model.oznv.FormatoOZECNVE0;
 import com.bbva.czic.accounts.dao.model.oznv.FormatoOZECNVS0;
 import com.bbva.czic.accounts.dao.model.ozny.FormatoOZECNYE0;
 import com.bbva.czic.accounts.dao.model.ozny.FormatoOZECNYS0;
+import com.bbva.czic.dto.net.EnumCheckStatus;
+import com.bbva.czic.dto.net.EnumCheckbookStatus;
 import com.bbva.czic.dto.net.EnumMonth;
 import com.bbva.czic.routine.commons.rm.utils.converter.StringMoneyConverter;
 import com.bbva.czic.routine.commons.rm.utils.mappers.AbstractBbvaTxConfigurableMapper;
@@ -61,7 +56,7 @@ public class TxAccountMapperImpl extends AbstractBbvaTxConfigurableMapper implem
 				.field("accountId", "numprod").byDefault().register();
 		
 		// Map DTOIntCheckbook <-> FormatoOZECNSE0 (OZNS)
-				factory.classMap(DTOIntCheckbook.class, FormatoOZECNSE0.class)
+				factory.classMap(DTOIntFilterCheckbooks.class, FormatoOZECNSE0.class)
 						.field("idAccount", "numcuen").field("id", "numcheq").byDefault().register();
 
 		/**
@@ -144,13 +139,17 @@ public class TxAccountMapperImpl extends AbstractBbvaTxConfigurableMapper implem
 	}
 	
 	@Override
-	public FormatoOZECNSE0 mapInOzns(DTOIntCheckbook dtoIn) {
+	public FormatoOZECNSE0 mapInOzns(DTOIntFilterCheckbooks dtoIn) {
 		return map(dtoIn, FormatoOZECNSE0.class);
 	}
 
 	@Override
 	public DTOIntCheckbook mapOutOzns(FormatoOZECNSS0 formatOutput) {
-		return map(formatOutput, DTOIntCheckbook.class);
+		DTOIntCheckbook dto = map(formatOutput, DTOIntCheckbook.class);
+		if(EnumCheckbookStatus.getByCode(dto.getActualState()) != null){
+			dto.setActualState(EnumCheckbookStatus.getByCode(dto.getActualState()).name());
+		}
+		return dto;
 	}
 
 	@Override
@@ -160,7 +159,11 @@ public class TxAccountMapperImpl extends AbstractBbvaTxConfigurableMapper implem
 
 	@Override
 	public DTOIntCheck mapOutOzny(FormatoOZECNYS0 formatOutput) {
-		return map(formatOutput, DTOIntCheck.class);
+		DTOIntCheck dto = map(formatOutput, DTOIntCheck.class);
+		if(EnumCheckStatus.getByCode(dto.getStatus()) != null) {
+			dto.setStatus(EnumCheckStatus.getByCode(dto.getStatus()).name());
+		}
+		return dto;
 	}
 
 

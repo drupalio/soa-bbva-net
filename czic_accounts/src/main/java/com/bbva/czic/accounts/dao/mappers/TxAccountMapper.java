@@ -53,7 +53,7 @@ public interface TxAccountMapper {
 	 */
 	DTOIntAccMovementsResume mapOutOznu(FormatoOZECNUS0 formatOutput);
 
-	FormatoOZECNSE0 mapInOzns(DTOIntCheckbook dtoIn);
+	FormatoOZECNSE0 mapInOzns(DTOIntFilterCheckbooks dtoIn);
 
 	DTOIntCheckbook mapOutOzns(FormatoOZECNSS0 formatOutput);
 

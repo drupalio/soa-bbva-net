@@ -1,0 +1,75 @@
+{
+  "bbva" : {
+    "uuaa" : "czic",
+    "remoteType" : "RESTFUL"
+  },
+  "dtos" : {
+    "enumAccountMoveStatus" : {
+      "#metadata" : {
+        "dtoPackage" : "com.bbva.czic.dto.net.EnumAccountMoveStatus"
+      },
+      "enumValue" : "String"
+    },
+    "enumProductType" : {
+      "#metadata" : {
+        "dtoPackage" : "com.bbva.czic.dto.net.EnumProductType"
+      },
+      "enumValue" : "String"
+    },
+    "enumAccountState" : {
+      "#metadata" : {
+        "dtoPackage" : "com.bbva.czic.dto.net.EnumAccountState"
+      },
+      "enumValue" : "String"
+    },
+    "office" : {
+      "#metadata" : {
+        "dtoPackage" : "com.bbva.czic.dto.net.Office"
+      }
+    },
+    "operation" : {
+      "#metadata" : {
+        "dtoPackage" : "com.bbva.czic.dto.net.Operation"
+      }
+    },
+    "movement" : {
+      "#metadata" : {
+        "dtoPackage" : "com.bbva.czic.dto.net.Movement"
+      },
+      "id" : {
+        "type" : "String",
+        "isKeyField" : true,
+        "description" : "Identificador del movimiento.",
+        "required" : true
+      },
+      "transactionDate" : "arq.DATE",
+      "operationDate" : "arq.DATE",
+      "concept" : "String",
+      "value" : "arq.MONEY",
+      "balance" : "arq.MONEY",
+      "operation" : "dto.operation",
+      "office" : "dto.office",
+      "status" : "dto.enumAccountState",
+      "productId" : {
+        "type" : "String",
+        "required" : true
+      },
+      "productType" : {
+        "type" : "dto.enumProductType",
+        "required" : true
+      }
+    },
+    "accMoveDetail" : {
+      "#metadata" : {
+        "dtoPackage" : "com.bbva.czic.dto.net.AccMoveDetail"
+      }
+    }
+  },
+  "sn" : {
+    "targetDto" : "movement",
+    "logicalId" : "movements",
+    "registryId" : "SN201500001",
+    "version" : "V01",
+    "description" : "SN movements"
+  }
+}

@@ -28,8 +28,9 @@ public class TransaccionOznsMock implements InvocadorTransaccion<PeticionTransac
 		final FormatoOZECNSS0 salida = new FormatoOZECNSS0();
 		final DataFactory dataFactory = new DataFactory();
 		CopySalida copySalida = new CopySalida();
-		
-		salida.setEstachq("H");
+
+
+		salida.setEstachq(EnumCheckbookStatus.CEMPAREJADO.getCode());
 		salida.setFecemis(dataFactory.getDate(2014, 12, 12));
 		salida.setFecentr(dataFactory.getDate(2014, 12, 12));
 		salida.setPrimchq(dataFactory.getNumberText(10));
