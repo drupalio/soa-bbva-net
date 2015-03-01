@@ -11,15 +11,20 @@ import javax.xml.bind.annotation.XmlType;
 @XmlType(name = "EnumCheckStatus", namespace = "urn:com:bbva:czic:dto:net")
 @XmlAccessorType(XmlAccessType.FIELD)
 public enum EnumCheckStatus implements Serializable {
+	DISPONIBLE("0"),
 	ANULADO("1"),
-	PED_OFICINA("A"),
-	EN_IMPRESOR("I"),
-	EN_OFICINA("O"),
-	ENTRE_CLIENTE("E"),
-	DE_BAJA("B"),
-	NO_RECIBIDO("N"),
-	ANULADO_PETICION("C"),
-	PERDIDO("2");
+	PERDIDO("2"),
+	PAGADOCPD("3"),
+	PAGADOOFF("4"),
+	EXTRAVIADO("5"),
+	REEXPEDIDO("6"),
+	ORDENOPAGO("8"),
+	CPENDIENTEE("9"),
+	REGISTPTE("A"),
+	CEMPAREJADO("B"),
+	REGISTEMP("C"),
+	REEMPLAZADO("R"),
+	REEMPLAZADO1("E");
 
 	private String codigo;
 

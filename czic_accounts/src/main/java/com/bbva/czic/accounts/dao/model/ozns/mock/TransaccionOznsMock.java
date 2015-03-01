@@ -30,7 +30,7 @@ public class TransaccionOznsMock implements InvocadorTransaccion<PeticionTransac
 		CopySalida copySalida = new CopySalida();
 
 
-		salida.setEstachq(EnumCheckbookStatus.CEMPAREJADO.getCode());
+		salida.setEstachq(EnumCheckbookStatus.ANULADO.getCode());
 		salida.setFecemis(dataFactory.getDate(2014, 12, 12));
 		salida.setFecentr(dataFactory.getDate(2014, 12, 12));
 		salida.setPrimchq(dataFactory.getNumberText(10));
