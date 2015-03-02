@@ -96,13 +96,13 @@ public class SrvLoanV01Test extends SpringContextBbvaTest {
         final DTOIntRotaryQuotaMove dtoIntRotaryQuotaMove = new DTOIntRotaryQuotaMove();
         dtoIntRotaryQuotaMove.setId("1234");
 
-        final Movement movement = new Movement();
-        movement.setId("123456");
+        final RotaryQuotaMove rotaryQuotaMove = new RotaryQuotaMove();
+        rotaryQuotaMove.setId("123456");
 
         when(iSrvIntLoan.getRotaryQuotaMovement(any(DTOIntFilterRotaryMovement.class))).thenReturn(dtoIntRotaryQuotaMove);
-        when(loanMapper.map(any(DTOIntRotaryQuotaMove.class))).thenReturn(movement);
+        when(loanMapper.map(any(DTOIntRotaryQuotaMove.class))).thenReturn(rotaryQuotaMove);
 
-        final Movement result = srvLoanV01.getRotaryQuotaMovement("1234", "4567");
+        final RotaryQuotaMove result = srvLoanV01.getRotaryQuotaMovement("1234", "4567");
 
         Assert.assertNotNull(result);
     }
