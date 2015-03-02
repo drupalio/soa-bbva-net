@@ -11,7 +11,7 @@ public class DTOIntFilterRotaryMovement {
 
     @NotNull
     @Length(min = 20, max = 20)
-    private String idLoan;
+        private String idLoan;
 
     @NotNull
     @NumberFormat(style = NumberFormat.Style.NUMBER)

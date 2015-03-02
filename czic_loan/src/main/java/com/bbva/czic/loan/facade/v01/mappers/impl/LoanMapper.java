@@ -17,6 +17,7 @@ import com.bbva.jee.arq.spring.core.servicing.gce.BusinessServiceException;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.List;
 
 @Mapper(value = "loan-mapper")
@@ -54,15 +55,15 @@ public class LoanMapper extends AbstractBbvaConfigurableMapper implements ILoanM
 				.byDefault().register();
 
 		// Map DTOIntMovement <-> RotaryQuotaMove
-		factory.classMap(DTOIntRotaryQuotaMove.class, Movement.class)
+		factory.classMap(DTOIntRotaryQuotaMove.class, RotaryQuotaMove.class)
 				.field("id", "id")
 				.field("concept", "concept")
 				.field("transactionDate", "transactionDate")
 				.field("operation", "operation")
 				.field("status", "status")
 				.field("value", "value")
-				.field("balance", "deb")
-				.field("numbersOfQuota", "numberOfQuotas")
+				.field("balance", "balance")
+				.field("numbersOfQuota", "numbersOfQuota")
 				.field("remainingQuotas", "remainingQuotas")
 				.byDefault().register();
 	}
@@ -111,7 +112,7 @@ public class LoanMapper extends AbstractBbvaConfigurableMapper implements ILoanM
 	 * @return
 	 */
 	@Override
-	public Movement map(DTOIntRotaryQuotaMove dtoIntRotaryQuotaMove) {
-		return map(dtoIntRotaryQuotaMove, Movement.class);
+	public RotaryQuotaMove map(DTOIntRotaryQuotaMove dtoIntRotaryQuotaMove) {
+		return  map(dtoIntRotaryQuotaMove, RotaryQuotaMove.class);
 	}
 }
