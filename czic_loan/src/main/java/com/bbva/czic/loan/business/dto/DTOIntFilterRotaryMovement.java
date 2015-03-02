@@ -9,14 +9,8 @@ import javax.validation.constraints.NotNull;
  */
 public class DTOIntFilterRotaryMovement {
 
-    @NotNull
-<<<<<<< HEAD
-    @Length(min = 16, max = 16)
-    private String idLoan;
-=======
     @Length(min = 20, max = 20)
-        private String idLoan;
->>>>>>> LoanEsperanzaGomez
+    private String idLoan;
 
     @NotNull
     private Integer idMovement;
