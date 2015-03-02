@@ -33,9 +33,9 @@ public class RotaryQuotaMove implements Serializable {
 	@ApiModelProperty("Valor del movimiento.")
 	private Money value;
 
-	private Balance balance;
+	private Balance deb;
 
-	private Integer numbersOfQuota;
+	private Integer numberOfQuotas;
 
 	private Integer remainingQuotas;
 
@@ -95,20 +95,20 @@ public class RotaryQuotaMove implements Serializable {
 	}
 
 	public Balance getBalance() {
-		return balance;
+		return deb;
 	}
 
-	public void setBalance(Balance balance) {
-		this.balance = balance;
+	public void setBalance(Balance deb) {
+		this.deb = deb;
 	}
 
 
 	public Integer getNumbersOfQuota() {
-		return numbersOfQuota;
+		return numberOfQuotas;
 	}
 
-	public void setNumbersOfQuota(Integer numbersOfQuota) {
-		this.numbersOfQuota = numbersOfQuota;
+	public void setNumbersOfQuota(Integer numberOfQuotas) {
+		this.numberOfQuotas = numberOfQuotas;
 	}
 
 	public Integer getRemainingQuotas() {
