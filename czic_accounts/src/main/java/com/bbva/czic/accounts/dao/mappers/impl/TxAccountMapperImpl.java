@@ -146,9 +146,6 @@ public class TxAccountMapperImpl extends AbstractBbvaTxConfigurableMapper implem
 	@Override
 	public DTOIntCheckbook mapOutOzns(FormatoOZECNSS0 formatOutput) {
 		DTOIntCheckbook dto = map(formatOutput, DTOIntCheckbook.class);
-		if(EnumCheckbookStatus.getByCode(dto.getActualState()) != null){
-			dto.setActualState(EnumCheckbookStatus.getByCode(dto.getActualState()).name());
-		}
 		return dto;
 	}
 
@@ -160,9 +157,6 @@ public class TxAccountMapperImpl extends AbstractBbvaTxConfigurableMapper implem
 	@Override
 	public DTOIntCheck mapOutOzny(FormatoOZECNYS0 formatOutput) {
 		DTOIntCheck dto = map(formatOutput, DTOIntCheck.class);
-		if(EnumCheckStatus.getByCode(dto.getStatus()) != null) {
-			dto.setStatus(EnumCheckStatus.getByCode(dto.getStatus()).name());
-		}
 		return dto;
 	}
 

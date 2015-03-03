@@ -36,7 +36,7 @@ public class TransaccionOznsMock implements InvocadorTransaccion<PeticionTransac
 		salida.setPrimchq(dataFactory.getNumberText(10));
 		salida.setUltichq(dataFactory.getNumberText(10));
 		salida.setTotachq(dataFactory.getNumberText(3));
-		
+
 		copySalida.setCopy(salida);
 		respuesta.getCuerpo().getPartes().add(copySalida);
 		return respuesta;

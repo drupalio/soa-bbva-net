@@ -42,7 +42,7 @@ public class Checkbook implements Serializable {
 	@Past
 	private Calendar deliveryDate;
 	@ApiModelProperty(value = "Estado actual de la chequera solicitada", required = true)
-	private EnumCheckbookStatus actualState;
+	private String actualState;
 	@ApiModelProperty(value = "Cheques asociados a una chequera", required = true)
 	private List<Check> checks;
 
@@ -98,11 +98,11 @@ public class Checkbook implements Serializable {
 		this.deliveryDate = deliveryDate;
 	}
 
-	public EnumCheckbookStatus getActualState() {
+	public String getActualState() {
 		return actualState;
 	}
 
-	public void setActualState(EnumCheckbookStatus actualState) {
+	public void setActualState(String actualState) {
 		this.actualState = actualState;
 	}
 

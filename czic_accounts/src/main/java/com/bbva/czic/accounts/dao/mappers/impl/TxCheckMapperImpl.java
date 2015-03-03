@@ -68,18 +68,12 @@ public class TxCheckMapperImpl extends AbstractBbvaTxConfigurableMapper implemen
 	@Override
 	public FormatoOZECNXE0 mapInOznx(DTOIntFilterChecks dtoIn) {
 		FormatoOZECNXE0 formato = map(dtoIn, FormatoOZECNXE0.class);
-		if(formato.getEstcheq() != null) {
-			formato.setEstcheq(EnumCheckStatus.valueOf(formato.getEstcheq()).getCodigo());
-		}
 		return formato;
 	}
 
 	@Override
 	public DTOIntCheck mapOutOznx(FormatoOZECNXS0 formatOutput) {
 		DTOIntCheck dto = map(formatOutput, DTOIntCheck.class);
-		if(EnumCheckStatus.getByCode(dto.getStatus()) != null) {
-			dto.setStatus(EnumCheckStatus.getByCode(dto.getStatus()).name());
-		}
 		return dto;
 	}
 }

@@ -21,14 +21,14 @@ public class DTOIntFilterChecks {
     private Integer paginationKey;
     @NotNull
     private Integer pageSize;
-    private EnumCheckStatus status;
+    private String status;
 
 
-    public EnumCheckStatus getStatus() {
+    public String getStatus() {
         return status;
     }
 
-    public void setStatus(EnumCheckStatus status) {
+    public void setStatus(String status) {
         this.status = status;
     }
 

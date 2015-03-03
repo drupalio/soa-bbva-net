@@ -117,15 +117,7 @@ public class AccountsMapper extends AbstractBbvaConfigurableMapper implements
 			throw new BusinessServiceException(
 					EnumError.WRONG_PARAMETERS.getAlias());
 		}
-
-		if(this.getEqValue(filter, "status") != null) {
-			try {
-				dtoFilter.setStatus(EnumCheckStatus.valueOf(this.getEqValue(filter, "status")));
-			}catch (Exception ie){
-				throw new BusinessServiceException(
-						EnumError.WRONG_PARAMETERS.getAlias());
-			}
-		}
+		dtoFilter.setStatus(this.getEqValue(filter, "status"));
 
 		return dtoFilter;
 	}
@@ -230,7 +222,7 @@ public class AccountsMapper extends AbstractBbvaConfigurableMapper implements
 			checkbook.setDeliveryDate(deliveryDate);
 		}
 
-		checkbook.setActualState(EnumCheckbookStatus.valueOf(intCheckbook.getActualState()));
+		checkbook.setActualState(intCheckbook.getActualState());
 
 		return checkbook;
 	}
