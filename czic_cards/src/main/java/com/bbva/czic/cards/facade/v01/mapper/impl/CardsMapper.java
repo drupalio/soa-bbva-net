@@ -36,7 +36,7 @@ public class CardsMapper extends AbstractBbvaConfigurableMapper implements ICard
 		// Custom converters
 		factory.getConverterFactory().registerConverter("enumCategoryConverter", new EnumCategoryConverter());
 
-		// Map DTOIntCheckbook <-> CheckBook
+		// Map DTOIntCardCharge <-> CheckBook
 		factory.classMap(DTOIntCardCharge.class, CardCharge.class)
 				.fieldMap("category", "category").converter("enumCategoryConverter").add()
 				.field("amount", "amount")

@@ -14,7 +14,7 @@ import javax.xml.bind.annotation.XmlType;
 public enum EnumCardChargeCategory implements Serializable {
 
 	OCIO("OCIO"),
-	REGALOS_LIBROS_DISCOS("(REGALOS|LIBROS,DISCOS)"),
+	REGALOS_LIBROS_DISCOS("(REGALOS|LIBROS|DISCOS)"),
 	COMERCIOBASICO("COMERCIO BASICO"),
 	ROPA_CALZADO_PERSONAL("(ROPA|CALZADO Y PERSONAL)"),
 	VARIOS("VARIOS"),
@@ -34,7 +34,7 @@ public enum EnumCardChargeCategory implements Serializable {
 	public static EnumCardChargeCategory fromString(String text) {
 	    if (text != null) {
 	      for (EnumCardChargeCategory cardChargeCategory : EnumCardChargeCategory.values()) {
-	        if (Pattern.compile(cardChargeCategory.text).matcher(text).matches()) {
+	        if (Pattern.compile(cardChargeCategory.text).matcher(text).find()) {
 	          return cardChargeCategory;
 	        }
 	      }
