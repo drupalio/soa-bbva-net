@@ -66,7 +66,7 @@ public class LoanMapperTest {
 		dtoIntRotaryQuotaMove.setId("1234567654");
 		dtoIntRotaryQuotaMove.setStatus("Ok");
 
-		final Movement result = loanMapper.map(dtoIntRotaryQuotaMove);
+		final RotaryQuotaMove result = loanMapper.map(dtoIntRotaryQuotaMove);
 
 		Assert.assertEquals(result.getId(), dtoIntRotaryQuotaMove.getId());
 		Assert.assertEquals(result.getStatus(), dtoIntRotaryQuotaMove.getStatus());

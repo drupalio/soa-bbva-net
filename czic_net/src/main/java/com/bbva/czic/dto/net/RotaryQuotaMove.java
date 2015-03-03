@@ -22,10 +22,10 @@ public class RotaryQuotaMove implements Serializable {
 
 	private String concept;
 
-	//@XmlJavaTypeAdapter(CalendarAdapter.class)
+	@XmlJavaTypeAdapter(CalendarAdapter.class)
 	@ApiModelProperty(value = " fecha de la transaccion", required = true)
-	//@Past
-	private String transactionDate;
+	@Past
+	private Calendar transactionDate;
 
 	private String status;
 
@@ -33,9 +33,9 @@ public class RotaryQuotaMove implements Serializable {
 	@ApiModelProperty("Valor del movimiento.")
 	private Money value;
 
-	private Balance balance;
+	private Balance deb;
 
-	private Integer numbersOfQuota;
+	private Integer numberOfQuotas;
 
 	private Integer remainingQuotas;
 
@@ -60,11 +60,11 @@ public class RotaryQuotaMove implements Serializable {
 		this.concept = concept;
 	}
 
-	public String getTransactionDate() {
+	public Calendar getTransactionDate() {
 		return transactionDate;
 	}
 
-	public void setTransactionDate(String transactionDate) {
+	public void setTransactionDate(Calendar transactionDate) {
 		this.transactionDate = transactionDate;
 	}
 
@@ -95,20 +95,20 @@ public class RotaryQuotaMove implements Serializable {
 	}
 
 	public Balance getBalance() {
-		return balance;
+		return deb;
 	}
 
-	public void setBalance(Balance balance) {
-		this.balance = balance;
+	public void setBalance(Balance deb) {
+		this.deb = deb;
 	}
 
 
 	public Integer getNumbersOfQuota() {
-		return numbersOfQuota;
+		return numberOfQuotas;
 	}
 
-	public void setNumbersOfQuota(Integer numbersOfQuota) {
-		this.numbersOfQuota = numbersOfQuota;
+	public void setNumbersOfQuota(Integer numberOfQuotas) {
+		this.numberOfQuotas = numberOfQuotas;
 	}
 
 	public Integer getRemainingQuotas() {

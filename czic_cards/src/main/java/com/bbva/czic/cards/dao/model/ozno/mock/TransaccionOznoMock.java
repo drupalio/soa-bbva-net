@@ -24,9 +24,18 @@ public class TransaccionOznoMock implements InvocadorTransaccion<PeticionTransac
 		RespuestaTransaccionOzno respuesta = new RespuestaTransaccionOzno();
 		final DataFactory dataFactory = new DataFactory();
 
-		for(EnumCardChargeCategory cat : EnumCardChargeCategory.values()){
+		String[] categories = {
+				"OCIO                               ",
+				"REGALOS, LIBROS, DISCOS            ",
+				"COMERCIO BASICO                    ",
+				"ROPA,CALZADO Y PERSONAL            ",
+				"VARIOS                             ",
+				"COMPRAS POR CANALES                "
+		};
+
+		for(String cat : categories){
 			FormatoOZECNOS0 formatoSalida = new FormatoOZECNOS0();
-			formatoSalida.setCategor(cat.name());
+			formatoSalida.setCategor(cat);
 			formatoSalida.setValcate(new BigDecimal(dataFactory.getNumberBetween(100000,200000)));
 			CopySalida copySalida = new CopySalida();
 			copySalida.setCopy(formatoSalida);

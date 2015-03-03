@@ -23,5 +23,5 @@ public interface ILoanMapper {
 
 	List<Movement> map(List<DTOIntMovement> listaDtoIntMovement);
 
-	Movement map(DTOIntRotaryQuotaMove dtoIntRotaryQuotaMove);
+	RotaryQuotaMove map(DTOIntRotaryQuotaMove dtoIntRotaryQuotaMove);
 }
