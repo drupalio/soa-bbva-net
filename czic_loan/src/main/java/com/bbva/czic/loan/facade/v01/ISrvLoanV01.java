@@ -13,5 +13,5 @@ public interface ISrvLoanV01 {
 	List<Movement> listRotaryQuotaMovements(String idLoan, Integer paginationKey, Integer pageSize,
 												   String filter);
 
-	Movement getRotaryQuotaMovement(String idMovement, String idLoan);
+	RotaryQuotaMove getRotaryQuotaMovement(String idMovement, String idLoan);
 }

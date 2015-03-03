@@ -30,7 +30,7 @@ public class TransaccionOznkMock implements InvocadorTransaccion<PeticionTransac
 
 		formatoSalida.setDescop("Descripcion");
 		formatoSalida.setResto("12345");
-		formatoSalida.setNumemov("000000000");
+		formatoSalida.setNumemov("00000000");
 		formatoSalida.setImporte("+00000000000");
 		formatoSalida.setBalance("+00000000000");
 		formatoSalida.setCoutaf("0000");

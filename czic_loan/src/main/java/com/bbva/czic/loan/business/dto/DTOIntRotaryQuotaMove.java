@@ -17,7 +17,7 @@ public class DTOIntRotaryQuotaMove {
 
 
     @NotNull
-    @Length(min = 9, max = 9)
+    @Length(min = 8, max = 8)
     private String id;
 
     @NotNull

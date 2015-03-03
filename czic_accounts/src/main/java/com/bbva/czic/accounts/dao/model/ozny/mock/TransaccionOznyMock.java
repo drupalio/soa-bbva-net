@@ -28,7 +28,7 @@ public class TransaccionOznyMock implements InvocadorTransaccion<PeticionTransac
         formato.setNumcheq("002233");
         formato.setFechemi(new Date());
         formato.setFechemi(new Date());
-        formato.setEstcheq(EnumCheckStatus.EN_IMPRESOR.getCodigo());
+        formato.setEstcheq(EnumCheckStatus.DISPONIBLE.getCodigo());
 
         CopySalida copy = new CopySalida();
         copy.setCopy(formato);
