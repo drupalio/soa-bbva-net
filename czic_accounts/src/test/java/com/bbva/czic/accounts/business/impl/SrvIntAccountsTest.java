@@ -368,13 +368,13 @@ public class SrvIntAccountsTest extends SpringContextBbvaTest {
 	@Test
 	public void testGetCheckbooks(){
 		final DTOIntFilterCheckbooks chkbook = new DTOIntFilterCheckbooks();
-		final DTOIntCheckbook book = new DTOIntCheckbook();
+		final List<DTOIntCheckbook> book = new ArrayList<DTOIntCheckbook>();
 		chkbook.setId(dataFactory.getNumberText(20));
 		chkbook.setIdAccount(dataFactory.getNumberText(20));
 
 		when(accountsDAO.getCheckbooks(any(DTOIntFilterCheckbooks.class))).thenReturn(book);
 
-		DTOIntCheckbook result = srv.getCheckbooks(chkbook);
+		List<DTOIntCheckbook> result = srv.getCheckbooks(chkbook);
 
 		assertNotNull(result);
 	}

@@ -184,15 +184,15 @@ public class SrvAccountsV01 implements ISrvAccountsV01,
 	@ApiResponses(value = {
 			@ApiResponse(code = -1, message = "aliasGCE1"),
 			@ApiResponse(code = -1, message = "aliasGCE2"),
-			@ApiResponse(code = 200, message = "Found Successfully", response = Checkbook.class),
+			@ApiResponse(code = 200, message = "Found Successfully", response = List.class),
 			@ApiResponse(code = 400, message = "Request Error"),
 			@ApiResponse(code = 409, message = "Functional Error"),
 			@ApiResponse(code = 500, message = "Technical Error") })
 	@GET
 	@Path("/{accountId}/checkbooks/{checkbookId}")
-	@ElementClass(response = Checkbook.class)
+	@ElementClass(response = List.class)
 	@SMC(registryID = "SMCCO1400013", logicalID = "getCheckbooks")
-	public Checkbook getCheckbook(
+	public List<Checkbook> getCheckbook(
 			@ApiParam(value = "Checkbooks identifier") @PathParam("checkbookId") String checkbookId,
 			@ApiParam(value = "account identifier") @PathParam("accountId") String accountId) {
 		// 2. Mapping to DTOIntCheckbook

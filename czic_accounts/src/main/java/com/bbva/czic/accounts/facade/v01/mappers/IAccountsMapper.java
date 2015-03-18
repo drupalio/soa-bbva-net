@@ -22,7 +22,7 @@ public interface IAccountsMapper {
 
 	List<Check> mapChecks(List<DTOIntCheck> listaDtoIntChecks);
 
-	Checkbook mapCheckbooks(DTOIntCheckbook intCheckbook);
+	List<Checkbook> mapCheckbooks(List<DTOIntCheckbook> intCheckbook);
 
 	DTOIntFilterAccount getDTOIntFilter(String idAccount, String filter);
 

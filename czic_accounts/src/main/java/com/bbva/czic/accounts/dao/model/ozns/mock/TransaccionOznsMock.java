@@ -39,6 +39,20 @@ public class TransaccionOznsMock implements InvocadorTransaccion<PeticionTransac
 
 		copySalida.setCopy(salida);
 		respuesta.getCuerpo().getPartes().add(copySalida);
+
+		final FormatoOZECNSS0 salida1 = new FormatoOZECNSS0();
+
+		salida1.setEstachq(EnumCheckbookStatus.ANULADO.getCode());
+		salida1.setFecemis(dataFactory.getDate(2014, 11, 15));
+		salida1.setFecentr(dataFactory.getDate(2014, 10, 19));
+		salida1.setPrimchq(dataFactory.getNumberText(10));
+		salida1.setUltichq(dataFactory.getNumberText(10));
+		salida1.setTotachq(dataFactory.getNumberText(3));
+
+		CopySalida copySalida1 = new CopySalida();
+		copySalida1.setCopy(salida);
+		respuesta.getCuerpo().getPartes().add(copySalida);
+
 		return respuesta;
 	}
 	

@@ -68,12 +68,12 @@ public class SrvLoanV01Test extends SpringContextBbvaTest {
         final List<DTOIntMovement> dtoIntMovementList = new ArrayList<DTOIntMovement>();
         final List<Movement> movementList = new ArrayList<Movement>();
 
-        DTOIntFilterLoan dtoIntFilterLoan = new DTOIntFilterLoan();
-
         String filter = "(transactionDate=ge=2014-01-12;transactionDate=le=02015-01-10)";
 
         Movement movement = new Movement();
         movement.setId("1234");
+
+        movementList.add(movement);
 
         final DTOIntMovement dtoIntMovement = new DTOIntMovement();
         dtoIntMovement.setId("1234");

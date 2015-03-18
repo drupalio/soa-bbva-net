@@ -19,7 +19,7 @@ import com.bbva.jee.arq.spring.core.host.InvocadorTransaccion;
  * @author Entelgy Colombia.
  */
 @Component(value = "tx-get-checkbook")
-public class TxGetCheckbook extends SimpleBbvaTransaction<DTOIntFilterCheckbooks, FormatoOZECNSE0, DTOIntCheckbook, FormatoOZECNSS0> {
+public class TxGetCheckbook extends MultiBbvaTransaction<DTOIntFilterCheckbooks, FormatoOZECNSE0, DTOIntCheckbook, FormatoOZECNSS0> {
 
 	@Resource(name="transaccionOzns")
 	private transient InvocadorTransaccion<PeticionTransaccionOzns, RespuestaTransaccionOzns> transaccionOzns;

@@ -228,7 +228,7 @@ public class SrvAccountsV01Test extends SpringContextBbvaTest {
     public void testGetCheckbookMapperException(){
         final BusinessServiceException bsn = getBsnExeptionByAlias(EnumError.NO_DATA.getAlias());
 
-        when(iAccountsMapper.mapCheckbooks(any(DTOIntCheckbook.class))).thenThrow(bsn);
+        when(iAccountsMapper.mapCheckbooks(anyList())).thenThrow(bsn);
 
         srv.getCheckbook("123456", "987654");
     }
@@ -236,14 +236,14 @@ public class SrvAccountsV01Test extends SpringContextBbvaTest {
     @Test
     public void testGetCheckbook(){
         final DTOIntFilterCheckbooks checkbook = new DTOIntFilterCheckbooks();
-        DTOIntCheckbook book = new DTOIntCheckbook();
-        final Checkbook answer = new Checkbook();
+        List<DTOIntCheckbook> bookList = new ArrayList<DTOIntCheckbook>();
+        final List<Checkbook> answer = new ArrayList<Checkbook>();
 
         when(iAccountsMapper.getDtoIntCheckbook(anyString(), anyString())).thenReturn(checkbook);
-        when(srvIntAccounts.getCheckbooks(any(DTOIntFilterCheckbooks.class))).thenReturn(book);
-        when(iAccountsMapper.mapCheckbooks(any(DTOIntCheckbook.class))).thenReturn(answer);
+        when(srvIntAccounts.getCheckbooks(any(DTOIntFilterCheckbooks.class))).thenReturn(bookList);
+        when(iAccountsMapper.mapCheckbooks(anyList())).thenReturn(answer);
 
-       Checkbook books = srv.getCheckbook("123456", "987654");
+        List<Checkbook> books = srv.getCheckbook("123456", "987654");
         assertNotNull(books);
     }
 

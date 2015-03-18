@@ -78,7 +78,7 @@ public class AccountsDAOImpl implements AccountsDAO {
 	}
 
 	@Override
-	public DTOIntCheckbook getCheckbooks(DTOIntFilterCheckbooks intCheckbook) {
+	public List<DTOIntCheckbook> getCheckbooks(DTOIntFilterCheckbooks intCheckbook) {
 		return txGetCheckbook.invoke(intCheckbook);
 	}
 }

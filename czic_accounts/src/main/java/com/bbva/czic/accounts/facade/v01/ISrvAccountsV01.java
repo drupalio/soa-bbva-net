@@ -21,7 +21,7 @@ public interface ISrvAccountsV01{
 
 	List<Check> listCheck(String accountId, String filter, Integer paginationKey, Integer pageSize);
 
-	Checkbook getCheckbook(String checkbookId, String accountId);
+	List<Checkbook> getCheckbook(String checkbookId, String accountId);
 
 	public Check getCheck(String accountId, String checkId);
 

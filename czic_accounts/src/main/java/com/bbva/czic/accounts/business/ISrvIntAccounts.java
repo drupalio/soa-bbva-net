@@ -30,7 +30,7 @@ public interface ISrvIntAccounts {
 	List<DTOIntCheck> listCheck(DTOIntFilterChecks filter);
 
 
-	DTOIntCheckbook getCheckbooks(DTOIntFilterCheckbooks intCheckbook);
+	List<DTOIntCheckbook> getCheckbooks(DTOIntFilterCheckbooks intCheckbook);
 
 	DTOIntCheck getChecks(DTOIntCheckFilter dtoIntCheckFilter);
 

@@ -203,28 +203,33 @@ public class AccountsMapper extends AbstractBbvaConfigurableMapper implements
 	}
 
 	@Override
-	public Checkbook mapCheckbooks(DTOIntCheckbook intCheckbook) {
+	public List<Checkbook> mapCheckbooks(List<DTOIntCheckbook> intCheckbook) {
 
-		final Checkbook checkbook = new Checkbook();
-		checkbook.setFirstCheck(intCheckbook.getFirstCheck() + "");
-		checkbook.setLastCheck(intCheckbook.getLastCheck());
-		checkbook.setTotalCheck(intCheckbook.getTotalCheck());
+		final List<Checkbook> checkbookList = new ArrayList<Checkbook>();
+		Checkbook checkbook = new Checkbook();
+		for (DTOIntCheckbook item : intCheckbook) {
 
-		if(intCheckbook.getRequestDate() != null) {
-			final Calendar requestDate = Calendar.getInstance();
-			requestDate.setTime(intCheckbook.getRequestDate());
-			checkbook.setRequestDate(requestDate);
-		}
+			checkbook.setFirstCheck(item.getFirstCheck() + "");
+			checkbook.setLastCheck(item.getLastCheck());
+			checkbook.setTotalCheck(item.getTotalCheck());
 
-		if(intCheckbook.getDeliveryDate() != null) {
-			final Calendar deliveryDate = Calendar.getInstance();
-			deliveryDate.setTime(intCheckbook.getDeliveryDate());
-			checkbook.setDeliveryDate(deliveryDate);
-		}
+			if (item.getRequestDate() != null) {
+				Calendar requestDate = Calendar.getInstance();
+				requestDate.setTime(item.getRequestDate());
+				checkbook.setRequestDate(requestDate);
+			}
 
-		checkbook.setActualState(intCheckbook.getActualState());
+			if (item.getDeliveryDate() != null) {
+				Calendar deliveryDate = Calendar.getInstance();
+				deliveryDate.setTime(item.getDeliveryDate());
+				checkbook.setDeliveryDate(deliveryDate);
+			}
 
-		return checkbook;
+			checkbook.setActualState(item.getActualState());
+
+			checkbookList.add(checkbook);
+	}
+		return checkbookList;
 	}
 
 

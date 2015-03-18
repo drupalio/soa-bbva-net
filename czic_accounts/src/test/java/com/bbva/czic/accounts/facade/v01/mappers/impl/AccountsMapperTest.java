@@ -132,12 +132,12 @@ public class AccountsMapperTest extends SpringContextBbvaTest {
 	@Test
 	public void testMapCheckbooks(){
 
-		final DTOIntCheckbook dtoIntCheckbook = mockDtoIntCheckbook();
+		final List<DTOIntCheckbook> dtoIntCheckbook = mockDtoIntCheckbookList();
 
-		final Checkbook checkbook = accountsMapper.mapCheckbooks(dtoIntCheckbook);
+		final List<Checkbook> checkbook = accountsMapper.mapCheckbooks(dtoIntCheckbook);
 
 		assertNotNull(checkbook);
-		assertNotNull(checkbook.getId());
+		assertNotNull(checkbook.get(0).getId());
 	}
 
 	@Test
@@ -270,14 +270,26 @@ public class AccountsMapperTest extends SpringContextBbvaTest {
 		return balance;
 	}
 
-	private DTOIntCheckbook mockDtoIntCheckbook(){
+	private List<DTOIntCheckbook> mockDtoIntCheckbookList(){
 		DTOIntCheckbook checkbook = new DTOIntCheckbook();
+		List<DTOIntCheckbook> checkbookList = new ArrayList<DTOIntCheckbook>();
 		checkbook.setId("123456789");
 		checkbook.setRequestDate(new Date());
 		checkbook.setDeliveryDate(new Date());
-		return checkbook;
+
+		checkbookList.add(checkbook);
+		return checkbookList;
 	}
 
+	private DTOIntCheckbook mockDtoIntCheckbook() {
+		DTOIntCheckbook checkbook = new DTOIntCheckbook();
+
+		checkbook.setId("123456789");
+		checkbook.setRequestDate(new Date());
+		checkbook.setDeliveryDate(new Date());
+
+		return checkbook;
+	}
 	private List<DTOIntCheck> mockDtoIntChecks(int lenght){
 		List<DTOIntCheck> checks  = new ArrayList<DTOIntCheck>();
 

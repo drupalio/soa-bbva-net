@@ -37,7 +37,7 @@ public interface AccountsDAO {
 	 * @param intCheckbook
 	 * @return
 	 */
-	DTOIntCheckbook getCheckbooks(DTOIntFilterCheckbooks intCheckbook);
+	List<DTOIntCheckbook> getCheckbooks(DTOIntFilterCheckbooks intCheckbook);
 
 	/**
 	 *
