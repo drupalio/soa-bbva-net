@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<assembly>
+	<id>sn</id>
+	<formats>
+		<format>jar</format>
+	</formats>
+	<includeBaseDirectory>false</includeBaseDirectory>
+	<fileSets>
+	    <fileSet>
+            <directory>target/classes/com/bbva/zic/cards/business</directory>
+            <outputDirectory>com/bbva/zic/cards/business</outputDirectory>
+        </fileSet>
+	    <fileSet>
+            <directory>target/classes/com/bbva/zic/cards/dao</directory>
+            <outputDirectory>com/bbva/zic/cards/dao</outputDirectory>
+        </fileSet>		
+	    <fileSet>
+            <directory>target/classes/META-INF</directory>            
+            <outputDirectory>META-INF</outputDirectory>
+        </fileSet>        
+	</fileSets> 
+</assembly>

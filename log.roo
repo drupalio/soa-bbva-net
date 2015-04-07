@@ -1,5 +1,5 @@
 // ServicesArchitecture log opened at 2014-12-15 10:56:21
-sarc createApplication --uuaa czic
+sarc createApplication --uuaa zic
 sarc createDto --projectName net --descriptorFile dtos-descriptor-net.json
 sarc createSN --descriptorFile sn-descriptor-globalPosition.json
 sarc createSN --descriptorFile sn-descriptor-globalPosition.json
@@ -232,3 +232,11 @@ sarc generatePackage
 exit
 // ServicesArchitecture log closed at 2015-02-27 14:52:22
 >>>>>>> ecca16d0ac9617ed303cfc5f21cc951d4eafea6d
+// ServicesArchitecture log opened at 2015-03-18 15:59:53
+sarc generatePackage
+exit
+// ServicesArchitecture log closed at 2015-03-18 17:08:36
+// ServicesArchitecture log opened at 2015-03-19 08:59:52
+sarc generatePackage
+exit
+// ServicesArchitecture log closed at 2015-03-19 09:45:31

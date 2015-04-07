@@ -1,6 +1,6 @@
 <application xmlns="http://wadl.dev.java.net/2009/02" xmlns:xs="http://www.w3.org/2001/XMLSchema">
     <grammars>
-        <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:ns1="urn:com:bbva:jee:arq:spring:core:servicing:utils" xmlns:tns="urn:com:bbva:czic:dto:net" attributeFormDefault="unqualified" elementFormDefault="unqualified" targetNamespace="urn:com:bbva:czic:dto:net">
+        <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:ns1="urn:com:bbva:jee:arq:spring:core:servicing:utils" xmlns:tns="urn:com:bbva:zic:dto:net" attributeFormDefault="unqualified" elementFormDefault="unqualified" targetNamespace="urn:com:bbva:zic:dto:net">
             <xs:import namespace="urn:com:bbva:jee:arq:spring:core:servicing:utils"/>
             <xs:element name="Balance" type="tns:Balance"/>
             <xs:element name="City" type="tns:City"/>
@@ -238,8 +238,8 @@
             </xs:complexType>
         </xs:schema>
     </grammars>
-    <resources base="http://localhost:8080/czic/executives">
-        <resource path="/V01" id="com.bbva.czic.executives.facade.v01.SrvExecutivesV01">
+    <resources base="http://localhost:8080/zic/executives">
+        <resource path="/V01" id="com.bbva.zic.executives.facade.v01.SrvExecutivesV01">
             <method name="GET" id="getExecutive">
                 <request>
                     <param name="$filter" style="query" default="null" type="xs:string"/>

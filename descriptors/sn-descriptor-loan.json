@@ -1,12 +1,12 @@
 {
   "bbva" : {
-    "uuaa" : "czic",
+    "uuaa" : "zic",
     "remoteType" : "RESTFUL"
   },
   "dtos" : {
     "loan" : {
       "#metadata" : {
-        "dtoPackage" : "com.bbva.czic.dto.net.Loan"
+        "dtoPackage" : "com.bbva.zic.dto.net.Loan"
       },
       "loanId" : {
         "type" : "String",
@@ -17,7 +17,7 @@
     },
     "rotaryQuota" : {
       "#metadata" : {
-        "dtoPackage" : "com.bbva.czic.dto.net.Loan"
+        "dtoPackage" : "com.bbva.zic.dto.net.Loan"
       },
       "operationCode" : {
         "type" : "String",
@@ -28,7 +28,7 @@
     },
     "rotaryQuotaMovement" : {
       "#metadata" : {
-        "dtoPackage" : "com.bbva.czic.dto.net.RotaryQuotaMove"
+        "dtoPackage" : "com.bbva.zic.dto.net.RotaryQuotaMove"
       },
       "rotaryQuotaMovementId" : {
         "type" : "String",
@@ -39,7 +39,7 @@
     },
     "movement" : {
       "#metadata" : {
-        "dtoPackage" : "com.bbva.czic.dto.net.Movement"
+        "dtoPackage" : "com.bbva.zic.dto.net.Movement"
       },
       "movementId" : {
         "type" : "String",

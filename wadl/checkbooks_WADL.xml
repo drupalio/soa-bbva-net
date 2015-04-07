@@ -1,6 +1,6 @@
-<application xmlns="http://wadl.dev.java.net/2009/02" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:prefix1="urn:com:bbva:czic:dto:net">
+<application xmlns="http://wadl.dev.java.net/2009/02" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:prefix1="urn:com:bbva:zic:dto:net">
     <grammars>
-        <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:ns1="urn:com:bbva:jee:arq:spring:core:servicing:utils" xmlns:tns="urn:com:bbva:czic:dto:net" attributeFormDefault="unqualified" elementFormDefault="unqualified" targetNamespace="urn:com:bbva:czic:dto:net">
+        <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:ns1="urn:com:bbva:jee:arq:spring:core:servicing:utils" xmlns:tns="urn:com:bbva:zic:dto:net" attributeFormDefault="unqualified" elementFormDefault="unqualified" targetNamespace="urn:com:bbva:zic:dto:net">
             <xs:import namespace="urn:com:bbva:jee:arq:spring:core:servicing:utils"/>
             <xs:element name="Check" type="tns:Check"/>
             <xs:element name="Checkbook" type="tns:Checkbook"/>
@@ -43,8 +43,8 @@
             </xs:complexType>
         </xs:schema>
     </grammars>
-    <resources base="http://localhost:8080/czic/checkbooks">
-        <resource path="/V01" id="com.bbva.czic.checkbooks.facade.v01.SrvCheckbooksV01">
+    <resources base="http://localhost:8080/zic/checkbooks">
+        <resource path="/V01" id="com.bbva.zic.checkbooks.facade.v01.SrvCheckbooksV01">
             <resource path="/checks/{checkId}">
                 <param name="checkId" style="template" type="xs:string"/>
                 <method name="GET" id="getChecks">

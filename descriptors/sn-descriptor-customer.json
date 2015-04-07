@@ -1,13 +1,13 @@
 {
     "bbva": {
-        "uuaa": "czic",
+        "uuaa": "zic",
         "remoteType": "RESTFUL"
     },
     "dtos": {
 
         "CardCharge": {
             "#metadata": {
-                "dtoPackage": "com.bbva.czic.dto.net.cardCharge"
+                "dtoPackage": "com.bbva.zic.dto.net.cardCharge"
             },
             "category": {
                 "type": "dto.EnumCardChargeCategory",
@@ -21,7 +21,7 @@
         },
         "user": {
             "#metadata": {
-                "dtoPackage": "com.bbva.czic.dto.net.user"
+                "dtoPackage": "com.bbva.zic.dto.net.user"
             },
             "customerId": {
                 "type": "String",
@@ -32,7 +32,7 @@
         },
         "CreditCard": {
             "#metadata": {
-                "dtoPackage": "com.bbva.czic.dto.net.creditCard"
+                "dtoPackage": "com.bbva.zic.dto.net.creditCard"
             },
             "number": {
                 "type": "String",
@@ -42,7 +42,7 @@
         },
         "Product": {
             "#metadata": {
-                "dtoPackage": "com.bbva.czic.dto.net.product"
+                "dtoPackage": "com.bbva.zic.dto.net.product"
             },
             "id": {
                 "type": "dto.Product",
@@ -53,7 +53,7 @@
         },
         "AccMovementsResume": {
             "#metadata": {
-                "dtoPackage": "com.bbva.czic.dto.net.accMovementsResume"
+                "dtoPackage": "com.bbva.zic.dto.net.accMovementsResume"
             },
             "income": {
                 "type": "arq.MONEY",

@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ Fichero errors_[logicalId].xml
+ Definiciones de error, permite definir una serie de errores.
+ Se requiere indicar:
+ - family: familia funcional (todos los errores de este fichero pertenecen a esta familia funcional).
+   Si se quiere agrupar los errores en distintas familias, entonces definir un fichero para cada familia,
+   con nombre errors_[logicalId]_[family].xml
+ - architecture: arquitectura, usar siempre SpringServicingArchitecture para la arquitectura de servicios.
+ - application: uuaa.
+ - servicing:business-service: logicalId del servicio de negocio que declara estos errores.
+
+ En tiempo de arranque de un servicio, unicamente se cargaran las definiciones de error que:
+ - indiquen una arquitectura SpringServicingArchitecture.
+ - indiquen una uuaa (application) igual a la uuaa a la que pertenece el servicio que esta arrancando.
+ - indiquen un servicio (servicing:business-service) igual al logicalId del servicio que esta arrancando.
+-->
+<error-definitions family="Accounts" architecture="SpringServicingArchitecture" application="zic"
+				   servicing:business-service="Accounts" xmlns="http://bbva.com/gce"
+				   xmlns:servicing="http://bbva.com/arq-spring-servicing/gce-extension">
+
+	<!--
+      Definicion de un error. Se requiere indicar:
+      - severity: severidad del error, puede ser ERROR, FATAL o CRITICAL
+      - alias: alias del error, para identificarlo al lanzar BusinessServiceException
+      - code: codigo numerico asociado al error
+      - servicing:http-status: codigo http asociado a este error
+     -->
+
+	<!--
+       Descripcion del error.
+       Se requiere indicar al menos un mensaje en el idioma por defecto.
+       Cada mensaje puede informar:
+       - lang: idioma del mensaje (si no se informa, se supone que se trata del idioma por defecto).
+       - servicing:channel: indica el canal llamante asociado al mensaje (si no se informa, se supone que el mensaje aplica a todos los canales).
+       - servicing:medium: indica el medio de acceso asociado al mensaje (si no se informa, se supone que el mensaje aplica a todos los medios de acceso).
+       - servicing:service: indica el servicio o producto asociado al mensaje (si no se informa, se supone que el mensaje aplica a todos los servicios).
+
+       En tiempo de ejecucion, el mensaje se elige de la siguiente forma:
+       - Si existe un mensaje para el canal, medio, servicio e idioma asociados a la peticion actual, se elige dicho mensaje.
+       - En caso contrario, si existe un mensaje para el canal, medio e idioma asociados a la peticion actual, se elige dicho mensaje.
+       - En caso contrario, si existe un mensaje para el canal e idioma asociados a la peticion actual, se elige dicho mensaje.
+       - En caso contrario, si existe un mensaje para el idioma asociado a la peticion actual, se elige dicho mensaje.
+- En caso contrario, se elige el mensaje en el idioma por defecto.
+-->
+
+	<error-definition severity="ERROR" alias="wrongParameters" code="1" servicing:http-status="400">
+		<message>Accounts not found.</message>
+		<message lang="en">Accounts not found.</message>
+		<message lang="es">Accounts inválidos</message>
+	</error-definition>
+	<error-definition severity="ERROR" alias="noData" code="2" servicing:http-status="409">
+		<message>Accounts not found.</message>
+		<message lang="en">Accounts not found.</message>
+		<message lang="es">No existen datos para la búsqueda realizada.</message>
+	</error-definition>
+    <error-definition severity="ERROR" alias="filterEmpty" code="2" servicing:http-status="400">
+		<message>Empty filter</message>
+		<message lang="en">Empty filter</message>
+		<message lang="es">No existen un filtro</message>
+	</error-definition>
+
+</error-definitions>

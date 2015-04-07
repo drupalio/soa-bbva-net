@@ -1,40 +1,40 @@
 {
   "bbva" : {
-    "uuaa" : "czic",
+    "uuaa" : "zic",
     "remoteType" : "RESTFUL"
   },
   "dtos" : {
     "enumAccountMoveStatus" : {
       "#metadata" : {
-        "dtoPackage" : "com.bbva.czic.dto.net.EnumAccountMoveStatus"
+        "dtoPackage" : "com.bbva.zic.dto.net.EnumAccountMoveStatus"
       },
       "enumValue" : "String"
     },
     "enumProductType" : {
       "#metadata" : {
-        "dtoPackage" : "com.bbva.czic.dto.net.EnumProductType"
+        "dtoPackage" : "com.bbva.zic.dto.net.EnumProductType"
       },
       "enumValue" : "String"
     },
     "enumAccountState" : {
       "#metadata" : {
-        "dtoPackage" : "com.bbva.czic.dto.net.EnumAccountState"
+        "dtoPackage" : "com.bbva.zic.dto.net.EnumAccountState"
       },
       "enumValue" : "String"
     },
     "office" : {
       "#metadata" : {
-        "dtoPackage" : "com.bbva.czic.dto.net.Office"
+        "dtoPackage" : "com.bbva.zic.dto.net.Office"
       }
     },
     "operation" : {
       "#metadata" : {
-        "dtoPackage" : "com.bbva.czic.dto.net.Operation"
+        "dtoPackage" : "com.bbva.zic.dto.net.Operation"
       }
     },
     "movement" : {
       "#metadata" : {
-        "dtoPackage" : "com.bbva.czic.dto.net.Movement"
+        "dtoPackage" : "com.bbva.zic.dto.net.Movement"
       },
       "id" : {
         "type" : "String",

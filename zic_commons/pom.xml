@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>com.bbva.zic</groupId>
+		<artifactId>pom-padre_zic</artifactId>
+		<version>1.4.0</version>
+	</parent>
+
+	<groupId>com.bbva.zic</groupId>
+	<artifactId>zic_commons</artifactId>
+	<packaging>jar</packaging>
+	<version>1.0.0</version>
+	<name>zic_commons</name>
+
+	<dependencies>
+		<dependency>
+			<groupId>com.bbva.zic</groupId>
+			<artifactId>zic_net</artifactId>
+			<version>1.0.0</version>
+		</dependency>
+		<dependency>
+			<groupId>com.bbva.jee.arq.spring.core</groupId>
+			<artifactId>arq-spring-servicing-core</artifactId>
+			<version>${arq-spring-servicing-core.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.bbva.jee.arq.spring.core</groupId>
+			<artifactId>arq-spring-restutils</artifactId>
+			<version>${arq-spring-restutils.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.bbva.jee.arq.spring.core</groupId>
+			<artifactId>arq-spring-core-spi</artifactId>
+			<version>${arq-spring-core-spi.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.bbva.jee.arq.spring.core</groupId>
+			<artifactId>arq-spring-core-api</artifactId>
+			<version>${arq-spring-core-api.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.bbva.jee.arq.spring.core</groupId>
+			<artifactId>arq-spring-connector-host</artifactId>
+			<version>${arq.spring.connector.host.version}</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>com.bbva.jee.arq.spring.core</groupId>
+			<artifactId>arq-spring-connector-host-ps9</artifactId>
+			<version>${arq.spring.connector.host.ps9.version}</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>com.bbva.jee.arq.spring.core</groupId>
+			<artifactId>arq-spring-connector-host-api</artifactId>
+			<version>${arq.spring.connector.host.api.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.fluttercode.datafactory</groupId>
+			<artifactId>datafactory</artifactId>
+			<version>0.8</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.bbva.jee.arq.spring.core</groupId>
+			<artifactId>arq-spring-connector-host-imsconnect</artifactId>
+			<version>${arq.spring.connector.host.imsconnect.version}</version>
+			<scope>test</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-entitymanager</artifactId>
+			<version>${hibernate-entitymanager.version}</version>
+			<scope>test</scope>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-test</artifactId>
+			<version>${spring.version}</version>
+			<exclusions>
+				<exclusion>
+					<groupId>commons-logging</groupId>
+					<artifactId>commons-logging</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.mockito</groupId>
+			<artifactId>mockito-core</artifactId>
+			<version>1.9.0</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>commons-io</groupId>
+			<artifactId>commons-io</artifactId>
+			<version>2.2</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>com.google.code.gson</groupId>
+			<artifactId>gson</artifactId>
+			<version>1.7.1</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>com.sun.xml.bind</groupId>
+			<artifactId>jaxb-core</artifactId>
+			<version>2.2.11</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.sun.xml.bind</groupId>
+			<artifactId>jaxb-impl</artifactId>
+			<version>2.2.11</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.8.2</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.powermock</groupId>
+			<artifactId>powermock-api-mockito</artifactId>
+			<version>1.6.1</version>
+			<scope>test</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>servlet-api</artifactId>
+			<version>2.5</version>
+			<scope>provided</scope>
+		</dependency>
+
+	</dependencies>
+	<build>
+		<finalName>${project.artifactId}-${project.version}-rm</finalName>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+
+				<configuration>
+					<source>1.6</source>
+					<target>1.6</target>
+					<encoding>UTF-8</encoding>
+				</configuration>
+			</plugin>
+		</plugins>
+		<pluginManagement>
+			<plugins>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-compiler-plugin</artifactId>
+					<version>${maven-compiler-plugin.version}</version>
+					<configuration>
+						<source>1.6</source>
+						<target>1.6</target>
+						<encoding>UTF-8</encoding>
+					</configuration>
+				</plugin>
+			</plugins>
+		</pluginManagement>
+	</build>
+</project>
+    

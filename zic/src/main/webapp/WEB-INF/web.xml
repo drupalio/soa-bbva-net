@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="ISO-8859-1" standalone="no"?>
+<web-app xmlns="http://java.sun.com/xml/ns/j2ee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	version="2.4"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd">
+	<description>Example Servicing Application</description>
+	<!-- Ubicacion de los ficheros applicationContext.xml de la aplicacion -->
+	<context-param>
+		<param-name>contextConfigLocation</param-name>
+		<param-value>classpath*:META-INF/spring/applicationContext*.xml</param-value>
+	</context-param>
+	<!-- UUAA de la aplicacion -->
+	<context-param>
+		<param-name>uuaa</param-name>
+		<param-value>zic</param-value>
+	</context-param>
+	<context-param>
+		<param-name>spring.profiles.active</param-name>
+		<param-value>dev</param-value>
+	</context-param>
+	<!-- Este listener arranca el Log a partir de META-INF/spring/applicationContext.cml -->
+	<listener>
+		<listener-class>com.bbva.jee.arq.spring.core.servicing.startup.BusinessServiceLogLoaderListener</listener-class>
+	</listener>
+	<!-- Este listener arranca Spring a partir de la propiedad de contexto contextConfigLocation -->
+	<listener>
+		<listener-class>com.bbva.jee.arq.spring.core.servicing.startup.BusinessServiceContainerContextLoaderListener</listener-class>
+	</listener>
+	<filter>
+		<filter-name>CharacterEncodingFilter</filter-name>
+		<filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+		<init-param>
+			<param-name>encoding</param-name>
+			<param-value>UTF-8</param-value>
+		</init-param>
+		<init-param>
+			<param-name>forceEncoding</param-name>
+			<param-value>true</param-value>
+		</init-param>
+	</filter>
+	<!-- Filtro de monitorizacion, siempre debe ser el primer filtro en declararse -->
+	<filter>
+		<filter-name>monitoringFilter</filter-name>
+		<filter-class>com.bbva.jee.arq.spring.core.servicing.monitoring.MonitoringFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>monitoringFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+	<!-- Este filtro habilita los scopes request, session y global session, 
+		y disponibiliza la respuesta -->
+	<filter>
+		<filter-name>requestResponseContextFilter</filter-name>
+		<filter-class>com.bbva.jee.arq.spring.core.servicing.invocation.RequestResponseContextFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>requestResponseContextFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+	<!-- Filtro de Swagger -->
+	<filter>
+		<filter-name>apiOriginFilter</filter-name>
+		<filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>apiOriginFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+	<display-name>zic</display-name>
+	<!-- Servlet de CXF -->
+	<servlet>
+		<servlet-name>CXFServlet</servlet-name>
+		<servlet-class>com.bbva.jee.arq.spring.core.servicing.startup.BusinessServiceModuleCXFServlet</servlet-class>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>CXFServlet</servlet-name>
+		<url-pattern>/*</url-pattern>
+	</servlet-mapping>
+	<!-- Servlet de HttpInvoker -->
+	<servlet>
+		<servlet-name>HttpInvokerServlet</servlet-name>
+		<servlet-class>com.bbva.jee.arq.spring.core.servicing.startup.BusinessServiceModuleHttpInvokerServlet</servlet-class>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>HttpInvokerServlet</servlet-name>
+		<url-pattern>/invoker/*</url-pattern>
+	</servlet-mapping>
+
+</web-app>

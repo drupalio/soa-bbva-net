@@ -1,12 +1,12 @@
 {
   "bbva" : {
-    "uuaa" : "czic",
+    "uuaa" : "zic",
     "remoteType" : "RESTFUL"
   },
   "dtos" : {
     "executive" : {
       "#metadata" : {
-        "dtoPackage" : "com.bbva.czic.dto.net.Excecutive"
+        "dtoPackage" : "com.bbva.zic.dto.net.Excecutive"
       },
       "executiveId" : {
         "type" : "String",
@@ -17,7 +17,7 @@
     },
     "cardCharge" : {
       "#metadata" : {
-        "dtoPackage" : "com.bbva.czic.dto.net.CardCharge"
+        "dtoPackage" : "com.bbva.zic.dto.net.CardCharge"
       },
       "cardChargeId" : {
         "type" : "String",

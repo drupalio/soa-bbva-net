@@ -1,6 +1,6 @@
 {
   "bbva": {
-    "uuaa": "czic",
+    "uuaa": "zic",
     "remoteType": "RESTFUL"
   },
   "dtos": {
@@ -42,7 +42,7 @@
     },
     "enumFunctionType": {
       "#metadata": {
-        "dtoPackage": "com.bbva.czic.dto.net.EnumFunctionType"
+        "dtoPackage": "com.bbva.zic.dto.net.EnumFunctionType"
       },
       "enumValue": "String"
     },
@@ -60,7 +60,7 @@
     },
     "office": {
       "#metadata": {
-        "dtoPackage": "com.bbva.czic.dto.net.Office"
+        "dtoPackage": "com.bbva.zic.dto.net.Office"
       },
       "name": "String",
       "postalAddress": "String",
@@ -68,7 +68,7 @@
     },
     "activity": {
       "#metadata": {
-        "dtoPackage": "com.bbva.czic.dto.net.Activity"
+        "dtoPackage": "com.bbva.zic.dto.net.Activity"
       },
       "operationDate": "String",
       "executionDate": "String",

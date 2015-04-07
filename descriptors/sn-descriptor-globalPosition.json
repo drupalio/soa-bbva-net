@@ -1,36 +1,36 @@
 {
   "bbva" : {
-    "uuaa" : "czic",
+    "uuaa" : "zic",
     "remoteType" : "RESTFUL"
   },
   "dtos" : {
     "enumProductType" : {
       "#metadata" : {
-        "dtoPackage" : "com.bbva.czic.dto.net.EnumProductType"
+        "dtoPackage" : "com.bbva.zic.dto.net.EnumProductType"
       },
       "enumValue" : "String"
     },
     "enumFinancialStatusType" : {
       "#metadata" : {
-        "dtoPackage" : "com.bbva.czic.dto.net.EnumFinancialStatusType"
+        "dtoPackage" : "com.bbva.zic.dto.net.EnumFinancialStatusType"
       },
       "enumValue" : "String"
     },
     "enumContactSourceType" : {
       "#metadata" : {
-        "dtoPackage" : "com.bbva.czic.dto.net.EnumContactSourceType"
+        "dtoPackage" : "com.bbva.zic.dto.net.EnumContactSourceType"
       },
       "enumValue" : "String"
     },
     "enumPhoneNumberType" : {
       "#metadata" : {
-        "dtoPackage" : "com.bbva.czic.dto.net.EnumPhoneNumberType"
+        "dtoPackage" : "com.bbva.zic.dto.net.EnumPhoneNumberType"
       },
       "enumValue" : "String"
     },
     "operation" : {
       "#metadata" : {
-        "dtoPackage" : "com.bbva.czic.dto.net.Operation"
+        "dtoPackage" : "com.bbva.zic.dto.net.Operation"
       },
       "operationCode" : {
         "type" : "String",
@@ -42,7 +42,7 @@
     },
     "phoneNumber" : {
       "#metadata" : {
-        "dtoPackage" : "com.bbva.czic.dto.net.PhoneNumber"
+        "dtoPackage" : "com.bbva.zic.dto.net.PhoneNumber"
       },
       "number" : "String",
       "countryCode" : "String",
@@ -54,7 +54,7 @@
     },
     "email" : {
       "#metadata" : {
-        "dtoPackage" : "com.bbva.czic.dto.net.Email"
+        "dtoPackage" : "com.bbva.zic.dto.net.Email"
       },
       "address" : "String",
       "primary" : "Boolean",
@@ -63,14 +63,14 @@
     },
     "contactInformation" : {
       "#metadata" : {
-        "dtoPackage" : "com.bbva.czic.dto.net.ContactInformation"
+        "dtoPackage" : "com.bbva.zic.dto.net.ContactInformation"
       },
       "phoneNumbers" : "List<dto.phoneNumber>",
       "emails" : "List<dto.email>"
     },
     "movement" : {
       "#metadata" : {
-        "dtoPackage" : "com.bbva.czic.dto.net.Movement"
+        "dtoPackage" : "com.bbva.zic.dto.net.Movement"
       },
       "movementId" : {
         "type" : "String",
@@ -88,7 +88,7 @@
     },
     "product" : {
       "#metadata" : {
-        "dtoPackage" : "com.bbva.czic.dto.net.Product"
+        "dtoPackage" : "com.bbva.zic.dto.net.Product"
       },
       "productId" : {
         "type" : "String",

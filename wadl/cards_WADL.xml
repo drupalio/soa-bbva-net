@@ -9,7 +9,7 @@
                 </xs:sequence>
             </xs:complexType>
         </xs:schema>
-        <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:ns1="urn:com:bbva:jee:arq:spring:core:servicing:utils" xmlns:tns="urn:com:bbva:czic:dto:net" attributeFormDefault="unqualified" elementFormDefault="unqualified" targetNamespace="urn:com:bbva:czic:dto:net">
+        <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:ns1="urn:com:bbva:jee:arq:spring:core:servicing:utils" xmlns:tns="urn:com:bbva:zic:dto:net" attributeFormDefault="unqualified" elementFormDefault="unqualified" targetNamespace="urn:com:bbva:zic:dto:net">
             <xs:import namespace="urn:com:bbva:jee:arq:spring:core:servicing:utils"/>
             <xs:element name="CardCharge" type="tns:CardCharge"/>
             <xs:element name="EnumCardChargeCategory" type="tns:EnumCardChargeCategory"/>
@@ -28,8 +28,8 @@
             </xs:simpleType>
         </xs:schema>
     </grammars>
-    <resources base="http://localhost:8080/czic/cards">
-        <resource path="/V01" id="com.bbva.czic.cards.facade.v01.SrvCardsV01">
+    <resources base="http://localhost:8080/zic/cards">
+        <resource path="/V01" id="SrvCardsV01">
             <resource path="/creditCard/{id}/cardCharges">
                 <param name="id" style="template" type="xs:string"/>
                 <method name="GET" id="getCreditCardCharges">
