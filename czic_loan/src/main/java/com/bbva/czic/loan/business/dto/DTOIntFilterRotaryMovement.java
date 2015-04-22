@@ -13,9 +13,11 @@ public class DTOIntFilterRotaryMovement {
     private String idLoan;
 
     @NotNull
+    @Length(min = 6, max = 6)
     private String idMovement;
 
     @NotNull
+    @Length(min = 4, max = 4)
     private String idExtracto;
 
     public DTOIntFilterRotaryMovement(){ }

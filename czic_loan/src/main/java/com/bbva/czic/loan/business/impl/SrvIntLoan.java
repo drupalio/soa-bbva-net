@@ -74,8 +74,9 @@ public class SrvIntLoan implements ISrvIntLoan {
 
 		log.info(" getRotaryQuota ");
 
-		dtoIntFilterRotaryMovement.setIdExtracto(dtoIntFilterRotaryMovement.getIdMovement().substring(0,4));
-		
+		dtoIntFilterRotaryMovement.setIdMovement(dtoIntFilterRotaryMovement.getIdMovement().substring(0,5));
+		dtoIntFilterRotaryMovement.setIdExtracto(dtoIntFilterRotaryMovement.getIdMovement().substring(6, dtoIntFilterRotaryMovement.getIdMovement().length()));
+
 		DtoValidator.validate(dtoIntFilterRotaryMovement);
 		final DTOIntRotaryQuotaMove result = loanDao.getRotaryQuotaMovement(dtoIntFilterRotaryMovement);
 
