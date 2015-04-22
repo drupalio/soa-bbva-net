@@ -13,7 +13,6 @@ privileged aspect FormatoOZNCSNK0_Roo_ToString {
         sb.append("Coutaf: ").append(getCoutaf()).append(", ");
         sb.append("Coutat: ").append(getCoutat()).append(", ");
         sb.append("Descop: ").append(getDescop()).append(", ");
-        sb.append("Estado: ").append(getEstado()).append(", ");
         sb.append("Fechaop: ").append(getFechaop()).append(", ");
         sb.append("Importe: ").append(getImporte()).append(", ");
         sb.append("Numemov: ").append(getNumemov()).append(", ");

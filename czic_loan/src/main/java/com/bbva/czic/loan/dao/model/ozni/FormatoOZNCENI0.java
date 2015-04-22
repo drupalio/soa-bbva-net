@@ -41,15 +41,21 @@ public class FormatoOZNCENI0 {
 	private Date fechafi;
 	
 	/**
-	 * <p>Campo <code>INDPAG</code>, &iacute;ndice: <code>4</code>, tipo: <code>ALFANUMERICO</code>
+	 * <p>Campo <code>INDPANE</code>, &iacute;ndice: <code>4</code>, tipo: <code>ENTERO</code>
 	 */
-	@Campo(indice = 4, nombre = "INDPAG", tipo = TipoCampo.ALFANUMERICO, longitudMinima = 1, longitudMaxima = 1)
-	private String indpag;
+	@Campo(indice = 4, nombre = "INDPANE", tipo = TipoCampo.ENTERO, longitudMinima = 4, longitudMaxima = 4)
+	private Integer indpane;
 	
 	/**
-	 * <p>Campo <code>POSPAG</code>, &iacute;ndice: <code>5</code>, tipo: <code>ALFANUMERICO</code>
+	 * <p>Campo <code>INDPANO</code>, &iacute;ndice: <code>5</code>, tipo: <code>ENTERO</code>
 	 */
-	@Campo(indice = 5, nombre = "POSPAG", tipo = TipoCampo.ALFANUMERICO, longitudMinima = 50, longitudMaxima = 50)
-	private String pospag;
+	@Campo(indice = 5, nombre = "INDPANO", tipo = TipoCampo.ENTERO, longitudMinima = 6, longitudMaxima = 6)
+	private Integer indpano;
+	
+	/**
+	 * <p>Campo <code>POSPAG</code>, &iacute;ndice: <code>6</code>, tipo: <code>ENTERO</code>
+	 */
+	@Campo(indice = 6, nombre = "POSPAG", tipo = TipoCampo.ENTERO, longitudMinima = 3, longitudMaxima = 3)
+	private Integer pospag;
 	
 }

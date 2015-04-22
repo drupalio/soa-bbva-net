@@ -16,6 +16,14 @@ privileged aspect FormatoOZNCSNI0_Roo_JavaBean {
         this.numeope = numeope;
     }
     
+    public String FormatoOZNCSNI0.getNumeext() {
+        return this.numeext;
+    }
+    
+    public void FormatoOZNCSNI0.setNumeext(String numeext) {
+        this.numeext = numeext;
+    }
+    
     public Date FormatoOZNCSNI0.getFechaop() {
         return this.fechaop;
     }

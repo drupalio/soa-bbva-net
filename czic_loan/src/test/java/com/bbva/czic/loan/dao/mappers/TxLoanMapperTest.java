@@ -51,7 +51,7 @@ public class TxLoanMapperTest{
 
 		final DTOIntFilterRotaryMovement dtoIntFilterRotaryMovement = new DTOIntFilterRotaryMovement();
 		dtoIntFilterRotaryMovement.setIdLoan("12345");
-		dtoIntFilterRotaryMovement.setIdMovement(3);
+		dtoIntFilterRotaryMovement.setIdMovement("3444");
 
 		final FormatoOZNCENK0 result = txLoanMapper.mapInOznk(dtoIntFilterRotaryMovement);
 
@@ -65,7 +65,7 @@ public class TxLoanMapperTest{
 		dtoIntFilterLoan.setIdLoan("12345");
 		dtoIntFilterLoan.setFechaInicial(new Date());
 		dtoIntFilterLoan.setFechaFinal(new Date());
-		dtoIntFilterLoan.setPaginationKey(3);
+		dtoIntFilterLoan.setPaginationKey("3333");
 
 		final FormatoOZNCENI0 result = txLoanMapper.mapInOzni(dtoIntFilterLoan);
 
@@ -90,7 +90,7 @@ public class TxLoanMapperTest{
 	public void mapperFormatoOZNCENK0ToDTOIntLoan(){
 
 		final FormatoOZNCSNK0 formatoOZNCSNK0 = new FormatoOZNCSNK0();
-		formatoOZNCSNK0.setEstado("Activo");
+
 		formatoOZNCSNK0.setNumemov("23");
 		formatoOZNCSNK0.setFechaop(new Date(20140313));
 		formatoOZNCSNK0.setResto("234");
@@ -98,7 +98,7 @@ public class TxLoanMapperTest{
 		formatoOZNCSNK0.setDescop("500");
 		formatoOZNCSNK0.setCoutaf("23400");
 		formatoOZNCSNK0.setCoutat("3");
-		formatoOZNCSNK0.setEstado("Activa");
+
 
 		final DTOIntRotaryQuotaMove result = txLoanMapper.mapOutOznk(formatoOZNCSNK0);
 
@@ -106,6 +106,5 @@ public class TxLoanMapperTest{
 		Assert.assertEquals(result.getConcept(), formatoOZNCSNK0.getResto());
 		Assert.assertEquals(result.getRemainingQuotas().toString(), formatoOZNCSNK0.getCoutaf());
 		Assert.assertEquals(result.getNumbersOfQuota().toString(), formatoOZNCSNK0.getCoutat());
-		Assert.assertEquals(result.getStatus(), formatoOZNCSNK0.getEstado());
 	}
 }

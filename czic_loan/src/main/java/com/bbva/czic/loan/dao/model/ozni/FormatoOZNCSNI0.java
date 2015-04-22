@@ -25,37 +25,43 @@ public class FormatoOZNCSNI0 {
 	/**
 	 * <p>Campo <code>NUMEOPE</code>, &iacute;ndice: <code>1</code>, tipo: <code>ALFANUMERICO</code>
 	 */
-	@Campo(indice = 1, nombre = "NUMEOPE", tipo = TipoCampo.ALFANUMERICO, longitudMinima = 9, longitudMaxima = 9)
+	@Campo(indice = 1, nombre = "NUMEOPE", tipo = TipoCampo.ALFANUMERICO, longitudMinima = 6, longitudMaxima = 6)
 	private String numeope;
 	
 	/**
-	 * <p>Campo <code>FECHAOP</code>, &iacute;ndice: <code>2</code>, tipo: <code>FECHA</code>
+	 * <p>Campo <code>NUMEEXT</code>, &iacute;ndice: <code>2</code>, tipo: <code>ALFANUMERICO</code>
 	 */
-	@Campo(indice = 2, nombre = "FECHAOP", tipo = TipoCampo.FECHA, longitudMinima = 10, longitudMaxima = 10, formato = "yyyy-MM-dd")
+	@Campo(indice = 2, nombre = "NUMEEXT", tipo = TipoCampo.ALFANUMERICO, longitudMinima = 4, longitudMaxima = 4)
+	private String numeext;
+	
+	/**
+	 * <p>Campo <code>FECHAOP</code>, &iacute;ndice: <code>3</code>, tipo: <code>FECHA</code>
+	 */
+	@Campo(indice = 3, nombre = "FECHAOP", tipo = TipoCampo.FECHA, longitudMinima = 10, longitudMaxima = 10, formato = "yyyy-MM-dd")
 	private Date fechaop;
 	
 	/**
-	 * <p>Campo <code>RESTO</code>, &iacute;ndice: <code>3</code>, tipo: <code>ALFANUMERICO</code>
+	 * <p>Campo <code>RESTO</code>, &iacute;ndice: <code>4</code>, tipo: <code>ALFANUMERICO</code>
 	 */
-	@Campo(indice = 3, nombre = "RESTO", tipo = TipoCampo.ALFANUMERICO, longitudMinima = 25, longitudMaxima = 25)
+	@Campo(indice = 4, nombre = "RESTO", tipo = TipoCampo.ALFANUMERICO, longitudMinima = 25, longitudMaxima = 25)
 	private String resto;
 	
 	/**
-	 * <p>Campo <code>VALOROP</code>, &iacute;ndice: <code>4</code>, tipo: <code>ALFANUMERICO</code>
+	 * <p>Campo <code>VALOROP</code>, &iacute;ndice: <code>5</code>, tipo: <code>ALFANUMERICO</code>
 	 */
-	@Campo(indice = 4, nombre = "VALOROP", tipo = TipoCampo.ALFANUMERICO, longitudMinima = 12, longitudMaxima = 12)
+	@Campo(indice = 5, nombre = "VALOROP", tipo = TipoCampo.ALFANUMERICO, longitudMinima = 12, longitudMaxima = 12)
 	private String valorop;
 	
 	/**
-	 * <p>Campo <code>BALANCE</code>, &iacute;ndice: <code>5</code>, tipo: <code>ALFANUMERICO</code>
+	 * <p>Campo <code>BALANCE</code>, &iacute;ndice: <code>6</code>, tipo: <code>ALFANUMERICO</code>
 	 */
-	@Campo(indice = 5, nombre = "BALANCE", tipo = TipoCampo.ALFANUMERICO, longitudMinima = 12, longitudMaxima = 12)
+	@Campo(indice = 6, nombre = "BALANCE", tipo = TipoCampo.ALFANUMERICO, longitudMinima = 12, longitudMaxima = 12)
 	private String balance;
 	
 	/**
-	 * <p>Campo <code>TIPOPE</code>, &iacute;ndice: <code>6</code>, tipo: <code>ALFANUMERICO</code>
+	 * <p>Campo <code>TIPOPE</code>, &iacute;ndice: <code>7</code>, tipo: <code>ALFANUMERICO</code>
 	 */
-	@Campo(indice = 6, nombre = "TIPOPE", tipo = TipoCampo.ALFANUMERICO, longitudMinima = 2, longitudMaxima = 2)
+	@Campo(indice = 7, nombre = "TIPOPE", tipo = TipoCampo.ALFANUMERICO, longitudMinima = 2, longitudMaxima = 2)
 	private String tipope;
 	
 }

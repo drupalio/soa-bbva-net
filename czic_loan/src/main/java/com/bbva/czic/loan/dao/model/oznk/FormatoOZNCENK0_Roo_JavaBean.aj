@@ -3,18 +3,9 @@
 
 package com.bbva.czic.loan.dao.model.oznk;
 
-import java.lang.Integer;
 import java.lang.String;
 
 privileged aspect FormatoOZNCENK0_Roo_JavaBean {
-    
-    public Integer FormatoOZNCENK0.getNommovi() {
-        return this.nommovi;
-    }
-    
-    public void FormatoOZNCENK0.setNommovi(Integer nommovi) {
-        this.nommovi = nommovi;
-    }
     
     public String FormatoOZNCENK0.getNomtarj() {
         return this.nomtarj;
@@ -22,6 +13,22 @@ privileged aspect FormatoOZNCENK0_Roo_JavaBean {
     
     public void FormatoOZNCENK0.setNomtarj(String nomtarj) {
         this.nomtarj = nomtarj;
+    }
+    
+    public String FormatoOZNCENK0.getNommovi() {
+        return this.nommovi;
+    }
+    
+    public void FormatoOZNCENK0.setNommovi(String nommovi) {
+        this.nommovi = nommovi;
+    }
+    
+    public String FormatoOZNCENK0.getNomextr() {
+        return this.nomextr;
+    }
+    
+    public void FormatoOZNCENK0.setNomextr(String nomextr) {
+        this.nomextr = nomextr;
     }
     
 }

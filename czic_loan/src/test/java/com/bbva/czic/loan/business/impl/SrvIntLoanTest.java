@@ -90,8 +90,8 @@ public class SrvIntLoanTest extends SpringContextBbvaTest {
 
 		DTOIntFilterLoan dtoIntFilterLoan = new DTOIntFilterLoan();
 		dtoIntFilterLoan.setIdLoan("123");
-		dtoIntFilterLoan.setPageSize(5);
-		dtoIntFilterLoan.setPaginationKey(3);
+		dtoIntFilterLoan.setPageSize("5");
+		dtoIntFilterLoan.setPaginationKey("3");
 		dtoIntFilterLoan.setFechaFinal(new Date(20140112));
 		dtoIntFilterLoan.setFechaInicial(new Date(20140115));
 
@@ -123,7 +123,7 @@ public class SrvIntLoanTest extends SpringContextBbvaTest {
 		Calendar calendar = Calendar.getInstance();
 		dtoIntRotaryQuotaMove.setTransactionDate(calendar);
 		dtoIntRotaryQuotaMove.setOperation(new Operation());
-		dtoIntRotaryQuotaMove.setStatus("Ok");
+
 		dtoIntRotaryQuotaMove.setValue(new Money());
 		dtoIntRotaryQuotaMove.setBalance(new Balance());
 		dtoIntRotaryQuotaMove.setNumbersOfQuota(new Integer(12));
@@ -131,7 +131,7 @@ public class SrvIntLoanTest extends SpringContextBbvaTest {
 
 		DTOIntFilterRotaryMovement dtoIntFilterRotaryMovement = new DTOIntFilterRotaryMovement();
 		dtoIntFilterRotaryMovement.setIdLoan("20684968230915840285");
-		dtoIntFilterRotaryMovement.setIdMovement(456734);
+		dtoIntFilterRotaryMovement.setIdMovement("456734");
 
 		when(loanDAO.getRotaryQuotaMovement(any(DTOIntFilterRotaryMovement.class))).thenReturn(dtoIntRotaryQuotaMove);
 

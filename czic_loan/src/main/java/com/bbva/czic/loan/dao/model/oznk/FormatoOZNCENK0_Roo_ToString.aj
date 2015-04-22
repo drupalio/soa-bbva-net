@@ -9,6 +9,7 @@ privileged aspect FormatoOZNCENK0_Roo_ToString {
     
     public String FormatoOZNCENK0.toString() {
         StringBuilder sb = new StringBuilder();
+        sb.append("Nomextr: ").append(getNomextr()).append(", ");
         sb.append("Nommovi: ").append(getNommovi()).append(", ");
         sb.append("Nomtarj: ").append(getNomtarj());
         return sb.toString();

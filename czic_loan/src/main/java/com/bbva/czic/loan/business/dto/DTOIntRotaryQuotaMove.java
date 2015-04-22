@@ -29,8 +29,6 @@ public class DTOIntRotaryQuotaMove {
     @NotNull
     private Operation operation;
 
-    @NotNull
-    private String status;
 
     @NotNull
     private Money value;
@@ -74,14 +72,6 @@ public class DTOIntRotaryQuotaMove {
 
     public void setTransactionDate(Calendar transactionDate) {
         this.transactionDate = transactionDate;
-    }
-
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
     }
 
     public Money getValue() {

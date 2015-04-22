@@ -64,6 +64,8 @@ public class Movement  implements Serializable
     private Integer remainingQuotas;
     @ApiModelProperty("")
     private Balance deb;
+    @ApiModelProperty("")
+    private String numExt;
 
 
     public Movement() {
@@ -180,5 +182,13 @@ public class Movement  implements Serializable
 
     public void setDeb(Balance deb) {
         this.deb = deb;
+    }
+
+    public String getNumExt() {
+        return numExt;
+    }
+
+    public void setNumExt(String numExt) {
+        this.numExt = numExt;
     }
 }

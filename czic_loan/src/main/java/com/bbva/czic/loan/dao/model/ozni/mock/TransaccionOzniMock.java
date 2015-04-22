@@ -39,6 +39,8 @@ public class TransaccionOzniMock implements InvocadorTransaccion<PeticionTransac
 		formatoOZNCSNi0.setBalance("10000");
 		formatoOZNCSNi0.setValorop("0");
 		formatoOZNCSNi0.setResto("GASTOS DE COBRANZA");
+		formatoOZNCSNi0.setNumeext("2345");
+
 
 		CopySalida copySalida = new CopySalida();
 		copySalida.setCopy(formatoOZNCSNi0);
@@ -53,6 +55,7 @@ public class TransaccionOzniMock implements InvocadorTransaccion<PeticionTransac
 		formatoOZNCSNi01.setBalance("10000");
 		formatoOZNCSNi01.setValorop("0");
 		formatoOZNCSNi01.setResto("GASTOS DE COBRANZA");
+		formatoOZNCSNi01.setNumeext("233444");
 
 		CopySalida copySalida1 = new CopySalida();
 		copySalida1.setCopy(formatoOZNCSNi01);

@@ -20,11 +20,7 @@ public class TransaccionOznk implements InvocadorTransaccion<PeticionTransaccion
 	
 	@Autowired
 	private ServicioTransacciones servicioTransacciones;
-
-	public void setServicioTransacciones(ServicioTransacciones servicioTransacciones) {
-		this.servicioTransacciones = servicioTransacciones;
-	}
-
+	
 	@Override
 	public RespuestaTransaccionOznk invocar(PeticionTransaccionOznk transaccion) throws ExcepcionTransaccion {
 		return servicioTransacciones.invocar(PeticionTransaccionOznk.class, RespuestaTransaccionOznk.class, transaccion);
@@ -36,5 +32,9 @@ public class TransaccionOznk implements InvocadorTransaccion<PeticionTransaccion
 	}
 	
 	@Override
-	public void vaciarCache() {}	
+	public void vaciarCache() {}
+
+	public void setServicioTransacciones(ServicioTransacciones servicioTransacciones) {
+		this.servicioTransacciones = servicioTransacciones;
+	}
 }

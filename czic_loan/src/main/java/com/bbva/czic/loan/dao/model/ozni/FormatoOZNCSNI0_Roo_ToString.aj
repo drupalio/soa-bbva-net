@@ -11,6 +11,7 @@ privileged aspect FormatoOZNCSNI0_Roo_ToString {
         StringBuilder sb = new StringBuilder();
         sb.append("Balance: ").append(getBalance()).append(", ");
         sb.append("Fechaop: ").append(getFechaop()).append(", ");
+        sb.append("Numeext: ").append(getNumeext()).append(", ");
         sb.append("Numeope: ").append(getNumeope()).append(", ");
         sb.append("Resto: ").append(getResto()).append(", ");
         sb.append("Tipope: ").append(getTipope()).append(", ");

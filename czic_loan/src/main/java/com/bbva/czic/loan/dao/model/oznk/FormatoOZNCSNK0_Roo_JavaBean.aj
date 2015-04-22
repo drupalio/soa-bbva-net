@@ -72,12 +72,4 @@ privileged aspect FormatoOZNCSNK0_Roo_JavaBean {
         this.coutat = coutat;
     }
     
-    public String FormatoOZNCSNK0.getEstado() {
-        return this.estado;
-    }
-    
-    public void FormatoOZNCSNK0.setEstado(String estado) {
-        this.estado = estado;
-    }
-    
 }

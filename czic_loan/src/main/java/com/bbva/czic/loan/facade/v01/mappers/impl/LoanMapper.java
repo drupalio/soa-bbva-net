@@ -51,6 +51,7 @@ public class LoanMapper extends AbstractBbvaConfigurableMapper implements ILoanM
 				.field("operation", "operation")
 				.field("value", "value")
 				.field("balance", "balance")
+				.field("numExt", "numExt")
 
 				.byDefault().register();
 
@@ -60,7 +61,7 @@ public class LoanMapper extends AbstractBbvaConfigurableMapper implements ILoanM
 				.field("concept", "concept")
 				.field("transactionDate", "transactionDate")
 				.field("operation", "operation")
-				.field("status", "status")
+
 				.field("value", "value")
 				.field("balance", "balance")
 				.field("numbersOfQuota", "numbersOfQuota")

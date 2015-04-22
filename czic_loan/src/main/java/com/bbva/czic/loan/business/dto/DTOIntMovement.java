@@ -15,6 +15,9 @@ public class DTOIntMovement {
 	private String id;
 
 	@NotNull
+	private String numExt;
+
+	@NotNull
 	private String concept;
 
 	@NotNull
@@ -83,4 +86,11 @@ public class DTOIntMovement {
 	}
 
 
+	public String getNumExt() {
+		return numExt;
+	}
+
+	public void setNumExt(String numExt) {
+		this.numExt = numExt;
+	}
 }

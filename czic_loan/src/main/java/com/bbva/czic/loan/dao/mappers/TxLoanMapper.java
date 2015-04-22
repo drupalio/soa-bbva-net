@@ -31,12 +31,13 @@ public class TxLoanMapper extends AbstractBbvaTxConfigurableMapper implements IT
 		factory.classMap(FormatoOZNCENK0.class, DTOIntFilterRotaryMovement.class)
 				.field("nomtarj", "idLoan")
 				.field("nommovi", "idMovement")
+				.field("nomextr", "idExtracto")
 				.byDefault().register();
 
 
 		// Map  FormatoOZNCSNJ0 DTOIntLoan
 		factory.classMap(FormatoOZNCSNJ0.class, DTOIntLoan.class)
-				.field("numcont", "id")    
+				.field("numcont", "id")
 				.field("tipprod", "type")
 				.field("desctar", "name")
 				.field("saldoto", "balance.total")
@@ -62,12 +63,13 @@ public class TxLoanMapper extends AbstractBbvaTxConfigurableMapper implements IT
 				.field("descop", "operation")
 				.field("coutaf","remainingQuotas")
 				.field("coutat", "numbersOfQuota")
-				.field("estado", "status")
+
 				.byDefault().register();
 
 		// Map  FormatoOZNCSNI0 DTOIntMovement
 		factory.classMap(FormatoOZNCSNI0.class, DTOIntMovement.class)
 				.field("numeope","id")
+				.field("numeext", "numExt")
 				.field("fechaop", "transactionDate")
 				.field("resto","concept")
 				.field("valorop", "value")
@@ -80,7 +82,9 @@ public class TxLoanMapper extends AbstractBbvaTxConfigurableMapper implements IT
 				.field("notarje", "idLoan")
 				.field("fechini", "fechaInicial")
 				.field("fechafi", "fechaFinal")
-				.field("indpag", "paginationKey")
+				.field("indpane", "paginationKey")//extracto
+				.field("indpano", "pageSize")//idmovimiento
+
 				.field("pospag", "pageSize")
 				.byDefault().register();
 	}

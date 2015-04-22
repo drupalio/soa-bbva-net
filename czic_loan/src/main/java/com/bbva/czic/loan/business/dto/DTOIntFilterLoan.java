@@ -16,11 +16,12 @@ public class DTOIntFilterLoan {
 	@NotNull
     private Date fechaFinal;
 
-	@NotNull
-    private Integer paginationKey;
 
 	@NotNull
-	private Integer pageSize;
+    private String paginationKey;
+
+	@NotNull
+	private String pageSize;
 
 	@NotNull
     private String idLoan;
@@ -75,19 +76,19 @@ public class DTOIntFilterLoan {
 		this.transactionDate = transactionDate;
 	}
 
-	public Integer getPaginationKey() {
+	public String getPaginationKey() {
 		return paginationKey;
 	}
 
-	public void setPaginationKey(Integer paginationKey) {
+	public void setPaginationKey(String paginationKey) {
 		this.paginationKey = paginationKey;
 	}
 
-	public Integer getPageSize() {
+	public String getPageSize() {
 		return pageSize;
 	}
 
-	public void setPageSize(Integer pageSize) {
+	public void setPageSize(String pageSize) {
 		this.pageSize = pageSize;
 	}
 

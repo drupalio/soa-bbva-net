@@ -64,11 +64,11 @@ public class LoanMapperTest {
 
 		final DTOIntRotaryQuotaMove dtoIntRotaryQuotaMove = new DTOIntRotaryQuotaMove();
 		dtoIntRotaryQuotaMove.setId("1234567654");
-		dtoIntRotaryQuotaMove.setStatus("Ok");
+
 
 		final RotaryQuotaMove result = loanMapper.map(dtoIntRotaryQuotaMove);
 
 		Assert.assertEquals(result.getId(), dtoIntRotaryQuotaMove.getId());
-		Assert.assertEquals(result.getStatus(), dtoIntRotaryQuotaMove.getStatus());
+
 	}
 }

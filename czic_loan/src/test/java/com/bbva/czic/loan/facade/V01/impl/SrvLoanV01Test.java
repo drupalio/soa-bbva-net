@@ -83,7 +83,7 @@ public class SrvLoanV01Test extends SpringContextBbvaTest {
         when(iSrvIntLoan.listRotaryQuotaMovements(any(DTOIntFilterLoan.class))).thenReturn(dtoIntMovementList);
         when(loanMapper.map(anyList())).thenReturn(movementList);
 
-        final List<Movement> m = srvLoanV01.listRotaryQuotaMovements("00816641", 5, 4, filter);
+        final List<Movement> m = srvLoanV01.listRotaryQuotaMovements("00816641", "5", "4", filter);
 
         Assert.assertNotNull(m);
     }
@@ -126,7 +126,7 @@ public class SrvLoanV01Test extends SpringContextBbvaTest {
 
         when(loanMapper.map(anyList())).thenThrow(bsn);
 
-        srvLoanV01.listRotaryQuotaMovements("00816641", 5, 4, filter);
+        srvLoanV01.listRotaryQuotaMovements("00816641", "5", "4", filter);
     }
 
     @Test(expected = BusinessServiceException.class)
@@ -138,7 +138,7 @@ public class SrvLoanV01Test extends SpringContextBbvaTest {
 
         when(iSrvIntLoan.listRotaryQuotaMovements(any(DTOIntFilterLoan.class))).thenThrow(bsn);
 
-        srvLoanV01.listRotaryQuotaMovements("00816641", 5, 4, filter);
+        srvLoanV01.listRotaryQuotaMovements("00816641", "5", "4", filter);
     }
 
 

@@ -3,6 +3,7 @@
 
 package com.bbva.czic.loan.dao.model.ozni;
 
+import java.lang.Integer;
 import java.lang.String;
 import java.util.Date;
 
@@ -32,19 +33,27 @@ privileged aspect FormatoOZNCENI0_Roo_JavaBean {
         this.fechafi = fechafi;
     }
     
-    public String FormatoOZNCENI0.getIndpag() {
-        return this.indpag;
+    public Integer FormatoOZNCENI0.getIndpane() {
+        return this.indpane;
     }
     
-    public void FormatoOZNCENI0.setIndpag(String indpag) {
-        this.indpag = indpag;
+    public void FormatoOZNCENI0.setIndpane(Integer indpane) {
+        this.indpane = indpane;
     }
     
-    public String FormatoOZNCENI0.getPospag() {
+    public Integer FormatoOZNCENI0.getIndpano() {
+        return this.indpano;
+    }
+    
+    public void FormatoOZNCENI0.setIndpano(Integer indpano) {
+        this.indpano = indpano;
+    }
+    
+    public Integer FormatoOZNCENI0.getPospag() {
         return this.pospag;
     }
     
-    public void FormatoOZNCENI0.setPospag(String pospag) {
+    public void FormatoOZNCENI0.setPospag(Integer pospag) {
         this.pospag = pospag;
     }
     

@@ -100,8 +100,8 @@ public class SrvLoanV01 implements ISrvLoanV01,	com.bbva.jee.arq.spring.core.ser
 	@Path("/rotaryQuota/{loanId}/movements")
 	@SMC(registryID = "SMCCO1400011", logicalID = "listRotaryQuotaMovements")
 	public List<Movement> listRotaryQuotaMovements(@ApiParam(value = "Loan identifier") @PathParam("loanId") String loanId,
-												   @ApiParam(value = "Loan pagination Key") @QueryParam("paginationKey")  Integer paginationKey,
-												   @ApiParam(value = "Loan page Size") @QueryParam("pageSize") Integer pageSize,
+												   @ApiParam(value = "Loan pagination Key") @QueryParam("paginationKey")  String paginationKey,
+												   @ApiParam(value = "Loan page Size") @QueryParam("pageSize") String pageSize,
 												   @ApiParam(value = "order by param") @DefaultValue("null") @QueryParam("$filter") String filter) {
 
 		log.info("Iniciado listRotaryQuotaMovements");
@@ -130,6 +130,6 @@ public class SrvLoanV01 implements ISrvLoanV01,	com.bbva.jee.arq.spring.core.ser
 			@ApiParam(value = "Claimer identifier param") @PathParam("idMovement") String idMovement) {
 
 		log.info("Iniciado getRotaryQuotaMovement");
-		return iLoanMapper.map(isrvIntLoan.getRotaryQuotaMovement(new DTOIntFilterRotaryMovement(idLoan, Integer.parseInt(idMovement))));
+		return iLoanMapper.map(isrvIntLoan.getRotaryQuotaMovement(new DTOIntFilterRotaryMovement(idLoan, idMovement)));
 	}
 }

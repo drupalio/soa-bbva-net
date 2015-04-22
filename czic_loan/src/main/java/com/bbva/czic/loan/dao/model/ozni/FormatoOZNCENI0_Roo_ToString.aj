@@ -11,7 +11,8 @@ privileged aspect FormatoOZNCENI0_Roo_ToString {
         StringBuilder sb = new StringBuilder();
         sb.append("Fechafi: ").append(getFechafi()).append(", ");
         sb.append("Fechini: ").append(getFechini()).append(", ");
-        sb.append("Indpag: ").append(getIndpag()).append(", ");
+        sb.append("Indpane: ").append(getIndpane()).append(", ");
+        sb.append("Indpano: ").append(getIndpano()).append(", ");
         sb.append("Notarje: ").append(getNotarje()).append(", ");
         sb.append("Pospag: ").append(getPospag());
         return sb.toString();
