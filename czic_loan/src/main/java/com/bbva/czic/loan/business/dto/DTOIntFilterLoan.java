@@ -1,5 +1,7 @@
 package com.bbva.czic.loan.business.dto;
 
+import org.hibernate.validator.constraints.Length;
+
 import javax.validation.constraints.NotNull;
 import java.util.Date;
 
@@ -18,6 +20,7 @@ public class DTOIntFilterLoan {
 
 
 	@NotNull
+	@Length(min = 10, max = 10)
     private String paginationKey;
 
 	@NotNull
@@ -26,8 +29,10 @@ public class DTOIntFilterLoan {
 	@NotNull
     private String idLoan;
 
-	private String transactionDate;
+	@NotNull
+	private String idExtracto;
 
+	@NotNull
 	private String idMovement;
 
 	/**
@@ -67,15 +72,6 @@ public class DTOIntFilterLoan {
 		this.fechaInicial = fechaInicial;
 	}
 
-
-	public String getTransactionDate() {
-		return transactionDate;
-	}
-
-	public void setTransactionDate(String transactionDate) {
-		this.transactionDate = transactionDate;
-	}
-
 	public String getPaginationKey() {
 		return paginationKey;
 	}
@@ -98,5 +94,13 @@ public class DTOIntFilterLoan {
 
 	public void setIdMovement(String idMovement) {
 		this.idMovement = idMovement;
+	}
+
+	public String getIdExtracto() {
+		return idExtracto;
+	}
+
+	public void setIdExtracto(String idExtracto) {
+		this.idExtracto = idExtracto;
 	}
 }

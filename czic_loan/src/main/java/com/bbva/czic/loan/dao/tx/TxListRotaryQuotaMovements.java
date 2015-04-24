@@ -24,6 +24,7 @@ public class TxListRotaryQuotaMovements extends MultiBbvaTransaction<DTOIntFilte
 
     @Override
     protected FormatoOZNCENI0 mapDtoInToRequestFormat(DTOIntFilterLoan dtoIn) {
+
         return iTxLoanMapper.mapInOzni(dtoIn);
     }
 

@@ -54,6 +54,9 @@ public class SrvIntLoan implements ISrvIntLoan {
 	@Override
 	public List<DTOIntMovement> listRotaryQuotaMovements(final DTOIntFilterLoan dtoIntFilterLoan) throws BusinessServiceException {
 
+		dtoIntFilterLoan.setIdExtracto(dtoIntFilterLoan.getPaginationKey().substring(0, 4));
+		dtoIntFilterLoan.setIdMovement(dtoIntFilterLoan.getPaginationKey().substring(4,dtoIntFilterLoan.getPaginationKey().length()));
+
 		DtoValidator.validate(dtoIntFilterLoan);
 		log.info(" getRotaryQuota ");
 

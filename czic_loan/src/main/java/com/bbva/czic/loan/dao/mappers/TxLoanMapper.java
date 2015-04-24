@@ -82,9 +82,8 @@ public class TxLoanMapper extends AbstractBbvaTxConfigurableMapper implements IT
 				.field("notarje", "idLoan")
 				.field("fechini", "fechaInicial")
 				.field("fechafi", "fechaFinal")
-				.field("indpane", "paginationKey")//extracto
-				.field("indpano", "pageSize")//idmovimiento
-
+				.field("indpane", "idExtracto")
+				.field("indpano", "idMovement")
 				.field("pospag", "pageSize")
 				.byDefault().register();
 	}
