@@ -90,7 +90,7 @@ public class SrvIntLoanTest extends SpringContextBbvaTest {
 
 		DTOIntFilterLoan dtoIntFilterLoan = new DTOIntFilterLoan();
 		dtoIntFilterLoan.setIdLoan("123");
-		dtoIntFilterLoan.setPageSize("5");
+		dtoIntFilterLoan.setPageSize(5);
 		dtoIntFilterLoan.setPaginationKey("3");
 		dtoIntFilterLoan.setFechaFinal(new Date(20140112));
 		dtoIntFilterLoan.setFechaInicial(new Date(20140115));

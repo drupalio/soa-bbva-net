@@ -6,6 +6,7 @@ import com.bbva.czic.loan.business.dto.*;
 import com.bbva.czic.loan.dao.impl.LoanDAO;
 import com.bbva.czic.routine.commons.rm.utils.validator.DtoValidator;
 import com.bbva.czic.routine.commons.rm.utils.validator.impl.StringValidator;
+import org.apache.commons.lang.StringUtils;
 import org.springframework.stereotype.Service;
 import com.bbva.czic.loan.business.ISrvIntLoan;
 import com.bbva.jee.arq.spring.core.log.I18nLog;
@@ -55,7 +56,7 @@ public class SrvIntLoan implements ISrvIntLoan {
 	public List<DTOIntMovement> listRotaryQuotaMovements(final DTOIntFilterLoan dtoIntFilterLoan) throws BusinessServiceException {
 
 		dtoIntFilterLoan.setIdExtracto(dtoIntFilterLoan.getPaginationKey().substring(0, 4));
-		dtoIntFilterLoan.setIdMovement(dtoIntFilterLoan.getPaginationKey().substring(4,dtoIntFilterLoan.getPaginationKey().length()));
+		dtoIntFilterLoan.setIdMovement(dtoIntFilterLoan.getPaginationKey().substring(4, dtoIntFilterLoan.getPaginationKey().length()));
 
 		DtoValidator.validate(dtoIntFilterLoan);
 		log.info(" getRotaryQuota ");

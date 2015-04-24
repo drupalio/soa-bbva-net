@@ -24,7 +24,7 @@ public class DTOIntFilterLoan {
     private String paginationKey;
 
 	@NotNull
-	private String pageSize;
+	private Integer pageSize;
 
 	@NotNull
     private String idLoan;
@@ -80,11 +80,11 @@ public class DTOIntFilterLoan {
 		this.paginationKey = paginationKey;
 	}
 
-	public String getPageSize() {
+	public Integer getPageSize() {
 		return pageSize;
 	}
 
-	public void setPageSize(String pageSize) {
+	public void setPageSize(Integer pageSize) {
 		this.pageSize = pageSize;
 	}
 

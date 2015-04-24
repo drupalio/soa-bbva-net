@@ -101,7 +101,7 @@ public class SrvLoanV01 implements ISrvLoanV01,	com.bbva.jee.arq.spring.core.ser
 	@SMC(registryID = "SMCCO1400011", logicalID = "listRotaryQuotaMovements")
 	public List<Movement> listRotaryQuotaMovements(@ApiParam(value = "Loan identifier") @PathParam("loanId") String loanId,
 												   @ApiParam(value = "Loan pagination Key") @QueryParam("paginationKey")  String paginationKey,
-												   @ApiParam(value = "Loan page Size") @QueryParam("pageSize") String pageSize,
+												   @ApiParam(value = "Loan page Size") @QueryParam("pageSize") Integer pageSize,
 												   @ApiParam(value = "order by param") @DefaultValue("null") @QueryParam("$filter") String filter) {
 
 		log.info("Iniciado listRotaryQuotaMovements");
