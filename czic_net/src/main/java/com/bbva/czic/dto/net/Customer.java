@@ -51,7 +51,7 @@ public class Customer implements Serializable {
 	private String dwelingType;
 	@ApiModelProperty("Ubicacion de la oficina")
 	private Place officeLocation;
-	@XmlJavaTypeAdapter(CalendarAdapter.class)
+	//@XmlJavaTypeAdapter(CalendarAdapter.class)
 	@ApiModelProperty("Fecha de último acceso")
 	private String lastAccessDate;
 

@@ -68,7 +68,18 @@ public class CustomerMapper extends AbstractBbvaConfigurableMapper implements IC
                 .byDefault().register();
 
         factory.classMap(Customer.class, DTOIntCustomer.class)
-        		.field("contactInfo","emails")
+                .field("document", "document")
+                .field("username", "username")
+                .field("name", "name")
+                .field("segment", "segment")
+                .field("contactInfo", "emails")
+                .field("homeLocation", "homeLocation")
+                .field("stratum", "stratum")
+                .field("residenceYears", "residenceYears")
+                .field("homeMembers", "homeMembers")
+                .field("dwelingType", "dwelingType")
+                .field("officeLocation", "officeLocation")
+                .field("lastAccessDate", "lastAccessDate")
                 .byDefault().register();
     }
 

@@ -127,12 +127,12 @@ public class DTOIntCustomer {
 		this.officeLocation = officeLocation;
 	}
 
-	public String getLastConnectionTime() {
+
+	public String getLastAccessDate() {
 		return lastAccessDate;
 	}
 
-	public void setLastConnectionTime(String lastConnectionTime) {
-		this.lastAccessDate = lastConnectionTime;
+	public void setLastAccessDate(String lastAccessDate) {
+		this.lastAccessDate = lastAccessDate;
 	}
-
 }

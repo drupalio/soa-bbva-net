@@ -55,13 +55,21 @@ public class TxCustomerMapper extends AbstractBbvaTxConfigurableMapper implement
 
 		// map FormatoOZECNBS0 <-> DTOIntCustomer (OZNB)
 		factory.classMap(DTOIntCustomer.class, FormatoOZNCSNB0.class).field("name", "nomclie")
-				.field("segment", "segment").field("stratum", "estrato").field("homeLocation.cityName", "ciudvia")
-				.field("homeLocation.stateName", "depavia").field("homeLocation.countryName", "paisvia")
-				.field("homeLocation.postalAddress", "descvia").field("residenceYears", "anosvda")
-				.field("homeMembers", "nropnas").field("dwelingType", "tpovvda")
-				.field("officeLocation.cityName", "ciudofi").field("officeLocation.stateName", "depaofi")
-				.field("officeLocation.countryName", "paisofi").field("officeLocation.postalAddress", "descofi")
-				.field("lastConnectionTime", "ultconx").byDefault().register();
+				.field("segment", "segment")
+				.field("stratum", "estrato")
+				.field("homeLocation.cityName", "ciudvia")
+				.field("homeLocation.stateName", "depavia")
+				.field("homeLocation.countryName", "paisvia")
+				.field("homeLocation.postalAddress", "descvia")
+				.field("residenceYears", "anosvda")
+				.field("homeMembers", "nropnas")
+				.field("dwelingType", "tpovvda")
+				.field("officeLocation.cityName", "ciudofi")
+				.field("officeLocation.stateName", "depaofi")
+				.field("officeLocation.countryName", "paisofi")
+				.field("officeLocation.postalAddress", "descofi")
+				.field("lastAccessDate", "ultconx")
+				.byDefault().register();
 
 		// map DTOIntAccMovementsResumesFilter <-> FormatoOZECNQE0
 		factory.classMap(DTOIntAccMovementsResumesFilter.class, FormatoOZECNQE0.class)
