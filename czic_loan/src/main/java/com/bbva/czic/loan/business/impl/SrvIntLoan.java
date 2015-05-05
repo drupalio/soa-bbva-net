@@ -4,6 +4,7 @@ package com.bbva.czic.loan.business.impl;
 import com.bbva.czic.loan.business.dto.*;
 
 import com.bbva.czic.loan.dao.impl.LoanDAO;
+import com.bbva.czic.routine.commons.rm.utils.errors.EnumError;
 import com.bbva.czic.routine.commons.rm.utils.validator.DtoValidator;
 import com.bbva.czic.routine.commons.rm.utils.validator.impl.StringValidator;
 import org.apache.commons.lang.StringUtils;
@@ -55,6 +56,8 @@ public class SrvIntLoan implements ISrvIntLoan {
 	@Override
 	public List<DTOIntMovement> listRotaryQuotaMovements(final DTOIntFilterLoan dtoIntFilterLoan) throws BusinessServiceException {
 
+		if(dtoIntFilterLoan.getPaginationKey().length() != 10)
+			throw new BusinessServiceException(EnumError.WRONG_PARAMETERS.getAlias());
 		dtoIntFilterLoan.setIdExtracto(dtoIntFilterLoan.getPaginationKey().substring(0, 4));
 		dtoIntFilterLoan.setIdMovement(dtoIntFilterLoan.getPaginationKey().substring(4, dtoIntFilterLoan.getPaginationKey().length()));
 
@@ -77,9 +80,11 @@ public class SrvIntLoan implements ISrvIntLoan {
 	public DTOIntRotaryQuotaMove getRotaryQuotaMovement(final DTOIntFilterRotaryMovement dtoIntFilterRotaryMovement) throws BusinessServiceException {
 
 		log.info(" getRotaryQuota ");
-
-		dtoIntFilterRotaryMovement.setIdMovement(dtoIntFilterRotaryMovement.getIdMovement().substring(0,5));
+		if(dtoIntFilterRotaryMovement.getIdMovement().length() != 10)
+			throw new BusinessServiceException(EnumError.WRONG_PARAMETERS.getAlias());
 		dtoIntFilterRotaryMovement.setIdExtracto(dtoIntFilterRotaryMovement.getIdMovement().substring(6, dtoIntFilterRotaryMovement.getIdMovement().length()));
+		dtoIntFilterRotaryMovement.setIdMovement(dtoIntFilterRotaryMovement.getIdMovement().substring(0,6));
+
 
 		DtoValidator.validate(dtoIntFilterRotaryMovement);
 		final DTOIntRotaryQuotaMove result = loanDao.getRotaryQuotaMovement(dtoIntFilterRotaryMovement);
