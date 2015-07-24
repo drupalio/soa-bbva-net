@@ -14,7 +14,7 @@ import com.bbva.czic.products.dao.model.oznt.FormatoOZECNTS1;
 
 public interface TxProductsMapper {
 
-	public static final int PLOT_LENGTH=99;
+	public static final int PLOT_LENGTH=100;
 	
 	public static final String headGet = "<indraExtXStreamParser><operation>4</operation><getExtractosDisponiblesXNoContratoXStreamParser><extRefpro>";
 	

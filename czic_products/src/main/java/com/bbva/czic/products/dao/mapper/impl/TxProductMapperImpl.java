@@ -289,34 +289,34 @@ public class TxProductMapperImpl extends AbstractBbvaTxConfigurableMapper implem
 				}
 				switch (i) {
 				case 0:
-					formatoEntrada.setSubtrm0(parser.substring(0, plotLength));
-					break;
-				case 100:
 					formatoEntrada.setSubtrm1(parser.substring(0, plotLength));
 					break;
-				case 200:
+				case 101:
 					formatoEntrada.setSubtrm2(parser.substring(0, plotLength));
 					break;
-				case 300:
+				case 202:
 					formatoEntrada.setSubtrm3(parser.substring(0, plotLength));
 					break;
-				case 400:
+				case 303:
 					formatoEntrada.setSubtrm4(parser.substring(0, plotLength));
 					break;
-				case 500:
+				case 404:
 					formatoEntrada.setSubtrm5(parser.substring(0, plotLength));
 					break;
-				case 600:
+				case 505:
 					formatoEntrada.setSubtrm6(parser.substring(0, plotLength));
 					break;
-				case 700:
+				case 606:
 					formatoEntrada.setSubtrm7(parser.substring(0, plotLength));
 					break;
-				case 800:
+				case 707:
 					formatoEntrada.setSubtrm8(parser.substring(0, plotLength));
 					break;
-				case 900:
+				case 808:
 					formatoEntrada.setSubtrm9(parser.substring(0, plotLength));
+					break;
+				case 909:
+					formatoEntrada.setSubtrm0(parser.substring(0, plotLength));
 					break;
 				}
 				parser = parser.substring(plotLength);
@@ -376,6 +376,7 @@ public class TxProductMapperImpl extends AbstractBbvaTxConfigurableMapper implem
 		private void mapListExtracts(DTOIntExtractOutput dtoIntExtractOut, String plot) {
 			log.info("Gettin' into ExtractListMapperOut.mapListExtracts: Trama="+plot);
 			dtoIntExtractOut.setExtracts(new ArrayList<DTOIntExtract>());
+			plot=plot.replaceAll("!","|");
 			StringTokenizer listExtracts = new StringTokenizer(plot, "|");
 			listExtracts.nextToken();
 			while (listExtracts.hasMoreElements()) {

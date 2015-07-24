@@ -37,7 +37,8 @@
 	<context:annotation-config />
 	
 	<!-- Declaracion de modulo de servicios -->
-	<servicing:module-metadata  service-logical-id="loan" />
+	<!--<servicing:module-metadata  service-logical-id="loan" application-name="czic" />-->
+	<servicing:module-metadata  service-logical-id="loan"/>
     
 	<!-- beans de cxf -->
     <import resource="classpath:META-INF/cxf/cxf.xml"/>

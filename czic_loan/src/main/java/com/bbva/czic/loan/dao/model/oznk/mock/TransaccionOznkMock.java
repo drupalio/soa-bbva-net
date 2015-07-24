@@ -28,13 +28,13 @@ public class TransaccionOznkMock implements InvocadorTransaccion<PeticionTransac
 
 		FormatoOZNCSNK0 formatoSalida = new FormatoOZNCSNK0();
 
-		formatoSalida.setDescop("Descripcion");
-		formatoSalida.setResto("12345");
-		formatoSalida.setNumemov("00000000");
-		formatoSalida.setImporte("+00000000000");
-		formatoSalida.setBalance("+00000000000");
+		formatoSalida.setDescop("TRASPASO CUPO ROTATIVO       a");
+		formatoSalida.setResto("00");
+		formatoSalida.setNumemov("000005");
+		formatoSalida.setImporte("+00950000000");
+		formatoSalida.setBalance("+00025000000");
 		formatoSalida.setCoutaf("0000");
-		formatoSalida.setCoutat("0001");
+		formatoSalida.setCoutat("0036");
 
 		formatoSalida.setFechaop(new Date());
 

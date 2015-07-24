@@ -11,7 +11,7 @@ public class DTOIntLoan  {
 	public final static long serialVersionUID = 1L;
 
 	@NotNull
-	@Length(min = 20, max = 20)
+	@Length(min = 16, max = 20)
 	private String id;
 
 	@NotNull
