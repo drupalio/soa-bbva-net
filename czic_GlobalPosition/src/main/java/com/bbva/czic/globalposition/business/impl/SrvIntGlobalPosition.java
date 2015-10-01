@@ -34,7 +34,7 @@ public class SrvIntGlobalPosition implements ISrvIntGlobalPosition {
 
 		List<DTOIntProduct> intProducts = globalPositionDAO.getExtractGlobalBalance(filterProduct);
 
-		//DtoValidator.validate(intProducts);
+		DtoValidator.validate(intProducts);
 
 		if (CollectionUtils.isEmpty(intProducts)) {
 			throw new BusinessServiceException(EnumError.NO_DATA.getAlias());

@@ -44,6 +44,7 @@ public class GlobalPositionMapper extends AbstractBbvaConfigurableMapper impleme
         factory.classMap(Balance.class, DTOIntBalance.class)
                 .field("total", "total")
                 .field("availableBalance", "availableBalance")
+                .field("tradeBalance", "tradeBalance")
                 .byDefault().register();
 
 
