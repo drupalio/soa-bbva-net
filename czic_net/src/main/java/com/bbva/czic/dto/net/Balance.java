@@ -31,6 +31,10 @@ public class Balance implements Serializable {
 	@ApiModelProperty("Saldo disponible del producto")
 	private Money availableBalance;
 
+	@XmlElement(type = Money.class)
+	@ApiModelProperty("Saldo en canje del producto")
+	private Money tradeBalance;
+
 	public Balance() {
 		// default constructor
 	}
@@ -55,4 +59,11 @@ public class Balance implements Serializable {
 		this.availableBalance = availableBalance;
 	}
 
+	public Money getTradeBalance() {
+		return tradeBalance;
+	}
+
+	public void setTradeBalance(Money tradeBalance) {
+		this.tradeBalance = tradeBalance;
+	}
 }

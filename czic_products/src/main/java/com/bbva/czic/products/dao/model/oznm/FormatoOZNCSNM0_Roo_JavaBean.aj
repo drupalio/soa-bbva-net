@@ -15,6 +15,22 @@ privileged aspect FormatoOZNCSNM0_Roo_JavaBean {
         this.numecta = numecta;
     }
     
+    public String FormatoOZNCSNM0.getTipo() {
+        return this.tipo;
+    }
+    
+    public void FormatoOZNCSNM0.setTipo(String tipo) {
+        this.tipo = tipo;
+    }
+    
+    public String FormatoOZNCSNM0.getNummov() {
+        return this.nummov;
+    }
+    
+    public void FormatoOZNCSNM0.setNummov(String nummov) {
+        this.nummov = nummov;
+    }
+    
     public String FormatoOZNCSNM0.getFchoper() {
         return this.fchoper;
     }
@@ -47,12 +63,12 @@ privileged aspect FormatoOZNCSNM0_Roo_JavaBean {
         this.baloper = baloper;
     }
     
-    public String FormatoOZNCSNM0.getTipo() {
-        return this.tipo;
+    public String FormatoOZNCSNM0.getCodoper() {
+        return this.codoper;
     }
     
-    public void FormatoOZNCSNM0.setTipo(String tipo) {
-        this.tipo = tipo;
+    public void FormatoOZNCSNM0.setCodoper(String codoper) {
+        this.codoper = codoper;
     }
     
     public String FormatoOZNCSNM0.getDescodi() {
@@ -93,6 +109,14 @@ privileged aspect FormatoOZNCSNM0_Roo_JavaBean {
     
     public void FormatoOZNCSNM0.setCtroorg(String ctroorg) {
         this.ctroorg = ctroorg;
+    }
+    
+    public String FormatoOZNCSNM0.getNumclie() {
+        return this.numclie;
+    }
+    
+    public void FormatoOZNCSNM0.setNumclie(String numclie) {
+        this.numclie = numclie;
     }
     
 }

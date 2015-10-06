@@ -23,16 +23,21 @@ public class TransaccionOznmMock implements InvocadorTransaccion<PeticionTransac
         RespuestaTransaccionOznm resultado = new RespuestaTransaccionOznm();
         FormatoOZNCSNM0 formato = new FormatoOZNCSNM0();
         formato.setBaloper("1000");
-        formato.setCtroorg("CHILE CENTRO");
-        formato.setDescodi("ABC");
-        formato.setFchoper("2014-03-11");
-        formato.setFchvalr("2014-05-12");
         formato.setNumecta("000100987333");
-        formato.setPlaza("NORTE");
-        formato.setResto("1000");
-        formato.setSaldo("2000");
         formato.setTipo("A");
-        formato.setValor("3000");
+        formato.setNummov("15");
+        formato.setFchoper("2014-09-1114:17");
+        formato.setResto("Transferencia");
+        formato.setValor("123456789");
+        formato.setBaloper("65161");
+        formato.setCodoper("246");
+        formato.setDescodi("Transferencia para pago de servicios");
+        formato.setFchvalr("2014-05-12");
+        formato.setPlaza("CHILE CENTRO (BUENOS AIRES)");
+        formato.setSaldo("2000");
+        formato.setCtroorg("0077 CHILE CENTRO");
+        formato.setNumclie("NUM CLIENTE");
+
 
         CopySalida copy = new CopySalida();
         copy.setCopy(formato);

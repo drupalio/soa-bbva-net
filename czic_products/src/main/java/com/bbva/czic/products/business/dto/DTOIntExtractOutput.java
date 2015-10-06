@@ -5,7 +5,8 @@ import java.util.List;
 public class DTOIntExtractOutput {
 	
 	private List<DTOIntExtract> extracts;
-	
+
+	private boolean mustCallAgain;
 	
 
 	@Override
@@ -21,4 +22,11 @@ public class DTOIntExtractOutput {
 		this.extracts = extracts;
 	}
 
+	public boolean isMustCallAgain() {
+		return mustCallAgain;
+	}
+
+	public void setMustCallAgain(boolean mustCallAgain) {
+		this.mustCallAgain = mustCallAgain;
+	}
 }

@@ -10,11 +10,14 @@ privileged aspect FormatoOZNCSNM0_Roo_ToString {
     public String FormatoOZNCSNM0.toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("Baloper: ").append(getBaloper()).append(", ");
+        sb.append("Codoper: ").append(getCodoper()).append(", ");
         sb.append("Ctroorg: ").append(getCtroorg()).append(", ");
         sb.append("Descodi: ").append(getDescodi()).append(", ");
         sb.append("Fchoper: ").append(getFchoper()).append(", ");
         sb.append("Fchvalr: ").append(getFchvalr()).append(", ");
+        sb.append("Numclie: ").append(getNumclie()).append(", ");
         sb.append("Numecta: ").append(getNumecta()).append(", ");
+        sb.append("Nummov: ").append(getNummov()).append(", ");
         sb.append("Plaza: ").append(getPlaza()).append(", ");
         sb.append("Resto: ").append(getResto()).append(", ");
         sb.append("Saldo: ").append(getSaldo()).append(", ");

@@ -2,12 +2,14 @@
 package com.bbva.czic.products.business.dto;
 
 
-
+import javax.validation.constraints.NotNull;
 
 public class DTOIntOperation {
 
     public final static long serialVersionUID = 1L;
+    @NotNull
     private String code;
+    @NotNull
     private String description;
     public DTOIntOperation() {
         //default constructor

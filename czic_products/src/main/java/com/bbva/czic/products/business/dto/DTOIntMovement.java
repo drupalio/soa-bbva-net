@@ -10,10 +10,14 @@ import com.bbva.jee.arq.spring.core.servicing.utils.Money;
 public class DTOIntMovement {
 
     public final static long serialVersionUID = 1L;
-    private String id;
     @NotNull
-    private Date transactionDate;
-    private Date operationDate;
+    private String id;
+
+    private String customerId;
+    @NotNull
+    private String productId;
+
+    private String productType;
     @NotNull
     private String concept;
     @NotNull
@@ -22,10 +26,15 @@ public class DTOIntMovement {
     private Money balance;
     @NotNull
     private DTOIntOperation operation;
+    @NotNull
+    private Date transactionDate;
+    @NotNull
+    private Date operationDate;
+    @NotNull
     private DTOIntOffice office;
+
     private String status;
-    private String productId;
-    private String productType;
+
     private Money originValue;
 
     public DTOIntMovement() {
@@ -127,6 +136,13 @@ public class DTOIntMovement {
 	public void setOriginValue(Money originValue) {
 		this.originValue = originValue;
 	}
-    
 
+
+    public String getCustomerId() {
+        return customerId;
+    }
+
+    public void setCustomerId(String customerId) {
+        this.customerId = customerId;
+    }
 }

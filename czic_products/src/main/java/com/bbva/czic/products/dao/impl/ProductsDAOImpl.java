@@ -45,7 +45,11 @@ public class ProductsDAOImpl  implements IProductsDAO {
 
 	@Override
 	public DTOIntExtractOutput listExtracts(DTOIntFilterExtract dtoIntFilterExtract) {
-		return txListExtracts.invoke(dtoIntFilterExtract);
+        DTOIntExtractOutput dtoIntExtractOutput=txListExtracts.invoke(dtoIntFilterExtract);
+        if(dtoIntExtractOutput.isMustCallAgain()){
+            dtoIntExtractOutput=txListExtracts.invoke(dtoIntFilterExtract);
+        }
+		return dtoIntExtractOutput;
 	}
 
     @Override

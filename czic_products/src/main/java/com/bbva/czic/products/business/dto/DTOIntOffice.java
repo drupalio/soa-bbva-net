@@ -2,13 +2,18 @@
 package com.bbva.czic.products.business.dto;
 
 
-
+import javax.validation.constraints.NotNull;
 
 public class DTOIntOffice {
 
     public final static long serialVersionUID = 1L;
+    @NotNull
     private String name;
+    @NotNull
+    private String code;
+
     private String postalAddress;
+
     private DTOIntLocation location;
 
 
@@ -40,4 +45,11 @@ public class DTOIntOffice {
         this.location = location;
     }
 
+    public String getCode() {
+        return code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
+    }
 }

@@ -29,10 +29,11 @@ public class TransaccionOznlMock implements InvocadorTransaccion<PeticionTransac
 		formato1.setBalance(new Random().nextInt(Integer.MAX_VALUE) + "");
 		formato1.setConcept("Transferencia");
 		formato1.setDescopr("Transferencia");
-		formato1.setFechope(new Date());
+		formato1.setFechope(null);
 		formato1.setNumoper(new Random().nextInt(Integer.MAX_VALUE));
 		formato1.setTipoopr("1");
 		formato1.setValorop(new Random().nextInt(Integer.MAX_VALUE) + "");
+		formato1.setFechope(new Date());
 
 		CopySalida copy1 = new CopySalida();
 		copy1.setCopy(formato1);
@@ -42,10 +43,11 @@ public class TransaccionOznlMock implements InvocadorTransaccion<PeticionTransac
 		formato2.setBalance(new Random().nextInt(Integer.MAX_VALUE) + "");
 		formato2.setConcept("Compra");
 		formato2.setDescopr("Pago domiciliado");
-		formato2.setFechope(new Date());
+		formato2.setFechope(null);
 		formato2.setNumoper(new Random().nextInt(Integer.MAX_VALUE));
 		formato2.setTipoopr("2");
 		formato2.setValorop(new Random().nextInt(Integer.MAX_VALUE) + "");
+		formato2.setFechope(new Date());
 
 		CopySalida copy2 = new CopySalida();
 		copy2.setCopy(formato2);
@@ -55,10 +57,11 @@ public class TransaccionOznlMock implements InvocadorTransaccion<PeticionTransac
 		formato3.setBalance(new Random().nextInt(Integer.MAX_VALUE) + "");
 		formato3.setConcept("Compra");
 		formato3.setDescopr("Pago domiciliado");
-		formato3.setFechope(new Date());
+		formato3.setFechope(null);
 		formato3.setNumoper(100);
 		formato3.setTipoopr("4");
 		formato3.setValorop(new Random().nextInt(Integer.MAX_VALUE) + "");
+		formato3.setFechope(new Date());
 
 		CopySalida copy3 = new CopySalida();
 		copy3.setCopy(formato3);

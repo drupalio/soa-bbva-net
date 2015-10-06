@@ -1,6 +1,8 @@
 package com.bbva.czic.products.dao.mapper.impl;
 
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.StringTokenizer;
 
@@ -16,6 +18,7 @@ import com.bbva.czic.products.dao.model.oznm.FormatoOZNCSNM0;
 import com.bbva.czic.products.dao.model.oznt.FormatoOZECNTE0;
 import com.bbva.czic.products.dao.model.oznt.FormatoOZECNTS0;
 import com.bbva.czic.products.dao.model.oznt.FormatoOZECNTS1;
+import com.bbva.czic.routine.commons.rm.utils.errors.EnumError;
 import com.bbva.czic.routine.commons.rm.utils.mappers.AbstractBbvaTxConfigurableMapper;
 import com.bbva.czic.routine.commons.rm.utils.mappers.Mapper;
 import com.bbva.czic.routine.mapper.CustomMapper;
@@ -23,6 +26,7 @@ import com.bbva.czic.routine.mapper.MapperFactory;
 import com.bbva.czic.routine.mapper.MappingContext;
 import com.bbva.jee.arq.spring.core.log.I18nLog;
 import com.bbva.jee.arq.spring.core.log.I18nLogFactory;
+import com.bbva.jee.arq.spring.core.servicing.gce.BusinessServiceException;
 
 
 @Mapper(value = "txProductMapper")
@@ -98,19 +102,16 @@ public class TxProductMapperImpl extends AbstractBbvaTxConfigurableMapper implem
 		// Map FormatoOZNCSNM0 <-> DTOIntMovement (OZNM)
 		factory.classMap(FormatoOZNCSNM0.class, DTOIntMovement.class)
 				//TODO Mapear saldo con valor origen
-				.field("numecta", "id")
-				.field("resto", "concept")
+				.field("numecta", "productId")
+				.field("tipo", "productType")
+				.field("nummov", "id")
 				.field("valor", "value")
+				.field("resto", "concept")
 				.field("baloper", "balance")
-				.field("tipo", "operation.code")
+				.field("codoper", "operation.code")
 				.field("descodi", "operation.description")
-				.field("fchoper", "transactionDate")
-				.field("fchvalr", "operationDate")
-				.field("ctroorg", "office.postalAddress")
-				.field("ctroorg", "office.name")
-				.field("saldo", "office.name") //-------------------
-				.field("plaza", "office.location.city.name")
 				.field("plaza", "office.location.dtoIntState.name")
+				.field("ctroorg", "office.name")
 				.field("saldo", "originValue")
 				.byDefault()
 				.register();
@@ -143,7 +144,23 @@ public class TxProductMapperImpl extends AbstractBbvaTxConfigurableMapper implem
 
 	@Override
 	public DTOIntMovement mapOutOznm(FormatoOZNCSNM0 formatOutput) {
-		return map(formatOutput, DTOIntMovement.class);
+		DTOIntMovement dtoIntMovement=map(formatOutput, DTOIntMovement.class);
+		SimpleDateFormat format=new SimpleDateFormat("yyyy-MM-ddHH:mm");
+		SimpleDateFormat format2=new SimpleDateFormat("yyyy-MM-dd");
+		if(formatOutput.getPlaza().indexOf("(")>0) {
+			dtoIntMovement.getOffice().getLocation().setCity(new DTOIntCity());
+			dtoIntMovement.getOffice().getLocation().getCity().setName(formatOutput.getPlaza().substring(
+					formatOutput.getPlaza().indexOf("(")+1, formatOutput.getPlaza().indexOf(")")));
+		}
+		try {
+			dtoIntMovement.getOffice().setCode(formatOutput.getCtroorg().substring(0, 4));
+			dtoIntMovement.setTransactionDate(format.parse(formatOutput.getFchoper()));
+			dtoIntMovement.setOperationDate(format2.parse(formatOutput.getFchvalr()));
+		}catch(ParseException e){
+			throw new BusinessServiceException(
+					EnumError.PARAMETER_MISSING.getAlias());
+		}
+		return dtoIntMovement;
 	}
 
 	@Override
@@ -283,7 +300,8 @@ public class TxProductMapperImpl extends AbstractBbvaTxConfigurableMapper implem
 			formatoEntrada.setSubtrm7("");
 			formatoEntrada.setSubtrm8("");
 			formatoEntrada.setSubtrm9("");
-			for (int i = 0; i < longitud; i++) {
+			int i=0;
+			while(parser.length()>0) {
 				if(plotLength>parser.length()){
 					plotLength=parser.length();
 				}
@@ -291,36 +309,36 @@ public class TxProductMapperImpl extends AbstractBbvaTxConfigurableMapper implem
 				case 0:
 					formatoEntrada.setSubtrm1(parser.substring(0, plotLength));
 					break;
-				case 101:
+				case 1:
 					formatoEntrada.setSubtrm2(parser.substring(0, plotLength));
 					break;
-				case 202:
+				case 2:
 					formatoEntrada.setSubtrm3(parser.substring(0, plotLength));
 					break;
-				case 303:
+				case 3:
 					formatoEntrada.setSubtrm4(parser.substring(0, plotLength));
 					break;
-				case 404:
+				case 4:
 					formatoEntrada.setSubtrm5(parser.substring(0, plotLength));
 					break;
-				case 505:
+				case 5:
 					formatoEntrada.setSubtrm6(parser.substring(0, plotLength));
 					break;
-				case 606:
+				case 6:
 					formatoEntrada.setSubtrm7(parser.substring(0, plotLength));
 					break;
-				case 707:
+				case 7:
 					formatoEntrada.setSubtrm8(parser.substring(0, plotLength));
 					break;
-				case 808:
+				case 8:
 					formatoEntrada.setSubtrm9(parser.substring(0, plotLength));
 					break;
-				case 909:
+				case 9:
 					formatoEntrada.setSubtrm0(parser.substring(0, plotLength));
 					break;
 				}
 				parser = parser.substring(plotLength);
-				i += plotLength;
+				i ++;
 			}
 			log.info("Gettin' out ExtractListMapperIn.processPlot: trama="+formatoEntrada.getSubtrm0()+formatoEntrada.getSubtrm1()+formatoEntrada.getSubtrm2()+formatoEntrada.getSubtrm3());
 			return formatoEntrada;
@@ -376,6 +394,9 @@ public class TxProductMapperImpl extends AbstractBbvaTxConfigurableMapper implem
 		private void mapListExtracts(DTOIntExtractOutput dtoIntExtractOut, String plot) {
 			log.info("Gettin' into ExtractListMapperOut.mapListExtracts: Trama="+plot);
 			dtoIntExtractOut.setExtracts(new ArrayList<DTOIntExtract>());
+			if(plot.toLowerCase().contains("indraextxstreamparser") || !plot.contains("|")){
+				dtoIntExtractOut.setMustCallAgain(true);
+			}
 			plot=plot.replaceAll("!","|");
 			StringTokenizer listExtracts = new StringTokenizer(plot, "|");
 			listExtracts.nextToken();
@@ -408,6 +429,10 @@ public class TxProductMapperImpl extends AbstractBbvaTxConfigurableMapper implem
 		private void mapGetExtracts(DTOIntExtractOutput dtoIntExtractOut, String plot) {
 			log.info("Gettin' into ExtractListMapperOut.mapGetExtracts: Trama="+plot);
 			dtoIntExtractOut.setExtracts(new ArrayList<DTOIntExtract>());
+			if(plot.toLowerCase().contains("indraextxstreamparser") || !plot.contains("|")){
+				dtoIntExtractOut.setMustCallAgain(true);
+			}
+			plot=plot.replaceAll("!","|");
 			StringTokenizer listExtracts = new StringTokenizer(plot, "|");
 			listExtracts.nextToken();
 			while (listExtracts.hasMoreElements()) {

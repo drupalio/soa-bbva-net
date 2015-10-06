@@ -88,17 +88,21 @@ public class TxProductMapperImplTest extends SpringContextBbvaTest {
 	public void mapOutOznm() {
 
 		FormatoOZNCSNM0 salida = new FormatoOZNCSNM0();
-		salida.setValor("10000");
-		salida.setFchoper("2015-08-01");
-		salida.setTipo("AH");
-		salida.setSaldo("10000");
-		salida.setResto("5000");
-		salida.setBaloper("1350");
-		salida.setCtroorg("OFICINA BOGOTA");
-		salida.setDescodi("01");
-		salida.setPlaza("Av chile");
-		salida.setNumecta("01020304050607080900");
-		salida.setFchvalr("2014-06-07");
+		salida.setBaloper("1000");
+		salida.setNumecta("000100987333");
+		salida.setTipo("A");
+		salida.setNummov("15");
+		salida.setFchoper("2014-09-1114:17");
+		salida.setResto("1000");
+		salida.setValor("3000");
+		salida.setBaloper("BALOPER");
+		salida.setCodoper("246");
+		salida.setDescodi("ABC");
+		salida.setFchvalr("2014-05-12");
+		salida.setPlaza("NORTE");
+		salida.setSaldo("2000");
+		salida.setCtroorg("CHILE CENTRO");
+		salida.setNumclie("NUM CLIENTE");
 
 		DTOIntMovement dtoIntMovement = txProductMapper.mapOutOznm(salida);
 
