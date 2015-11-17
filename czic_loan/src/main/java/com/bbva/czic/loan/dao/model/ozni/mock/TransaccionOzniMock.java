@@ -37,8 +37,8 @@ public class TransaccionOzniMock implements InvocadorTransaccion<PeticionTransac
 		formatoOZNCSNi0.setTipope("10");
 		formatoOZNCSNi0.setNumeope("000000012");
 		formatoOZNCSNi0.setBalance("10000");
-		formatoOZNCSNi0.setValorop("0");
-		formatoOZNCSNi0.setResto("GASTOS DE COBRANZA");
+		formatoOZNCSNi0.setValorop("10");
+		formatoOZNCSNi0.setResto("5616651");
 		formatoOZNCSNi0.setNumeext("2345");
 
 
@@ -53,8 +53,8 @@ public class TransaccionOzniMock implements InvocadorTransaccion<PeticionTransac
 		formatoOZNCSNi01.setTipope("10");
 		formatoOZNCSNi01.setNumeope("000000012");
 		formatoOZNCSNi01.setBalance("10000");
-		formatoOZNCSNi01.setValorop("0");
-		formatoOZNCSNi01.setResto("GASTOS DE COBRANZA");
+		formatoOZNCSNi01.setValorop("20");
+		formatoOZNCSNi01.setResto("65165165");
 		formatoOZNCSNi01.setNumeext("233444");
 
 		CopySalida copySalida1 = new CopySalida();
