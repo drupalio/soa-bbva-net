@@ -74,8 +74,12 @@ public class TxAccountMapperImpl extends AbstractBbvaTxConfigurableMapper implem
 
         // Map DTOIntCheckbook <-> FormatoOZECNSE0 (OZNS)
         factory.classMap(DTOIntCheckbook.class, FormatoOZECNSS0.class)
-                .field("firstCheck", "primchq").field("lastCheck", "ultichq").field("totalCheck", "totachq").field("requestDate", "fecemis")
-                .field("deliveryDate", "fecentr").field("deliveryDate", "fecentr").field("actualState", "estachq").byDefault().register();
+                .field("firstCheck", "primchq")
+                .field("lastCheck", "ultichq")
+                .field("totalCheck", "totachq")
+                .field("requestDate", "fecemis")
+                .field("deliveryDate", "fecentr")
+                .field("actualState", "estachq").byDefault().register();
 
         // Map FormatoOZECNUS0 <-> DTOIntAccMovementsResume (OZNU)
         factory.classMap(DTOIntAccMovementsResume.class, FormatoOZECNUS0.class)
@@ -171,25 +175,25 @@ public class TxAccountMapperImpl extends AbstractBbvaTxConfigurableMapper implem
 
             dtoIntAccout.setListaCheckBook(new ArrayList<DTOIntCheckbook>());
 
-            if (Integer.parseInt(outputFormat.getIdcheq0()) > 0)
+            if (Double.parseDouble(outputFormat.getIdcheq0()) > 0)
                 dtoIntAccout.getListaCheckBook().add(new DTOIntCheckbook(outputFormat.getIdcheq0()));
-            if (Integer.parseInt(outputFormat.getIdcheq1()) > 0)
+            if (Double.parseDouble(outputFormat.getIdcheq1()) > 0)
                 dtoIntAccout.getListaCheckBook().add(new DTOIntCheckbook(outputFormat.getIdcheq1()));
-            if (Integer.parseInt(outputFormat.getIdcheq2()) > 0)
+            if (Double.parseDouble(outputFormat.getIdcheq2()) > 0)
                 dtoIntAccout.getListaCheckBook().add(new DTOIntCheckbook(outputFormat.getIdcheq2()));
-            if (Integer.parseInt(outputFormat.getIdcheq3()) > 0)
+            if (Double.parseDouble(outputFormat.getIdcheq3()) > 0)
                 dtoIntAccout.getListaCheckBook().add(new DTOIntCheckbook(outputFormat.getIdcheq3()));
-            if (Integer.parseInt(outputFormat.getIdcheq4()) > 0)
+            if (Double.parseDouble(outputFormat.getIdcheq4()) > 0)
                 dtoIntAccout.getListaCheckBook().add(new DTOIntCheckbook(outputFormat.getIdcheq4()));
-            if (Integer.parseInt(outputFormat.getIdcheq5()) > 0)
+            if (Double.parseDouble(outputFormat.getIdcheq5()) > 0)
                 dtoIntAccout.getListaCheckBook().add(new DTOIntCheckbook(outputFormat.getIdcheq5()));
-            if (Integer.parseInt(outputFormat.getIdcheq6()) > 0)
+            if (Double.parseDouble(outputFormat.getIdcheq6()) > 0)
                 dtoIntAccout.getListaCheckBook().add(new DTOIntCheckbook(outputFormat.getIdcheq6()));
-            if (Integer.parseInt(outputFormat.getIdcheq7()) > 0)
+            if (Double.parseDouble(outputFormat.getIdcheq7()) > 0)
                 dtoIntAccout.getListaCheckBook().add(new DTOIntCheckbook(outputFormat.getIdcheq7()));
-            if (Integer.parseInt(outputFormat.getIdcheq8()) > 0)
+            if (Double.parseDouble(outputFormat.getIdcheq8()) > 0)
                 dtoIntAccout.getListaCheckBook().add(new DTOIntCheckbook(outputFormat.getIdcheq8()));
-            if (Integer.parseInt(outputFormat.getIdcheq9()) > 0)
+            if (Double.parseDouble(outputFormat.getIdcheq9()) > 0)
                 dtoIntAccout.getListaCheckBook().add(new DTOIntCheckbook(outputFormat.getIdcheq9()));
         }
     }

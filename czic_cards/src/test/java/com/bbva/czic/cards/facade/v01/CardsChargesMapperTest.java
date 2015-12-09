@@ -19,7 +19,7 @@ public class CardsChargesMapperTest {
 		 */
 		FormatoOZECNOS0 formatoSalida = new FormatoOZECNOS0();
 		formatoSalida.setCategor("OCIO");
-		formatoSalida.setValcate(new BigDecimal("100"));
+		formatoSalida.setValcate("100");
 
 		dtoIntCardCharge = CardsChargesMapper.mapToOuter(formatoSalida);
 

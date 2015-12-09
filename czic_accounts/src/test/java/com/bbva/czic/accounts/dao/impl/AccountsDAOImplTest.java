@@ -149,17 +149,17 @@ public class AccountsDAOImplTest extends SpringContextBbvaTest {
         DTOIntFilterCheckbooks filter = new DTOIntFilterCheckbooks();
 
         when(txGetCheckbook.invoke(any(DTOIntFilterCheckbooks.class))).thenThrow(bsn);
-        dao.getCheckbooks(filter);
+        dao.getCheckbook(filter);
     }
 
     @Test
     public void testGetCheckbooks(){
         DTOIntFilterCheckbooks filter = new DTOIntFilterCheckbooks();
-        List<DTOIntCheckbook> book = new ArrayList<DTOIntCheckbook>();
+        DTOIntCheckbook book = new DTOIntCheckbook();
 
         when(txGetCheckbook.invoke(any(DTOIntFilterCheckbooks.class))).thenReturn(book);
 
-        List<DTOIntCheckbook> result = dao.getCheckbooks(filter);
+        DTOIntCheckbook result = dao.getCheckbook(filter);
         assertNotNull(result);
     }
 }

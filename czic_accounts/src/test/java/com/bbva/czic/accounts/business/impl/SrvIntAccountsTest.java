@@ -333,7 +333,7 @@ public class SrvIntAccountsTest extends SpringContextBbvaTest {
 	public void testGetCheckbooksInvalidFilter(){
 		final DTOIntFilterCheckbooks chkbook = new DTOIntFilterCheckbooks();
 
-		srv.getCheckbooks(chkbook);
+		srv.getCheckbook(chkbook);
 	}
 
 	@Test(expected = BusinessServiceException.class)
@@ -342,7 +342,7 @@ public class SrvIntAccountsTest extends SpringContextBbvaTest {
 		chkbook.setId(dataFactory.getNumberText(20));
 		chkbook.setIdAccount(dataFactory.getNumberText(18) + "AA");
 
-		srv.getCheckbooks(chkbook);
+		srv.getCheckbook(chkbook);
 	}
 
 	@Test(expected = BusinessServiceException.class)
@@ -351,7 +351,7 @@ public class SrvIntAccountsTest extends SpringContextBbvaTest {
 		chkbook.setId(dataFactory.getNumberText(18) + "AA");
 		chkbook.setIdAccount(dataFactory.getNumberText(20));
 
-		srv.getCheckbooks(chkbook);
+		srv.getCheckbook(chkbook);
 	}
 
 	@Test(expected = BusinessServiceException.class)
@@ -360,21 +360,21 @@ public class SrvIntAccountsTest extends SpringContextBbvaTest {
 		chkbook.setId(dataFactory.getNumberText(20));
 		chkbook.setIdAccount(dataFactory.getNumberText(20));
 
-		when(accountsDAO.getCheckbooks(any(DTOIntFilterCheckbooks.class))).thenThrow(bsn);
+		when(accountsDAO.getCheckbook(any(DTOIntFilterCheckbooks.class))).thenThrow(bsn);
 
-		srv.getCheckbooks(chkbook);
+		srv.getCheckbook(chkbook);
 	}
 
 	@Test
 	public void testGetCheckbooks(){
 		final DTOIntFilterCheckbooks chkbook = new DTOIntFilterCheckbooks();
-		final List<DTOIntCheckbook> book = new ArrayList<DTOIntCheckbook>();
+		final DTOIntCheckbook book = new DTOIntCheckbook();
 		chkbook.setId(dataFactory.getNumberText(20));
 		chkbook.setIdAccount(dataFactory.getNumberText(20));
 
-		when(accountsDAO.getCheckbooks(any(DTOIntFilterCheckbooks.class))).thenReturn(book);
+		when(accountsDAO.getCheckbook(any(DTOIntFilterCheckbooks.class))).thenReturn(book);
 
-		List<DTOIntCheckbook> result = srv.getCheckbooks(chkbook);
+		DTOIntCheckbook result = srv.getCheckbook(chkbook);
 
 		assertNotNull(result);
 	}

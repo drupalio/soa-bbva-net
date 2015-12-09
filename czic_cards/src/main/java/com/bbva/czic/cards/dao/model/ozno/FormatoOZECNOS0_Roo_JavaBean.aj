@@ -4,7 +4,6 @@
 package com.bbva.czic.cards.dao.model.ozno;
 
 import java.lang.String;
-import java.math.BigDecimal;
 
 privileged aspect FormatoOZECNOS0_Roo_JavaBean {
     
@@ -16,11 +15,11 @@ privileged aspect FormatoOZECNOS0_Roo_JavaBean {
         this.categor = categor;
     }
     
-    public BigDecimal FormatoOZECNOS0.getValcate() {
+    public String FormatoOZECNOS0.getValcate() {
         return this.valcate;
     }
     
-    public void FormatoOZECNOS0.setValcate(BigDecimal valcate) {
+    public void FormatoOZECNOS0.setValcate(String valcate) {
         this.valcate = valcate;
     }
     

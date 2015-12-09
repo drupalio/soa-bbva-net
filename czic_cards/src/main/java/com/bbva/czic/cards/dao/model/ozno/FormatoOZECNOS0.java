@@ -1,7 +1,5 @@
 package com.bbva.czic.cards.dao.model.ozno;
 
-import java.math.BigDecimal;
-
 import com.bbva.jee.arq.spring.core.host.Campo;
 import com.bbva.jee.arq.spring.core.host.TipoCampo;
 import com.bbva.jee.arq.spring.core.host.Formato;
@@ -29,9 +27,9 @@ public class FormatoOZECNOS0 {
 	private String categor;
 	
 	/**
-	 * <p>Campo <code>VALCATE</code>, &iacute;ndice: <code>2</code>, tipo: <code>DECIMAL</code>
+	 * <p>Campo <code>VALCATE</code>, &iacute;ndice: <code>2</code>, tipo: <code>ALFANUMERICO</code>
 	 */
-	@Campo(indice = 2, nombre = "VALCATE", tipo = TipoCampo.DECIMAL, longitudMinima = 17, longitudMaxima = 17, decimales = 2)
-	private BigDecimal valcate;
+	@Campo(indice = 2, nombre = "VALCATE", tipo = TipoCampo.ALFANUMERICO, longitudMinima = 17, longitudMaxima = 17)
+	private String valcate;
 	
 }

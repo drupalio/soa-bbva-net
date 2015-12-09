@@ -132,12 +132,12 @@ public class AccountsMapperTest extends SpringContextBbvaTest {
 	@Test
 	public void testMapCheckbooks(){
 
-		final List<DTOIntCheckbook> dtoIntCheckbook = mockDtoIntCheckbookList();
+		final DTOIntCheckbook dtoIntCheckbook = mockDtoIntCheckbook();
 
-		final List<Checkbook> checkbook = accountsMapper.mapCheckbooks(dtoIntCheckbook);
+		final Checkbook checkbook = accountsMapper.mapCheckbooks(dtoIntCheckbook);
 
 		assertNotNull(checkbook);
-		assertNotNull(checkbook.get(0).getId());
+		assertNotNull(checkbook.getId());
 	}
 
 	@Test
