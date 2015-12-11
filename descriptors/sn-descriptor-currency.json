@@ -1,0 +1,38 @@
+{
+  "bbva" : {
+    "uuaa" : "czic",
+    "remoteType" : "RESTFUL"
+  },
+  "dtos" : {
+    "Currency" : {
+      "#metadata" : {
+        "dtoPackage" : "com.bbva.czic.dto.net.currency"
+      },
+      "Id" : {
+        "type" : "String",
+        "isKeyField" : true,
+        "description" : "Identificador del pago",
+        "required" : true
+      }
+    }
+  },
+  "sn" : {
+    "targetDto" : "Currency",
+    "logicalId" : "currency",
+    "registryId" : "SN123456789",
+    "version" : "V01",
+    "description" : "SN Customer",
+    "smcs" : {
+      "get" : {
+        "all" : [ {
+          "targetDto" : "Currency",
+          "logicalId" : "listCurrencies",
+          "registryId" : "SMC234567890",
+          "description" : "Operación que retorna todos los tipos de monedas o divisas que hay (COP-Peso colombiano,EUR-Euro...etc)",
+          "notes" : "Operación que retorna todos los tipos de monedas o divisas que hay (COP-Peso colombiano,EUR-Euro...etc)",
+          "gceErrors" : [ "aliasGCE1", "aliasGCE2" ]
+        } ]
+      }
+    }
+  }
+}
