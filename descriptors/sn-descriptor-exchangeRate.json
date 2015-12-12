@@ -1,0 +1,71 @@
+{
+  "bbva" : {
+    "uuaa" : "czic",
+    "remoteType" : "RESTFUL"
+  },
+  "dtos" : {
+    "currency" : {
+      "#metadata" : {
+        "dtoPackage" : "com.bbva.czic.dto.net.Currency"
+      }
+    },
+    "customer" : {
+      "#metadata" : {
+        "dtoPackage" : "com.bbva.czic.dto.net.Customer"
+      }
+    },
+    "exchangeRateValues" : {
+      "purchaseValue" : {
+        "type" : "arq.MONEY",
+        "description" : "Valor del tipo de cambio para la compra"
+      },
+      "saleValue" : {
+        "type" : "arq.MONEY",
+        "description" : "Valor del tipo de cambio para la venta"
+      }
+    },
+    "exchangeRateAssessments" : {
+      "type" : {
+        "type" : "String",
+        "description" : "Tipo de tasa"
+      },
+      "value" : {
+        "type" : "Integer",
+        "description" : "Valor de la tasa"
+      }
+    },
+    "exchangeRate" : {
+      "exchangeRateCurrency" : {
+        "type" : "dto.currency",
+        "description" : "Moneda del tipo de cambio"
+      },
+      "exchangeRateAssessments" : {
+        "type" : "List<dto.exchangeRateAssessments>",
+        "description" : "ValoraciÃ³n asociada al cÃ¡lculo o tasaciÃ³n del tipo de cambio"
+      },
+      "exchangeRateValues" : {
+        "type" : "dto.exchangeRateValues",
+        "description" : "Detalle del tipo de cambio"
+      }
+    }
+  },
+  "sn" : {
+    "targetDto" : "exchangeRate",
+    "logicalId" : "exchangeRate",
+    "registryId" : "SN201500333",
+    "version" : "V01",
+    "description" : "SN exchangeRate",
+    "smcs" : {
+      "get" : {
+        "all" : [ {
+          "targetDto" : "exchangeRate",
+          "logicalId" : "getExchangeRate",
+          "registryId" : "SMC201500334",
+          "description" : "Operación que obtiene las tasas vigentes en el momento o las tasas de un avance de operación",
+          "notes" : "Consulta de tasas",
+          "gceErrors" : [ "aliasGCE1", "aliasGCE2" ]
+        } ]
+      }
+    }
+  }
+}
