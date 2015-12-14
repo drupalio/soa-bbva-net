@@ -14,13 +14,56 @@ public class CurrencyDAOImpl  implements CurrencyDAO {
     @Override
     public List<DTOIntCurrency> listCurrencies() {
         List<DTOIntCurrency> dtoIntCurrencyList=new ArrayList<DTOIntCurrency>();
-        String currencyString="COP";
-        for(int i=0;i<10;i++){
-            DTOIntCurrency dtoIntCurrency=new DTOIntCurrency();
-            dtoIntCurrency.setId(String.valueOf(i));
-            dtoIntCurrency.setName(currencyString + i);
-            dtoIntCurrencyList.add(dtoIntCurrency);
-        }
+        DTOIntCurrency dtoIntCurrency=new DTOIntCurrency();
+        dtoIntCurrency.setId("CAD");
+        dtoIntCurrency.setName("DÓLAR CANADIENSE");
+        dtoIntCurrencyList.add(dtoIntCurrency);
+
+        dtoIntCurrency=new DTOIntCurrency();
+        dtoIntCurrency.setId("CHF");
+        dtoIntCurrency.setName("FRANCO SUIZO");
+        dtoIntCurrencyList.add(dtoIntCurrency);
+
+        dtoIntCurrency=new DTOIntCurrency();
+        dtoIntCurrency.setId("CNY");
+        dtoIntCurrency.setName("YUAN");
+        dtoIntCurrencyList.add(dtoIntCurrency);
+
+        dtoIntCurrency=new DTOIntCurrency();
+        dtoIntCurrency.setId("COP");
+        dtoIntCurrency.setName("PESO COLOMBIANO");
+        dtoIntCurrencyList.add(dtoIntCurrency);
+
+        dtoIntCurrency=new DTOIntCurrency();
+        dtoIntCurrency.setId("EUR");
+        dtoIntCurrency.setName("EURO");
+        dtoIntCurrencyList.add(dtoIntCurrency);
+
+        dtoIntCurrency=new DTOIntCurrency();
+        dtoIntCurrency.setId("GBP");
+        dtoIntCurrency.setName("LIBRA ESTERLINA");
+        dtoIntCurrencyList.add(dtoIntCurrency);
+
+        dtoIntCurrency=new DTOIntCurrency();
+        dtoIntCurrency.setId("JPY");
+        dtoIntCurrency.setName("YEN JAPONÉS");
+        dtoIntCurrencyList.add(dtoIntCurrency);
+
+        dtoIntCurrency=new DTOIntCurrency();
+        dtoIntCurrency.setId("MXN");
+        dtoIntCurrency.setName("PESO MEXICANO");
+        dtoIntCurrencyList.add(dtoIntCurrency);
+
+        dtoIntCurrency=new DTOIntCurrency();
+        dtoIntCurrency.setId("SEK");
+        dtoIntCurrency.setName("CORONA SUECA");
+        dtoIntCurrencyList.add(dtoIntCurrency);
+
+        dtoIntCurrency=new DTOIntCurrency();
+        dtoIntCurrency.setId("USD");
+        dtoIntCurrency.setName("DÓLAR AMERICANO");
+        dtoIntCurrencyList.add(dtoIntCurrency);
+
         return dtoIntCurrencyList;
     }
 }

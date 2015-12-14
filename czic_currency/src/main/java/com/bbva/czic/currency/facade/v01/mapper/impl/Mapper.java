@@ -1,6 +1,7 @@
 package com.bbva.czic.currency.facade.v01.mapper.impl;
 
 import com.bbva.czic.currency.facade.v01.mapper.IMapper;
+import com.wordnik.swagger.annotations.Api;
 import org.springframework.beans.BeanUtils;
 
 import com.bbva.czic.dto.net.Currency;
@@ -9,6 +10,7 @@ import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
+
 
 @Component(value = "CurrencyMapper")
 public class Mapper implements IMapper{

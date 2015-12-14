@@ -42,8 +42,6 @@ import java.util.List;
 @Api(value="/currency/V01",description="SN Customer")
 @Produces({ MediaType.APPLICATION_JSON})
 @Service
-
-	
 public class SrvCurrencyV01 implements ISrvCurrencyV01, com.bbva.jee.arq.spring.core.servicing.utils.ContextAware {
 
 	private static I18nLog log = I18nLogFactory.getLogI18n(SrvCurrencyV01.class,"META-INF/spring/i18n/log/mensajesLog");
@@ -72,10 +70,8 @@ public class SrvCurrencyV01 implements ISrvCurrencyV01, com.bbva.jee.arq.spring.
 	ISrvIntCurrency srvIntCurrency;
 
 	
-	@ApiOperation(value="Operacion que retorna todos los tipos de monedas o divisas que hay (COP-Peso colombiano,EUR-Euro...etc)", notes="Operaci�n que retorna todos los tipos de monedas o divisas que hay (COP-Peso colombiano,EUR-Euro...etc)",response=List.class)
+	@ApiOperation(value="Operacion que retorna todos los tipos de monedas o divisas que hay (COP-Peso colombiano,EUR-Euro...etc)", notes="Operacion que retorna todos los tipos de monedas o divisas que hay (COP-Peso colombiano,EUR-Euro...etc)",response=List.class)
 	@ApiResponses(value = {
-		@ApiResponse(code = -1, message = "aliasGCE1"),
-		@ApiResponse(code = -1, message = "aliasGCE2"),
 		@ApiResponse(code = 200, message = "Found Sucessfully", response=Response.class),
 		@ApiResponse(code = 400, message = "Wrong Parameter"),
 		@ApiResponse(code = 500, message = "Technical Error")})
