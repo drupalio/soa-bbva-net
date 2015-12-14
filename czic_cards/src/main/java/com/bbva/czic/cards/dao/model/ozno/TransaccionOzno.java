@@ -5,8 +5,8 @@ import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
 
 import com.bbva.jee.arq.spring.core.host.ExcepcionTransaccion;
-import com.bbva.jee.arq.spring.core.host.InvocadorTransaccion;
 import com.bbva.jee.arq.spring.core.host.ServicioTransacciones;
+import com.bbva.jee.arq.spring.core.host.InvocadorTransaccion;
 
 /**
  * Invocador de la transacci&oacute;n <code>OZNO</code>
@@ -21,22 +21,17 @@ public class TransaccionOzno implements
 
 	@Autowired
 	private ServicioTransacciones servicioTransacciones;
-
+	
 	@Override
-	public RespuestaTransaccionOzno invocar(PeticionTransaccionOzno transaccion)
-			throws ExcepcionTransaccion {
-		return servicioTransacciones.invocar(PeticionTransaccionOzno.class,
-				RespuestaTransaccionOzno.class, transaccion);
+	public RespuestaTransaccionOzno invocar(PeticionTransaccionOzno transaccion) throws ExcepcionTransaccion {
+		return servicioTransacciones.invocar(PeticionTransaccionOzno.class, RespuestaTransaccionOzno.class, transaccion);
 	}
-
+	
 	@Override
-	public RespuestaTransaccionOzno invocarCache(
-			PeticionTransaccionOzno transaccion) throws ExcepcionTransaccion {
-		return servicioTransacciones.invocar(PeticionTransaccionOzno.class,
-				RespuestaTransaccionOzno.class, transaccion);
+	public RespuestaTransaccionOzno invocarCache(PeticionTransaccionOzno transaccion) throws ExcepcionTransaccion {
+		return servicioTransacciones.invocar(PeticionTransaccionOzno.class, RespuestaTransaccionOzno.class, transaccion);
 	}
-
+	
 	@Override
-	public void vaciarCache() {
-	}
+	public void vaciarCache() {}	
 }

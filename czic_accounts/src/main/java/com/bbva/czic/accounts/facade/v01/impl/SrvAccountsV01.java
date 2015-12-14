@@ -192,7 +192,7 @@ public class SrvAccountsV01 implements ISrvAccountsV01,
 	@Path("/{accountId}/checkbooks/{checkbookId}")
 	@ElementClass(response = List.class)
 	@SMC(registryID = "SMCCO1400013", logicalID = "getCheckbooks")
-	public List<Checkbook> getCheckbook(
+	public Checkbook getCheckbook(
 			@ApiParam(value = "Checkbooks identifier") @PathParam("checkbookId") String checkbookId,
 			@ApiParam(value = "account identifier") @PathParam("accountId") String accountId) {
 		// 2. Mapping to DTOIntCheckbook
@@ -201,7 +201,7 @@ public class SrvAccountsV01 implements ISrvAccountsV01,
 
 		// 3. Invoke SrvIntAccount and Mapping to canonical DTO
 		return iAccountsMapper.mapCheckbooks(srvIntAccounts
-				.getCheckbooks(dtointCheckbook));
+				.getCheckbook(dtointCheckbook));
 	}
 
 	@Override

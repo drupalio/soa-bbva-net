@@ -91,7 +91,7 @@ public class SrvGlobalPositionV01 implements ISrvGlobalPositionV01,
 		log.info("SrvGlobalPositionV01.getExtractGlobalBalance : HOT SWAP");
 
 		// 1. Validate filter FIQL
-		new FiqlValidator(filter).hasEq(PRODUCT_TYPE).validateIfExist();
+		//new FiqlValidator(filter).hasEq(PRODUCT_TYPE).validateIfExist();
 
 		// 2. Mapping to DTOIntFilter
 		final DTOIntProductFilter filterProduct = globalPositionMapper.getDTOIntFilter(filter);

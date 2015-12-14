@@ -39,7 +39,7 @@ public class TransaccionOznaMock implements InvocadorTransaccion<PeticionTransac
 		salida.setTipprod("AH");
 
 		salida.setIdcheq0(dataFactory.getNumberText(10));
-		salida.setIdcheq1(dataFactory.getNumberText(20));
+		salida.setIdcheq1("00000000000000000");
 		salida.setIdcheq2(dataFactory.getNumberText(20));
 		salida.setIdcheq3(dataFactory.getNumberText(20));
 		salida.setIdcheq4(dataFactory.getNumberText(20));

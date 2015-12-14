@@ -14,6 +14,7 @@
     <!--url>http://maven.apache.org</url-->
     <modules>
         <module>czic_exchangeRate</module>
+        <module>czic_currency</module>
         <module>czic_net</module>
         <module>czic_loan</module>
         <module>czic</module>

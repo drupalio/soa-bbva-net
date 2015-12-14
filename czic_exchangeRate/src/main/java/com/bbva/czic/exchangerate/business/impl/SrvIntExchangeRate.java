@@ -27,7 +27,7 @@ public class SrvIntExchangeRate implements ISrvIntExchangeRate {
 
 	@Override
 	public DTOIntExchangeRate getExchangeRate(DTOIntExchangeRateFilter dtoIntExchangeRateFilter) {
-		// 1. Validate DtoIntFilterAccount
+		// 1. Validate DTOIntExchangeRateFilter
 		DtoValidator.validate(dtoIntExchangeRateFilter);
 		// 2. Get response
 		final DTOIntExchangeRate result = exchangeRateDAO.getExchangeRate(dtoIntExchangeRateFilter);

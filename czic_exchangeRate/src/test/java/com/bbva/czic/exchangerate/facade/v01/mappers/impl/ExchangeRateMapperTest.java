@@ -59,9 +59,16 @@ public class ExchangeRateMapperTest extends SpringContextBbvaTest {
 	}
 
 	@Test
-	public void testExchangeRateFilter() {
+	public void testExchangeRatePurchaseFilter() {
 		DTOIntExchangeRateFilter exchangeRateFilter = exchangeRateMapper.map("USD", "1026183049",
 				new BigDecimal(100000), null);
+		Assert.assertNotNull(exchangeRateFilter);
+	}
+
+	@Test
+	public void testExchangeRateSaleFilter() {
+		DTOIntExchangeRateFilter exchangeRateFilter = exchangeRateMapper.map("USD", "1026183049", null, new BigDecimal(
+				100000));
 		Assert.assertNotNull(exchangeRateFilter);
 	}
 }

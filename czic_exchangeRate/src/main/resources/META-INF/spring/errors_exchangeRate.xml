@@ -6,4 +6,15 @@
 		<message lang="en">ExchangeRate not found.</message>
 	</error-definition>
 	-->
+	
+	<error-definition severity="ERROR" alias="wrongParameters" code="1" servicing:http-status="400">
+        <message>Executives not found.</message>
+        <message lang="en">Executives not found.</message>
+        <message lang="es">Parámetros inválidos</message>
+    </error-definition>
+    <error-definition severity="FATAL" alias="technicalError" code="4" servicing:http-status="500">
+        <message>Technical error.</message>
+        <message lang="en">Technical error.</message>
+        <message lang="es">Error Tecnico.</message>
+    </error-definition>
 </error-definitions>

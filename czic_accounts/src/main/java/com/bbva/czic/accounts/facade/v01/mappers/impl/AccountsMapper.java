@@ -203,33 +203,30 @@ public class AccountsMapper extends AbstractBbvaConfigurableMapper implements
 	}
 
 	@Override
-	public List<Checkbook> mapCheckbooks(List<DTOIntCheckbook> intCheckbook) {
+	public Checkbook mapCheckbooks(DTOIntCheckbook intCheckbook) {
 
-		final List<Checkbook> checkbookList = new ArrayList<Checkbook>();
 		Checkbook checkbook = new Checkbook();
-		for (DTOIntCheckbook item : intCheckbook) {
 
-			checkbook.setFirstCheck(item.getFirstCheck() + "");
-			checkbook.setLastCheck(item.getLastCheck());
-			checkbook.setTotalCheck(item.getTotalCheck());
+			checkbook.setFirstCheck(intCheckbook.getFirstCheck() + "");
+			checkbook.setLastCheck(intCheckbook.getLastCheck());
+			checkbook.setTotalCheck(intCheckbook.getTotalCheck());
 
-			if (item.getRequestDate() != null) {
+			if (intCheckbook.getRequestDate() != null) {
 				Calendar requestDate = Calendar.getInstance();
-				requestDate.setTime(item.getRequestDate());
+				requestDate.setTime(intCheckbook.getRequestDate());
 				checkbook.setRequestDate(requestDate);
 			}
 
-			if (item.getDeliveryDate() != null) {
+			if (intCheckbook.getDeliveryDate() != null) {
 				Calendar deliveryDate = Calendar.getInstance();
-				deliveryDate.setTime(item.getDeliveryDate());
+				deliveryDate.setTime(intCheckbook.getDeliveryDate());
 				checkbook.setDeliveryDate(deliveryDate);
 			}
 
-			checkbook.setActualState(item.getActualState());
+			checkbook.setActualState(intCheckbook.getActualState());
 
-			checkbookList.add(checkbook);
-	}
-		return checkbookList;
+
+		return checkbook;
 	}
 
 

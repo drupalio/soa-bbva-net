@@ -25,18 +25,18 @@ public class TransaccionOznoMock implements InvocadorTransaccion<PeticionTransac
 		final DataFactory dataFactory = new DataFactory();
 
 		String[] categories = {
-				"OCIO                               ",
-				"REGALOS, LIBROS, DISCOS            ",
-				"COMERCIO BASICO                    ",
-				"ROPA,CALZADO Y PERSONAL            ",
-				"VARIOS                             ",
-				"COMPRAS POR CANALES                "
+				"ACIO                               ",
+				"AEGALOS, LIBROS, DISCOS            ",
+				"AOMERCIO BASICO                    ",
+				"AOPA,CALZADO Y PERSONAL            ",
+				"AARIOS                             ",
+				"AOMPRAS POR CANALES                "
 		};
 
 		for(String cat : categories){
 			FormatoOZECNOS0 formatoSalida = new FormatoOZECNOS0();
 			formatoSalida.setCategor(cat);
-			formatoSalida.setValcate(new BigDecimal(dataFactory.getNumberBetween(100000,200000)));
+			formatoSalida.setValcate("1234567890");
 			CopySalida copySalida = new CopySalida();
 			copySalida.setCopy(formatoSalida);
 			respuesta.getCuerpo().getPartes().add(copySalida);
