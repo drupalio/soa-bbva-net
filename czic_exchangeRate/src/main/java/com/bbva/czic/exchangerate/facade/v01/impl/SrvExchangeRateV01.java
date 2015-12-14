@@ -75,9 +75,9 @@ public class SrvExchangeRateV01 implements ISrvExchangeRateV01,
 	@GET
 	@SMC(registryID = "SMC201500334", logicalID = "getExchangeRate")
 	public ExchangeRate getExchangeRate(
-			@ApiParam(value = "rate currency") @QueryParam("$exchangeRateCurrency") String exchangeRateCurrency,
-			@ApiParam(value = "filter param") @QueryParam("$customer.id") String customerId,
-			@ApiParam(value = "fields param") @QueryParam("$exchangeRateValues.purchaseValue.amount") BigDecimal purchaseValueAmount,
+			@ApiParam(value = "rate currency") @QueryParam("exchangeRateCurrency") String exchangeRateCurrency,
+			@ApiParam(value = "filter param") @QueryParam("customer.id") String customerId,
+			@ApiParam(value = "fields param") @QueryParam("exchangeRateValues.purchaseValue.amount") BigDecimal purchaseValueAmount,
 			@ApiParam(value = "expands param") @QueryParam("exchangeRateValues.saleValue.amount") BigDecimal saleValueAmount) {
 
 		// 2. Mapping to DTOIntFilter

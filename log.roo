@@ -286,3 +286,9 @@ sarc createSN --descriptorFile sn-descriptor-exchangeRate.json
 sarc completeSNDescriptor --descriptorFile sn-descriptor-exchangeRate.json
 sarc createSN --descriptorFile sn-descriptor-exchangeRate.json
 sarc createSN --descriptorFile sn-descriptor-exchangeRate.json
+// ServicesArchitecture log opened at 2015-12-14 14:15:38
+sarc generatePackage
+exit
+// ServicesArchitecture log closed at 2015-12-14 14:19:56
+// ServicesArchitecture log opened at 2015-12-14 14:21:06
+sarc generatePackage
