@@ -4,6 +4,9 @@ package com.bbva.czic.currency.business.dto;
 
 import javax.validation.constraints.NotNull;
 
+/**
+ * Clase DTO interna que tiene solo los atributos que seran manejados durante la ejecución del servicio listCurrencies
+ */
 public class DTOIntCurrency {
 
     public final static long serialVersionUID = 1L;

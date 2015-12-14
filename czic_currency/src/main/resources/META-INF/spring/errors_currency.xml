@@ -6,4 +6,30 @@
 		<message lang="en">Currency not found.</message>
 	</error-definition>
 	-->
+
+	<error-definition severity="FATAL" alias="wrongParameters" code="1" servicing:http-status="400">
+		<message>Wrong parameters.</message>
+		<message lang="en">Wrong parameters.</message>
+		<message lang="es">Parametros inválidos.</message>
+	</error-definition>
+
+	<error-definition severity="FATAL" alias="mandatoryParametersMissing" code="3" servicing:http-status="400">
+		<message>Missing Attributes</message>
+		<message lang="en">Missing Attributes</message>
+		<message lang="es">Artibutos obligatorios vacíos.</message>
+	</error-definition>
+
+	<error-definition severity="FATAL" alias="technicalError" code="4" servicing:http-status="500">
+		<message>Technical error.</message>
+		<message lang="en">Technical error.</message>
+		<message lang="es">Error Tecnico.</message>
+	</error-definition>
+
+	<error-definition severity="FATAL" alias="serviceUnavailable" code="4" servicing:http-status="500">
+		<message>Technical error.</message>
+		<message lang="en">Technical error.</message>
+		<message lang="es">Error Tecnico.</message>
+	</error-definition>
+
+
 </error-definitions>

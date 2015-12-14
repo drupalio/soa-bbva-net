@@ -48,38 +48,6 @@ public class SrvIntCurrencyTest {
 		MockitoAnnotations.initMocks(this);
 	}
 
-	@Test(expected=BusinessServiceException.class)
-	public void testGetCurrencysWithoutID() {
-		// Setup data
-		final List<DTOIntCurrency> dtoIntCurrencyList = new ArrayList<DTOIntCurrency>();
-		DTOIntCurrency dtoIntCurrency=new DTOIntCurrency();
-		dtoIntCurrency.setName("COP");
-		dtoIntCurrencyList.add(dtoIntCurrency);
-
-		// Setup expectation
-		when(currencyDAO.listCurrencies()).thenReturn(dtoIntCurrencyList);
-
-		// SUT execution
-		srv.listCurrencies();
-
-	}
-
-	@Test(expected=BusinessServiceException.class)
-	public void testGetCurrencysWithoutName() {
-		// Setup data
-		final List<DTOIntCurrency> dtoIntCurrencyList = new ArrayList<DTOIntCurrency>();
-		DTOIntCurrency dtoIntCurrency=new DTOIntCurrency();
-		dtoIntCurrency.setId("ID");
-		dtoIntCurrencyList.add(dtoIntCurrency);
-
-		// Setup expectation
-		when(currencyDAO.listCurrencies()).thenReturn(dtoIntCurrencyList);
-
-		// SUT execution
-		srv.listCurrencies();
-
-	}
-
 	@Test
 	public void testGetCurrencysOK() {
 		// Setup data
