@@ -1,0 +1,133 @@
+{
+  "bbva" : {
+    "uuaa" : "czic",
+    "remoteType" : "RESTFUL"
+  },
+  "dtos" : {
+    "person" : {
+      "name" : {
+        "type" : "String",
+        "description" : "Nombre de la persona o Razon social de la empresa"
+      },
+      "identityDocument" : {
+        "type" : "List<dto.identityDocument>",
+        "description" : "Listado de documentos utilizados para identificar una persona"
+      }
+    },
+    "identityDocument" : {
+      "number" : {
+        "type" : "String",
+        "description" : "Documento utilizado para identificar una persona"
+      }
+    },
+    "bank" : {
+      "name" : {
+        "type" : "String",
+        "description" : "Descripcion del banco"
+      },
+      "bicCode" : {
+        "type" : "String",
+        "description" : "Codigo del banco necesario para hacer transferencias entre bancos fuera de la Union Europea"
+      }
+    },
+    "country" : {
+      "#metadata" : {
+        "dtoPackage" : "com.bbva.czic.dto.net.Country"
+      }
+    },
+    "product" : {
+      "#metadata" : {
+        "dtoPackage" : "com.bbva.czic.dto.net.Product"
+      }
+    },
+    "address" : {
+      "city" : {
+        "type" : "String",
+        "description" : "Ciudad de la direccion"
+      }
+    },
+    "contract" : {
+      "#metadata" : {
+        "dtoPackage" : "com.bbva.czic.dto.net.Contract"
+      },
+      "bank" : {
+        "type" : "dto.bank",
+        "description" : "Entidad bancaria a la cual pertenece el contrato"
+      },
+      "country" : {
+        "type" : "dto.country",
+        "description" : "PaÃ­s donde se realiza el contrato"
+      },
+      "address" : {
+        "type" : "dto.address",
+        "description" : "Ciudad de la direccion"
+      },
+      "product" : {
+        "type" : "dto.product",
+        "description" : "Producto asociado al contrato"
+      },
+      "participants" : {
+        "type" : "List<dto.person>",
+        "description" : "Listado de intervinientes del contrato con su relacion de intervencion"
+      }
+    },
+    "exchangeRate" : {
+      "#metadata" : {
+        "dtoPackage" : "com.bbva.czic.dto.net.ExchangeRate"
+      }
+    },
+    "document" : {
+      "id" : {
+        "type" : "String",
+        "description" : "Identificador unico del documento"
+      }
+    },
+    "externalReference" : {
+      "id" : {
+        "type" : "String",
+        "description" : "Identificador de la referencia externa"
+      },
+      "value" : {
+        "type" : "String",
+        "description" : "Valor de la referencia externa"
+      }
+    },
+    "internationalContractTransfer" : {
+      "intermediaryBankAccount" : {
+        "type" : "dto.contract",
+        "description" : "Cuenta que sirve como intermediario cuando el banco origen no tiene conexiÃ³n real con el banco destino"
+      },
+      "exchangeRate" : {
+        "type" : "dto.exchangeRate",
+        "description" : "Datos de las tasas correspondientes a la transaccion internacional"
+      },
+      "formularyTransfer" : {
+        "type" : "dto.document",
+        "description" : "Documento del formulario cambiario"
+      },
+      "references" : {
+        "type" : "List<dto.externalReference>",
+        "description" : "Referencias de la transaccion internacional"
+      }
+    }
+  },
+  "sn" : {
+    "targetDto" : "internationalContractTransfer",
+    "logicalId" : "internationalContractTransfer",
+    "registryId" : "SN201500333",
+    "version" : "V01",
+    "description" : "SN internationalContractTransfer",
+    "smcs" : {
+      "get" : {
+        "all" : [ {
+          "targetDto" : "internationalContractTransfer",
+          "logicalId" : "listInternationalContractTransfer",
+          "registryId" : "SMC201500334",
+          "description" : "Operacion que lista todas las transacciones internacionales del cliente",
+          "notes" : "Consulta de operaciones",
+          "gceErrors" : [ "aliasGCE1", "aliasGCE2" ]
+        }]
+      }
+    }
+  }
+}

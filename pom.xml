@@ -13,6 +13,7 @@
     <version>1.4.0</version>
     <!--url>http://maven.apache.org</url-->
     <modules>
+        <module>czic_internationalContractTransfer</module>
         <module>czic_exchangeRate</module>
         <module>czic_currency</module>
         <module>czic_net</module>

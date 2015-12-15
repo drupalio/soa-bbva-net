@@ -292,3 +292,28 @@ exit
 // ServicesArchitecture log closed at 2015-12-14 14:19:56
 // ServicesArchitecture log opened at 2015-12-14 14:21:06
 sarc generatePackage
+sarc generatePackage
+// ServicesArchitecture log opened at 2015-12-14 14:45:59
+sarc generatePackage
+sarc generatePackage
+sarc generatePackage
+exit
+// ServicesArchitecture log closed at 2015-12-15 10:07:36
+// ServicesArchitecture log opened at 2015-12-15 10:08:19
+sarc createSN --descriptorFile sn-descriptor-internationalContractTransfer.json
+sarc createSN --descriptorFile sn-descriptor-internationalContractTransfer.json
+sarc createSN --descriptorFile sn-descriptor-internationalContractTransfer.json
+sarc createSN --descriptorFile sn-descriptor-internationalContractTransfer.json
+sarc completeSNDescriptor --descriptorFile sn-descriptor-internationalContractTransfer.json
+sarc completeSNDescriptor --descriptorFile sn-descriptor-internationalContractTransfer.json
+sarc completeSNDescriptor --descriptorFile sn-descriptor-internationalContractTransfer.json
+sarc completeSNDescriptor --descriptorFile sn-descriptor-internationalContractTransfer.json
+sarc completeSNDescriptor --descriptorFile sn-descriptor-internationalContractTransfer.json
+sarc completeSNDescriptor --descriptorFile sn-descriptor-internationalContractTransfer.json
+sarc completeSNDescriptor --descriptorFile sn-descriptor-internationalContractTransfer.json
+sarc completeSNDescriptor --descriptorFile sn-descriptor-internationalContractTransfer.json
+sarc completeSNDescriptor --descriptorFile sn-descriptor-internationalContractTransfer.json
+sarc completeSNDescriptor --descriptorFile sn-descriptor-internationalContractTransfer.json
+sarc completeSNDescriptor --descriptorFile sn-descriptor-internationalContractTransfer.json
+sarc createSN --descriptorFile sn-descriptor-internationalContractTransfer.json
+sarc createSN --descriptorFile sn-descriptor-internationalContractTransfer.json

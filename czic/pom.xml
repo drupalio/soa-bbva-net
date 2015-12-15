@@ -376,6 +376,11 @@
             <artifactId>czic_currency</artifactId>
             <version>1.0.0</version>
         </dependency>
+    	<dependency>
+            <groupId>com.bbva.czic.internationalcontracttransfer</groupId>
+            <artifactId>czic_internationalContractTransfer</artifactId>
+            <version>1.0.0</version>
+        </dependency>
     </dependencies>
 	<build>
 		<plugins>
