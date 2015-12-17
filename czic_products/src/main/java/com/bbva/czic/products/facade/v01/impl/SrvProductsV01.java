@@ -49,11 +49,10 @@ import com.wordnik.swagger.annotations.ApiResponses;
 @Api(value = "/products/V01", description = "Products REST service.")
 @Produces({ MediaType.APPLICATION_JSON })
 @Service
-public class SrvProductsV01 implements ISrvProductsV01,
-		com.bbva.jee.arq.spring.core.servicing.utils.ContextAware {
+public class SrvProductsV01 implements ISrvProductsV01, com.bbva.jee.arq.spring.core.servicing.utils.ContextAware {
 
-	private static I18nLog log = I18nLogFactory.getLogI18n(
-			SrvProductsV01.class, "META-INF/spring/i18n/log/mensajesLog");
+	private static I18nLog log = I18nLogFactory
+			.getLogI18n(SrvProductsV01.class, "META-INF/spring/i18n/log/mensajesLog");
 
 	public HttpHeaders httpHeaders;
 
@@ -78,9 +77,9 @@ public class SrvProductsV01 implements ISrvProductsV01,
 	@Autowired
 	ISrvIntProducts srvIntProducts;
 
+	@Override
 	@ApiOperation(value = "Operaci�n  que muestra las condiciones de los productos asociados a un cliente", notes = "Operaci�n  que muestra las condiciones de los productos asociados a un cliente", response = Response.class)
-	@ApiResponses(value = {
-			@ApiResponse(code = -1, message = "aliasGCE1"),
+	@ApiResponses(value = { @ApiResponse(code = -1, message = "aliasGCE1"),
 			@ApiResponse(code = -1, message = "aliasGCE2"),
 			@ApiResponse(code = 200, message = "Found Sucessfully", response = Response.class),
 			@ApiResponse(code = 500, message = "Technical Error") })
@@ -88,17 +87,14 @@ public class SrvProductsV01 implements ISrvProductsV01,
 	@Path("/{productId}/conditions")
 	@Produces({ MediaType.APPLICATION_JSON })
 	@SMC(registryID = "SMCCO1400022", logicalID = "getConditions")
-	public Conditions getConditions(
-			@ApiParam(value = "Product identifier") @PathParam("productId") String productId) {
+	public Conditions getConditions(@ApiParam(value = "Product identifier") @PathParam("productId") String productId) {
 		// 1. Validate parameter
 		if (productId == null || productId.trim().isEmpty()) {
-			throw new BusinessServiceException(
-					EnumError.WRONG_PARAMETERS.getAlias());
+			throw new BusinessServiceException(EnumError.WRONG_PARAMETERS.getAlias());
 		}
 
 		// 2. Mapping to DTOIntFilter
-		final DTOIntProduct dtoIntProduct = productsMapper
-				.getDtoIntConditions(productId);
+		final DTOIntProduct dtoIntProduct = productsMapper.getDtoIntConditions(productId);
 
 		// 3. Invoke SrvIntCustomers and Mapping to canonical DTO
 		return productsMapper.map(srvIntProducts.getConditions(dtoIntProduct));
@@ -106,116 +102,97 @@ public class SrvProductsV01 implements ISrvProductsV01,
 
 	@Override
 	@ApiOperation(value = "Listado Extractos", notes = "Listado De Extractos ", response = Response.class)
-	@ApiResponses(value = {
-			@ApiResponse(code = -1, message = "aliasGCE1"),
+	@ApiResponses(value = { @ApiResponse(code = -1, message = "aliasGCE1"),
 			@ApiResponse(code = -1, message = "aliasGCE2"),
 			@ApiResponse(code = 200, message = "Found Sucessfully", response = Response.class),
 			@ApiResponse(code = 500, message = "Technical Error") })
 	@GET
 	@Path("/{productId}/extracts")
 	@SMC(registryID = "SMCCO1500011", logicalID = "listExtracts")
-	public List<Extract> listExtracts(
-			@ApiParam(value = "identifier param") @PathParam("productId") String productId,
+	public List<Extract> listExtracts(@ApiParam(value = "identifier param") @PathParam("productId") String productId,
 			@ApiParam(value = "filter param") @QueryParam("$filter") String filter) {
 
 		// 1. Mapping filter -> DTO
-		DTOIntFilterExtract dtoIntFilterExtract = productsMapper
-				.getDtoIntFilterExtract(productId, filter);
+		DTOIntFilterExtract dtoIntFilterExtract = productsMapper.getDtoIntFilterExtract(productId, filter);
 		// 2. Invoke SrvIntCustomers and Mapping to canonical DTO
-		return productsMapper.mapExtracts(srvIntProducts
-				.listExtracts(dtoIntFilterExtract));
+		return productsMapper.mapExtracts(srvIntProducts.listExtracts(dtoIntFilterExtract));
 	}
-/*
+
+	/*
+	 * @Override
+	 * @ApiOperation(value = "Listado Extractos", notes = "Listado De Extractos ", response = Response.class)
+	 * @ApiResponses(value = {
+	 * @ApiResponse(code = -1, message = "aliasGCE1"),
+	 * @ApiResponse(code = -1, message = "aliasGCE2"),
+	 * @ApiResponse(code = 200, message = "Found Sucessfully", response = Response.class),
+	 * @ApiResponse(code = 500, message = "Technical Error") })
+	 * @GET
+	 * @Path("/{productId}/extracts")
+	 * @SMC(registryID = "SMCCO1500011", logicalID = "listExtracts") public Extract getExtract(
+	 * @ApiParam(value = "identifier param") @PathParam("productId") String productId,
+	 * @ApiParam(value = "filter param") @QueryParam("$filter") String filter) { // 1. Mapping filter -> DTO
+	 * DTOIntFilterExtract dtoIntFilterExtract = productsMapper .getDtoIntFilterExtract(productId, filter); // 2. Invoke
+	 * SrvIntCustomers and Mapping to canonical DTO return productsMapper.mapExtracts(srvIntProducts
+	 * .listExtracts(dtoIntFilterExtract)).get(0); }
+	 */
 	@Override
-	@ApiOperation(value = "Listado Extractos", notes = "Listado De Extractos ", response = Response.class)
-	@ApiResponses(value = {
-			@ApiResponse(code = -1, message = "aliasGCE1"),
+	@ApiOperation(value = "Consulta que trae la informaci�n detallada de un movimiento realizado sobre una cuenta", notes = "Consulta de movimiento", response = Movement.class)
+	@ApiResponses(value = { @ApiResponse(code = -1, message = "aliasGCE1"),
 			@ApiResponse(code = -1, message = "aliasGCE2"),
 			@ApiResponse(code = 200, message = "Found Sucessfully", response = Response.class),
-			@ApiResponse(code = 500, message = "Technical Error") })
-	@GET
-	@Path("/{productId}/extracts")
-	@SMC(registryID = "SMCCO1500011", logicalID = "listExtracts")
-	public Extract getExtract(
-			@ApiParam(value = "identifier param") @PathParam("productId") String productId,
-			@ApiParam(value = "filter param") @QueryParam("$filter") String filter) {
-
-		// 1. Mapping filter -> DTO
-		DTOIntFilterExtract dtoIntFilterExtract = productsMapper
-				.getDtoIntFilterExtract(productId, filter);
-		// 2. Invoke SrvIntCustomers and Mapping to canonical DTO
-		return productsMapper.mapExtracts(srvIntProducts
-				.listExtracts(dtoIntFilterExtract)).get(0);
-	}
-*/
-	@Override
-	@ApiOperation(value="Consulta que trae la informaci�n detallada de un movimiento realizado sobre una cuenta", notes="Consulta de movimiento",response=Movement.class)
-	@ApiResponses(value = {
-			@ApiResponse(code = -1, message = "aliasGCE1"),
-			@ApiResponse(code = -1, message = "aliasGCE2"),
-			@ApiResponse(code = 200, message = "Found Sucessfully", response=Response.class),
 			@ApiResponse(code = 400, message = "Wrong parameters"),
-			@ApiResponse(code = 409, message = "Data not found"),
-			@ApiResponse(code = 500, message = "Technical Error")})
+			@ApiResponse(code = 409, message = "Data not found"), @ApiResponse(code = 500, message = "Technical Error") })
 	@GET
 	@Path("/{productId}/movements/{movementId}")
-	@Produces({MediaType.APPLICATION_JSON})
+	@Produces({ MediaType.APPLICATION_JSON })
 	@ElementClass(response = AccMoveDetail.class)
-	@SMC(registryID="SMCCO1500001",logicalID="getMovement")
+	@SMC(registryID = "SMCCO1500001", logicalID = "getMovement")
 	public AccMoveDetail getMovement(@ApiParam(value = "identifier param") @PathParam("productId") String productId,
-								@ApiParam(value = "filter param") @PathParam("movementId") String movementId,
-								@ApiParam(value = "filter param") @DefaultValue("null") @QueryParam("$filter") String filter) {
+			@ApiParam(value = "filter param") @PathParam("movementId") String movementId,
+			@ApiParam(value = "filter param") @DefaultValue("null") @QueryParam("$filter") String filter) {
 
 		// 1. Validate parameter
 		if (movementId == null || movementId.trim().isEmpty()) {
-			throw new BusinessServiceException(
-					EnumError.WRONG_PARAMETERS.getAlias());
+			throw new BusinessServiceException(EnumError.WRONG_PARAMETERS.getAlias());
 		}
 
 		// 2. Validate filter
-		new FiqlValidator(filter).exist()
-				.hasEq("productType").validate();
+		new FiqlValidator(filter).exist().hasEq("productType").validate();
 
 		// Mapeo del filtro a DTO
-		DTOIntFilterMovements dtoIntFilterMovements = productsMapper.getDTOIntFilterGetMovement(productId,movementId,filter);
+		DTOIntFilterMovements dtoIntFilterMovements = productsMapper.getDTOIntFilterGetMovement(productId, movementId,
+				filter);
 
 		// 3. Invoke SrvIntCustomers and Mapping to canonical DTO
-		return productsMapper.mapMovement(srvIntProducts.getMovement(dtoIntFilterMovements)) ;
+		return productsMapper.mapMovement(srvIntProducts.getMovement(dtoIntFilterMovements));
 
 	}
 
-
 	@Override
-	@ApiOperation(value="Operacion que lista los movimientos asociados a un producto y tipo en particular segun los parametros de busqueda, en el caso de que no se envie nungun parametro retornara los movimientos asociados que esten almacenados en backend.", notes="Listado de movimientos",response=Movement.class)
-	@ApiResponses(value = {
-			@ApiResponse(code = -1, message = "aliasGCE1"),
+	@ApiOperation(value = "Operacion que lista los movimientos asociados a un producto y tipo en particular segun los parametros de busqueda, en el caso de que no se envie nungun parametro retornara los movimientos asociados que esten almacenados en backend.", notes = "Listado de movimientos", response = Movement.class)
+	@ApiResponses(value = { @ApiResponse(code = -1, message = "aliasGCE1"),
 			@ApiResponse(code = -1, message = "aliasGCE2"),
-			@ApiResponse(code = 200, message = "Found Sucessfully", response=Response.class),
+			@ApiResponse(code = 200, message = "Found Sucessfully", response = Response.class),
 			@ApiResponse(code = 400, message = "Wrong parameters"),
-			@ApiResponse(code = 409, message = "Data not found"),
-			@ApiResponse(code = 500, message = "Technical Error")})
+			@ApiResponse(code = 409, message = "Data not found"), @ApiResponse(code = 500, message = "Technical Error") })
 	@GET
 	@Path("/{productId}/movements")
 	@ElementClass(response = List.class)
-	@SMC(registryID="SMCCO1500002",logicalID="listMovements")
-	public List<Movement> listMovements(@ApiParam(value = "identifier param") @PathParam("productId") String productId,
-										@ApiParam(value = "filter param") @DefaultValue("null") @QueryParam("$filter") String filter,
-										@ApiParam(value = "pagination key") @DefaultValue("null") @QueryParam("paginationKey") Integer paginationKey,
-										@ApiParam(value = "pagination size") @DefaultValue("null") @QueryParam("pageSize") Integer pageSize) {
+	@SMC(registryID = "SMCCO1500002", logicalID = "listMovements")
+	public List<Movement> listMovements(
+			@ApiParam(value = "identifier param") @PathParam("productId") String productId,
+			@ApiParam(value = "filter param") @DefaultValue("null") @QueryParam("$filter") String filter,
+			@ApiParam(value = "pagination key") @DefaultValue("null") @QueryParam("paginationKey") Integer paginationKey,
+			@ApiParam(value = "pagination size") @DefaultValue("null") @QueryParam("pageSize") Integer pageSize) {
 
 		// 1. Validate filter
-		new FiqlValidator(filter).hasEq("productType").hasGeAndLe("transactionDate")
-				.hasGeOrLe("value").validateAny();
+		new FiqlValidator(filter).hasEq("productType").hasGeAndLe("transactionDate").hasGeOrLe("value").validateAny();
 
 		// Mapeo del filtro a DTO
-		DTOIntFilterMovements dtoIntFilterMovements = productsMapper
-				.getDTOIntFilterGetListMovements(productId, filter, paginationKey,
-						pageSize);
+		DTOIntFilterMovements dtoIntFilterMovements = productsMapper.getDTOIntFilterGetListMovements(productId, filter,
+				paginationKey, pageSize);
 		// 3. Invoke SrvIntCustomers and Mapping to canonical DTO
-		return productsMapper.mapMovements(srvIntProducts
-				.listMovements(dtoIntFilterMovements));
+		return productsMapper.mapMovements(srvIntProducts.listMovements(dtoIntFilterMovements));
 	}
-
-
 
 }

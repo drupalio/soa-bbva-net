@@ -1,52 +1,53 @@
-
 package com.bbva.czic.internationalcontracttransfer.business.dto;
 
 import java.util.List;
 
+public class DTOIntInternationalContractTransfer extends DTOIntContractTransfer {
 
+	public final static long serialVersionUID = 1L;
 
-public class DTOIntInternationalContractTransfer {
+	private DTOIntContract intermediaryBankAccount;
 
-    public final static long serialVersionUID = 1L;
-    private DTOIntContract intermediaryBankAccount;
-    private DTOIntExchangeRate exchangeRate;
-    private DTOIntDocument formularyTransfer;
-    private List<DTOIntExternalReference> references;
+	private DTOIntExchangeRate exchangeRate;
 
-    public DTOIntInternationalContractTransfer() {
-        //default constructor
-    }
+	private DTOIntDocument formularyTransfer;
 
-    public DTOIntContract getIntermediaryBankAccount() {
-        return intermediaryBankAccount;
-    }
+	private List<DTOIntExternalReference> references;
 
-    public void setIntermediaryBankAccount(DTOIntContract intermediaryBankAccount) {
-        this.intermediaryBankAccount = intermediaryBankAccount;
-    }
+	public DTOIntInternationalContractTransfer() {
+		// default constructor
+	}
 
-    public DTOIntExchangeRate getExchangeRate() {
-        return exchangeRate;
-    }
+	public DTOIntContract getIntermediaryBankAccount() {
+		return intermediaryBankAccount;
+	}
 
-    public void setExchangeRate(DTOIntExchangeRate exchangeRate) {
-        this.exchangeRate = exchangeRate;
-    }
+	public void setIntermediaryBankAccount(DTOIntContract intermediaryBankAccount) {
+		this.intermediaryBankAccount = intermediaryBankAccount;
+	}
 
-    public DTOIntDocument getFormularyTransfer() {
-        return formularyTransfer;
-    }
+	public DTOIntExchangeRate getExchangeRate() {
+		return exchangeRate;
+	}
 
-    public void setFormularyTransfer(DTOIntDocument formularyTransfer) {
-        this.formularyTransfer = formularyTransfer;
-    }
+	public void setExchangeRate(DTOIntExchangeRate exchangeRate) {
+		this.exchangeRate = exchangeRate;
+	}
 
-    public List<DTOIntExternalReference> getReferences() {
-        return references;
-    }
+	public DTOIntDocument getFormularyTransfer() {
+		return formularyTransfer;
+	}
 
-    public void setReferences(List<DTOIntExternalReference> references) {
-        this.references = references;
-    }
+	public void setFormularyTransfer(DTOIntDocument formularyTransfer) {
+		this.formularyTransfer = formularyTransfer;
+	}
+
+	public List<DTOIntExternalReference> getReferences() {
+		return references;
+	}
+
+	public void setReferences(List<DTOIntExternalReference> references) {
+		this.references = references;
+	}
 
 }

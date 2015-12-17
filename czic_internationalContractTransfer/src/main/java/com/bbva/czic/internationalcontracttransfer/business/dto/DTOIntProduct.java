@@ -1,15 +1,21 @@
-
 package com.bbva.czic.internationalcontracttransfer.business.dto;
-
-
-
 
 public class DTOIntProduct {
 
-    public final static long serialVersionUID = 1L;
+	public final static long serialVersionUID = 1L;
 
-    public DTOIntProduct() {
-        //default constructor
-    }
+	private String id;
+
+	public DTOIntProduct() {
+		// default constructor
+	}
+
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
 
 }

@@ -1,15 +1,17 @@
-
 package com.bbva.czic.internationalcontracttransfer.business.dto;
-
-
-
 
 public class DTOIntExchangeRate {
 
-    public final static long serialVersionUID = 1L;
+	public final static long serialVersionUID = 1L;
 
-    public DTOIntExchangeRate() {
-        //default constructor
-    }
+	private DTOIntExchangeRateAssessments exchangeRateAssesments;
+
+	public DTOIntExchangeRateAssessments getExchangeRateAssesments() {
+		return exchangeRateAssesments;
+	}
+
+	public void setExchangeRateAssesments(DTOIntExchangeRateAssessments exchangeRateAssesments) {
+		this.exchangeRateAssesments = exchangeRateAssesments;
+	}
 
 }

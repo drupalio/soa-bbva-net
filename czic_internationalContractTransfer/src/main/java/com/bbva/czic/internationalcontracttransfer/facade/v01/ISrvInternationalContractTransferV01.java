@@ -1,9 +1,12 @@
 package com.bbva.czic.internationalcontracttransfer.facade.v01;
 
-import javax.ws.rs.core.Response;
+import java.util.List;
+
+import com.bbva.czic.dto.net.InternationalContractTransfer;
 
 public interface ISrvInternationalContractTransferV01 {
 
-	public Response listInternationalContractTransfer(String filter, String fields, String expands, String orderby);
+	public List<InternationalContractTransfer> listInternationalContractTransfer(String filter,
+			String senderContractParticipantsId, Integer paginationKey, Integer pageSize, String expands);
 
 }

@@ -13,7 +13,7 @@ import com.wordnik.swagger.annotations.ApiModelProperty;
 @XmlRootElement(name = "internationalContractTransfer", namespace = "urn:com:bbva:czic:internationalcontracttransfer:facade:v01:dto")
 @XmlType(name = "internationalContractTransfer", namespace = "urn:com:bbva:czic:internationalcontracttransfer:facade:v01:dto")
 @XmlAccessorType(XmlAccessType.FIELD)
-public class InternationalContractTransfer implements Serializable {
+public class InternationalContractTransfer extends ContractTransfer implements Serializable {
 
 	public final static long serialVersionUID = 1L;
 

@@ -20,7 +20,7 @@ public class ExchangeRate implements Serializable {
 	@ApiModelProperty("Moneda del tipo de cambio")
 	private Currency exchangeRateCurrency;
 
-	@ApiModelProperty("Valoraci\u00c3\u00b3n asociada al c\u00c3\u00a1lculo o tasaci\u00c3\u00b3n del tipo de cambio")
+	@ApiModelProperty("Valoración asociada al cálculo o tasación del tipo de cambio")
 	private List<ExchangeRateAssessments> exchangeRateAssessments;
 
 	@ApiModelProperty("Detalle del tipo de cambio")
