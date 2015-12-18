@@ -10,8 +10,8 @@ import javax.xml.bind.annotation.XmlType;
 
 import com.wordnik.swagger.annotations.ApiModelProperty;
 
-@XmlRootElement(name = "exchangeRate", namespace = "urn:com:bbva:czic:exchangerate:facade:v01:dto")
-@XmlType(name = "exchangeRate", namespace = "urn:com:bbva:czic:exchangerate:facade:v01:dto")
+@XmlRootElement(name = "exchangeRate", namespace = "urn:com:bbva:czic:dto:net")
+@XmlType(name = "exchangeRate", namespace = "urn:com:bbva:czic:dto:net")
 @XmlAccessorType(XmlAccessType.FIELD)
 public class ExchangeRate implements Serializable {
 

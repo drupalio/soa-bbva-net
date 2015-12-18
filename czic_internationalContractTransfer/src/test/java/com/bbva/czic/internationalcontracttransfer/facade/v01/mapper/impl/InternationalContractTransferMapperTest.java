@@ -141,7 +141,7 @@ public class InternationalContractTransferMapperTest extends SpringContextBbvaTe
 		exchangeRateAssesments.setType("TasaDivisaUSD");
 		exchangeRateAssesments.setValue(new BigDecimal(12345));
 		listAssesments.add(exchangeRateAssesments);
-		exchangeRate.setExchangeRateAssesments(exchangeRateAssesments);
+		exchangeRate.setExchangeRateAssesments(listAssesments);
 
 		final InternationalContractTransfer internationalContractTransfer = internationalMapper
 				.map(dtoInternationalContractTransfer);
@@ -151,6 +151,6 @@ public class InternationalContractTransferMapperTest extends SpringContextBbvaTe
 
 	@Test
 	public void testListInternationalContractTransfer() {
-
+		
 	}
 }

@@ -10,8 +10,8 @@ import javax.xml.bind.annotation.XmlType;
 
 import com.wordnik.swagger.annotations.ApiModelProperty;
 
-@XmlRootElement(name = "internationalContractTransfer", namespace = "urn:com:bbva:czic:internationalcontracttransfer:facade:v01:dto")
-@XmlType(name = "internationalContractTransfer", namespace = "urn:com:bbva:czic:internationalcontracttransfer:facade:v01:dto")
+@XmlRootElement(name = "internationalContractTransfer", namespace = "urn:com:bbva:czic:dto:net")
+@XmlType(name = "internationalContractTransfer", namespace = "urn:com:bbva:czic:dto:net")
 @XmlAccessorType(XmlAccessType.FIELD)
 public class InternationalContractTransfer extends ContractTransfer implements Serializable {
 

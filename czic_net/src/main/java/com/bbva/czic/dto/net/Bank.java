@@ -10,8 +10,8 @@ import javax.xml.bind.annotation.XmlType;
 
 import com.wordnik.swagger.annotations.ApiModelProperty;
 
-@XmlRootElement(name = "bank", namespace = "urn:com:bbva:czic:internationalcontracttransfer:facade:v01:dto")
-@XmlType(name = "bank", namespace = "urn:com:bbva:czic:internationalcontracttransfer:facade:v01:dto")
+@XmlRootElement(name = "bank", namespace = "urn:com:bbva:czic:dto:net")
+@XmlType(name = "bank", namespace = "urn:com:bbva:czic:dto:net")
 @XmlAccessorType(XmlAccessType.FIELD)
 public class Bank
     implements Serializable

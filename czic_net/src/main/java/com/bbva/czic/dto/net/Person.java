@@ -11,14 +11,16 @@ import javax.xml.bind.annotation.XmlType;
 
 import com.wordnik.swagger.annotations.ApiModelProperty;
 
-@XmlRootElement(name = "person", namespace = "urn:com:bbva:czic:internationalcontracttransfer:facade:v01:dto")
-@XmlType(name = "person", namespace = "urn:com:bbva:czic:internationalcontracttransfer:facade:v01:dto")
+@XmlRootElement(name = "person", namespace = "urn:com:bbva:czic:dto:net")
+@XmlType(name = "person", namespace = "urn:com:bbva:czic:dto:net")
 @XmlAccessorType(XmlAccessType.FIELD)
 public class Person
     implements Serializable
 {
 
     public final static long serialVersionUID = 1L;
+    @ApiModelProperty("Código de la persona")
+    private String id;
     @ApiModelProperty("Nombre de la persona o Razon social de la empresa")
     private String name;
     @ApiModelProperty("Listado de documentos utilizados para identificar una persona")
@@ -28,7 +30,15 @@ public class Person
         //default constructor
     }
 
-    public String getName() {
+    public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
+
+	public String getName() {
         return name;
     }
 

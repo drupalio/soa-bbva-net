@@ -1,8 +1,11 @@
 package com.bbva.czic.internationalcontracttransfer.dao;
 
+import com.bbva.czic.internationalcontracttransfer.business.dto.DTOIntFilterInternationalContractTransfers;
+import com.bbva.czic.internationalcontracttransfer.business.dto.DTOIntInternationalContractTransfer;
+
 public interface InternationalContractTransferDAO {
 
-	//TODO: method signatures for DAO
+	public List<DTOIntInternationalContractTransfer> getInternationalContractTransfer(DTOIntFilterInternationalContractTransfers dtoFilterInternational);
 	
 }
 

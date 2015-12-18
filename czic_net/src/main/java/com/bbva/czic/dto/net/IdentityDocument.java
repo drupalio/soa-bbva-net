@@ -10,8 +10,8 @@ import com.wordnik.swagger.annotations.ApiModelProperty;
 
 
 
-@XmlRootElement(name = "identityDocument", namespace = "urn:com:bbva:czic:internationalcontracttransfer:facade:v01:dto")
-@XmlType(name = "identityDocument", namespace = "urn:com:bbva:czic:internationalcontracttransfer:facade:v01:dto")
+@XmlRootElement(name = "identityDocument", namespace = "urn:com:bbva:czic:dto:net")
+@XmlType(name = "identityDocument", namespace = "urn:com:bbva:czic:dto:net")
 @XmlAccessorType(XmlAccessType.FIELD)
 public class IdentityDocument
     implements Serializable

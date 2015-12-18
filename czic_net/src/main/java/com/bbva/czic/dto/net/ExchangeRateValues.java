@@ -14,8 +14,8 @@ import com.bbva.jee.arq.spring.core.servicing.utils.MoneyAdapter;
 import com.bbva.jee.arq.spring.core.servicing.utils.Money;
 import com.wordnik.swagger.annotations.ApiModelProperty;
 
-@XmlRootElement(name = "exchangeRateValues", namespace = "urn:com:bbva:czic:exchangerate:facade:v01:dto")
-@XmlType(name = "exchangeRateValues", namespace = "urn:com:bbva:czic:exchangerate:facade:v01:dto")
+@XmlRootElement(name = "exchangeRateValues", namespace = "urn:com:bbva:czic:dto:net")
+@XmlType(name = "exchangeRateValues", namespace = "urn:com:bbva:czic:dto:net")
 @XmlAccessorType(XmlAccessType.FIELD)
 public class ExchangeRateValues
     implements Serializable
