@@ -23,7 +23,7 @@ public class SrvIntInternationalContractTransfer implements ISrvIntInternational
 
 	@Autowired
 	BusinessServicesToolKit bussinesToolKit;
-	
+
 	@Resource(name = "internationalContractTransfer-dao")
 	private InternationalContractTransferDAO internationalContractTransferDAO;
 
@@ -33,7 +33,8 @@ public class SrvIntInternationalContractTransfer implements ISrvIntInternational
 		// 1. Validate DTOIntExchangeRateFilter
 		DtoValidator.validate(filterInternationalContractTransfer);
 		// 2. Get response
-		final List<DTOIntInternationalContractTransfer> result = internationalContractTransferDAO.listInternationalContractTransfer(filterInternationalContractTransfer);
+		final List<DTOIntInternationalContractTransfer> result = internationalContractTransferDAO
+				.listInternationalContractTransfer(filterInternationalContractTransfer);
 
 		// 3. Validate output
 		DtoValidator.validate(result);

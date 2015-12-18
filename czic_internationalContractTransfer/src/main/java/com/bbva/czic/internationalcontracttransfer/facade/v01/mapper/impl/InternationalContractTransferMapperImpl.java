@@ -11,6 +11,7 @@ import com.bbva.czic.dto.net.Contract;
 import com.bbva.czic.dto.net.ContractTransferReceiver;
 import com.bbva.czic.dto.net.ContractTransferSender;
 import com.bbva.czic.dto.net.Country;
+import com.bbva.czic.dto.net.Document;
 import com.bbva.czic.dto.net.ExchangeRate;
 import com.bbva.czic.dto.net.ExchangeRateAssessments;
 import com.bbva.czic.dto.net.ExternalReference;
@@ -19,7 +20,6 @@ import com.bbva.czic.dto.net.InternationalContractTransfer;
 import com.bbva.czic.dto.net.OptionsList;
 import com.bbva.czic.dto.net.Participant;
 import com.bbva.czic.dto.net.Product;
-import com.bbva.czic.internationalcontracttransfer.business.dto.DTOIntExchangeRate;
 import com.bbva.czic.internationalcontracttransfer.business.dto.DTOIntExchangeRateAssessments;
 import com.bbva.czic.internationalcontracttransfer.business.dto.DTOIntExternalReference;
 import com.bbva.czic.internationalcontracttransfer.business.dto.DTOIntFilterInternationalContractTransfers;
@@ -48,13 +48,15 @@ public class InternationalContractTransferMapperImpl extends AbstractBbvaConfigu
 		optionsList.setName(dtoInternationalContractTransfer.getState());
 		internationalContractTransfer.setState(optionsList);
 		internationalContractTransfer.setDate(dtoInternationalContractTransfer.getDate());
-		internationalContractTransfer.setId(dtoInternationalContractTransfer.getId());
-		
+		Document docFormulary = new Document();
+		docFormulary.setId(dtoInternationalContractTransfer.getFormularyTransfer().getId());
+		internationalContractTransfer.setFormularyTransfer(docFormulary);
+
 		optionsList = new OptionsList();
 		optionsList.setName(dtoInternationalContractTransfer.getTypeName());
 		internationalContractTransfer.setType(optionsList);
 
-		//info referenceValue
+		// info referenceValue
 		List<ExternalReference> references = new ArrayList<ExternalReference>();
 		for (DTOIntExternalReference intReferences : dtoInternationalContractTransfer.getReferences()) {
 			ExternalReference reference = new ExternalReference();
@@ -63,19 +65,22 @@ public class InternationalContractTransferMapperImpl extends AbstractBbvaConfigu
 			references.add(reference);
 		}
 		internationalContractTransfer.setReferences(references);
-		
+
 		// info sender
 		ContractTransferSender sender = new ContractTransferSender();
 		Contract contractSender = new Contract();
 		List<Participant> participants = new ArrayList<Participant>();
-		
-		for(int i=0;i<dtoInternationalContractTransfer.getSender().getContract().getParticipants().size();i++){
+
+		for (int i = 0; i < dtoInternationalContractTransfer.getSender().getContract().getParticipants().size(); i++) {
 			Participant participant = new Participant();
-			participant.setId(dtoInternationalContractTransfer.getSender().getContract().getParticipants().get(i).getId());
-			participant.setName(dtoInternationalContractTransfer.getSender().getContract().getParticipants().get(i).getName());
-			
+			participant.setId(dtoInternationalContractTransfer.getSender().getContract().getParticipants().get(i)
+					.getId());
+			participant.setName(dtoInternationalContractTransfer.getSender().getContract().getParticipants().get(i)
+					.getName());
+
 			List<IdentityDocument> listIdentityDocument = new ArrayList<IdentityDocument>();
-			for (DTOIntIdentityDocument intIdentity : dtoInternationalContractTransfer.getSender().getContract().getParticipants().get(i).getIdentityDocument()) {
+			for (DTOIntIdentityDocument intIdentity : dtoInternationalContractTransfer.getSender().getContract()
+					.getParticipants().get(i).getIdentityDocument()) {
 				IdentityDocument document = new IdentityDocument();
 				document.setNumber(intIdentity.getNumber());
 				listIdentityDocument.add(document);
@@ -92,12 +97,13 @@ public class InternationalContractTransferMapperImpl extends AbstractBbvaConfigu
 		contractSender.setCountry(country);
 		sender.setContract(contractSender);
 		internationalContractTransfer.setSender(sender);
-		
+
 		// info receiver
 		ContractTransferReceiver receiver = new ContractTransferReceiver();
 		Contract contractReceiver = new Contract();
 		participants = new ArrayList<Participant>();
-		for (DTOIntPerson intParticipant : dtoInternationalContractTransfer.getReceiver().getContract().getParticipants()) {
+		for (DTOIntPerson intParticipant : dtoInternationalContractTransfer.getReceiver().getContract()
+				.getParticipants()) {
 			Participant participant = new Participant();
 			participant.setName(intParticipant.getName());
 			participants.add(participant);
@@ -107,7 +113,7 @@ public class InternationalContractTransferMapperImpl extends AbstractBbvaConfigu
 		bank.setName(dtoInternationalContractTransfer.getReceiver().getContract().getBank().getName());
 		bank.setBicCode(dtoInternationalContractTransfer.getReceiver().getContract().getBank().getBicCode());
 		contractReceiver.setBank(bank);
-		country = new  Country();
+		country = new Country();
 		country.setName(dtoInternationalContractTransfer.getReceiver().getContract().getCountry().getName());
 		contractReceiver.setCountry(country);
 		Address address = new Address();
@@ -115,7 +121,7 @@ public class InternationalContractTransferMapperImpl extends AbstractBbvaConfigu
 		contractReceiver.setAddress(address);
 		receiver.setContract(contractReceiver);
 		internationalContractTransfer.setReceiver(receiver);
-		
+
 		// info intermediary
 		Contract intermediary = new Contract();
 		bank = new Bank();
@@ -131,11 +137,12 @@ public class InternationalContractTransferMapperImpl extends AbstractBbvaConfigu
 		product.setId(dtoInternationalContractTransfer.getIntermediaryBankAccount().getProduct().getId());
 		intermediary.setProduct(product);
 		internationalContractTransfer.setIntermediaryBankAccount(intermediary);
-		
+
 		// info exchangeRate
 		ExchangeRate exchangeRate = new ExchangeRate();
 		List<ExchangeRateAssessments> exchangeRateAssessments = new ArrayList<ExchangeRateAssessments>();
-		for (DTOIntExchangeRateAssessments intAssessments : dtoInternationalContractTransfer.getExchangeRate().getExchangeRateAssesments()) {
+		for (DTOIntExchangeRateAssessments intAssessments : dtoInternationalContractTransfer.getExchangeRate()
+				.getExchangeRateAssesments()) {
 			ExchangeRateAssessments exchangeRateAssessment = new ExchangeRateAssessments();
 			exchangeRateAssessment.setType(intAssessments.getType());
 			exchangeRateAssessment.setValue(intAssessments.getValue());
@@ -149,6 +156,7 @@ public class InternationalContractTransferMapperImpl extends AbstractBbvaConfigu
 	@Override
 	public List<InternationalContractTransfer> mapList(
 			List<DTOIntInternationalContractTransfer> dtoListInternationalContractTransfer) {
+
 		List<InternationalContractTransfer> listInternationalContractTransfer = new ArrayList<InternationalContractTransfer>();
 		for (DTOIntInternationalContractTransfer intInternational : dtoListInternationalContractTransfer) {
 			InternationalContractTransfer internationalContractTransfer = map(intInternational);

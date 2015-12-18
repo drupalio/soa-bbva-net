@@ -1,39 +1,34 @@
-package com.bbva.czic.internationalcontracttransfer.business.impl;
+package com.bbva.czic.internationalcontracttransfer.business.dao.impl;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import org.springframework.test.context.ActiveProfiles;
 
 import com.bbva.czic.internationalcontracttransfer.business.dto.DTOIntFilterInternationalContractTransfers;
 import com.bbva.czic.internationalcontracttransfer.business.dto.DTOIntInternationalContractTransfer;
 import com.bbva.czic.internationalcontracttransfer.dao.InternationalContractTransferDAO;
+import com.bbva.czic.internationalcontracttransfer.dao.impl.InternationalContractTransferDAOImpl;
 import com.bbva.czic.routine.commons.rm.utils.test.SpringContextBbvaTest;
 
 @ActiveProfiles("dev")
-public class SrvIntInternationalContractTransfer01Test extends SpringContextBbvaTest {
-
-	@Mock
-	private InternationalContractTransferDAO internationalContractTransferDAO;
+public class InternationalContractTransferDAOImplTest extends SpringContextBbvaTest {
 
 	@InjectMocks
-	SrvIntInternationalContractTransfer srv;
+	InternationalContractTransferDAO internationalContractTransferDAO;
 
 	@Before
 	public void init() {
-		srv = new SrvIntInternationalContractTransfer();
+		internationalContractTransferDAO = new InternationalContractTransferDAOImpl();
 		MockitoAnnotations.initMocks(this);
 	}
 
 	@Test
-	public void testListInternationalContractTransfer() {
+	public void testGetExchangeRatePurchaseOK() {
 		DTOIntFilterInternationalContractTransfers dtoFilterInternational = new DTOIntFilterInternationalContractTransfers();
 		dtoFilterInternational.setDateEnd("2015-10-10");
 		dtoFilterInternational.setDateStart("2015-09-10");
@@ -43,12 +38,12 @@ public class SrvIntInternationalContractTransfer01Test extends SpringContextBbva
 		dtoFilterInternational.setReferencesValue("5486");
 		dtoFilterInternational.setSenderContractParticipantsId("1004928327");
 		dtoFilterInternational.setTypeName("HACIA");
-		List<DTOIntInternationalContractTransfer> listDTOIntInternationalContractTransfer = new ArrayList<DTOIntInternationalContractTransfer>();
-		Mockito.when(internationalContractTransferDAO.listInternationalContractTransfer(dtoFilterInternational))
-				.thenReturn(listDTOIntInternationalContractTransfer);
 
-		final List<DTOIntInternationalContractTransfer> respuesta = srv
+		List<DTOIntInternationalContractTransfer> dtoIntInternationalContractTransfer = internationalContractTransferDAO
 				.listInternationalContractTransfer(dtoFilterInternational);
-		Assert.assertNotNull(respuesta);
+
+		Assert.assertNotNull(dtoIntInternationalContractTransfer);
+
 	}
+
 }

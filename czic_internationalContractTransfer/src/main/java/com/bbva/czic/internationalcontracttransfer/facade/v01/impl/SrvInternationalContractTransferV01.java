@@ -84,8 +84,9 @@ public class SrvInternationalContractTransferV01 implements ISrvInternationalCon
 			@ApiParam(value = "expands param") @DefaultValue("null") @QueryParam("$expands") String expands) {
 
 		// 1. Validate filter
-		new FiqlValidator(filter).hasEq("referencesValue").hasEq("typeName").hasGeAndLe("date").validateAny();
-
+		if (!filter.equals("null")) {
+			new FiqlValidator(filter).hasEq("referencesValue").hasEq("typeName").hasGeAndLe("date").validateAny();
+		}
 		// Mapeo del filtro a DTO
 		DTOIntFilterInternationalContractTransfers intFilterInternational = internationalMapper.map(filter,
 				senderContractParticipantsId, paginationKey, pageSize, expands);

@@ -8,8 +8,8 @@
 	-->
 	
 	<error-definition severity="ERROR" alias="wrongParameters" code="1" servicing:http-status="400">
-        <message>Executives not found.</message>
-        <message lang="en">Executives not found.</message>
+        <message>ExchangeRate not found.</message>
+        <message lang="en">ExchangeRate not found.</message>
         <message lang="es">Parámetros inválidos</message>
     </error-definition>
     <error-definition severity="FATAL" alias="technicalError" code="4" servicing:http-status="500">
