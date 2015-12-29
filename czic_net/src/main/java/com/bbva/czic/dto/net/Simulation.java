@@ -9,20 +9,20 @@ import javax.xml.bind.annotation.XmlType;
 
 import com.wordnik.swagger.annotations.ApiModelProperty;
 
-@XmlRootElement(name = "ExternalReference", namespace = "urn:com:bbva:czic:dto:net")
-@XmlType(name = "ExternalReference", namespace = "urn:com:bbva:czic:dto:net")
+@XmlRootElement(name = "Simulation", namespace = "urn:com:bbva:czic:dto:net")
+@XmlType(name = "Simulation", namespace = "urn:com:bbva:czic:dto:net")
 @XmlAccessorType(XmlAccessType.FIELD)
-public class ExternalReference implements Serializable {
+public class Simulation implements Serializable {
 
 	public final static long serialVersionUID = 1L;
 
-	@ApiModelProperty("Identificador de la referencia externa")
+	@ApiModelProperty(value = "Identificador del simulador", required = true)
 	private String id;
 
-	@ApiModelProperty("Valor de la referencia externa")
-	private String value;
+	@ApiModelProperty("Descripción del simulador")
+	private String algorithm;
 
-	public ExternalReference() {
+	public Simulation() {
 		// default constructor
 	}
 
@@ -34,12 +34,12 @@ public class ExternalReference implements Serializable {
 		this.id = id;
 	}
 
-	public String getValue() {
-		return value;
+	public String getAlgorithm() {
+		return algorithm;
 	}
 
-	public void setValue(String value) {
-		this.value = value;
+	public void setAlgorithm(String algorithm) {
+		this.algorithm = algorithm;
 	}
 
 }

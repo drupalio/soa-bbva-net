@@ -119,14 +119,15 @@ public class InternationalContractTransferDAOImpl implements InternationalContra
 		listReference.add(reference);
 
 		// info exchangeRate
+		final List<DTOIntExchangeRate> listExchangeRate = new ArrayList<DTOIntExchangeRate>();
 		final DTOIntExchangeRate exchangeRate = new DTOIntExchangeRate();
-		List<DTOIntExchangeRateAssessments> listAssesments = new ArrayList<DTOIntExchangeRateAssessments>();
+
 		DTOIntExchangeRateAssessments exchangeRateAssesments = new DTOIntExchangeRateAssessments();
 		exchangeRateAssesments.setType("TasaDivisaUSD");
 		exchangeRateAssesments.setValue(new BigDecimal(12345));
-		listAssesments.add(exchangeRateAssesments);
-		exchangeRate.setExchangeRateAssesments(listAssesments);
-		dtoInternationalContractTransfer.setExchangeRate(exchangeRate);
+		exchangeRate.setExchangeRateAssesments(exchangeRateAssesments);
+		listExchangeRate.add(exchangeRate);
+		dtoInternationalContractTransfer.setExchangeRates(listExchangeRate);
 
 		listDTOIntInternational.add(dtoInternationalContractTransfer);
 		return listDTOIntInternational;

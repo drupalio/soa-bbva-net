@@ -366,11 +366,6 @@
 		<!-- <artifactId>czic_movements</artifactId> -->
 		<!-- <version>1.0.0</version> -->
 		<!-- </dependency> -->
-		<dependency>
-	           <groupId>com.bbva.czic.exchangerate</groupId>
-	           <artifactId>czic_exchangeRate</artifactId>
-	           <version>1.0.0</version>
-	     </dependency>
         <dependency>
             <groupId>com.bbva.czic.currency</groupId>
             <artifactId>czic_currency</artifactId>
@@ -379,6 +374,11 @@
     	<dependency>
             <groupId>com.bbva.czic.internationalcontracttransfer</groupId>
             <artifactId>czic_internationalContractTransfer</artifactId>
+            <version>1.0.0</version>
+        </dependency>
+    	<dependency>
+            <groupId>com.bbva.czic.exchangeratesimulation</groupId>
+            <artifactId>czic_exchangeRateSimulation</artifactId>
             <version>1.0.0</version>
         </dependency>
     </dependencies>

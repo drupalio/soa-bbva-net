@@ -21,7 +21,7 @@ public class InternationalContractTransfer extends ContractTransfer implements S
 	private Contract intermediaryBankAccount;
 
 	@ApiModelProperty("Datos de las tasas correspondientes a la transaccion internacional")
-	private ExchangeRate exchangeRate;
+	private List<ExchangeRate> exchangeRates;
 
 	@ApiModelProperty("Documento del formulario cambiario")
 	private Document formularyTransfer;
@@ -41,12 +41,12 @@ public class InternationalContractTransfer extends ContractTransfer implements S
 		this.intermediaryBankAccount = intermediaryBankAccount;
 	}
 
-	public ExchangeRate getExchangeRate() {
-		return exchangeRate;
+	public List<ExchangeRate> getExchangeRates() {
+		return exchangeRates;
 	}
 
-	public void setExchangeRate(ExchangeRate exchangeRate) {
-		this.exchangeRate = exchangeRate;
+	public void setExchangeRates(List<ExchangeRate> exchangeRates) {
+		this.exchangeRates = exchangeRates;
 	}
 
 	public Document getFormularyTransfer() {

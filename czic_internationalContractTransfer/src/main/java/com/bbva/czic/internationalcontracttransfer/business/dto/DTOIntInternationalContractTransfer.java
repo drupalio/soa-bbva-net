@@ -8,7 +8,7 @@ public class DTOIntInternationalContractTransfer extends DTOIntContractTransfer 
 
 	private DTOIntContract intermediaryBankAccount;
 
-	private DTOIntExchangeRate exchangeRate;
+	private List<DTOIntExchangeRate> exchangeRates;
 
 	private DTOIntDocument formularyTransfer;
 
@@ -26,12 +26,12 @@ public class DTOIntInternationalContractTransfer extends DTOIntContractTransfer 
 		this.intermediaryBankAccount = intermediaryBankAccount;
 	}
 
-	public DTOIntExchangeRate getExchangeRate() {
-		return exchangeRate;
+	public List<DTOIntExchangeRate> getExchangeRates() {
+		return exchangeRates;
 	}
 
-	public void setExchangeRate(DTOIntExchangeRate exchangeRate) {
-		this.exchangeRate = exchangeRate;
+	public void setExchangeRates(List<DTOIntExchangeRate> exchangeRates) {
+		this.exchangeRates = exchangeRates;
 	}
 
 	public DTOIntDocument getFormularyTransfer() {

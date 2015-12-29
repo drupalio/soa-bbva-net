@@ -7,7 +7,6 @@ import java.util.List;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-import org.mockito.Mockito;
 
 import com.bbva.czic.dto.net.InternationalContractTransfer;
 import com.bbva.czic.internationalcontracttransfer.business.dto.DTOIntAddress;
@@ -38,29 +37,10 @@ public class InternationalContractTransferMapperTest extends SpringContextBbvaTe
 	@Before
 	public void init() {
 		internationalMapper = new InternationalContractTransferMapperImpl();
-	}
 
-	@Test
-	public void testIntFilterInternational() {
-		DTOIntFilterInternationalContractTransfers dtoFilterInternational = internationalMapper.map(
-				"(referencesValue==12345,(typeName==HACIA;date=ge=2015-01-10;date=le=2015-02-12))", "1025049283", 0010,
-				20, "");
-		Assert.assertNotNull(dtoFilterInternational);
-		Assert.assertEquals("12345", dtoFilterInternational.getReferencesValue());
-		Assert.assertEquals("HACIA", dtoFilterInternational.getTypeName());
-		Assert.assertEquals("2015-01-10", dtoFilterInternational.getDateStart());
-		Assert.assertEquals("2015-02-12", dtoFilterInternational.getDateEnd());
-		Assert.assertEquals("1025049283", dtoFilterInternational.getSenderContractParticipantsId());
-		Assert.assertSame(0010, dtoFilterInternational.getPaginationKey());
-		Assert.assertSame(20, dtoFilterInternational.getPageSize());
-		Assert.assertEquals("", dtoFilterInternational.getExpands());
-	}
-
-	@Test
-	public void testInternationalContractTransfer() {
 		dtoInternationalContractTransfer = new DTOIntInternationalContractTransfer();
-		dtoInternationalContractTransfer.setDate("");
-		dtoInternationalContractTransfer.setTypeName("");
+		dtoInternationalContractTransfer.setDate("29/12/2015");
+		dtoInternationalContractTransfer.setTypeName("Hacia");
 		final DTOIntMoney intMoney = new DTOIntMoney();
 		intMoney.setCurrency("USD");
 		intMoney.setAmount(new BigDecimal(10000));
@@ -145,14 +125,35 @@ public class InternationalContractTransferMapperTest extends SpringContextBbvaTe
 		listReference.add(reference);
 
 		// info exchangeRate
+		final List<DTOIntExchangeRate> listExchangeRate = new ArrayList<DTOIntExchangeRate>();
 		final DTOIntExchangeRate exchangeRate = new DTOIntExchangeRate();
-		List<DTOIntExchangeRateAssessments> listAssesments = new ArrayList<DTOIntExchangeRateAssessments>();
+
 		DTOIntExchangeRateAssessments exchangeRateAssesments = new DTOIntExchangeRateAssessments();
 		exchangeRateAssesments.setType("TasaDivisaUSD");
 		exchangeRateAssesments.setValue(new BigDecimal(12345));
-		listAssesments.add(exchangeRateAssesments);
-		exchangeRate.setExchangeRateAssesments(listAssesments);
-		dtoInternationalContractTransfer.setExchangeRate(exchangeRate);
+		exchangeRate.setExchangeRateAssesments(exchangeRateAssesments);
+		listExchangeRate.add(exchangeRate);
+		dtoInternationalContractTransfer.setExchangeRates(listExchangeRate);
+	}
+
+	@Test
+	public void testIntFilterInternational() {
+		DTOIntFilterInternationalContractTransfers dtoFilterInternational = internationalMapper.map(
+				"(referencesValue==12345,(typeName==HACIA;date=ge=2015-01-10;date=le=2015-02-12))", "1025049283", 0010,
+				20, "");
+		Assert.assertNotNull(dtoFilterInternational);
+		Assert.assertEquals("12345", dtoFilterInternational.getReferencesValue());
+		Assert.assertEquals("HACIA", dtoFilterInternational.getTypeName());
+		Assert.assertEquals("2015-01-10", dtoFilterInternational.getDateStart());
+		Assert.assertEquals("2015-02-12", dtoFilterInternational.getDateEnd());
+		Assert.assertEquals("1025049283", dtoFilterInternational.getSenderContractParticipantsId());
+		Assert.assertSame(0010, dtoFilterInternational.getPaginationKey());
+		Assert.assertSame(20, dtoFilterInternational.getPageSize());
+		Assert.assertEquals("", dtoFilterInternational.getExpands());
+	}
+
+	@Test
+	public void testInternationalContractTransfer() {
 
 		final InternationalContractTransfer internationalContractTransfer = internationalMapper
 				.map(dtoInternationalContractTransfer);
@@ -160,12 +161,12 @@ public class InternationalContractTransferMapperTest extends SpringContextBbvaTe
 
 	}
 
-	// @Test
+	@Test
 	public void testListInternationalContractTransfer() {
 
 		InternationalContractTransfer internationalContractTransfer = new InternationalContractTransfer();
-		Mockito.when(internationalMapper.map(dtoInternationalContractTransfer)).thenReturn(
-				internationalContractTransfer);
+		// Mockito.when(internationalMapper.map(Mockito.any(DTOIntInternationalContractTransfer.class))).thenReturn(
+		// internationalContractTransfer);
 		List<DTOIntInternationalContractTransfer> dtoListInternationalContractTransfer = new ArrayList<DTOIntInternationalContractTransfer>();
 
 		dtoListInternationalContractTransfer.add(dtoInternationalContractTransfer);

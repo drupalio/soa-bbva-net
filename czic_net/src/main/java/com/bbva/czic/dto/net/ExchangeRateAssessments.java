@@ -10,8 +10,8 @@ import javax.xml.bind.annotation.XmlType;
 
 import com.wordnik.swagger.annotations.ApiModelProperty;
 
-@XmlRootElement(name = "exchangeRateAssessments", namespace = "urn:com:bbva:czic:dto:net")
-@XmlType(name = "exchangeRateAssessments", namespace = "urn:com:bbva:czic:dto:net")
+@XmlRootElement(name = "ExchangeRateAssessments", namespace = "urn:com:bbva:czic:dto:net")
+@XmlType(name = "ExchangeRateAssessments", namespace = "urn:com:bbva:czic:dto:net")
 @XmlAccessorType(XmlAccessType.FIELD)
 public class ExchangeRateAssessments implements Serializable {
 
@@ -19,6 +19,9 @@ public class ExchangeRateAssessments implements Serializable {
 
 	@ApiModelProperty("Tipo de tasa")
 	private String type;
+
+	@ApiModelProperty("Tipo de tasa")
+	private String subtype;
 
 	@ApiModelProperty("Valor de la tasa")
 	private BigDecimal value;
@@ -33,6 +36,14 @@ public class ExchangeRateAssessments implements Serializable {
 
 	public void setType(String type) {
 		this.type = type;
+	}
+
+	public String getSubtype() {
+		return subtype;
+	}
+
+	public void setSubtype(String subtype) {
+		this.subtype = subtype;
 	}
 
 	public BigDecimal getValue() {

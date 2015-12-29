@@ -1,0 +1,91 @@
+{
+  "bbva" : {
+    "uuaa" : "czic",
+    "remoteType" : "RESTFUL"
+  },
+  "dtos" : {
+    "currency" : {
+      "#metadata" : {
+        "dtoPackage" : "com.bbva.czic.dto.net.Currency"
+      }
+    },
+    "optionsList" : {
+      "#metadata" : {
+        "dtoPackage" : "com.bbva.czic.dto.net.optionsList"
+      }
+    },
+    "exchangeRateValues" : {
+      "purchaseValue" : {
+        "type" : "arq.MONEY",
+        "description" : "Valor del tipo de cambio para la compra"
+      },
+      "saleValue" : {
+        "type" : "arq.MONEY",
+        "description" : "Valor del tipo de cambio para la venta"
+      }
+    },
+    "exchangeRateAssessments" : {
+      "type" : {
+        "type" : "String",
+        "description" : "Tipo de tasa"
+      },
+      "subtype" : {
+        "type" : "String",
+        "description" : "Tipo de tasa"
+      },
+      "value" : {
+        "type" : "Integer",
+        "description" : "Valor de la tasa"
+      }
+    },
+    "exchangeRate" : {
+      "baseRateCurrency" : {
+        "type" : "dto.currency",
+        "description" : "Moneda del tipo de cambio"
+      },
+      "exchangeRateCurrency" : {
+        "type" : "dto.currency",
+        "description" : "Moneda del tipo de cambio"
+      },
+      "exchangeRateDate" : {
+        "type" : "arq.DATE",
+        "description" : "Fecha del tipo de cambio"
+      },
+      "exchangeRateAssessments" : {
+        "type" : "dto.exchangeRateAssessments",
+        "description" : "Valoracion asociada al calculo o tasacion del tipo de cambio"
+      },
+      "exchangeRateValues" : {
+        "type" : "dto.exchangeRateValues",
+        "description" : "Detalle del tipo de cambio"
+      }
+    },
+    "exchangeRateSimulation" : {
+      "type" : {
+        "type" : "dto.optionsList",
+        "description" : "Dato del tipo de la tasa"
+      },
+      "exchangeRate" : {
+        "type" : "List<dto.exchangeRate>",
+        "description" : "Listado de las tasas calculadas"
+      }
+    }
+  },
+  "sn" : {
+    "targetDto" : "exchangeRateSimulation",
+    "logicalId" : "exchangeRateSimulation",
+    "registryId" : "SN201500333",
+    "version" : "V01",
+    "description" : "SN exchangeRateSimulation",
+    "smcs" : {
+      "post" : [ {
+        "targetDto" : "exchangeRateSimulation",
+        "logicalId" : "getExchangeRateSimulation",
+        "registryId" : "SMC201500334",
+        "description" : "Operacion que obtiene las tasas vigentes en el momento o las tasas de un avance de operacion",
+        "notes" : "Consulta de tasas",
+        "gceErrors" : [ "aliasGCE1", "aliasGCE2" ]
+      }]
+    }
+  }
+}

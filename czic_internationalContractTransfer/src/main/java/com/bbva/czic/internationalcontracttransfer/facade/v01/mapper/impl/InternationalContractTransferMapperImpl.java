@@ -20,7 +20,7 @@ import com.bbva.czic.dto.net.InternationalContractTransfer;
 import com.bbva.czic.dto.net.OptionsList;
 import com.bbva.czic.dto.net.Participant;
 import com.bbva.czic.dto.net.Product;
-import com.bbva.czic.internationalcontracttransfer.business.dto.DTOIntExchangeRateAssessments;
+import com.bbva.czic.internationalcontracttransfer.business.dto.DTOIntExchangeRate;
 import com.bbva.czic.internationalcontracttransfer.business.dto.DTOIntExternalReference;
 import com.bbva.czic.internationalcontracttransfer.business.dto.DTOIntFilterInternationalContractTransfers;
 import com.bbva.czic.internationalcontracttransfer.business.dto.DTOIntIdentityDocument;
@@ -139,17 +139,18 @@ public class InternationalContractTransferMapperImpl extends AbstractBbvaConfigu
 		internationalContractTransfer.setIntermediaryBankAccount(intermediary);
 
 		// info exchangeRate
-		ExchangeRate exchangeRate = new ExchangeRate();
-		List<ExchangeRateAssessments> exchangeRateAssessments = new ArrayList<ExchangeRateAssessments>();
-		for (DTOIntExchangeRateAssessments intAssessments : dtoInternationalContractTransfer.getExchangeRate()
-				.getExchangeRateAssesments()) {
+
+		List<ExchangeRate> exchangeRates = new ArrayList<ExchangeRate>();
+		for (DTOIntExchangeRate intExchangeRate : dtoInternationalContractTransfer.getExchangeRates()) {
+			ExchangeRate exchangeRate = new ExchangeRate();
 			ExchangeRateAssessments exchangeRateAssessment = new ExchangeRateAssessments();
-			exchangeRateAssessment.setType(intAssessments.getType());
-			exchangeRateAssessment.setValue(intAssessments.getValue());
-			exchangeRateAssessments.add(exchangeRateAssessment);
+			exchangeRateAssessment.setType(intExchangeRate.getExchangeRateAssesments().getType());
+			exchangeRateAssessment.setValue(intExchangeRate.getExchangeRateAssesments().getValue());
+			exchangeRate.setExchangeRateAssessments(exchangeRateAssessment);
+			exchangeRates.add(exchangeRate);
+
 		}
-		exchangeRate.setExchangeRateAssessments(exchangeRateAssessments);
-		internationalContractTransfer.setExchangeRate(exchangeRate);
+		internationalContractTransfer.setExchangeRates(exchangeRates);
 		return internationalContractTransfer;
 	}
 

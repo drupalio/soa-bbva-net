@@ -317,3 +317,10 @@ sarc completeSNDescriptor --descriptorFile sn-descriptor-internationalContractTr
 sarc completeSNDescriptor --descriptorFile sn-descriptor-internationalContractTransfer.json
 sarc createSN --descriptorFile sn-descriptor-internationalContractTransfer.json
 sarc createSN --descriptorFile sn-descriptor-internationalContractTransfer.json
+// ServicesArchitecture log opened at 2015-12-23 10:50:09
+sarc generatePackage
+// ServicesArchitecture log opened at 2015-12-28 10:25:20
+sarc completeSNDescriptor --descriptorFile sn-descriptor-exchangeRateSimulation.json
+sarc createSN --descriptorFile sn-descriptor-exchangeRateSimulation.json
+sarc createSN --descriptorFile sn-descriptor-exchangeRateSimulation.json
+sarc generatePackage
